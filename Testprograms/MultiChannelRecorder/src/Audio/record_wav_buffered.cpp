@@ -27,6 +27,10 @@
 #include <Arduino.h>
 #include "record_wav_buffered.h"
 
+static uint32_t bytesWrittenToBuffer = 0;
+static uint32_t bytesReadFromBuffer = 0;
+static uint32_t bytesWrittemToSdCard = 0;
+
 /* static */ uint8_t AudioRecordWAVbuffered::objcnt;
 /* static */ void AudioRecordWAVbuffered::EventResponse(EventResponderRef evref)
 {
@@ -37,6 +41,7 @@
 	pPWB->getNextWrite(&pb,&sz);	// find out where and how much
 	if (sz > pPWB->bufSize / 2)			// never do more than half a buffer
 		sz = pPWB->bufSize / 2;
+	bytesReadFromBuffer += sz;																// TODO: Remove after debugging
 	pPWB->flushBuffer(pb,sz);		// write out more file data from the buffer
 }
 
@@ -57,9 +62,9 @@ void AudioRecordWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
 
 		uint32_t now = micros();
 		outN = wavfile.write(pb,sz);	// try for that
+		bytesWrittemToSdCard += outN;															// TODO: Remove after debugging
 		wavfile.flush();
 		readMicros.newValue(micros() - now);
-		
 		if (outN < sz) // failed to write out all data
 		{
 			Serial.printf("write of %d bytes failed: wrote %d\n",sz,outN);
@@ -129,6 +134,8 @@ bool AudioRecordWAVbuffered::record(const File _file, bool paused /* = false */)
 		// prepare to write data
 		emptyBuffer((objnum & (SLOTS-1)) * stagger); // ensure we start from scratch
 		getNextWrite(&pb,&sz);	// find out where and how much we need for first write
+
+		bytesReadFromBuffer += sz;																// TODO: Remove after debugging
 		
 		makeWAVheader(&header,chanCnt); // create a default WAV header
 		write((uint8_t*) &header,sizeof header);	// not sure of alignment, can't do it in place: copy
@@ -292,6 +299,8 @@ void AudioRecordWAVbuffered::update(void)
 			data[alloCnt] = blocks[alloCnt]->data;
 		alloCnt++;
 	}
+
+	static int count = 0;
 	
 	// only update if we're recording and not paused,
 	// but we must discard the received blocks!
@@ -301,22 +310,39 @@ void AudioRecordWAVbuffered::update(void)
 		{
 			interleave(buf,data,chanCnt);	// make a chunk of data for the file
 			result rdr = write((uint8_t*) buf, sizeof buf); // send it to the buffer
+			bytesWrittenToBuffer += sizeof buf;															// TODO: Remove after debugging
 			data_length += sizeof buf;
+			count++;
 			
 			if (ok != rdr 			// there's now room for a buffer read,
 				&& !eof 			// and more file data available
 				&& !writePending)  	// and we haven't already asked
 			{
-				triggerEvent(rdr);
+				triggerEvent(0);
 				writePending = true;
+				// Serial.printf("Start Writing buffer to SD card, count: %d\n", count);
+				count = 0;
 			}
+			else if(rdr == invalid)
+			{
+			  Serial.printf("WARNING - BUFFER OVERFLOW!!!! Start Writing buffer to SD card, count: %d\n", count);
+			}
+			
+			// {
+			// 	static uint32_t t = 0;
+			// 	if(millis() - t > 50)
+			// 	{
+			// 		triggerEvent(0);
+			// 	}
+			// 	// Serial.printf("Bytes available in Buffer: %d, bytes to write: %d\n", getAvailable(), sizeof buf);
+			// }
 		}
 	}
 	
 	// relinquish our interest in these blocks
 	while (--alloCnt >= 0)
 		if (nullptr != blocks[alloCnt]) // stock release() can't cope with NULL pointer
-			release(blocks[alloCnt]);	
+			release(blocks[alloCnt]);
 }
 
 /*

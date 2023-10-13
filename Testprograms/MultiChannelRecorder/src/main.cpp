@@ -7,6 +7,8 @@
 
 #include "Audio/record_wav_buffered.h"
 
+#include "SdCard/SdioTeensy.cpp"
+
 
 // GUItool: begin automatically generated code
 AudioSynthWaveformSine   sine1;
@@ -93,7 +95,7 @@ const char* fileName = "32_Channels_60s.wav";
 void setup()
 {
   Serial.begin(0);
-  AudioMemory(200);
+  AudioMemory(60);
 
   sine1.frequency(261.63);
   sine2.frequency(277.19);
@@ -133,9 +135,20 @@ void setup()
   sine31.begin(1.0, 5.0, WAVEFORM_SAWTOOTH);
   sine32.begin(1.0, 10.0, WAVEFORM_SAWTOOTH);
 
-  const size_t sz = 65536 * 3;    // TODO: Why -> Tell me why (I don't like Mondays)
-  const AudioBuffer::bufType bufMem = AudioBuffer::inHeap;
-  recordWAV1.createBuffer(sz, bufMem);
+  const size_t sz = 65536 * 64;
+  const AudioBuffer::bufType bufMem = AudioBuffer::inExt;
+  if(recordWAV1.createBuffer(sz, bufMem))
+  {
+    while(1)
+    {
+      Serial.println("Failed to create buffer");
+      delay(500);
+    }
+  }
+
+  // const size_t sz = 65536 * 6;    // TODO: Why -> Tell me why (I don't like Mondays)
+  // const AudioBuffer::bufType bufMem = AudioBuffer::inHeap;
+  // recordWAV1.createBuffer(sz, bufMem);
 
   if(!SD.begin(BUILTIN_SDCARD))
   {
@@ -145,6 +158,14 @@ void setup()
       delay(500);
     }
   }
+  Serial.println("Type any character to start");
+  while (!Serial.available())
+  {
+    yield();
+  }
+
+  setSdclk(100000);
+  Serial.printf("SDDIO Speed: %d\n", ((SdioCard*)SD.sdfs.card())->kHzSdClk());
 }
 
 
@@ -156,8 +177,8 @@ void loop()
   {
     recording = true;
     Serial.println("startRecording");
-    recordStartTime = millis();
     recordWAV1.recordSD(fileName);
+    recordStartTime = millis();
   }
 
   static bool once = true;
@@ -168,13 +189,17 @@ void loop()
     recordWAV1.stop();  
   }
 
-  static uint32_t t = 0;
-  if(millis() - t > 1000)
-  {
-    t = millis();
-    float cpuLoad = AudioProcessorUsage();
-    Serial.print("CPU Load: ");
-    Serial.print(cpuLoad, 2);  // Print with 2 decimal places
-    Serial.println("%");
-  }
+  // static uint32_t t = 0;
+  // if(millis() - t > 1000)
+  // {
+  //   t = millis();
+  //   float cpuLoad = AudioProcessorUsage();
+  //   Serial.print("CPU Load: ");
+  //   Serial.print(cpuLoad, 2);  // Print with 2 decimal places
+  //   Serial.print("%, Current Memory Usage: ");
+  //   Serial.print(AudioMemoryUsage());
+  //   Serial.print(" bytes, Max: ");
+  //   Serial.print(AudioMemoryUsageMax());
+  //   Serial.println(" bytes");
+  // }
 }
