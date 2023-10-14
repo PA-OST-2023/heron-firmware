@@ -106,8 +106,6 @@ void testdrawcircles(uint8_t radius, uint16_t color)
 void testtriangles()
 {
 	disp.fillScreen(ST7735_BLACK);
-  pinMode(TFT_BL, OUTPUT);
-  digitalWrite(TFT_BL, HIGH);
 
 	int color = 0xF800;
 	int t;
@@ -219,7 +217,10 @@ int n = 0;
 
 void setup()
 {
+  pinMode(TFT_BL, OUTPUT);
+  digitalWrite(TFT_BL, LOW);
   disp.init(240,240);
+  digitalWrite(TFT_BL, HIGH);
 
   disp.setAddrWindow(0, 0, 240, 240);
 
