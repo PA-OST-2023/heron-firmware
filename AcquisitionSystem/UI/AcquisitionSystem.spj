@@ -278,7 +278,22 @@
               },
               {
                 "part": "lv.PART.MAIN",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 2087371275,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": -2092766647,
+                        "strtype": "_style/Text_Font",
+                        "strval": "montserrat_16",
+                        "InheritedType": 3
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": 1845549428,
                 "strtype": "LABEL/Style_main",
                 "strval": "lv.PART.MAIN, Text, Rectangle, Pad",
@@ -1426,8 +1441,7 @@
                     "InheritedType": 11
                   }
                 ],
-                "saved_objtypeKey": "BUTTON",
-                "tree_closed": true
+                "saved_objtypeKey": "BUTTON"
               }
             ],
             "locked": false,
@@ -5366,7 +5380,7 @@
     "theme_color2": 0,
     "exportFolderPath": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\src\\Gui",
     "projectExportFolderPath": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI",
-    "backup_cnt": 34,
+    "backup_cnt": 107,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

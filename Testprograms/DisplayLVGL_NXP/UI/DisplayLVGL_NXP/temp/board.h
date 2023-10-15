@@ -428,11 +428,11 @@
  *================*/
 
 /*Documentation of the widgets: https://docs.lvgl.io/latest/en/html/widgets/index.html*/
-#define LV_USE_ARC 1
+#define LV_USE_ARC 0
 
 #define LV_USE_BAR 0
 
-#define LV_USE_BTN 0
+#define LV_USE_BTN 1
 
 #define LV_USE_BTNMATRIX 0
 
@@ -454,7 +454,7 @@
 
 #define LV_USE_LINE 0
 
-#define LV_USE_ROLLER 0
+#define LV_USE_ROLLER 1
 #if LV_USE_ROLLER
 /*Number of extra "pages" when the roller is infinite*/
 #define LV_ROLLER_INF_PAGES 7
@@ -526,7 +526,7 @@
 
 #define LV_USE_SPINBOX 0
 
-#define LV_USE_SPINNER 1
+#define LV_USE_SPINNER 0
 
 #define LV_USE_TABVIEW 0
 

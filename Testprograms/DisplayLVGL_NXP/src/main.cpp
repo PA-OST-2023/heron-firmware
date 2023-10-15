@@ -11,7 +11,7 @@
 #include <SPI.h>
 
 #include <lvgl.h>
-#include "gui_guider.h"
+#include "Gui/generated/gui_guider.h"
 
 ST7789_t3 disp = ST7789_t3(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
 
@@ -50,6 +50,7 @@ void setup()
 
   lv_ui ui;
   setup_ui(&ui);
+  lv_scr_load(ui.screenSetTime);
 
   digitalWrite(TFT_BL, HIGH);
 }

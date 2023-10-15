@@ -37,82 +37,35 @@
 			"keyboard_font_size": "18",
 			"list": [
 				{
-					"name": "spinner_1",
-					"id": "6vsuhgl5",
-					"type": "spinner",
-					"left": 70,
-					"top": 109,
-					"visible": true,
-					"flag": [],
-					"custom_attributes": {},
-					"width": 100,
-					"height": 100,
-					"default_style": false,
-					"arc_length": 60,
-					"spin_time": 1000,
-					"style": [
-						{
-							"part": "LV_PART_MAIN",
-							"state": "LV_STATE_DEFAULT",
-							"disable": false,
-							"padding_top": 5,
-							"padding_bottom": 5,
-							"padding_left": 5,
-							"padding_right": 5,
-							"bg_color": "#ffffff",
-							"bg_grad_color": "#eeeef6",
-							"bg_opa": 0,
-							"bg_grad_dir": "LV_GRAD_DIR_NONE",
-							"arc_color": "#d5d6de",
-							"arc_opa": 56,
-							"arc_width": 20,
-							"shadow_color": "#2195f6",
-							"shadow_opa": 255,
-							"shadow_width": 0,
-							"shadow_spread": 0,
-							"shadow_ofs_x": 0,
-							"shadow_ofs_y": 0
-						},
-						{
-							"part": "LV_PART_INDICATOR",
-							"state": "LV_STATE_DEFAULT",
-							"disable": false,
-							"arc_color": "#2195f6",
-							"arc_opa": 255,
-							"arc_width": 20
-						}
-					]
-				},
-				{
 					"name": "label_1",
 					"id": "hbw20los",
 					"type": "label",
 					"left": 45,
-					"top": 55,
+					"top": 103.5,
 					"visible": true,
 					"flag": [],
 					"custom_attributes": {},
 					"width": 150,
 					"height": 33,
 					"default_style": false,
-					"text": "LVGL Test NXP",
+					"text": "Bootup...\n",
 					"long_mode": "LV_LABEL_LONG_WRAP",
 					"style": [
 						{
 							"part": "LV_PART_MAIN",
 							"state": "LV_STATE_DEFAULT",
 							"disable": false,
-							"border_width": 2,
 							"border_side": [
 								"LV_BORDER_SIDE_FULL"
 							],
+							"border_width": 2,
 							"border_opa": 0,
 							"border_color": "#000000",
 							"radius": 5,
 							"text_color": "#ffffff",
 							"font": 16,
 							"text_align": "LV_TEXT_ALIGN_CENTER",
-							"font_family": "MontserratRegular",
+							"font_family": "montserratMedium",
 							"letter_space": 1,
 							"line_space": 0,
 							"bg_color": "#000000",
@@ -148,9 +101,9 @@
 							"text_color": "#000000",
 							"font": 16,
 							"font_family": "montserratMedium",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
 							"letter_space": 2,
 							"line_space": 0,
-							"text_align": "LV_TEXT_ALIGN_CENTER",
 							"bg_color": "#5a6173",
 							"bg_grad_color": "#5a6173",
 							"bg_opa": 0,
@@ -174,6 +127,2524 @@
 				}
 			],
 			"event": {},
+			"style": [
+				{
+					"part": "LV_PART_MAIN",
+					"state": "LV_STATE_DEFAULT",
+					"disable": false,
+					"bg_color": "#101418",
+					"bg_grad_dir": "LV_GRAD_DIR_NONE",
+					"bg_grad_color": "#2195f6",
+					"bg_opa": 255,
+					"bg_img_src": "",
+					"bg_img_opa": 255,
+					"bg_img_recolor": "#ffffff",
+					"bg_img_recolor_opa": 0
+				}
+			]
+		},
+		{
+			"name": "screenRecording",
+			"id": "8415kjht",
+			"type": "scr",
+			"version": 161,
+			"customer_code": {
+				"code_c": "",
+				"inc_c": "",
+				"code_py": "",
+				"inc_py": ""
+			},
+			"width": 240,
+			"height": 240,
+			"visible": true,
+			"flag": [],
+			"display_kb": false,
+			"chinese_input": false,
+			"chinese_library": "mini",
+			"keyboard_font_type": "simsun",
+			"keyboard_font_size": "18",
+			"list": [
+				{
+					"name": "cont_1",
+					"id": "nb5i0oyb",
+					"type": "cont",
+					"left": 0,
+					"top": 0,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 240,
+					"height": 40,
+					"default_style": false,
+					"scrollbar_mode": "OFF",
+					"child": [
+						{
+							"name": "label_2",
+							"id": "51pmmojh",
+							"type": "label",
+							"left": 128,
+							"top": 70,
+							"visible": true,
+							"flag": [],
+							"custom_attributes": {},
+							"width": 34,
+							"height": 18,
+							"default_style": false,
+							"text": "",
+							"long_mode": "LV_LABEL_LONG_WRAP",
+							"style": [
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_DEFAULT",
+									"disable": false,
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 255,
+									"border_color": "#2195f6",
+									"radius": 0,
+									"text_color": "#ffffff",
+									"font": 16,
+									"text_align": "LV_TEXT_ALIGN_CENTER",
+									"font_family": "FontAwesome5",
+									"letter_space": 0,
+									"line_space": 0,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 0,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"padding_top": 0,
+									"padding_right": 0,
+									"padding_bottom": 0,
+									"padding_left": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0
+								},
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_DISABLED",
+									"disable": true,
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 255,
+									"border_color": "#2195f6",
+									"radius": 0,
+									"text_color": "#000000",
+									"font": 16,
+									"font_family": "montserratMedium",
+									"text_align": "LV_TEXT_ALIGN_CENTER",
+									"letter_space": 2,
+									"line_space": 0,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 0,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"padding_top": 0,
+									"padding_right": 0,
+									"padding_bottom": 0,
+									"padding_left": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0
+								}
+							]
+						},
+						{
+							"name": "btnCurrentTime",
+							"id": "zbt6mqm8",
+							"type": "btn",
+							"left": 7,
+							"top": 6,
+							"visible": true,
+							"flag": [],
+							"custom_attributes": {},
+							"width": 60,
+							"height": 28,
+							"default_style": false,
+							"long_mode": "LV_LABEL_LONG_WRAP",
+							"text": "00:00",
+							"toggle": false,
+							"style": [
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_DEFAULT",
+									"disable": false,
+									"bg_color": "#000000",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 0,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 0,
+									"border_color": "#000000",
+									"radius": 0,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"font": 16,
+									"font_family": "montserratMedium",
+									"text_color": "#ffffff",
+									"text_align": "LV_TEXT_ALIGN_CENTER"
+								},
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_FOCUSED",
+									"disable": true,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 255,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_color": "#2195f6",
+									"border_opa": 255,
+									"radius": 5,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"font": 16,
+									"font_family": "montserratMedium",
+									"text_color": "#ffffff"
+								},
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_PRESSED",
+									"disable": true,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 255,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_color": "#2195f6",
+									"border_opa": 255,
+									"radius": 5,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"font": 16,
+									"font_family": "montserratMedium",
+									"text_color": "#ffffff"
+								},
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_CHECKED",
+									"disable": true,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 255,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 255,
+									"border_color": "#2195f6",
+									"radius": 5,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"font": 12,
+									"font_family": "montserratMedium",
+									"text_color": "#000000"
+								},
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_DISABLED",
+									"disable": true,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 255,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 255,
+									"border_color": "#2195f6",
+									"radius": 5,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"font": 12,
+									"font_family": "montserratMedium",
+									"text_color": "#000000"
+								}
+							]
+						},
+						{
+							"name": "label_1",
+							"id": "c9mishct",
+							"type": "label",
+							"left": 96,
+							"top": 5,
+							"visible": true,
+							"flag": [],
+							"custom_attributes": {},
+							"width": 60,
+							"height": 28,
+							"default_style": false,
+							"text": "",
+							"long_mode": "LV_LABEL_LONG_WRAP",
+							"style": [
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_DEFAULT",
+									"disable": false,
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 255,
+									"border_color": "#2195f6",
+									"radius": 0,
+									"text_color": "#ffffff",
+									"font": 16,
+									"text_align": "LV_TEXT_ALIGN_CENTER",
+									"font_family": "FontAwesome5ProRegular_400",
+									"letter_space": 5,
+									"line_space": 1,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 0,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"padding_top": 6,
+									"padding_right": 0,
+									"padding_bottom": 0,
+									"padding_left": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0
+								},
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_DISABLED",
+									"disable": true,
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 255,
+									"border_color": "#2195f6",
+									"radius": 0,
+									"text_color": "#000000",
+									"font": 16,
+									"font_family": "montserratMedium",
+									"text_align": "LV_TEXT_ALIGN_CENTER",
+									"letter_space": 2,
+									"line_space": 0,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 0,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"padding_top": 0,
+									"padding_right": 0,
+									"padding_bottom": 0,
+									"padding_left": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0
+								}
+							]
+						}
+					],
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"border_side": [
+								"LV_BORDER_SIDE_BOTTOM"
+							],
+							"border_width": 2,
+							"border_color": "#D200AC",
+							"border_opa": 255,
+							"radius": 0,
+							"bg_color": "#292831",
+							"bg_grad_color": "#ffffff",
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"bg_opa": 255,
+							"padding_top": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"padding_right": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						}
+					]
+				}
+			],
+			"style": [
+				{
+					"part": "LV_PART_MAIN",
+					"state": "LV_STATE_DEFAULT",
+					"disable": false,
+					"bg_color": "#101418",
+					"bg_grad_dir": "LV_GRAD_DIR_NONE",
+					"bg_grad_color": "#2195f6",
+					"bg_opa": 255,
+					"bg_img_src": "",
+					"bg_img_opa": 255,
+					"bg_img_recolor": "#ffffff",
+					"bg_img_recolor_opa": 0
+				}
+			]
+		},
+		{
+			"name": "screenSetTime",
+			"id": "9n90frfx",
+			"type": "scr",
+			"version": 161,
+			"customer_code": {
+				"code_c": "",
+				"inc_c": "",
+				"code_py": "",
+				"inc_py": ""
+			},
+			"width": 240,
+			"height": 240,
+			"visible": true,
+			"flag": [],
+			"display_kb": false,
+			"chinese_input": false,
+			"chinese_library": "mini",
+			"keyboard_font_type": "simsun",
+			"keyboard_font_size": "18",
+			"list": [
+				{
+					"name": "rollerDay",
+					"id": "v86lktt6",
+					"type": "roller",
+					"left": 10,
+					"top": 60,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 64,
+					"default_style": false,
+					"roller_name": [
+						{
+							"text": "01"
+						},
+						{
+							"text": "02"
+						},
+						{
+							"text": "03"
+						},
+						{
+							"text": "04"
+						},
+						{
+							"text": "05"
+						},
+						{
+							"text": "06"
+						},
+						{
+							"text": "07"
+						},
+						{
+							"text": "08"
+						},
+						{
+							"text": "09"
+						},
+						{
+							"text": "10"
+						},
+						{
+							"text": "11"
+						},
+						{
+							"text": "12"
+						},
+						{
+							"text": "13"
+						},
+						{
+							"text": "14"
+						},
+						{
+							"text": "15"
+						},
+						{
+							"text": "16"
+						},
+						{
+							"text": "17"
+						},
+						{
+							"text": "18"
+						},
+						{
+							"text": "19"
+						},
+						{
+							"text": "20"
+						},
+						{
+							"text": "21"
+						},
+						{
+							"text": "22"
+						},
+						{
+							"text": "23"
+						},
+						{
+							"text": "24"
+						},
+						{
+							"text": "25"
+						},
+						{
+							"text": "26"
+						},
+						{
+							"text": "27"
+						},
+						{
+							"text": "28"
+						},
+						{
+							"text": "29"
+						},
+						{
+							"text": "30"
+						},
+						{
+							"text": "31"
+						}
+					],
+					"rowCount": 1,
+					"mode": "LV_ROLLER_MODE_NORMAL",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"border_color": "#293031",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#000000",
+							"shadow_opa": 0,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#292831",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 16,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						}
+					]
+				},
+				{
+					"name": "rollerMonth",
+					"id": "8yzgekqh",
+					"type": "roller",
+					"left": 88,
+					"top": 60,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 64,
+					"default_style": false,
+					"roller_name": [
+						{
+							"text": "01"
+						},
+						{
+							"text": "02"
+						},
+						{
+							"text": "03"
+						},
+						{
+							"text": "04"
+						},
+						{
+							"text": "05"
+						},
+						{
+							"text": "06"
+						},
+						{
+							"text": "07"
+						},
+						{
+							"text": "08"
+						},
+						{
+							"text": "09"
+						},
+						{
+							"text": "10"
+						},
+						{
+							"text": "11"
+						},
+						{
+							"text": "12"
+						}
+					],
+					"rowCount": 1,
+					"mode": "LV_ROLLER_MODE_NORMAL",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"border_color": "#293031",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#000000",
+							"shadow_opa": 0,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#292831",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 16,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						}
+					]
+				},
+				{
+					"name": "rollerYear",
+					"id": "4nrmb8ax",
+					"type": "roller",
+					"left": 166,
+					"top": 60,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 64,
+					"default_style": false,
+					"roller_name": [
+						{
+							"text": "2023"
+						},
+						{
+							"text": "2024"
+						},
+						{
+							"text": "2025"
+						},
+						{
+							"text": "2026"
+						},
+						{
+							"text": "2027"
+						},
+						{
+							"text": "2028"
+						},
+						{
+							"text": "2029"
+						},
+						{
+							"text": "2030"
+						}
+					],
+					"rowCount": 1,
+					"mode": "LV_ROLLER_MODE_NORMAL",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"border_color": "#293031",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#000000",
+							"shadow_opa": 0,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#292831",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 16,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						}
+					]
+				},
+				{
+					"name": "rollerHour",
+					"id": "qo078xkh",
+					"type": "roller",
+					"left": 22,
+					"top": 120,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 56,
+					"default_style": false,
+					"roller_name": [
+						{
+							"text": "00"
+						},
+						{
+							"text": "01"
+						},
+						{
+							"text": "02"
+						},
+						{
+							"text": "03"
+						},
+						{
+							"text": "04"
+						},
+						{
+							"text": "05"
+						},
+						{
+							"text": "06"
+						},
+						{
+							"text": "07"
+						},
+						{
+							"text": "08"
+						},
+						{
+							"text": "09"
+						},
+						{
+							"text": "10"
+						},
+						{
+							"text": "11"
+						},
+						{
+							"text": "12"
+						},
+						{
+							"text": "13"
+						},
+						{
+							"text": "14"
+						},
+						{
+							"text": "15"
+						},
+						{
+							"text": "16"
+						},
+						{
+							"text": "17"
+						},
+						{
+							"text": "18"
+						},
+						{
+							"text": "19"
+						},
+						{
+							"text": "20"
+						},
+						{
+							"text": "21"
+						},
+						{
+							"text": "22"
+						},
+						{
+							"text": "23"
+						}
+					],
+					"rowCount": 1,
+					"mode": "LV_ROLLER_MODE_NORMAL",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"border_color": "#293031",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#000000",
+							"shadow_opa": 0,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#292831",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 16,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						}
+					]
+				},
+				{
+					"name": "rollerMinute",
+					"id": "t9kl5t2u",
+					"type": "roller",
+					"left": 92,
+					"top": 120,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 56,
+					"default_style": false,
+					"roller_name": [
+						{
+							"text": "00"
+						},
+						{
+							"text": "01"
+						},
+						{
+							"text": "02"
+						},
+						{
+							"text": "03"
+						},
+						{
+							"text": "04"
+						},
+						{
+							"text": "05"
+						},
+						{
+							"text": "06"
+						},
+						{
+							"text": "07"
+						},
+						{
+							"text": "08"
+						},
+						{
+							"text": "09"
+						},
+						{
+							"text": "10"
+						},
+						{
+							"text": "11"
+						},
+						{
+							"text": "12"
+						},
+						{
+							"text": "13"
+						},
+						{
+							"text": "14"
+						},
+						{
+							"text": "15"
+						},
+						{
+							"text": "16"
+						},
+						{
+							"text": "17"
+						},
+						{
+							"text": "18"
+						},
+						{
+							"text": "19"
+						},
+						{
+							"text": "20"
+						},
+						{
+							"text": "21"
+						},
+						{
+							"text": "22"
+						},
+						{
+							"text": "23"
+						},
+						{
+							"text": "24"
+						},
+						{
+							"text": "25"
+						},
+						{
+							"text": "26"
+						},
+						{
+							"text": "27"
+						},
+						{
+							"text": "28"
+						},
+						{
+							"text": "29"
+						},
+						{
+							"text": "30"
+						},
+						{
+							"text": "31"
+						},
+						{
+							"text": "32"
+						},
+						{
+							"text": "33"
+						},
+						{
+							"text": "34"
+						},
+						{
+							"text": "35"
+						},
+						{
+							"text": "36"
+						},
+						{
+							"text": "37"
+						},
+						{
+							"text": "38"
+						},
+						{
+							"text": "39"
+						},
+						{
+							"text": "40"
+						},
+						{
+							"text": "41"
+						},
+						{
+							"text": "42"
+						},
+						{
+							"text": "43"
+						},
+						{
+							"text": "44"
+						},
+						{
+							"text": "45"
+						},
+						{
+							"text": "46"
+						},
+						{
+							"text": "47"
+						},
+						{
+							"text": "48"
+						},
+						{
+							"text": "49"
+						},
+						{
+							"text": "50"
+						},
+						{
+							"text": "51"
+						},
+						{
+							"text": "52"
+						},
+						{
+							"text": "53"
+						},
+						{
+							"text": "54"
+						},
+						{
+							"text": "55"
+						},
+						{
+							"text": "56"
+						},
+						{
+							"text": "57"
+						},
+						{
+							"text": "58"
+						},
+						{
+							"text": "59"
+						}
+					],
+					"rowCount": 1,
+					"mode": "LV_ROLLER_MODE_NORMAL",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"border_color": "#293031",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#000000",
+							"shadow_opa": 0,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#292831",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 16,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						}
+					]
+				},
+				{
+					"name": "rollerSecond",
+					"id": "dj482als",
+					"type": "roller",
+					"left": 162,
+					"top": 120,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 56,
+					"default_style": false,
+					"roller_name": [
+						{
+							"text": "00"
+						},
+						{
+							"text": "01"
+						},
+						{
+							"text": "02"
+						},
+						{
+							"text": "03"
+						},
+						{
+							"text": "04"
+						},
+						{
+							"text": "05"
+						},
+						{
+							"text": "06"
+						},
+						{
+							"text": "07"
+						},
+						{
+							"text": "08"
+						},
+						{
+							"text": "09"
+						},
+						{
+							"text": "10"
+						},
+						{
+							"text": "11"
+						},
+						{
+							"text": "12"
+						},
+						{
+							"text": "13"
+						},
+						{
+							"text": "14"
+						},
+						{
+							"text": "15"
+						},
+						{
+							"text": "16"
+						},
+						{
+							"text": "17"
+						},
+						{
+							"text": "18"
+						},
+						{
+							"text": "19"
+						},
+						{
+							"text": "20"
+						},
+						{
+							"text": "21"
+						},
+						{
+							"text": "22"
+						},
+						{
+							"text": "23"
+						},
+						{
+							"text": "24"
+						},
+						{
+							"text": "25"
+						},
+						{
+							"text": "26"
+						},
+						{
+							"text": "27"
+						},
+						{
+							"text": "28"
+						},
+						{
+							"text": "29"
+						},
+						{
+							"text": "30"
+						},
+						{
+							"text": "31"
+						},
+						{
+							"text": "32"
+						},
+						{
+							"text": "33"
+						},
+						{
+							"text": "34"
+						},
+						{
+							"text": "35"
+						},
+						{
+							"text": "36"
+						},
+						{
+							"text": "37"
+						},
+						{
+							"text": "38"
+						},
+						{
+							"text": "39"
+						},
+						{
+							"text": "40"
+						},
+						{
+							"text": "41"
+						},
+						{
+							"text": "42"
+						},
+						{
+							"text": "43"
+						},
+						{
+							"text": "44"
+						},
+						{
+							"text": "45"
+						},
+						{
+							"text": "46"
+						},
+						{
+							"text": "47"
+						},
+						{
+							"text": "48"
+						},
+						{
+							"text": "49"
+						},
+						{
+							"text": "50"
+						},
+						{
+							"text": "51"
+						},
+						{
+							"text": "52"
+						},
+						{
+							"text": "53"
+						},
+						{
+							"text": "54"
+						},
+						{
+							"text": "55"
+						},
+						{
+							"text": "56"
+						},
+						{
+							"text": "57"
+						},
+						{
+							"text": "58"
+						},
+						{
+							"text": "59"
+						}
+					],
+					"rowCount": 1,
+					"mode": "LV_ROLLER_MODE_NORMAL",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"border_color": "#293031",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#000000",
+							"shadow_opa": 0,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#ffffff",
+							"bg_grad_color": "#ffffff",
+							"radius": 5,
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#333333",
+							"font": 12,
+							"font_family": "montserratMedium",
+							"border_color": "#e6e6e6",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#292831",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 16,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						},
+						{
+							"part": "LV_PART_SELECTED",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"text_color": "#FFFFFF",
+							"font": 12,
+							"font_family": "montserratMedium"
+						}
+					]
+				},
+				{
+					"name": "label_5",
+					"id": "lrqpudk8",
+					"type": "label",
+					"left": 75,
+					"top": 69,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 12,
+					"height": 24,
+					"default_style": false,
+					"text": ".",
+					"long_mode": "LV_LABEL_LONG_WRAP",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#ffffff",
+							"font": 16,
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"font_family": "montserratMedium",
+							"letter_space": 0,
+							"line_space": 1,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 6,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#000000",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"letter_space": 2,
+							"line_space": 0,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 0,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						}
+					]
+				},
+				{
+					"name": "label_6",
+					"id": "nr2ezy9s",
+					"type": "label",
+					"left": 153,
+					"top": 69,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 12,
+					"height": 24,
+					"default_style": false,
+					"text": ".",
+					"long_mode": "LV_LABEL_LONG_WRAP",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#ffffff",
+							"font": 16,
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"font_family": "montserratMedium",
+							"letter_space": 0,
+							"line_space": 1,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 6,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#000000",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"letter_space": 2,
+							"line_space": 0,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 0,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						}
+					]
+				},
+				{
+					"name": "label_7",
+					"id": "n3imj92i",
+					"type": "label",
+					"left": 79,
+					"top": 123,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 12,
+					"height": 24,
+					"default_style": false,
+					"text": ":",
+					"long_mode": "LV_LABEL_LONG_WRAP",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#ffffff",
+							"font": 16,
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"font_family": "montserratMedium",
+							"letter_space": 0,
+							"line_space": 1,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 6,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#000000",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"letter_space": 2,
+							"line_space": 0,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 0,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						}
+					]
+				},
+				{
+					"name": "label_8",
+					"id": "631zr3od",
+					"type": "label",
+					"left": 149,
+					"top": 123,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 12,
+					"height": 24,
+					"default_style": false,
+					"text": ":",
+					"long_mode": "LV_LABEL_LONG_WRAP",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#ffffff",
+							"font": 16,
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"font_family": "montserratMedium",
+							"letter_space": 0,
+							"line_space": 1,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 6,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#000000",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"letter_space": 2,
+							"line_space": 0,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 0,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						}
+					]
+				},
+				{
+					"name": "btnUpdateTime",
+					"id": "sdjim2z0",
+					"type": "btn",
+					"left": 10,
+					"top": 184,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 220,
+					"height": 45,
+					"default_style": false,
+					"long_mode": "LV_LABEL_LONG_WRAP",
+					"text": "Update",
+					"toggle": false,
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#292831",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 255,
+							"border_color": "#D200AC",
+							"radius": 5,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"font": 16,
+							"font_family": "montserratMedium",
+							"text_color": "#ffffff",
+							"text_align": "LV_TEXT_ALIGN_CENTER"
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_FOCUSED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_color": "#2195f6",
+							"border_opa": 255,
+							"radius": 5,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"font": 16,
+							"font_family": "montserratMedium",
+							"text_color": "#ffffff"
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_PRESSED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_color": "#2195f6",
+							"border_opa": 255,
+							"radius": 5,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"font": 16,
+							"font_family": "montserratMedium",
+							"text_color": "#ffffff"
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_CHECKED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 5,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"font": 12,
+							"font_family": "montserratMedium",
+							"text_color": "#000000"
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"bg_color": "#2195f6",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 255,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 5,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"font": 12,
+							"font_family": "montserratMedium",
+							"text_color": "#000000"
+						}
+					]
+				},
+				{
+					"name": "cont_1",
+					"id": "pv9uhggw",
+					"type": "cont",
+					"left": 0,
+					"top": 0,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 240,
+					"height": 40,
+					"default_style": false,
+					"scrollbar_mode": "OFF",
+					"child": [
+						{
+							"name": "label_4",
+							"id": "m3a7uchc",
+							"type": "label",
+							"left": 0,
+							"top": 5,
+							"visible": true,
+							"flag": [],
+							"custom_attributes": {},
+							"width": 240,
+							"height": 28,
+							"default_style": false,
+							"text": "Set RTC Time",
+							"long_mode": "LV_LABEL_LONG_WRAP",
+							"style": [
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_DEFAULT",
+									"disable": false,
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 255,
+									"border_color": "#2195f6",
+									"radius": 0,
+									"text_color": "#ffffff",
+									"font": 16,
+									"text_align": "LV_TEXT_ALIGN_CENTER",
+									"font_family": "montserratMedium",
+									"letter_space": 0,
+									"line_space": 1,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 0,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"padding_top": 6,
+									"padding_right": 0,
+									"padding_bottom": 0,
+									"padding_left": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0
+								},
+								{
+									"part": "LV_PART_MAIN",
+									"state": "LV_STATE_DISABLED",
+									"disable": true,
+									"border_side": [
+										"LV_BORDER_SIDE_FULL"
+									],
+									"border_width": 0,
+									"border_opa": 255,
+									"border_color": "#2195f6",
+									"radius": 0,
+									"text_color": "#000000",
+									"font": 16,
+									"font_family": "montserratMedium",
+									"text_align": "LV_TEXT_ALIGN_CENTER",
+									"letter_space": 2,
+									"line_space": 0,
+									"bg_color": "#2195f6",
+									"bg_grad_color": "#2195f6",
+									"bg_opa": 0,
+									"bg_grad_dir": "LV_GRAD_DIR_NONE",
+									"padding_top": 0,
+									"padding_right": 0,
+									"padding_bottom": 0,
+									"padding_left": 0,
+									"bg_img_src": "",
+									"bg_img_opa": 255,
+									"bg_img_recolor": "#ffffff",
+									"bg_img_recolor_opa": 0,
+									"shadow_color": "#2195f6",
+									"shadow_opa": 255,
+									"shadow_width": 0,
+									"shadow_spread": 0,
+									"shadow_ofs_x": 0,
+									"shadow_ofs_y": 0
+								}
+							]
+						}
+					],
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"border_side": [
+								"LV_BORDER_SIDE_BOTTOM"
+							],
+							"border_width": 2,
+							"border_color": "#D200AC",
+							"border_opa": 255,
+							"radius": 0,
+							"bg_color": "#292831",
+							"bg_grad_color": "#ffffff",
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"bg_opa": 255,
+							"padding_top": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"padding_right": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						}
+					]
+				}
+			],
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -400,7 +2871,7 @@
 			"height": "240"
 		},
 		"version": "test_v1",
-		"default_scr": "screenBootup",
+		"default_scr": "screenSetTime",
 		"theme": "LV_THEME_MATERIAL_FLAG_LIGHT",
 		"screen": [
 			{
@@ -452,7 +2923,7 @@
 						"flag": [],
 						"pos": [
 							45,
-							55
+							103.5
 						],
 						"size": [
 							150,
@@ -460,24 +2931,24 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"text": "LVGL Test NXP",
+						"text": "Bootup...\n",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"style": [
 							{
 								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"border_width": 2,
 								"border_side": [
 									"LV_BORDER_SIDE_FULL"
 								],
+								"border_width": 2,
 								"border_opa": 0,
 								"border_color": "#000000",
 								"radius": 5,
 								"text_color": "#ffffff",
 								"font": 16,
 								"text_align": "LV_TEXT_ALIGN_CENTER",
-								"font_family": "MontserratRegular",
+								"font_family": "montserratMedium",
 								"letter_space": 1,
 								"line_space": 0,
 								"bg_color": "#000000",
@@ -513,9 +2984,9 @@
 								"text_color": "#000000",
 								"font": 16,
 								"font_family": "montserratMedium",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
 								"letter_space": 2,
 								"line_space": 0,
-								"text_align": "LV_TEXT_ALIGN_CENTER",
 								"bg_color": "#5a6173",
 								"bg_grad_color": "#5a6173",
 								"bg_opa": 0,
@@ -536,43 +3007,860 @@
 								"shadow_ofs_y": 0
 							}
 						]
-					},
+					}
+				]
+			},
+			{
+				"name": "screenRecording",
+				"id": "8415kjht",
+				"type": "scr",
+				"version": 161,
+				"customer_code": {
+					"code_c": "",
+					"inc_c": "",
+					"code_py": "",
+					"inc_py": ""
+				},
+				"width": 240,
+				"height": 240,
+				"visible": true,
+				"flag": [],
+				"display_kb": false,
+				"chinese_input": false,
+				"chinese_library": "mini",
+				"keyboard_font_type": "simsun",
+				"keyboard_font_size": "18",
+				"style": [
 					{
-						"name": "screenBootup_spinner_1",
-						"id": "6vsuhgl5",
-						"type": "spinner",
+						"part": "LV_PART_MAIN",
+						"state": "LV_STATE_DEFAULT",
+						"disable": false,
+						"bg_color": "#101418",
+						"bg_grad_dir": "LV_GRAD_DIR_NONE",
+						"bg_grad_color": "#2195f6",
+						"bg_opa": 255,
+						"bg_img_src": "",
+						"bg_img_opa": 255,
+						"bg_img_recolor": "#ffffff",
+						"bg_img_recolor_opa": 0
+					}
+				],
+				"size": [
+					240,
+					240
+				],
+				"widgets": [
+					{
+						"name": "screenRecording_cont_1",
+						"id": "nb5i0oyb",
+						"type": "cont",
 						"visible": true,
+						"scrollbar_mode": "OFF",
 						"flag": [],
 						"pos": [
-							70,
-							109
+							0,
+							0
 						],
 						"size": [
-							100,
-							100
+							240,
+							40
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"width": 100,
-						"height": 100,
-						"arc_length": 60,
-						"spin_time": 1000,
+						"child": [
+							{
+								"name": "screenRecording_label_1",
+								"id": "c9mishct",
+								"type": "label",
+								"visible": true,
+								"flag": [],
+								"pos": [
+									96,
+									5
+								],
+								"size": [
+									60,
+									28
+								],
+								"default_style": false,
+								"custom_attributes": {},
+								"text": "",
+								"long_mode": "LV_LABEL_LONG_WRAP",
+								"style": [
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_DEFAULT",
+										"disable": false,
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 255,
+										"border_color": "#2195f6",
+										"radius": 0,
+										"text_color": "#ffffff",
+										"font": 16,
+										"text_align": "LV_TEXT_ALIGN_CENTER",
+										"font_family": "FontAwesome5ProRegular_400",
+										"letter_space": 5,
+										"line_space": 1,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 0,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"padding_top": 6,
+										"padding_right": 0,
+										"padding_bottom": 0,
+										"padding_left": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0
+									},
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_DISABLED",
+										"disable": true,
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 255,
+										"border_color": "#2195f6",
+										"radius": 0,
+										"text_color": "#000000",
+										"font": 16,
+										"font_family": "montserratMedium",
+										"text_align": "LV_TEXT_ALIGN_CENTER",
+										"letter_space": 2,
+										"line_space": 0,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 0,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"padding_top": 0,
+										"padding_right": 0,
+										"padding_bottom": 0,
+										"padding_left": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0
+									}
+								]
+							},
+							{
+								"name": "screenRecording_btnCurrentTime",
+								"id": "zbt6mqm8",
+								"type": "btn",
+								"visible": true,
+								"flag": [],
+								"pos": [
+									7,
+									6
+								],
+								"size": [
+									60,
+									28
+								],
+								"default_style": false,
+								"custom_attributes": {},
+								"text_align": "center",
+								"style": [
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_DEFAULT",
+										"disable": false,
+										"bg_color": "#000000",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 0,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 0,
+										"border_color": "#000000",
+										"radius": 0,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"font": 16,
+										"font_family": "montserratMedium",
+										"text_color": "#ffffff",
+										"text_align": "LV_TEXT_ALIGN_CENTER"
+									},
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_FOCUSED",
+										"disable": true,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 255,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_color": "#2195f6",
+										"border_opa": 255,
+										"radius": 5,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"font": 16,
+										"font_family": "montserratMedium",
+										"text_color": "#ffffff"
+									},
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_PRESSED",
+										"disable": true,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 255,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_color": "#2195f6",
+										"border_opa": 255,
+										"radius": 5,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"font": 16,
+										"font_family": "montserratMedium",
+										"text_color": "#ffffff"
+									},
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_CHECKED",
+										"disable": true,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 255,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 255,
+										"border_color": "#2195f6",
+										"radius": 5,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"font": 12,
+										"font_family": "montserratMedium",
+										"text_color": "#000000"
+									},
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_DISABLED",
+										"disable": true,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 255,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 255,
+										"border_color": "#2195f6",
+										"radius": 5,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"font": 12,
+										"font_family": "montserratMedium",
+										"text_color": "#000000"
+									}
+								],
+								"text": "00:00",
+								"long_mode": "LV_LABEL_LONG_WRAP",
+								"toggle": false
+							},
+							{
+								"name": "screenRecording_label_2",
+								"id": "51pmmojh",
+								"type": "label",
+								"visible": true,
+								"flag": [],
+								"pos": [
+									128,
+									70
+								],
+								"size": [
+									34,
+									18
+								],
+								"default_style": false,
+								"custom_attributes": {},
+								"text": "",
+								"long_mode": "LV_LABEL_LONG_WRAP",
+								"style": [
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_DEFAULT",
+										"disable": false,
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 255,
+										"border_color": "#2195f6",
+										"radius": 0,
+										"text_color": "#ffffff",
+										"font": 16,
+										"text_align": "LV_TEXT_ALIGN_CENTER",
+										"font_family": "FontAwesome5",
+										"letter_space": 0,
+										"line_space": 0,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 0,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"padding_top": 0,
+										"padding_right": 0,
+										"padding_bottom": 0,
+										"padding_left": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0
+									},
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_DISABLED",
+										"disable": true,
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 255,
+										"border_color": "#2195f6",
+										"radius": 0,
+										"text_color": "#000000",
+										"font": 16,
+										"font_family": "montserratMedium",
+										"text_align": "LV_TEXT_ALIGN_CENTER",
+										"letter_space": 2,
+										"line_space": 0,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 0,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"padding_top": 0,
+										"padding_right": 0,
+										"padding_bottom": 0,
+										"padding_left": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0
+									}
+								]
+							}
+						],
 						"style": [
 							{
 								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"padding_top": 5,
-								"padding_bottom": 5,
-								"padding_left": 5,
-								"padding_right": 5,
-								"bg_color": "#ffffff",
-								"bg_grad_color": "#eeeef6",
+								"border_side": [
+									"LV_BORDER_SIDE_BOTTOM"
+								],
+								"border_width": 2,
+								"border_color": "#D200AC",
+								"border_opa": 255,
+								"radius": 0,
+								"bg_color": "#292831",
+								"bg_grad_color": "#ffffff",
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"bg_opa": 255,
+								"padding_top": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"padding_right": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "screenSetTime",
+				"id": "9n90frfx",
+				"type": "scr",
+				"version": 161,
+				"customer_code": {
+					"code_c": "",
+					"inc_c": "",
+					"code_py": "",
+					"inc_py": ""
+				},
+				"width": 240,
+				"height": 240,
+				"visible": true,
+				"flag": [],
+				"display_kb": false,
+				"chinese_input": false,
+				"chinese_library": "mini",
+				"keyboard_font_type": "simsun",
+				"keyboard_font_size": "18",
+				"style": [
+					{
+						"part": "LV_PART_MAIN",
+						"state": "LV_STATE_DEFAULT",
+						"disable": false,
+						"bg_color": "#101418",
+						"bg_grad_dir": "LV_GRAD_DIR_NONE",
+						"bg_grad_color": "#2195f6",
+						"bg_opa": 255,
+						"bg_img_src": "",
+						"bg_img_opa": 255,
+						"bg_img_recolor": "#ffffff",
+						"bg_img_recolor_opa": 0
+					}
+				],
+				"size": [
+					240,
+					240
+				],
+				"widgets": [
+					{
+						"name": "screenSetTime_cont_1",
+						"id": "pv9uhggw",
+						"type": "cont",
+						"visible": true,
+						"scrollbar_mode": "OFF",
+						"flag": [],
+						"pos": [
+							0,
+							0
+						],
+						"size": [
+							240,
+							40
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"child": [
+							{
+								"name": "screenSetTime_label_4",
+								"id": "m3a7uchc",
+								"type": "label",
+								"visible": true,
+								"flag": [],
+								"pos": [
+									0,
+									5
+								],
+								"size": [
+									240,
+									28
+								],
+								"default_style": false,
+								"custom_attributes": {},
+								"text": "Set RTC Time",
+								"long_mode": "LV_LABEL_LONG_WRAP",
+								"style": [
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_DEFAULT",
+										"disable": false,
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 255,
+										"border_color": "#2195f6",
+										"radius": 0,
+										"text_color": "#ffffff",
+										"font": 16,
+										"text_align": "LV_TEXT_ALIGN_CENTER",
+										"font_family": "montserratMedium",
+										"letter_space": 0,
+										"line_space": 1,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 0,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"padding_top": 6,
+										"padding_right": 0,
+										"padding_bottom": 0,
+										"padding_left": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0
+									},
+									{
+										"part": "LV_PART_MAIN",
+										"state": "LV_STATE_DISABLED",
+										"disable": true,
+										"border_side": [
+											"LV_BORDER_SIDE_FULL"
+										],
+										"border_width": 0,
+										"border_opa": 255,
+										"border_color": "#2195f6",
+										"radius": 0,
+										"text_color": "#000000",
+										"font": 16,
+										"font_family": "montserratMedium",
+										"text_align": "LV_TEXT_ALIGN_CENTER",
+										"letter_space": 2,
+										"line_space": 0,
+										"bg_color": "#2195f6",
+										"bg_grad_color": "#2195f6",
+										"bg_opa": 0,
+										"bg_grad_dir": "LV_GRAD_DIR_NONE",
+										"padding_top": 0,
+										"padding_right": 0,
+										"padding_bottom": 0,
+										"padding_left": 0,
+										"bg_img_src": "",
+										"bg_img_opa": 255,
+										"bg_img_recolor": "#ffffff",
+										"bg_img_recolor_opa": 0,
+										"shadow_color": "#2195f6",
+										"shadow_opa": 255,
+										"shadow_width": 0,
+										"shadow_spread": 0,
+										"shadow_ofs_x": 0,
+										"shadow_ofs_y": 0
+									}
+								]
+							}
+						],
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"border_side": [
+									"LV_BORDER_SIDE_BOTTOM"
+								],
+								"border_width": 2,
+								"border_color": "#D200AC",
+								"border_opa": 255,
+								"radius": 0,
+								"bg_color": "#292831",
+								"bg_grad_color": "#ffffff",
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"bg_opa": 255,
+								"padding_top": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"padding_right": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_btnUpdateTime",
+						"id": "sdjim2z0",
+						"type": "btn",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							10,
+							184
+						],
+						"size": [
+							220,
+							45
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"text_align": "center",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#292831",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"border_color": "#D200AC",
+								"radius": 5,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"font": 16,
+								"font_family": "montserratMedium",
+								"text_color": "#ffffff",
+								"text_align": "LV_TEXT_ALIGN_CENTER"
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_color": "#2195f6",
+								"border_opa": 255,
+								"radius": 5,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"font": 16,
+								"font_family": "montserratMedium",
+								"text_color": "#ffffff"
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_PRESSED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_color": "#2195f6",
+								"border_opa": 255,
+								"radius": 5,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"font": 16,
+								"font_family": "montserratMedium",
+								"text_color": "#ffffff"
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_CHECKED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 5,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"font": 12,
+								"font_family": "montserratMedium",
+								"text_color": "#000000"
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 5,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"font": 12,
+								"font_family": "montserratMedium",
+								"text_color": "#000000"
+							}
+						],
+						"text": "Update",
+						"long_mode": "LV_LABEL_LONG_WRAP",
+						"toggle": false
+					},
+					{
+						"name": "screenSetTime_label_8",
+						"id": "631zr3od",
+						"type": "label",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							149,
+							123
+						],
+						"size": [
+							12,
+							24
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"text": ":",
+						"long_mode": "LV_LABEL_LONG_WRAP",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#ffffff",
+								"font": 16,
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"font_family": "montserratMedium",
+								"letter_space": 0,
+								"line_space": 1,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
 								"bg_opa": 0,
 								"bg_grad_dir": "LV_GRAD_DIR_NONE",
-								"arc_color": "#d5d6de",
-								"arc_opa": 56,
-								"arc_width": 20,
+								"padding_top": 6,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
 								"shadow_color": "#2195f6",
 								"shadow_opa": 255,
 								"shadow_width": 0,
@@ -581,12 +3869,1354 @@
 								"shadow_ofs_y": 0
 							},
 							{
-								"part": "LV_PART_INDICATOR",
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#000000",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"letter_space": 2,
+								"line_space": 0,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 0,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_label_7",
+						"id": "n3imj92i",
+						"type": "label",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							79,
+							123
+						],
+						"size": [
+							12,
+							24
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"text": ":",
+						"long_mode": "LV_LABEL_LONG_WRAP",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"arc_color": "#2195f6",
-								"arc_opa": 255,
-								"arc_width": 20
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#ffffff",
+								"font": 16,
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"font_family": "montserratMedium",
+								"letter_space": 0,
+								"line_space": 1,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 6,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#000000",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"letter_space": 2,
+								"line_space": 0,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 0,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_label_6",
+						"id": "nr2ezy9s",
+						"type": "label",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							153,
+							69
+						],
+						"size": [
+							12,
+							24
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"text": ".",
+						"long_mode": "LV_LABEL_LONG_WRAP",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#ffffff",
+								"font": 16,
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"font_family": "montserratMedium",
+								"letter_space": 0,
+								"line_space": 1,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 6,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#000000",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"letter_space": 2,
+								"line_space": 0,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 0,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_label_5",
+						"id": "lrqpudk8",
+						"type": "label",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							75,
+							69
+						],
+						"size": [
+							12,
+							24
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"text": ".",
+						"long_mode": "LV_LABEL_LONG_WRAP",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#ffffff",
+								"font": 16,
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"font_family": "montserratMedium",
+								"letter_space": 0,
+								"line_space": 1,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 6,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#000000",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"letter_space": 2,
+								"line_space": 0,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 0,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_rollerSecond",
+						"id": "dj482als",
+						"type": "roller",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							162,
+							120
+						],
+						"size": [
+							56,
+							null
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"roller_name": [
+							"00",
+							"01",
+							"02",
+							"03",
+							"04",
+							"05",
+							"06",
+							"07",
+							"08",
+							"09",
+							"10",
+							"11",
+							"12",
+							"13",
+							"14",
+							"15",
+							"16",
+							"17",
+							"18",
+							"19",
+							"20",
+							"21",
+							"22",
+							"23",
+							"24",
+							"25",
+							"26",
+							"27",
+							"28",
+							"29",
+							"30",
+							"31",
+							"32",
+							"33",
+							"34",
+							"35",
+							"36",
+							"37",
+							"38",
+							"39",
+							"40",
+							"41",
+							"42",
+							"43",
+							"44",
+							"45",
+							"46",
+							"47",
+							"48",
+							"49",
+							"50",
+							"51",
+							"52",
+							"53",
+							"54",
+							"55",
+							"56",
+							"57",
+							"58",
+							"59"
+						],
+						"rowCount": 1,
+						"mode": "LV_ROLLER_MODE_NORMAL",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"border_color": "#293031",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#000000",
+								"shadow_opa": 0,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#292831",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 16,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_rollerMinute",
+						"id": "t9kl5t2u",
+						"type": "roller",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							92,
+							120
+						],
+						"size": [
+							56,
+							null
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"roller_name": [
+							"00",
+							"01",
+							"02",
+							"03",
+							"04",
+							"05",
+							"06",
+							"07",
+							"08",
+							"09",
+							"10",
+							"11",
+							"12",
+							"13",
+							"14",
+							"15",
+							"16",
+							"17",
+							"18",
+							"19",
+							"20",
+							"21",
+							"22",
+							"23",
+							"24",
+							"25",
+							"26",
+							"27",
+							"28",
+							"29",
+							"30",
+							"31",
+							"32",
+							"33",
+							"34",
+							"35",
+							"36",
+							"37",
+							"38",
+							"39",
+							"40",
+							"41",
+							"42",
+							"43",
+							"44",
+							"45",
+							"46",
+							"47",
+							"48",
+							"49",
+							"50",
+							"51",
+							"52",
+							"53",
+							"54",
+							"55",
+							"56",
+							"57",
+							"58",
+							"59"
+						],
+						"rowCount": 1,
+						"mode": "LV_ROLLER_MODE_NORMAL",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"border_color": "#293031",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#000000",
+								"shadow_opa": 0,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#292831",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 16,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_rollerHour",
+						"id": "qo078xkh",
+						"type": "roller",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							22,
+							120
+						],
+						"size": [
+							56,
+							null
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"roller_name": [
+							"00",
+							"01",
+							"02",
+							"03",
+							"04",
+							"05",
+							"06",
+							"07",
+							"08",
+							"09",
+							"10",
+							"11",
+							"12",
+							"13",
+							"14",
+							"15",
+							"16",
+							"17",
+							"18",
+							"19",
+							"20",
+							"21",
+							"22",
+							"23"
+						],
+						"rowCount": 1,
+						"mode": "LV_ROLLER_MODE_NORMAL",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"border_color": "#293031",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#000000",
+								"shadow_opa": 0,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#292831",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 16,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_rollerYear",
+						"id": "4nrmb8ax",
+						"type": "roller",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							166,
+							60
+						],
+						"size": [
+							64,
+							null
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"roller_name": [
+							"2023",
+							"2024",
+							"2025",
+							"2026",
+							"2027",
+							"2028",
+							"2029",
+							"2030"
+						],
+						"rowCount": 1,
+						"mode": "LV_ROLLER_MODE_NORMAL",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"border_color": "#293031",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#000000",
+								"shadow_opa": 0,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#292831",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 16,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_rollerMonth",
+						"id": "8yzgekqh",
+						"type": "roller",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							88,
+							60
+						],
+						"size": [
+							64,
+							null
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"roller_name": [
+							"01",
+							"02",
+							"03",
+							"04",
+							"05",
+							"06",
+							"07",
+							"08",
+							"09",
+							"10",
+							"11",
+							"12"
+						],
+						"rowCount": 1,
+						"mode": "LV_ROLLER_MODE_NORMAL",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"border_color": "#293031",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#000000",
+								"shadow_opa": 0,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#292831",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 16,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							}
+						]
+					},
+					{
+						"name": "screenSetTime_rollerDay",
+						"id": "v86lktt6",
+						"type": "roller",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							10,
+							60
+						],
+						"size": [
+							64,
+							null
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"roller_name": [
+							"01",
+							"02",
+							"03",
+							"04",
+							"05",
+							"06",
+							"07",
+							"08",
+							"09",
+							"10",
+							"11",
+							"12",
+							"13",
+							"14",
+							"15",
+							"16",
+							"17",
+							"18",
+							"19",
+							"20",
+							"21",
+							"22",
+							"23",
+							"24",
+							"25",
+							"26",
+							"27",
+							"28",
+							"29",
+							"30",
+							"31"
+						],
+						"rowCount": 1,
+						"mode": "LV_ROLLER_MODE_NORMAL",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"border_color": "#293031",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#000000",
+								"shadow_opa": 0,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#ffffff",
+								"bg_grad_color": "#ffffff",
+								"radius": 5,
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#333333",
+								"font": 12,
+								"font_family": "montserratMedium",
+								"border_color": "#e6e6e6",
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 255,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#292831",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 16,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_FOCUSED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
+							},
+							{
+								"part": "LV_PART_SELECTED",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"bg_color": "#2195f6",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 255,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"text_color": "#FFFFFF",
+								"font": 12,
+								"font_family": "montserratMedium"
 							}
 						]
 					}
