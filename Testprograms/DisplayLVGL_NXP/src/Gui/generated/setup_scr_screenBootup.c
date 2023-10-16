@@ -25,12 +25,45 @@ void setup_scr_screenBootup(lv_ui *ui)
 	lv_obj_set_style_bg_opa(ui->screenBootup, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_color(ui->screenBootup, lv_color_hex(0x101418), LV_PART_MAIN|LV_STATE_DEFAULT);
 
+	//Write codes screenBootup_lottie_1
+	ui->screenBootup_lottie_1 = lv_rlottie_create_from_raw(ui->screenBootup, 240, 240, (const void *)lottie_drone);
+	lv_obj_set_pos(ui->screenBootup_lottie_1, 0, 0);
+	lv_obj_set_size(ui->screenBootup_lottie_1, 240, 240);
+
+	//Write style for screenBootup_lottie_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenBootup_lottie_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screenBootup_label_2
+	ui->screenBootup_label_2 = lv_label_create(ui->screenBootup);
+	lv_label_set_text(ui->screenBootup_label_2, "V0.1");
+	lv_label_set_long_mode(ui->screenBootup_label_2, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenBootup_label_2, 10, 207);
+	lv_obj_set_size(ui->screenBootup_label_2, 220, 33);
+
+	//Write style for screenBootup_label_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenBootup_label_2, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screenBootup_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screenBootup_label_2, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screenBootup_label_2, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenBootup_label_2, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenBootup_label_2, lv_color_hex(0x9d9d9d), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenBootup_label_2, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenBootup_label_2, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenBootup_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenBootup_label_2, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenBootup_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenBootup_label_2, 8, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenBootup_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenBootup_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenBootup_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenBootup_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
 	//Write codes screenBootup_label_1
 	ui->screenBootup_label_1 = lv_label_create(ui->screenBootup);
-	lv_label_set_text(ui->screenBootup_label_1, "Bootup...\n");
+	lv_label_set_text(ui->screenBootup_label_1, "Acquisition System");
 	lv_label_set_long_mode(ui->screenBootup_label_1, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenBootup_label_1, 45, 103.5);
-	lv_obj_set_size(ui->screenBootup_label_1, 150, 33);
+	lv_obj_set_pos(ui->screenBootup_label_1, 0, 9);
+	lv_obj_set_size(ui->screenBootup_label_1, 240, 33);
 
 	//Write style for screenBootup_label_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screenBootup_label_1, 2, LV_PART_MAIN|LV_STATE_DEFAULT);

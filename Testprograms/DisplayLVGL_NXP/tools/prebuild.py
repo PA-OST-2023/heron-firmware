@@ -4,26 +4,21 @@ import os
 import shutil
 import stat
 from pathlib import Path
+import subprocess
 
-def rmtree(top):
-    for root, dirs, files in os.walk(top, topdown=False):
-        for name in files:
-            filename = os.path.join(root, name)
-            os.chmod(filename, stat.S_IWUSR)
-            os.remove(filename)
-        for name in dirs:
-            if os.name == 'nt':     # check if windows
-                os.system('rmdir /S /Q "{}"'.format(name))
-            os.rmdir(os.path.join(root, name))
-    os.rmdir(top) 
-
-
-def on_rm_error(func, path, exc_info):
-    # path contains the path of the file that couldn't be removed
-    # let's just assume that it's read-only and unlink it.
-    os.chmod(path, stat.S_IWRITE)
-    os.unlink(path)
-
+def unset_readonly(path):
+    dirPaths = []
+    if os.name == 'nt':     # check if windows
+        dirPaths.append(path)
+        for root, dirs, files in os.walk(path, topdown=False):
+            dirPaths.append(root)
+            for name in files:
+                filename = os.path.join(root, name)
+                os.chmod(filename, stat.S_IWUSR)
+            for name in dirs:
+                dirPaths.append(os.path.join(root, name))
+        for dirPath in dirPaths:
+            subprocess.run(["powershell", "-Command", f"(Get-Item -Path '{dirPath}').Attributes = (Get-Item -Path '{dirPath}').Attributes -band -bnot [System.IO.FileAttributes]::ReadOnly"])
 
 def copy_directory():
     src_dirs = [
@@ -37,24 +32,17 @@ def copy_directory():
     ]
 
     for src, dst in zip(src_dirs, dst_dirs):
-        # Check if source directory exists
-        if not os.path.exists(src):
+        if not os.path.exists(src):     # Check if source directory exists
             print(f"Source directory {src} does not exist. Skipping.")
             return
-
-        # If destination directory exists, remove it first
-        if os.path.exists(dst):
-            # rmtree(dst)
-            shutil.rmtree(dst, onerror=on_rm_error)
-
-        # Copy the entire directory recursively
-        shutil.copytree(src, dst)
-        print(f"Copied {src} to {dst}.")
-
-    print("Copying directories")
+        if os.path.exists(dst):         # If destination directory exists, remove it first
+            unset_readonly(dst)
+            shutil.rmtree(dst)
+        shutil.copytree(src, dst)       # Copy the entire directory recursively
+        unset_readonly(dst)
+    print("Prebuild-Script: Copied UI files")
 
 
 copy_directory()
-
 
 # env.AddPreAction("buildprog", copy_directory())

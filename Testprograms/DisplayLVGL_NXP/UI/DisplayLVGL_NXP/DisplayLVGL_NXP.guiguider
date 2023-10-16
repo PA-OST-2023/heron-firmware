@@ -40,15 +40,15 @@
 					"name": "label_1",
 					"id": "hbw20los",
 					"type": "label",
-					"left": 45,
-					"top": 103.5,
+					"left": 0,
+					"top": 9,
 					"visible": true,
 					"flag": [],
 					"custom_attributes": {},
-					"width": 150,
+					"width": 240,
 					"height": 33,
 					"default_style": false,
-					"text": "Bootup...\n",
+					"text": "Acquisition System",
 					"long_mode": "LV_LABEL_LONG_WRAP",
 					"style": [
 						{
@@ -122,6 +122,118 @@
 							"shadow_spread": 0,
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
+						}
+					]
+				},
+				{
+					"name": "label_2",
+					"id": "20gdgz6i",
+					"type": "label",
+					"left": 10,
+					"top": 207,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 220,
+					"height": 33,
+					"default_style": false,
+					"text": "V0.1",
+					"long_mode": "LV_LABEL_LONG_WRAP",
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 2,
+							"border_opa": 0,
+							"border_color": "#000000",
+							"radius": 5,
+							"text_color": "#9d9d9d",
+							"font": 16,
+							"text_align": "LV_TEXT_ALIGN_LEFT",
+							"font_family": "montserratMedium",
+							"letter_space": 1,
+							"line_space": 0,
+							"bg_color": "#000000",
+							"bg_grad_color": "#2195f6",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 8,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						},
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DISABLED",
+							"disable": true,
+							"border_side": [
+								"LV_BORDER_SIDE_FULL"
+							],
+							"border_width": 0,
+							"border_opa": 255,
+							"border_color": "#2195f6",
+							"radius": 0,
+							"text_color": "#000000",
+							"font": 16,
+							"font_family": "montserratMedium",
+							"text_align": "LV_TEXT_ALIGN_CENTER",
+							"letter_space": 2,
+							"line_space": 0,
+							"bg_color": "#5a6173",
+							"bg_grad_color": "#5a6173",
+							"bg_opa": 0,
+							"bg_grad_dir": "LV_GRAD_DIR_NONE",
+							"padding_top": 0,
+							"padding_right": 0,
+							"padding_bottom": 0,
+							"padding_left": 0,
+							"bg_img_src": "",
+							"bg_img_opa": 255,
+							"bg_img_recolor": "#ffffff",
+							"bg_img_recolor_opa": 0,
+							"shadow_color": "#2195f6",
+							"shadow_opa": 255,
+							"shadow_width": 0,
+							"shadow_spread": 0,
+							"shadow_ofs_x": 0,
+							"shadow_ofs_y": 0
+						}
+					]
+				},
+				{
+					"name": "lottie_1",
+					"id": "kpkyb0gb",
+					"type": "lottie",
+					"left": 0,
+					"top": 0,
+					"visible": true,
+					"flag": [],
+					"custom_attributes": {},
+					"width": 240,
+					"height": 240,
+					"json_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Testprograms\\DisplayLVGL_NXP\\UI\\DisplayLVGL_NXP\\import\\lottie\\drone.json",
+					"default_style": false,
+					"style": [
+						{
+							"part": "LV_PART_MAIN",
+							"state": "LV_STATE_DEFAULT",
+							"disable": false,
+							"bg_color": "#2195f6",
+							"bg_opa": 0
 						}
 					]
 				}
@@ -555,6 +667,7 @@
 					]
 				}
 			],
+			"event": {},
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -2645,6 +2758,7 @@
 					]
 				}
 			],
+			"event": {},
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -2871,7 +2985,7 @@
 			"height": "240"
 		},
 		"version": "test_v1",
-		"default_scr": "screenSetTime",
+		"default_scr": "screenBootup",
 		"theme": "LV_THEME_MATERIAL_FLAG_LIGHT",
 		"screen": [
 			{
@@ -2916,22 +3030,142 @@
 				],
 				"widgets": [
 					{
+						"name": "screenBootup_lottie_1",
+						"id": "kpkyb0gb",
+						"type": "lottie",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							0,
+							0
+						],
+						"size": [
+							240,
+							240
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"json_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Testprograms\\DisplayLVGL_NXP\\UI\\DisplayLVGL_NXP\\import\\lottie\\drone.json",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"bg_color": "#2195f6",
+								"bg_opa": 0
+							}
+						]
+					},
+					{
+						"name": "screenBootup_label_2",
+						"id": "20gdgz6i",
+						"type": "label",
+						"visible": true,
+						"flag": [],
+						"pos": [
+							10,
+							207
+						],
+						"size": [
+							220,
+							33
+						],
+						"default_style": false,
+						"custom_attributes": {},
+						"text": "V0.1",
+						"long_mode": "LV_LABEL_LONG_WRAP",
+						"style": [
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DEFAULT",
+								"disable": false,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 2,
+								"border_opa": 0,
+								"border_color": "#000000",
+								"radius": 5,
+								"text_color": "#9d9d9d",
+								"font": 16,
+								"text_align": "LV_TEXT_ALIGN_LEFT",
+								"font_family": "montserratMedium",
+								"letter_space": 1,
+								"line_space": 0,
+								"bg_color": "#000000",
+								"bg_grad_color": "#2195f6",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 8,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							},
+							{
+								"part": "LV_PART_MAIN",
+								"state": "LV_STATE_DISABLED",
+								"disable": true,
+								"border_side": [
+									"LV_BORDER_SIDE_FULL"
+								],
+								"border_width": 0,
+								"border_opa": 255,
+								"border_color": "#2195f6",
+								"radius": 0,
+								"text_color": "#000000",
+								"font": 16,
+								"font_family": "montserratMedium",
+								"text_align": "LV_TEXT_ALIGN_CENTER",
+								"letter_space": 2,
+								"line_space": 0,
+								"bg_color": "#5a6173",
+								"bg_grad_color": "#5a6173",
+								"bg_opa": 0,
+								"bg_grad_dir": "LV_GRAD_DIR_NONE",
+								"padding_top": 0,
+								"padding_right": 0,
+								"padding_bottom": 0,
+								"padding_left": 0,
+								"bg_img_src": "",
+								"bg_img_opa": 255,
+								"bg_img_recolor": "#ffffff",
+								"bg_img_recolor_opa": 0,
+								"shadow_color": "#2195f6",
+								"shadow_opa": 255,
+								"shadow_width": 0,
+								"shadow_spread": 0,
+								"shadow_ofs_x": 0,
+								"shadow_ofs_y": 0
+							}
+						]
+					},
+					{
 						"name": "screenBootup_label_1",
 						"id": "hbw20los",
 						"type": "label",
 						"visible": true,
 						"flag": [],
 						"pos": [
-							45,
-							103.5
+							0,
+							9
 						],
 						"size": [
-							150,
+							240,
 							33
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"text": "Bootup...\n",
+						"text": "Acquisition System",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"style": [
 							{
@@ -3030,6 +3264,7 @@
 				"chinese_library": "mini",
 				"keyboard_font_type": "simsun",
 				"keyboard_font_size": "18",
+				"event": {},
 				"style": [
 					{
 						"part": "LV_PART_MAIN",
@@ -3479,6 +3714,7 @@
 				"chinese_library": "mini",
 				"keyboard_font_type": "simsun",
 				"keyboard_font_size": "18",
+				"event": {},
 				"style": [
 					{
 						"part": "LV_PART_MAIN",

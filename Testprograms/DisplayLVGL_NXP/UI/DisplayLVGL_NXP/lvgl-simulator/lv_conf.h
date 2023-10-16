@@ -581,7 +581,7 @@
 #define LV_USE_FS_STDIO 0
 #if LV_USE_FS_STDIO
 /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
-#define LV_FS_STDIO_LETTER 'C'
+#define LV_FS_STDIO_LETTER 'D'
 /*Set the working directory. File/directory paths will be appended to it.*/
 #define LV_FS_STDIO_PATH ""
 /*>0 to cache this number of bytes in lv_fs_read()*/
@@ -666,7 +666,7 @@
 #endif    /* LV_USE_FREETYPE */
 
 /*Rlottie library*/
-#define LV_USE_RLOTTIE 0
+#define LV_USE_RLOTTIE 1
 
 /*FFmpeg library for image decoding and playing videos
  *Supports all major image formats so do not enable other image decoder with it*/

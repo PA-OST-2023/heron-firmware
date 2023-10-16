@@ -20,6 +20,8 @@ typedef struct
   
 	lv_obj_t *screenBootup;
 	bool screenBootup_del;
+	lv_obj_t *screenBootup_lottie_1;
+	lv_obj_t *screenBootup_label_2;
 	lv_obj_t *screenBootup_label_1;
 	lv_obj_t *screenRecording;
 	bool screenRecording_del;
@@ -54,6 +56,8 @@ extern lv_ui guider_ui;
 void setup_scr_screenBootup(lv_ui *ui);
 void setup_scr_screenRecording(lv_ui *ui);
 void setup_scr_screenSetTime(lv_ui *ui);
+#define LV_LOT_DECLARE(array_name) extern const uint8_t array_name[];
+LV_LOT_DECLARE(lottie_drone);
 
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_16)
