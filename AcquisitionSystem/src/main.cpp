@@ -9,6 +9,13 @@
 #include <lvgl.h>
 #include "Gui/generated/gui_guider.h"
 
+#include <console.h>
+
+#include "arduino_freertos.h"
+#include "avr/pgmspace.h"
+
+using namespace arduino;
+
 #define TFT_SCLK 13  // SCLK can also use pin 14
 #define TFT_MOSI 11  // MOSI can also use pin 7
 #define TFT_CS   10  // CS & DC can use pins 2, 6, 9, 10, 15, 20, 21, 22, 23
@@ -38,6 +45,24 @@ const int screenHeight = 240;
 const int screenBufferHeight = 60;
 const int lvglUpdateRate = 60;
 
+static void myLoop(void*)
+{
+  while(true)
+  {
+    // lv_task_handler();
+    vTaskDelay(pdMS_TO_TICKS(5));
+
+    static uint32_t t = 0;
+    if (millis() - t > 1000)
+    {
+      t = millis();
+      // console.ok.printf("Console Test: %d\n", t);
+      Serial.printf("Serial Test: %d\n", t);
+      Serial.flush();
+    }
+  }
+}
+
 void my_disp_flush(lv_disp_drv_t *dispDrv, const lv_area_t *area, lv_color_t *color_p);
 void touchpad_read(lv_indev_drv_t * drv, lv_indev_data_t* data);
 void my_print(const char* buf);
@@ -45,59 +70,80 @@ void my_print(const char* buf);
 void rainbow(uint8_t wait);
 CRGB Wheel(byte WheelPos);
 
-void setup()
+FLASHMEM __attribute__((noinline)) void setup()
 {
   Serial.begin(0);
+  // console.begin();
+  // console.ok.println("Console Test :)");
 
-  FastLED.addLeds<WS2812, RGB_LED, GRB>(leds, NUM_LEDS);
-  FastLED.setBrightness(255);
-  FastLED.clear();
-  FastLED.show();
+  if (CrashReport)
+  {
+    Serial.print(CrashReport);
+    Serial.println();
+    Serial.flush();
+  }
 
-  leds[1] = CRGB::Green;
-  FastLED.show();
+  // FastLED.addLeds<WS2812, RGB_LED, GRB>(leds, NUM_LEDS);
+  // FastLED.setBrightness(255);
+  // FastLED.clear();
+  // FastLED.show();
 
-  pinMode(TFT_BL, OUTPUT);
-  digitalWrite(TFT_BL, LOW);
-  disp.initB();
-  disp.setRotation(3);
-  disp.fillScreen(ST77XX_BLACK);
+  // leds[1] = CRGB::Green;
+  // FastLED.show();
 
-  touch.begin();
+  // pinMode(TFT_BL, OUTPUT);
+  // digitalWrite(TFT_BL, LOW);
+  // disp.initB();
+  // disp.setRotation(3);
+  // disp.fillScreen(ST77XX_BLACK);
 
-  sm_set_default_pool(myHeap, myHeapSize, false, nullptr);  // use a memory pool on the external ram
-  lv_log_register_print_cb(my_print);
-  lv_init();
-  static lv_disp_draw_buf_t draw_buf;
-  static lv_color_t buf[screenWidth * screenBufferHeight];
-  lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenBufferHeight);
-  disp.setFrameBuffer((uint16_t*)buf);
+  // touch.begin();
 
-  static lv_disp_drv_t disp_drv;
-  lv_disp_drv_init(&disp_drv);
-  disp_drv.hor_res = screenWidth;
-  disp_drv.ver_res = screenHeight;
-  disp_drv.flush_cb = my_disp_flush;
-  disp_drv.draw_buf = &draw_buf;
-  disp_drv.user_data = &disp;
-  lv_disp_t* dispDrv = lv_disp_drv_register(&disp_drv);
-  lv_timer_set_period(dispDrv->refr_timer, 1000.0 / lvglUpdateRate);
+  // sm_set_default_pool(myHeap, myHeapSize, false, nullptr);  // use a memory pool on the external ram
+  // lv_log_register_print_cb(my_print);
+  // lv_init();
+  // static lv_disp_draw_buf_t draw_buf;
+  // static lv_color_t buf[screenWidth * screenBufferHeight];
+  // lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenBufferHeight);
+  // disp.setFrameBuffer((uint16_t*)buf);
 
-  static lv_indev_drv_t indev_drv;
-  lv_indev_drv_init(&indev_drv);
-  indev_drv.type = LV_INDEV_TYPE_POINTER;
-  indev_drv.read_cb = touchpad_read;
-  lv_indev_drv_register(&indev_drv);
+  // static lv_disp_drv_t disp_drv;
+  // lv_disp_drv_init(&disp_drv);
+  // disp_drv.hor_res = screenWidth;
+  // disp_drv.ver_res = screenHeight;
+  // disp_drv.flush_cb = my_disp_flush;
+  // disp_drv.draw_buf = &draw_buf;
+  // disp_drv.user_data = &disp;
+  // lv_disp_t* dispDrv = lv_disp_drv_register(&disp_drv);
+  // lv_timer_set_period(dispDrv->refr_timer, 1000.0 / lvglUpdateRate);
 
-  setup_ui(&guider_ui);
-  digitalWrite(TFT_BL, HIGH);
+  // static lv_indev_drv_t indev_drv;
+  // lv_indev_drv_init(&indev_drv);
+  // indev_drv.type = LV_INDEV_TYPE_POINTER;
+  // indev_drv.read_cb = touchpad_read;
+  // lv_indev_drv_register(&indev_drv);
+
+  // setup_ui(&guider_ui);
+  // digitalWrite(TFT_BL, HIGH);
+
+  xTaskCreate(myLoop, "myLoop", 4096, nullptr, 10, nullptr);
+
+  vTaskStartScheduler();
 }
 
 
 void loop()
 {
-  lv_task_handler();
+  // lv_task_handler();
   // rainbow(0);
+
+  // static uint32_t t = 0;
+  // if (millis() - t > 1000)
+  // {
+  //   t = millis();
+  //   // console.ok.printf("Console Test: %d\n", t);
+  //   Serial.printf("Serial Test: %d\n", t);
+  // }
 }
 
 void my_disp_flush(lv_disp_drv_t *dispDrv, const lv_area_t *area, lv_color_t *color_p)

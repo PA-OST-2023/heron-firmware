@@ -36,11 +36,8 @@ bool Console::begin(void)
 {
   if(type == USBCDC_t)
   {
-  //   (*(USBCDC*)&stream).enableReboot(true);     // Enables entering bootloader when changing to baudrate of 1200 bit/s (normaly not used, due to dedicated DFU USB-Endpoint)
-  //   (*(USBCDC*)&stream).onEvent(usbEventCallback);
-  //   (*(USBCDC*)&stream).begin();
-  //   (*(USBCDC*)&stream).setDebugOutput(true);
-  // }
+    (*(usb_serial_class*)&stream).begin(0);
+  }
   else return false;
   return initialize();
 }
@@ -49,7 +46,7 @@ bool Console::begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t tx
 {
   if(type == HardwareSerial_t)
   {
-    (*(HardwareSerial*)&stream).begin(baud, config, rxPin, txPin, invert, timeout_ms, rxfifo_full_thrhd);
+    (*(HardwareSerial*)&stream).begin(baud, config);
   }
   else return false;
   return initialize();
@@ -59,8 +56,8 @@ bool Console::initialize(void)
 {
   initialized = true;
   bufferAccessSemaphore = xSemaphoreCreateMutex();
-  xTaskCreate(writeTask, "task_consoleWrite", 4096, this, 2, &writeTaskHandle);
-  xTaskCreate(interfaceTask, "task_consoleIface", 4096, this, 5, NULL);    // TODO: Stack size must be that large?!
+  // xTaskCreate(writeTask, "task_consoleWrite", 4096, this, 2, &writeTaskHandle);
+  // xTaskCreate(interfaceTask, "task_consoleIface", 4096, this, 5, NULL);    // TODO: Stack size must be that large?!
   return true;
 }
 
@@ -177,7 +174,7 @@ size_t Console::write(const uint8_t *buffer, size_t size)
 
 void Console::printTimestamp(void)
 {
-  int h = _min(millis() / 3600000, 99);
+  int h = min(millis() / 3600000, 99);
   int m = (millis() / 60000) % 60;
   int s = (millis() / 1000) % 60;
   int ms = millis() % 1000;
@@ -189,35 +186,13 @@ void Console::printStartupMessage(void)
   stream.print(CONSOLE_CLEAR);
   stream.print(CONSOLE_COLOR_BOLD_CYAN CONSOLE_BACKGROUND_DEFAULT);
   stream.println("****************************************************");
-  stream.println("*                   ESP32-S3 Basic                 *");
-  stream.println("*             2023, Florian Baumgartner            *");
+  stream.println("*                 AcquisitionSystem                *");
+  stream.println("*      2023, Florian Baumgartner, Alain Keller     *");
   stream.println("****************************************************");
   stream.println(CONSOLE_LOG);
 }
 
-void Console::usbEventCallback(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
-{
-  if(event_base == ARDUINO_USB_CDC_EVENTS)
-  {
-    arduino_usb_cdc_event_data_t * data = (arduino_usb_cdc_event_data_t*)event_data;
-    switch (event_id)
-    {
-      case ARDUINO_USB_CDC_CONNECTED_EVENT:
-        break;
-      case ARDUINO_USB_CDC_DISCONNECTED_EVENT:
-        break;
-      case ARDUINO_USB_CDC_LINE_STATE_EVENT:
-        break;
-      case ARDUINO_USB_CDC_LINE_CODING_EVENT:
-        break;
-      default:
-        break;
-    }
-  }
-}
-
 
 #ifndef USE_CUSTOM_CONSOLE
-  USBCDC USBSerial;
-  Console console(USBSerial);
+  Console console(Serial);
 #endif

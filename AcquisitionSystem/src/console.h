@@ -34,6 +34,7 @@
 #define CONSOLE_H
 
 #include <Arduino.h>
+#include <arduino_freertos.h>
 #include <semphr.h>
 
 #define INTERFACE_UPDATE_RATE           10            // [hz]
@@ -179,7 +180,7 @@ class Console: public Stream
     {
       if(type == USBCDC_t)
       {
-        return *(USBCDC*)&stream;
+        return *(usb_serial_class*)&stream;
       }
       else if (type == HardwareSerial_t)
       {
@@ -196,7 +197,7 @@ class Console: public Stream
     ConsoleStatus warning = ConsoleStatus(ConsoleStatus::StatusWarning_t);
     ConsoleStatus dummy = ConsoleStatus(ConsoleStatus::StatusDummy_t);
   
-    Console(USBCDC &stream): stream(stream), type(USBCDC_t) {ok.ref(this); log.ref(this); error.ref(this); warning.ref(this); custom.ref(this); dummy.ref(this);}
+    Console(usb_serial_class &stream): stream(stream), type(USBCDC_t) {ok.ref(this); log.ref(this); error.ref(this); warning.ref(this); custom.ref(this); dummy.ref(this);}
     Console(HardwareSerial &stream): stream(stream), type(HardwareSerial_t) {ok.ref(this); log.ref(this); error.ref(this); warning.ref(this); custom.ref(this); dummy.ref(this);}
     bool begin();                 // Used for USBSerial
     bool begin(unsigned long baud, uint32_t config=SERIAL_8N1, int8_t rxPin=-1, int8_t txPin=-1, bool invert=false, unsigned long timeout_ms = 20000UL, uint8_t rxfifo_full_thrhd = 112);    // Used for HardwareSerial
@@ -248,7 +249,7 @@ class Console: public Stream
 
 
 #ifndef USE_CUSTOM_CONSOLE
-  extern USBCDC USBSerial;
+  extern usb_serial_class USBSerial;
   extern Console console;
 #endif
 
