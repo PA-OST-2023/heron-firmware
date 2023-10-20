@@ -430,7 +430,7 @@
 /*Documentation of the widgets: https://docs.lvgl.io/latest/en/html/widgets/index.html*/
 #define LV_USE_ARC 0
 
-#define LV_USE_BAR 0
+#define LV_USE_BAR 1
 
 #define LV_USE_BTN 1
 
@@ -462,7 +462,7 @@
 
 #define LV_USE_SLIDER 0
 
-#define LV_USE_SWITCH 0
+#define LV_USE_SWITCH 1
 
 #define LV_USE_TEXTAREA 0
 #if LV_USE_TEXTAREA
@@ -508,7 +508,7 @@
 
 #define LV_USE_LED 0
 
-#define LV_USE_LIST 0
+#define LV_USE_LIST 1
 
 #define LV_USE_MENU 0
 
@@ -530,7 +530,7 @@
 
 #define LV_USE_TABVIEW 0
 
-#define LV_USE_TILEVIEW 0
+#define LV_USE_TILEVIEW 1
 
 #define LV_USE_VIDEO 0
 
@@ -667,7 +667,7 @@
 #endif    /* LV_USE_FREETYPE */
 
 /*Rlottie library*/
-#define LV_USE_RLOTTIE 1
+#define LV_USE_RLOTTIE 0
 
 /*FFmpeg library for image decoding and playing videos
  *Supports all major image formats so do not enable other image decoder with it*/

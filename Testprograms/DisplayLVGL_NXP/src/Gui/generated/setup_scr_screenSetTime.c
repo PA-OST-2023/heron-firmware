@@ -25,28 +25,28 @@ void setup_scr_screenSetTime(lv_ui *ui)
 	lv_obj_set_style_bg_opa(ui->screenSetTime, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_color(ui->screenSetTime, lv_color_hex(0x101418), LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenSetTime_cont_1
-	ui->screenSetTime_cont_1 = lv_obj_create(ui->screenSetTime);
-	lv_obj_set_pos(ui->screenSetTime_cont_1, 0, 0);
-	lv_obj_set_size(ui->screenSetTime_cont_1, 240, 40);
-	lv_obj_set_scrollbar_mode(ui->screenSetTime_cont_1, LV_SCROLLBAR_MODE_OFF);
+	//Write codes screenSetTime_cont_2
+	ui->screenSetTime_cont_2 = lv_obj_create(ui->screenSetTime);
+	lv_obj_set_pos(ui->screenSetTime_cont_2, 0, 0);
+	lv_obj_set_size(ui->screenSetTime_cont_2, 240, 40);
+	lv_obj_set_scrollbar_mode(ui->screenSetTime_cont_2, LV_SCROLLBAR_MODE_OFF);
 
-	//Write style for screenSetTime_cont_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenSetTime_cont_1, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_opa(ui->screenSetTime_cont_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_color(ui->screenSetTime_cont_1, lv_color_hex(0xD200AC), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_side(ui->screenSetTime_cont_1, LV_BORDER_SIDE_BOTTOM, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenSetTime_cont_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenSetTime_cont_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenSetTime_cont_1, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenSetTime_cont_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenSetTime_cont_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenSetTime_cont_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenSetTime_cont_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenSetTime_cont_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenSetTime_cont_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenSetTime_cont_2, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screenSetTime_cont_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screenSetTime_cont_2, lv_color_hex(0xD200AC), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screenSetTime_cont_2, LV_BORDER_SIDE_BOTTOM, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenSetTime_cont_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenSetTime_cont_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenSetTime_cont_2, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenSetTime_cont_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenSetTime_cont_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenSetTime_cont_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenSetTime_cont_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenSetTime_cont_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Write codes screenSetTime_label_4
-	ui->screenSetTime_label_4 = lv_label_create(ui->screenSetTime_cont_1);
+	ui->screenSetTime_label_4 = lv_label_create(ui->screenSetTime);
 	lv_label_set_text(ui->screenSetTime_label_4, "Set RTC Time");
 	lv_label_set_long_mode(ui->screenSetTime_label_4, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screenSetTime_label_4, 0, 5);
@@ -58,14 +58,33 @@ void setup_scr_screenSetTime(lv_ui *ui)
 	lv_obj_set_style_text_color(ui->screenSetTime_label_4, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screenSetTime_label_4, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screenSetTime_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenSetTime_label_4, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenSetTime_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_align(ui->screenSetTime_label_4, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_opa(ui->screenSetTime_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenSetTime_label_4, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenSetTime_label_4, 8, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_right(ui->screenSetTime_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_bottom(ui->screenSetTime_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_left(ui->screenSetTime_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenSetTime_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screenSetTime_btn_1
+	ui->screenSetTime_btn_1 = lv_btn_create(ui->screenSetTime);
+	ui->screenSetTime_btn_1_label = lv_label_create(ui->screenSetTime_btn_1);
+	lv_label_set_text(ui->screenSetTime_btn_1_label, " ");
+	lv_label_set_long_mode(ui->screenSetTime_btn_1_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->screenSetTime_btn_1_label, LV_ALIGN_LEFT_MID, 0, 0);
+	lv_obj_set_style_pad_all(ui->screenSetTime_btn_1, 0, LV_STATE_DEFAULT);
+	lv_obj_set_pos(ui->screenSetTime_btn_1, 7, 6);
+	lv_obj_set_size(ui->screenSetTime_btn_1, 60, 28);
+
+	//Write style for screenSetTime_btn_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenSetTime_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenSetTime_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenSetTime_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenSetTime_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenSetTime_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenSetTime_btn_1, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenSetTime_btn_1, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Write codes screenSetTime_btnUpdateTime
 	ui->screenSetTime_btnUpdateTime = lv_btn_create(ui->screenSetTime);
@@ -344,4 +363,6 @@ void setup_scr_screenSetTime(lv_ui *ui)
 	lv_obj_update_layout(ui->screenSetTime);
 
 	
+	//Init events for screen.
+	events_init_screenSetTime(ui);
 }

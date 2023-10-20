@@ -28,6 +28,9 @@
 #if LV_USE_GUIDER_SIMULATOR
 /* code for simulator begin  */
 
+#undef LV_COLOR_SCREEN_TRANSP
+#define LV_COLOR_SCREEN_TRANSP 1
+
 
 /* code for simulator end */
 #else
