@@ -1,9 +1,0 @@
-SET(SOURCES screens/ui_ScreenBootup.c
-    screens/ui_ScreenRecording.c
-    screens/ui_ScreenSetTime.c
-    ui.c
-    components/ui_comp_hook.c
-    ui_helpers.c
-    fonts/ui_font_FontAwesome16.c)
-
-add_library(ui ${SOURCES})

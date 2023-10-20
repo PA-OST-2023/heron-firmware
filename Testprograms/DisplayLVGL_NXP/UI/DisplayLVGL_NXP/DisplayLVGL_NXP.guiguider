@@ -18914,8 +18914,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screenRecording"
+			]
 		},
 		{
 			"name": "screenSetTime",
@@ -21697,8 +21696,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screenSetTime"
+			]
 		}
 	],
 	"FrontStatus": {},

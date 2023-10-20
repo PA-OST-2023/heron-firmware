@@ -42,7 +42,7 @@
 #endif
 
 
-#define ST7735_SPICLOCK 24000000
+#define ST7735_SPICLOCK 60000000
 //#define ST7735_SPICLOCK 16000000
 
 // some flags for initR() :(
@@ -66,6 +66,9 @@
 #define ST7735_TFTHEIGHT_144 128
 // for 1.8" display and mini
 #define ST7735_TFTHEIGHT_160  160 // for 1.8" and mini display
+
+#define ST7789V_TFTWIDTH_240  240
+#define ST7789V_TFTHEIGHT_240 240
 
 #define ST7735_NOP     0x00
 #define ST7735_SWRESET 0x01
