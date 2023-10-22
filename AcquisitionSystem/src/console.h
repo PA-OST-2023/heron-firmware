@@ -39,7 +39,7 @@
 
 #define INTERFACE_UPDATE_RATE           10            // [hz]
 #define QUEUE_BUFFER_LENGTH             (1<<13)       // [#]    Buffer Size must be power of 2
-#define CONSOLE_ACTIVE_DELAY            3000          // [ms]   Data transmission hold-back delay after console object has been enabled
+#define CONSOLE_ACTIVE_DELAY            500           // [ms]   Data transmission hold-back delay after console object has been enabled
 #define INTERFACE_ACTIVE_DELAY          1500          // [ms]   Data transmission hold-back delay after physical connection has been established (Terminal opened)
 
 
@@ -165,7 +165,7 @@ class Console: public Stream
     volatile bool initialized = false;
     volatile bool enabled = false;               // Indicates if the stream is enabled (e.g. is set after USB MSC setup is done)
     volatile bool streamActive = false;          // Indicates if the console is opened and data is tranmitted
-    volatile char ringBuffer[QUEUE_BUFFER_LENGTH];
+    volatile char* ringBuffer = nullptr;
     volatile uint32_t writeIdx = 0, readIdx = 0;
     SemaphoreHandle_t bufferAccessSemaphore = nullptr;
     TaskHandle_t writeTaskHandle = nullptr;
@@ -175,7 +175,6 @@ class Console: public Stream
     void printStartupMessage(void);
     static void writeTask(void *pvParameter);
     static void interfaceTask(void *pvParameter);
-    // static void usbEventCallback(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data);
     bool getInterfaceState(void)
     {
       if(type == USBCDC_t)
@@ -197,10 +196,10 @@ class Console: public Stream
     ConsoleStatus warning = ConsoleStatus(ConsoleStatus::StatusWarning_t);
     ConsoleStatus dummy = ConsoleStatus(ConsoleStatus::StatusDummy_t);
   
-    Console(usb_serial_class &stream): stream(stream), type(USBCDC_t) {ok.ref(this); log.ref(this); error.ref(this); warning.ref(this); custom.ref(this); dummy.ref(this);}
-    Console(HardwareSerial &stream): stream(stream), type(HardwareSerial_t) {ok.ref(this); log.ref(this); error.ref(this); warning.ref(this); custom.ref(this); dummy.ref(this);}
+    Console(usb_serial_class &stream, bool enabled = false): stream(stream), type(USBCDC_t), enabled(enabled) {ok.ref(this); log.ref(this); error.ref(this); warning.ref(this); custom.ref(this); dummy.ref(this);}
+    Console(HardwareSerial &stream, bool enabled = false): stream(stream), type(HardwareSerial_t), enabled(enabled) {ok.ref(this); log.ref(this); error.ref(this); warning.ref(this); custom.ref(this); dummy.ref(this);}
     bool begin();                 // Used for USBSerial
-    bool begin(unsigned long baud, uint32_t config=SERIAL_8N1, int8_t rxPin=-1, int8_t txPin=-1, bool invert=false, unsigned long timeout_ms = 20000UL, uint8_t rxfifo_full_thrhd = 112);    // Used for HardwareSerial
+    bool begin(unsigned long baud, uint32_t config=SERIAL_8N1);    // Used for HardwareSerial
     void end(void);
     void enable(bool state) {enabled = state;}
     void flush(void) {readIdx = writeIdx;}
@@ -249,7 +248,6 @@ class Console: public Stream
 
 
 #ifndef USE_CUSTOM_CONSOLE
-  extern usb_serial_class USBSerial;
   extern Console console;
 #endif
 

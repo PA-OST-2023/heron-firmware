@@ -1,13 +1,13 @@
 #include <Arduino.h>
-#include <Adafruit_GFX.h>
-#include <ST7789_t3.h>
-#include <CST816S.h>
-#include <SPI.h>
+// #include <Adafruit_GFX.h>
+// #include <ST7789_t3.h>
+// #include <CST816S.h>
+// #include <SPI.h>
 
-#include <FastLED.h>
-#include <static_malloc.h>
-#include <lvgl.h>
-#include "Gui/generated/gui_guider.h"
+// #include <FastLED.h>
+// #include <static_malloc.h>
+// #include <lvgl.h>
+// #include "Gui/generated/gui_guider.h"
 
 #include <console.h>
 
@@ -30,51 +30,44 @@ using namespace arduino;
 #define NUM_LEDS 66
 
 
-constexpr size_t myHeapSize = 1024 * 4096;
-EXTMEM uint8_t myHeap[myHeapSize]; // 4MB memory pool on the external ram chip
+// constexpr size_t myHeapSize = 1024 * 4096;
+// EXTMEM uint8_t myHeap[myHeapSize]; // 4MB memory pool on the external ram chip
 
-lv_ui guider_ui;
-ST7735_t3 disp = ST7735_t3(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
-CST816S touch(&Wire1, TCH_RST, TCH_IRQ);	// SDA, SCL, RST, IRQ
 
-// Adafruit_NeoPixel strip(66, 22, NEO_GRB + NEO_KHZ800);
-CRGB leds[NUM_LEDS];
+// ST7735_t3 disp = ST7735_t3(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
+// CST816S touch(&Wire1, TCH_RST, TCH_IRQ);	// SDA, SCL, RST, IRQ
+// lv_ui guider_ui;
+// CRGB leds[NUM_LEDS];
 
-const int screenWidth = 240;
-const int screenHeight = 240;
-const int screenBufferHeight = 60;
-const int lvglUpdateRate = 60;
+// const int screenWidth = 240;
+// const int screenHeight = 240;
+// const int screenBufferHeight = 60;
+// const int lvglUpdateRate = 60;
 
-static void myLoop(void*)
+// void my_disp_flush(lv_disp_drv_t *dispDrv, const lv_area_t *area, lv_color_t *color_p);
+// void touchpad_read(lv_indev_drv_t * drv, lv_indev_data_t* data);
+// void my_print(const char* buf);
+static void myLoop(void*);
+
+static void task2(void*) 
 {
-  while(true)
-  {
-    // lv_task_handler();
-    vTaskDelay(pdMS_TO_TICKS(5));
+    while (true) {
+        Serial.println("TICK");
+        vTaskDelay(pdMS_TO_TICKS(1000));
 
-    static uint32_t t = 0;
-    if (millis() - t > 1000)
-    {
-      t = millis();
-      // console.ok.printf("Console Test: %d\n", t);
-      Serial.printf("Serial Test: %d\n", t);
-      Serial.flush();
+        Serial.println("TOCK");
+        vTaskDelay(pdMS_TO_TICKS(1000));
+
+        console.log.printf("Time: %d\n", millis());
     }
-  }
 }
 
-void my_disp_flush(lv_disp_drv_t *dispDrv, const lv_area_t *area, lv_color_t *color_p);
-void touchpad_read(lv_indev_drv_t * drv, lv_indev_data_t* data);
-void my_print(const char* buf);
-
-void rainbow(uint8_t wait);
-CRGB Wheel(byte WheelPos);
+// void rainbow(uint8_t wait);
+// CRGB Wheel(byte WheelPos);
 
 FLASHMEM __attribute__((noinline)) void setup()
 {
   Serial.begin(0);
-  // console.begin();
-  // console.ok.println("Console Test :)");
 
   if (CrashReport)
   {
@@ -83,13 +76,81 @@ FLASHMEM __attribute__((noinline)) void setup()
     Serial.flush();
   }
 
-  // FastLED.addLeds<WS2812, RGB_LED, GRB>(leds, NUM_LEDS);
-  // FastLED.setBrightness(255);
-  // FastLED.clear();
-  // FastLED.show();
+  delay(1000);
+  bool res = console.begin();
+  Serial.printf("Console begin: %d\n", res);
+  console.ok.println("Console Test :)");
 
-  // leds[1] = CRGB::Green;
-  // FastLED.show();
+  xTaskCreate(task2, "task2", 128, nullptr, 2, nullptr);
+  // xTaskCreate(myLoop, "myLoop", 256, nullptr, 10, nullptr);
+
+  vTaskStartScheduler();
+}
+
+
+void loop()
+{
+}
+
+// void my_disp_flush(lv_disp_drv_t *dispDrv, const lv_area_t *area, lv_color_t *color_p)
+// {
+//   ((ST7789_t3*)dispDrv->user_data)->writeRect(area->x1, area->y1, (area->x2 - area->x1 + 1), (area->y2 - area->y1 + 1), (uint16_t *)color_p);
+//   ((ST7789_t3*)dispDrv->user_data)->updateScreenAsync();   // DMA the stuff to the screen
+//   lv_disp_flush_ready(dispDrv);
+// }
+
+// void touchpad_read(lv_indev_drv_t * drv, lv_indev_data_t* data)
+// {
+//   if (((CST816S*)drv->user_data)->available())
+//   {
+//     data->state = LV_INDEV_STATE_PR;  // Indicate that the touchpad is pressed
+//     data->point.x = ((CST816S*)drv->user_data)->data.x;
+//     data->point.y = ((CST816S*)drv->user_data)->data.y;
+//   }
+//   else
+//   {
+//     data->state = LV_INDEV_STATE_REL;
+//   }
+// }
+
+
+// void my_print(const char* buf)
+// {
+//     Serial.write(buf);
+//     Serial.flush();
+// }
+
+// void rainbow(uint8_t wait) {
+//   uint16_t i, j;
+
+//   for(j=0; j<256; j++) {
+//     for(i=0; i<NUM_LEDS; i++) {
+//       leds[i] = Wheel((i+j) & 255);
+//     }
+//     FastLED.show();
+//     delay(wait);
+//   }
+// }
+
+// CRGB Wheel(byte WheelPos) {
+//   WheelPos = 255 - WheelPos;
+//   if(WheelPos < 85) {
+//     return CRGB(255 - WheelPos * 3, 0, WheelPos * 3);
+//   }
+//   if(WheelPos < 170) {
+//     WheelPos -= 85;
+//     return CRGB(0, WheelPos * 3, 255 - WheelPos * 3);
+//   }
+//   WheelPos -= 170;
+//   return CRGB(WheelPos * 3, 255 - WheelPos * 3, 0);
+// }
+
+static void myLoop(void*)
+{
+  // vTaskDelay(pdMS_TO_TICKS(1000));
+  // static ST7735_t3 disp = ST7735_t3(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
+  // static CST816S touch(&Wire1, TCH_RST, TCH_IRQ);	// SDA, SCL, RST, IRQ
+  // static lv_ui guider_ui;
 
   // pinMode(TFT_BL, OUTPUT);
   // digitalWrite(TFT_BL, LOW);
@@ -121,83 +182,15 @@ FLASHMEM __attribute__((noinline)) void setup()
   // lv_indev_drv_init(&indev_drv);
   // indev_drv.type = LV_INDEV_TYPE_POINTER;
   // indev_drv.read_cb = touchpad_read;
+  // indev_drv.user_data = &touch;
   // lv_indev_drv_register(&indev_drv);
 
   // setup_ui(&guider_ui);
   // digitalWrite(TFT_BL, HIGH);
 
-  xTaskCreate(myLoop, "myLoop", 4096, nullptr, 10, nullptr);
-
-  vTaskStartScheduler();
-}
-
-
-void loop()
-{
-  // lv_task_handler();
-  // rainbow(0);
-
-  // static uint32_t t = 0;
-  // if (millis() - t > 1000)
-  // {
-  //   t = millis();
-  //   // console.ok.printf("Console Test: %d\n", t);
-  //   Serial.printf("Serial Test: %d\n", t);
-  // }
-}
-
-void my_disp_flush(lv_disp_drv_t *dispDrv, const lv_area_t *area, lv_color_t *color_p)
-{
-  ((ST7789_t3*)dispDrv->user_data)->writeRect(area->x1, area->y1, (area->x2 - area->x1 + 1), (area->y2 - area->y1 + 1), (uint16_t *)color_p);
-  ((ST7789_t3*)dispDrv->user_data)->updateScreenAsync();   // DMA the stuff to the screen
-  lv_disp_flush_ready(dispDrv);
-}
-
-void touchpad_read(lv_indev_drv_t * drv, lv_indev_data_t* data)
-{
-  if (touch.available())
+  while(true)
   {
-    data->state = LV_INDEV_STATE_PR;  // Indicate that the touchpad is pressed
-    data->point.x = touch.data.x;
-    data->point.y = touch.data.y;
-  }
-  else
-  {
-    data->state = LV_INDEV_STATE_REL;
+    // lv_task_handler();
+    vTaskDelay(pdMS_TO_TICKS(10));
   }
 }
-
-
-void my_print(const char* buf)
-{
-    Serial.write(buf);
-    Serial.flush();
-}
-
-void rainbow(uint8_t wait) {
-  uint16_t i, j;
-
-  for(j=0; j<256; j++) {
-    for(i=0; i<NUM_LEDS; i++) {
-      leds[i] = Wheel((i+j) & 255);
-    }
-    FastLED.show();
-    delay(wait);
-  }
-}
-
-// Input a value 0 to 255 to get a color value.
-// The colors are a transition r - g - b - back to r.
-CRGB Wheel(byte WheelPos) {
-  WheelPos = 255 - WheelPos;
-  if(WheelPos < 85) {
-    return CRGB(255 - WheelPos * 3, 0, WheelPos * 3);
-  }
-  if(WheelPos < 170) {
-    WheelPos -= 85;
-    return CRGB(0, WheelPos * 3, 255 - WheelPos * 3);
-  }
-  WheelPos -= 170;
-  return CRGB(WheelPos * 3, 255 - WheelPos * 3, 0);
-}
-

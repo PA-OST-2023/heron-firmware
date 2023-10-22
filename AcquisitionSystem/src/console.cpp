@@ -32,7 +32,7 @@
 
 #include "console.h"
 
-bool Console::begin(void)
+FLASHMEM bool Console::begin(void)
 {
   if(type == USBCDC_t)
   {
@@ -42,7 +42,7 @@ bool Console::begin(void)
   return initialize();
 }
 
-bool Console::begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin, bool invert, unsigned long timeout_ms, uint8_t rxfifo_full_thrhd)
+FLASHMEM bool Console::begin(unsigned long baud, uint32_t config)
 {
   if(type == HardwareSerial_t)
   {
@@ -52,21 +52,23 @@ bool Console::begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t tx
   return initialize();
 }
 
-bool Console::initialize(void)
+FLASHMEM bool Console::initialize(void)
 {
   initialized = true;
+  ringBuffer = (char*) malloc(QUEUE_BUFFER_LENGTH);
+  if(ringBuffer == nullptr) return false;
   bufferAccessSemaphore = xSemaphoreCreateMutex();
-  // xTaskCreate(writeTask, "task_consoleWrite", 4096, this, 2, &writeTaskHandle);
-  // xTaskCreate(interfaceTask, "task_consoleIface", 4096, this, 5, NULL);    // TODO: Stack size must be that large?!
+  xTaskCreate(writeTask, "task_consoleWrite", 4096, this, 2, &writeTaskHandle);
+  xTaskCreate(interfaceTask, "task_consoleIface", 4096, this, 5, NULL);    // TODO: Stack size must be that large?!
   return true;
 }
 
-void Console::end(void)
+FLASHMEM void Console::end(void)
 {
   initialized = false;
 }
 
-void Console::writeTask(void *pvParameter)
+FLASHMEM void Console::writeTask(void *pvParameter)
 {
   Console* ref = (Console*)pvParameter;
 
@@ -94,7 +96,7 @@ void Console::writeTask(void *pvParameter)
   vTaskDelete(NULL);
 }
 
-void Console::interfaceTask(void *pvParameter)
+FLASHMEM void Console::interfaceTask(void *pvParameter)
 {
   Console* ref = (Console*)pvParameter;
 
@@ -140,12 +142,12 @@ void Console::interfaceTask(void *pvParameter)
   vTaskDelete(NULL);
 }
 
-size_t Console::write(const uint8_t *buffer, size_t size)
+FLASHMEM size_t Console::write(const uint8_t *buffer, size_t size)
 {
   if(size == 0) return 0;
   if(xSemaphoreTake(bufferAccessSemaphore, portMAX_DELAY))
   {
-    int free;
+    size_t free;
     size = min(size, (size_t) QUEUE_BUFFER_LENGTH - 1);
     if(writeIdx + size <= QUEUE_BUFFER_LENGTH)
     {
@@ -154,7 +156,7 @@ size_t Console::write(const uint8_t *buffer, size_t size)
     }
     else
     {
-      int firstPartSize = QUEUE_BUFFER_LENGTH - writeIdx;
+      size_t firstPartSize = QUEUE_BUFFER_LENGTH - writeIdx;
       memcpy((uint8_t*) ringBuffer + writeIdx, buffer, firstPartSize);
       memcpy((uint8_t*) ringBuffer, buffer + firstPartSize, size - firstPartSize);
       free = readIdx - writeIdx;
@@ -172,7 +174,7 @@ size_t Console::write(const uint8_t *buffer, size_t size)
   return 0;
 }
 
-void Console::printTimestamp(void)
+FLASHMEM void Console::printTimestamp(void)
 {
   int h = min(millis() / 3600000, 99);
   int m = (millis() / 60000) % 60;
@@ -181,12 +183,12 @@ void Console::printTimestamp(void)
   printf("[%02d:%02d:%02d.%03d] ", h, m, s, ms);
 }
 
-void Console::printStartupMessage(void)
+FLASHMEM void Console::printStartupMessage(void)
 {
   stream.print(CONSOLE_CLEAR);
   stream.print(CONSOLE_COLOR_BOLD_CYAN CONSOLE_BACKGROUND_DEFAULT);
   stream.println("****************************************************");
-  stream.println("*                 AcquisitionSystem                *");
+  stream.println("*                AcquisitionSystem                 *");
   stream.println("*      2023, Florian Baumgartner, Alain Keller     *");
   stream.println("****************************************************");
   stream.println(CONSOLE_LOG);
@@ -194,5 +196,5 @@ void Console::printStartupMessage(void)
 
 
 #ifndef USE_CUSTOM_CONSOLE
-  Console console(Serial);
+  Console console(Serial, true);
 #endif
