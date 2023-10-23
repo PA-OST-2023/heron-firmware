@@ -52,13 +52,15 @@ static void myLoop(void*);
 static void task2(void*) 
 {
     while (true) {
-        Serial.println("TICK");
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        // console.log.println("TICK");
+        // vTaskDelay(pdMS_TO_TICKS(1000));
 
-        Serial.println("TOCK");
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        // console.log.println("TOCK");
+        // vTaskDelay(pdMS_TO_TICKS(1000));
 
         console.log.printf("Time: %d\n", millis());
+
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
 
@@ -67,21 +69,16 @@ static void task2(void*)
 
 FLASHMEM __attribute__((noinline)) void setup()
 {
-  Serial.begin(0);
+  console.begin();
 
-  if (CrashReport)
+  if(CrashReport)
   {
-    Serial.print(CrashReport);
-    Serial.println();
-    Serial.flush();
+    console.log.println(CrashReport);
   }
 
-  delay(1000);
-  bool res = console.begin();
-  Serial.printf("Console begin: %d\n", res);
   console.ok.println("Console Test :)");
 
-  xTaskCreate(task2, "task2", 128, nullptr, 2, nullptr);
+  xTaskCreate(task2, "task2", 2048, nullptr, 2, nullptr);
   // xTaskCreate(myLoop, "myLoop", 256, nullptr, 10, nullptr);
 
   vTaskStartScheduler();

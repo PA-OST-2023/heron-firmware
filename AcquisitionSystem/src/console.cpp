@@ -54,12 +54,12 @@ FLASHMEM bool Console::begin(unsigned long baud, uint32_t config)
 
 FLASHMEM bool Console::initialize(void)
 {
-  initialized = true;
   ringBuffer = (char*) malloc(QUEUE_BUFFER_LENGTH);
   if(ringBuffer == nullptr) return false;
   bufferAccessSemaphore = xSemaphoreCreateMutex();
+  initialized = true;
   xTaskCreate(writeTask, "task_consoleWrite", 4096, this, 2, &writeTaskHandle);
-  xTaskCreate(interfaceTask, "task_consoleIface", 4096, this, 5, NULL);    // TODO: Stack size must be that large?!
+  xTaskCreate(interfaceTask, "task_consoleIface", 256, this, 2, NULL);
   return true;
 }
 
@@ -68,7 +68,7 @@ FLASHMEM void Console::end(void)
   initialized = false;
 }
 
-FLASHMEM void Console::writeTask(void *pvParameter)
+void Console::writeTask(void *pvParameter)
 {
   Console* ref = (Console*)pvParameter;
 
@@ -96,7 +96,7 @@ FLASHMEM void Console::writeTask(void *pvParameter)
   vTaskDelete(NULL);
 }
 
-FLASHMEM void Console::interfaceTask(void *pvParameter)
+void Console::interfaceTask(void *pvParameter)
 {
   Console* ref = (Console*)pvParameter;
 
@@ -127,7 +127,7 @@ FLASHMEM void Console::interfaceTask(void *pvParameter)
     if(ref->streamActive && !streamActiveOld)
     {
       ref->printStartupMessage();
-      vTaskDelay((const TickType_t) 10);                    // Make sure that startup message is printed befor everything else
+      vTaskDelay(pdMS_TO_TICKS(10));                        // Make sure that startup message is printed befor everything else
       xTaskNotifyGive(ref->writeTaskHandle);                // Send signal to update task (for sending out data in queue buffer)
     }
     if(!ref->streamActive && streamActiveOld)               // Detect if console has been closed
@@ -137,7 +137,7 @@ FLASHMEM void Console::interfaceTask(void *pvParameter)
     }
     streamActiveOld = ref->streamActive;
 
-    vTaskDelayUntil(&task_last_tick, (const TickType_t) 1000 / INTERFACE_UPDATE_RATE);
+    vTaskDelayUntil(&task_last_tick, pdMS_TO_TICKS(1000 / INTERFACE_UPDATE_RATE));
   }
   vTaskDelete(NULL);
 }
