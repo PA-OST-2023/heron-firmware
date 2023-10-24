@@ -25,6 +25,8 @@
 #include "Arduino.h"
 #include "CST816S.h"
 
+using namespace arduino;
+
 CST816S* CST816S::ref = nullptr;
 
 
@@ -82,24 +84,31 @@ void CST816S::begin(int interrupt) {
   pinMode(_rst, OUTPUT);
 
   digitalWrite(_rst, HIGH );
-  delay(50);
+  vTaskDelay(50);
   digitalWrite(_rst, LOW);
-  delay(5);
+  vTaskDelay(5);
   digitalWrite(_rst, HIGH );
-  delay(50);
+  vTaskDelay(50);
 
   i2c_read(CST816S_ADDRESS, 0x15, &data.version, 1);
-  delay(5);
+  vTaskDelay(5);
   i2c_read(CST816S_ADDRESS, 0xA7, data.versionInfo, 3);
 
-  attachInterrupt(_irq, handleISR, interrupt);
+  if(interrupt != POLLING_MODE)
+  {
+    attachInterrupt(_irq, handleISR, interrupt);
+  }
+  else
+  {
+    pollingMode = true;
+  }
 }
 
 /*!
     @brief  check for a touch event
 */
 bool CST816S::available() {
-  if (_event_available) {
+  if (_event_available || pollingMode) {
     read_touch();
     _event_available = false;
     return true;
@@ -112,9 +121,9 @@ bool CST816S::available() {
 */
 void CST816S::sleep() {
   digitalWrite(_rst, LOW);
-  delay(5);
+  vTaskDelay(5);
   digitalWrite(_rst, HIGH );
-  delay(50);
+  vTaskDelay(50);
   byte standby_value = 0x03;
   i2c_write(CST816S_ADDRESS, 0xA5, &standby_value, 1);
 }
@@ -165,7 +174,7 @@ String CST816S::gesture() {
 	@param	length
 			length of data
 */
-uint8_t CST816S::i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t *reg_data, uint32_t length)
+FLASHMEM uint8_t CST816S::i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t *reg_data, uint32_t length)
 {
   _wire->beginTransmission(addr);
   _wire->write(reg_addr);

@@ -27,8 +27,13 @@
 
 #include <Arduino.h>
 #include <Wire.h>
+#include <arduino_freertos.h>
+
+using namespace arduino;
 
 #define CST816S_ADDRESS     0x15
+
+#define POLLING_MODE        0x00
 
 enum GESTURE {
   NONE = 0x00,
@@ -69,8 +74,8 @@ class CST816S {
     TwoWire* _wire = nullptr;
     int _rst;
     int _irq;
-    bool _event_available;
-    
+    volatile bool _event_available;
+    bool pollingMode = false;    
     static void handleISR();
     static CST816S* ref;
 

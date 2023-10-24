@@ -191,6 +191,36 @@ FLASHMEM void Console::printStartupMessage(void)
   stream.println("*                AcquisitionSystem                 *");
   stream.println("*      2023, Florian Baumgartner, Alain Keller     *");
   stream.println("****************************************************");
+  stream.println("*                                                  *");      
+  stream.println("*                              +%@@#==+++++-.      *");                  
+  stream.println("*                            :+.  :==+==:.         *");                  
+  stream.println("*                           .+==.::..              *");                  
+  stream.println("*                          .*:=--:                 *");                  
+  stream.println("*                         .= .====:                *");                  
+  stream.println("*                             .=+++-               *");                  
+  stream.println("*                               *+#-               *");                  
+  stream.println("*                              .*+#-               *");                  
+  stream.println("*                         .::--*#**-               *");                  
+  stream.println("*                      :+#%%@@*###-=               *");                  
+  stream.println("*                    :*@@@@*@#+*+%-:               *");                  
+  stream.println("*                  :*%@@@@@@%.=+=+-                *");                  
+  stream.println("*                :*##@@@@%%##=%#=-.                *");                  
+  stream.println("*              .=**#@@@%%%#@@#%+=:                 *");                  
+  stream.println("*            .=#%%%%%####%@@*..*=                  *");                  
+  stream.println("*           .*%%%#####*#%@@= .::.                  *");                  
+  stream.println("*           +##%####%%*=#%=-:.                     *");                  
+  stream.println("*          +*%%%@%#+-+--#-:                        *");                  
+  stream.println("*         =##@@%#+--::=*+                          *");                  
+  stream.println("*        :%@@%#=.     +*-                          *");                  
+  stream.println("*        -@@@*.      .%%:                          *");                  
+  stream.println("*        .-:.        .@@=                          *");                  
+  stream.println("*                     #*=                          *");                  
+  stream.println("*                     *-#                          *");                  
+  stream.println("*                     -=+:                         *");                  
+  stream.println("*                     :#.#                         *");                  
+  stream.println("*        ... ..    ..:-@=@+--=-.... ..             *");                  
+  stream.println("*       ...::...:::-=+++*###*=--.:::::.            *");                  
+  stream.println("****************************************************");
   stream.println(CONSOLE_LOG);
 }
 
