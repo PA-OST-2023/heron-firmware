@@ -1,4 +1,11 @@
 #include <Arduino.h>
+#include <SD.h>
+#include <MTP_Teensy.h>
+// #include <Audio.h>
+
+// #include "Audio/record_wav_buffered.h"
+// #include "SdCard/SdioTeensy.cpp"
+
 // #include <FastLED.h>
 
 #include <console.h>
@@ -28,16 +35,25 @@ using namespace arduino;
 
 static void task2(void*) 
 {
+  
+
   while (true)
   {
-    console.log.printf("[MAIN] Time: %d\n", millis());
-    vTaskDelay(pdMS_TO_TICKS(500));
+    MTP.loop();
+
+    static uint32_t t = 0;
+    if(millis() - t > 1000)
+    {
+      t = millis();
+      console.log.printf("[MAIN] Time: %d\n", millis());
+    }
+    vTaskDelay(pdMS_TO_TICKS(1));
   }
 }
 
 FLASHMEM __attribute__((noinline)) void setup()
 {
-  static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_RST, TFT_BL, TCH_RST, TCH_IRQ);
+  // static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_RST, TFT_BL, TCH_RST, TCH_IRQ);
 
   console.begin();
   if(CrashReport)
@@ -45,9 +61,22 @@ FLASHMEM __attribute__((noinline)) void setup()
     console.log.printf("[MAIN] Crash-Report:\n%s", CrashReport);
   }
   console.log.println("[MAIN] Starting...");
-  gui.begin();
 
-  xTaskCreate(task2, "task2", 2048, nullptr, 2, nullptr);
+  MTP.begin();
+  if (SD.begin(BUILTIN_SDCARD))
+  {
+    MTP.addFilesystem(SD, "SD Card");
+    console.log.println("Added SD card using built in SDIO, or given SPI CS");
+  }
+  else
+  {
+    console.warning.println("No SD Card");
+  }
+  console.ok.println("\nSetup done");
+
+  // gui.begin();
+
+  xTaskCreate(task2, "task2", 2048 * 6, nullptr, 2, nullptr);
 
   vTaskStartScheduler();
 }

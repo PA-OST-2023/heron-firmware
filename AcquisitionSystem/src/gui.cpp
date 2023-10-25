@@ -34,9 +34,9 @@
 #include <static_malloc.h>
 #include "Gui/generated/gui_guider.h"
 
-lv_ui guider_ui;
+DMAMEM lv_ui guider_ui;
+DMAMEM lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
 EXTMEM static uint8_t extHeap[Gui::EXT_HEAP_SIZE];
-lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), rst(rst), bl(bl), tch_rst(tch_rst), tch_irq(tch_irq)
 {
@@ -48,7 +48,7 @@ FLASHMEM bool Gui::begin(void)
   pinMode(bl, OUTPUT);
   
   console.log.println("[GUI] Initializing display... ");
-  xTaskCreate(update, "task_gui", 16384, this, 8, nullptr);
+  xTaskCreate(update, "task_gui", 4096, this, 8, nullptr);
   console.ok.println("[GUI] Initialization done.");
   return true;
 }
@@ -120,7 +120,7 @@ void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
   {
     int x = touch->data.x;
     int y = touch->data.y;
-    if((x > 0) && (y > 0) && (x < SCREEN_WIDTH) && (y < SCREEN_HEIGHT))
+    if((x > 0) && (y > 0) && (x < (int)SCREEN_WIDTH) && (y < (int)SCREEN_HEIGHT))
     {
       data->state = LV_INDEV_STATE_PR;  // Indicate that the touchpad is pressed
       data->point.x = (lv_coord_t)x;
