@@ -27,9 +27,7 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <arduino_freertos.h>
-
-using namespace arduino;
+#include <TeensyThreads.h>
 
 #define CST816S_ADDRESS     0x15
 

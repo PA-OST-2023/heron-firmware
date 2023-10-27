@@ -1,11 +1,11 @@
 /******************************************************************************
-* file    gui.h
+* file    utils.cpp
 *******************************************************************************
-* brief   Wrapper for GUI interface (lvgl, touch, display, etc.)
+* brief   Utility functions like USB (Mass Storage, Serial, etc.), SD Card
 *******************************************************************************
 * author  Florian Baumgartner
 * version 1.0
-* date    2023-10-23
+* date    2023-10-26
 *******************************************************************************
 * MIT License
 *
@@ -30,42 +30,43 @@
 * SOFTWARE.
 ******************************************************************************/
 
-#ifndef GUI_H
-#define GUI_H
-
-#include <Arduino.h>
+#include "utils.h"
 #include <console.h>
-#include <Adafruit_GFX.h>
-#include <ST7789_t3.h>
-#include <CST816S.h>
-#include <SPI.h>
-#include <lvgl.h>
+#include <TeensyThreads.h>
+#include "SdCard/SdioTeensy.cpp"
 
-class Gui
+
+Utils::Utils()
 {
-  public:
-    static constexpr const uint32_t SCREEN_WIDTH          = 240;
-    static constexpr const uint32_t SCREEN_HEIGHT         = 240;
-    static constexpr const uint32_t SCREEN_BUFFER_HEIGHT  = 60;
-    static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
-    static constexpr size_t EXT_HEAP_SIZE                 = 1024 * 4096;    // 4MB memory pool on the external ram chip
+}
 
-    Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int tch_irq);
-    bool begin(void);
-    void update(void);
+bool Utils::begin(const char* storageName)
+{
+  bool res = true;
+  MTP.begin();
+  if(SD.begin(BUILTIN_SDCARD))
+  {
+    MTP.addFilesystem(SD, storageName);
+    console.ok.println("[UTILS] SD Card initialized");
+  }
+  else
+  {
+    console.warning.println("[UTILS] No SD Card");
+    res = false;
+  }
+  
+  setSdclk(100000);
+  console.log.printf("[UTILS] Set SDDIO Frequency to %d kHz\n", ((SdioCard*)SD.sdfs.card())->kHzSdClk());
+  // threads.addThread(update, this, 1024);
+  return res;
+}
 
-  private:
-    const int sclk, mosi, cs, dc, rst, bl, tch_rst, tch_irq;
-    ST7735_t3 disp = ST7735_t3(cs, dc, mosi, sclk, rst);
-    CST816S touch = CST816S(&Wire1, tch_rst, tch_irq);
-
-    static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
-    static uint8_t extHeap[EXT_HEAP_SIZE];
-    volatile bool initialized = false;
-    
-    static void lvglPrint(const char* buf);
-    static void dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p);
-    static void touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data);
-};
-
-#endif
+void Utils::update(void)
+{
+  MTP.loop();
+  // while(true)
+  // {
+  //   // MTP.loop();
+  //   threads.delay(5);
+  // }
+}

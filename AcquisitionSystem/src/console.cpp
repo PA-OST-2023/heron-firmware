@@ -56,10 +56,9 @@ FLASHMEM bool Console::initialize(void)
 {
   ringBuffer = (char*) malloc(QUEUE_BUFFER_LENGTH);
   if(ringBuffer == nullptr) return false;
-  bufferAccessSemaphore = xSemaphoreCreateMutex();
   initialized = true;
-  xTaskCreate(writeTask, "task_consoleWrite", 4096, this, 2, &writeTaskHandle);
-  xTaskCreate(interfaceTask, "task_consoleIface", 256, this, 2, NULL);
+  threads.addThread(writeTask, this, 4096);
+  threads.addThread(interfaceTask, this, 256);
   return true;
 }
 
@@ -74,10 +73,10 @@ void Console::writeTask(void *pvParameter)
 
   while(ref->initialized)
   {
-    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);          // Wait on notification for data in buffer or console opened
+    if(ref->notifyMutex.lock(100))                    // Wait on notification for data in buffer or console opened
     if(ref->streamActive)
     {
-      if(xSemaphoreTake(ref->bufferAccessSemaphore, portMAX_DELAY))
+      if(ref->bufferAccessMutex.lock())
       {
         if(ref->readIdx < ref->writeIdx)              // Regular case, no wrap around needed
         {
@@ -89,46 +88,43 @@ void Console::writeTask(void *pvParameter)
           ref->stream.write((const uint8_t*) ref->ringBuffer, ref->writeIdx);
         }
         ref->readIdx = ref->writeIdx;
-        xSemaphoreGive(ref->bufferAccessSemaphore);
+        ref->bufferAccessMutex.unlock();
       }
     }
   }
-  vTaskDelete(NULL);
 }
 
 void Console::interfaceTask(void *pvParameter)
 {
   Console* ref = (Console*)pvParameter;
 
-  TickType_t interfaceTimer = 0;
-  TickType_t enabledTimer = 0;
+  uint32_t interfaceTimer = 0;
+  uint32_t enabledTimer = 0;
   bool enabledOld = false, enabledDelayed = false;
   bool interfaceOld = false, interfaceDelayed = false;
   bool streamActiveOld = false;
   while(ref->initialized)
   {
-    TickType_t task_last_tick = xTaskGetTickCount();
-
     if(ref->enabled && !enabledOld)
     {
-      enabledTimer = xTaskGetTickCount() + CONSOLE_ACTIVE_DELAY;
+      enabledTimer = millis() + CONSOLE_ACTIVE_DELAY;
     }
     enabledOld = ref->enabled;
-    enabledDelayed = (xTaskGetTickCount() > enabledTimer) && ref->enabled;
+    enabledDelayed = (millis() > enabledTimer) && ref->enabled;
 
     if(ref->getInterfaceState() && !interfaceOld)
     {
-      interfaceTimer = xTaskGetTickCount() + INTERFACE_ACTIVE_DELAY;
+      interfaceTimer = millis() + INTERFACE_ACTIVE_DELAY;
     }
     interfaceOld = ref->getInterfaceState();
-    interfaceDelayed = (xTaskGetTickCount() > interfaceTimer) && ref->getInterfaceState();
+    interfaceDelayed = (millis() > interfaceTimer) && ref->getInterfaceState();
 
     ref->streamActive = enabledDelayed && interfaceDelayed;
     if(ref->streamActive && !streamActiveOld)
     {
       ref->printStartupMessage();
-      vTaskDelay(pdMS_TO_TICKS(10));                        // Make sure that startup message is printed befor everything else
-      xTaskNotifyGive(ref->writeTaskHandle);                // Send signal to update task (for sending out data in queue buffer)
+      threads.delay(10);
+      ref->bufferAccessMutex.unlock();
     }
     if(!ref->streamActive && streamActiveOld)               // Detect if console has been closed
     {
@@ -137,15 +133,14 @@ void Console::interfaceTask(void *pvParameter)
     }
     streamActiveOld = ref->streamActive;
 
-    vTaskDelayUntil(&task_last_tick, pdMS_TO_TICKS(1000 / INTERFACE_UPDATE_RATE));
+    threads.delay(1000 / INTERFACE_UPDATE_RATE);
   }
-  vTaskDelete(NULL);
 }
 
 FLASHMEM size_t Console::write(const uint8_t *buffer, size_t size)
 {
   if(size == 0) return 0;
-  if(xSemaphoreTake(bufferAccessSemaphore, portMAX_DELAY))
+  if(bufferAccessMutex.lock())
   {
     size_t free;
     size = min(size, (size_t) QUEUE_BUFFER_LENGTH - 1);
@@ -167,8 +162,8 @@ FLASHMEM size_t Console::write(const uint8_t *buffer, size_t size)
       readIdx = (readIdx + (size - free)) & (QUEUE_BUFFER_LENGTH - 1);
     }
 
-    xSemaphoreGive(bufferAccessSemaphore);
-    xTaskNotifyGive(writeTaskHandle);               // Send signal to update task (for sending out data)
+    bufferAccessMutex.unlock();
+    notifyMutex.unlock();     // Send signal to update task (for sending out data in queue buffer)
     return size;
   }
   return 0;

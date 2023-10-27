@@ -34,10 +34,9 @@
 #define CONSOLE_H
 
 #include <Arduino.h>
-#include <arduino_freertos.h>
-#include <semphr.h>
+#include <TeensyThreads.h>
 
-#define INTERFACE_UPDATE_RATE           10            // [hz]
+#define INTERFACE_UPDATE_RATE           10            // [Hz]
 #define QUEUE_BUFFER_LENGTH             (1<<12)       // [#]    Buffer Size must be power of 2
 #define CONSOLE_ACTIVE_DELAY            0             // [ms]   Data transmission hold-back delay after console object has been enabled
 #define INTERFACE_ACTIVE_DELAY          250           // [ms]   Data transmission hold-back delay after physical connection has been established (Terminal opened)
@@ -167,8 +166,8 @@ class Console: public Stream
     volatile bool streamActive = false;          // Indicates if the console is opened and data is tranmitted
     volatile char* ringBuffer = nullptr;
     volatile uint32_t writeIdx = 0, readIdx = 0;
-    SemaphoreHandle_t bufferAccessSemaphore = nullptr;
-    TaskHandle_t writeTaskHandle = nullptr;
+    Threads::Mutex bufferAccessMutex;
+    Threads::Mutex notifyMutex;
     ConsoleStatus custom = ConsoleStatus(ConsoleStatus::StatusCustom_t);
 
     bool initialize(void);

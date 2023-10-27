@@ -101,50 +101,50 @@ private:
 	uint8_t state_record;
 };
 
-// class AudioRecordWAVmono : public AudioRecordWAVbuffered
-// {
-// 	public:
-// 		AudioRecordWAVmono(): AudioRecordWAVbuffered(1,inputQueueArray) {}
-// };
+class AudioRecordWAVmono : public AudioRecordWAVbuffered
+{
+	public:
+		AudioRecordWAVmono(): AudioRecordWAVbuffered(1,inputQueueArray) {}
+};
 
-// class AudioRecordWAVstereo : public AudioRecordWAVbuffered
-// {
-// 	public:
-// 		AudioRecordWAVstereo(): AudioRecordWAVbuffered(2,inputQueueArray) {}
-// };
+class AudioRecordWAVstereo : public AudioRecordWAVbuffered
+{
+	public:
+		AudioRecordWAVstereo(): AudioRecordWAVbuffered(2,inputQueueArray) {}
+};
 
-// class AudioRecordWAVquad : public AudioRecordWAVbuffered
-// {
-// 		audio_block_t *iqa[4];	
-// 	public:
-// 		AudioRecordWAVquad(): AudioRecordWAVbuffered(4,iqa) {}
-// };
+class AudioRecordWAVquad : public AudioRecordWAVbuffered
+{
+		audio_block_t *iqa[4];	
+	public:
+		AudioRecordWAVquad(): AudioRecordWAVbuffered(4,iqa) {}
+};
 
-// class AudioRecordWAVhex : public AudioRecordWAVbuffered
-// {
-// 		audio_block_t *iqa[6];	
-// 	public:
-// 		AudioRecordWAVhex(): AudioRecordWAVbuffered(6,iqa) {}
-// };
+class AudioRecordWAVhex : public AudioRecordWAVbuffered
+{
+		audio_block_t *iqa[6];	
+	public:
+		AudioRecordWAVhex(): AudioRecordWAVbuffered(6,iqa) {}
+};
 
-// class AudioRecordWAVoct : public AudioRecordWAVbuffered
-// {
-// 		audio_block_t *iqa[8];	
-// 	public:
-// 		AudioRecordWAVoct(): AudioRecordWAVbuffered(8,iqa) {}
-// };
+class AudioRecordWAVoct : public AudioRecordWAVbuffered
+{
+		audio_block_t *iqa[8];	
+	public:
+		AudioRecordWAVoct(): AudioRecordWAVbuffered(8,iqa) {}
+};
 
-// class AudioRecordWAV16 : public AudioRecordWAVbuffered
-// {
-// 		audio_block_t *iqa[16];	
-// 	public:
-// 		AudioRecordWAV16(): AudioRecordWAVbuffered(16,iqa) {}
-// };
+class AudioRecordWAV16 : public AudioRecordWAVbuffered
+{
+		audio_block_t *iqa[16];	
+	public:
+		AudioRecordWAV16(): AudioRecordWAVbuffered(16,iqa) {}
+};
 
-// class AudioRecordWAV32 : public AudioRecordWAVbuffered
-// {
-// 		audio_block_t *iqa[32];	
-// 	public:
-// 		AudioRecordWAV32(): AudioRecordWAVbuffered(32,iqa) {}
-// };
+class AudioRecordWAV32 : public AudioRecordWAVbuffered
+{
+		audio_block_t *iqa[32];	
+	public:
+		AudioRecordWAV32(): AudioRecordWAVbuffered(32,iqa) {}
+};
 #endif // !defined(record_wav_buffered_h_)

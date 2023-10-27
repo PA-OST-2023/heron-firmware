@@ -29,6 +29,8 @@
 
 #include <Arduino.h>
 #include <FS.h>
+#include <AudioStream.h>
+#include <SD.h>
 
 // Default to disabling oscilloscope debug
 // This will be removed in production code

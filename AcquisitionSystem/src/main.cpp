@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <SD.h>
-#include <MTP_Teensy.h>
+#include <TeensyThreads.h>
+
 // #include <Audio.h>
 
 // #include "Audio/record_wav_buffered.h"
@@ -9,12 +9,9 @@
 // #include <FastLED.h>
 
 #include <console.h>
+#include <utils.h>
+#include <audioUtils.h>
 #include <gui.h>
-
-#include "arduino_freertos.h"
-#include "avr/pgmspace.h"
-
-using namespace arduino;
 
 #define TFT_SCLK 13  // SCLK can also use pin 14
 #define TFT_MOSI 11  // MOSI can also use pin 7
@@ -29,17 +26,46 @@ using namespace arduino;
 #define RGB_LED  22  // RGB LED can use any pin
 #define NUM_LEDS 66
 
+#define BTN_REC  30
+#define BTN_SEL  31
+
 // CRGB leds[NUM_LEDS];
 // void rainbow(uint8_t wait);
 // CRGB Wheel(byte WheelPos);
 
+static Utils utils;
+static AudioUtils audio;
+static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_RST, TFT_BL, TCH_RST, TCH_IRQ);
+
+
+
 static void task2(void*) 
 {
-  
-
   while (true)
   {
-    MTP.loop();
+    static bool recording = false;
+    static bool btnRecOld, btnRec;
+    static bool btnSelOld, btnSel;
+    btnRecOld = btnRec;
+    btnSelOld = btnSel;
+    btnRec = !digitalRead(BTN_REC);
+    btnSel = !digitalRead(BTN_SEL);
+
+    if(btnRec && !btnRecOld)
+    {
+      if(!recording)
+      {
+        console.log.println("[MAIN] Button REC pressed");
+        audio.startRecording("test.wav");
+        recording = true;
+      }
+      else
+      {
+        console.log.println("[MAIN] Button REC pressed");
+        audio.stopRecording();
+        recording = false;
+      } 
+    }
 
     static uint32_t t = 0;
     if(millis() - t > 1000)
@@ -47,42 +73,33 @@ static void task2(void*)
       t = millis();
       console.log.printf("[MAIN] Time: %d\n", millis());
     }
-    vTaskDelay(pdMS_TO_TICKS(1));
+    threads.delay(50);
   }
 }
 
-FLASHMEM __attribute__((noinline)) void setup()
+void setup()
 {
-  // static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_RST, TFT_BL, TCH_RST, TCH_IRQ);
+  pinMode(BTN_REC, INPUT_PULLUP);
+  pinMode(BTN_SEL, INPUT_PULLUP);
 
   console.begin();
-  if(CrashReport)
-  {
-    console.log.printf("[MAIN] Crash-Report:\n%s", CrashReport);
-  }
-  console.log.println("[MAIN] Starting...");
+  gui.begin();
+  audio.begin();
+  utils.begin();
 
-  MTP.begin();
-  if (SD.begin(BUILTIN_SDCARD))
-  {
-    MTP.addFilesystem(SD, "SD Card");
-    console.log.println("Added SD card using built in SDIO, or given SPI CS");
-  }
-  else
-  {
-    console.warning.println("No SD Card");
-  }
-  console.ok.println("\nSetup done");
+  threads.addThread(task2, nullptr, 2048);
 
-  // gui.begin();
-
-  xTaskCreate(task2, "task2", 2048 * 6, nullptr, 2, nullptr);
-
-  vTaskStartScheduler();
+  // audio.startRecording("test.wav");
+  // threads.delay(10000);
+  // audio.stopRecording();
 }
 
 void loop()
 {
+  // MTP.loop();
+  gui.update();
+  utils.update();
+  // threads.delay(10);
 }
 
 // void rainbow(uint8_t wait) {

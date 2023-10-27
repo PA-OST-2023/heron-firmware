@@ -25,8 +25,6 @@
 #include "Arduino.h"
 #include "CST816S.h"
 
-using namespace arduino;
-
 CST816S* CST816S::ref = nullptr;
 
 
@@ -84,14 +82,14 @@ void CST816S::begin(int interrupt) {
   pinMode(_rst, OUTPUT);
 
   digitalWrite(_rst, HIGH );
-  vTaskDelay(50);
+  threads.delay(50);
   digitalWrite(_rst, LOW);
-  vTaskDelay(5);
+  threads.delay(5);
   digitalWrite(_rst, HIGH );
-  vTaskDelay(50);
+  threads.delay(50);
 
   i2c_read(CST816S_ADDRESS, 0x15, &data.version, 1);
-  vTaskDelay(5);
+  threads.delay(5);
   i2c_read(CST816S_ADDRESS, 0xA7, data.versionInfo, 3);
 
   if(interrupt != POLLING_MODE)
@@ -121,9 +119,9 @@ bool CST816S::available() {
 */
 void CST816S::sleep() {
   digitalWrite(_rst, LOW);
-  vTaskDelay(5);
+  threads.delay(5);
   digitalWrite(_rst, HIGH );
-  vTaskDelay(50);
+  threads.delay(50);
   byte standby_value = 0x03;
   i2c_write(CST816S_ADDRESS, 0xA5, &standby_value, 1);
 }

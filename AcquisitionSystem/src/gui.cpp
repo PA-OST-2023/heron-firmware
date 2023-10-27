@@ -32,36 +32,28 @@
 
 #include "gui.h"
 #include <static_malloc.h>
+#include <TeensyThreads.h>
 #include "Gui/generated/gui_guider.h"
 
 DMAMEM lv_ui guider_ui;
 DMAMEM lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
-EXTMEM static uint8_t extHeap[Gui::EXT_HEAP_SIZE];
+EXTMEM uint8_t Gui::extHeap[Gui::EXT_HEAP_SIZE];
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), rst(rst), bl(bl), tch_rst(tch_rst), tch_irq(tch_irq)
 {
 }
 
-FLASHMEM bool Gui::begin(void)
+bool Gui::begin(void)
 {
   digitalWrite(bl, LOW);
   pinMode(bl, OUTPUT);
-  
+
   console.log.println("[GUI] Initializing display... ");
-  xTaskCreate(update, "task_gui", 4096, this, 8, nullptr);
-  console.ok.println("[GUI] Initialization done.");
-  return true;
-}
+  disp.initB();
+  disp.setRotation(3);
+  disp.fillScreen(ST77XX_BLACK);
 
-void Gui::update(void* pvParameter)
-{
-  Gui* ref = (Gui*)pvParameter;
-
-  ref->disp.initB();
-  ref->disp.setRotation(3);
-  ref->disp.fillScreen(ST77XX_BLACK);
-
-  ref->touch.begin();
+  touch.begin();
 
   sm_set_default_pool(extHeap, EXT_HEAP_SIZE, false, nullptr);  // use a memory pool on the external ram
   lv_log_register_print_cb(lvglPrint);
@@ -69,7 +61,7 @@ void Gui::update(void* pvParameter)
 
   static lv_disp_draw_buf_t draw_buf;
   lv_disp_draw_buf_init(&draw_buf, buf, NULL, SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT);
-  ref->disp.setFrameBuffer((uint16_t*)buf);
+  disp.setFrameBuffer((uint16_t*)buf);
 
   static lv_disp_drv_t disp_drv;
   lv_disp_drv_init(&disp_drv);
@@ -77,7 +69,7 @@ void Gui::update(void* pvParameter)
   disp_drv.ver_res = SCREEN_HEIGHT;
   disp_drv.flush_cb = dispflush;
   disp_drv.draw_buf = &draw_buf;
-  disp_drv.user_data = &ref->disp;
+  disp_drv.user_data = &disp;
   lv_disp_t* dispDrv = lv_disp_drv_register(&disp_drv);
   lv_timer_set_period(dispDrv->refr_timer, 1000.0 / UPDATE_RATE);
 
@@ -85,19 +77,28 @@ void Gui::update(void* pvParameter)
   lv_indev_drv_init(&indev_drv);
   indev_drv.type = LV_INDEV_TYPE_POINTER;
   indev_drv.read_cb = touchpadRead;
-  indev_drv.user_data = &ref->touch;
+  indev_drv.user_data = &touch;
   lv_indev_drv_register(&indev_drv);
 
   setup_ui(&guider_ui);
-  digitalWrite(ref->bl, HIGH);
+  digitalWrite(bl, HIGH);
 
-  ref->initialized = true;
-  while(ref->initialized)
-  {
-    lv_task_handler();
-    vTaskDelay(pdMS_TO_TICKS(5));
-  }
-  vTaskDelete(nullptr);
+  console.ok.println("[GUI] Initialization done.");
+  initialized = true;
+  return true;
+}
+
+void Gui::update(void)
+{
+  // Gui* ref = (Gui*)pvParameter;
+  // setup_ui(&guider_ui);
+  // digitalWrite(ref->bl, HIGH);
+  // while(ref->initialized)
+  // {
+  //   lv_task_handler();
+  //   threads.delay(5);
+  // }
+  lv_task_handler();
 }
 
 void Gui::lvglPrint(const char* buf)
