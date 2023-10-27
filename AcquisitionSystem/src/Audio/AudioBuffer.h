@@ -134,6 +134,7 @@ class AudioBuffer : public MemBuffer
 {
   public:
 	AudioBuffer() : queueOut(0), queueIn(0), isFull(false), bufState(empty) {}
+	~AudioBuffer() {}		// TODO: Check if Decconstructor of MemBuffer is really called?
 	enum bufState_e {empty,firstValid,secondValid,bothValid}; // state of buffer
 	
   //private:

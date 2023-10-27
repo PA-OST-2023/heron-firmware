@@ -41,6 +41,9 @@ static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_RST, TFT_BL, TCH_RST, TCH
 
 static void task2(void*) 
 {
+  char fileName[20];
+  int fileNumber = 0;
+
   while (true)
   {
     static bool recording = false;
@@ -56,7 +59,8 @@ static void task2(void*)
       if(!recording)
       {
         console.log.println("[MAIN] Button REC pressed");
-        audio.startRecording("test.wav");
+        sprintf(fileName, "test_%d.wav", fileNumber++);
+        audio.startRecording(fileName);
         recording = true;
       }
       else
@@ -96,10 +100,8 @@ void setup()
 
 void loop()
 {
-  // MTP.loop();
   gui.update();
   utils.update();
-  // threads.delay(10);
 }
 
 // void rainbow(uint8_t wait) {

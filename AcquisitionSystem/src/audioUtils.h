@@ -54,11 +54,19 @@ class AudioUtils
 
   private:
     const AudioBuffer::bufType bufMem = AudioBuffer::inExt;
-    bool chanelEnabled[CHANNEL_COUNT] = {true};
+    bool chanelEnabled[CHANNEL_COUNT];
     uint32_t recordingStartTime = 0;
     bool recording = false;
     volatile bool recordingError = false;
 
+    AudioSynthWaveformSine sine[32];
+
+    audio_block_t *iqa[32];	// Audio input queue for recording
+    AudioRecordWAVbuffered* recorder = nullptr;
+    AudioConnection* recorderConnection[32];
+
+    bool reconnectAudioBlocks(void);
+    static void update(void* parameter);
 };
 
 #endif

@@ -73,6 +73,20 @@ public:
 	uint32_t lengthMillis(void);
 	uint32_t writeCurrentHeader(void);
 	virtual void update(void);
+
+	bool getWriteErrorDetected(void)
+	{
+	  bool res = writeErrorDetected;
+	  writeErrorDetected = false;
+	  return res;
+	}
+
+	bool getBufferOverflowDetected(void)
+	{
+	  bool res = bufferOverflowDetected;
+	  bufferOverflowDetected = false;
+	  return res;
+	}
 	
 	static uint8_t objcnt;
 	// debug members
@@ -91,6 +105,8 @@ private:
 	static void EventResponse(EventResponderRef evref);
 	void flushBuffer(uint8_t* pb, size_t sz);
 	
+	volatile bool writeErrorDetected = false;
+	volatile bool bufferOverflowDetected = false;
 	bool eof;
 	bool writePending;
 	uint8_t objnum;

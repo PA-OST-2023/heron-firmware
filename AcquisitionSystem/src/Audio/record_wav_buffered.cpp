@@ -25,6 +25,8 @@
  */
 
 #include <Arduino.h>
+#include <console.h>
+#include <TeensyThreads.h>
 #include "record_wav_buffered.h"
 
 static uint32_t bytesWrittenToBuffer = 0;
@@ -67,7 +69,8 @@ void AudioRecordWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
 		readMicros.newValue(micros() - now);
 		if (outN < sz) // failed to write out all data
 		{
-			Serial.printf("write of %d bytes failed: wrote %d\n",sz,outN);
+			console.warning.printf("write of %d bytes failed: wrote %d\n",sz,outN);
+			writeErrorDetected = true;
 			// NOW what do we do?!
 		}
 		if (0 == total_length) 		// first write, includes WAV header...
@@ -211,8 +214,23 @@ void AudioRecordWAVbuffered::stop(void)
 		state = STATE_STOP; // ensure update() no longer tries to write
 		
 		// ensure everything buffered gets written out
-		if (writePending)
-			yield();
+		if(writePending)
+		{
+			console.log.println("[RECORD WAV BUFFERED] Write is still pending...");
+		}
+		int count = 0;
+		while(writePending)
+		{
+		  threads.delay(10);
+		//   yield();
+		  count++;
+		  if(count > 1000)
+		  {
+		    console.error.println("[RECORD WAV BUFFERED] Write is still pending after 10 second, aborting...");
+		    break;
+		  }
+		}
+		
 		getNextWrite(&pb,&sz);	// find out where and how much
 		flushBuffer(pb,sz);		// write out residual file data from the buffer
 
@@ -325,7 +343,8 @@ void AudioRecordWAVbuffered::update(void)
 			}
 			else if(rdr == invalid)
 			{
-			  Serial.printf("WARNING - BUFFER OVERFLOW!!!! Start Writing buffer to SD card, count: %d\n", count);
+			//   console.warning.printf("WARNING - BUFFER OVERFLOW!!!! Start Writing buffer to SD card, count: %d\n", count);
+			  bufferOverflowDetected = true;
 			}
 			
 			// {
