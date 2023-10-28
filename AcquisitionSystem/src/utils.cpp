@@ -32,11 +32,10 @@
 
 #include "utils.h"
 #include <console.h>
-#include <TeensyThreads.h>
 #include "SdCard/SdioTeensy.cpp"
 
 
-Utils::Utils()
+Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi) : scl_sys(scl_sys), sda_sys(sda_sys), scl_hmi(scl_hmi), sda_hmi(sda_hmi)
 {
 }
 
@@ -54,19 +53,54 @@ bool Utils::begin(const char* storageName)
     console.warning.println("[UTILS] No SD Card");
     res = false;
   }
-  
   setSdclk(100000);
   console.log.printf("[UTILS] Set SDDIO Frequency to %d kHz\n", ((SdioCard*)SD.sdfs.card())->kHzSdClk());
-  // threads.addThread(update, this, 1024);
+  
+  Wire.begin();
+  Wire.setClock(400000);
+  Wire.setSCL(scl_sys);
+  Wire.setSDA(sda_sys);
+
+  Wire1.begin();
+  Wire1.setClock(400000);
+  Wire1.setSCL(scl_hmi);
+  Wire1.setSDA(sda_hmi);
+
   return res;
+}
+
+int Utils::scanWire(TwoWire& wire)
+{
+  uint8_t error, address;
+  int deviceCount = 0;
+
+  console.log.println("[UTILS] Scanning I2C bus...");
+  for (address = 1; address < 127; address++)
+  {
+    wire.beginTransmission(address);
+    error = wire.endTransmission();
+    if (error == 0)
+    {
+      console.log.printf("[UTILS] I2C device found at address 0x%02X\n", address);
+      deviceCount++;
+    }
+    else if (error == 4)
+    {
+      console.warning.printf("[UTILS] Unknown error at address 0x%02X\n", address);
+    }
+  }
+  if (deviceCount == 0)
+  {
+    console.error.printf("[UTILS] No I2C devices found\n");
+  }
+  else
+  {
+    console.log.printf("[UTILS] Scan complete (%d devices found)\n", deviceCount);
+  }
+  return deviceCount;
 }
 
 void Utils::update(void)
 {
   MTP.loop();
-  // while(true)
-  // {
-  //   // MTP.loop();
-  //   threads.delay(5);
-  // }
 }

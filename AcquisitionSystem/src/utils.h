@@ -35,17 +35,19 @@
 
 #include <Arduino.h>
 #include <MTP_Teensy.h>
+#include <Wire.h>
 #include <SD.h>
 
 class Utils
 {
   public:
-    Utils();
+    Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi);
     bool begin(const char* storageName = "SD Card");
     void update(void);
+    int scanWire(TwoWire& wire);
 
   private:
-    
+    const int scl_sys, sda_sys, scl_hmi, sda_hmi;    
 
 };
 

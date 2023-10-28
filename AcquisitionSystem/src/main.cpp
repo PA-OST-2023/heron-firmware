@@ -26,6 +26,11 @@
 #define RGB_LED  22  // RGB LED can use any pin
 #define NUM_LEDS 66
 
+#define SCL_HMI  16
+#define SDA_HMI  17
+#define SCL_SYS  19
+#define SDA_SYS  18
+
 #define BTN_REC  30
 #define BTN_SEL  31
 
@@ -33,11 +38,10 @@
 // void rainbow(uint8_t wait);
 // CRGB Wheel(byte WheelPos);
 
-static Utils utils;
+
 static AudioUtils audio;
+static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_RST, TFT_BL, TCH_RST, TCH_IRQ);
-
-
 
 static void task2(void*) 
 {
@@ -87,15 +91,18 @@ void setup()
   pinMode(BTN_SEL, INPUT_PULLUP);
 
   console.begin();
+  utils.begin();
   gui.begin();
   audio.begin();
-  utils.begin();
+  
+  // Wire1.setSCL(16);
+  // Wire1.setSDA(17);
+
+  utils.scanWire(Wire);
+  utils.scanWire(Wire1);
 
   threads.addThread(task2, nullptr, 2048);
 
-  // audio.startRecording("test.wav");
-  // threads.delay(10000);
-  // audio.stopRecording();
 }
 
 void loop()
