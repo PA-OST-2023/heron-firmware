@@ -35,6 +35,7 @@
 
 #include <Arduino.h>
 #include <Audio.h>
+#include <ADAU7118.h>
 #include "Audio/record_wav_buffered.h"
 
 class AudioUtils
@@ -42,6 +43,7 @@ class AudioUtils
   public:
     static constexpr const size_t EXT_BUFFER_SIZE = 65536 * 64;    // 4 MB
     static constexpr const size_t CHANNEL_COUNT   = 32;
+    static constexpr const size_t ADAU7118_COUNT  = 4;
 
     AudioUtils();
     bool begin(void);
@@ -59,9 +61,13 @@ class AudioUtils
     bool recording = false;
     volatile bool recordingError = false;
 
-    AudioSynthWaveformSine sine[32];
+    ADAU7118 adau7118[ADAU7118_COUNT] = {ADAU7118(Wire, 0x14), ADAU7118(Wire, 0x15), ADAU7118(Wire, 0x16), ADAU7118(Wire, 0x17)};
 
-    audio_block_t *iqa[32];	// Audio input queue for recording
+    AudioInputTDM tdmIn1; 
+    AudioInputTDM2 tdmIn2;
+    AudioOutputTDM tdmOut1;
+    
+    audio_block_t *iqa[32];	    // Audio input queue for recording
     AudioRecordWAVbuffered* recorder = nullptr;
     AudioConnection* recorderConnection[32];
 

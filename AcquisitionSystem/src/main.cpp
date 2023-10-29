@@ -52,11 +52,11 @@ static void task2(void*)
   {
     static bool recording = false;
     static bool btnRecOld, btnRec;
-    static bool btnSelOld, btnSel;
+    // static bool btnSelOld, btnSel;
     btnRecOld = btnRec;
-    btnSelOld = btnSel;
+    // btnSelOld = btnSel;
     btnRec = !digitalRead(BTN_REC);
-    btnSel = !digitalRead(BTN_SEL);
+    // btnSel = !digitalRead(BTN_SEL);
 
     if(btnRec && !btnRecOld)
     {
@@ -98,8 +98,8 @@ void setup()
   // Wire1.setSCL(16);
   // Wire1.setSDA(17);
 
-  utils.scanWire(Wire);
-  utils.scanWire(Wire1);
+  // utils.scanWire(Wire);
+  // utils.scanWire(Wire1);
 
   threads.addThread(task2, nullptr, 2048);
 

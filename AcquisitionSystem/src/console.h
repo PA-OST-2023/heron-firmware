@@ -34,7 +34,7 @@
 #define CONSOLE_H
 
 #include <Arduino.h>
-#include <TeensyThreads.h>
+#include "../lib/TeensyThreads/TeensyThreads.h"
 
 #define INTERFACE_UPDATE_RATE           10            // [Hz]
 #define QUEUE_BUFFER_LENGTH             (1<<12)       // [#]    Buffer Size must be power of 2
