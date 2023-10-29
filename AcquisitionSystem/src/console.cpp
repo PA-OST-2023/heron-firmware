@@ -32,7 +32,7 @@
 
 #include "console.h"
 
-FLASHMEM bool Console::begin(void)
+bool Console::begin(void)
 {
   if(type == USBCDC_t)
   {
@@ -42,7 +42,7 @@ FLASHMEM bool Console::begin(void)
   return initialize();
 }
 
-FLASHMEM bool Console::begin(unsigned long baud, uint32_t config)
+bool Console::begin(unsigned long baud, uint32_t config)
 {
   if(type == HardwareSerial_t)
   {
@@ -52,17 +52,17 @@ FLASHMEM bool Console::begin(unsigned long baud, uint32_t config)
   return initialize();
 }
 
-FLASHMEM bool Console::initialize(void)
+bool Console::initialize(void)
 {
   ringBuffer = (char*) malloc(QUEUE_BUFFER_LENGTH);
   if(ringBuffer == nullptr) return false;
   initialized = true;
-  threads.addThread(writeTask, this, 4096);
   threads.addThread(interfaceTask, this, 256);
+  threads.addThread(writeTask, this, 4096);
   return true;
 }
 
-FLASHMEM void Console::end(void)
+void Console::end(void)
 {
   initialized = false;
 }
@@ -73,16 +73,15 @@ void Console::writeTask(void *pvParameter)
 
   while(ref->initialized)
   {
-    if(ref->notifyMutex.lock(100))                    // Wait on notification for data in buffer or console opened
-    if(ref->streamActive)
+    if(ref->notifyMutex.lock() && ref->streamActive)      // Wait on notification for data in buffer or console opened
     {
       if(ref->bufferAccessMutex.lock())
       {
-        if(ref->readIdx < ref->writeIdx)              // Regular case, no wrap around needed
+        if(ref->readIdx < ref->writeIdx)                  // Regular case, no wrap around needed
         {
           ref->stream.write((const uint8_t*) ref->ringBuffer + ref->readIdx, ref->writeIdx - ref->readIdx);
         }
-        else if(ref->readIdx > ref->writeIdx)         // Need to send buffer in two parts (ReadIdx to End | 0 to WriteIdx)
+        else if(ref->readIdx > ref->writeIdx)             // Need to send buffer in two parts (ReadIdx to End | 0 to WriteIdx)
         {
           ref->stream.write((const uint8_t*) ref->ringBuffer + ref->readIdx, QUEUE_BUFFER_LENGTH - ref->readIdx);
           ref->stream.write((const uint8_t*) ref->ringBuffer, ref->writeIdx);
@@ -123,8 +122,9 @@ void Console::interfaceTask(void *pvParameter)
     if(ref->streamActive && !streamActiveOld)
     {
       ref->printStartupMessage();
-      threads.delay(10);
       ref->bufferAccessMutex.unlock();
+      ref->notifyMutex.unlock();
+      Console::writeTask(ref);
     }
     if(!ref->streamActive && streamActiveOld)               // Detect if console has been closed
     {
@@ -137,7 +137,7 @@ void Console::interfaceTask(void *pvParameter)
   }
 }
 
-FLASHMEM size_t Console::write(const uint8_t *buffer, size_t size)
+size_t Console::write(const uint8_t *buffer, size_t size)
 {
   if(size == 0) return 0;
   if(bufferAccessMutex.lock())
@@ -169,7 +169,7 @@ FLASHMEM size_t Console::write(const uint8_t *buffer, size_t size)
   return 0;
 }
 
-FLASHMEM void Console::printTimestamp(void)
+void Console::printTimestamp(void)
 {
   int h = min(millis() / 3600000, 99);
   int m = (millis() / 60000) % 60;
@@ -178,7 +178,7 @@ FLASHMEM void Console::printTimestamp(void)
   printf("[%02d:%02d:%02d.%03d] ", h, m, s, ms);
 }
 
-FLASHMEM void Console::printStartupMessage(void)
+void Console::printStartupMessage(void)
 {
   stream.print(CONSOLE_CLEAR);
   stream.print(CONSOLE_COLOR_BOLD_CYAN CONSOLE_BACKGROUND_DEFAULT);
