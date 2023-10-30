@@ -39,6 +39,7 @@ ADAU7118::ADAU7118(TwoWire& wire, uint8_t addr) : wire(wire), addr(addr)
 
 bool ADAU7118::begin(bool tdmChannel, decimationRatio_t decimationRatio)
 {
+  this->tdmChannel = tdmChannel;
   bool res = true;
   if(readVendorId() != 0x41)
   {
@@ -51,11 +52,8 @@ bool ADAU7118::begin(bool tdmChannel, decimationRatio_t decimationRatio)
   res &= setHighPassFilter(FILTER_OFF);
   res &= writeRegister(ADAU7118_REG_SPT_CTRL1, 0x53);  // Enable Tristate, 16 BCLKs per slot, Left-Justified (delay by 0), TDM-Mode
   res &= writeRegister(ADAU7118_REG_SPT_CTRL2, 0x00);  // Frame Clock Polarity: Normal, Capture on rising edge
-  for(int i = 0; i < 8; i++)
-  {
-    uint8_t reg = 0x01 | (i << 4) | (tdmChannel? 0x80 : 0x00);    // Drive slot active, Set TDM-Channel (0 ... 7 or 8 ... 15)
-    res &= writeRegister(ADAU7118_REG_SPT_CX(i), reg);
-  }
+  res &= setSlotsEnabled(0xFF);
+  res &= writeRegister(ADAU7118_REG_DRIVE_STRENGTH, 0x05);  // Set drive strength of TDM to max (15mA), PDM to 5mA
   return res;
 }
 
@@ -69,6 +67,22 @@ bool ADAU7118::setHighPassFilter(filter_t filter)
   {
     return writeRegister(ADAU7118_REG_HPF_CONTROL, 0x01 | ((uint8_t)filter << 4));
   }
+}
+
+bool ADAU7118::setSlotsEnabled(uint8_t slots)
+{
+  bool res = true;
+  for(int i = 0; i < 8; i++)
+  {
+    uint8_t slot = 0x00;
+    if(slots & (1 << i))
+    {
+      slot = (i & 0x0E) + !(i & 0x01);           // Slot 1, 0, 3, 2, 5, 4, 7, 6
+    }
+    uint8_t reg = 0x01 | (slot << 4) | (tdmChannel? 0x80 : 0x00);    // Drive slot active, Set TDM-Channel (0 ... 7 or 8 ... 15)
+    res &= writeRegister(ADAU7118_REG_SPT_CX(i), reg);
+  }
+  return res;
 }
 
 uint8_t ADAU7118::readRegister(uint8_t reg)

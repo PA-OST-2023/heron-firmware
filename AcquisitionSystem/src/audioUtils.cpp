@@ -43,12 +43,20 @@ AudioUtils::AudioUtils()
   {
     chanelEnabled[i] = true;
     recorderConnection[i] = nullptr;
+    if(i < 16)
+    {
+      peakConnection[i] = new AudioConnection(tdmIn1, i, peak[i], 0);
+    }
+    else
+    {
+      peakConnection[i] = new AudioConnection(tdmIn2, i - 16, peak[i], 0);
+    }
   }
 }
 
 bool AudioUtils::begin(void)
 {
-  AudioMemory(60);
+  AudioMemory(120);
 
   for(int i = 0; i < ADAU7118_COUNT; i++)
   {
@@ -57,7 +65,7 @@ bool AudioUtils::begin(void)
       console.error.printf("[AUDIO] Failed to initialize ADAU7118 %d\n", i);
       return false;
     }
-    adau7118[i].setHighPassFilter(ADAU7118::FILTER_OFF);
+    adau7118[i].setHighPassFilter(ADAU7118::FILTER_27_474HZ);
   }
   console.log.println("[AUDIO] Initialized ADAU7118");  
 
@@ -185,8 +193,17 @@ bool AudioUtils::reconnectAudioBlocks(void)
       }
     }
   }
-
   return true;
+}
+
+float AudioUtils::getPeak(int channel)
+{
+  if(channel < 0 || channel >= CHANNEL_COUNT) return 0.0;
+  if(peak[channel].available())
+  {
+    volumeValue[channel] = peak[channel].read();
+  }
+  return volumeValue[channel];
 }
 
 void AudioUtils::update(void* parameter)

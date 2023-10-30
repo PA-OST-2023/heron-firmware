@@ -44,20 +44,24 @@ class Hmi
     static constexpr const uint32_t AUDIO_CHANNEL_COUNT   = 32;
     static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
 
-    typedef enum {STATUS_OK, STATUS_WARNING, STATUS_ERROR} systemStatus_t;
+    typedef enum {STATUS_BOOTUP, STATUS_OK, STATUS_WARNING, STATUS_ERROR} systemStatus_t;
 
     Hmi(int rgbLed, int btnRec, int btnSel, int potVol);
     bool begin(void);
     void setSystemStatus(systemStatus_t status) {systemStatus = status;}
-    // void setLedVolume(const float* volume);
+    inline void setLedVolume(int channel, float volume) {ledVolume[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = volume;}
+    inline void setChannelEnabled(int channel, bool enabled) {channelEnabled[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = enabled;}
 
   private:
     const int rgbLed, btnRec, btnSel, potVol;
     Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_COUNT, rgbLed, NEO_GRB + NEO_KHZ800);
     systemStatus_t systemStatus = STATUS_OK;
     float ledVolume[AUDIO_CHANNEL_COUNT];
+    bool channelEnabled[AUDIO_CHANNEL_COUNT];
+    int selectedChannel = 0;
 
     volatile bool initialized = false;
+    float volume = 0.0;
 
     static void update(void* parameter);
 

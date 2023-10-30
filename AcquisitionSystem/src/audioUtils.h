@@ -53,6 +53,7 @@ class AudioUtils
     int getWavChannelNumber(int channel);
     float getRecordingTime(void) {return recording? ((float)millis() - (float)recordingStartTime) / 1000.0 : 0.0;}
     bool setChannelConfig(int channel, bool enabled) {if(channel < CHANNEL_COUNT && channel >= 0) chanelEnabled[channel] = enabled; else return false; return true;}
+    float getPeak(int channel);
 
   private:
     const AudioBuffer::bufType bufMem = AudioBuffer::inExt;
@@ -60,16 +61,19 @@ class AudioUtils
     uint32_t recordingStartTime = 0;
     bool recording = false;
     volatile bool recordingError = false;
+    float volumeValue[CHANNEL_COUNT];
 
     ADAU7118 adau7118[ADAU7118_COUNT] = {ADAU7118(Wire, 0x14), ADAU7118(Wire, 0x15), ADAU7118(Wire, 0x16), ADAU7118(Wire, 0x17)};
 
     AudioInputTDM tdmIn1; 
     AudioInputTDM2 tdmIn2;
     AudioOutputTDM tdmOut1;
-    
-    audio_block_t *iqa[32];	    // Audio input queue for recording
+
+    AudioAnalyzePeak peak[CHANNEL_COUNT];
+    audio_block_t* iqa[CHANNEL_COUNT];	    // Audio input queue for recording
+    AudioConnection* recorderConnection[CHANNEL_COUNT];
+    AudioConnection* peakConnection[CHANNEL_COUNT];
     AudioRecordWAVbuffered* recorder = nullptr;
-    AudioConnection* recorderConnection[32];
 
     bool reconnectAudioBlocks(void);
     static void update(void* parameter);

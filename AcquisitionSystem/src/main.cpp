@@ -59,6 +59,11 @@ static void demoTask(void*)
     btnRecOld = btnRec;
     btnRec = !digitalRead(BTN_REC);
 
+    for(int i = 0; i < 32; i++)
+    {
+      hmi.setLedVolume(i, audio.getPeak(i));
+    }
+
     if(btnRec && !btnRecOld)
     {
       if(!recording)
@@ -82,6 +87,6 @@ static void demoTask(void*)
       t = millis();
       console.log.printf("[MAIN] Time: %d\n", millis());
     }
-    threads.delay(50);
+    threads.delay(25);
   }
 }

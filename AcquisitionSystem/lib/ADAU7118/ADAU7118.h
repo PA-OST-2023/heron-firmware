@@ -72,10 +72,12 @@ class ADAU7118
     uint16_t readDeviceId(void) {return (readRegister(ADAU7118_REG_DEVICE_ID1) << 8) | readRegister(ADAU7118_REG_DEVICE_ID2);}
     uint8_t readRevisionId(void) {return readRegister(ADAU7118_REG_REVISION_ID);}
     bool setHighPassFilter(filter_t filter);
+    bool setSlotsEnabled(uint8_t slots);
 
   private:
     TwoWire& wire;
     const uint8_t addr;
+    bool tdmChannel;
 
     uint8_t readRegister(uint8_t reg);
     bool readRegister(uint8_t reg, uint8_t* data, uint32_t length);
