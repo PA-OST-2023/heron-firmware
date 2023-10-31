@@ -51,20 +51,24 @@ bool Hmi::begin(Utils& utilsRef)
   pinMode(potVol, INPUT);
   volume = 1.0 - (analogRead(potVol) / 1023.0);
 
+  utils->lockWire(Wire1);
+  if(!rtc.begin(&Wire1))
+  {
+    console.error.println("[HMI] RTC could not be initialized");
+    return false;
+  }
+   if (!rtc.initialized() || rtc.lostPower())
+   {
+    console.warning.println("[HMI] RTC is NOT initialized, let's set the time!");
+    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  }
+  rtc.start();
+  utils->unlockWire(Wire1);
+
   leds.begin();
   leds.setBrightness(255);
   leds.clear();
   leds.show();
-
-  utils->lockWire(Wire1);
-  rtc.begin();
-  rtc.setTwelveTwentyFourHour(eTWENTYFOURHOUR);
-  if(!rtc.isrunning())
-  {
-    console.error.println("[HMI] RTC is not running!");
-    return false;
-  }
-  utils->unlockWire(Wire1);
 
   initialized = true;
   threads.addThread(update, (void*)this, 4096);
@@ -76,14 +80,14 @@ void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, u
 {
   DateTime time = DateTime(year, month, day, hour, minute, second);
   utils->lockWire(Wire1);
-  rtc.setTime(time);
+  rtc.adjust(time);
   utils->unlockWire(Wire1);
 }
 
 void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
 {
   utils->lockWire(Wire1);
-  DateTime time = rtc.readTime();
+  DateTime time = rtc.now();
   utils->unlockWire(Wire1);
   year = time.year();
   month = time.month();
@@ -96,7 +100,7 @@ void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hou
 void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
 {
   utils->lockWire(Wire1);
-  DateTime time = rtc.readTime();
+  DateTime time = rtc.now();
   utils->unlockWire(Wire1);
   hour = time.hour();
   minute = time.minute();
@@ -106,7 +110,7 @@ void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
 void Hmi::getDate(uint16_t& year, uint8_t& month, uint8_t& day)
 {
   utils->lockWire(Wire1);
-  DateTime time = rtc.readTime();
+  DateTime time = rtc.now();
   utils->unlockWire(Wire1);
   year = time.year();
   month = time.month();

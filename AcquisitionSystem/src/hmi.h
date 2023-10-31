@@ -35,7 +35,7 @@
 
 #include <Arduino.h>
 #include <utils.h>
-#include <PCF8523.h>
+#include <RTClib.h>
 #include <Adafruit_NeoPixel.h>
 
 class Hmi
@@ -62,7 +62,7 @@ class Hmi
   private:
     const int rgbLed, btnRec, btnSel, potVol;
     Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_COUNT, rgbLed, NEO_GRB + NEO_KHZ800);
-    PCF8523 rtc = PCF8523(Wire1);
+    RTC_PCF8523 rtc;
 
     Utils* utils;
     systemStatus_t systemStatus = STATUS_OK;
