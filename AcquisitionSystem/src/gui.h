@@ -42,14 +42,27 @@
 #include <SPI.h>
 #include <lvgl.h>
 
+class FileContainer
+{
+  public:
+    char fileName[50];
+    uint32_t fileSize;
+    bool isDirectory;
+};
+
 class Gui
 {
   public:
     static constexpr const uint32_t SCREEN_WIDTH          = 240;
     static constexpr const uint32_t SCREEN_HEIGHT         = 240;
     static constexpr const uint32_t SCREEN_BUFFER_HEIGHT  = 60;
+    static constexpr const uint32_t AUDIO_CHANNEL_COUNT   = 32;
     static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
     static constexpr size_t EXT_HEAP_SIZE                 = 1024 * 4096;    // 4MB memory pool on the external ram chip
+
+    typedef enum {SD_CARD_MISSING, SD_CARD_ERROR, SD_CARD_OK} SdCardStatus_t;
+    typedef enum {USB_DISCONNECTED, USB_CONNECTED, USB_ACTIVE} UsbStatus_t;
+    typedef enum {ETH_DISCONNECTED, ETH_CONNECTED, ETH_ACTIVE} EthStatus_t;
 
     Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int tch_irq);
     bool begin(Utils& utilsRef);
@@ -59,7 +72,15 @@ class Gui
     void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
     void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second);
     void setVolume(float volume);
-
+    void setChannelEnabled(const bool* enabled, uint32_t count = AUDIO_CHANNEL_COUNT);
+    void setChannelMonitor(int channel = -1);
+    void getChannelEnabled(bool* enabled, uint32_t count = AUDIO_CHANNEL_COUNT);
+    void setSdCardStatus(SdCardStatus_t status);
+    void setUsbStatus(UsbStatus_t status);
+    void setEthStatus(EthStatus_t status);
+    void setSystemWarning(const char* warning = nullptr);
+    void setFileContainer(FileContainer* fileContainer, uint32_t count);
+    bool isReady(void) {return initialized;}
 
   private:
     const int sclk, mosi, cs, dc, rst, bl, tch_rst, tch_irq;
@@ -69,6 +90,11 @@ class Gui
     static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
     static uint8_t extHeap[EXT_HEAP_SIZE];
     volatile bool initialized = false;
+
+    lv_obj_t*** enableSwitches;
+
+    // FileContainer* fileContainer = nullptr;
+    // uint32_t fileContainerSize = 0;
 
     static Utils* utils;
     static void lvglPrint(const char* buf);

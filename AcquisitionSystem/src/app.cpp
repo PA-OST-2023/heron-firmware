@@ -42,7 +42,17 @@ App::App(AudioUtils& audio, Hmi& hmi, Gui& gui, Utils& utils) : audio(audio), hm
 }
 
 bool App::begin(void)
-{  
+{
+  bool channels[32];        // TODO: Get from EEPROM
+  for(int i = 0; i < 32; i++)
+  {
+    channels[i] = true;
+  }
+  // while(!gui.isReady()) {threads.delay(100);}
+  gui.setChannelEnabled(channels);
+  hmi.setChannelEnabled(channels);
+  audio.setChannelConfig(channels);
+
   threads.addThread(update, (void*)this, 4096);
   console.ok.println("[APP] Initialized");
   return true;

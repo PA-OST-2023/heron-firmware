@@ -51,7 +51,11 @@ class Hmi
     bool begin(Utils& utilsRef);
     void setSystemStatus(systemStatus_t status) {systemStatus = status;}
     inline void setLedVolume(int channel, float volume) {ledVolume[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = volume;}
+    inline void setLedVolume(float* volume, int count = AUDIO_CHANNEL_COUNT) {for(int i = 0; i < count; i++) ledVolume[i] = volume[i];}
     inline void setChannelEnabled(int channel, bool enabled) {channelEnabled[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = enabled;}
+    inline void setChannelEnabled(bool* enabled, int count = AUDIO_CHANNEL_COUNT) {for(int i = 0; i < count; i++) channelEnabled[i] = enabled[i];}
+    inline void setSelectedChannel(int channel) {selectedChannel = constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1);}
+    inline void setSelectedChannel(bool* selected, int count = AUDIO_CHANNEL_COUNT) {for(int i = 0; i < count; i++) if(selected[i]) selectedChannel = i;}
     void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
     void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second);
     void getTime(uint8_t& hour, uint8_t& minute, uint8_t& second);

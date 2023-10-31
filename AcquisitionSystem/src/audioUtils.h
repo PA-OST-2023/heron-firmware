@@ -51,8 +51,9 @@ class AudioUtils
     bool stopRecording(void);
     bool getRecordingStatus(void);
     int getWavChannelNumber(int channel);
-    float getRecordingTime(void) {return recording? ((float)millis() - (float)recordingStartTime) / 1000.0 : 0.0;}
-    bool setChannelConfig(int channel, bool enabled) {if(channel < CHANNEL_COUNT && channel >= 0) chanelEnabled[channel] = enabled; else return false; return true;}
+    inline float getRecordingTime(void) {return recording? ((float)millis() - (float)recordingStartTime) / 1000.0 : 0.0;}
+    inline bool setChannelConfig(int channel, bool enabled) {if(channel < CHANNEL_COUNT && channel >= 0) chanelEnabled[channel] = enabled; else return false; return true;}
+    inline void setChannelConfig(bool* enabled, int count = CHANNEL_COUNT) {for(int i = 0; i < count; i++) chanelEnabled[i] = enabled[i];}
     float getPeak(int channel);
 
   private:

@@ -51,6 +51,11 @@ bool Hmi::begin(Utils& utilsRef)
   pinMode(potVol, INPUT);
   volume = 1.0 - (analogRead(potVol) / 1023.0);
 
+  leds.begin();
+  leds.setBrightness(255);
+  leds.clear();
+  leds.show();
+
   utils->lockWire(Wire1);
   if(!rtc.begin(&Wire1))
   {
@@ -64,11 +69,6 @@ bool Hmi::begin(Utils& utilsRef)
   }
   rtc.start();
   utils->unlockWire(Wire1);
-
-  leds.begin();
-  leds.setBrightness(255);
-  leds.clear();
-  leds.show();
 
   initialized = true;
   threads.addThread(update, (void*)this, 4096);

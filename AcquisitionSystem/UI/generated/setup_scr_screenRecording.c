@@ -428,72 +428,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_15
-	ui->screenRecording_label_15 = lv_label_create(ui->screenRecording_cont_ch01);
-	lv_label_set_text(ui->screenRecording_label_15, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_15, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_15, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_15, 66, 32);
+	//Write codes screenRecording_label_ch_01
+	ui->screenRecording_label_ch_01 = lv_label_create(ui->screenRecording_cont_ch01);
+	lv_label_set_text(ui->screenRecording_label_ch_01, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_01, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_01, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_01, 66, 32);
 
-	//Write style for screenRecording_label_15, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_15, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_15, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_15, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_15, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_15, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_01, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_01, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_01, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_01, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_01, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_01, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_14
-	ui->screenRecording_label_14 = lv_label_create(ui->screenRecording_cont_ch01);
-	lv_label_set_text(ui->screenRecording_label_14, "");
-	lv_label_set_long_mode(ui->screenRecording_label_14, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_14, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_14, 25, 32);
+	//Write codes screenRecording_label_spk_01
+	ui->screenRecording_label_spk_01 = lv_label_create(ui->screenRecording_cont_ch01);
+	lv_label_set_text(ui->screenRecording_label_spk_01, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_01, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_01, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_01, 25, 32);
 
-	//Write style for screenRecording_label_14, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_14, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_14, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_14, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_14, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_14, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_01, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_01, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_01, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_01, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_01, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_01, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_2
-	ui->screenRecording_sw_2 = lv_switch_create(ui->screenRecording_cont_ch01);
-	lv_obj_set_pos(ui->screenRecording_sw_2, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_2, 40, 20);
+	//Write codes screenRecording_sw_01
+	ui->screenRecording_sw_01 = lv_switch_create(ui->screenRecording_cont_ch01);
+	lv_obj_set_pos(ui->screenRecording_sw_01, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_01, 40, 20);
 
-	//Write style for screenRecording_sw_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_2, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_2, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_01, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_01, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_01, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_01, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_01, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_2, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_2, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_2, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_2, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_01, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_01, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_01, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_01, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_2, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_2, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_2, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_2, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_2, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_01, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_01, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_01, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_01, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_01, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_13
 	ui->screenRecording_label_13 = lv_label_create(ui->screenRecording_cont_ch01);
@@ -537,72 +537,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_30
-	ui->screenRecording_label_30 = lv_label_create(ui->screenRecording_cont_ch02);
-	lv_label_set_text(ui->screenRecording_label_30, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_30, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_30, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_30, 66, 32);
+	//Write codes screenRecording_label_ch_02
+	ui->screenRecording_label_ch_02 = lv_label_create(ui->screenRecording_cont_ch02);
+	lv_label_set_text(ui->screenRecording_label_ch_02, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_02, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_02, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_02, 66, 32);
 
-	//Write style for screenRecording_label_30, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_30, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_30, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_30, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_30, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_30, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_02, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_02, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_02, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_02, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_02, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_02, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_29
-	ui->screenRecording_label_29 = lv_label_create(ui->screenRecording_cont_ch02);
-	lv_label_set_text(ui->screenRecording_label_29, "");
-	lv_label_set_long_mode(ui->screenRecording_label_29, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_29, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_29, 25, 32);
+	//Write codes screenRecording_label_spk_02
+	ui->screenRecording_label_spk_02 = lv_label_create(ui->screenRecording_cont_ch02);
+	lv_label_set_text(ui->screenRecording_label_spk_02, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_02, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_02, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_02, 25, 32);
 
-	//Write style for screenRecording_label_29, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_29, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_29, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_29, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_29, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_29, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_02, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_02, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_02, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_02, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_02, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_02, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_7
-	ui->screenRecording_sw_7 = lv_switch_create(ui->screenRecording_cont_ch02);
-	lv_obj_set_pos(ui->screenRecording_sw_7, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_7, 40, 20);
+	//Write codes screenRecording_sw_02
+	ui->screenRecording_sw_02 = lv_switch_create(ui->screenRecording_cont_ch02);
+	lv_obj_set_pos(ui->screenRecording_sw_02, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_02, 40, 20);
 
-	//Write style for screenRecording_sw_7, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_7, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_7, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_7, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_7, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_7, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_02, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_02, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_02, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_02, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_02, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_7, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_7, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_7, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_7, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_02, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_02, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_02, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_02, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_7, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_7, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_7, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_7, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_7, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_02, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_02, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_02, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_02, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_02, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_28
 	ui->screenRecording_label_28 = lv_label_create(ui->screenRecording_cont_ch02);
@@ -646,72 +646,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_33
-	ui->screenRecording_label_33 = lv_label_create(ui->screenRecording_cont_ch03);
-	lv_label_set_text(ui->screenRecording_label_33, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_33, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_33, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_33, 66, 32);
+	//Write codes screenRecording_label_ch_03
+	ui->screenRecording_label_ch_03 = lv_label_create(ui->screenRecording_cont_ch03);
+	lv_label_set_text(ui->screenRecording_label_ch_03, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_03, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_03, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_03, 66, 32);
 
-	//Write style for screenRecording_label_33, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_33, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_33, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_33, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_33, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_33, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_03, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_03, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_03, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_03, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_03, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_03, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_32
-	ui->screenRecording_label_32 = lv_label_create(ui->screenRecording_cont_ch03);
-	lv_label_set_text(ui->screenRecording_label_32, "");
-	lv_label_set_long_mode(ui->screenRecording_label_32, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_32, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_32, 25, 32);
+	//Write codes screenRecording_label_spk_03
+	ui->screenRecording_label_spk_03 = lv_label_create(ui->screenRecording_cont_ch03);
+	lv_label_set_text(ui->screenRecording_label_spk_03, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_03, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_03, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_03, 25, 32);
 
-	//Write style for screenRecording_label_32, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_32, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_32, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_32, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_32, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_32, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_03, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_03, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_03, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_03, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_03, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_03, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_8
-	ui->screenRecording_sw_8 = lv_switch_create(ui->screenRecording_cont_ch03);
-	lv_obj_set_pos(ui->screenRecording_sw_8, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_8, 40, 20);
+	//Write codes screenRecording_sw_03
+	ui->screenRecording_sw_03 = lv_switch_create(ui->screenRecording_cont_ch03);
+	lv_obj_set_pos(ui->screenRecording_sw_03, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_03, 40, 20);
 
-	//Write style for screenRecording_sw_8, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_8, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_8, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_8, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_8, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_8, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_03, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_03, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_03, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_03, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_03, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_8, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_8, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_8, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_8, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_03, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_03, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_03, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_03, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_8, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_8, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_8, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_8, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_8, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_03, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_03, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_03, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_03, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_03, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_31
 	ui->screenRecording_label_31 = lv_label_create(ui->screenRecording_cont_ch03);
@@ -755,72 +755,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_36
-	ui->screenRecording_label_36 = lv_label_create(ui->screenRecording_cont_ch04);
-	lv_label_set_text(ui->screenRecording_label_36, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_36, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_36, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_36, 66, 32);
+	//Write codes screenRecording_label_ch_04
+	ui->screenRecording_label_ch_04 = lv_label_create(ui->screenRecording_cont_ch04);
+	lv_label_set_text(ui->screenRecording_label_ch_04, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_04, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_04, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_04, 66, 32);
 
-	//Write style for screenRecording_label_36, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_36, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_36, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_36, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_36, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_36, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_04, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_04, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_04, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_04, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_04, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_04, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_35
-	ui->screenRecording_label_35 = lv_label_create(ui->screenRecording_cont_ch04);
-	lv_label_set_text(ui->screenRecording_label_35, "");
-	lv_label_set_long_mode(ui->screenRecording_label_35, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_35, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_35, 25, 32);
+	//Write codes screenRecording_label_spk_04
+	ui->screenRecording_label_spk_04 = lv_label_create(ui->screenRecording_cont_ch04);
+	lv_label_set_text(ui->screenRecording_label_spk_04, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_04, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_04, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_04, 25, 32);
 
-	//Write style for screenRecording_label_35, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_35, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_35, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_35, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_35, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_35, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_04, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_04, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_04, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_04, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_04, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_04, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_9
-	ui->screenRecording_sw_9 = lv_switch_create(ui->screenRecording_cont_ch04);
-	lv_obj_set_pos(ui->screenRecording_sw_9, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_9, 40, 20);
+	//Write codes screenRecording_sw_04
+	ui->screenRecording_sw_04 = lv_switch_create(ui->screenRecording_cont_ch04);
+	lv_obj_set_pos(ui->screenRecording_sw_04, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_04, 40, 20);
 
-	//Write style for screenRecording_sw_9, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_9, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_9, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_9, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_9, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_9, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_04, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_04, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_04, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_04, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_04, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_9, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_9, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_9, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_9, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_04, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_04, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_04, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_04, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_9, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_9, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_9, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_9, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_9, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_04, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_04, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_04, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_04, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_04, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_34
 	ui->screenRecording_label_34 = lv_label_create(ui->screenRecording_cont_ch04);
@@ -864,72 +864,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_39
-	ui->screenRecording_label_39 = lv_label_create(ui->screenRecording_cont_ch05);
-	lv_label_set_text(ui->screenRecording_label_39, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_39, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_39, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_39, 66, 32);
+	//Write codes screenRecording_label_ch_05
+	ui->screenRecording_label_ch_05 = lv_label_create(ui->screenRecording_cont_ch05);
+	lv_label_set_text(ui->screenRecording_label_ch_05, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_05, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_05, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_05, 66, 32);
 
-	//Write style for screenRecording_label_39, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_39, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_39, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_39, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_39, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_39, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_39, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_39, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_39, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_39, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_39, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_39, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_39, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_39, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_05, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_05, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_05, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_05, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_05, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_05, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_38
-	ui->screenRecording_label_38 = lv_label_create(ui->screenRecording_cont_ch05);
-	lv_label_set_text(ui->screenRecording_label_38, "");
-	lv_label_set_long_mode(ui->screenRecording_label_38, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_38, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_38, 25, 32);
+	//Write codes screenRecording_label_spk_05
+	ui->screenRecording_label_spk_05 = lv_label_create(ui->screenRecording_cont_ch05);
+	lv_label_set_text(ui->screenRecording_label_spk_05, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_05, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_05, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_05, 25, 32);
 
-	//Write style for screenRecording_label_38, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_38, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_38, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_38, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_38, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_38, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_38, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_38, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_38, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_38, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_38, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_38, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_38, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_38, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_05, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_05, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_05, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_05, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_05, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_05, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_10
-	ui->screenRecording_sw_10 = lv_switch_create(ui->screenRecording_cont_ch05);
-	lv_obj_set_pos(ui->screenRecording_sw_10, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_10, 40, 20);
+	//Write codes screenRecording_sw_05
+	ui->screenRecording_sw_05 = lv_switch_create(ui->screenRecording_cont_ch05);
+	lv_obj_set_pos(ui->screenRecording_sw_05, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_05, 40, 20);
 
-	//Write style for screenRecording_sw_10, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_10, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_10, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_10, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_05, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_05, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_05, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_05, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_05, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_10, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_10, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_10, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_10, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_05, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_05, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_05, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_05, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_10, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_10, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_10, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_10, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_10, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_05, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_05, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_05, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_05, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_05, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_37
 	ui->screenRecording_label_37 = lv_label_create(ui->screenRecording_cont_ch05);
@@ -973,72 +973,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_42
-	ui->screenRecording_label_42 = lv_label_create(ui->screenRecording_cont_ch06);
-	lv_label_set_text(ui->screenRecording_label_42, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_42, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_42, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_42, 66, 32);
+	//Write codes screenRecording_label_ch_06
+	ui->screenRecording_label_ch_06 = lv_label_create(ui->screenRecording_cont_ch06);
+	lv_label_set_text(ui->screenRecording_label_ch_06, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_06, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_06, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_06, 66, 32);
 
-	//Write style for screenRecording_label_42, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_42, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_42, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_42, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_42, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_42, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_42, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_42, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_42, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_42, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_42, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_42, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_42, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_42, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_06, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_06, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_06, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_06, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_06, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_06, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_41
-	ui->screenRecording_label_41 = lv_label_create(ui->screenRecording_cont_ch06);
-	lv_label_set_text(ui->screenRecording_label_41, "");
-	lv_label_set_long_mode(ui->screenRecording_label_41, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_41, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_41, 25, 32);
+	//Write codes screenRecording_label_spk_06
+	ui->screenRecording_label_spk_06 = lv_label_create(ui->screenRecording_cont_ch06);
+	lv_label_set_text(ui->screenRecording_label_spk_06, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_06, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_06, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_06, 25, 32);
 
-	//Write style for screenRecording_label_41, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_41, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_41, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_41, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_41, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_41, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_41, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_41, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_41, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_41, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_41, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_41, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_41, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_41, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_06, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_06, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_06, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_06, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_06, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_06, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_11
-	ui->screenRecording_sw_11 = lv_switch_create(ui->screenRecording_cont_ch06);
-	lv_obj_set_pos(ui->screenRecording_sw_11, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_11, 40, 20);
+	//Write codes screenRecording_sw_06
+	ui->screenRecording_sw_06 = lv_switch_create(ui->screenRecording_cont_ch06);
+	lv_obj_set_pos(ui->screenRecording_sw_06, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_06, 40, 20);
 
-	//Write style for screenRecording_sw_11, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_11, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_11, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_11, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_06, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_06, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_06, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_06, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_06, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_11, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_11, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_11, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_11, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_06, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_06, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_06, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_06, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_11, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_11, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_11, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_11, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_11, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_06, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_06, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_06, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_06, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_06, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_40
 	ui->screenRecording_label_40 = lv_label_create(ui->screenRecording_cont_ch06);
@@ -1082,72 +1082,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_45
-	ui->screenRecording_label_45 = lv_label_create(ui->screenRecording_cont_ch07);
-	lv_label_set_text(ui->screenRecording_label_45, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_45, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_45, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_45, 66, 32);
+	//Write codes screenRecording_label_ch_07
+	ui->screenRecording_label_ch_07 = lv_label_create(ui->screenRecording_cont_ch07);
+	lv_label_set_text(ui->screenRecording_label_ch_07, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_07, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_07, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_07, 66, 32);
 
-	//Write style for screenRecording_label_45, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_45, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_45, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_45, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_45, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_45, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_45, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_45, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_45, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_45, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_45, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_45, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_45, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_45, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_07, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_07, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_07, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_07, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_07, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_07, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_44
-	ui->screenRecording_label_44 = lv_label_create(ui->screenRecording_cont_ch07);
-	lv_label_set_text(ui->screenRecording_label_44, "");
-	lv_label_set_long_mode(ui->screenRecording_label_44, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_44, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_44, 25, 32);
+	//Write codes screenRecording_label_spk_07
+	ui->screenRecording_label_spk_07 = lv_label_create(ui->screenRecording_cont_ch07);
+	lv_label_set_text(ui->screenRecording_label_spk_07, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_07, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_07, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_07, 25, 32);
 
-	//Write style for screenRecording_label_44, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_44, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_44, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_44, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_44, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_44, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_44, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_44, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_44, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_44, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_44, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_44, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_44, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_44, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_07, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_07, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_07, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_07, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_07, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_07, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_12
-	ui->screenRecording_sw_12 = lv_switch_create(ui->screenRecording_cont_ch07);
-	lv_obj_set_pos(ui->screenRecording_sw_12, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_12, 40, 20);
+	//Write codes screenRecording_sw_07
+	ui->screenRecording_sw_07 = lv_switch_create(ui->screenRecording_cont_ch07);
+	lv_obj_set_pos(ui->screenRecording_sw_07, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_07, 40, 20);
 
-	//Write style for screenRecording_sw_12, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_12, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_12, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_12, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_07, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_07, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_07, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_07, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_07, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_12, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_12, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_12, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_12, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_07, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_07, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_07, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_07, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_12, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_12, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_12, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_12, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_12, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_07, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_07, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_07, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_07, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_07, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_43
 	ui->screenRecording_label_43 = lv_label_create(ui->screenRecording_cont_ch07);
@@ -1191,72 +1191,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_48
-	ui->screenRecording_label_48 = lv_label_create(ui->screenRecording_cont_ch08);
-	lv_label_set_text(ui->screenRecording_label_48, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_48, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_48, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_48, 66, 32);
+	//Write codes screenRecording_label_ch_08
+	ui->screenRecording_label_ch_08 = lv_label_create(ui->screenRecording_cont_ch08);
+	lv_label_set_text(ui->screenRecording_label_ch_08, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_08, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_08, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_08, 66, 32);
 
-	//Write style for screenRecording_label_48, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_48, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_48, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_48, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_48, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_48, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_48, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_48, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_48, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_48, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_48, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_48, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_48, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_48, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_08, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_08, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_08, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_08, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_08, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_08, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_47
-	ui->screenRecording_label_47 = lv_label_create(ui->screenRecording_cont_ch08);
-	lv_label_set_text(ui->screenRecording_label_47, "");
-	lv_label_set_long_mode(ui->screenRecording_label_47, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_47, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_47, 25, 32);
+	//Write codes screenRecording_label_spk_08
+	ui->screenRecording_label_spk_08 = lv_label_create(ui->screenRecording_cont_ch08);
+	lv_label_set_text(ui->screenRecording_label_spk_08, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_08, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_08, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_08, 25, 32);
 
-	//Write style for screenRecording_label_47, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_47, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_47, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_47, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_47, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_47, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_47, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_47, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_47, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_47, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_47, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_47, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_47, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_47, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_08, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_08, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_08, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_08, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_08, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_08, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_13
-	ui->screenRecording_sw_13 = lv_switch_create(ui->screenRecording_cont_ch08);
-	lv_obj_set_pos(ui->screenRecording_sw_13, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_13, 40, 20);
+	//Write codes screenRecording_sw_08
+	ui->screenRecording_sw_08 = lv_switch_create(ui->screenRecording_cont_ch08);
+	lv_obj_set_pos(ui->screenRecording_sw_08, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_08, 40, 20);
 
-	//Write style for screenRecording_sw_13, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_13, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_13, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_13, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_08, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_08, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_08, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_08, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_08, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_13, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_13, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_13, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_13, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_08, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_08, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_08, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_08, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_13, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_13, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_13, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_13, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_13, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_08, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_08, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_08, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_08, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_08, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_46
 	ui->screenRecording_label_46 = lv_label_create(ui->screenRecording_cont_ch08);
@@ -1300,72 +1300,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_51
-	ui->screenRecording_label_51 = lv_label_create(ui->screenRecording_cont_ch09);
-	lv_label_set_text(ui->screenRecording_label_51, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_51, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_51, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_51, 66, 32);
+	//Write codes screenRecording_label_ch_09
+	ui->screenRecording_label_ch_09 = lv_label_create(ui->screenRecording_cont_ch09);
+	lv_label_set_text(ui->screenRecording_label_ch_09, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_09, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_09, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_09, 66, 32);
 
-	//Write style for screenRecording_label_51, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_51, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_51, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_51, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_51, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_51, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_51, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_51, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_51, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_51, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_51, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_51, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_51, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_51, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_09, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_09, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_09, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_09, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_09, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_09, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_50
-	ui->screenRecording_label_50 = lv_label_create(ui->screenRecording_cont_ch09);
-	lv_label_set_text(ui->screenRecording_label_50, "");
-	lv_label_set_long_mode(ui->screenRecording_label_50, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_50, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_50, 25, 32);
+	//Write codes screenRecording_label_spk_09
+	ui->screenRecording_label_spk_09 = lv_label_create(ui->screenRecording_cont_ch09);
+	lv_label_set_text(ui->screenRecording_label_spk_09, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_09, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_09, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_09, 25, 32);
 
-	//Write style for screenRecording_label_50, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_50, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_50, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_50, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_50, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_50, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_50, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_50, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_50, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_50, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_50, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_50, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_50, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_50, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_09, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_09, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_09, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_09, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_09, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_09, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_14
-	ui->screenRecording_sw_14 = lv_switch_create(ui->screenRecording_cont_ch09);
-	lv_obj_set_pos(ui->screenRecording_sw_14, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_14, 40, 20);
+	//Write codes screenRecording_sw_09
+	ui->screenRecording_sw_09 = lv_switch_create(ui->screenRecording_cont_ch09);
+	lv_obj_set_pos(ui->screenRecording_sw_09, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_09, 40, 20);
 
-	//Write style for screenRecording_sw_14, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_14, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_14, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_14, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_09, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_09, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_09, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_09, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_09, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_14, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_14, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_14, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_14, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_09, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_09, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_09, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_09, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_14, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_14, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_14, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_14, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_14, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_09, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_09, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_09, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_09, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_09, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_49
 	ui->screenRecording_label_49 = lv_label_create(ui->screenRecording_cont_ch09);
@@ -1409,72 +1409,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_54
-	ui->screenRecording_label_54 = lv_label_create(ui->screenRecording_cont_ch10);
-	lv_label_set_text(ui->screenRecording_label_54, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_54, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_54, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_54, 66, 32);
+	//Write codes screenRecording_label_ch_10
+	ui->screenRecording_label_ch_10 = lv_label_create(ui->screenRecording_cont_ch10);
+	lv_label_set_text(ui->screenRecording_label_ch_10, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_10, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_10, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_10, 66, 32);
 
-	//Write style for screenRecording_label_54, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_54, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_54, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_54, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_54, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_54, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_54, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_54, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_54, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_54, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_54, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_54, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_54, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_54, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_10, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_10, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_10, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_10, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_10, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_10, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_53
-	ui->screenRecording_label_53 = lv_label_create(ui->screenRecording_cont_ch10);
-	lv_label_set_text(ui->screenRecording_label_53, "");
-	lv_label_set_long_mode(ui->screenRecording_label_53, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_53, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_53, 25, 32);
+	//Write codes screenRecording_label_spk_10
+	ui->screenRecording_label_spk_10 = lv_label_create(ui->screenRecording_cont_ch10);
+	lv_label_set_text(ui->screenRecording_label_spk_10, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_10, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_10, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_10, 25, 32);
 
-	//Write style for screenRecording_label_53, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_53, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_53, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_53, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_53, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_53, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_53, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_53, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_53, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_53, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_53, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_53, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_53, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_53, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_10, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_10, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_10, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_10, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_10, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_10, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_15
-	ui->screenRecording_sw_15 = lv_switch_create(ui->screenRecording_cont_ch10);
-	lv_obj_set_pos(ui->screenRecording_sw_15, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_15, 40, 20);
+	//Write codes screenRecording_sw_10
+	ui->screenRecording_sw_10 = lv_switch_create(ui->screenRecording_cont_ch10);
+	lv_obj_set_pos(ui->screenRecording_sw_10, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_10, 40, 20);
 
-	//Write style for screenRecording_sw_15, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_15, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_15, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_15, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_10, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_10, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_10, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_10, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_10, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_15, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_15, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_15, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_15, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_10, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_10, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_10, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_10, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_15, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_15, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_15, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_15, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_15, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_10, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_10, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_10, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_10, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_10, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_52
 	ui->screenRecording_label_52 = lv_label_create(ui->screenRecording_cont_ch10);
@@ -1518,72 +1518,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_57
-	ui->screenRecording_label_57 = lv_label_create(ui->screenRecording_cont_ch11);
-	lv_label_set_text(ui->screenRecording_label_57, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_57, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_57, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_57, 66, 32);
+	//Write codes screenRecording_label_ch_11
+	ui->screenRecording_label_ch_11 = lv_label_create(ui->screenRecording_cont_ch11);
+	lv_label_set_text(ui->screenRecording_label_ch_11, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_11, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_11, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_11, 66, 32);
 
-	//Write style for screenRecording_label_57, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_57, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_57, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_57, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_57, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_57, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_57, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_57, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_57, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_57, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_57, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_57, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_57, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_57, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_11, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_11, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_11, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_11, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_11, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_11, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_56
-	ui->screenRecording_label_56 = lv_label_create(ui->screenRecording_cont_ch11);
-	lv_label_set_text(ui->screenRecording_label_56, "");
-	lv_label_set_long_mode(ui->screenRecording_label_56, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_56, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_56, 25, 32);
+	//Write codes screenRecording_label_spk_11
+	ui->screenRecording_label_spk_11 = lv_label_create(ui->screenRecording_cont_ch11);
+	lv_label_set_text(ui->screenRecording_label_spk_11, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_11, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_11, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_11, 25, 32);
 
-	//Write style for screenRecording_label_56, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_56, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_56, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_56, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_56, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_56, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_56, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_56, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_56, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_56, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_56, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_56, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_56, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_56, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_11, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_11, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_11, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_11, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_11, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_11, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_16
-	ui->screenRecording_sw_16 = lv_switch_create(ui->screenRecording_cont_ch11);
-	lv_obj_set_pos(ui->screenRecording_sw_16, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_16, 40, 20);
+	//Write codes screenRecording_sw_11
+	ui->screenRecording_sw_11 = lv_switch_create(ui->screenRecording_cont_ch11);
+	lv_obj_set_pos(ui->screenRecording_sw_11, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_11, 40, 20);
 
-	//Write style for screenRecording_sw_16, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_16, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_16, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_16, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_11, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_11, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_11, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_11, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_11, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_16, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_16, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_16, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_16, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_11, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_11, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_11, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_11, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_16, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_16, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_16, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_16, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_16, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_11, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_11, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_11, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_11, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_11, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_55
 	ui->screenRecording_label_55 = lv_label_create(ui->screenRecording_cont_ch11);
@@ -1627,72 +1627,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_60
-	ui->screenRecording_label_60 = lv_label_create(ui->screenRecording_cont_ch12);
-	lv_label_set_text(ui->screenRecording_label_60, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_60, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_60, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_60, 66, 32);
+	//Write codes screenRecording_label_ch_12
+	ui->screenRecording_label_ch_12 = lv_label_create(ui->screenRecording_cont_ch12);
+	lv_label_set_text(ui->screenRecording_label_ch_12, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_12, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_12, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_12, 66, 32);
 
-	//Write style for screenRecording_label_60, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_60, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_60, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_60, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_60, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_60, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_60, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_60, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_60, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_60, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_60, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_60, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_60, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_60, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_12, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_12, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_12, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_12, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_12, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_12, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_59
-	ui->screenRecording_label_59 = lv_label_create(ui->screenRecording_cont_ch12);
-	lv_label_set_text(ui->screenRecording_label_59, "");
-	lv_label_set_long_mode(ui->screenRecording_label_59, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_59, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_59, 25, 32);
+	//Write codes screenRecording_label_spk_12
+	ui->screenRecording_label_spk_12 = lv_label_create(ui->screenRecording_cont_ch12);
+	lv_label_set_text(ui->screenRecording_label_spk_12, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_12, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_12, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_12, 25, 32);
 
-	//Write style for screenRecording_label_59, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_59, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_59, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_59, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_59, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_59, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_59, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_59, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_59, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_59, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_59, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_59, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_59, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_59, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_12, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_12, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_12, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_12, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_12, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_12, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_17
-	ui->screenRecording_sw_17 = lv_switch_create(ui->screenRecording_cont_ch12);
-	lv_obj_set_pos(ui->screenRecording_sw_17, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_17, 40, 20);
+	//Write codes screenRecording_sw_12
+	ui->screenRecording_sw_12 = lv_switch_create(ui->screenRecording_cont_ch12);
+	lv_obj_set_pos(ui->screenRecording_sw_12, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_12, 40, 20);
 
-	//Write style for screenRecording_sw_17, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_17, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_17, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_17, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_12, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_12, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_12, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_12, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_12, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_17, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_17, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_17, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_17, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_12, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_12, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_12, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_12, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_17, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_17, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_17, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_17, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_17, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_12, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_12, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_12, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_12, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_12, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_58
 	ui->screenRecording_label_58 = lv_label_create(ui->screenRecording_cont_ch12);
@@ -1736,72 +1736,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_63
-	ui->screenRecording_label_63 = lv_label_create(ui->screenRecording_cont_ch13);
-	lv_label_set_text(ui->screenRecording_label_63, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_63, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_63, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_63, 66, 32);
+	//Write codes screenRecording_label_ch_13
+	ui->screenRecording_label_ch_13 = lv_label_create(ui->screenRecording_cont_ch13);
+	lv_label_set_text(ui->screenRecording_label_ch_13, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_13, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_13, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_13, 66, 32);
 
-	//Write style for screenRecording_label_63, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_63, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_63, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_63, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_63, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_63, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_63, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_63, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_63, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_63, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_63, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_63, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_63, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_63, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_13, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_13, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_13, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_13, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_13, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_13, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_62
-	ui->screenRecording_label_62 = lv_label_create(ui->screenRecording_cont_ch13);
-	lv_label_set_text(ui->screenRecording_label_62, "");
-	lv_label_set_long_mode(ui->screenRecording_label_62, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_62, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_62, 25, 32);
+	//Write codes screenRecording_label_spk_13
+	ui->screenRecording_label_spk_13 = lv_label_create(ui->screenRecording_cont_ch13);
+	lv_label_set_text(ui->screenRecording_label_spk_13, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_13, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_13, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_13, 25, 32);
 
-	//Write style for screenRecording_label_62, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_62, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_62, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_62, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_62, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_62, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_62, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_62, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_62, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_62, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_62, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_62, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_62, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_62, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_13, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_13, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_13, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_13, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_13, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_13, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_18
-	ui->screenRecording_sw_18 = lv_switch_create(ui->screenRecording_cont_ch13);
-	lv_obj_set_pos(ui->screenRecording_sw_18, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_18, 40, 20);
+	//Write codes screenRecording_sw_13
+	ui->screenRecording_sw_13 = lv_switch_create(ui->screenRecording_cont_ch13);
+	lv_obj_set_pos(ui->screenRecording_sw_13, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_13, 40, 20);
 
-	//Write style for screenRecording_sw_18, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_18, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_18, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_18, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_13, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_13, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_13, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_13, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_13, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_18, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_18, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_18, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_18, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_13, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_13, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_13, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_13, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_18, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_18, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_18, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_18, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_18, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_13, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_13, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_13, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_13, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_13, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_61
 	ui->screenRecording_label_61 = lv_label_create(ui->screenRecording_cont_ch13);
@@ -1845,72 +1845,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_66
-	ui->screenRecording_label_66 = lv_label_create(ui->screenRecording_cont_ch14);
-	lv_label_set_text(ui->screenRecording_label_66, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_66, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_66, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_66, 66, 32);
+	//Write codes screenRecording_label_ch_14
+	ui->screenRecording_label_ch_14 = lv_label_create(ui->screenRecording_cont_ch14);
+	lv_label_set_text(ui->screenRecording_label_ch_14, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_14, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_14, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_14, 66, 32);
 
-	//Write style for screenRecording_label_66, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_66, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_66, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_66, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_66, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_66, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_66, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_66, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_66, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_66, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_66, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_66, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_66, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_66, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_14, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_14, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_14, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_14, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_14, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_14, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_65
-	ui->screenRecording_label_65 = lv_label_create(ui->screenRecording_cont_ch14);
-	lv_label_set_text(ui->screenRecording_label_65, "");
-	lv_label_set_long_mode(ui->screenRecording_label_65, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_65, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_65, 25, 32);
+	//Write codes screenRecording_label_spk_14
+	ui->screenRecording_label_spk_14 = lv_label_create(ui->screenRecording_cont_ch14);
+	lv_label_set_text(ui->screenRecording_label_spk_14, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_14, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_14, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_14, 25, 32);
 
-	//Write style for screenRecording_label_65, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_65, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_65, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_65, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_65, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_65, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_65, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_65, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_65, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_65, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_65, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_65, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_65, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_65, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_14, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_14, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_14, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_14, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_14, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_14, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_19
-	ui->screenRecording_sw_19 = lv_switch_create(ui->screenRecording_cont_ch14);
-	lv_obj_set_pos(ui->screenRecording_sw_19, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_19, 40, 20);
+	//Write codes screenRecording_sw_14
+	ui->screenRecording_sw_14 = lv_switch_create(ui->screenRecording_cont_ch14);
+	lv_obj_set_pos(ui->screenRecording_sw_14, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_14, 40, 20);
 
-	//Write style for screenRecording_sw_19, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_19, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_19, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_19, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_14, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_14, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_14, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_14, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_14, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_19, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_19, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_19, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_19, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_14, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_14, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_14, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_14, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_19, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_19, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_19, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_19, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_19, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_14, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_14, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_14, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_14, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_14, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_64
 	ui->screenRecording_label_64 = lv_label_create(ui->screenRecording_cont_ch14);
@@ -1954,72 +1954,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_69
-	ui->screenRecording_label_69 = lv_label_create(ui->screenRecording_cont_ch15);
-	lv_label_set_text(ui->screenRecording_label_69, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_69, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_69, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_69, 66, 32);
+	//Write codes screenRecording_label_ch_15
+	ui->screenRecording_label_ch_15 = lv_label_create(ui->screenRecording_cont_ch15);
+	lv_label_set_text(ui->screenRecording_label_ch_15, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_15, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_15, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_15, 66, 32);
 
-	//Write style for screenRecording_label_69, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_69, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_69, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_69, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_69, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_69, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_69, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_69, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_69, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_69, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_69, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_69, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_69, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_69, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_15, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_15, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_15, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_15, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_15, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_15, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_68
-	ui->screenRecording_label_68 = lv_label_create(ui->screenRecording_cont_ch15);
-	lv_label_set_text(ui->screenRecording_label_68, "");
-	lv_label_set_long_mode(ui->screenRecording_label_68, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_68, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_68, 25, 32);
+	//Write codes screenRecording_label_spk_15
+	ui->screenRecording_label_spk_15 = lv_label_create(ui->screenRecording_cont_ch15);
+	lv_label_set_text(ui->screenRecording_label_spk_15, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_15, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_15, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_15, 25, 32);
 
-	//Write style for screenRecording_label_68, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_68, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_68, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_68, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_68, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_68, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_68, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_68, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_68, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_68, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_68, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_68, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_68, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_68, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_15, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_15, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_15, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_15, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_15, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_15, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_20
-	ui->screenRecording_sw_20 = lv_switch_create(ui->screenRecording_cont_ch15);
-	lv_obj_set_pos(ui->screenRecording_sw_20, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_20, 40, 20);
+	//Write codes screenRecording_sw_15
+	ui->screenRecording_sw_15 = lv_switch_create(ui->screenRecording_cont_ch15);
+	lv_obj_set_pos(ui->screenRecording_sw_15, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_15, 40, 20);
 
-	//Write style for screenRecording_sw_20, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_20, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_20, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_20, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_15, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_15, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_15, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_15, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_15, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_20, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_20, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_20, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_20, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_15, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_15, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_15, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_15, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_20, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_20, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_20, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_20, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_20, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_15, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_15, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_15, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_15, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_15, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_67
 	ui->screenRecording_label_67 = lv_label_create(ui->screenRecording_cont_ch15);
@@ -2063,72 +2063,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_72
-	ui->screenRecording_label_72 = lv_label_create(ui->screenRecording_cont_ch16);
-	lv_label_set_text(ui->screenRecording_label_72, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_72, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_72, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_72, 66, 32);
+	//Write codes screenRecording_label_ch_16
+	ui->screenRecording_label_ch_16 = lv_label_create(ui->screenRecording_cont_ch16);
+	lv_label_set_text(ui->screenRecording_label_ch_16, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_16, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_16, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_16, 66, 32);
 
-	//Write style for screenRecording_label_72, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_72, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_72, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_72, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_72, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_72, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_72, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_72, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_72, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_72, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_72, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_72, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_72, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_72, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_16, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_16, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_16, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_16, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_16, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_16, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_71
-	ui->screenRecording_label_71 = lv_label_create(ui->screenRecording_cont_ch16);
-	lv_label_set_text(ui->screenRecording_label_71, "");
-	lv_label_set_long_mode(ui->screenRecording_label_71, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_71, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_71, 25, 32);
+	//Write codes screenRecording_label_spk_16
+	ui->screenRecording_label_spk_16 = lv_label_create(ui->screenRecording_cont_ch16);
+	lv_label_set_text(ui->screenRecording_label_spk_16, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_16, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_16, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_16, 25, 32);
 
-	//Write style for screenRecording_label_71, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_71, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_71, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_71, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_71, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_71, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_71, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_71, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_71, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_71, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_71, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_71, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_71, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_71, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_16, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_16, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_16, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_16, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_16, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_16, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_21
-	ui->screenRecording_sw_21 = lv_switch_create(ui->screenRecording_cont_ch16);
-	lv_obj_set_pos(ui->screenRecording_sw_21, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_21, 40, 20);
+	//Write codes screenRecording_sw_16
+	ui->screenRecording_sw_16 = lv_switch_create(ui->screenRecording_cont_ch16);
+	lv_obj_set_pos(ui->screenRecording_sw_16, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_16, 40, 20);
 
-	//Write style for screenRecording_sw_21, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_21, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_21, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_21, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_16, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_16, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_16, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_16, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_16, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_21, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_21, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_21, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_21, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_16, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_16, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_16, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_16, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_21, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_21, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_21, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_21, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_21, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_16, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_16, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_16, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_16, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_16, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_70
 	ui->screenRecording_label_70 = lv_label_create(ui->screenRecording_cont_ch16);
@@ -2172,72 +2172,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_75
-	ui->screenRecording_label_75 = lv_label_create(ui->screenRecording_cont_ch17);
-	lv_label_set_text(ui->screenRecording_label_75, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_75, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_75, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_75, 66, 32);
+	//Write codes screenRecording_label_ch_17
+	ui->screenRecording_label_ch_17 = lv_label_create(ui->screenRecording_cont_ch17);
+	lv_label_set_text(ui->screenRecording_label_ch_17, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_17, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_17, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_17, 66, 32);
 
-	//Write style for screenRecording_label_75, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_75, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_75, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_75, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_75, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_75, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_75, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_75, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_75, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_75, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_75, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_75, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_75, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_75, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_17, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_17, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_17, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_17, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_17, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_17, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_74
-	ui->screenRecording_label_74 = lv_label_create(ui->screenRecording_cont_ch17);
-	lv_label_set_text(ui->screenRecording_label_74, "");
-	lv_label_set_long_mode(ui->screenRecording_label_74, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_74, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_74, 25, 32);
+	//Write codes screenRecording_label_spk_17
+	ui->screenRecording_label_spk_17 = lv_label_create(ui->screenRecording_cont_ch17);
+	lv_label_set_text(ui->screenRecording_label_spk_17, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_17, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_17, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_17, 25, 32);
 
-	//Write style for screenRecording_label_74, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_74, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_74, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_74, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_74, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_74, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_74, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_74, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_74, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_74, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_74, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_74, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_74, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_74, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_17, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_17, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_17, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_17, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_17, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_17, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_22
-	ui->screenRecording_sw_22 = lv_switch_create(ui->screenRecording_cont_ch17);
-	lv_obj_set_pos(ui->screenRecording_sw_22, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_22, 40, 20);
+	//Write codes screenRecording_sw_17
+	ui->screenRecording_sw_17 = lv_switch_create(ui->screenRecording_cont_ch17);
+	lv_obj_set_pos(ui->screenRecording_sw_17, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_17, 40, 20);
 
-	//Write style for screenRecording_sw_22, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_22, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_22, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_22, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_17, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_17, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_17, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_17, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_17, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_22, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_22, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_22, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_22, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_17, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_17, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_17, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_17, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_22, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_22, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_22, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_22, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_22, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_17, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_17, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_17, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_17, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_17, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_73
 	ui->screenRecording_label_73 = lv_label_create(ui->screenRecording_cont_ch17);
@@ -2281,72 +2281,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_78
-	ui->screenRecording_label_78 = lv_label_create(ui->screenRecording_cont_ch18);
-	lv_label_set_text(ui->screenRecording_label_78, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_78, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_78, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_78, 66, 32);
+	//Write codes screenRecording_label_ch_18
+	ui->screenRecording_label_ch_18 = lv_label_create(ui->screenRecording_cont_ch18);
+	lv_label_set_text(ui->screenRecording_label_ch_18, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_18, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_18, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_18, 66, 32);
 
-	//Write style for screenRecording_label_78, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_78, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_78, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_78, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_78, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_78, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_78, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_78, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_78, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_78, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_78, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_78, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_78, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_78, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_18, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_18, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_18, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_18, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_18, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_18, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_77
-	ui->screenRecording_label_77 = lv_label_create(ui->screenRecording_cont_ch18);
-	lv_label_set_text(ui->screenRecording_label_77, "");
-	lv_label_set_long_mode(ui->screenRecording_label_77, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_77, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_77, 25, 32);
+	//Write codes screenRecording_label_spk_18
+	ui->screenRecording_label_spk_18 = lv_label_create(ui->screenRecording_cont_ch18);
+	lv_label_set_text(ui->screenRecording_label_spk_18, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_18, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_18, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_18, 25, 32);
 
-	//Write style for screenRecording_label_77, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_77, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_77, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_77, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_77, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_77, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_77, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_77, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_77, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_77, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_77, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_77, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_77, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_77, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_18, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_18, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_18, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_18, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_18, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_18, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_23
-	ui->screenRecording_sw_23 = lv_switch_create(ui->screenRecording_cont_ch18);
-	lv_obj_set_pos(ui->screenRecording_sw_23, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_23, 40, 20);
+	//Write codes screenRecording_sw_18
+	ui->screenRecording_sw_18 = lv_switch_create(ui->screenRecording_cont_ch18);
+	lv_obj_set_pos(ui->screenRecording_sw_18, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_18, 40, 20);
 
-	//Write style for screenRecording_sw_23, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_23, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_23, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_23, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_18, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_18, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_18, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_18, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_18, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_23, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_23, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_23, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_23, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_18, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_18, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_18, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_18, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_23, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_23, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_23, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_23, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_23, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_18, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_18, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_18, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_18, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_18, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_76
 	ui->screenRecording_label_76 = lv_label_create(ui->screenRecording_cont_ch18);
@@ -2390,72 +2390,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_81
-	ui->screenRecording_label_81 = lv_label_create(ui->screenRecording_cont_ch19);
-	lv_label_set_text(ui->screenRecording_label_81, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_81, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_81, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_81, 66, 32);
+	//Write codes screenRecording_label_ch_19
+	ui->screenRecording_label_ch_19 = lv_label_create(ui->screenRecording_cont_ch19);
+	lv_label_set_text(ui->screenRecording_label_ch_19, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_19, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_19, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_19, 66, 32);
 
-	//Write style for screenRecording_label_81, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_81, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_81, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_81, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_81, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_81, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_81, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_81, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_81, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_81, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_81, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_81, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_81, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_81, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_19, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_19, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_19, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_19, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_19, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_19, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_80
-	ui->screenRecording_label_80 = lv_label_create(ui->screenRecording_cont_ch19);
-	lv_label_set_text(ui->screenRecording_label_80, "");
-	lv_label_set_long_mode(ui->screenRecording_label_80, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_80, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_80, 25, 32);
+	//Write codes screenRecording_label_spk_19
+	ui->screenRecording_label_spk_19 = lv_label_create(ui->screenRecording_cont_ch19);
+	lv_label_set_text(ui->screenRecording_label_spk_19, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_19, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_19, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_19, 25, 32);
 
-	//Write style for screenRecording_label_80, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_80, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_80, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_80, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_80, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_80, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_80, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_80, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_80, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_80, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_80, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_80, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_80, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_80, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_19, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_19, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_19, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_19, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_19, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_19, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_24
-	ui->screenRecording_sw_24 = lv_switch_create(ui->screenRecording_cont_ch19);
-	lv_obj_set_pos(ui->screenRecording_sw_24, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_24, 40, 20);
+	//Write codes screenRecording_sw_19
+	ui->screenRecording_sw_19 = lv_switch_create(ui->screenRecording_cont_ch19);
+	lv_obj_set_pos(ui->screenRecording_sw_19, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_19, 40, 20);
 
-	//Write style for screenRecording_sw_24, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_24, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_24, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_24, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_19, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_19, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_19, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_19, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_19, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_24, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_24, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_24, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_24, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_19, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_19, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_19, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_19, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_24, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_24, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_24, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_24, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_24, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_19, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_19, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_19, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_19, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_19, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_79
 	ui->screenRecording_label_79 = lv_label_create(ui->screenRecording_cont_ch19);
@@ -2499,72 +2499,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_84
-	ui->screenRecording_label_84 = lv_label_create(ui->screenRecording_cont_ch20);
-	lv_label_set_text(ui->screenRecording_label_84, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_84, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_84, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_84, 66, 32);
+	//Write codes screenRecording_label_ch_20
+	ui->screenRecording_label_ch_20 = lv_label_create(ui->screenRecording_cont_ch20);
+	lv_label_set_text(ui->screenRecording_label_ch_20, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_20, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_20, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_20, 66, 32);
 
-	//Write style for screenRecording_label_84, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_84, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_84, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_84, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_84, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_84, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_84, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_84, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_84, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_84, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_84, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_84, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_84, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_84, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_20, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_20, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_20, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_20, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_20, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_20, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_83
-	ui->screenRecording_label_83 = lv_label_create(ui->screenRecording_cont_ch20);
-	lv_label_set_text(ui->screenRecording_label_83, "");
-	lv_label_set_long_mode(ui->screenRecording_label_83, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_83, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_83, 25, 32);
+	//Write codes screenRecording_label_spk_20
+	ui->screenRecording_label_spk_20 = lv_label_create(ui->screenRecording_cont_ch20);
+	lv_label_set_text(ui->screenRecording_label_spk_20, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_20, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_20, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_20, 25, 32);
 
-	//Write style for screenRecording_label_83, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_83, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_83, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_83, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_83, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_83, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_83, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_83, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_83, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_83, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_83, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_83, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_83, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_83, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_20, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_20, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_20, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_20, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_20, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_20, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_25
-	ui->screenRecording_sw_25 = lv_switch_create(ui->screenRecording_cont_ch20);
-	lv_obj_set_pos(ui->screenRecording_sw_25, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_25, 40, 20);
+	//Write codes screenRecording_sw_20
+	ui->screenRecording_sw_20 = lv_switch_create(ui->screenRecording_cont_ch20);
+	lv_obj_set_pos(ui->screenRecording_sw_20, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_20, 40, 20);
 
-	//Write style for screenRecording_sw_25, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_25, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_25, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_25, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_20, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_20, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_20, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_20, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_20, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_25, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_25, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_25, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_25, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_20, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_20, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_20, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_20, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_25, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_25, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_25, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_25, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_25, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_20, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_20, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_20, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_20, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_20, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_82
 	ui->screenRecording_label_82 = lv_label_create(ui->screenRecording_cont_ch20);
@@ -2608,72 +2608,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_87
-	ui->screenRecording_label_87 = lv_label_create(ui->screenRecording_cont_ch21);
-	lv_label_set_text(ui->screenRecording_label_87, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_87, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_87, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_87, 66, 32);
+	//Write codes screenRecording_label_ch_21
+	ui->screenRecording_label_ch_21 = lv_label_create(ui->screenRecording_cont_ch21);
+	lv_label_set_text(ui->screenRecording_label_ch_21, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_21, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_21, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_21, 66, 32);
 
-	//Write style for screenRecording_label_87, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_87, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_87, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_87, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_87, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_87, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_87, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_87, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_87, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_87, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_87, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_87, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_87, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_87, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_21, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_21, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_21, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_21, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_21, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_21, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_86
-	ui->screenRecording_label_86 = lv_label_create(ui->screenRecording_cont_ch21);
-	lv_label_set_text(ui->screenRecording_label_86, "");
-	lv_label_set_long_mode(ui->screenRecording_label_86, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_86, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_86, 25, 32);
+	//Write codes screenRecording_label_spk_21
+	ui->screenRecording_label_spk_21 = lv_label_create(ui->screenRecording_cont_ch21);
+	lv_label_set_text(ui->screenRecording_label_spk_21, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_21, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_21, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_21, 25, 32);
 
-	//Write style for screenRecording_label_86, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_86, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_86, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_86, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_86, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_86, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_86, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_86, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_86, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_86, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_86, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_86, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_86, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_86, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_21, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_21, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_21, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_21, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_21, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_21, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_26
-	ui->screenRecording_sw_26 = lv_switch_create(ui->screenRecording_cont_ch21);
-	lv_obj_set_pos(ui->screenRecording_sw_26, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_26, 40, 20);
+	//Write codes screenRecording_sw_21
+	ui->screenRecording_sw_21 = lv_switch_create(ui->screenRecording_cont_ch21);
+	lv_obj_set_pos(ui->screenRecording_sw_21, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_21, 40, 20);
 
-	//Write style for screenRecording_sw_26, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_26, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_26, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_26, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_21, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_21, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_21, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_21, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_21, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_26, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_26, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_26, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_26, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_21, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_21, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_21, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_21, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_26, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_26, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_26, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_26, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_26, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_21, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_21, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_21, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_21, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_21, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_85
 	ui->screenRecording_label_85 = lv_label_create(ui->screenRecording_cont_ch21);
@@ -2717,72 +2717,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_90
-	ui->screenRecording_label_90 = lv_label_create(ui->screenRecording_cont_ch22);
-	lv_label_set_text(ui->screenRecording_label_90, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_90, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_90, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_90, 66, 32);
+	//Write codes screenRecording_label_ch_22
+	ui->screenRecording_label_ch_22 = lv_label_create(ui->screenRecording_cont_ch22);
+	lv_label_set_text(ui->screenRecording_label_ch_22, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_22, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_22, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_22, 66, 32);
 
-	//Write style for screenRecording_label_90, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_90, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_90, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_90, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_90, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_90, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_90, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_90, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_90, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_90, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_90, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_90, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_90, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_90, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_22, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_22, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_22, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_22, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_22, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_22, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_89
-	ui->screenRecording_label_89 = lv_label_create(ui->screenRecording_cont_ch22);
-	lv_label_set_text(ui->screenRecording_label_89, "");
-	lv_label_set_long_mode(ui->screenRecording_label_89, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_89, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_89, 25, 32);
+	//Write codes screenRecording_label_spk_22
+	ui->screenRecording_label_spk_22 = lv_label_create(ui->screenRecording_cont_ch22);
+	lv_label_set_text(ui->screenRecording_label_spk_22, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_22, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_22, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_22, 25, 32);
 
-	//Write style for screenRecording_label_89, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_89, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_89, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_89, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_89, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_89, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_89, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_89, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_89, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_89, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_89, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_89, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_89, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_89, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_22, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_22, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_22, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_22, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_22, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_22, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_27
-	ui->screenRecording_sw_27 = lv_switch_create(ui->screenRecording_cont_ch22);
-	lv_obj_set_pos(ui->screenRecording_sw_27, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_27, 40, 20);
+	//Write codes screenRecording_sw_22
+	ui->screenRecording_sw_22 = lv_switch_create(ui->screenRecording_cont_ch22);
+	lv_obj_set_pos(ui->screenRecording_sw_22, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_22, 40, 20);
 
-	//Write style for screenRecording_sw_27, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_27, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_27, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_27, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_22, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_22, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_22, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_22, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_22, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_27, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_27, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_27, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_27, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_22, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_22, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_22, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_22, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_27, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_27, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_27, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_27, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_27, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_22, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_22, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_22, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_22, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_22, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_88
 	ui->screenRecording_label_88 = lv_label_create(ui->screenRecording_cont_ch22);
@@ -2826,72 +2826,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_93
-	ui->screenRecording_label_93 = lv_label_create(ui->screenRecording_cont_ch23);
-	lv_label_set_text(ui->screenRecording_label_93, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_93, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_93, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_93, 66, 32);
+	//Write codes screenRecording_label_ch_23
+	ui->screenRecording_label_ch_23 = lv_label_create(ui->screenRecording_cont_ch23);
+	lv_label_set_text(ui->screenRecording_label_ch_23, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_23, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_23, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_23, 66, 32);
 
-	//Write style for screenRecording_label_93, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_93, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_93, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_93, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_93, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_93, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_93, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_93, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_93, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_93, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_93, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_93, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_93, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_93, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_23, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_23, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_23, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_23, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_23, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_23, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_92
-	ui->screenRecording_label_92 = lv_label_create(ui->screenRecording_cont_ch23);
-	lv_label_set_text(ui->screenRecording_label_92, "");
-	lv_label_set_long_mode(ui->screenRecording_label_92, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_92, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_92, 25, 32);
+	//Write codes screenRecording_label_spk_23
+	ui->screenRecording_label_spk_23 = lv_label_create(ui->screenRecording_cont_ch23);
+	lv_label_set_text(ui->screenRecording_label_spk_23, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_23, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_23, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_23, 25, 32);
 
-	//Write style for screenRecording_label_92, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_92, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_92, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_92, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_92, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_92, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_92, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_92, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_92, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_92, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_92, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_92, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_92, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_92, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_23, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_23, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_23, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_23, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_23, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_23, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_28
-	ui->screenRecording_sw_28 = lv_switch_create(ui->screenRecording_cont_ch23);
-	lv_obj_set_pos(ui->screenRecording_sw_28, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_28, 40, 20);
+	//Write codes screenRecording_sw_23
+	ui->screenRecording_sw_23 = lv_switch_create(ui->screenRecording_cont_ch23);
+	lv_obj_set_pos(ui->screenRecording_sw_23, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_23, 40, 20);
 
-	//Write style for screenRecording_sw_28, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_28, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_28, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_28, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_23, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_23, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_23, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_23, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_23, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_28, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_28, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_28, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_28, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_23, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_23, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_23, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_23, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_28, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_28, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_28, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_28, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_28, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_23, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_23, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_23, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_23, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_23, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_91
 	ui->screenRecording_label_91 = lv_label_create(ui->screenRecording_cont_ch23);
@@ -2935,72 +2935,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_96
-	ui->screenRecording_label_96 = lv_label_create(ui->screenRecording_cont_ch24);
-	lv_label_set_text(ui->screenRecording_label_96, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_96, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_96, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_96, 66, 32);
+	//Write codes screenRecording_label_ch_24
+	ui->screenRecording_label_ch_24 = lv_label_create(ui->screenRecording_cont_ch24);
+	lv_label_set_text(ui->screenRecording_label_ch_24, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_24, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_24, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_24, 66, 32);
 
-	//Write style for screenRecording_label_96, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_96, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_96, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_96, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_96, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_96, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_96, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_96, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_96, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_96, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_96, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_96, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_96, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_96, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_24, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_24, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_24, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_24, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_24, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_24, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_95
-	ui->screenRecording_label_95 = lv_label_create(ui->screenRecording_cont_ch24);
-	lv_label_set_text(ui->screenRecording_label_95, "");
-	lv_label_set_long_mode(ui->screenRecording_label_95, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_95, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_95, 25, 32);
+	//Write codes screenRecording_label_spk_24
+	ui->screenRecording_label_spk_24 = lv_label_create(ui->screenRecording_cont_ch24);
+	lv_label_set_text(ui->screenRecording_label_spk_24, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_24, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_24, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_24, 25, 32);
 
-	//Write style for screenRecording_label_95, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_95, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_95, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_95, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_95, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_95, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_95, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_95, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_95, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_95, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_95, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_95, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_95, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_95, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_24, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_24, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_24, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_24, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_24, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_24, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_29
-	ui->screenRecording_sw_29 = lv_switch_create(ui->screenRecording_cont_ch24);
-	lv_obj_set_pos(ui->screenRecording_sw_29, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_29, 40, 20);
+	//Write codes screenRecording_sw_24
+	ui->screenRecording_sw_24 = lv_switch_create(ui->screenRecording_cont_ch24);
+	lv_obj_set_pos(ui->screenRecording_sw_24, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_24, 40, 20);
 
-	//Write style for screenRecording_sw_29, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_29, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_29, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_29, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_24, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_24, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_24, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_24, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_24, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_29, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_29, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_29, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_29, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_24, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_24, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_24, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_24, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_29, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_29, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_29, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_29, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_29, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_24, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_24, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_24, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_24, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_24, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_94
 	ui->screenRecording_label_94 = lv_label_create(ui->screenRecording_cont_ch24);
@@ -3044,72 +3044,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_99
-	ui->screenRecording_label_99 = lv_label_create(ui->screenRecording_cont_ch25);
-	lv_label_set_text(ui->screenRecording_label_99, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_99, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_99, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_99, 66, 32);
+	//Write codes screenRecording_label_ch_25
+	ui->screenRecording_label_ch_25 = lv_label_create(ui->screenRecording_cont_ch25);
+	lv_label_set_text(ui->screenRecording_label_ch_25, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_25, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_25, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_25, 66, 32);
 
-	//Write style for screenRecording_label_99, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_99, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_99, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_99, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_99, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_99, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_99, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_99, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_99, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_99, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_99, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_99, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_99, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_99, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_25, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_25, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_25, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_25, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_25, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_25, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_98
-	ui->screenRecording_label_98 = lv_label_create(ui->screenRecording_cont_ch25);
-	lv_label_set_text(ui->screenRecording_label_98, "");
-	lv_label_set_long_mode(ui->screenRecording_label_98, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_98, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_98, 25, 32);
+	//Write codes screenRecording_label_spk_25
+	ui->screenRecording_label_spk_25 = lv_label_create(ui->screenRecording_cont_ch25);
+	lv_label_set_text(ui->screenRecording_label_spk_25, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_25, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_25, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_25, 25, 32);
 
-	//Write style for screenRecording_label_98, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_98, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_98, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_98, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_98, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_98, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_98, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_98, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_98, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_98, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_98, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_98, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_98, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_98, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_25, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_25, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_25, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_25, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_25, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_25, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_30
-	ui->screenRecording_sw_30 = lv_switch_create(ui->screenRecording_cont_ch25);
-	lv_obj_set_pos(ui->screenRecording_sw_30, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_30, 40, 20);
+	//Write codes screenRecording_sw_25
+	ui->screenRecording_sw_25 = lv_switch_create(ui->screenRecording_cont_ch25);
+	lv_obj_set_pos(ui->screenRecording_sw_25, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_25, 40, 20);
 
-	//Write style for screenRecording_sw_30, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_30, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_30, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_30, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_25, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_25, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_25, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_25, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_25, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_30, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_30, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_30, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_30, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_25, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_25, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_25, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_25, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_30, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_30, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_30, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_30, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_30, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_25, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_25, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_25, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_25, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_25, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_97
 	ui->screenRecording_label_97 = lv_label_create(ui->screenRecording_cont_ch25);
@@ -3153,72 +3153,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_102
-	ui->screenRecording_label_102 = lv_label_create(ui->screenRecording_cont_ch26);
-	lv_label_set_text(ui->screenRecording_label_102, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_102, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_102, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_102, 66, 32);
+	//Write codes screenRecording_label_ch_26
+	ui->screenRecording_label_ch_26 = lv_label_create(ui->screenRecording_cont_ch26);
+	lv_label_set_text(ui->screenRecording_label_ch_26, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_26, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_26, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_26, 66, 32);
 
-	//Write style for screenRecording_label_102, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_102, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_102, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_102, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_102, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_102, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_102, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_102, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_102, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_102, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_102, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_102, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_102, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_102, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_26, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_26, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_26, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_26, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_26, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_26, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_101
-	ui->screenRecording_label_101 = lv_label_create(ui->screenRecording_cont_ch26);
-	lv_label_set_text(ui->screenRecording_label_101, "");
-	lv_label_set_long_mode(ui->screenRecording_label_101, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_101, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_101, 25, 32);
+	//Write codes screenRecording_label_spk_26
+	ui->screenRecording_label_spk_26 = lv_label_create(ui->screenRecording_cont_ch26);
+	lv_label_set_text(ui->screenRecording_label_spk_26, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_26, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_26, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_26, 25, 32);
 
-	//Write style for screenRecording_label_101, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_101, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_101, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_101, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_101, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_101, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_101, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_101, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_101, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_101, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_101, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_101, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_101, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_101, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_26, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_26, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_26, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_26, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_26, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_26, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_31
-	ui->screenRecording_sw_31 = lv_switch_create(ui->screenRecording_cont_ch26);
-	lv_obj_set_pos(ui->screenRecording_sw_31, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_31, 40, 20);
+	//Write codes screenRecording_sw_26
+	ui->screenRecording_sw_26 = lv_switch_create(ui->screenRecording_cont_ch26);
+	lv_obj_set_pos(ui->screenRecording_sw_26, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_26, 40, 20);
 
-	//Write style for screenRecording_sw_31, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_31, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_31, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_31, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_26, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_26, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_26, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_26, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_26, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_31, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_31, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_31, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_31, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_26, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_26, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_26, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_26, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_31, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_31, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_31, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_31, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_31, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_26, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_26, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_26, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_26, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_26, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_100
 	ui->screenRecording_label_100 = lv_label_create(ui->screenRecording_cont_ch26);
@@ -3262,72 +3262,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_105
-	ui->screenRecording_label_105 = lv_label_create(ui->screenRecording_cont_ch27);
-	lv_label_set_text(ui->screenRecording_label_105, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_105, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_105, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_105, 66, 32);
+	//Write codes screenRecording_label_ch_27
+	ui->screenRecording_label_ch_27 = lv_label_create(ui->screenRecording_cont_ch27);
+	lv_label_set_text(ui->screenRecording_label_ch_27, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_27, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_27, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_27, 66, 32);
 
-	//Write style for screenRecording_label_105, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_105, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_105, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_105, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_105, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_105, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_105, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_105, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_105, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_105, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_105, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_105, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_105, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_105, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_27, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_27, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_27, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_27, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_27, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_27, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_104
-	ui->screenRecording_label_104 = lv_label_create(ui->screenRecording_cont_ch27);
-	lv_label_set_text(ui->screenRecording_label_104, "");
-	lv_label_set_long_mode(ui->screenRecording_label_104, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_104, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_104, 25, 32);
+	//Write codes screenRecording_label_spk_27
+	ui->screenRecording_label_spk_27 = lv_label_create(ui->screenRecording_cont_ch27);
+	lv_label_set_text(ui->screenRecording_label_spk_27, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_27, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_27, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_27, 25, 32);
 
-	//Write style for screenRecording_label_104, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_104, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_104, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_104, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_104, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_104, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_104, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_104, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_104, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_104, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_104, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_104, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_104, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_104, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_27, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_27, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_27, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_27, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_27, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_27, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_32
-	ui->screenRecording_sw_32 = lv_switch_create(ui->screenRecording_cont_ch27);
-	lv_obj_set_pos(ui->screenRecording_sw_32, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_32, 40, 20);
+	//Write codes screenRecording_sw_27
+	ui->screenRecording_sw_27 = lv_switch_create(ui->screenRecording_cont_ch27);
+	lv_obj_set_pos(ui->screenRecording_sw_27, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_27, 40, 20);
 
-	//Write style for screenRecording_sw_32, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_32, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_32, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_32, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_27, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_27, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_27, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_27, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_27, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_32, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_32, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_32, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_32, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_27, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_27, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_27, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_27, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_32, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_32, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_32, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_32, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_32, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_27, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_27, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_27, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_27, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_27, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_103
 	ui->screenRecording_label_103 = lv_label_create(ui->screenRecording_cont_ch27);
@@ -3371,72 +3371,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_108
-	ui->screenRecording_label_108 = lv_label_create(ui->screenRecording_cont_ch28);
-	lv_label_set_text(ui->screenRecording_label_108, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_108, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_108, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_108, 66, 32);
+	//Write codes screenRecording_label_ch_28
+	ui->screenRecording_label_ch_28 = lv_label_create(ui->screenRecording_cont_ch28);
+	lv_label_set_text(ui->screenRecording_label_ch_28, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_28, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_28, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_28, 66, 32);
 
-	//Write style for screenRecording_label_108, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_108, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_108, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_108, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_108, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_108, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_108, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_108, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_108, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_108, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_108, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_108, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_108, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_108, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_28, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_28, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_28, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_28, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_28, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_28, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_107
-	ui->screenRecording_label_107 = lv_label_create(ui->screenRecording_cont_ch28);
-	lv_label_set_text(ui->screenRecording_label_107, "");
-	lv_label_set_long_mode(ui->screenRecording_label_107, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_107, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_107, 25, 32);
+	//Write codes screenRecording_label_spk_28
+	ui->screenRecording_label_spk_28 = lv_label_create(ui->screenRecording_cont_ch28);
+	lv_label_set_text(ui->screenRecording_label_spk_28, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_28, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_28, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_28, 25, 32);
 
-	//Write style for screenRecording_label_107, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_107, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_107, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_107, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_107, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_107, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_107, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_107, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_107, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_107, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_107, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_107, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_107, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_107, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_28, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_28, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_28, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_28, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_28, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_28, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_33
-	ui->screenRecording_sw_33 = lv_switch_create(ui->screenRecording_cont_ch28);
-	lv_obj_set_pos(ui->screenRecording_sw_33, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_33, 40, 20);
+	//Write codes screenRecording_sw_28
+	ui->screenRecording_sw_28 = lv_switch_create(ui->screenRecording_cont_ch28);
+	lv_obj_set_pos(ui->screenRecording_sw_28, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_28, 40, 20);
 
-	//Write style for screenRecording_sw_33, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_33, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_33, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_33, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_33, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_28, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_28, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_28, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_28, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_28, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_33, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_33, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_33, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_33, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_28, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_28, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_28, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_28, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_33, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_33, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_33, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_33, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_33, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_28, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_28, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_28, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_28, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_28, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_106
 	ui->screenRecording_label_106 = lv_label_create(ui->screenRecording_cont_ch28);
@@ -3480,72 +3480,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_111
-	ui->screenRecording_label_111 = lv_label_create(ui->screenRecording_cont_ch29);
-	lv_label_set_text(ui->screenRecording_label_111, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_111, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_111, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_111, 66, 32);
+	//Write codes screenRecording_label_ch_29
+	ui->screenRecording_label_ch_29 = lv_label_create(ui->screenRecording_cont_ch29);
+	lv_label_set_text(ui->screenRecording_label_ch_29, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_29, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_29, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_29, 66, 32);
 
-	//Write style for screenRecording_label_111, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_111, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_111, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_111, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_111, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_111, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_111, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_111, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_111, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_111, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_111, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_111, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_111, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_111, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_29, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_29, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_29, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_29, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_29, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_29, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_110
-	ui->screenRecording_label_110 = lv_label_create(ui->screenRecording_cont_ch29);
-	lv_label_set_text(ui->screenRecording_label_110, "");
-	lv_label_set_long_mode(ui->screenRecording_label_110, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_110, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_110, 25, 32);
+	//Write codes screenRecording_label_spk_29
+	ui->screenRecording_label_spk_29 = lv_label_create(ui->screenRecording_cont_ch29);
+	lv_label_set_text(ui->screenRecording_label_spk_29, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_29, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_29, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_29, 25, 32);
 
-	//Write style for screenRecording_label_110, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_110, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_110, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_110, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_110, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_110, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_110, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_110, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_110, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_110, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_110, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_110, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_110, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_110, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_29, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_29, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_29, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_29, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_29, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_29, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_34
-	ui->screenRecording_sw_34 = lv_switch_create(ui->screenRecording_cont_ch29);
-	lv_obj_set_pos(ui->screenRecording_sw_34, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_34, 40, 20);
+	//Write codes screenRecording_sw_29
+	ui->screenRecording_sw_29 = lv_switch_create(ui->screenRecording_cont_ch29);
+	lv_obj_set_pos(ui->screenRecording_sw_29, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_29, 40, 20);
 
-	//Write style for screenRecording_sw_34, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_34, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_34, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_34, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_34, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_34, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_29, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_29, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_29, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_29, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_29, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_34, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_34, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_34, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_34, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_29, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_29, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_29, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_29, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_34, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_34, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_34, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_34, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_34, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_29, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_29, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_29, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_29, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_29, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_109
 	ui->screenRecording_label_109 = lv_label_create(ui->screenRecording_cont_ch29);
@@ -3589,72 +3589,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_114
-	ui->screenRecording_label_114 = lv_label_create(ui->screenRecording_cont_ch30);
-	lv_label_set_text(ui->screenRecording_label_114, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_114, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_114, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_114, 66, 32);
+	//Write codes screenRecording_label_ch_30
+	ui->screenRecording_label_ch_30 = lv_label_create(ui->screenRecording_cont_ch30);
+	lv_label_set_text(ui->screenRecording_label_ch_30, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_30, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_30, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_30, 66, 32);
 
-	//Write style for screenRecording_label_114, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_114, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_114, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_114, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_114, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_114, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_114, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_114, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_114, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_114, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_114, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_114, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_114, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_114, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_30, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_30, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_30, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_30, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_30, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_30, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_113
-	ui->screenRecording_label_113 = lv_label_create(ui->screenRecording_cont_ch30);
-	lv_label_set_text(ui->screenRecording_label_113, "");
-	lv_label_set_long_mode(ui->screenRecording_label_113, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_113, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_113, 25, 32);
+	//Write codes screenRecording_label_spk_30
+	ui->screenRecording_label_spk_30 = lv_label_create(ui->screenRecording_cont_ch30);
+	lv_label_set_text(ui->screenRecording_label_spk_30, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_30, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_30, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_30, 25, 32);
 
-	//Write style for screenRecording_label_113, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_113, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_113, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_113, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_113, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_113, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_113, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_113, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_113, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_113, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_113, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_113, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_113, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_113, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_30, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_30, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_30, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_30, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_30, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_30, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_35
-	ui->screenRecording_sw_35 = lv_switch_create(ui->screenRecording_cont_ch30);
-	lv_obj_set_pos(ui->screenRecording_sw_35, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_35, 40, 20);
+	//Write codes screenRecording_sw_30
+	ui->screenRecording_sw_30 = lv_switch_create(ui->screenRecording_cont_ch30);
+	lv_obj_set_pos(ui->screenRecording_sw_30, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_30, 40, 20);
 
-	//Write style for screenRecording_sw_35, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_35, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_35, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_35, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_35, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_30, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_30, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_30, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_30, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_30, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_35, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_35, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_35, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_35, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_30, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_30, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_30, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_30, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_35, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_35, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_35, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_35, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_35, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_30, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_30, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_30, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_30, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_30, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_112
 	ui->screenRecording_label_112 = lv_label_create(ui->screenRecording_cont_ch30);
@@ -3698,72 +3698,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_117
-	ui->screenRecording_label_117 = lv_label_create(ui->screenRecording_cont_ch31);
-	lv_label_set_text(ui->screenRecording_label_117, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_117, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_117, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_117, 66, 32);
+	//Write codes screenRecording_label_ch_31
+	ui->screenRecording_label_ch_31 = lv_label_create(ui->screenRecording_cont_ch31);
+	lv_label_set_text(ui->screenRecording_label_ch_31, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_31, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_31, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_31, 66, 32);
 
-	//Write style for screenRecording_label_117, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_117, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_117, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_117, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_117, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_117, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_117, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_117, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_117, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_117, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_117, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_117, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_117, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_117, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_31, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_31, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_31, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_31, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_31, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_31, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_116
-	ui->screenRecording_label_116 = lv_label_create(ui->screenRecording_cont_ch31);
-	lv_label_set_text(ui->screenRecording_label_116, "");
-	lv_label_set_long_mode(ui->screenRecording_label_116, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_116, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_116, 25, 32);
+	//Write codes screenRecording_label_spk_31
+	ui->screenRecording_label_spk_31 = lv_label_create(ui->screenRecording_cont_ch31);
+	lv_label_set_text(ui->screenRecording_label_spk_31, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_31, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_31, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_31, 25, 32);
 
-	//Write style for screenRecording_label_116, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_116, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_116, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_116, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_116, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_116, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_116, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_116, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_116, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_116, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_116, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_116, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_116, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_116, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_31, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_31, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_31, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_31, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_31, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_31, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_36
-	ui->screenRecording_sw_36 = lv_switch_create(ui->screenRecording_cont_ch31);
-	lv_obj_set_pos(ui->screenRecording_sw_36, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_36, 40, 20);
+	//Write codes screenRecording_sw_31
+	ui->screenRecording_sw_31 = lv_switch_create(ui->screenRecording_cont_ch31);
+	lv_obj_set_pos(ui->screenRecording_sw_31, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_31, 40, 20);
 
-	//Write style for screenRecording_sw_36, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_36, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_36, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_36, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_36, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_31, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_31, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_31, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_31, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_31, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_36, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_36, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_36, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_36, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_31, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_31, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_31, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_31, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_36, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_36, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_36, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_36, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_36, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_31, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_31, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_31, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_31, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_31, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_115
 	ui->screenRecording_label_115 = lv_label_create(ui->screenRecording_cont_ch31);
@@ -3807,72 +3807,72 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screenRecording_cont_ch32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_cont_ch32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_120
-	ui->screenRecording_label_120 = lv_label_create(ui->screenRecording_cont_ch32);
-	lv_label_set_text(ui->screenRecording_label_120, "CH: 31");
-	lv_label_set_long_mode(ui->screenRecording_label_120, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_120, 137, 5);
-	lv_obj_set_size(ui->screenRecording_label_120, 66, 32);
+	//Write codes screenRecording_label_ch_32
+	ui->screenRecording_label_ch_32 = lv_label_create(ui->screenRecording_cont_ch32);
+	lv_label_set_text(ui->screenRecording_label_ch_32, "CH: 31");
+	lv_label_set_long_mode(ui->screenRecording_label_ch_32, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_ch_32, 137, 5);
+	lv_obj_set_size(ui->screenRecording_label_ch_32, 66, 32);
 
-	//Write style for screenRecording_label_120, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_120, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_120, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_120, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_120, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_120, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_120, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_120, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_120, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_120, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_120, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_120, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_120, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_120, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_ch_32, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_ch_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_ch_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_ch_32, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_ch_32, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_ch_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_ch_32, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_ch_32, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_ch_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_ch_32, 7, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_ch_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_ch_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_ch_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_ch_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_label_119
-	ui->screenRecording_label_119 = lv_label_create(ui->screenRecording_cont_ch32);
-	lv_label_set_text(ui->screenRecording_label_119, "");
-	lv_label_set_long_mode(ui->screenRecording_label_119, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenRecording_label_119, 100, 4);
-	lv_obj_set_size(ui->screenRecording_label_119, 25, 32);
+	//Write codes screenRecording_label_spk_32
+	ui->screenRecording_label_spk_32 = lv_label_create(ui->screenRecording_cont_ch32);
+	lv_label_set_text(ui->screenRecording_label_spk_32, "");
+	lv_label_set_long_mode(ui->screenRecording_label_spk_32, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screenRecording_label_spk_32, 100, 4);
+	lv_obj_set_size(ui->screenRecording_label_spk_32, 25, 32);
 
-	//Write style for screenRecording_label_119, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screenRecording_label_119, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_label_119, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screenRecording_label_119, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_119, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screenRecording_label_119, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screenRecording_label_119, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screenRecording_label_119, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenRecording_label_119, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_119, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenRecording_label_119, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenRecording_label_119, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenRecording_label_119, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_label_119, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_label_spk_32, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screenRecording_label_spk_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_label_spk_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screenRecording_label_spk_32, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_spk_32, &lv_font_FontAwesome5ProRegular_400_22, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screenRecording_label_spk_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screenRecording_label_spk_32, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screenRecording_label_spk_32, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenRecording_label_spk_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_spk_32, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenRecording_label_spk_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenRecording_label_spk_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenRecording_label_spk_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_label_spk_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_sw_37
-	ui->screenRecording_sw_37 = lv_switch_create(ui->screenRecording_cont_ch32);
-	lv_obj_set_pos(ui->screenRecording_sw_37, 46, 12);
-	lv_obj_set_size(ui->screenRecording_sw_37, 40, 20);
+	//Write codes screenRecording_sw_32
+	ui->screenRecording_sw_32 = lv_switch_create(ui->screenRecording_cont_ch32);
+	lv_obj_set_pos(ui->screenRecording_sw_32, 46, 12);
+	lv_obj_set_size(ui->screenRecording_sw_32, 40, 20);
 
-	//Write style for screenRecording_sw_37, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_37, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_37, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_37, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_37, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenRecording_sw_37, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_32, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_32, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_32, lv_color_hex(0x41485a), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_32, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenRecording_sw_32, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for screenRecording_sw_37, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_37, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_37, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_37, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	//Write style for screenRecording_sw_32, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_32, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_32, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_32, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
 
-	//Write style for screenRecording_sw_37, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenRecording_sw_37, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenRecording_sw_37, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screenRecording_sw_37, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenRecording_sw_37, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+	//Write style for screenRecording_sw_32, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screenRecording_sw_32, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screenRecording_sw_32, lv_color_hex(0x292831), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screenRecording_sw_32, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screenRecording_sw_32, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes screenRecording_label_118
 	ui->screenRecording_label_118 = lv_label_create(ui->screenRecording_cont_ch32);

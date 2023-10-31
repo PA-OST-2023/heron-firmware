@@ -42,6 +42,16 @@ Utils* Gui::utils;
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), rst(rst), bl(bl), tch_rst(tch_rst), tch_irq(tch_irq)
 {
+  static lv_obj_t** swRefs[AUDIO_CHANNEL_COUNT] = {
+    &guider_ui.screenRecording_sw_01, &guider_ui.screenRecording_sw_02, &guider_ui.screenRecording_sw_03, &guider_ui.screenRecording_sw_04,
+    &guider_ui.screenRecording_sw_05, &guider_ui.screenRecording_sw_06, &guider_ui.screenRecording_sw_07, &guider_ui.screenRecording_sw_08,
+    &guider_ui.screenRecording_sw_09, &guider_ui.screenRecording_sw_10, &guider_ui.screenRecording_sw_11, &guider_ui.screenRecording_sw_12,
+    &guider_ui.screenRecording_sw_13, &guider_ui.screenRecording_sw_14, &guider_ui.screenRecording_sw_15, &guider_ui.screenRecording_sw_16,
+    &guider_ui.screenRecording_sw_17, &guider_ui.screenRecording_sw_18, &guider_ui.screenRecording_sw_19, &guider_ui.screenRecording_sw_20,
+    &guider_ui.screenRecording_sw_21, &guider_ui.screenRecording_sw_22, &guider_ui.screenRecording_sw_23, &guider_ui.screenRecording_sw_24,
+    &guider_ui.screenRecording_sw_25, &guider_ui.screenRecording_sw_26, &guider_ui.screenRecording_sw_27, &guider_ui.screenRecording_sw_28,
+    &guider_ui.screenRecording_sw_29, &guider_ui.screenRecording_sw_30, &guider_ui.screenRecording_sw_31, &guider_ui.screenRecording_sw_32};
+  enableSwitches = swRefs;
 }
 
 bool Gui::begin(Utils& utilsRef)
@@ -129,6 +139,60 @@ void Gui::setVolume(float volume)
   lv_label_set_text(guider_ui.screenRecording_label_volume, buf);
   lv_bar_set_value(guider_ui.screenRecording_bar_volume, percent, LV_ANIM_OFF);
 }
+
+void Gui::setChannelEnabled(const bool* enabled, uint32_t count)
+{
+  for(int i = 0; i < count; i++)
+  {
+    if(*enableSwitches[i])
+    {
+      if(enabled[i])
+      {
+        lv_obj_add_state(*enableSwitches[i], LV_STATE_CHECKED);
+      }
+      else
+      {
+        lv_obj_clear_state(*enableSwitches[i], LV_STATE_CHECKED);
+      }
+    }
+  }
+}
+
+void Gui::setChannelMonitor(int channel)
+{
+
+}
+
+void Gui::getChannelEnabled(bool* enabled, uint32_t count)
+{
+
+}
+
+void Gui::setSdCardStatus(SdCardStatus_t status)
+{
+
+}
+
+void Gui::setUsbStatus(UsbStatus_t status)
+{
+
+}
+
+void Gui::setEthStatus(EthStatus_t status)
+{
+
+}
+
+void Gui::setSystemWarning(const char* warning)
+{
+
+}
+
+void Gui::setFileContainer(FileContainer* fileContainer, uint32_t count)
+{
+
+}
+
 
 void Gui::update(void)
 {

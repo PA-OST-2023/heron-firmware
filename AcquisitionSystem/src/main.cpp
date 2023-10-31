@@ -36,9 +36,9 @@ void setup()
 {
   console.begin();
   utils.begin();
-  audio.begin();
   hmi.begin(utils);
   gui.begin(utils);
+  audio.begin();
   app.begin();
 
   threads.addThread(demoTask, nullptr, 2048);
