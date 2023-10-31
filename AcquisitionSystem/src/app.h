@@ -56,8 +56,16 @@ class App
     Gui& gui;
     Utils& utils;
 
+    bool channelEnabled[AudioUtils::CHANNEL_COUNT];
+    bool channelEnabledOld[AudioUtils::CHANNEL_COUNT];
+
+    bool recording = false;
+    int monitorChannel = 0;
+    char fileName[50];
+
     static App* ref;
     static void update(void* parameter);
+    int getChannelCount(void);
 
 };
 

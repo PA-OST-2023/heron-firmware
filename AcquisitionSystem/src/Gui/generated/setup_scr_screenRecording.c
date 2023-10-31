@@ -3901,7 +3901,6 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_pos(ui->screenRecording_cont_recording, 14, 59);
 	lv_obj_set_size(ui->screenRecording_cont_recording, 212, 122);
 	lv_obj_set_scrollbar_mode(ui->screenRecording_cont_recording, LV_SCROLLBAR_MODE_OFF);
-	lv_obj_add_flag(ui->screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
 
 	//Write style for screenRecording_cont_recording, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screenRecording_cont_recording, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -3928,12 +3927,12 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_border_width(ui->screenRecording_label_recording_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screenRecording_label_recording_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_color(ui->screenRecording_label_recording_time, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenRecording_label_recording_time, &lv_font_montserratMedium_35, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenRecording_label_recording_time, &lv_font_digital7_mono_46, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screenRecording_label_recording_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screenRecording_label_recording_time, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_align(ui->screenRecording_label_recording_time, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_opa(ui->screenRecording_label_recording_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screenRecording_label_recording_time, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screenRecording_label_recording_time, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_right(ui->screenRecording_label_recording_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_bottom(ui->screenRecording_label_recording_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_left(ui->screenRecording_label_recording_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -3963,7 +3962,7 @@ void setup_scr_screenRecording(lv_ui *ui)
 
 	//Write codes screenRecording_label_recording_remaining
 	ui->screenRecording_label_recording_remaining = lv_label_create(ui->screenRecording_cont_recording);
-	lv_label_set_text(ui->screenRecording_label_recording_remaining, "Remaining: 15:26:07");
+	lv_label_set_text(ui->screenRecording_label_recording_remaining, "Remaining: 00:00:00");
 	lv_label_set_long_mode(ui->screenRecording_label_recording_remaining, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screenRecording_label_recording_remaining, 4, 84);
 	lv_obj_set_size(ui->screenRecording_label_recording_remaining, 200, 28);

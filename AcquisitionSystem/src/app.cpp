@@ -43,15 +43,16 @@ App::App(AudioUtils& audio, Hmi& hmi, Gui& gui, Utils& utils) : audio(audio), hm
 
 bool App::begin(void)
 {
-  bool channels[32];        // TODO: Get from EEPROM
-  for(int i = 0; i < 32; i++)
+  for(int i = 0; i < 32; i++)     // TODO: Get from EEPROM
   {
-    channels[i] = true;
+    channelEnabled[i] = true;
   }
-  // while(!gui.isReady()) {threads.delay(100);}
-  gui.setChannelEnabled(channels);
-  hmi.setChannelEnabled(channels);
-  audio.setChannelConfig(channels);
+  gui.setChannelEnabled(channelEnabled);
+  hmi.setChannelEnabled(channelEnabled);
+  audio.setChannelConfig(channelEnabled);
+
+  gui.setRecordingState(false);
+  gui.setChannelMonitor(0);
 
   threads.addThread(update, (void*)this, 4096);
   console.ok.println("[APP] Initialized");
@@ -89,14 +90,103 @@ void App::update(void* parameter)
       app->gui.setTime(hour, minute);
     }
 
+    bool channelConfigUpdated = false;
     static uint32_t tHmi = 0;
     if(millis() - tHmi > 100)
     {
       tHmi = millis();
       ref->gui.setVolume(ref->hmi.getVolume());
       // TODO: Set volume of headphones
+
+      memcpy(ref->channelEnabledOld, ref->channelEnabled, sizeof(channelEnabled));
+      ref->gui.getChannelEnabled(ref->channelEnabled);
+      if(memcmp(ref->channelEnabledOld, ref->channelEnabled, sizeof(channelEnabled)) != 0)
+      {
+        console.log.println("[APP] Updated channel config");
+        ref->gui.setChannelEnabled(ref->channelEnabled);    // Update Chanel indices
+        ref->hmi.setChannelEnabled(ref->channelEnabled);
+        ref->audio.setChannelConfig(ref->channelEnabled);
+        channelConfigUpdated = true;
+      }
     }
+
+    for(int i = 0; i < AudioUtils::CHANNEL_COUNT; i++)
+    {
+      ref->hmi.setLedVolume(i, ref->audio.getPeak(i));
+    }
+
+    bool mainScreenActive = ref->gui.isMainScreenActive();
+    if(mainScreenActive)
+    {
+      if(ref->hmi.getButtonSelectEvent())
+      {
+        ref->monitorChannel++;
+        channelConfigUpdated = true;
+      }
+      if(channelConfigUpdated)
+      {
+        if(ref->getChannelCount() > 0)
+        {
+          for(; ref->monitorChannel < AudioUtils::CHANNEL_COUNT + 1; ref->monitorChannel++)
+          {
+            if(ref->channelEnabled[ref->monitorChannel])
+            {
+              break;
+            }
+          }
+          if(ref->monitorChannel >= 32) ref->monitorChannel = -1;
+        }
+        else
+        {
+          console.warning.println("[APP] No channels enabled");
+          ref->monitorChannel = -1;
+        }
+        ref->gui.setChannelMonitor(ref->monitorChannel);
+        ref->hmi.setChannelMonitor(ref->monitorChannel);
+      }
+
+      if(ref->hmi.getButtonRecordEvent())
+      {
+        static int fileNumber = 0;    // TODO: Remove later
+        if(!ref->recording)
+        {
+          console.log.println("[APP] Button REC pressed");
+          sprintf(ref->fileName, "test_%d.wav", fileNumber++);
+          if(ref->audio.startRecording(ref->fileName))
+          {
+            ref->recording = true;
+            ref->gui.setRecordingState(true);
+          }
+        }
+        else
+        {
+          console.log.println("[APP] Button REC pressed");
+          if(ref->audio.stopRecording())
+          {
+            ref->recording = false;
+            ref->gui.setRecordingState(false);
+          }
+        }
+      }
+
+      if(ref->recording)
+      {
+        ref->gui.setRecordingTime(ref->audio.getRecordingTime());
+        // TODO: Calculate remaining recording time
+      }
+    }
+    
 
     threads.delay(1000.0 / UPDATE_RATE);
   }
+}
+
+int App::getChannelCount(void)
+{
+  int count = 0;
+  for(int i = 0; i < AudioUtils::CHANNEL_COUNT; i++)
+  {
+    if(channelEnabled[i]) count++;
+  }
+  return count;
 }

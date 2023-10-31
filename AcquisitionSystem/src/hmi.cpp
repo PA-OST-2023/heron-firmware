@@ -122,6 +122,14 @@ void Hmi::update(void* parameter)
   Hmi* ref = (Hmi*)parameter;
   while(ref->initialized)
   {
+    ref->buttonRecordOld = ref->buttonRecord;
+    ref->buttonRecord = !digitalRead(ref->btnRec);
+    ref->buttonRecordEvent |= ref->buttonRecord && !ref->buttonRecordOld;
+
+    ref->buttonSelectOld = ref->buttonSelect;
+    ref->buttonSelect = !digitalRead(ref->btnSel);
+    ref->buttonSelectEvent |= ref->buttonSelect && !ref->buttonSelectOld;
+
     ref->volume = 0.5 * ref->volume + 0.5 * (1.0 - (analogRead(ref->potVol) / 1023.0));
 
     ref->leds.clear();
@@ -137,8 +145,20 @@ void Hmi::update(void* parameter)
         ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(r, g, 0));
       }
     }
-    // ref->leds.setPixelColor()
 
+    for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+    {
+      int pos = (i * 2) + 2;
+      if(i >= 16) pos++;
+      if(i == ref->selectedChannel)
+      {
+        ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(0, 0, 100));
+      }
+      else if(ref->channelEnabled[i])
+      {
+        ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(2, 2, 2));
+      }
+    }
 
     ref->leds.setPixelColor(1, (millis() % 1000) < 500 ? Adafruit_NeoPixel::Color(0, 255, 0) : Adafruit_NeoPixel::Color(0, 0, 0));
     ref->leds.show();

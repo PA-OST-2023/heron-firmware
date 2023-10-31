@@ -254,7 +254,7 @@ LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_11)
 LV_FONT_DECLARE(lv_font_MontserratRegular_20)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_22)
 LV_FONT_DECLARE(lv_font_montserratMedium_24)
-LV_FONT_DECLARE(lv_font_montserratMedium_35)
+LV_FONT_DECLARE(lv_font_digital7_mono_46)
 
 
 #ifdef __cplusplus

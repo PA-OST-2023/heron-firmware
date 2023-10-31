@@ -54,13 +54,14 @@ class Hmi
     inline void setLedVolume(float* volume, int count = AUDIO_CHANNEL_COUNT) {for(int i = 0; i < count; i++) ledVolume[i] = volume[i];}
     inline void setChannelEnabled(int channel, bool enabled) {channelEnabled[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = enabled;}
     inline void setChannelEnabled(bool* enabled, int count = AUDIO_CHANNEL_COUNT) {for(int i = 0; i < count; i++) channelEnabled[i] = enabled[i];}
-    inline void setSelectedChannel(int channel) {selectedChannel = constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1);}
-    inline void setSelectedChannel(bool* selected, int count = AUDIO_CHANNEL_COUNT) {for(int i = 0; i < count; i++) if(selected[i]) selectedChannel = i;}
+    inline void setChannelMonitor(int channel) {selectedChannel = channel;}
     void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
     void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second);
     void getTime(uint8_t& hour, uint8_t& minute, uint8_t& second);
     void getDate(uint16_t& year, uint8_t& month, uint8_t& day);
     float getVolume(void) {return volume;}
+    bool getButtonRecordEvent(void) {bool res = buttonRecordEvent; buttonRecordEvent = false; return res;}
+    bool getButtonSelectEvent(void) {bool res = buttonSelectEvent; buttonSelectEvent = false; return res;}
     
 
   private:
@@ -73,6 +74,10 @@ class Hmi
     float ledVolume[AUDIO_CHANNEL_COUNT];
     bool channelEnabled[AUDIO_CHANNEL_COUNT];
     int selectedChannel = 0;
+    bool buttonRecordEvent = false;
+    bool buttonSelectEvent = false;
+    bool buttonRecord = false, buttonRecordOld = false;
+    bool buttonSelect = false, buttonSelectOld = false;
 
     volatile bool initialized = false;
     float volume = 0.0;

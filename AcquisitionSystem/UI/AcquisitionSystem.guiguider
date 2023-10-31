@@ -464,7 +464,7 @@
 					"type": "cont",
 					"left": 14,
 					"top": 59,
-					"visible": false,
+					"visible": true,
 					"flag": [],
 					"custom_attributes": {},
 					"width": 212,
@@ -484,7 +484,7 @@
 							"width": 200,
 							"height": 28,
 							"default_style": false,
-							"text": "Remaining: 15:26:07",
+							"text": "Remaining: 00:00:00",
 							"long_mode": "LV_LABEL_LONG_WRAP",
 							"style": [
 								{
@@ -677,16 +677,16 @@
 									"border_color": "#2195f6",
 									"radius": 0,
 									"text_color": "#ffffff",
-									"font": 35,
+									"font": 46,
 									"text_align": "LV_TEXT_ALIGN_CENTER",
-									"font_family": "montserratMedium",
+									"font_family": "digital7_mono",
 									"letter_space": 0,
 									"line_space": 1,
 									"bg_color": "#2195f6",
 									"bg_grad_color": "#2195f6",
 									"bg_opa": 0,
 									"bg_grad_dir": "LV_GRAD_DIR_NONE",
-									"padding_top": 6,
+									"padding_top": 1,
 									"padding_right": 0,
 									"padding_bottom": 0,
 									"padding_left": 0,
@@ -19174,8 +19174,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screenRecording"
+			]
 		},
 		{
 			"name": "screenSetTime",
@@ -21957,8 +21956,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screenSetTime"
+			]
 		}
 	],
 	"FrontStatus": {},
@@ -41081,7 +41079,7 @@
 						"name": "screenRecording_cont_recording",
 						"id": "nseryh26",
 						"type": "cont",
-						"visible": false,
+						"visible": true,
 						"scrollbar_mode": "OFF",
 						"flag": [],
 						"pos": [
@@ -41126,16 +41124,16 @@
 										"border_color": "#2195f6",
 										"radius": 0,
 										"text_color": "#ffffff",
-										"font": 35,
+										"font": 46,
 										"text_align": "LV_TEXT_ALIGN_CENTER",
-										"font_family": "montserratMedium",
+										"font_family": "digital7_mono",
 										"letter_space": 0,
 										"line_space": 1,
 										"bg_color": "#2195f6",
 										"bg_grad_color": "#2195f6",
 										"bg_opa": 0,
 										"bg_grad_dir": "LV_GRAD_DIR_NONE",
-										"padding_top": 6,
+										"padding_top": 1,
 										"padding_right": 0,
 										"padding_bottom": 0,
 										"padding_left": 0,
@@ -41297,7 +41295,7 @@
 								],
 								"default_style": false,
 								"custom_attributes": {},
-								"text": "Remaining: 15:26:07",
+								"text": "Remaining: 00:00:00",
 								"long_mode": "LV_LABEL_LONG_WRAP",
 								"style": [
 									{

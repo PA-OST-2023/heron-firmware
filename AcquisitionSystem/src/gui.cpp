@@ -52,6 +52,28 @@ Gui::Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int t
     &guider_ui.screenRecording_sw_25, &guider_ui.screenRecording_sw_26, &guider_ui.screenRecording_sw_27, &guider_ui.screenRecording_sw_28,
     &guider_ui.screenRecording_sw_29, &guider_ui.screenRecording_sw_30, &guider_ui.screenRecording_sw_31, &guider_ui.screenRecording_sw_32};
   enableSwitches = swRefs;
+
+  static lv_obj_t** mnRefs[AUDIO_CHANNEL_COUNT] = {
+    &guider_ui.screenRecording_label_spk_01, &guider_ui.screenRecording_label_spk_02, &guider_ui.screenRecording_label_spk_03, &guider_ui.screenRecording_label_spk_04,
+    &guider_ui.screenRecording_label_spk_05, &guider_ui.screenRecording_label_spk_06, &guider_ui.screenRecording_label_spk_07, &guider_ui.screenRecording_label_spk_08,
+    &guider_ui.screenRecording_label_spk_09, &guider_ui.screenRecording_label_spk_10, &guider_ui.screenRecording_label_spk_11, &guider_ui.screenRecording_label_spk_12,
+    &guider_ui.screenRecording_label_spk_13, &guider_ui.screenRecording_label_spk_14, &guider_ui.screenRecording_label_spk_15, &guider_ui.screenRecording_label_spk_16,
+    &guider_ui.screenRecording_label_spk_17, &guider_ui.screenRecording_label_spk_18, &guider_ui.screenRecording_label_spk_19, &guider_ui.screenRecording_label_spk_20,
+    &guider_ui.screenRecording_label_spk_21, &guider_ui.screenRecording_label_spk_22, &guider_ui.screenRecording_label_spk_23, &guider_ui.screenRecording_label_spk_24,
+    &guider_ui.screenRecording_label_spk_25, &guider_ui.screenRecording_label_spk_26, &guider_ui.screenRecording_label_spk_27, &guider_ui.screenRecording_label_spk_28,
+    &guider_ui.screenRecording_label_spk_29, &guider_ui.screenRecording_label_spk_30, &guider_ui.screenRecording_label_spk_31, &guider_ui.screenRecording_label_spk_32};  
+  monitorSymbols = mnRefs;
+
+  static lv_obj_t** chRefs[AUDIO_CHANNEL_COUNT] = {
+    &guider_ui.screenRecording_label_ch_01, &guider_ui.screenRecording_label_ch_02, &guider_ui.screenRecording_label_ch_03, &guider_ui.screenRecording_label_ch_04,
+    &guider_ui.screenRecording_label_ch_05, &guider_ui.screenRecording_label_ch_06, &guider_ui.screenRecording_label_ch_07, &guider_ui.screenRecording_label_ch_08,
+    &guider_ui.screenRecording_label_ch_09, &guider_ui.screenRecording_label_ch_10, &guider_ui.screenRecording_label_ch_11, &guider_ui.screenRecording_label_ch_12,
+    &guider_ui.screenRecording_label_ch_13, &guider_ui.screenRecording_label_ch_14, &guider_ui.screenRecording_label_ch_15, &guider_ui.screenRecording_label_ch_16,
+    &guider_ui.screenRecording_label_ch_17, &guider_ui.screenRecording_label_ch_18, &guider_ui.screenRecording_label_ch_19, &guider_ui.screenRecording_label_ch_20,
+    &guider_ui.screenRecording_label_ch_21, &guider_ui.screenRecording_label_ch_22, &guider_ui.screenRecording_label_ch_23, &guider_ui.screenRecording_label_ch_24,
+    &guider_ui.screenRecording_label_ch_25, &guider_ui.screenRecording_label_ch_26, &guider_ui.screenRecording_label_ch_27, &guider_ui.screenRecording_label_ch_28,
+    &guider_ui.screenRecording_label_ch_29, &guider_ui.screenRecording_label_ch_30, &guider_ui.screenRecording_label_ch_31, &guider_ui.screenRecording_label_ch_32};
+  channelIndeces = chRefs;
 }
 
 bool Gui::begin(Utils& utilsRef)
@@ -102,6 +124,11 @@ bool Gui::begin(Utils& utilsRef)
   return true;
 }
 
+bool Gui::isMainScreenActive(void)
+{
+  return (lv_scr_act() == guider_ui.screenRecording);
+}
+
 void Gui::setTime(uint8_t hour, uint8_t minute)
 {
   char buf[10];
@@ -135,13 +162,15 @@ void Gui::setVolume(float volume)
 {
   uint8_t percent = constrain((uint8_t)(volume * 100.0 + 0.5), 0, 100);
   char buf[10];
-  sprintf(buf, "%d", percent);
+  snprintf(buf, sizeof(buf), "%02d", percent);
   lv_label_set_text(guider_ui.screenRecording_label_volume, buf);
   lv_bar_set_value(guider_ui.screenRecording_bar_volume, percent, LV_ANIM_OFF);
 }
 
 void Gui::setChannelEnabled(const bool* enabled, uint32_t count)
 {
+  char buf[20];
+  int channelCount = 0;
   for(int i = 0; i < count; i++)
   {
     if(*enableSwitches[i])
@@ -155,16 +184,40 @@ void Gui::setChannelEnabled(const bool* enabled, uint32_t count)
         lv_obj_clear_state(*enableSwitches[i], LV_STATE_CHECKED);
       }
     }
+    if(*channelIndeces[i])
+    {
+      if(enabled[i])
+      {
+        snprintf(buf, sizeof(buf), "CH: %2d", channelCount++);
+        lv_label_set_text(*channelIndeces[i], buf);
+        lv_obj_clear_flag(*channelIndeces[i], LV_OBJ_FLAG_HIDDEN);
+      }
+      else
+      {
+        lv_obj_add_flag(*channelIndeces[i], LV_OBJ_FLAG_HIDDEN);
+      }
+    }
+  }
+}
+
+void Gui::getChannelEnabled(bool* enabled, uint32_t count)
+{
+  for(int i = 0; i < count; i++)
+  {
+    enabled[i] = lv_obj_has_state(*enableSwitches[i], LV_STATE_CHECKED);
   }
 }
 
 void Gui::setChannelMonitor(int channel)
 {
-
-}
-
-void Gui::getChannelEnabled(bool* enabled, uint32_t count)
-{
+  for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+  {
+    if(*monitorSymbols[i])
+    {
+      uint32_t color = (i == channel) ? 0x00FF00 : 0x0041485A;
+      lv_obj_set_style_text_color(*monitorSymbols[i], lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
+    }
+  }
 
 }
 
@@ -189,6 +242,39 @@ void Gui::setSystemWarning(const char* warning)
 }
 
 void Gui::setFileContainer(FileContainer* fileContainer, uint32_t count)
+{
+
+}
+
+void Gui::setDiskUsage(uint32_t used, uint32_t total)
+{
+
+}
+
+void Gui::setRecordingState(bool state)
+{
+  if(state)
+  {
+    lv_obj_clear_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_state(guider_ui.screenRecording_tileview, LV_STATE_DISABLED);
+    lv_obj_add_state(guider_ui.screenRecording_cont_top_bar, LV_STATE_DISABLED);
+  }
+  else
+  {
+    lv_obj_add_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_state(guider_ui.screenRecording_tileview, LV_STATE_DISABLED);
+    lv_obj_clear_state(guider_ui.screenRecording_cont_top_bar, LV_STATE_DISABLED);
+  }
+}
+
+void Gui::setRecordingTime(float time)
+{
+  char buf[20];
+  snprintf(buf, sizeof(buf), "%02d:%02d.%02d", (int)time / 60, (int)time % 60, (int)(time * 100.0) % 100);
+  lv_label_set_text(guider_ui.screenRecording_label_recording_time, buf);
+}
+
+void Gui::setRemainingRecordingTime(float time)
 {
 
 }

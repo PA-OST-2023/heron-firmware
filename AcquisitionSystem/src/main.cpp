@@ -30,8 +30,6 @@ static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_RST, TFT_BL, TCH_RST, TCH
 static Hmi hmi(RGB_LED, BTN_REC, BTN_SEL, VOL_POT);
 static App app(audio, hmi, gui, utils);
 
-static void demoTask(void*);
-
 void setup()
 {
   console.begin();
@@ -40,56 +38,10 @@ void setup()
   gui.begin(utils);
   audio.begin();
   app.begin();
-
-  threads.addThread(demoTask, nullptr, 2048);
 }
 
 void loop()
 {
   gui.update();
   utils.update();
-}
-
-static void demoTask(void*)
-{
-  char fileName[20];
-  int fileNumber = 0;
-
-  while (true)
-  {
-    static bool recording = false;
-    static bool btnRecOld, btnRec;
-    btnRecOld = btnRec;
-    btnRec = !digitalRead(BTN_REC);
-
-    for(int i = 0; i < 32; i++)
-    {
-      hmi.setLedVolume(i, audio.getPeak(i));
-    }
-
-    if(btnRec && !btnRecOld)
-    {
-      if(!recording)
-      {
-        console.log.println("[MAIN] Button REC pressed");
-        sprintf(fileName, "test_%d.wav", fileNumber++);
-        audio.startRecording(fileName);
-        recording = true;
-      }
-      else
-      {
-        console.log.println("[MAIN] Button REC pressed");
-        audio.stopRecording();
-        recording = false;
-      } 
-    }
-
-    static uint32_t t = 0;
-    if(millis() - t > 1000)
-    {
-      t = millis();
-      console.log.printf("[MAIN] Time: %d\n", millis());
-    }
-    threads.delay(25);
-  }
 }
