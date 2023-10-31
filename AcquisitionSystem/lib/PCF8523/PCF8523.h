@@ -27,6 +27,8 @@ License
 #ifndef _PCF8523_H_
 #define _PCF8523_H_
 
+#include <Arduino.h>
+#include <Wire.h>
 
 
 // comment this out if you already have a JeeLabs' DateTime class in your code
@@ -218,10 +220,11 @@ protected:
 class PCF8523{
 
 	public:
-		static bool begin(void);
-		static void setTime(const DateTime& dt);
+		PCF8523(TwoWire& wire = Wire) : wire(wire) {};
+		bool begin(void);
+		void setTime(const DateTime& dt);
 
-		static DateTime readTime();
+		DateTime readTime();
 
 		// Alarms
 		void setAlarm(uint8_t minute_alarm ); 
@@ -262,6 +265,9 @@ class PCF8523{
 		void stop_32768_clkout();
 		uint8_t clearRtcInterruptFlags();
 		void 	rtcCapSelect(eCAP_SEL value);
+	
+	private:
+		TwoWire& wire;
 
 
 };

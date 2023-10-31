@@ -95,9 +95,14 @@ def modify_flash_constants(dir):
         with open(Path(dir).resolve() / "images" / image, "w", encoding="utf8") as f:
             f.writelines(lines)
 
+def redefine_as_cpp(c_file):
+    cpp_file = c_file.with_suffix(".cpp")
+    os.rename(c_file, cpp_file)
+
 
 
 copy_directory()
 modify_flash_constants(Path("src/Gui/generated").resolve())
+redefine_as_cpp(Path("src/Gui/generated/events_init.c").resolve())
 
 # env.AddPreAction("buildprog", copy_directory())

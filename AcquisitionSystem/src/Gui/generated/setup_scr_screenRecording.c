@@ -131,7 +131,7 @@ void setup_scr_screenRecording(lv_ui *ui)
 	ui->screenRecording_bar_volume = lv_bar_create(ui->screenRecording_cont_top_bar);
 	lv_obj_set_style_anim_time(ui->screenRecording_bar_volume, 1000, 0);
 	lv_bar_set_mode(ui->screenRecording_bar_volume, LV_BAR_MODE_NORMAL);
-	lv_bar_set_value(ui->screenRecording_bar_volume, 50, LV_ANIM_OFF);
+	lv_bar_set_value(ui->screenRecording_bar_volume, 100, LV_ANIM_OFF);
 	lv_obj_set_pos(ui->screenRecording_bar_volume, 207, 25);
 	lv_obj_set_size(ui->screenRecording_bar_volume, 28, 3);
 

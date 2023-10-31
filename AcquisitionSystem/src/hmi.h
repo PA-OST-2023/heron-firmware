@@ -51,10 +51,17 @@ class Hmi
     void setSystemStatus(systemStatus_t status) {systemStatus = status;}
     inline void setLedVolume(int channel, float volume) {ledVolume[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = volume;}
     inline void setChannelEnabled(int channel, bool enabled) {channelEnabled[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = enabled;}
+    void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
+    void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second);
+    void getTime(uint8_t& hour, uint8_t& minute, uint8_t& second);
+    void getDate(uint16_t& year, uint8_t& month, uint8_t& day);
+    float getVolume(void) {return volume;}
+    
 
   private:
     const int rgbLed, btnRec, btnSel, potVol;
     Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_COUNT, rgbLed, NEO_GRB + NEO_KHZ800);
+    PCF8523 rtc = PCF8523(Wire1);
     systemStatus_t systemStatus = STATUS_OK;
     float ledVolume[AUDIO_CHANNEL_COUNT];
     bool channelEnabled[AUDIO_CHANNEL_COUNT];

@@ -88,16 +88,46 @@ bool Gui::begin(void)
   return true;
 }
 
+void Gui::setTime(uint8_t hour, uint8_t minute)
+{
+  char buf[10];
+  sprintf(buf, "%02d:%02d", hour, minute);
+  lv_label_set_text(guider_ui.screenRecording_btn_current_time_label, buf);
+}
+
+void Gui::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)
+{
+  setTime(hour, minute);
+  lv_roller_set_selected(guider_ui.screenSetTime_rollerDay, day - 1, LV_ANIM_OFF);
+  lv_roller_set_selected(guider_ui.screenSetTime_rollerMonth, month - 1, LV_ANIM_OFF);
+  lv_roller_set_selected(guider_ui.screenSetTime_rollerYear, year - 2023, LV_ANIM_OFF);
+  lv_roller_set_selected(guider_ui.screenSetTime_rollerHour, hour, LV_ANIM_OFF);
+  lv_roller_set_selected(guider_ui.screenSetTime_rollerMinute, minute, LV_ANIM_OFF);
+  lv_roller_set_selected(guider_ui.screenSetTime_rollerSecond, second, LV_ANIM_OFF);
+}
+
+void Gui::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
+{
+  char buf[10];
+  lv_roller_get_selected_str(guider_ui.screenSetTime_rollerDay, buf, 10);     day = atoi(buf);
+  lv_roller_get_selected_str(guider_ui.screenSetTime_rollerMonth, buf, 10);   month = atoi(buf);
+  lv_roller_get_selected_str(guider_ui.screenSetTime_rollerYear, buf, 10);    year = atoi(buf);
+  lv_roller_get_selected_str(guider_ui.screenSetTime_rollerHour, buf, 10);    hour = atoi(buf);
+  lv_roller_get_selected_str(guider_ui.screenSetTime_rollerMinute, buf, 10);  minute = atoi(buf);
+  lv_roller_get_selected_str(guider_ui.screenSetTime_rollerSecond, buf, 10);  second = atoi(buf);  
+}
+
+void Gui::setVolume(float volume)
+{
+  uint8_t percent = constrain((uint8_t)(volume * 100.0 + 0.5), 0, 100);
+  char buf[10];
+  sprintf(buf, "%d", percent);
+  lv_label_set_text(guider_ui.screenRecording_label_volume, buf);
+  lv_bar_set_value(guider_ui.screenRecording_bar_volume, percent, LV_ANIM_OFF);
+}
+
 void Gui::update(void)
 {
-  // Gui* ref = (Gui*)pvParameter;
-  // setup_ui(&guider_ui);
-  // digitalWrite(ref->bl, HIGH);
-  // while(ref->initialized)
-  // {
-  //   lv_task_handler();
-  //   threads.delay(5);
-  // }
   lv_task_handler();
 }
 

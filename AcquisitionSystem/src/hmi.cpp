@@ -55,12 +55,50 @@ bool Hmi::begin(void)
   leds.clear();
   leds.show();
 
+  rtc.begin();
+  if(!rtc.isrunning())
+  {
+    console.error.println("[HMI] RTC is not running!");
+    return false;
+  }
+
   initialized = true;
   threads.addThread(update, (void*)this, 4096);
   console.ok.println("[HMI] Initialized");
   return true;
 }
 
+void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)
+{
+  rtc.setTime(DateTime(year, month, day, hour, minute, second));
+}
+
+void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
+{
+  DateTime time = rtc.readTime();
+  year = time.year();
+  month = time.month();
+  day = time.day();
+  hour = time.hour();
+  minute = time.minute();
+  second = time.second();
+}
+
+void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
+{
+  DateTime time = rtc.readTime();
+  hour = time.hour();
+  minute = time.minute();
+  second = time.second();
+}
+
+void Hmi::getDate(uint16_t& year, uint8_t& month, uint8_t& day)
+{
+  DateTime time = rtc.readTime();
+  year = time.year();
+  month = time.month();
+  day = time.day();
+}
 
 void Hmi::update(void* parameter)
 {
@@ -74,7 +112,7 @@ void Hmi::update(void* parameter)
     {
       if(ref->channelEnabled[i])
       {
-        float volume = constrain((1.1 / (1 + pow(2.71828, -7 * (ref->ledVolume[i] - 0.5)))) - 0.05, 0.0, 1.0);     // Random function, copilot helped me with this (no, it was our math idea)
+        float volume = constrain((1.21 / (1 + pow(2.71828, -7 * (ref->ledVolume[i] - 0.232)))) - 0.2, 0.0, 1.0);     // Random function, copilot helped me with this (no, it was our math idea)
         uint8_t r = constrain((volume - 0.5) * 2.0, 0.0, 1.0) * 255;
         uint8_t g = (1.0 - fabs(1.0 - volume * 2.0)) * 255;
         int pos = (i * 2) + 3;

@@ -5,6 +5,7 @@
 #include <audioUtils.h>
 #include <hmi.h>
 #include <gui.h>
+#include <app.h>
 
 #define TFT_SCLK        13
 #define TFT_MOSI        11
@@ -27,6 +28,7 @@ static AudioUtils audio;
 static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_RST, TFT_BL, TCH_RST, TCH_IRQ);
 static Hmi hmi(RGB_LED, BTN_REC, BTN_SEL, VOL_POT);
+static App app(audio, hmi, gui, utils);
 
 static void demoTask(void*);
 
@@ -37,6 +39,7 @@ void setup()
   hmi.begin();
   gui.begin();
   audio.begin();
+  app.begin();
 
   threads.addThread(demoTask, nullptr, 2048);
 }

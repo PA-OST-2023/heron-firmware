@@ -1,11 +1,11 @@
 /******************************************************************************
-* file    gui.h
+* file    app.h
 *******************************************************************************
-* brief   Wrapper for GUI interface (lvgl, touch, display, etc.)
+* brief   Main application class, handles state machine
 *******************************************************************************
 * author  Florian Baumgartner
 * version 1.0
-* date    2023-10-23
+* date    2023-10-31
 *******************************************************************************
 * MIT License
 *
@@ -30,48 +30,37 @@
 * SOFTWARE.
 ******************************************************************************/
 
-#ifndef GUI_H
-#define GUI_H
+#ifndef APP_H
+#define APP_H
 
 #include <Arduino.h>
-#include <console.h>
-#include <Adafruit_GFX.h>
-#include <ST7789_t3.h>
-#include <CST816S.h>
-#include <SPI.h>
-#include <lvgl.h>
+#include <utils.h>
+#include <audioUtils.h>
+#include <hmi.h>
+#include <gui.h>
 
-class Gui
+class App
 {
   public:
-    static constexpr const uint32_t SCREEN_WIDTH          = 240;
-    static constexpr const uint32_t SCREEN_HEIGHT         = 240;
-    static constexpr const uint32_t SCREEN_BUFFER_HEIGHT  = 60;
     static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
-    static constexpr size_t EXT_HEAP_SIZE                 = 1024 * 4096;    // 4MB memory pool on the external ram chip
 
-    Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int tch_irq);
+    App(AudioUtils& audio, Hmi& hmi, Gui& gui, Utils& utils);
     bool begin(void);
-    void update(void);
 
-    void setTime(uint8_t hour, uint8_t minute);
-    void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
-    void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second);
-    void setVolume(float volume);
-
+    static void callbackUpdateTime(void);
+    static void callbackSetRollerTime(void);
 
   private:
-    const int sclk, mosi, cs, dc, rst, bl, tch_rst, tch_irq;
-    ST7735_t3 disp = ST7735_t3(cs, dc, mosi, sclk, rst);
-    CST816S touch = CST816S(&Wire1, tch_rst, tch_irq);
+    AudioUtils& audio;
+    Hmi& hmi;
+    Gui& gui;
+    Utils& utils;
 
-    static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
-    static uint8_t extHeap[EXT_HEAP_SIZE];
-    volatile bool initialized = false;
-    
-    static void lvglPrint(const char* buf);
-    static void dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p);
-    static void touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data);
+    static App* ref;
+    static void update(void* parameter);
+
 };
 
+
 #endif
+
