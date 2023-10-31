@@ -84,6 +84,7 @@ void App::update(void* parameter)
     {
       tHmi = millis();
       ref->gui.setVolume(ref->hmi.getVolume());
+      // TODO: Set volume of headphones
     }
 
     threads.delay(1000.0 / UPDATE_RATE);

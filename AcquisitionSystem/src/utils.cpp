@@ -34,7 +34,6 @@
 #include <console.h>
 #include "SdCard/SdioTeensy.cpp"
 
-
 Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi) : scl_sys(scl_sys), sda_sys(sda_sys), scl_hmi(scl_hmi), sda_hmi(sda_hmi)
 {
 }
@@ -60,11 +59,13 @@ bool Utils::begin(const char* storageName)
   Wire.setClock(400000);
   Wire.setSCL(scl_sys);
   Wire.setSDA(sda_sys);
+  unlockWire(Wire);
 
   Wire1.begin();
   Wire1.setClock(400000);
   Wire1.setSCL(scl_hmi);
   Wire1.setSDA(sda_hmi);
+  unlockWire(Wire1);
 
   return res;
 }
@@ -98,6 +99,38 @@ int Utils::scanWire(TwoWire& wire)
     console.log.printf("[UTILS] Scan complete (%d devices found)\n", deviceCount);
   }
   return deviceCount;
+}
+
+int Utils::lockWire(TwoWire& wire, int timeout)
+{
+  if(&wire == &Wire)
+  {
+    return wireMutex[0].lock(timeout);
+  }
+  else if(&wire == &Wire1)
+  {
+    return wireMutex[1].lock(timeout);
+  }
+  else
+  {
+    return -1;
+  }
+}
+
+int Utils::unlockWire(TwoWire& wire)
+{
+  if(&wire == &Wire)
+  {
+    return wireMutex[0].unlock();
+  }
+  else if(&wire == &Wire1)
+  {
+    return wireMutex[1].unlock();
+  }
+  else
+  {
+    return -1;
+  }
 }
 
 void Utils::update(void)

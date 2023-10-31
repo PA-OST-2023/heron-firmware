@@ -43,8 +43,9 @@ Hmi::Hmi(int rgbLed, int btnRec, int btnSel, int potVol) : rgbLed(rgbLed), btnRe
   }
 }
 
-bool Hmi::begin(void)
+bool Hmi::begin(Utils& utilsRef)
 {
+  utils = &utilsRef;
   pinMode(btnRec, INPUT_PULLUP);
   pinMode(btnSel, INPUT_PULLUP);
   pinMode(potVol, INPUT);
@@ -55,12 +56,15 @@ bool Hmi::begin(void)
   leds.clear();
   leds.show();
 
+  utils->lockWire(Wire1);
   rtc.begin();
+  rtc.setTwelveTwentyFourHour(eTWENTYFOURHOUR);
   if(!rtc.isrunning())
   {
     console.error.println("[HMI] RTC is not running!");
     return false;
   }
+  utils->unlockWire(Wire1);
 
   initialized = true;
   threads.addThread(update, (void*)this, 4096);
@@ -70,12 +74,17 @@ bool Hmi::begin(void)
 
 void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)
 {
-  rtc.setTime(DateTime(year, month, day, hour, minute, second));
+  DateTime time = DateTime(year, month, day, hour, minute, second);
+  utils->lockWire(Wire1);
+  rtc.setTime(time);
+  utils->unlockWire(Wire1);
 }
 
 void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
 {
+  utils->lockWire(Wire1);
   DateTime time = rtc.readTime();
+  utils->unlockWire(Wire1);
   year = time.year();
   month = time.month();
   day = time.day();
@@ -86,7 +95,9 @@ void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hou
 
 void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
 {
+  utils->lockWire(Wire1);
   DateTime time = rtc.readTime();
+  utils->unlockWire(Wire1);
   hour = time.hour();
   minute = time.minute();
   second = time.second();
@@ -94,7 +105,9 @@ void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
 
 void Hmi::getDate(uint16_t& year, uint8_t& month, uint8_t& day)
 {
+  utils->lockWire(Wire1);
   DateTime time = rtc.readTime();
+  utils->unlockWire(Wire1);
   year = time.year();
   month = time.month();
   day = time.day();

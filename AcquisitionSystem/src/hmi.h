@@ -34,6 +34,7 @@
 #define HMI_H
 
 #include <Arduino.h>
+#include <utils.h>
 #include <PCF8523.h>
 #include <Adafruit_NeoPixel.h>
 
@@ -47,7 +48,7 @@ class Hmi
     typedef enum {STATUS_BOOTUP, STATUS_OK, STATUS_WARNING, STATUS_ERROR} systemStatus_t;
 
     Hmi(int rgbLed, int btnRec, int btnSel, int potVol);
-    bool begin(void);
+    bool begin(Utils& utilsRef);
     void setSystemStatus(systemStatus_t status) {systemStatus = status;}
     inline void setLedVolume(int channel, float volume) {ledVolume[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = volume;}
     inline void setChannelEnabled(int channel, bool enabled) {channelEnabled[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = enabled;}
@@ -62,6 +63,8 @@ class Hmi
     const int rgbLed, btnRec, btnSel, potVol;
     Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_COUNT, rgbLed, NEO_GRB + NEO_KHZ800);
     PCF8523 rtc = PCF8523(Wire1);
+
+    Utils* utils;
     systemStatus_t systemStatus = STATUS_OK;
     float ledVolume[AUDIO_CHANNEL_COUNT];
     bool channelEnabled[AUDIO_CHANNEL_COUNT];

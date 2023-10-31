@@ -38,13 +38,15 @@
 DMAMEM lv_ui guider_ui;
 DMAMEM lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
 EXTMEM uint8_t Gui::extHeap[Gui::EXT_HEAP_SIZE];
+Utils* Gui::utils;
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), rst(rst), bl(bl), tch_rst(tch_rst), tch_irq(tch_irq)
 {
 }
 
-bool Gui::begin(void)
+bool Gui::begin(Utils& utilsRef)
 {
+  utils = &utilsRef;
   digitalWrite(bl, LOW);
   pinMode(bl, OUTPUT);
 
@@ -53,7 +55,9 @@ bool Gui::begin(void)
   disp.setRotation(3);
   disp.fillScreen(ST77XX_BLACK);
 
+  utils->lockWire(Wire1);
   touch.begin();
+  utils->unlockWire(Wire1);
 
   sm_set_default_pool(extHeap, EXT_HEAP_SIZE, false, nullptr);  // use a memory pool on the external ram
   lv_log_register_print_cb(lvglPrint);
@@ -147,7 +151,10 @@ void Gui::dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* c
 void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
 {
   CST816S* touch = (CST816S*)drv->user_data;
-  if(touch->available())
+  utils->lockWire(Wire1);
+  bool available = touch->available();
+  utils->unlockWire(Wire1);
+  if(available)
   {
     int x = touch->data.x;
     int y = touch->data.y;

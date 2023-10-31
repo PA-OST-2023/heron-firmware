@@ -35,6 +35,7 @@
 
 #include <Arduino.h>
 #include <console.h>
+#include <utils.h>
 #include <Adafruit_GFX.h>
 #include <ST7789_t3.h>
 #include <CST816S.h>
@@ -51,7 +52,7 @@ class Gui
     static constexpr size_t EXT_HEAP_SIZE                 = 1024 * 4096;    // 4MB memory pool on the external ram chip
 
     Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int tch_irq);
-    bool begin(void);
+    bool begin(Utils& utilsRef);
     void update(void);
 
     void setTime(uint8_t hour, uint8_t minute);
@@ -68,7 +69,8 @@ class Gui
     static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
     static uint8_t extHeap[EXT_HEAP_SIZE];
     volatile bool initialized = false;
-    
+
+    static Utils* utils;
     static void lvglPrint(const char* buf);
     static void dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p);
     static void touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data);

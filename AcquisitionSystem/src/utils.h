@@ -34,6 +34,7 @@
 #define UTILS_H
 
 #include <Arduino.h>
+#include <TeensyThreads.h>
 #include <MTP_Teensy.h>
 #include <Wire.h>
 #include <SD.h>
@@ -45,12 +46,12 @@ class Utils
     bool begin(const char* storageName = "SD Card");
     void update(void);
     int scanWire(TwoWire& wire);
+    int lockWire(TwoWire& wire, int timeout = 0);
+    int unlockWire(TwoWire& wire);
 
   private:
-    const int scl_sys, sda_sys, scl_hmi, sda_hmi;    
-
+    const int scl_sys, sda_sys, scl_hmi, sda_hmi;
+    Threads::Mutex wireMutex[2];
 };
-
-
 
 #endif
