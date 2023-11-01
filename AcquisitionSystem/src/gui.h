@@ -58,7 +58,7 @@ class Gui
     static constexpr const uint32_t SCREEN_BUFFER_HEIGHT  = 60;
     static constexpr const uint32_t AUDIO_CHANNEL_COUNT   = 32;
     static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
-    static constexpr size_t EXT_HEAP_SIZE                 = 1024 * 4096;    // 4MB memory pool on the external ram chip
+    static constexpr const size_t   EXT_HEAP_SIZE         = 1024 * 4096;    // 4MB memory pool on the external ram chip
 
     typedef enum {SD_CARD_MISSING, SD_CARD_ERROR, SD_CARD_OK} SdCardStatus_t;
     typedef enum {USB_DISCONNECTED, USB_CONNECTED, USB_ACTIVE} UsbStatus_t;

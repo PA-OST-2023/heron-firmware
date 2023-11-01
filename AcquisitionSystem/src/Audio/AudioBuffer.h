@@ -280,7 +280,8 @@ class AudioWAVdata
 	AudioWAVdata(uint16_t cct) : format(0), bitsPerSample(0), chanCnt(cct), 
 					 dataChunks(0), samples(0), firstAudio(0)
 					 {}
-	AudioWAVdata() : AudioWAVdata(2) {}				 
+	AudioWAVdata() : AudioWAVdata(2) {}		
+	~AudioWAVdata() {}		 
 	uint32_t getB2M(uint16_t chanCnt, uint32_t sampleRate, uint16_t bitsPerSample);
 	uint16_t parseWAVheader(File& f); // parse WAV file
 	void makeWAVheader(wavhdr_t* wav, uint16_t chans = 1, uint16_t fmt = 1, uint16_t bits = 16, uint32_t rate = AUDIO_SAMPLE_RATE);

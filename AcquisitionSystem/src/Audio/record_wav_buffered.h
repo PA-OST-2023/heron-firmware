@@ -50,11 +50,11 @@ class AudioRecordWAVbuffered : public EventResponder, public AudioBuffer, public
 public:
 	AudioRecordWAVbuffered(unsigned char ninput, audio_block_t **iqueue);
 	AudioRecordWAVbuffered(void) : AudioRecordWAVbuffered(2,inputQueueArray) {}
-	~AudioRecordWAVbuffered(void) 
-	{
-		stop();
-		SAFE_RELEASE_INPUTS();
-	}
+	// ~AudioRecordWAVbuffered(void) 
+	// {
+	// 	stop();
+	// 	SAFE_RELEASE_INPUTS();
+	// }
 	
 	bool recordSD(const char* filename, bool paused = false);
 	bool record(const File _file, bool paused = false);

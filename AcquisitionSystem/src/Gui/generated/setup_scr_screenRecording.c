@@ -219,6 +219,7 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_pos(ui->screenRecording_tileview, 0, 45);
 	lv_obj_set_size(ui->screenRecording_tileview, 240, 195);
 	lv_obj_set_scrollbar_mode(ui->screenRecording_tileview, LV_SCROLLBAR_MODE_OFF);
+	lv_obj_add_flag(ui->screenRecording_tileview, LV_OBJ_FLAG_PRESS_LOCK);
 
 	//Write style for screenRecording_tileview, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->screenRecording_tileview, 255, LV_PART_MAIN|LV_STATE_DEFAULT);

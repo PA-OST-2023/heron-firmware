@@ -256,12 +256,16 @@ void Gui::setRecordingState(bool state)
   if(state)
   {
     lv_obj_clear_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
+    // lv_obj_add_flag(guider_ui.screenRecording_tileview, LV_OBJ_FLAG_HIDDEN);
+    // lv_obj_add_flag(guider_ui.screenRecording_cont_top_bar, LV_OBJ_FLAG_HIDDEN);
     lv_obj_add_state(guider_ui.screenRecording_tileview, LV_STATE_DISABLED);
     lv_obj_add_state(guider_ui.screenRecording_cont_top_bar, LV_STATE_DISABLED);
   }
   else
   {
     lv_obj_add_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
+    // lv_obj_clear_flag(guider_ui.screenRecording_tileview, LV_OBJ_FLAG_HIDDEN);
+    // lv_obj_clear_flag(guider_ui.screenRecording_cont_top_bar, LV_OBJ_FLAG_HIDDEN);
     lv_obj_clear_state(guider_ui.screenRecording_tileview, LV_STATE_DISABLED);
     lv_obj_clear_state(guider_ui.screenRecording_cont_top_bar, LV_STATE_DISABLED);
   }

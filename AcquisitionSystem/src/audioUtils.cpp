@@ -98,6 +98,7 @@ bool AudioUtils::startRecording(const char* filename)
       console.warning.println("[AUDIO] Waiting for recorder to dispose buffer");
       threads.delay(50);
     }
+    recorder->stop();
     delete recorder;
     recorder = nullptr;
     console.log.println("[AUDIO] Recorder Instance deleted");
