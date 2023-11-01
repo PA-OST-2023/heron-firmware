@@ -108,6 +108,29 @@ void App::update(void* parameter)
         ref->audio.setChannelConfig(ref->channelEnabled);
         channelConfigUpdated = true;
       }
+
+      Gui::SdCardStatus_t sdCardStatus = Gui::SD_CARD_MISSING;
+      if(ref->utils.isSdCardPresent())
+      {
+        sdCardStatus = ref->utils.getSdCardError()? Gui::SD_CARD_ERROR : Gui::SD_CARD_OK;
+      }
+      ref->gui.setSdCardStatus(sdCardStatus);
+
+      Gui::UsbStatus_t usbStatus = Gui::USB_DISCONNECTED;
+      if(ref->utils.usbConnected())
+      {
+        usbStatus = console? Gui::USB_ACTIVE : Gui::USB_CONNECTED;
+      }
+      ref->gui.setUsbStatus(usbStatus);
+
+      Gui::EthStatus_t ethStatus = Gui::ETH_DISCONNECTED;   // TODO: Get status from Ethernet Module
+      ref->gui.setEthStatus(ethStatus);
+
+      ref->gui.setSystemWarning(ref->warning);
+      // TODO: Remove warning after user interaction
+
+      ref->utils.setSdCardScanAccess(!ref->recording);      // Disable SD-Card scan while recording
+      ref->gui.setDiskUsage(ref->utils.getSdCardUsedSizeMb(), ref->utils.getSdCardTotalSizeMb());
     }
 
     for(int i = 0; i < AudioUtils::CHANNEL_COUNT; i++)

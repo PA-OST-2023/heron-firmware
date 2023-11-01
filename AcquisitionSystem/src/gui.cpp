@@ -162,7 +162,7 @@ void Gui::setVolume(float volume)
 {
   uint8_t percent = constrain((uint8_t)(volume * 100.0 + 0.5), 0, 100);
   char buf[10];
-  snprintf(buf, sizeof(buf), "%02d", percent);
+  snprintf(buf, sizeof(buf), "%d", percent);
   lv_label_set_text(guider_ui.screenRecording_label_volume, buf);
   lv_bar_set_value(guider_ui.screenRecording_bar_volume, percent, LV_ANIM_OFF);
 }
@@ -223,22 +223,71 @@ void Gui::setChannelMonitor(int channel)
 
 void Gui::setSdCardStatus(SdCardStatus_t status)
 {
-
+  static SdCardStatus_t oldStatus = (SdCardStatus_t)-1;
+  if(oldStatus != status)
+  {
+    oldStatus = status;
+    uint32_t color = 0x00000000;
+    switch(status)
+    {
+      case SD_CARD_MISSING: color = 0x00292831; break;
+      case SD_CARD_ERROR: color = 0x00FF8F00; break;
+      case SD_CARD_OK: color = 0x00FFFFFF; break;
+      default: break;
+    }
+    lv_obj_set_style_text_color(guider_ui.screenRecording_label_sd_card, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
+  }
 }
 
 void Gui::setUsbStatus(UsbStatus_t status)
 {
-
+  static UsbStatus_t oldStatus = (UsbStatus_t)-1;
+  if(oldStatus != status)
+  {
+    oldStatus = status;
+    uint32_t color = 0x00000000;
+    switch(status)
+    {
+      case USB_DISCONNECTED: color = 0x00292831; break;
+      case USB_CONNECTED: color = 0x00FFFFFF; break;
+      case USB_ACTIVE: color = 0x0000FF00; break;
+      default: break;
+    }
+    lv_obj_set_style_text_color(guider_ui.screenRecording_label_usb, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
+  }
 }
 
 void Gui::setEthStatus(EthStatus_t status)
 {
-
+  static EthStatus_t oldStatus = (EthStatus_t)-1;
+  if(oldStatus != status)
+  {
+    oldStatus = status;
+    uint32_t color = 0x00000000;
+    switch(status)
+    {
+      case ETH_DISCONNECTED: color = 0x00292831; break;
+      case ETH_CONNECTED: color = 0x00FFFFFF; break;
+      case ETH_ACTIVE: color = 0x0000FF00; break;
+      default: break;
+    }
+    lv_obj_set_style_text_color(guider_ui.screenRecording_label_ethernet, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
+  }
 }
 
 void Gui::setSystemWarning(const char* warning)
 {
-
+  if(warning)
+  {
+    snprintf(warningText, sizeof(warningText), "%s", warning);
+    lv_obj_clear_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
+    // TODO: Set warning text
+  }
+  else
+  {
+    warningText[0] = '\0';
+    lv_obj_add_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
+  }
 }
 
 void Gui::setFileContainer(FileContainer* fileContainer, uint32_t count)
@@ -246,9 +295,19 @@ void Gui::setFileContainer(FileContainer* fileContainer, uint32_t count)
 
 }
 
-void Gui::setDiskUsage(uint32_t used, uint32_t total)
+void Gui::setDiskUsage(float usedMb, float totalMb)
 {
-
+  char buf[20];
+  snprintf(buf, sizeof(buf), "%.1f / %.1f GB", usedMb / 1000.0, totalMb / 1000.0);
+  lv_label_set_text(guider_ui.screenRecording_label_disk_storage, buf);
+  if(totalMb > 0.0)
+  {
+    lv_bar_set_value(guider_ui.screenRecording_bar_disk_storage, (uint8_t)((usedMb / totalMb) * 100.0 + 0.5), LV_ANIM_OFF);
+  }
+  else
+  {
+    lv_bar_set_value(guider_ui.screenRecording_bar_disk_storage, 0, LV_ANIM_OFF);
+  }
 }
 
 void Gui::setRecordingState(bool state)
@@ -256,18 +315,12 @@ void Gui::setRecordingState(bool state)
   if(state)
   {
     lv_obj_clear_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(guider_ui.screenRecording_tileview, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(guider_ui.screenRecording_cont_top_bar, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_state(guider_ui.screenRecording_tileview, LV_STATE_DISABLED);
-    lv_obj_add_state(guider_ui.screenRecording_cont_top_bar, LV_STATE_DISABLED);
+    lv_obj_clear_flag(guider_ui.screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
   }
   else
   {
     lv_obj_add_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(guider_ui.screenRecording_tileview, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(guider_ui.screenRecording_cont_top_bar, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_state(guider_ui.screenRecording_tileview, LV_STATE_DISABLED);
-    lv_obj_clear_state(guider_ui.screenRecording_cont_top_bar, LV_STATE_DISABLED);
+    lv_obj_add_flag(guider_ui.screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
   }
 }
 

@@ -81,7 +81,7 @@ class Gui
     void setEthStatus(EthStatus_t status);
     void setSystemWarning(const char* warning = nullptr);
     void setFileContainer(FileContainer* fileContainer, uint32_t count);
-    void setDiskUsage(uint32_t used, uint32_t total);
+    void setDiskUsage(float usedMb, float totalMb);
     bool isMainScreenActive(void);
     void setRecordingState(bool state);
     void setRecordingTime(float time);
@@ -99,9 +99,13 @@ class Gui
     lv_obj_t*** enableSwitches;
     lv_obj_t*** monitorSymbols;
     lv_obj_t*** channelIndeces;
+    char warningText[50];
 
     // FileContainer* fileContainer = nullptr;
     // uint32_t fileContainerSize = 0;
+
+    // static lv_obj_tree_walk_res_t enable_child_cb(lv_obj_t * obj, void * user_data) {lv_obj_add_flag(obj, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE); return LV_OBJ_TREE_WALK_NEXT;}
+    // static lv_obj_tree_walk_res_t disable_child_cb(lv_obj_t * obj, void * user_data) {lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE); return LV_OBJ_TREE_WALK_NEXT;}
 
     static Utils* utils;
     static void lvglPrint(const char* buf);

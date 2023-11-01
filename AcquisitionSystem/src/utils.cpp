@@ -44,6 +44,7 @@ bool Utils::begin(const char* storageName)
   MTP.begin();
   if(SD.begin(BUILTIN_SDCARD))
   {
+    sdCardPresent = true;
     MTP.addFilesystem(SD, storageName);
     console.ok.println("[UTILS] SD Card initialized");
   }
@@ -136,4 +137,49 @@ int Utils::unlockWire(TwoWire& wire)
 void Utils::update(void)
 {
   MTP.loop();
+
+  static uint32_t t = 0; 
+  if(millis() - t > 1000 / UPDATE_RATE)
+  {
+    t = millis();
+    if(sdCardScanAccess)
+    {
+      if(SD.mediaPresent())
+      {
+        if(!sdCardPresent)
+        {
+          sdCardPresent = true;
+          console.log.println("[UTILS] SD Card inserted");
+          if(!SD.begin(BUILTIN_SDCARD))
+          {
+            console.error.println("[UTILS] Failed to initialize SD Card");
+          }
+        }
+
+        uint64_t totalSize = SD.totalSize();
+        uint64_t usedSize = SD.usedSize();
+        if(totalSize != sdCardTotalSize || usedSize != sdCardUsedSize)
+        {
+          sdCardTotalSize = totalSize;
+          sdCardUsedSize = usedSize;
+          console.log.printf("[UTILS] SD Card: %.2f MB total, %.2f MB used\n", getSdCardTotalSizeMb(), getSdCardUsedSizeMb());
+        }
+
+        // TODO: scan all files and dirs in root
+
+      }
+      else
+      {
+        if(sdCardPresent)
+        {
+          console.log.println("[UTILS] SD Card removed");
+        }
+        sdCardPresent = false;
+        sdCardTotalSize = 0;
+        sdCardUsedSize = 0;
+        sdCardError = false;
+      }
+    }
+  }
+
 }

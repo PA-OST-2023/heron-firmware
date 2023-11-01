@@ -209,6 +209,7 @@ typedef struct
 	lv_obj_t *screenRecording_label_spk_32;
 	lv_obj_t *screenRecording_sw_32;
 	lv_obj_t *screenRecording_label_118;
+	lv_obj_t *screenRecording_cont_background_opaque;
 	lv_obj_t *screenRecording_cont_recording;
 	lv_obj_t *screenRecording_label_recording_time;
 	lv_obj_t *screenRecording_label_6;
@@ -254,7 +255,7 @@ LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_11)
 LV_FONT_DECLARE(lv_font_MontserratRegular_20)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_22)
 LV_FONT_DECLARE(lv_font_montserratMedium_24)
-LV_FONT_DECLARE(lv_font_digital7_mono_46)
+LV_FONT_DECLARE(lv_font_digital7mono_46)
 
 
 #ifdef __cplusplus

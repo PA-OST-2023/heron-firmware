@@ -178,11 +178,11 @@ class Console: public Stream
     {
       if(type == USBCDC_t)
       {
-        return *(usb_serial_class*)&stream;
+        return *(usb_serial_class*)&stream == true;
       }
       else if (type == HardwareSerial_t)
       {
-        return *(HardwareSerial*)&stream;
+        return *(HardwareSerial*)&stream == true;
       }
       return true;
     }

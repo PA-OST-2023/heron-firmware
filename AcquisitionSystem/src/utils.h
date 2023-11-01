@@ -42,16 +42,30 @@
 class Utils
 {
   public:
+    static constexpr const float    UPDATE_RATE           = 2.0;           // Hz
+
     Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi);
     bool begin(const char* storageName = "SD Card");
     void update(void);
     int scanWire(TwoWire& wire);
     int lockWire(TwoWire& wire, int timeout = 0);
     int unlockWire(TwoWire& wire);
+    bool isSdCardPresent(void) {return sdCardPresent;}
+    bool getSdCardError(void) {return sdCardError;}
+    bool usbConnected(void) {return !bitRead(USB1_PORTSC1, 7);}
+    float getSdCardTotalSizeMb(void) {return (float)sdCardTotalSize / 1048576.0;}
+    float getSdCardUsedSizeMb(void) {return (float)sdCardUsedSize / 1048576.0;}
+    void setSdCardScanAccess(bool access) {sdCardScanAccess = access;}
 
   private:
     const int scl_sys, sda_sys, scl_hmi, sda_hmi;
     Threads::Mutex wireMutex[2];
+    char storageName[50];
+    bool sdCardScanAccess = true;
+    bool sdCardPresent = false;
+    bool sdCardError = false;
+    uint64_t sdCardTotalSize = 0;
+    uint64_t sdCardUsedSize = 0;
 };
 
 #endif

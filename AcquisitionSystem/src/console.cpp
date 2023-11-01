@@ -89,6 +89,7 @@ void Console::writeTask(void *pvParameter)
         ref->readIdx = ref->writeIdx;
         ref->bufferAccessMutex.unlock();
       }
+      ref->notifyMutex.unlock();
     }
   }
 }
@@ -124,7 +125,6 @@ void Console::interfaceTask(void *pvParameter)
       ref->printStartupMessage();
       ref->bufferAccessMutex.unlock();
       ref->notifyMutex.unlock();
-      Console::writeTask(ref);
     }
     if(!ref->streamActive && streamActiveOld)               // Detect if console has been closed
     {

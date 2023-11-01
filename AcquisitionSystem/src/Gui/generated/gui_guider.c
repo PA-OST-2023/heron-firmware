@@ -31,6 +31,6 @@ void init_scr_del_flag(lv_ui *ui)
 void setup_ui(lv_ui *ui)
 {
   init_scr_del_flag(ui);
-  setup_scr_screenRecording(ui);
-  lv_scr_load(ui->screenRecording);
+  setup_scr_screenBootup(ui);
+  lv_scr_load(ui->screenBootup);
 }
