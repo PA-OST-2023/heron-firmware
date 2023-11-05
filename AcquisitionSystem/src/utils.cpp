@@ -134,15 +134,19 @@ int Utils::unlockWire(TwoWire& wire)
   }
 }
 
-void Utils::update(void)
+void Utils::update(void)     // Make sure this function is non-blocking!
 {
-  MTP.loop();
+  if(tryLockSdCardAccess())
+  {
+    MTP.loop();
+    unlockSdCardAccess();
+  }
 
   static uint32_t t = 0; 
   if(millis() - t > 1000 / UPDATE_RATE)
   {
     t = millis();
-    if(sdCardScanAccess)
+    if(tryLockSdCardAccess())
     {
       if(SD.mediaPresent())
       {
@@ -179,7 +183,7 @@ void Utils::update(void)
         sdCardUsedSize = 0;
         sdCardError = false;
       }
+      unlockSdCardAccess();
     }
   }
-
 }

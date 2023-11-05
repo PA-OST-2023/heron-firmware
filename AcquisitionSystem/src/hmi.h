@@ -43,7 +43,7 @@ class Hmi
   public:
     static constexpr const uint32_t LED_COUNT             = 66;
     static constexpr const uint32_t AUDIO_CHANNEL_COUNT   = 32;
-    static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
+    static constexpr const float    UPDATE_RATE           = 24.0;           // Hz
 
     typedef enum {STATUS_BOOTUP, STATUS_OK, STATUS_WARNING, STATUS_ERROR} systemStatus_t;
 

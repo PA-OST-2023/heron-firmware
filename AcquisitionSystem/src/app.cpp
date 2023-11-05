@@ -92,7 +92,7 @@ void App::update(void* parameter)
 
     bool channelConfigUpdated = false;
     static uint32_t tHmi = 0;
-    if(millis() - tHmi > 100)
+    if(millis() - tHmi > 50)
     {
       tHmi = millis();
       ref->gui.setVolume(ref->hmi.getVolume());
@@ -103,7 +103,7 @@ void App::update(void* parameter)
       if(memcmp(ref->channelEnabledOld, ref->channelEnabled, sizeof(channelEnabled)) != 0)
       {
         console.log.println("[APP] Updated channel config");
-        ref->gui.setChannelEnabled(ref->channelEnabled);    // Update Chanel indices
+        ref->gui.setChannelEnabled(ref->channelEnabled);    // Update Channel indices
         ref->hmi.setChannelEnabled(ref->channelEnabled);
         ref->audio.setChannelConfig(ref->channelEnabled);
         channelConfigUpdated = true;
@@ -129,8 +129,8 @@ void App::update(void* parameter)
       ref->gui.setSystemWarning(ref->warning);
       // TODO: Remove warning after user interaction
 
-      ref->utils.setSdCardScanAccess(!ref->recording);      // Disable SD-Card scan while recording
       ref->gui.setDiskUsage(ref->utils.getSdCardUsedSizeMb(), ref->utils.getSdCardTotalSizeMb());
+      
     }
 
     for(int i = 0; i < AudioUtils::CHANNEL_COUNT; i++)
@@ -170,15 +170,39 @@ void App::update(void* parameter)
 
       if(ref->hmi.getButtonRecordEvent())
       {
-        static int fileNumber = 0;    // TODO: Remove later
         if(!ref->recording)
         {
           console.log.println("[APP] Button REC pressed");
-          sprintf(ref->fileName, "test_%d.wav", fileNumber++);
-          if(ref->audio.startRecording(ref->fileName))
+          uint8_t day, month, hour, minute, second;
+          uint16_t year;
+          ref->hmi.getDate(year, month, day);
+          ref->hmi.getTime(hour, minute, second);
+          uint32_t channelCoding = 0x00000000;
+          for(int i = 0; i < AudioUtils::CHANNEL_COUNT; i++)
           {
-            ref->recording = true;
-            ref->gui.setRecordingState(true);
+            if(ref->channelEnabled[i])
+            {
+              channelCoding |= (1 << i);
+            }
+          }
+          sprintf(ref->fileName, "%02d%02d%02d_%02d%02d%02d_%02d_%08lX.wav", year - 2000, month, day, hour, minute, second, ref->getChannelCount(), channelCoding);
+          if(ref->utils.lockSdCardAccess())
+          {
+            // TODO: Move UI page to channels
+            if(ref->audio.startRecording(ref->fileName))
+            {
+              ref->recording = true;
+              ref->gui.setRecordingState(true);
+            }
+            else
+            {
+              ref->utils.unlockSdCardAccess();
+              console.error.println("[APP] Could not start recording");
+            }
+          }
+          else
+          {
+            console.error.println("[APP] Could not lock SD card access");
           }
         }
         else
@@ -189,17 +213,17 @@ void App::update(void* parameter)
             ref->recording = false;
             ref->gui.setRecordingState(false);
           }
+          ref->utils.unlockSdCardAccess();
         }
       }
 
       if(ref->recording)
       {
         ref->gui.setRecordingTime(ref->audio.getRecordingTime());
-        // TODO: Calculate remaining recording time
+        ref->gui.setRemainingRecordingTime(ref->calculateRemainingRecordingTime(ref->audio.getRecordingTime()));
       }
     }
     
-
     threads.delay(1000.0 / UPDATE_RATE);
   }
 }
@@ -212,4 +236,19 @@ int App::getChannelCount(void)
     if(channelEnabled[i]) count++;
   }
   return count;
+}
+
+float App::calculateRemainingRecordingTime(float recordingTime)
+{
+  int channelCount = getChannelCount();
+  float totalSizeMb = utils.getSdCardTotalSizeMb();
+  float usedSizeMb = utils.getSdCardUsedSizeMb();
+
+  float remainingTime = 0.0;
+  if(channelCount > 0)
+  {
+    float remainingSizeMb = (totalSizeMb - usedSizeMb) * 1024.0 * 1024.0;
+    remainingTime = remainingSizeMb / ((float)channelCount * 2 * 44100);    // 2 Bytes per sample, n channels, 44100 samples per second
+  }
+  return remainingTime - recordingTime;
 }

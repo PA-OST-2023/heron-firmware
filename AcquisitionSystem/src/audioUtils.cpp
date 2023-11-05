@@ -129,7 +129,7 @@ bool AudioUtils::startRecording(const char* filename)
     return false;
   }
   recordingStartTime = millis();
-  console.log.printf("[AUDIO] Recording to ""%s"" (%d Channels)\n", filename, channelsActive);
+  console.log.printf("[AUDIO] Recording to \"%s\" (%d Channels)\n", filename, channelsActive);
   return true;
 }
 

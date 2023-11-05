@@ -74,6 +74,12 @@ Gui::Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int t
     &guider_ui.screenRecording_label_ch_25, &guider_ui.screenRecording_label_ch_26, &guider_ui.screenRecording_label_ch_27, &guider_ui.screenRecording_label_ch_28,
     &guider_ui.screenRecording_label_ch_29, &guider_ui.screenRecording_label_ch_30, &guider_ui.screenRecording_label_ch_31, &guider_ui.screenRecording_label_ch_32};
   channelIndeces = chRefs;
+
+  for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+  {
+    channelEnabled[i] = false;
+    channelEnabledReadback[i] = false;
+  }
 }
 
 bool Gui::begin(Utils& utilsRef)
@@ -131,20 +137,24 @@ bool Gui::isMainScreenActive(void)
 
 void Gui::setTime(uint8_t hour, uint8_t minute)
 {
-  char buf[10];
-  sprintf(buf, "%02d:%02d", hour, minute);
-  lv_label_set_text(guider_ui.screenRecording_btn_current_time_label, buf);
+  if((hour == this->hour) && (minute == this->minute)) return;
+  this->hour = hour;
+  this->minute = minute;
+  flagTime = true;
+  sprintf(bufferTime, "%02d:%02d", hour, minute);
 }
 
 void Gui::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)
 {
+  if((year == this->year) && (month == this->month) && (day == this->day) && (hour == this->hour) && (minute == this->minute) && (second == this->second)) return;
+  this->year = year;
+  this->month = month;
+  this->day = day;
+  this->hour = hour;
+  this->minute = minute;
+  this->second = second;
+  flagDate = true;
   setTime(hour, minute);
-  lv_roller_set_selected(guider_ui.screenSetTime_rollerDay, day - 1, LV_ANIM_OFF);
-  lv_roller_set_selected(guider_ui.screenSetTime_rollerMonth, month - 1, LV_ANIM_OFF);
-  lv_roller_set_selected(guider_ui.screenSetTime_rollerYear, year - 2023, LV_ANIM_OFF);
-  lv_roller_set_selected(guider_ui.screenSetTime_rollerHour, hour, LV_ANIM_OFF);
-  lv_roller_set_selected(guider_ui.screenSetTime_rollerMinute, minute, LV_ANIM_OFF);
-  lv_roller_set_selected(guider_ui.screenSetTime_rollerSecond, second, LV_ANIM_OFF);
 }
 
 void Gui::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
@@ -161,41 +171,20 @@ void Gui::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hou
 void Gui::setVolume(float volume)
 {
   uint8_t percent = constrain((uint8_t)(volume * 100.0 + 0.5), 0, 100);
-  char buf[10];
-  snprintf(buf, sizeof(buf), "%d", percent);
-  lv_label_set_text(guider_ui.screenRecording_label_volume, buf);
-  lv_bar_set_value(guider_ui.screenRecording_bar_volume, percent, LV_ANIM_OFF);
+  if(volumePercent == percent) return;
+  volumePercent = percent;
+  volumeFlag = true;
+  snprintf(bufferVolume, sizeof(buf), "%d", volumePercent);
 }
 
 void Gui::setChannelEnabled(const bool* enabled, uint32_t count)
 {
-  char buf[20];
-  int channelCount = 0;
   for(int i = 0; i < count; i++)
   {
-    if(*enableSwitches[i])
+    if(enabled[i] != channelEnabled[i])
     {
-      if(enabled[i])
-      {
-        lv_obj_add_state(*enableSwitches[i], LV_STATE_CHECKED);
-      }
-      else
-      {
-        lv_obj_clear_state(*enableSwitches[i], LV_STATE_CHECKED);
-      }
-    }
-    if(*channelIndeces[i])
-    {
-      if(enabled[i])
-      {
-        snprintf(buf, sizeof(buf), "CH: %2d", channelCount++);
-        lv_label_set_text(*channelIndeces[i], buf);
-        lv_obj_clear_flag(*channelIndeces[i], LV_OBJ_FLAG_HIDDEN);
-      }
-      else
-      {
-        lv_obj_add_flag(*channelIndeces[i], LV_OBJ_FLAG_HIDDEN);
-      }
+      channelEnabled[i] = enabled[i];
+      flagChannelEnabled = true;
     }
   }
 }
@@ -204,75 +193,36 @@ void Gui::getChannelEnabled(bool* enabled, uint32_t count)
 {
   for(int i = 0; i < count; i++)
   {
-    enabled[i] = lv_obj_has_state(*enableSwitches[i], LV_STATE_CHECKED);
+    enabled[i] = channelEnabled[i];
   }
 }
 
 void Gui::setChannelMonitor(int channel)
 {
-  for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
-  {
-    if(*monitorSymbols[i])
-    {
-      uint32_t color = (i == channel) ? 0x00FF00 : 0x0041485A;
-      lv_obj_set_style_text_color(*monitorSymbols[i], lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
-    }
-  }
-
+  if(channelMonitor == channel) return;
+  channelMonitor = channel;
+  flagChannelMonitor = true;
 }
 
 void Gui::setSdCardStatus(SdCardStatus_t status)
 {
-  static SdCardStatus_t oldStatus = (SdCardStatus_t)-1;
-  if(oldStatus != status)
-  {
-    oldStatus = status;
-    uint32_t color = 0x00000000;
-    switch(status)
-    {
-      case SD_CARD_MISSING: color = 0x00292831; break;
-      case SD_CARD_ERROR: color = 0x00FF8F00; break;
-      case SD_CARD_OK: color = 0x00FFFFFF; break;
-      default: break;
-    }
-    lv_obj_set_style_text_color(guider_ui.screenRecording_label_sd_card, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
-  }
+  if(sdCardStatus == status) return;
+  sdCardStatus = status;
+  flagSdCardStatus = true;
 }
 
 void Gui::setUsbStatus(UsbStatus_t status)
 {
-  static UsbStatus_t oldStatus = (UsbStatus_t)-1;
-  if(oldStatus != status)
-  {
-    oldStatus = status;
-    uint32_t color = 0x00000000;
-    switch(status)
-    {
-      case USB_DISCONNECTED: color = 0x00292831; break;
-      case USB_CONNECTED: color = 0x00FFFFFF; break;
-      case USB_ACTIVE: color = 0x0000FF00; break;
-      default: break;
-    }
-    lv_obj_set_style_text_color(guider_ui.screenRecording_label_usb, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
-  }
+  if(usbStatus == status) return;
+  usbStatus = status;
+  flagUsbStatus = true;
 }
 
 void Gui::setEthStatus(EthStatus_t status)
 {
-  static EthStatus_t oldStatus = (EthStatus_t)-1;
-  if(oldStatus != status)
-  {
-    oldStatus = status;
-    uint32_t color = 0x00000000;
-    switch(status)
-    {
-      case ETH_DISCONNECTED: color = 0x00292831; break;
-      case ETH_CONNECTED: color = 0x00FFFFFF; break;
-      case ETH_ACTIVE: color = 0x0000FF00; break;
-      default: break;
-    }
-    lv_obj_set_style_text_color(guider_ui.screenRecording_label_ethernet, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
-  }
+  if(ethStatus == status) return;
+  ethStatus = status;
+  flagEthStatus = true;
 }
 
 void Gui::setSystemWarning(const char* warning)
@@ -280,13 +230,12 @@ void Gui::setSystemWarning(const char* warning)
   if(warning)
   {
     snprintf(warningText, sizeof(warningText), "%s", warning);
-    lv_obj_clear_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
-    // TODO: Set warning text
+    flagWarning = true;
   }
   else
   {
     warningText[0] = '\0';
-    lv_obj_add_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
+    flagWarning = true;
   }
 }
 
@@ -297,48 +246,214 @@ void Gui::setFileContainer(FileContainer* fileContainer, uint32_t count)
 
 void Gui::setDiskUsage(float usedMb, float totalMb)
 {
-  char buf[20];
-  snprintf(buf, sizeof(buf), "%.1f / %.1f GB", usedMb / 1000.0, totalMb / 1000.0);
-  lv_label_set_text(guider_ui.screenRecording_label_disk_storage, buf);
-  if(totalMb > 0.0)
-  {
-    lv_bar_set_value(guider_ui.screenRecording_bar_disk_storage, (uint8_t)((usedMb / totalMb) * 100.0 + 0.5), LV_ANIM_OFF);
-  }
-  else
-  {
-    lv_bar_set_value(guider_ui.screenRecording_bar_disk_storage, 0, LV_ANIM_OFF);
-  }
+  if((diskUsageUsed == usedMb) && (diskUsageTotal == totalMb)) return;
+  diskUsageUsed = usedMb;
+  diskUsageTotal = totalMb;
+  flagDiskUsage = true;
 }
 
 void Gui::setRecordingState(bool state)
 {
-  if(state)
-  {
-    lv_obj_clear_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_flag(guider_ui.screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
-  }
-  else
-  {
-    lv_obj_add_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(guider_ui.screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
-  }
+  if(recordingState == state) return;
+  recordingState = state;
+  flagRecordingState = true;
 }
 
 void Gui::setRecordingTime(float time)
 {
-  char buf[20];
-  snprintf(buf, sizeof(buf), "%02d:%02d.%02d", (int)time / 60, (int)time % 60, (int)(time * 100.0) % 100);
-  lv_label_set_text(guider_ui.screenRecording_label_recording_time, buf);
+  if(recordingTime == (int)time) return;
+  recordingTime = (int)time;
+  flagRecordingTime = true;
 }
 
 void Gui::setRemainingRecordingTime(float time)
 {
-
+  if(remainingRecordingTime == (int)time) return;
+  remainingRecordingTime = (int)time;
+  flagRemainingRecordingTime = true;
 }
 
 
 void Gui::update(void)
 {
+  if(!initialized) return;
+  if(flagTime)
+  {
+    flagTime = false;
+    lv_label_set_text(guider_ui.screenRecording_btn_current_time_label, bufferTime);
+  }
+  if(flagDate)
+  {
+    flagDate = false;
+    lv_roller_set_selected(guider_ui.screenSetTime_rollerDay, day - 1, LV_ANIM_OFF);
+    lv_roller_set_selected(guider_ui.screenSetTime_rollerMonth, month - 1, LV_ANIM_OFF);
+    lv_roller_set_selected(guider_ui.screenSetTime_rollerYear, year - 2023, LV_ANIM_OFF);
+    lv_roller_set_selected(guider_ui.screenSetTime_rollerHour, hour, LV_ANIM_OFF);
+    lv_roller_set_selected(guider_ui.screenSetTime_rollerMinute, minute, LV_ANIM_OFF);
+    lv_roller_set_selected(guider_ui.screenSetTime_rollerSecond, second, LV_ANIM_OFF);
+  }
+  if(volumeFlag)
+  {
+    volumeFlag = false;
+    lv_label_set_text(guider_ui.screenRecording_label_volume, bufferVolume);
+    lv_bar_set_value(guider_ui.screenRecording_bar_volume, volumePercent, LV_ANIM_OFF);
+  }
+  if(flagChannelEnabled)
+  {
+    flagChannelEnabled = false;
+    int channelCount = 0;
+    char buf[20];
+    for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+    {
+      if(*enableSwitches[i])
+      {
+        if(channelEnabled[i])
+        {
+          lv_obj_add_state(*enableSwitches[i], LV_STATE_CHECKED);
+        }
+        else
+        {
+          lv_obj_clear_state(*enableSwitches[i], LV_STATE_CHECKED);
+        }
+      }
+      if(*channelIndeces[i])
+      {
+        if(channelEnabled[i])
+        {
+          snprintf(buf, sizeof(buf), "CH: %2d", channelCount++);
+          lv_label_set_text(*channelIndeces[i], buf);
+          lv_obj_clear_flag(*channelIndeces[i], LV_OBJ_FLAG_HIDDEN);
+        }
+        else
+        {
+          lv_obj_add_flag(*channelIndeces[i], LV_OBJ_FLAG_HIDDEN);
+        }
+      }
+    }
+  }
+  if(flagChannelMonitor)
+  {
+    flagChannelMonitor = false;
+    for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+    {
+      if(*monitorSymbols[i])
+      {
+        uint32_t color = (i == channelMonitor) ? 0x00FF00 : 0x0041485A;
+        lv_obj_set_style_text_color(*monitorSymbols[i], lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
+      }
+    }
+  }
+  if(flagSdCardStatus)
+  {
+    flagSdCardStatus = false;
+    uint32_t color = 0x00000000;
+    switch(sdCardStatus)
+    {
+      case SD_CARD_MISSING: color = 0x00292831; break;
+      case SD_CARD_ERROR: color = 0x00FF8F00; break;
+      case SD_CARD_OK: color = 0x00FFFFFF; break;
+      default: break;
+    }
+    lv_obj_set_style_text_color(guider_ui.screenRecording_label_sd_card, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
+  }
+  if(flagUsbStatus)
+  {
+    flagUsbStatus = false;
+    uint32_t color = 0x00000000;
+    switch(usbStatus)
+    {
+      case USB_DISCONNECTED: color = 0x00292831; break;
+      case USB_CONNECTED: color = 0x00FFFFFF; break;
+      case USB_ACTIVE: color = 0x0000FF00; break;
+      default: break;
+    }
+    lv_obj_set_style_text_color(guider_ui.screenRecording_label_usb, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
+  }
+  if(flagEthStatus)
+  {
+    flagEthStatus = false;
+    uint32_t color = 0x00000000;
+    switch(ethStatus)
+    {
+      case ETH_DISCONNECTED: color = 0x00292831; break;
+      case ETH_CONNECTED: color = 0x00FFFFFF; break;
+      case ETH_ACTIVE: color = 0x0000FF00; break;
+      default: break;
+    }
+    lv_obj_set_style_text_color(guider_ui.screenRecording_label_ethernet, lv_color_hex(color), LV_PART_MAIN|LV_STATE_DEFAULT);
+  }
+  if(flagWarning)
+  {
+    flagWarning = false;
+    if(warningText[0] != '\0')
+    {
+      lv_obj_clear_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
+      // lv_label_set_text(guider_ui.screenRecording_label_warning, warningText);
+    }
+    else
+    {
+      lv_obj_add_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
+    }
+  }
+  if(flagDiskUsage)
+  {
+    flagDiskUsage = false;
+    char buf[20];
+    snprintf(buf, sizeof(buf), "%.1f / %.1f GB", diskUsageUsed / 1000.0, diskUsageTotal / 1000.0);
+    lv_label_set_text(guider_ui.screenRecording_label_disk_storage, buf);
+    if(diskUsageTotal > 0.0)
+    {
+      lv_bar_set_value(guider_ui.screenRecording_bar_disk_storage, (uint8_t)((diskUsageUsed / diskUsageTotal) * 100.0 + 0.5), LV_ANIM_OFF);
+    }
+    else
+    {
+      lv_bar_set_value(guider_ui.screenRecording_bar_disk_storage, 0, LV_ANIM_OFF);
+    }
+  }
+  if(flagRecordingState)
+  {
+    flagRecordingState = false;
+    if(recordingState)
+    {
+      lv_obj_clear_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
+      lv_obj_clear_flag(guider_ui.screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
+    }
+    else
+    {
+      lv_obj_add_flag(guider_ui.screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
+      lv_obj_add_flag(guider_ui.screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
+    }
+  }
+  if(flagRecordingTime)
+  {
+    flagRecordingTime = false;
+    char buf[20];
+    snprintf(buf, sizeof(buf), "%02d:%02d", recordingTime / 60, recordingTime % 60);
+    lv_label_set_text(guider_ui.screenRecording_label_recording_time, buf);
+  }
+  if(flagRemainingRecordingTime)
+  {
+    flagRemainingRecordingTime = false;
+    char buf[25];
+    snprintf(buf, sizeof(buf), "Remaining: %02d:%02d:%02d", remainingRecordingTime / 3600, ((remainingRecordingTime / 60) % 60), remainingRecordingTime % 60);
+    lv_label_set_text(guider_ui.screenRecording_label_recording_remaining, buf);
+  }
+
+  static uint32_t readbackTime = 0;
+  if(millis() - readbackTime > 50)
+  {
+    readbackTime = millis();
+    for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+    {
+      channelEnabledReadback[i] = lv_obj_has_state(*enableSwitches[i], LV_STATE_CHECKED);
+      if(channelEnabledReadback[i] != channelEnabled[i])
+      {
+        channelEnabled[i] = channelEnabledReadback[i];
+        flagChannelEnabled = true;
+      }
+    }
+  }
+
   lv_task_handler();
 }
 

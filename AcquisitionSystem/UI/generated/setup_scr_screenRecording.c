@@ -3902,7 +3902,6 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_size(ui->screenRecording_cont_background_opaque, 240, 240);
 	lv_obj_set_scrollbar_mode(ui->screenRecording_cont_background_opaque, LV_SCROLLBAR_MODE_OFF);
 	lv_obj_add_flag(ui->screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
-	lv_obj_add_flag(ui->screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
 
 	//Write style for screenRecording_cont_background_opaque, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screenRecording_cont_background_opaque, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -3937,7 +3936,7 @@ void setup_scr_screenRecording(lv_ui *ui)
 
 	//Write codes screenRecording_label_recording_time
 	ui->screenRecording_label_recording_time = lv_label_create(ui->screenRecording_cont_recording);
-	lv_label_set_text(ui->screenRecording_label_recording_time, "00:00.00");
+	lv_label_set_text(ui->screenRecording_label_recording_time, "00:00");
 	lv_label_set_long_mode(ui->screenRecording_label_recording_time, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screenRecording_label_recording_time, 4, 37);
 	lv_obj_set_size(ui->screenRecording_label_recording_time, 200, 48);

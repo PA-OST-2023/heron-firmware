@@ -36,7 +36,7 @@
 #include <Arduino.h>
 #include "../lib/TeensyThreads/TeensyThreads.h"
 
-#define INTERFACE_UPDATE_RATE           10            // [Hz]
+#define INTERFACE_UPDATE_RATE           4             // [Hz]
 #define QUEUE_BUFFER_LENGTH             (1<<12)       // [#]    Buffer Size must be power of 2
 #define CONSOLE_ACTIVE_DELAY            0             // [ms]   Data transmission hold-back delay after console object has been enabled
 #define INTERFACE_ACTIVE_DELAY          200           // [ms]   Data transmission hold-back delay after physical connection has been established (Terminal opened)

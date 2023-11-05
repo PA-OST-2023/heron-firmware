@@ -42,7 +42,7 @@
 class App
 {
   public:
-    static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
+    static constexpr const float    UPDATE_RATE           = 20.0;           // Hz
 
     App(AudioUtils& audio, Hmi& hmi, Gui& gui, Utils& utils);
     bool begin(void);
@@ -68,6 +68,7 @@ class App
     static App* ref;
     static void update(void* parameter);
     int getChannelCount(void);
+    float calculateRemainingRecordingTime(float recordingTime);
 
 };
 

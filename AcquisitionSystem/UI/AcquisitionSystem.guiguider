@@ -51,7 +51,7 @@
 					"use_fs": false,
 					"fs_type": "flash",
 					"sd_path": "",
-					"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI\\import\\image\\Heron.png",
+					"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI\\import\\image\\Heron.png",
 					"rotate": 0,
 					"x": 50,
 					"y": 50,
@@ -662,7 +662,7 @@
 							"width": 200,
 							"height": 48,
 							"default_style": false,
-							"text": "00:00.00",
+							"text": "00:00",
 							"long_mode": "LV_LABEL_LONG_WRAP",
 							"style": [
 								{
@@ -779,7 +779,7 @@
 					"type": "cont",
 					"left": 0,
 					"top": 0,
-					"visible": false,
+					"visible": true,
 					"flag": [
 						"LV_OBJ_FLAG_HIDDEN"
 					],
@@ -836,7 +836,7 @@
 					"default_style": false,
 					"scrollbar_mode": "OFF",
 					"direction": "horizon",
-					"current_item": 0,
+					"current_item": 1,
 					"tile_count": 1,
 					"child": [
 						{
@@ -22399,7 +22399,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI\\import\\image\\Heron.png",
+						"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI\\import\\image\\Heron.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "50,50",
@@ -41128,7 +41128,7 @@
 						"name": "screenRecording_cont_background_opaque",
 						"id": "le1sa98m",
 						"type": "cont",
-						"visible": false,
+						"visible": true,
 						"scrollbar_mode": "OFF",
 						"flag": [
 							"LV_OBJ_FLAG_HIDDEN"
@@ -41211,7 +41211,7 @@
 								],
 								"default_style": false,
 								"custom_attributes": {},
-								"text": "00:00.00",
+								"text": "00:00",
 								"long_mode": "LV_LABEL_LONG_WRAP",
 								"style": [
 									{

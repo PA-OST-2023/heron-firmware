@@ -33,6 +33,7 @@ static App app(audio, hmi, gui, utils);
 void setup()
 {
   console.begin();
+  console.log.println("[MAIN] Initialize System...");
   utils.begin();
   hmi.begin(utils);
   gui.begin(utils);

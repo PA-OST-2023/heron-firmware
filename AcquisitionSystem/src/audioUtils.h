@@ -41,7 +41,7 @@
 class AudioUtils
 {
   public:
-    static constexpr const size_t EXT_BUFFER_SIZE = 65536 * 64;    // 4 MB
+    static constexpr const size_t EXT_BUFFER_SIZE = 65536 * 128;    // 8 MB
     static constexpr const size_t CHANNEL_COUNT   = 32;
     static constexpr const size_t ADAU7118_COUNT  = 4;
 

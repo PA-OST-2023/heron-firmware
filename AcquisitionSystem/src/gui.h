@@ -57,7 +57,7 @@ class Gui
     static constexpr const uint32_t SCREEN_HEIGHT         = 240;
     static constexpr const uint32_t SCREEN_BUFFER_HEIGHT  = 60;
     static constexpr const uint32_t AUDIO_CHANNEL_COUNT   = 32;
-    static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
+    static constexpr const float    UPDATE_RATE           = 24.0;           // Hz
     static constexpr const size_t   EXT_HEAP_SIZE         = 1024 * 4096;    // 4MB memory pool on the external ram chip
 
     typedef enum {SD_CARD_MISSING, SD_CARD_ERROR, SD_CARD_OK} SdCardStatus_t;
@@ -100,6 +100,45 @@ class Gui
     lv_obj_t*** monitorSymbols;
     lv_obj_t*** channelIndeces;
     char warningText[50];
+    bool flagWarning = false;
+
+    char bufferTime[10];
+    bool flagTime = false, flagDate = false;
+    uint16_t year = 0xFFFF;
+    uint8_t month = 0xFF, day = 0xFF, hour = 0xFF, minute = 0xFF, second = 0xFF;
+
+    uint8_t volumePercent = 0xFF;
+    char bufferVolume[10];
+    bool volumeFlag = false;
+
+    bool channelEnabled[AUDIO_CHANNEL_COUNT];
+    bool channelEnabledReadback[AUDIO_CHANNEL_COUNT];
+    bool flagChannelEnabled = true;
+
+    int channelMonitor = -1;
+    bool flagChannelMonitor = false;
+
+    SdCardStatus_t sdCardStatus = (SdCardStatus_t)-1;
+    bool flagSdCardStatus = false;
+
+    UsbStatus_t usbStatus = (UsbStatus_t)-1;
+    bool flagUsbStatus = false;
+
+    EthStatus_t ethStatus = (EthStatus_t)-1;
+    bool flagEthStatus = false;
+
+    float diskUsageUsed = 0.0, diskUsageTotal = 0.0;
+    bool flagDiskUsage = false;
+
+    bool recordingState = false;
+    bool flagRecordingState = true;
+
+    int recordingTime = -1;
+    bool flagRecordingTime = true;
+
+    int remainingRecordingTime = -1;
+    bool flagRemainingRecordingTime = true;
+
 
     // FileContainer* fileContainer = nullptr;
     // uint32_t fileContainerSize = 0;
