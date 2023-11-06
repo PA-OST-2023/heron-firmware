@@ -42,12 +42,7 @@ typedef struct
 	lv_obj_t *screenRecording_bar_disk_storage;
 	lv_obj_t *screenRecording_label_121;
 	lv_obj_t *screenRecording_label_disk_storage;
-	lv_obj_t *screenRecording_list_1;
-	lv_obj_t *screenRecording_list_1_item0;
-	lv_obj_t *screenRecording_list_1_item1;
-	lv_obj_t *screenRecording_list_1_item2;
-	lv_obj_t *screenRecording_list_1_item3;
-	lv_obj_t *screenRecording_list_1_item4;
+	lv_obj_t *screenRecording_file_container_list;
 	lv_obj_t *screenRecording_cont_10;
 	lv_obj_t *screenRecording_cont_ch01;
 	lv_obj_t *screenRecording_label_ch_01;

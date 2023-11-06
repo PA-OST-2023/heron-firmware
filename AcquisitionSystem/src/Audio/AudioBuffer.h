@@ -58,7 +58,7 @@ class MemBuffer
 	// buffer memory maintenance:
 	result createBuffer(size_t sz, bufType typ);  // create buffer for audio data, managed by class
 	result createBuffer(uint8_t* buf, size_t sz);  // create buffer for audio data, managed by application
-	result disposeBuffer(); // dispose of buffer: if it's of type "given", the application may free it after this call
+	result disposeBuffer(bool force = false); // dispose of buffer: if it's of type "given", the application may free it after this call
 	void setInUse(bool flag) // lock the buffer while in use
 	{
 		inUse += flag?1:-1;

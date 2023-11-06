@@ -38,12 +38,13 @@ static const uint32_t B2M_11025 = (uint32_t)((double)4294967296000.0 / AUDIO_SAM
  * itself, after this function has been called.
  * \return ok
  */
-AudioBuffer::result MemBuffer::disposeBuffer()
+AudioBuffer::result MemBuffer::disposeBuffer(bool force)
 {
 	result rv = invalid;
 	
-	if (0 == inUse)
+	if (0 == inUse || force)
 	{
+		inUse = 0;
 		if (nullptr != buffer)
 		{
 			switch (bufTypeX) // free buffer, if we created it

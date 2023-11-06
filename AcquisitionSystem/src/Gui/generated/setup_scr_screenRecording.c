@@ -316,79 +316,69 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screenRecording_label_disk_storage, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screenRecording_label_disk_storage, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screenRecording_list_1
-	ui->screenRecording_list_1 = lv_list_create(ui->screenRecording_tileview_tile_files);
-	ui->screenRecording_list_1_item0 = lv_list_add_btn(ui->screenRecording_list_1, LV_SYMBOL_DIRECTORY, "settings");
-	ui->screenRecording_list_1_item1 = lv_list_add_btn(ui->screenRecording_list_1, LV_SYMBOL_FILE, "231019_110608_32_FFFFFFFF.wav");
-	ui->screenRecording_list_1_item2 = lv_list_add_btn(ui->screenRecording_list_1, LV_SYMBOL_FILE, "231019_115502_32_FFFFFFFF.wav");
-	ui->screenRecording_list_1_item3 = lv_list_add_btn(ui->screenRecording_list_1, LV_SYMBOL_FILE, "231020_080728_16_FFFF0000.wav");
-	ui->screenRecording_list_1_item4 = lv_list_add_btn(ui->screenRecording_list_1, LV_SYMBOL_FILE, "231020_1001020_16_FFFF0000.wav");
-	lv_obj_set_pos(ui->screenRecording_list_1, -2, 2);
-	lv_obj_set_size(ui->screenRecording_list_1, 240, 161);
-	lv_obj_set_scrollbar_mode(ui->screenRecording_list_1, LV_SCROLLBAR_MODE_OFF);
-	lv_obj_add_flag(ui->screenRecording_list_1, LV_OBJ_FLAG_CLICKABLE);
+	//Write codes screenRecording_file_container_list
+	ui->screenRecording_file_container_list = lv_list_create(ui->screenRecording_tileview_tile_files);
+	lv_obj_set_pos(ui->screenRecording_file_container_list, -2, 2);
+	lv_obj_set_size(ui->screenRecording_file_container_list, 240, 161);
+	lv_obj_set_scrollbar_mode(ui->screenRecording_file_container_list, LV_SCROLLBAR_MODE_OFF);
+	lv_obj_add_flag(ui->screenRecording_file_container_list, LV_OBJ_FLAG_CLICKABLE);
 
-	//Write style state: LV_STATE_DEFAULT for &style_screenRecording_list_1_main_main_default
-	static lv_style_t style_screenRecording_list_1_main_main_default;
-	ui_init_style(&style_screenRecording_list_1_main_main_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screenRecording_file_container_list_main_main_default
+	static lv_style_t style_screenRecording_file_container_list_main_main_default;
+	ui_init_style(&style_screenRecording_file_container_list_main_main_default);
 	
-	lv_style_set_pad_top(&style_screenRecording_list_1_main_main_default, 0);
-	lv_style_set_pad_left(&style_screenRecording_list_1_main_main_default, 5);
-	lv_style_set_pad_right(&style_screenRecording_list_1_main_main_default, 5);
-	lv_style_set_pad_bottom(&style_screenRecording_list_1_main_main_default, 5);
-	lv_style_set_bg_opa(&style_screenRecording_list_1_main_main_default, 255);
-	lv_style_set_bg_color(&style_screenRecording_list_1_main_main_default, lv_color_hex(0x101418));
-	lv_style_set_border_width(&style_screenRecording_list_1_main_main_default, 0);
-	lv_style_set_radius(&style_screenRecording_list_1_main_main_default, 3);
-	lv_style_set_shadow_width(&style_screenRecording_list_1_main_main_default, 0);
-	lv_obj_add_style(ui->screenRecording_list_1, &style_screenRecording_list_1_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_style_set_pad_top(&style_screenRecording_file_container_list_main_main_default, 0);
+	lv_style_set_pad_left(&style_screenRecording_file_container_list_main_main_default, 5);
+	lv_style_set_pad_right(&style_screenRecording_file_container_list_main_main_default, 5);
+	lv_style_set_pad_bottom(&style_screenRecording_file_container_list_main_main_default, 5);
+	lv_style_set_bg_opa(&style_screenRecording_file_container_list_main_main_default, 255);
+	lv_style_set_bg_color(&style_screenRecording_file_container_list_main_main_default, lv_color_hex(0x101418));
+	lv_style_set_border_width(&style_screenRecording_file_container_list_main_main_default, 0);
+	lv_style_set_radius(&style_screenRecording_file_container_list_main_main_default, 3);
+	lv_style_set_shadow_width(&style_screenRecording_file_container_list_main_main_default, 0);
+	lv_obj_add_style(ui->screenRecording_file_container_list, &style_screenRecording_file_container_list_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style state: LV_STATE_DEFAULT for &style_screenRecording_list_1_main_scrollbar_default
-	static lv_style_t style_screenRecording_list_1_main_scrollbar_default;
-	ui_init_style(&style_screenRecording_list_1_main_scrollbar_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screenRecording_file_container_list_main_scrollbar_default
+	static lv_style_t style_screenRecording_file_container_list_main_scrollbar_default;
+	ui_init_style(&style_screenRecording_file_container_list_main_scrollbar_default);
 	
-	lv_style_set_radius(&style_screenRecording_list_1_main_scrollbar_default, 3);
-	lv_style_set_bg_opa(&style_screenRecording_list_1_main_scrollbar_default, 255);
-	lv_style_set_bg_color(&style_screenRecording_list_1_main_scrollbar_default, lv_color_hex(0xffffff));
-	lv_obj_add_style(ui->screenRecording_list_1, &style_screenRecording_list_1_main_scrollbar_default, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
+	lv_style_set_radius(&style_screenRecording_file_container_list_main_scrollbar_default, 3);
+	lv_style_set_bg_opa(&style_screenRecording_file_container_list_main_scrollbar_default, 255);
+	lv_style_set_bg_color(&style_screenRecording_file_container_list_main_scrollbar_default, lv_color_hex(0xffffff));
+	lv_obj_add_style(ui->screenRecording_file_container_list, &style_screenRecording_file_container_list_main_scrollbar_default, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
 
-	//Write style state: LV_STATE_DEFAULT for &style_screenRecording_list_1_extra_btns_main_default
-	static lv_style_t style_screenRecording_list_1_extra_btns_main_default;
-	ui_init_style(&style_screenRecording_list_1_extra_btns_main_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screenRecording_file_container_list_extra_btns_main_default
+	static lv_style_t style_screenRecording_file_container_list_extra_btns_main_default;
+	ui_init_style(&style_screenRecording_file_container_list_extra_btns_main_default);
 	
-	lv_style_set_pad_top(&style_screenRecording_list_1_extra_btns_main_default, 5);
-	lv_style_set_pad_left(&style_screenRecording_list_1_extra_btns_main_default, 5);
-	lv_style_set_pad_right(&style_screenRecording_list_1_extra_btns_main_default, 0);
-	lv_style_set_pad_bottom(&style_screenRecording_list_1_extra_btns_main_default, 5);
-	lv_style_set_border_width(&style_screenRecording_list_1_extra_btns_main_default, 2);
-	lv_style_set_border_opa(&style_screenRecording_list_1_extra_btns_main_default, 255);
-	lv_style_set_border_color(&style_screenRecording_list_1_extra_btns_main_default, lv_color_hex(0x101418));
-	lv_style_set_border_side(&style_screenRecording_list_1_extra_btns_main_default, LV_BORDER_SIDE_BOTTOM);
-	lv_style_set_text_color(&style_screenRecording_list_1_extra_btns_main_default, lv_color_hex(0xffffff));
-	lv_style_set_text_font(&style_screenRecording_list_1_extra_btns_main_default, &lv_font_montserratMedium_13);
-	lv_style_set_radius(&style_screenRecording_list_1_extra_btns_main_default, 1);
-	lv_style_set_bg_opa(&style_screenRecording_list_1_extra_btns_main_default, 255);
-	lv_style_set_bg_color(&style_screenRecording_list_1_extra_btns_main_default, lv_color_hex(0x292831));
-	lv_obj_add_style(ui->screenRecording_list_1_item4, &style_screenRecording_list_1_extra_btns_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_add_style(ui->screenRecording_list_1_item3, &style_screenRecording_list_1_extra_btns_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_add_style(ui->screenRecording_list_1_item2, &style_screenRecording_list_1_extra_btns_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_add_style(ui->screenRecording_list_1_item1, &style_screenRecording_list_1_extra_btns_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_add_style(ui->screenRecording_list_1_item0, &style_screenRecording_list_1_extra_btns_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_style_set_pad_top(&style_screenRecording_file_container_list_extra_btns_main_default, 5);
+	lv_style_set_pad_left(&style_screenRecording_file_container_list_extra_btns_main_default, 5);
+	lv_style_set_pad_right(&style_screenRecording_file_container_list_extra_btns_main_default, 0);
+	lv_style_set_pad_bottom(&style_screenRecording_file_container_list_extra_btns_main_default, 5);
+	lv_style_set_border_width(&style_screenRecording_file_container_list_extra_btns_main_default, 2);
+	lv_style_set_border_opa(&style_screenRecording_file_container_list_extra_btns_main_default, 255);
+	lv_style_set_border_color(&style_screenRecording_file_container_list_extra_btns_main_default, lv_color_hex(0x101418));
+	lv_style_set_border_side(&style_screenRecording_file_container_list_extra_btns_main_default, LV_BORDER_SIDE_BOTTOM);
+	lv_style_set_text_color(&style_screenRecording_file_container_list_extra_btns_main_default, lv_color_hex(0xffffff));
+	lv_style_set_text_font(&style_screenRecording_file_container_list_extra_btns_main_default, &lv_font_montserratMedium_13);
+	lv_style_set_radius(&style_screenRecording_file_container_list_extra_btns_main_default, 1);
+	lv_style_set_bg_opa(&style_screenRecording_file_container_list_extra_btns_main_default, 255);
+	lv_style_set_bg_color(&style_screenRecording_file_container_list_extra_btns_main_default, lv_color_hex(0x292831));
 
-	//Write style state: LV_STATE_DEFAULT for &style_screenRecording_list_1_extra_texts_main_default
-	static lv_style_t style_screenRecording_list_1_extra_texts_main_default;
-	ui_init_style(&style_screenRecording_list_1_extra_texts_main_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screenRecording_file_container_list_extra_texts_main_default
+	static lv_style_t style_screenRecording_file_container_list_extra_texts_main_default;
+	ui_init_style(&style_screenRecording_file_container_list_extra_texts_main_default);
 	
-	lv_style_set_pad_top(&style_screenRecording_list_1_extra_texts_main_default, 5);
-	lv_style_set_pad_left(&style_screenRecording_list_1_extra_texts_main_default, 0);
-	lv_style_set_pad_right(&style_screenRecording_list_1_extra_texts_main_default, 0);
-	lv_style_set_pad_bottom(&style_screenRecording_list_1_extra_texts_main_default, 5);
-	lv_style_set_border_width(&style_screenRecording_list_1_extra_texts_main_default, 0);
-	lv_style_set_text_color(&style_screenRecording_list_1_extra_texts_main_default, lv_color_hex(0x0D3055));
-	lv_style_set_text_font(&style_screenRecording_list_1_extra_texts_main_default, &lv_font_FontAwesome5ProRegular_400_11);
-	lv_style_set_radius(&style_screenRecording_list_1_extra_texts_main_default, 3);
-	lv_style_set_bg_opa(&style_screenRecording_list_1_extra_texts_main_default, 255);
-	lv_style_set_bg_color(&style_screenRecording_list_1_extra_texts_main_default, lv_color_hex(0xffffff));
+	lv_style_set_pad_top(&style_screenRecording_file_container_list_extra_texts_main_default, 5);
+	lv_style_set_pad_left(&style_screenRecording_file_container_list_extra_texts_main_default, 0);
+	lv_style_set_pad_right(&style_screenRecording_file_container_list_extra_texts_main_default, 0);
+	lv_style_set_pad_bottom(&style_screenRecording_file_container_list_extra_texts_main_default, 5);
+	lv_style_set_border_width(&style_screenRecording_file_container_list_extra_texts_main_default, 0);
+	lv_style_set_text_color(&style_screenRecording_file_container_list_extra_texts_main_default, lv_color_hex(0x0D3055));
+	lv_style_set_text_font(&style_screenRecording_file_container_list_extra_texts_main_default, &lv_font_FontAwesome5ProRegular_400_11);
+	lv_style_set_radius(&style_screenRecording_file_container_list_extra_texts_main_default, 3);
+	lv_style_set_bg_opa(&style_screenRecording_file_container_list_extra_texts_main_default, 255);
+	lv_style_set_bg_color(&style_screenRecording_file_container_list_extra_texts_main_default, lv_color_hex(0xffffff));
 
 
 

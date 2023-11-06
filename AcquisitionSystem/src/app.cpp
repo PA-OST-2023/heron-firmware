@@ -130,7 +130,7 @@ void App::update(void* parameter)
       // TODO: Remove warning after user interaction
 
       ref->gui.setDiskUsage(ref->utils.getSdCardUsedSizeMb(), ref->utils.getSdCardTotalSizeMb());
-      
+      ref->gui.setFileContainer(ref->utils.getFileContainer(), ref->utils.getFileContainerSize());
     }
 
     for(int i = 0; i < AudioUtils::CHANNEL_COUNT; i++)
@@ -172,7 +172,7 @@ void App::update(void* parameter)
       {
         if(!ref->recording)
         {
-          console.log.println("[APP] Button REC pressed");
+          console.log.println("[APP] Button REC pressed (start recording)");
           uint8_t day, month, hour, minute, second;
           uint16_t year;
           ref->hmi.getDate(year, month, day);
@@ -207,12 +207,17 @@ void App::update(void* parameter)
         }
         else
         {
-          console.log.println("[APP] Button REC pressed");
+          console.log.println("[APP] Button REC pressed (stop recording)");
           if(ref->audio.stopRecording())
           {
             ref->recording = false;
             ref->gui.setRecordingState(false);
           }
+          else
+          {
+            console.error.println("[APP] Could not stop recording");
+          }
+          console.log.println("[APP] Unlocking SD card access");
           ref->utils.unlockSdCardAccess();
         }
       }

@@ -93,12 +93,19 @@ bool AudioUtils::startRecording(const char* filename)
   }
   if(recorder != nullptr)
   {
+    int timeout = 0;
     while(recorder->disposeBuffer() == MemBuffer::invalid)
     {
       console.warning.println("[AUDIO] Waiting for recorder to dispose buffer");
       threads.delay(50);
+      if(timeout++ > 10)
+      {
+        console.warning.println("[AUDIO] Timeout while waiting for recorder to dispose buffer -> force delete");
+        recorder->disposeBuffer(true);
+        break;
+      }
     }
-    recorder->stop();
+    // recorder->stop();   // Stop recording if still running
     delete recorder;
     recorder = nullptr;
     console.log.println("[AUDIO] Recorder Instance deleted");

@@ -34,8 +34,17 @@
 #include <console.h>
 #include "SdCard/SdioTeensy.cpp"
 
+EXTMEM FileContainer Utils::fileContainer[Utils::MAX_FILE_COUNT];
+
 Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi) : scl_sys(scl_sys), sda_sys(sda_sys), scl_hmi(scl_hmi), sda_hmi(sda_hmi)
 {
+  for(int i = 0; i < MAX_FILE_COUNT; i++)
+  {
+    fileContainer[i].fileName[0] = '\0';
+    fileContainer[i].fileSize = 0;
+    fileContainer[i].isDirectory = false;
+    fileContainer[i].uniqueId = 0;
+  }
 }
 
 bool Utils::begin(const char* storageName)
@@ -168,9 +177,7 @@ void Utils::update(void)     // Make sure this function is non-blocking!
           sdCardUsedSize = usedSize;
           console.log.printf("[UTILS] SD Card: %.2f MB total, %.2f MB used\n", getSdCardTotalSizeMb(), getSdCardUsedSizeMb());
         }
-
-        // TODO: scan all files and dirs in root
-
+        fileCount = scanDirectory("/");   // Scan the root directory
       }
       else
       {
@@ -186,4 +193,108 @@ void Utils::update(void)     // Make sure this function is non-blocking!
       unlockSdCardAccess();
     }
   }
+}
+
+int Utils::scanDirectory(const char* path, bool verbose)
+{
+  File root = SD.open(path);
+  if(!root)
+  {
+    console.error.println("[UTILS] Failed to open directory");
+    return 0;
+  }
+  if(!root.isDirectory())
+  {
+    console.error.println("[UTILS] Not a directory");
+    root.close();
+    return 0;
+  }
+
+  int count = getFileCount(path, true);
+  if(verbose)
+  {
+    console.log.printf("[UTILS] Found %d files and directories in %s\n", count, path);
+  }
+
+  File entry = root.openNextFile();
+  int index = 0;
+  while(entry)
+  {
+    if(index >= count)
+    {
+      console.error.println("[UTILS] More entries than expected");
+      break;
+    }
+    if(index > MAX_FILE_COUNT)
+    {
+      console.warning.printf("[UTILS] Too many entries (max %d)\n", MAX_FILE_COUNT);
+      break;
+    }
+    strncpy(fileContainer[index].fileName, entry.name(), sizeof(fileContainer[index].fileName) - 1);      // Copy the file name
+    fileContainer[index].fileName[sizeof(fileContainer[index].fileName) - 1] = '\0';                      // Ensure null termination
+    fileContainer[index].fileSize = entry.size();                                                         // Set the file size
+    fileContainer[index].isDirectory = entry.isDirectory();                                               // Set the directory flag
+    fileContainer[index].uniqueId = generateUniqueId(fileContainer[index].fileName);                      // Generate a unique ID for the file
+    if(verbose)
+    {
+      console.log.printf("[UTILS] Found %s: %s\n", fileContainer[index].isDirectory ? "directory" : "file", fileContainer[index].fileName);
+    }
+    index++;
+    entry.close();
+    entry = root.openNextFile();
+  }
+
+  root.close();
+  if(index != count)
+  {
+    console.log.printf("[UTILS] Warning: Expected %d entries, but found %d entries.\n", count, index);
+  }
+  return index;     // Return the number of entries added to the files array
+}
+
+int Utils::getFileCount(const char* path, bool includeDirectories)
+{
+  File dir = SD.open(path);
+  if(!dir)
+  {
+    console.error.println("[UTILS] Failed to open directory");
+    return -1;
+  }
+
+  if(!dir.isDirectory())
+  {
+    console.error.println("[UTILS] Path is not a directory");
+    dir.close();
+    return -1;
+  }
+
+  int count = 0;
+  File entry = dir.openNextFile();
+  while(entry)
+  {
+    if (entry.isDirectory() && includeDirectories)
+    {
+      count++;
+    }
+    else if(!entry.isDirectory())
+    {
+      count++;
+    }
+    entry.close();      // Close the file to free up memory
+    entry = dir.openNextFile();
+  }
+
+  dir.close();          // Make sure to close the directory to free up resources
+  return count;
+}
+
+uint32_t Utils::generateUniqueId(const char* fileName)
+{
+  uint32_t hash = 5381;               // Starting value for djb2 algorithm
+  int c;
+  while((c = *fileName++))
+  {
+    hash = ((hash << 5) + hash) + c;  // hash * 33 + c
+  }
+  return hash;
 }

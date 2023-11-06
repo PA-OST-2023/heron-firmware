@@ -836,7 +836,7 @@
 					"default_style": false,
 					"scrollbar_mode": "OFF",
 					"direction": "horizon",
-					"current_item": 1,
+					"current_item": 0,
 					"tile_count": 1,
 					"child": [
 						{
@@ -845,7 +845,7 @@
 							"is_tile": true,
 							"child": [
 								{
-									"name": "list_1",
+									"name": "file_container_list",
 									"id": "fxj93vab",
 									"type": "list",
 									"left": -2,
@@ -859,48 +859,7 @@
 									"height": 161,
 									"default_style": false,
 									"scrollbar_mode": "OFF",
-									"items": [
-										{
-											"type": "symbol",
-											"text": "settings",
-											"img_path": "",
-											"img_width": 20,
-											"img_height": 20,
-											"img_symbol": "LV_SYMBOL_DIRECTORY;fas fa-folder"
-										},
-										{
-											"type": "symbol",
-											"text": "231019_110608_32_FFFFFFFF.wav",
-											"img_path": "",
-											"img_width": 20,
-											"img_height": 20,
-											"img_symbol": "LV_SYMBOL_FILE;fas fa-file"
-										},
-										{
-											"type": "symbol",
-											"text": "231019_115502_32_FFFFFFFF.wav",
-											"img_path": "",
-											"img_width": 20,
-											"img_height": 20,
-											"img_symbol": "LV_SYMBOL_FILE;fas fa-file"
-										},
-										{
-											"type": "symbol",
-											"text": "231020_080728_16_FFFF0000.wav",
-											"img_path": "",
-											"img_width": 20,
-											"img_height": 20,
-											"img_symbol": "LV_SYMBOL_FILE;fas fa-file"
-										},
-										{
-											"type": "symbol",
-											"text": "231020_1001020_16_FFFF0000.wav",
-											"img_path": "",
-											"img_width": 20,
-											"img_height": 20,
-											"img_symbol": "LV_SYMBOL_FILE;fas fa-file"
-										}
-									],
+									"items": [],
 									"style": [
 										{
 											"part": "LV_PART_MAIN",
@@ -18945,270 +18904,7 @@
 					]
 				}
 			],
-			"event": {
-				"released": [
-					{
-						"trigger": "released",
-						"dst": "screen",
-						"action": {
-							"load_screen": {
-								"ische": true,
-								"duration": 200,
-								"delay": 200,
-								"scrId": "9n90frfx",
-								"anim_type": "LV_SCR_LOAD_ANIM_NONE",
-								"is_clean": false,
-								"is_del": false
-							},
-							"bg_color": {
-								"ische": false,
-								"value": "#000000"
-							},
-							"grad_color": {
-								"ische": false,
-								"value": "#000000",
-								"dir": "LV_GRAD_DIR_HOR"
-							},
-							"bg_opa": {
-								"ische": false,
-								"value": 255
-							},
-							"width": {
-								"ische": false,
-								"value": 50
-							},
-							"height": {
-								"ische": false,
-								"value": 50
-							},
-							"set_text": {
-								"ische": false,
-								"value": "default",
-								"font": 12,
-								"font_family": "simsun"
-							},
-							"position": {
-								"ische": false,
-								"value_x": 0,
-								"value_y": 0
-							},
-							"isVisible": {
-								"ische": false,
-								"flag": ""
-							},
-							"customer_code": {
-								"ische": false,
-								"inc_c": "",
-								"code_c": "",
-								"inc_py": "",
-								"code_py": ""
-							},
-							"add_state": {
-								"ische": false,
-								"value": "LV_STATE_DEFAULT"
-							},
-							"add_flag": {
-								"ische": false,
-								"value": []
-							},
-							"clear_flag": {
-								"ische": false,
-								"value": []
-							},
-							"move": {
-								"ische": false,
-								"value_x": 0,
-								"value_y": 0,
-								"delay": 0,
-								"duration": 1000,
-								"repeat_count": 0,
-								"repeat_delay": 0,
-								"playback_time": 0,
-								"playback_delay": 0,
-								"start_cb": "",
-								"ready_cb": "",
-								"deleted_cb": "",
-								"path_type": "linear"
-							},
-							"scaleSize": {
-								"ische": false,
-								"width": 0,
-								"height": 0,
-								"delay": 0,
-								"duration": 1000,
-								"repeat_count": 0,
-								"repeat_delay": 0,
-								"playback_time": 0,
-								"playback_delay": 0,
-								"start_cb": "",
-								"ready_cb": "",
-								"deleted_cb": "",
-								"path_type": "linear"
-							},
-							"img_zoom": {
-								"ische": false,
-								"zoom": 0,
-								"delay": 0,
-								"duration": 1000,
-								"repeat_count": 0,
-								"repeat_delay": 0,
-								"playback_time": 0,
-								"playback_delay": 0,
-								"start_cb": "",
-								"ready_cb": "",
-								"deleted_cb": "",
-								"path_type": "linear"
-							},
-							"rotate": {
-								"ische": false,
-								"rotate": 0,
-								"x": 0,
-								"y": 0,
-								"delay": 0,
-								"duration": 1000,
-								"repeat_count": 0,
-								"repeat_delay": 0,
-								"playback_time": 0,
-								"playback_delay": 0,
-								"start_cb": "",
-								"ready_cb": "",
-								"deleted_cb": "",
-								"path_type": "linear"
-							}
-						}
-					},
-					{
-						"trigger": "released",
-						"dst": "null",
-						"action": {
-							"load_screen": {
-								"ische": false,
-								"duration": 200,
-								"delay": 200,
-								"scrId": "",
-								"anim_type": "LV_SCR_LOAD_ANIM_NONE",
-								"is_clean": false,
-								"is_del": true
-							},
-							"bg_color": {
-								"ische": false,
-								"value": "#000000"
-							},
-							"grad_color": {
-								"ische": false,
-								"value": "#000000",
-								"dir": "LV_GRAD_DIR_HOR"
-							},
-							"bg_opa": {
-								"ische": false,
-								"value": 255
-							},
-							"width": {
-								"ische": false,
-								"value": 50
-							},
-							"height": {
-								"ische": false,
-								"value": 50
-							},
-							"set_text": {
-								"ische": false,
-								"value": "default",
-								"font": 12,
-								"font_family": "simsun"
-							},
-							"position": {
-								"ische": false,
-								"value_x": 0,
-								"value_y": 0
-							},
-							"isVisible": {
-								"ische": false,
-								"flag": ""
-							},
-							"customer_code": {
-								"ische": true,
-								"inc_c": "#ifdef PLATFORMIO\n#include \"../../app.h\"\n#endif",
-								"code_c": "#ifdef PLATFORMIO\nApp::callbackSetRollerTime();\n#endif",
-								"inc_py": "",
-								"code_py": ""
-							},
-							"add_state": {
-								"ische": false,
-								"value": "LV_STATE_DEFAULT"
-							},
-							"add_flag": {
-								"ische": false,
-								"value": []
-							},
-							"clear_flag": {
-								"ische": false,
-								"value": []
-							},
-							"move": {
-								"ische": false,
-								"value_x": 0,
-								"value_y": 0,
-								"delay": 0,
-								"duration": 1000,
-								"repeat_count": 0,
-								"repeat_delay": 0,
-								"playback_time": 0,
-								"playback_delay": 0,
-								"start_cb": "",
-								"ready_cb": "",
-								"deleted_cb": "",
-								"path_type": "linear"
-							},
-							"scaleSize": {
-								"ische": false,
-								"width": 0,
-								"height": 0,
-								"delay": 0,
-								"duration": 1000,
-								"repeat_count": 0,
-								"repeat_delay": 0,
-								"playback_time": 0,
-								"playback_delay": 0,
-								"start_cb": "",
-								"ready_cb": "",
-								"deleted_cb": "",
-								"path_type": "linear"
-							},
-							"img_zoom": {
-								"ische": false,
-								"zoom": 0,
-								"delay": 0,
-								"duration": 1000,
-								"repeat_count": 0,
-								"repeat_delay": 0,
-								"playback_time": 0,
-								"playback_delay": 0,
-								"start_cb": "",
-								"ready_cb": "",
-								"deleted_cb": "",
-								"path_type": "linear"
-							},
-							"rotate": {
-								"ische": false,
-								"rotate": 0,
-								"x": 0,
-								"y": 0,
-								"delay": 0,
-								"duration": 1000,
-								"repeat_count": 0,
-								"repeat_delay": 0,
-								"playback_time": 0,
-								"playback_delay": 0,
-								"start_cb": "",
-								"ready_cb": "",
-								"deleted_cb": "",
-								"path_type": "linear"
-							}
-						}
-					}
-				]
-			},
+			"event": {},
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -23759,7 +23455,7 @@
 										]
 									},
 									{
-										"name": "screenRecording_list_1",
+										"name": "screenRecording_file_container_list",
 										"id": "fxj93vab",
 										"type": "list",
 										"visible": true,
@@ -23777,78 +23473,7 @@
 										],
 										"default_style": false,
 										"custom_attributes": {},
-										"items": [
-											{
-												"type": "symbol",
-												"text": "settings",
-												"img_path": "",
-												"img_width": 20,
-												"img_height": 20,
-												"img_symbol": "LV_SYMBOL_DIRECTORY",
-												"img_size": [
-													20,
-													20
-												],
-												"img_sd_path": "S://",
-												"img_flash_path": "F:/"
-											},
-											{
-												"type": "symbol",
-												"text": "231019_110608_32_FFFFFFFF.wav",
-												"img_path": "",
-												"img_width": 20,
-												"img_height": 20,
-												"img_symbol": "LV_SYMBOL_FILE",
-												"img_size": [
-													20,
-													20
-												],
-												"img_sd_path": "S://",
-												"img_flash_path": "F:/"
-											},
-											{
-												"type": "symbol",
-												"text": "231019_115502_32_FFFFFFFF.wav",
-												"img_path": "",
-												"img_width": 20,
-												"img_height": 20,
-												"img_symbol": "LV_SYMBOL_FILE",
-												"img_size": [
-													20,
-													20
-												],
-												"img_sd_path": "S://",
-												"img_flash_path": "F:/"
-											},
-											{
-												"type": "symbol",
-												"text": "231020_080728_16_FFFF0000.wav",
-												"img_path": "",
-												"img_width": 20,
-												"img_height": 20,
-												"img_symbol": "LV_SYMBOL_FILE",
-												"img_size": [
-													20,
-													20
-												],
-												"img_sd_path": "S://",
-												"img_flash_path": "F:/"
-											},
-											{
-												"type": "symbol",
-												"text": "231020_1001020_16_FFFF0000.wav",
-												"img_path": "",
-												"img_width": 20,
-												"img_height": 20,
-												"img_symbol": "LV_SYMBOL_FILE",
-												"img_size": [
-													20,
-													20
-												],
-												"img_sd_path": "S://",
-												"img_flash_path": "F:/"
-											}
-										],
+										"items": [],
 										"style": [
 											{
 												"part": "LV_PART_MAIN",

@@ -69,7 +69,7 @@ void AudioRecordWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
 		readMicros.newValue(micros() - now);
 		if (outN < sz) // failed to write out all data
 		{
-			console.warning.printf("write of %d bytes failed: wrote %d\n",sz,outN);
+			console.warning.printf("[RECORD WAV BUFFERED] Write of %d bytes failed: wrote %d\n",sz,outN);
 			writeErrorDetected = true;
 			// NOW what do we do?!
 		}
@@ -318,8 +318,7 @@ void AudioRecordWAVbuffered::update(void)
 		alloCnt++;
 	}
 
-	static int count = 0;
-	
+
 	// only update if we're recording and not paused,
 	// but we must discard the received blocks!
 	if (state != STATE_STOP && state != STATE_PAUSED)
@@ -330,7 +329,6 @@ void AudioRecordWAVbuffered::update(void)
 			result rdr = write((uint8_t*) buf, sizeof buf); // send it to the buffer
 			bytesWrittenToBuffer += sizeof buf;															// TODO: Remove after debugging
 			data_length += sizeof buf;
-			count++;
 			
 			if (ok != rdr 			// there's now room for a buffer read,
 				&& !eof 			// and more file data available
@@ -339,22 +337,12 @@ void AudioRecordWAVbuffered::update(void)
 				triggerEvent(0);
 				writePending = true;
 				// Serial.printf("Start Writing buffer to SD card, count: %d\n", count);
-				count = 0;
 			}
 			else if(rdr == invalid)
 			{
 			//   console.warning.printf("WARNING - BUFFER OVERFLOW!!!! Start Writing buffer to SD card, count: %d\n", count);
 			  bufferOverflowDetected = true;
 			}
-			
-			// {
-			// 	static uint32_t t = 0;
-			// 	if(millis() - t > 50)
-			// 	{
-			// 		triggerEvent(0);
-			// 	}
-			// 	// Serial.printf("Bytes available in Buffer: %d, bytes to write: %d\n", getAvailable(), sizeof buf);
-			// }
 		}
 	}
 	

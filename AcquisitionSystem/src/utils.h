@@ -39,10 +39,20 @@
 #include <Wire.h>
 #include <SD.h>
 
+class FileContainer
+{
+  public:
+    char fileName[50] = "";
+    uint32_t fileSize;
+    bool isDirectory;
+    uint32_t uniqueId;
+};
+
 class Utils
 {
   public:
     static constexpr const float    UPDATE_RATE           = 1.0;           // Hz
+    static constexpr const size_t   MAX_FILE_COUNT        = 100;           // #
 
     Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi);
     bool begin(const char* storageName = "SD Card");
@@ -58,6 +68,8 @@ class Utils
     int lockSdCardAccess(uint32_t timeout = 0) {return sdCardMutex.lock(timeout);}
     int tryLockSdCardAccess(void) {return sdCardMutex.try_lock();}
     int unlockSdCardAccess(void) {return sdCardMutex.unlock();}
+    FileContainer* getFileContainer(void) {return fileContainer;}
+    int getFileContainerSize(void) {return fileCount;}
 
   private:
     const int scl_sys, sda_sys, scl_hmi, sda_hmi;
@@ -69,6 +81,13 @@ class Utils
     bool sdCardError = false;
     uint64_t sdCardTotalSize = 0;
     uint64_t sdCardUsedSize = 0;
+
+    int fileCount = 0;
+    EXTMEM static FileContainer fileContainer[MAX_FILE_COUNT];
+
+    int scanDirectory(const char* path = "/", bool verbose = false);
+    int getFileCount(const char* path = "/", bool includeDirectories = true);
+    uint32_t generateUniqueId(const char* fileName);
 };
 
 #endif

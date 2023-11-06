@@ -80,6 +80,11 @@ Gui::Gui(int sclk, int mosi, int cs, int dc, int rst, int bl, int tch_rst, int t
     channelEnabled[i] = false;
     channelEnabledReadback[i] = false;
   }
+  for(int i = 0; i < Utils::MAX_FILE_COUNT; i++)
+  {
+    fileContainerObjects[i].uniqueId = 0;
+    fileContainerObjects[i].obj = nullptr;
+  }
 }
 
 bool Gui::begin(Utils& utilsRef)
@@ -125,7 +130,7 @@ bool Gui::begin(Utils& utilsRef)
   setup_ui(&guider_ui);
   digitalWrite(bl, HIGH);
 
-  console.ok.println("[GUI] Initialization done.");
+  console.ok.println("[GUI] Initialized");
   initialized = true;
   return true;
 }
@@ -241,7 +246,10 @@ void Gui::setSystemWarning(const char* warning)
 
 void Gui::setFileContainer(FileContainer* fileContainer, uint32_t count)
 {
-
+  if(count == fileContainerSize) return;
+  fileContainerSize = count;
+  this->fileContainer = fileContainer;
+  flagFileContainer = true;
 }
 
 void Gui::setDiskUsage(float usedMb, float totalMb)
@@ -438,6 +446,11 @@ void Gui::update(void)
     snprintf(buf, sizeof(buf), "Remaining: %02d:%02d:%02d", remainingRecordingTime / 3600, ((remainingRecordingTime / 60) % 60), remainingRecordingTime % 60);
     lv_label_set_text(guider_ui.screenRecording_label_recording_remaining, buf);
   }
+  if(flagFileContainer)
+  {
+    flagFileContainer = false;
+    updateFileContainer();
+  }
 
   static uint32_t readbackTime = 0;
   if(millis() - readbackTime > 50)
@@ -455,6 +468,81 @@ void Gui::update(void)
   }
 
   lv_task_handler();
+}
+
+void Gui::updateFileContainer(bool verbose)
+{
+  static bool styleInit = false;
+  static lv_style_t style_screenRecording_file_container_list_extra_btns_main_default;
+  if(!styleInit)
+  {
+    styleInit = true;
+    ui_init_style(&style_screenRecording_file_container_list_extra_btns_main_default);
+    lv_style_set_pad_top(&style_screenRecording_file_container_list_extra_btns_main_default, 5);
+    lv_style_set_pad_left(&style_screenRecording_file_container_list_extra_btns_main_default, 5);
+    lv_style_set_pad_right(&style_screenRecording_file_container_list_extra_btns_main_default, 0);
+    lv_style_set_pad_bottom(&style_screenRecording_file_container_list_extra_btns_main_default, 5);
+    lv_style_set_border_width(&style_screenRecording_file_container_list_extra_btns_main_default, 2);
+    lv_style_set_border_opa(&style_screenRecording_file_container_list_extra_btns_main_default, 255);
+    lv_style_set_border_color(&style_screenRecording_file_container_list_extra_btns_main_default, lv_color_hex(0x101418));
+    lv_style_set_border_side(&style_screenRecording_file_container_list_extra_btns_main_default, LV_BORDER_SIDE_BOTTOM);
+    lv_style_set_text_color(&style_screenRecording_file_container_list_extra_btns_main_default, lv_color_hex(0xffffff));
+    lv_style_set_text_font(&style_screenRecording_file_container_list_extra_btns_main_default, &lv_font_montserratMedium_13);
+    lv_style_set_radius(&style_screenRecording_file_container_list_extra_btns_main_default, 1);
+    lv_style_set_bg_opa(&style_screenRecording_file_container_list_extra_btns_main_default, 255);
+    lv_style_set_bg_color(&style_screenRecording_file_container_list_extra_btns_main_default, lv_color_hex(0x292831));
+  }
+
+  for(int i = 0; i < Utils::MAX_FILE_COUNT; i++)            // Scan over all files in the list
+  {
+    uint32_t id = fileContainerObjects[i].uniqueId;
+    if(id == 0) continue;                                   // Skip empty slots
+    bool found = false;
+    for(int j = 0; j < fileContainerSize; j++)              // Scan over all possible files
+    {
+      if(fileContainer[j].uniqueId == id)
+      {
+        found = true;
+        break;
+      }
+    }
+    if(!found)                                              // File not found in list
+    {
+      lv_obj_del(fileContainerObjects[i].obj);
+      fileContainerObjects[i].obj = nullptr;
+      fileContainerObjects[i].uniqueId = 0;
+      if(verbose) console.log.println("[GUI] Delete File");
+    }
+  }
+
+  for(int i = 0; i < fileContainerSize; i++)                // Add missing files to list
+  {
+    uint32_t id = fileContainer[i].uniqueId;
+    bool found = false;
+    for(int j = 0; j < Utils::MAX_FILE_COUNT; j++)          // Scan over all files in the list
+    {
+      if(fileContainerObjects[j].uniqueId == id)
+      {
+        found = true;
+        break;
+      }
+    }
+    if(!found)                                              // File not found in list
+    {
+      for(int j = 0; j < Utils::MAX_FILE_COUNT; j++)        // Scan over all files in the list
+      {
+        if(fileContainerObjects[j].uniqueId == 0)           // Found empty slot
+        {
+          fileContainerObjects[j].uniqueId = id;
+          fileContainerObjects[j].obj = lv_list_add_btn(guider_ui.screenRecording_file_container_list, fileContainer[i].isDirectory? LV_SYMBOL_DIRECTORY : LV_SYMBOL_FILE, fileContainer[i].fileName);
+          lv_obj_add_style(fileContainerObjects[j].obj, &style_screenRecording_file_container_list_extra_btns_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+          lv_label_set_long_mode(lv_obj_get_child(fileContainerObjects[j].obj, 1), LV_LABEL_LONG_DOT);
+          if(verbose) console.log.printf("[GUI] Add File \"%s\" to list\n", fileContainer[i].fileName);
+          break;
+        }
+      }
+    }
+  }
 }
 
 void Gui::lvglPrint(const char* buf)

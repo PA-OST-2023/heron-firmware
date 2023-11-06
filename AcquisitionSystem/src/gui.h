@@ -42,13 +42,11 @@
 #include <SPI.h>
 #include <lvgl.h>
 
-class FileContainer
+struct
 {
-  public:
-    char fileName[50];
-    uint32_t fileSize;
-    bool isDirectory;
-};
+  lv_obj_t* obj = nullptr;
+  uint32_t uniqueId = 0;
+} typedef FileContainerObject;
 
 class Gui
 {
@@ -99,8 +97,6 @@ class Gui
     lv_obj_t*** enableSwitches;
     lv_obj_t*** monitorSymbols;
     lv_obj_t*** channelIndeces;
-    char warningText[50];
-    bool flagWarning = false;
 
     char bufferTime[10];
     bool flagTime = false, flagDate = false;
@@ -139,13 +135,16 @@ class Gui
     int remainingRecordingTime = -1;
     bool flagRemainingRecordingTime = true;
 
+    FileContainer* fileContainer = nullptr;
+    FileContainerObject fileContainerObjects[Utils::MAX_FILE_COUNT];
+    uint32_t fileContainerSize = 0;
+    bool flagFileContainer = true;
 
-    // FileContainer* fileContainer = nullptr;
-    // uint32_t fileContainerSize = 0;
+    char warningText[50];
+    bool flagWarning = false;
 
-    // static lv_obj_tree_walk_res_t enable_child_cb(lv_obj_t * obj, void * user_data) {lv_obj_add_flag(obj, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE); return LV_OBJ_TREE_WALK_NEXT;}
-    // static lv_obj_tree_walk_res_t disable_child_cb(lv_obj_t * obj, void * user_data) {lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE); return LV_OBJ_TREE_WALK_NEXT;}
-
+    void updateFileContainer(bool verbose = false);
+    
     static Utils* utils;
     static void lvglPrint(const char* buf);
     static void dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p);
