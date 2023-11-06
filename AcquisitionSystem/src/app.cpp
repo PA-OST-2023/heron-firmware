@@ -126,11 +126,10 @@ void App::update(void* parameter)
       Gui::EthStatus_t ethStatus = Gui::ETH_DISCONNECTED;   // TODO: Get status from Ethernet Module
       ref->gui.setEthStatus(ethStatus);
 
-      ref->gui.setSystemWarning(ref->warning);
-      // TODO: Remove warning after user interaction
-
       ref->gui.setDiskUsage(ref->utils.getSdCardUsedSizeMb(), ref->utils.getSdCardTotalSizeMb());
       ref->gui.setFileContainer(ref->utils.getFileContainer(), ref->utils.getFileContainerSize());
+
+      ref->hmi.setRecordingStatus(ref->recording? ref->audio.getRecordingTime() : 0.0);     // Make Recording LED blink when recording
     }
 
     for(int i = 0; i < AudioUtils::CHANNEL_COUNT; i++)
@@ -139,6 +138,14 @@ void App::update(void* parameter)
     }
 
     bool mainScreenActive = ref->gui.isMainScreenActive();
+    if(!ref->systemBooted && mainScreenActive)
+    {
+      ref->systemBooted = true;
+      console.ok.println("[APP] System booted and is ready\n");
+      console.print(CONSOLE_COLOR_BOLD_MAGENTA CONSOLE_BACKGROUND_DEFAULT);
+      console.print("****************************************************\n\n");
+      console.print(CONSOLE_COLOR_DEFAULT CONSOLE_BACKGROUND_DEFAULT);
+    }
     if(mainScreenActive)
     {
       if(ref->hmi.getButtonSelectEvent())
@@ -228,7 +235,32 @@ void App::update(void* parameter)
         ref->gui.setRemainingRecordingTime(ref->calculateRemainingRecordingTime(ref->audio.getRecordingTime()));
       }
     }
-    
+
+    if(ref->audio.getRecordingError())
+    {
+      console.error.println("[APP] Recording error");
+      ref->recording = false;
+      ref->audio.stopRecording();
+      ref->gui.setRecordingState(false);
+      ref->utils.unlockSdCardAccess();
+      ref->error = "Recording error occured";
+    }
+
+    // TODO: Catch all warnings and error and update GUI and HMI (until the user acknowledges the warning/error by pressing on the message-box)
+    // ref->gui.setSystemWarning(ref->warning);    // TODO: Remove warning after user interaction
+    if(ref->error)
+    {
+      ref->hmi.setSystemStatus(Hmi::STATUS_ERROR);
+    }
+    else if(ref->warning)
+    {
+      ref->hmi.setSystemStatus(Hmi::STATUS_WARNING);
+    }
+    else if(ref->systemBooted)
+    {
+      ref->hmi.setSystemStatus(Hmi::STATUS_OK);
+    }
+      
     threads.delay(1000.0 / UPDATE_RATE);
   }
 }

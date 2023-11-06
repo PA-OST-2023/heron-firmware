@@ -43,13 +43,14 @@ class Hmi
   public:
     static constexpr const uint32_t LED_COUNT             = 66;
     static constexpr const uint32_t AUDIO_CHANNEL_COUNT   = 32;
-    static constexpr const float    UPDATE_RATE           = 24.0;           // Hz
+    static constexpr const float    UPDATE_RATE           = 30.0;           // Hz
 
     typedef enum {STATUS_BOOTUP, STATUS_OK, STATUS_WARNING, STATUS_ERROR} systemStatus_t;
 
     Hmi(int rgbLed, int btnRec, int btnSel, int potVol);
     bool begin(Utils& utilsRef);
     void setSystemStatus(systemStatus_t status) {systemStatus = status;}
+    void setRecordingStatus(float recordingTime = 0) {this->recordingTime = recordingTime;}
     inline void setLedVolume(int channel, float volume) {ledVolume[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = volume;}
     inline void setLedVolume(float* volume, int count = AUDIO_CHANNEL_COUNT) {for(int i = 0; i < count; i++) ledVolume[i] = volume[i];}
     inline void setChannelEnabled(int channel, bool enabled) {channelEnabled[constrain(channel, 0, AUDIO_CHANNEL_COUNT - 1)] = enabled;}
@@ -70,10 +71,11 @@ class Hmi
     RTC_PCF8523 rtc;
 
     Utils* utils;
-    systemStatus_t systemStatus = STATUS_OK;
+    systemStatus_t systemStatus = STATUS_BOOTUP;
     float ledVolume[AUDIO_CHANNEL_COUNT];
     bool channelEnabled[AUDIO_CHANNEL_COUNT];
     int selectedChannel = 0;
+    float recordingTime = 0;
     bool buttonRecordEvent = false;
     bool buttonSelectEvent = false;
     bool buttonRecord = false, buttonRecordOld = false;

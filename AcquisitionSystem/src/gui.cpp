@@ -246,7 +246,7 @@ void Gui::setSystemWarning(const char* warning)
 
 void Gui::setFileContainer(FileContainer* fileContainer, uint32_t count)
 {
-  if(count == fileContainerSize) return;
+  if(count == fileContainerSize) return;      // INFO: Known Bug -> If a file/dir is renamed the uniqueId changes but the GUI does not updated (someone knows a good solution?)
   fileContainerSize = count;
   this->fileContainer = fileContainer;
   flagFileContainer = true;

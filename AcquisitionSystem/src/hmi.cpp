@@ -133,34 +133,58 @@ void Hmi::update(void* parameter)
     ref->volume = 0.5 * ref->volume + 0.5 * (1.0 - (analogRead(ref->potVol) / 1023.0));
 
     ref->leds.clear();
-    for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+    if(ref->systemStatus != STATUS_BOOTUP)
     {
-      if(ref->channelEnabled[i])
+      for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
       {
-        float volume = constrain((1.21 / (1 + pow(2.71828, -7 * (ref->ledVolume[i] - 0.232)))) - 0.2, 0.0, 1.0);     // Random function, copilot helped me with this (no, it was our math idea)
-        uint8_t r = constrain((volume - 0.5) * 2.0, 0.0, 1.0) * 255;
-        uint8_t g = (1.0 - fabs(1.0 - volume * 2.0)) * 255;
-        int pos = (i * 2) + 3;
-        if(i >= 16) pos--;
-        ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(r, g, 0));
+        if(ref->channelEnabled[i])
+        {
+          float volume = constrain((1.21 / (1 + pow(2.71828, -7 * (ref->ledVolume[i] - 0.232)))) - 0.2, 0.0, 1.0);     // Random function, copilot helped me with this (no, it was our math idea)
+          uint8_t r = constrain((volume - 0.5) * 2.0, 0.0, 1.0) * 255;
+          uint8_t g = (1.0 - fabs(1.0 - volume * 2.0)) * 255;
+          int pos = (i * 2) + 3;
+          if(i >= 16) pos--;
+          ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(r, g, 0));
+        }
+      }
+
+      for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+      {
+        int pos = (i * 2) + 2;
+        if(i >= 16) pos++;
+        if(i == ref->selectedChannel)
+        {
+          ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(0, 0, 100));
+        }
+        else if(ref->channelEnabled[i])
+        {
+          ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(2, 2, 2));
+        }
+      }
+
+      if(ref->recordingTime > 0.0 /*&& ((int)(ref->recordingTime * 1000.0) % 1000) < 500*/)   // Recording LED blinks red when recording (1 Hz)
+      {
+        ref->leds.setPixelColor(0, Adafruit_NeoPixel::Color(255, 0, 0));
+      }
+
+      switch(ref->systemStatus)
+      {
+        case STATUS_OK:
+          ref->leds.setPixelColor(1, (millis() % 1000) < 500 ? Adafruit_NeoPixel::Color(0, 255, 0) : Adafruit_NeoPixel::Color(0, 0, 0));
+          break;
+        case STATUS_WARNING:
+          ref->leds.setPixelColor(1, (millis() % 1000) < 500 ? Adafruit_NeoPixel::Color(255, 255, 0) : Adafruit_NeoPixel::Color(0, 0, 0));
+          break;
+        case STATUS_ERROR:
+          ref->leds.setPixelColor(1, (millis() % 1000) < 500 ? Adafruit_NeoPixel::Color(255, 0, 0) : Adafruit_NeoPixel::Color(0, 0, 0));
+          break;
+        default: break;
       }
     }
-
-    for(int i = 0; i < AUDIO_CHANNEL_COUNT; i++)
+    else  // Bootup animation
     {
-      int pos = (i * 2) + 2;
-      if(i >= 16) pos++;
-      if(i == ref->selectedChannel)
-      {
-        ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(0, 0, 100));
-      }
-      else if(ref->channelEnabled[i])
-      {
-        ref->leds.setPixelColor(pos, Adafruit_NeoPixel::Color(2, 2, 2));
-      }
-    }
 
-    ref->leds.setPixelColor(1, (millis() % 1000) < 500 ? Adafruit_NeoPixel::Color(0, 255, 0) : Adafruit_NeoPixel::Color(0, 0, 0));
+    }
     ref->leds.show();
 
     threads.delay(1000.0 / UPDATE_RATE);

@@ -62,8 +62,11 @@ class App
     bool recording = false;
     int monitorChannel = 0;
     char fileName[50];
+
+    bool systemBooted = false;
     
     const char* warning = nullptr;
+    const char* error = nullptr;
 
     static App* ref;
     static void update(void* parameter);

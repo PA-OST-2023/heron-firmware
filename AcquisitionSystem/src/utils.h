@@ -36,6 +36,7 @@
 #include <Arduino.h>
 #include <TeensyThreads.h>
 #include <MTP_Teensy.h>
+#include <EEPROM.h>
 #include <Wire.h>
 #include <SD.h>
 
@@ -51,8 +52,11 @@ class FileContainer
 class Utils
 {
   public:
-    static constexpr const float    UPDATE_RATE           = 1.0;           // Hz
-    static constexpr const size_t   MAX_FILE_COUNT        = 100;           // #
+    static constexpr const float    UPDATE_RATE                     = 1.0;           // Hz
+    static constexpr const size_t   MAX_FILE_COUNT                  = 100;           // #
+
+    static constexpr const uint32_t EEPROM_ADDR_CHANNEL_ENABLED     = 0;
+    static constexpr const uint32_t EEPROM_ADDR_CHANNEL_NUMBER      = 4;
 
     Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi);
     bool begin(const char* storageName = "SD Card");
@@ -70,6 +74,11 @@ class Utils
     int unlockSdCardAccess(void) {return sdCardMutex.unlock();}
     FileContainer* getFileContainer(void) {return fileContainer;}
     int getFileContainerSize(void) {return fileCount;}
+
+    bool storeChannelEnabled(const bool* channelEnabled, int count);
+    void loadChannelEnabled(bool* channelEnabled, int count);
+    bool storeChannelNumber(int channelNumber);
+    int loadChannelNumber(void);
 
   private:
     const int scl_sys, sda_sys, scl_hmi, sda_hmi;

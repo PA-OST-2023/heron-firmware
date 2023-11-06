@@ -195,6 +195,41 @@ void Utils::update(void)     // Make sure this function is non-blocking!
   }
 }
 
+bool Utils::storeChannelEnabled(const bool* channelEnabled, int count)
+{
+  uint32_t channels = 0x00000000;
+  for(int i = 0; i < count; i++)
+  {
+    if(channelEnabled[i])
+    {
+      bitSet(channels, i);
+    }
+  }
+  return EEPROM.put(EEPROM_ADDR_CHANNEL_ENABLED, channels) != 0;
+}
+
+void Utils::loadChannelEnabled(bool* channelEnabled, int count)
+{
+  uint32_t channels;
+  EEPROM.get(EEPROM_ADDR_CHANNEL_ENABLED, channels);
+  for(int i = 0; i < count; i++)
+  {
+    channelEnabled[i] = bitRead(channels, i);
+  }
+}
+
+bool Utils::storeChannelNumber(int channelNumber)
+{
+  return EEPROM.put(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber) != 0;
+}
+
+int Utils::loadChannelNumber(void)
+{
+  int channelNumber = 0;
+  EEPROM.get(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber);
+  return channelNumber;
+}
+
 int Utils::scanDirectory(const char* path, bool verbose)
 {
   File root = SD.open(path);

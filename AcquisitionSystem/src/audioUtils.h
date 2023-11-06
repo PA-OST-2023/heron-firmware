@@ -55,6 +55,7 @@ class AudioUtils
     inline bool setChannelConfig(int channel, bool enabled) {if(channel < CHANNEL_COUNT && channel >= 0) chanelEnabled[channel] = enabled; else return false; return true;}
     inline void setChannelConfig(bool* enabled, int count = CHANNEL_COUNT) {for(int i = 0; i < count; i++) chanelEnabled[i] = enabled[i];}
     float getPeak(int channel);
+    bool getRecordingError(void) {bool temp = recordingError; recordingError = false; return temp;}
 
   private:
     const AudioBuffer::bufType bufMem = AudioBuffer::inExt;
