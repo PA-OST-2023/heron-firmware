@@ -205,6 +205,7 @@ bool Utils::storeChannelEnabled(const bool* channelEnabled, int count)
       bitSet(channels, i);
     }
   }
+  console.log.printf("[UTILS] EEPROM Store channel enabled: 0x%08X\n", channels);
   return EEPROM.put(EEPROM_ADDR_CHANNEL_ENABLED, channels) != 0;
 }
 
@@ -212,6 +213,7 @@ void Utils::loadChannelEnabled(bool* channelEnabled, int count)
 {
   uint32_t channels;
   EEPROM.get(EEPROM_ADDR_CHANNEL_ENABLED, channels);
+  console.log.printf("[UTILS] EEPROM Load channel enabled: 0x%08X\n", channels);
   for(int i = 0; i < count; i++)
   {
     channelEnabled[i] = bitRead(channels, i);
@@ -220,6 +222,7 @@ void Utils::loadChannelEnabled(bool* channelEnabled, int count)
 
 bool Utils::storeChannelNumber(int channelNumber)
 {
+  console.log.printf("[UTILS] EEPROM Store channel number: %d\n", channelNumber);
   return EEPROM.put(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber) != 0;
 }
 
@@ -227,6 +230,7 @@ int Utils::loadChannelNumber(void)
 {
   int channelNumber = 0;
   EEPROM.get(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber);
+  console.log.printf("[UTILS] EEPROM Load channel number: %d\n", channelNumber);
   return channelNumber;
 }
 

@@ -43,17 +43,19 @@ App::App(AudioUtils& audio, Hmi& hmi, Gui& gui, Utils& utils) : audio(audio), hm
 
 bool App::begin(void)
 {
-  for(int i = 0; i < 32; i++)     // TODO: Get from EEPROM
-  {
-    channelEnabled[i] = true;
-  }
+  utils.loadChannelEnabled(channelEnabled, AudioUtils::CHANNEL_COUNT);    // Load channel config from EEPROM
+  monitorChannel = utils.loadChannelNumber();                             // Load channel number from EEPROM
+
   gui.setChannelEnabled(channelEnabled);
   hmi.setChannelEnabled(channelEnabled);
   audio.setChannelConfig(channelEnabled);
+  gui.setChannelMonitor(monitorChannel);
+  hmi.setChannelMonitor(monitorChannel);
+  audio.setChannelMonitor(monitorChannel);
 
   gui.setRecordingState(false);
-  gui.setChannelMonitor(0);
-
+  gui.setSystemWarning("");
+  
   threads.addThread(update, (void*)this, 4096);
   console.ok.println("[APP] Initialized");
   return true;
@@ -96,7 +98,7 @@ void App::update(void* parameter)
     {
       tHmi = millis();
       ref->gui.setVolume(ref->hmi.getVolume());
-      // TODO: Set volume of headphones
+      ref->audio.setVolume(ref->hmi.getVolume());           // Update volume of headphone amplifier
 
       memcpy(ref->channelEnabledOld, ref->channelEnabled, sizeof(channelEnabled));
       ref->gui.getChannelEnabled(ref->channelEnabled);
@@ -107,6 +109,7 @@ void App::update(void* parameter)
         ref->hmi.setChannelEnabled(ref->channelEnabled);
         ref->audio.setChannelConfig(ref->channelEnabled);
         channelConfigUpdated = true;
+        ref->channelEnabledUpdated = true;                  // Store channel config to EEPROM (pending)
       }
 
       Gui::SdCardStatus_t sdCardStatus = Gui::SD_CARD_MISSING;
@@ -123,13 +126,13 @@ void App::update(void* parameter)
       }
       ref->gui.setUsbStatus(usbStatus);
 
-      Gui::EthStatus_t ethStatus = Gui::ETH_DISCONNECTED;   // TODO: Get status from Ethernet Module
+      Gui::EthStatus_t ethStatus = Gui::ETH_DISCONNECTED;                                   // TODO: Get status from Ethernet Module
       ref->gui.setEthStatus(ethStatus);
 
       ref->gui.setDiskUsage(ref->utils.getSdCardUsedSizeMb(), ref->utils.getSdCardTotalSizeMb());
       ref->gui.setFileContainer(ref->utils.getFileContainer(), ref->utils.getFileContainerSize());
 
-      ref->hmi.setRecordingStatus(ref->recording? ref->audio.getRecordingTime() : 0.0);     // Make Recording LED blink when recording
+      ref->hmi.setRecordingStatus(ref->recording? ref->audio.getRecordingTime() : 0.0);     // Make Recording LED light up when recording
     }
 
     for(int i = 0; i < AudioUtils::CHANNEL_COUNT; i++)
@@ -173,6 +176,8 @@ void App::update(void* parameter)
         }
         ref->gui.setChannelMonitor(ref->monitorChannel);
         ref->hmi.setChannelMonitor(ref->monitorChannel);
+        ref->audio.setChannelMonitor(ref->monitorChannel);
+        ref->monitorChannelUpdated = true;
       }
 
       if(ref->hmi.getButtonRecordEvent())
@@ -195,7 +200,6 @@ void App::update(void* parameter)
           sprintf(ref->fileName, "%02d%02d%02d_%02d%02d%02d_%02d_%08lX.wav", year - 2000, month, day, hour, minute, second, ref->getChannelCount(), channelCoding);
           if(ref->utils.lockSdCardAccess())
           {
-            // TODO: Move UI page to channels
             if(ref->audio.startRecording(ref->fileName))
             {
               ref->recording = true;
@@ -233,6 +237,22 @@ void App::update(void* parameter)
       {
         ref->gui.setRecordingTime(ref->audio.getRecordingTime());
         ref->gui.setRemainingRecordingTime(ref->calculateRemainingRecordingTime(ref->audio.getRecordingTime()));
+      }
+    }
+
+    static uint32_t tEEprom = 0;
+    if(millis() - tEEprom > 1000)
+    {
+      tEEprom = millis();
+      if(ref->channelEnabledUpdated)
+      {
+        ref->channelEnabledUpdated = false;
+        ref->utils.storeChannelEnabled(ref->channelEnabled, AudioUtils::CHANNEL_COUNT);
+      }
+      if(ref->monitorChannelUpdated)
+      {
+        ref->monitorChannelUpdated = false;
+        ref->utils.storeChannelNumber(ref->monitorChannel);
       }
     }
 

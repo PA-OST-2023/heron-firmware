@@ -58,13 +58,15 @@ class App
 
     bool channelEnabled[AudioUtils::CHANNEL_COUNT];
     bool channelEnabledOld[AudioUtils::CHANNEL_COUNT];
-
-    bool recording = false;
+    bool channelEnabledUpdated = false;
+    
     int monitorChannel = 0;
-    char fileName[50];
-
+    bool monitorChannelUpdated = false;
+  
+    bool recording = false;
     bool systemBooted = false;
     
+    char fileName[50];
     const char* warning = nullptr;
     const char* error = nullptr;
 

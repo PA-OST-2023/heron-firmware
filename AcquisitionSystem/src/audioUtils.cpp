@@ -105,7 +105,6 @@ bool AudioUtils::startRecording(const char* filename)
         break;
       }
     }
-    // recorder->stop();   // Stop recording if still running
     delete recorder;
     recorder = nullptr;
     console.log.println("[AUDIO] Recorder Instance deleted");
@@ -212,6 +211,18 @@ float AudioUtils::getPeak(int channel)
     volumeValue[channel] = peak[channel].read();
   }
   return volumeValue[channel];
+}
+
+bool AudioUtils::setChannelMonitor(int channel)
+{
+  // TODO: Implement
+  return true;
+}
+
+bool AudioUtils::setVolume(float volume)
+{
+  // TODO: Implement
+  return true;
 }
 
 void AudioUtils::update(void* parameter)
