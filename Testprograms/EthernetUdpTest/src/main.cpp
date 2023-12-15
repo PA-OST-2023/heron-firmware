@@ -144,7 +144,7 @@ void setup()
     console.ok.println("Ethernet initialized.");
   }
 
-  const size_t sz = 65536 * 16;
+  const size_t sz = 65536 * 8;
   const AudioBuffer::bufType bufMem = AudioBuffer::inExt;
   if(transmitWav1.createBuffer(sz, bufMem))
   {
