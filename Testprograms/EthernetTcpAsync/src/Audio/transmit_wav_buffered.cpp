@@ -37,8 +37,6 @@
 
 
 using namespace qindesign::network;
-
-
 uint8_t AudioTransmitWAVbuffered::objcnt;
 
 AudioTransmitWAVbuffered::AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t **iqueue) : AudioStream(ninput, iqueue), lowWater(0xFFFFFFFF), chanCnt(ninput), writePending(false), objnum(objcnt++)
@@ -81,22 +79,19 @@ void AudioTransmitWAVbuffered::end(void)
 void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
 {
 	AudioTransmitWAVbuffered* pPWB = (AudioTransmitWAVbuffered*) evref.getContext();
-
   pPWB->writePending = true;
 
   static uint8_t bufferBlock[1460 * 8];
   if(pPWB->circularBuffer.available() > sizeof(bufferBlock))
   {
-    // pPWB->circularBuffer.readBytes(bufferBlock, sizeof(bufferBlock));
     pPWB->circularBuffer.peekBytes(bufferBlock, sizeof(bufferBlock));
     uint32_t outN = pPWB->flushBuffer(bufferBlock, sizeof(bufferBlock));
-    // outN = sizeof(bufferBlock);
-    pPWB->circularBuffer.readBytesVirtual(outN);
+    pPWB->circularBuffer.markBytesRead(outN);
     pPWB->byteCounter += outN;                   // Count the bytes that have been sent out for the data rate calculation
 
     if(outN != sizeof(bufferBlock))
     {
-      Serial.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
+      // Serial.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
       // console.warning.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
     }
   }
@@ -248,12 +243,20 @@ void AudioTransmitWAVbuffered::update(void)
 		{
 			interleave(buf, data, chanCnt);	                  // make a chunk of data for the file
       uint32_t availableToWrite = circularBuffer.capacity() - circularBuffer.available();
-      if(availableToWrite < sizeof(buf))
+
+      static const uint8_t magicStartSequence[16] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF};
+
+      if(availableToWrite < (sizeof(buf) + sizeof(magicStartSequence)))
       {
         Serial.println("[TRANSMIT WAV BUFFERED] Buffer overflow detected.");
         // circularBuffer.clear();
         // console.error.println("[TRANSMIT WAV BUFFERED] Buffer overflow detected.");
       }
+
+      // Just for debugging:
+      for(int i = 0; i < 10; i++) ((uint8_t*)buf)[i] = i;   // TODO: Remove this line
+
+      circularBuffer.write(magicStartSequence, sizeof(magicStartSequence));
       circularBuffer.write((uint8_t*)buf, sizeof(buf));
       if(!writePending)
       {

@@ -66,7 +66,7 @@ class Circular_Buffer {
         T peek_front(T *buffer, uint32_t length, uint32_t entry = 0);
         T read(T *buffer, uint32_t length) { return readBytes(buffer,length); }
         T readBytes(T *buffer, uint32_t length);
-        T readBytesVirtual(uint32_t length);
+        T markBytesRead(uint32_t length);
         void flush() { clear(); }
         void clear() { head = tail = _available = 0; }
         void print(const char *p);
@@ -600,7 +600,7 @@ T Circular_Buffer<T,_size,multi>::readBytes(T *buffer, uint32_t length) {
 
 // Added by Florian Baumgartner
 template<typename T, uint32_t _size, uint32_t multi>
-T Circular_Buffer<T,_size,multi>::readBytesVirtual(uint32_t length) {
+T Circular_Buffer<T,_size,multi>::markBytesRead(uint32_t length) {
   if ( multi ) {
     read();
     return 0;
