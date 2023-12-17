@@ -27,7 +27,7 @@
 
 import socket
 
-HOST = '192.168.33.10'  # The server's IP address
+HOST = '192.168.40.80'  # The server's IP address
 PORT = 6666             # The port used by the server
 
 def main():

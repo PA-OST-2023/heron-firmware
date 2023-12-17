@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <console.h>
-#include <Audio.h>
+// #include <console.h>
+// #include <Audio.h>
 // #include "Audio/transmit_wav_buffered.h"
 
 #include <QNEthernet.h>
@@ -10,38 +10,46 @@ EthernetServer server(6666); // Port number for the server
 
 void tcpThread(void* pvParameter);
 
-AudioSynthWaveformSine   sine1;
-AudioSynthWaveformSine   sine2;
-AudioSynthWaveformSine   sine3;
-AudioSynthWaveformSine   sine4;
-AudioSynthWaveformSine   sine5;
-AudioSynthWaveformSine   sine6;
-AudioSynthWaveformSine   sine7;
-AudioSynthWaveformSine   sine8;
-AudioSynthWaveformSine   sine9;
-AudioSynthWaveformSine   sine10;
-AudioSynthWaveformSine   sine11;
-AudioSynthWaveformSine   sine12;
-AudioSynthWaveformSine   sine13;
-AudioSynthWaveformSine   sine14;
-AudioSynthWaveformSine   sine15;
-AudioSynthWaveformSine   sine16;
-AudioSynthWaveformSine   sine17;
-AudioSynthWaveformSine   sine18;
-AudioSynthWaveformSine   sine19;
-AudioSynthWaveformSine   sine20;
-AudioSynthWaveformSine   sine21;
-AudioSynthWaveformSine   sine22;
-AudioSynthWaveformSine   sine23;
-AudioSynthWaveformSine   sine24;
-AudioSynthWaveformSine   sine25;
-AudioSynthWaveformSine   sine26;
-AudioSynthWaveformSine   sine27;
-AudioSynthWaveformSine   sine28;
-AudioSynthWaveformSine   sine29;
-AudioSynthWaveformSine   sine30;
-AudioSynthWaveformSine   sine31;
-AudioSynthWaveformSine   sine32;
+size_t writeFully(EthernetClient &c, const uint8_t *buf, size_t size, uint32_t timeout) {
+  uint32_t startT = millis();
+  return qindesign::network::util::writeFully(c, buf, size, [&c, startT, timeout]()
+  {
+    return !static_cast<bool>(c) || (millis() - startT) >= timeout;
+  });
+}
+
+// AudioSynthWaveformSine   sine1;
+// AudioSynthWaveformSine   sine2;
+// AudioSynthWaveformSine   sine3;
+// AudioSynthWaveformSine   sine4;
+// AudioSynthWaveformSine   sine5;
+// AudioSynthWaveformSine   sine6;
+// AudioSynthWaveformSine   sine7;
+// AudioSynthWaveformSine   sine8;
+// AudioSynthWaveformSine   sine9;
+// AudioSynthWaveformSine   sine10;
+// AudioSynthWaveformSine   sine11;
+// AudioSynthWaveformSine   sine12;
+// AudioSynthWaveformSine   sine13;
+// AudioSynthWaveformSine   sine14;
+// AudioSynthWaveformSine   sine15;
+// AudioSynthWaveformSine   sine16;
+// AudioSynthWaveformSine   sine17;
+// AudioSynthWaveformSine   sine18;
+// AudioSynthWaveformSine   sine19;
+// AudioSynthWaveformSine   sine20;
+// AudioSynthWaveformSine   sine21;
+// AudioSynthWaveformSine   sine22;
+// AudioSynthWaveformSine   sine23;
+// AudioSynthWaveformSine   sine24;
+// AudioSynthWaveformSine   sine25;
+// AudioSynthWaveformSine   sine26;
+// AudioSynthWaveformSine   sine27;
+// AudioSynthWaveformSine   sine28;
+// AudioSynthWaveformSine   sine29;
+// AudioSynthWaveformSine   sine30;
+// AudioSynthWaveformSine   sine31;
+// AudioSynthWaveformSine   sine32;
 
 // AudioTransmitWAV32       transmitWav1;
 
@@ -81,12 +89,13 @@ AudioSynthWaveformSine   sine32;
 
 void setup()
 {
-  console.begin();
-  AudioMemory(120);
+  Serial.begin(0);
+  // console.begin();
+  // AudioMemory(120);
 
-  IPAddress ip(192, 168, 33, 10);
+  IPAddress ip(192, 168, 40, 80);
   IPAddress subnet(255, 255, 255, 0);
-  IPAddress gateway(192, 168, 33, 1);
+  IPAddress gateway(192, 168, 40, 1);
 
   Ethernet.setLocalIP(ip);
   Ethernet.setSubnetMask(subnet);
@@ -94,7 +103,7 @@ void setup()
 
   if(!Ethernet.begin(ip, subnet, gateway))
   {
-    console.println("Failed to configure Ethernet using static IP");
+    // console.println("Failed to configure Ethernet using static IP");
     // No point in proceeding, loop forever:
     while (true) {
       delay(1);
@@ -102,9 +111,9 @@ void setup()
   }
   server.begin();
 
-  console.print("Server is at ");
-  console.println(Ethernet.localIP());
-  console.println("Server started, waiting for clients...");
+  // console.print("Server is at ");
+  // console.println(Ethernet.localIP());
+  // console.println("Server started, waiting for clients...");
 
   // threads.addThread(tcpThread, nullptr, 2048);
 }
@@ -124,20 +133,27 @@ void tcpThread(void* pvParameter)
   {
     EthernetClient client = server.available();
     if (client) {
-      console.println("Client Connected");
+      // console.println("Client Connected");
       while(client.connected()) {
         // Send data as fast as possible
         // client.println("Hello from Teensy");
         // client.write(buffer, sizeof(buffer));
 
-        for(int i = 0; i < 5; i++)
+        static uint32_t millisLast = 0;
+        uint32_t currentMillis = millis();
+        if(millisLast != currentMillis)
         {
-          uint32_t sent = client.write(buffer, sizeof(buffer));
-          if(sent != sizeof(buffer))
+          millisLast = currentMillis;
+          for(int i = 0; i < 5; i++)
           {
-            console.warning.printf("Failed to send all data: %d\n", sent);
+            uint32_t sent = writeFully(client, buffer, sizeof(buffer), 1000);
+            // uint32_t sent = client.write(buffer, sizeof(buffer));
+            // if(sent != sizeof(buffer))
+            // {
+            //   console.warning.printf("Failed to send all data: %d\n", sent);
+            // }
+            bytesSent += sent;
           }
-          bytesSent += sent;
         }
 
         // Optional: implement a small delay to control the data rate
@@ -145,18 +161,16 @@ void tcpThread(void* pvParameter)
         Ethernet.loop();
         // threads.yield();
 
-        threads.delay(1);
-
         static uint32_t t = 0;
         if(millis() - t > 1000)
         {
           t = millis();
-          console.printf("Sent: %f MBit/s\n", bytesSent * 8.0 / 1000000.0);
+          Serial.printf("Sent: %f MBit/s\n", bytesSent * 8.0 / 1000000.0);
           bytesSent = 0;
         }
       }
       client.stop();
-      console.println("Client Disconnected");
+      // console.println("Client Disconnected");
     }
   }
 }
