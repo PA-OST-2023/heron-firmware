@@ -92,7 +92,7 @@ void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
 
     if(outN != sizeof(bufferBlock))
     {
-      // Serial.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
+      Serial.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
       // console.warning.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
     }
   }
@@ -128,7 +128,7 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
         }
         if(millis() - t0 > TCP_SEND_TIMEOUT_US)
         {
-          // Serial.println("[TRANSMIT WAV BUFFERED] Timeout.");
+          Serial.println("[TRANSMIT WAV BUFFERED] Timeout.");
           // console.error.println("[TRANSMIT WAV BUFFERED] Timeout.");
           break;
         }

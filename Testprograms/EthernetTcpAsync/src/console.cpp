@@ -89,7 +89,6 @@ void Console::writeTask(void *pvParameter)
         ref->readIdx = ref->writeIdx;
         ref->bufferAccessMutex.unlock();
       }
-      ref->notifyMutex.unlock();
     }
   }
 }

@@ -1,24 +1,13 @@
 #include <Arduino.h>
-// #include <console.h>
+#include <console.h>
 #include <Audio.h>
 #include "Audio/transmit_wav_buffered.h"
-
 #include <QNEthernet.h>
 using namespace qindesign::network;
 
-#include "Teensy41_AsyncTCP.hpp"
 
 EthernetServer server(6666); // Port number for the server
 
-void tcpThread(void* pvParameter);
-
-size_t writeFully(EthernetClient &c, const uint8_t *buf, size_t size, uint32_t timeout) {
-  uint32_t startT = millis();
-  return qindesign::network::util::writeFully(c, buf, size, [&c, startT, timeout]()
-  {
-    return !static_cast<bool>(c) || (millis() - startT) >= timeout;
-  });
-}
 
 AudioSynthWaveformSine   sine1;
 AudioSynthWaveformSine   sine2;
@@ -92,13 +81,13 @@ AudioConnection          patchCord33(sine32, 0, transmitWav1, 31);
 void setup()
 {
   Serial.begin(0);
-  // console.begin();
+  console.begin();
   AudioMemory(250);
 
-  while(!Serial)
-  {
-    delay(1);
-  }
+  // while(!Serial)
+  // {
+  //   delay(1);
+  // }
 
   sine1.frequency(261.63);
   sine2.frequency(277.19);
@@ -143,27 +132,12 @@ void setup()
 
   if(!Ethernet.begin(ip, subnet, gateway))
   {
-    // console.println("Failed to configure Ethernet using static IP");
-    // No point in proceeding, loop forever:
+    console.println("Failed to configure Ethernet using static IP");
     while (true) {
       delay(1);
     }
   }
 
-  
-
-  // const size_t sz = 65536 * 128;
-  // const AudioBuffer::bufType bufMem = AudioBuffer::inExt;
-  // if(transmitWav1.createBuffer(sz, bufMem))
-  // {
-  //   while(1)
-  //   {
-  //     Serial.println("Failed to create buffer");
-  //     delay(500);
-  //   }
-  // }
-
-  // server.begin();
   if(!transmitWav1.begin(&server))
   {
     Serial.println("Transmit WAV buffered could not be initialized.");
@@ -174,18 +148,15 @@ void setup()
   }
 
 
-  // console.print("Server is at ");
-  // console.println(Ethernet.localIP());
-  // console.println("Server started, waiting for clients...");
-
-  // threads.addThread(tcpThread, nullptr, 2048);
+  console.print("Server is at ");
+  console.println(Ethernet.localIP());
+  console.println("Server started, waiting for clients...");
 }
 
 void loop()
 {
   Ethernet.loop();
   // server.flush();
-  // tcpThread(nullptr);
 
   static float dataRateAvr = 0;
   if(millis() < 10000)
@@ -200,68 +171,6 @@ void loop()
   if(millis() - t > 1000)
   {
     t = millis();
-    Serial.printf("[MAIN] Audio Stream Datarate: %.2f MBit/s\n", (dataRateAvr * 8.0) / 1024.0 / 1024.0);
+    console.log.printf("[MAIN] Audio Stream Datarate: %.2f MBit/s\n", (dataRateAvr * 8.0) / 1024.0 / 1024.0);
   }
 }
-
-void tcpThread(void* pvParameter)
-{
-  static uint8_t buffer[1460] = "Hello, server!";
-  static uint32_t bytesSent = 0;
-  static uint32_t cycles = 0;
-
-  while(true)
-  {
-    EthernetClient client = server.available();
-    if (client) {
-      // console.println("Client Connected");
-      while(client.connected()) {
-        // Send data as fast as possible
-        // client.println("Hello from Teensy");
-        // client.write(buffer, sizeof(buffer));
-
-        static uint32_t millisLast = 0;
-        uint32_t currentMillis = millis();
-        if(currentMillis - millisLast > 100)
-        {
-          millisLast = currentMillis;
-          uint32_t sent = 0;
-          while(true)
-          {
-            sent += client.write(buffer, sizeof(buffer));
-            // sent += writeFully(client, buffer, sizeof(buffer), 1000);
-            if(sent >= 500 * sizeof(buffer))
-            {
-              bytesSent += sent;
-              break;
-            }
-            if(millis() - currentMillis > 1000)
-            {
-              Serial.println("Timeout");
-              bytesSent += sent;
-              break;
-            }
-          }
-          cycles++;
-        }
-
-        // Optional: implement a small delay to control the data rate
-        
-        Ethernet.loop();
-        // threads.yield();
-
-        static uint32_t t = 0;
-        if(millis() - t > 1000)
-        {
-          t = millis();
-          Serial.printf("Sent: %f MBit/s, Cycles: %d\n", (bytesSent * 8.0) / 1000000, cycles);
-          bytesSent = 0;
-          cycles = 0;
-        }
-      }
-      client.stop();
-      // console.println("Client Disconnected");
-    }
-  }
-}
-
