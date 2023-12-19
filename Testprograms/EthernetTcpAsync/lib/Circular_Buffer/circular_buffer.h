@@ -99,18 +99,11 @@ class Circular_Buffer {
         bool find(T *buffer, uint32_t length, int pos1, int pos2, int pos3, int pos4 = -1, int pos5 = -1);
         bool findRemove(T *buffer, uint32_t length, int pos1, int pos2, int pos3, int pos4 = -1, int pos5 = -1);
 
+    protected:
+    private:
         volatile uint32_t head = 0;
         volatile uint32_t tail = 0;
         volatile uint32_t _available = 0;
-
-    protected:
-    private:
-        // volatile uint32_t head = 0;
-        // volatile uint32_t tail = 0;
-        // volatile uint32_t _available = 0;
-
-        // T _cbuf[_size];
-        // T _cabuf[_size][multi+2];
 
         T* _cbuf;
         T** _cabuf;

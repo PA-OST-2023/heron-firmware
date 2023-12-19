@@ -1,6 +1,6 @@
 import socket
 
-HOST = '192.168.40.80'  # The server's IP address
+HOST = '192.168.33.80'  # The server's IP address
 PORT = 6666             # The port used by the server
 
 def main():
@@ -10,7 +10,14 @@ def main():
         print(f"Connected to {HOST}:{PORT}")
 
         dataBuffer = bytearray()  # Buffer to store received data
-        magicStartSequence = bytes([0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF])
+        magicStartSequence = bytes("HERON666", 'utf-8')
+
+        headerSize = 20
+        channelCount = 32
+        blockSampleCount = 128
+        audioBlockSize = channelCount * blockSampleCount * 2
+        packetSize = audioBlockSize + headerSize
+
 
         try:
             while True:
@@ -20,16 +27,18 @@ def main():
 
                 dataBuffer.extend(data)
 
-                # Search for the magic sequence
-                magicIndex = dataBuffer.find(magicStartSequence)
-                if magicIndex != -1:
-                    alignedData = dataBuffer[magicIndex + len(magicStartSequence):]
-                    print(f"Received {len(alignedData)} bytes: {[int(i) for i in alignedData[:10]]}")
+                headerIndex = dataBuffer.find(magicStartSequence)
+                if headerIndex != -1 and len(dataBuffer) >= packetSize:
+                    packetIndex = int.from_bytes(dataBuffer[headerIndex + 8 : headerIndex + 12], 'little')
+                    timestamp = int.from_bytes(dataBuffer[headerIndex + 12 : headerIndex + headerSize], 'little')
+                    audioData = dataBuffer[headerIndex + headerSize : headerIndex + headerSize + audioBlockSize]
+                    dataBuffer = dataBuffer[packetSize:]
 
-                    # Clear the buffer or remove processed part
-                    dataBuffer = dataBuffer[magicIndex + len(magicStartSequence):]
+                    # print(f"Packet index: {packetIndex}, Timestamp: {timestamp/1000000000:.6f}")
+                    print(f"Received {len(audioData)} bytes: {[int(i) for i in audioData[:20]]}")
+
                     
-                # Optional: Add more logic to process alignedData
+
 
         finally:
             print("Closing connection")

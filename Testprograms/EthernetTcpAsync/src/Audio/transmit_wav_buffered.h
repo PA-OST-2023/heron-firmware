@@ -37,15 +37,24 @@
 #include <AudioStream.h>
 #include <EventResponder.h>
 #include <QNEthernet.h>
-#include <circular_buffer.h>
+#include "CircularBuffer.h"
 
 using namespace qindesign::network;
 
+struct __attribute__((packed)) Header
+{
+  const uint8_t magic [8] = {'H', 'E', 'R', 'O', 'N', '6', '6', '6'};
+  volatile uint32_t blockIndex = 0;
+  volatile uint64_t timestamp = 0;
+};
 
 class AudioTransmitWAVbuffered : public EventResponder, public AudioStream
 {
 public:
-    static constexpr const size_t TCP_PACKET_MAX_SIZE = 1460;
+  static constexpr const size_t TCP_PACKET_MAX_SIZE   = 1460;
+  static constexpr const size_t TCP_PACKET_BLOCK_SIZE = AUDIO_BLOCK_SAMPLES * 32 * 2 + sizeof(Header);  // Must be at least as big as: AUDIO_BLOCK_SAMPLES * ChannelCount * 2
+  static constexpr const size_t TCP_SEND_TIMEOUT_US   = 50;
+  static constexpr const size_t EXT_RAM_BUFFER_SIZE   = 12 * 1024 * 1024;         // Max is 16MB
 
 	AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t **iqueue);
 	AudioTransmitWAVbuffered(void) : AudioTransmitWAVbuffered(2, inputQueueArray) {}
@@ -60,15 +69,9 @@ public:
 	  return res;
 	}
   uint32_t getDataRate(void) {return bytesPerSecond;}     // bytes per second
-	
 	virtual void update(void);
 	
 	static uint8_t objcnt;
-	size_t lowWater;
-	// LogLastMinMax<uint32_t> bufferAvail;
-
-  Circular_Buffer<uint8_t, 12 * 1024 * 1024> circularBuffer;
-	
 	friend class AudioTransmitWAVmono;
 	friend class AudioTransmitWAVstereo;
 	
@@ -77,6 +80,8 @@ private:
 	static void EventResponse(EventResponderRef evref);
 	uint32_t flushBuffer(uint8_t* pb, size_t sz);
 	volatile bool bufferOverflowDetected = false;
+  static EXTMEM CircularBuffer<EXT_RAM_BUFFER_SIZE> circularBuffer;
+  Header header;
 
 	uint32_t byteCounter = 0;
 	uint32_t bytesPerSecond = 0;
@@ -88,15 +93,6 @@ private:
 	bool initialized = false;
 	volatile bool writePending = false;
 	uint8_t objnum;
-
-	size_t writeFully(EthernetClient &c, const uint8_t *buf, size_t size, uint32_t timeout)
-  {
-		uint32_t startT = millis();
-		return qindesign::network::util::writeFully(c, buf, size, [&c, startT, timeout]()
-		{
-			return !static_cast<bool>(c) || (millis() - startT) >= timeout;
-		});
-		}
 };
 
 class AudioTransmitWAVmono : public AudioTransmitWAVbuffered

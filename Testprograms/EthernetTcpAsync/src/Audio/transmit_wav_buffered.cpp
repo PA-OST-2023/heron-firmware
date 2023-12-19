@@ -38,8 +38,9 @@
 
 using namespace qindesign::network;
 uint8_t AudioTransmitWAVbuffered::objcnt;
+EXTMEM CircularBuffer<AudioTransmitWAVbuffered::EXT_RAM_BUFFER_SIZE> AudioTransmitWAVbuffered::circularBuffer;
 
-AudioTransmitWAVbuffered::AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t **iqueue) : AudioStream(ninput, iqueue), lowWater(0xFFFFFFFF), chanCnt(ninput), writePending(false), objnum(objcnt++)
+AudioTransmitWAVbuffered::AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t **iqueue) : AudioStream(ninput, iqueue), chanCnt(ninput), writePending(false), objnum(objcnt++)
 {
 	setContext(this);
 	attach(EventResponse);
@@ -81,10 +82,10 @@ void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
 	AudioTransmitWAVbuffered* pPWB = (AudioTransmitWAVbuffered*) evref.getContext();
   pPWB->writePending = true;
 
-  static uint8_t bufferBlock[1460 * 8];
-  if(pPWB->circularBuffer.available() > sizeof(bufferBlock))
+  static uint8_t bufferBlock[TCP_PACKET_BLOCK_SIZE];
+  if(pPWB->circularBuffer.availableToRead() > sizeof(bufferBlock))
   {
-    pPWB->circularBuffer.peekBytes(bufferBlock, sizeof(bufferBlock));
+    pPWB->circularBuffer.peek(bufferBlock, sizeof(bufferBlock));
     uint32_t outN = pPWB->flushBuffer(bufferBlock, sizeof(bufferBlock));
     pPWB->circularBuffer.markBytesRead(outN);
     pPWB->byteCounter += outN;                   // Count the bytes that have been sent out for the data rate calculation
@@ -100,81 +101,45 @@ void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
 
 uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
 {
-  size_t samplesPerpacket = TCP_PACKET_MAX_SIZE / (2 * chanCnt);      // Calculate the number of multichannel-samples that fit in one packet (2 bytes per sample)
-  size_t bytesPerPacket = samplesPerpacket * 2 * chanCnt;             // Calculate the number of bytes that correspond to the number of samples
-  size_t outN = 0;                                                    // Effective amount of samples that have been sent out
-
-  // Serial.printf("[TRANSMIT WAV BUFFERED] Data in buffer: %d\n", sz);
-
-  // static uint32_t blockSize = bytesPerPacket * 100;
-
-  if(initialized)
-	// if(sz >= blockSize && initialized)                          // Data transfer triggered, but there's not enough data - ignore the request
+  if(!initialized)
 	{
-    // console.log.printf("[TRANSMIT WAV BUFFERED] Cycle: %d, Data in buffer: %d\n", maxCycles, sz);
-    // if(maxCycles >= 2)
-    // {
-    //   break;
-    // }
-    // maxCycles++;
+    return 0;
+  }
 
-    if(client)
+  size_t outN = 0;                                                    // Effective amount of samples that have been sent out
+  if(client)
+  {
+    if(!client.connected())
     {
-      if(!client.connected())
-      {
-        client.stop();
-        client = server->available();
-      }
-      else
-      {
-        // outN = client.write(pb, sz);
-        // Ethernet.loop();
-        // server->flush();
-
-
-        uint32_t t0 = millis();
-        while(true)
-        {
-          outN += client.write(pb + outN, sz - outN);
-          Ethernet.loop();
-          server->flush();
-          if(outN >= sz)
-          {
-            break;
-          }
-          if(millis() - t0 > 50)      // TODO: Make timeout configurable
-          {
-            // Serial.println("[TRANSMIT WAV BUFFERED] Timeout.");
-            // console.error.println("[TRANSMIT WAV BUFFERED] Timeout.");
-            break;
-          }
-        }
-      }
+      client.stop();
+      client = server->available();
     }
     else
     {
-      client = server->available();
-      // Serial.println("[TRANSMIT WAV BUFFERED] Client is not connected.");
+      uint32_t t0 = millis();
+      while(true)
+      {
+        outN += client.write(pb + outN, sz - outN);
+        Ethernet.loop();
+        server->flush();
+        if(outN >= sz)
+        {
+          break;
+        }
+        if(millis() - t0 > TCP_SEND_TIMEOUT_US)
+        {
+          // Serial.println("[TRANSMIT WAV BUFFERED] Timeout.");
+          // console.error.println("[TRANSMIT WAV BUFFERED] Timeout.");
+          break;
+        }
+      }
     }
-
-    // outN = Udp->write(pb + outN, bytesPerPacket);
-
-		if (outN != bytesPerPacket)                                        // failed to write out all data
-		{
-      // Serial.printf("[RECORD WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", bytesPerPacket, outN);
-			// console.warning.printf("[RECORD WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", bytesPerPacket, outN);
-		}
-
-		// bufferAvail.newValue(getAvailable());                             // worse than lowWater
-		// writeExecuted(bytesPerPacket);
-		// writeExecuted(outN);
-	}
+  }
   else
   {
-    // writePending = false;
-    return 0;
+    client = server->available();
+    // Serial.println("[TRANSMIT WAV BUFFERED] Client is not connected.");
   }
-	// writePending = false;
   return outN;
 }
 
@@ -183,7 +148,7 @@ static void interleave(int16_t* buf,int16_t** blocks,uint16_t channels)     // i
 	if (1 == channels)    // mono, do the simple thing
 	{
 		if (nullptr != blocks[0])
-			memcpy(buf,blocks[0],AUDIO_BLOCK_SAMPLES * sizeof *buf);
+			memcpy(buf,blocks[0], AUDIO_BLOCK_SAMPLES * sizeof *buf);
 		else
 			memset(buf,0,AUDIO_BLOCK_SAMPLES * sizeof *buf);
 	}
@@ -220,8 +185,6 @@ void AudioTransmitWAVbuffered::update(void)
 	int16_t* data[chanCnt] = {0};
 	int alloCnt = 0; 	                                    // count of blocks successfully received
 
-  // static uint32_t bytesToSend = 0;
-
   if(millis() - secondTimer > 1000)
   {
     bytesPerSecond = byteCounter;
@@ -242,57 +205,25 @@ void AudioTransmitWAVbuffered::update(void)
 		if(alloCnt >= chanCnt)                              // received enough - extract the data
 		{
 			interleave(buf, data, chanCnt);	                  // make a chunk of data for the file
-      uint32_t availableToWrite = circularBuffer.capacity() - circularBuffer.available();
 
-      static const uint8_t magicStartSequence[16] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF};
+      header.blockIndex++;
+      header.timestamp = (uint64_t)micros() * 1000;               // TODO Get from GPS
 
-      if(availableToWrite < (sizeof(buf) + sizeof(magicStartSequence)))
+      if(circularBuffer.availableToWrite() < (sizeof(buf)))
       {
         Serial.println("[TRANSMIT WAV BUFFERED] Buffer overflow detected.");
-        // circularBuffer.clear();
+        circularBuffer.clear();
         // console.error.println("[TRANSMIT WAV BUFFERED] Buffer overflow detected.");
       }
-
-      // Just for debugging:
-      for(int i = 0; i < 10; i++) ((uint8_t*)buf)[i] = i;   // TODO: Remove this line
-
-      circularBuffer.write(magicStartSequence, sizeof(magicStartSequence));
-      circularBuffer.write((uint8_t*)buf, sizeof(buf));
-      if(!writePending)
+      else
       {
-        triggerEvent(0);
+        circularBuffer.write((uint8_t*)&header, sizeof(header));
+        circularBuffer.write((uint8_t*)buf, sizeof(buf));
+        if(!writePending)
+        {
+          triggerEvent(0);
+        }
       }
-
-      // bytesToSend += sizeof(buf);
-      // static uint32_t t0 = millis();
-      // if(millis() - t0 > 1000)
-      // {
-      //   t0 = millis();
-      //   Serial.printf("[TRANSMIT WAV BUFFERED] Data written to buffer [MBit/s]: %.2f\n", (bytesToSend * 8.0) / 1000000);
-      //   bytesToSend = 0;
-      // }
-
-
-      // writePending = true;
-      // triggerEvent(0);
-			// if(rdr == ok && !writePending)  	                // there's now room for a buffer read and we haven't already asked
-			// {
-      //   writePending = true;
-			// 	triggerEvent(0);
-			// }
-			// else if(rdr == full)
-			// {
-			//   bufferOverflowDetected = true;
-      //   // emptyBuffer();
-      //   Serial.println("[TRANSMIT WAV BUFFERED] Buffer overflow detected.");
-      //   // console.error.println("[TRANSMIT WAV BUFFERED] Buffer overflow detected.");
-			// }
-      // else if(rdr == invalid)
-      // {
-      //   Serial.println("[TRANSMIT WAV BUFFERED] Invalid buffer.");
-      //   // emptyBuffer();
-      //   // console.error.println("[TRANSMIT WAV BUFFERED] Invalid buffer.");
-      // }
 		}
 	}
 	
