@@ -80,14 +80,8 @@ AudioConnection          patchCord33(sine32, 0, transmitWav1, 31);
 
 void setup()
 {
-  Serial.begin(0);
   console.begin();
   AudioMemory(250);
-
-  // while(!Serial)
-  // {
-  //   delay(1);
-  // }
 
   sine1.frequency(261.63);
   sine2.frequency(277.19);
@@ -132,31 +126,27 @@ void setup()
 
   if(!Ethernet.begin(ip, subnet, gateway))
   {
-    console.println("Failed to configure Ethernet using static IP");
-    while (true) {
+    console.println("[MAIN] Failed to configure Ethernet using static IP");
+    while (true)
+    {
       delay(1);
     }
   }
 
   if(!transmitWav1.begin(&server))
   {
-    Serial.println("Transmit WAV buffered could not be initialized.");
+    console.error.println("[MAIN] Transmit WAV buffered could not be initialized.");
   }
   else
   {
-    Serial.println("Transmit WAV buffered initialized.");
+    console.ok.println("[MAIN] Transmit WAV buffered initialized.");
   }
-
-
-  console.print("Server is at ");
-  console.println(Ethernet.localIP());
-  console.println("Server started, waiting for clients...");
+  console.print("Server is at "); console.println(Ethernet.localIP());
 }
 
 void loop()
 {
   Ethernet.loop();
-  // server.flush();
 
   static float dataRateAvr = 0;
   if(millis() < 10000)
@@ -168,9 +158,21 @@ void loop()
     dataRateAvr = dataRateAvr * 0.9 + transmitWav1.getDataRate() * 0.1;
   }
   static uint32_t t = 0;
-  if(millis() - t > 1000)
+  if(millis() - t > 200)
   {
     t = millis();
-    console.log.printf("[MAIN] Audio Stream Datarate: %.2f MBit/s\n", (dataRateAvr * 8.0) / 1024.0 / 1024.0);
+    if(transmitWav1.getConnectionState())
+    {
+      console.log.printf("[MAIN] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n", (dataRateAvr * 8.0) / 1024.0 / 1024.0, transmitWav1.getBufferFillLevel() * 100.0);
+    }
+    else
+    {
+      console.warning.println("[MAIN] No client connected.");
+    }
+  }
+
+  if(transmitWav1.getBufferOverflowDetected())
+  {
+    console.warning.println("[MAIN] Buffer overflow detected.");
   }
 }

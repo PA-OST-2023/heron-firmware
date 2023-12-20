@@ -51,15 +51,16 @@ struct __attribute__((packed)) Header
 class AudioTransmitWAVbuffered : public EventResponder, public AudioStream
 {
 public:
-  static constexpr const size_t TCP_PACKET_MAX_SIZE   = 1460;
-  static constexpr const size_t TCP_PACKET_BLOCK_SIZE = AUDIO_BLOCK_SAMPLES * 32 * 2 + sizeof(Header);  // Must be at least as big as: AUDIO_BLOCK_SAMPLES * ChannelCount * 2
-  static constexpr const size_t TCP_SEND_TIMEOUT_US   = 50;
-  static constexpr const size_t EXT_RAM_BUFFER_SIZE   = 12 * 1024 * 1024;         // Max is 16MB
+  static constexpr const size_t TCP_PACKET_MAX_SIZE       = 1460;
+  static constexpr const size_t TCP_PACKET_BLOCK_SIZE     = TCP_PACKET_MAX_SIZE * 16;   // Must be at least as big as: AUDIO_BLOCK_SAMPLES * ChannelCount * 2
+  static constexpr const size_t TCP_SEND_TIMEOUT_US       = 50;                         // Resend interval in microseconds
+  static constexpr const size_t TCP_CONNECTION_TIMEOUT_MS = 5000;                       // Connection timeout in milliseconds
+  static constexpr const size_t EXT_RAM_BUFFER_SIZE       = 12 * 1024 * 1024;           // Max is 16 MB
 
 	AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t **iqueue);
 	AudioTransmitWAVbuffered(void) : AudioTransmitWAVbuffered(2, inputQueueArray) {}
 	virtual ~AudioTransmitWAVbuffered(void) {end();}
-	bool begin(EthernetServer* tcpServer);
+	bool begin(EthernetServer* tcpServer, bool verboseOutput = false);
 	void end(void);
 
 	bool getBufferOverflowDetected(void)
@@ -68,7 +69,9 @@ public:
 	  bufferOverflowDetected = false;
 	  return res;
 	}
-  uint32_t getDataRate(void) {return bytesPerSecond;}     // bytes per second
+  float getBufferFillLevel(void) {return (float)circularBuffer.availableToRead() / (float)circularBuffer.capacity();}
+  uint32_t getDataRate(void) {return bytesPerSecond;}                                         // Bytes per second
+  bool getConnectionState(void) {if(!client) return false; else return client.connected();}
 	virtual void update(void);
 	
 	static uint8_t objcnt;
@@ -86,6 +89,7 @@ private:
 	uint32_t byteCounter = 0;
 	uint32_t bytesPerSecond = 0;
 	uint32_t secondTimer = 0;
+  uint32_t lastSendTime = 0;
 
 	EthernetServer* server = nullptr;
   EthernetClient client;
@@ -93,6 +97,7 @@ private:
 	bool initialized = false;
 	volatile bool writePending = false;
 	uint8_t objnum;
+  bool verbose = false;
 };
 
 class AudioTransmitWAVmono : public AudioTransmitWAVbuffered

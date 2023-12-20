@@ -46,19 +46,18 @@ AudioTransmitWAVbuffered::AudioTransmitWAVbuffered(unsigned char ninput, audio_b
 	attach(EventResponse);
 }
 
-bool AudioTransmitWAVbuffered::begin(EthernetServer* tcpServer)
+bool AudioTransmitWAVbuffered::begin(EthernetServer* tcpServer, bool verboseOutput)
 {
   if(initialized)
   {
-    Serial.println("[TRANSMIT WAV BUFFERED] Modle was already initialized.");
-    // console.warning.println("[TRANSMIT WAV BUFFERED] Modle was already initialized.");
+    console.warning.println("[TRANSMIT WAV BUFFERED] Modle was already initialized.");
     return false;
   }
   server = tcpServer;
+  verbose = verboseOutput;
   if(!server)
   {
-    Serial.println("[TRANSMIT WAV BUFFERED] Server is nullptr.");
-    // console.error.println("[TRANSMIT WAV BUFFERED] Client is nullptr.");
+    console.error.println("[TRANSMIT WAV BUFFERED] Client is nullptr.");
     return false;
   }
   server->begin();
@@ -90,9 +89,12 @@ void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
     pPWB->circularBuffer.markBytesRead(outN);
     pPWB->byteCounter += outN;                   // Count the bytes that have been sent out for the data rate calculation
 
-    if(outN != sizeof(bufferBlock))
+    if(outN == sizeof(bufferBlock))
     {
-      Serial.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
+      pPWB->lastSendTime = millis();
+    }
+    else
+    {
       // console.warning.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
     }
   }
@@ -106,16 +108,13 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
     return 0;
   }
 
+  bool searchForClient = true;
   size_t outN = 0;                                                    // Effective amount of samples that have been sent out
   if(client)
   {
-    if(!client.connected())
+    if(client.connected())
     {
-      client.stop();
-      client = server->available();
-    }
-    else
-    {
+      searchForClient = false;
       uint32_t t0 = millis();
       while(true)
       {
@@ -126,19 +125,31 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
         {
           break;
         }
-        if(millis() - t0 > TCP_SEND_TIMEOUT_US)
+        if(millis() - t0 >= TCP_SEND_TIMEOUT_US)
         {
-          Serial.println("[TRANSMIT WAV BUFFERED] Timeout.");
-          // console.error.println("[TRANSMIT WAV BUFFERED] Timeout.");
+          if(verbose)
+          {
+            console.warning.printf("[TRANSMIT WAV BUFFERED] Timeout after %d ms.\n", millis() - t0);
+          }
+          if(millis() - lastSendTime > TCP_CONNECTION_TIMEOUT_MS)           // If the last send was too long ago, we assume that the connection is lost
+          {
+            client.abort();
+            searchForClient = true;
+            console.warning.println("[TRANSMIT WAV BUFFERED] TCP Connection timeout -> close connection...");
+          }
           break;
         }
       }
     }
   }
-  else
+
+  if(searchForClient)
   {
     client = server->available();
-    // Serial.println("[TRANSMIT WAV BUFFERED] Client is not connected.");
+    if(client)
+    {
+      console.log.println("[TRANSMIT WAV BUFFERED] Client connected.");
+    }
   }
   return outN;
 }
@@ -211,9 +222,8 @@ void AudioTransmitWAVbuffered::update(void)
 
       if(circularBuffer.availableToWrite() < (sizeof(buf)))
       {
-        Serial.println("[TRANSMIT WAV BUFFERED] Buffer overflow detected.");
         circularBuffer.clear();
-        // console.error.println("[TRANSMIT WAV BUFFERED] Buffer overflow detected.");
+        bufferOverflowDetected = true;
       }
       else
       {

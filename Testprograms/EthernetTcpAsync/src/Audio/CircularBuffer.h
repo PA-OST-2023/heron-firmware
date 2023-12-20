@@ -40,20 +40,12 @@
 template<size_t Size>
 class CircularBuffer
 {
-  static_assert(Size % 2 == 0, "Size must be a multiple of 2");
-  static_assert(Size > 0, "Size must be greater than 0");
-
   public:
     CircularBuffer() : head(0), tail(0), bufferSize(0), bufferCapacity(Size), bufferFull(false){}
 
     ~CircularBuffer() {}
 
     void write(const uint8_t* data, size_t size) {
-        if (size > availableToWrite()) {
-            // Handle error or resize logic
-            return;
-        }
-
         for (size_t i = 0; i < size; ++i) {
             buffer[tail] = data[i];
             tail = (tail + 1) % Size;

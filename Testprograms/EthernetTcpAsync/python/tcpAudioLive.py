@@ -37,7 +37,7 @@ lastPacketIndex = 0
 
 try:
     while True:
-        data = sock.recv(1460*8)
+        data = sock.recv(1460 * 8)
         if not data:
             break
         dataBuffer.extend(data)

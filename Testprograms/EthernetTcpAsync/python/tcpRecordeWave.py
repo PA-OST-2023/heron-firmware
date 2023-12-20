@@ -51,8 +51,8 @@ def main():
                         startSeconds = timestamp / 1000000000
 
                     if timestamp // 1000000000 > seconds:
-                        seconds = timestamp // 1000000000 - startSeconds
-                        print(f"Recording time: {seconds:.2f}/{RECORDING_TIME:.2f} seconds")
+                        seconds = timestamp // 1000000000
+                        print(f"Recording time: {seconds - startSeconds:.2f}/{RECORDING_TIME:.2f} seconds")
 
                     
                 else:
