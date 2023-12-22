@@ -1,7 +1,6 @@
 import socket
 import time
 
-
 HOST = '192.168.33.80'
 PORT = 6666
 TCP_CONNECTION_TIMEOUT = 5.0
@@ -23,7 +22,6 @@ def main():
                 s.settimeout(0.5)
                 s.connect((HOST, PORT))
                 s.sendall(b'0')
-                print(f"Timeout: {s.gettimeout()}")
                 print(f"Connected to {HOST}:{PORT}")
                 i = 0
                 lastReceived = time.time()
@@ -44,14 +42,11 @@ def main():
                             dataBuffer = dataBuffer[packetSize:]
                             i+=1
                             if i%100 == 0:
-                                print(f"Received {len(audioData)} bytes: {[int(i) for i in audioData[:20]]}")
-                            # print(f"Packet index: {packetIndex}, Timestamp: {timestamp/1000000000:.6f}")
-                            # print(f"Received {len(audioData)} bytes: {[int(i) for i in audioData[:20]]}")
+                                # print(f"Received {len(audioData)} bytes: {[int(i) for i in audioData[:20]]}")
+                                print(f"Packet index: {packetIndex}, Timestamp: {timestamp/1000000000:.6f}")
 
                     except (socket.timeout, TimeoutError) as e:      # Don't care about short connection drops, as long as the connection is re-established
-                        print(type(e), e)
                         if(time.time() - lastReceived > TCP_CONNECTION_TIMEOUT):
-                            print(f"Connection timed out after {time.time() - lastReceived:.2f} seconds")
                             break
                         continue
                     except Exception as e:
