@@ -208,7 +208,7 @@ void sys_check_core_locking(const char *file, int line, const char *func);
 #define TCP_MSS                    1460  /* 536 */
 // #define TCP_CALCULATE_EFF_SEND_MSS 1
 // #define LWIP_TCP_RTO_TIME          3000
-#define TCP_SND_BUF                (4 * TCP_MSS)  /* (2 * TCP_MSS) */
+#define TCP_SND_BUF                (8 * TCP_MSS)  /* (2 * TCP_MSS) */
 // #define TCP_SND_QUEUELEN           ((4 * (TCP_SND_BUF) + (TCP_MSS - 1))/(TCP_MSS))
 /* #define TCP_SNDLOWAT \
    LWIP_MIN(LWIP_MAX(((TCP_SND_BUF)/2), (2 * TCP_MSS) + 1), (TCP_SND_BUF) - 1)*/

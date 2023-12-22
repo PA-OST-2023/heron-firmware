@@ -57,7 +57,7 @@ bool Console::initialize(void)
   ringBuffer = (char*) malloc(QUEUE_BUFFER_LENGTH);
   if(ringBuffer == nullptr) return false;
   initialized = true;
-  threads.addThread(interfaceTask, this, 512);
+  threads.addThread(interfaceTask, this, 1024);
   threads.addThread(writeTask, this, 4096);
   return true;
 }

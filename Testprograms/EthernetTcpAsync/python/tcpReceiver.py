@@ -55,15 +55,11 @@ def main():
                             break
                         continue
                     except Exception as e:
-                        print(type(e), e)
                         print("Trying to re-establish connection")
                         break
 
         except (socket.timeout, TimeoutError, ConnectionRefusedError) as e:
-            print(type(e), e)
-            print("Connection refused, retrying in 2.5 second")
-            # time.sleep(0.1)
-            # continue
+            pass
 
 
 if __name__ == '__main__':
