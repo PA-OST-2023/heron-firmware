@@ -4,7 +4,7 @@ or
 
 # _QNEthernet_, an lwIP-Based Ethernet Library For Teensy 4.1
 
-_Version: 0.25.0_
+_Version: 0.26.0-snapshot_
 
 The _QNEthernet_ library provides Ethernet functionality for the Teensy 4.1.
 It's compatible with the Arduino-style API.
@@ -58,6 +58,13 @@ lwIP release.
 15. [How to implement VLAN tagging](#how-to-implement-vlan-tagging)
 16. [Application layered TCP: TLS, proxies, etc.](#application-layered-tcp-tls-proxies-etc)
     1. [About the allocator functions](#about-the-allocator-functions)
+    2. [About the TLS adapter functions](#about-the-tls-adapter-functions)
+    3. [How to enable Mbed TLS](#how-to-enable-mbed-tls)
+       1. [Installing the Mbed TLS library](#installing-the-mbed-tls-library)
+          1. [Mbed TLS library install for Arduino IDE](#mbed-tls-library-install-for-arduino-ide)
+          2. [Mbed TLS library install for PlatformIO](#mbed-tls-library-install-for-platformio)
+       2. [Implementing the _altcp_tls_adapter_ functions](#implementing-the-altcp_tls_adapter-functions)
+       3. [Implementing the Mbed TLS entropy function](#implementing-the-mbed-tls-entropy-function)
 17. [On connections that hang around after cable disconnect](#on-connections-that-hang-around-after-cable-disconnect)
 18. [Notes on ordering and timing](#notes-on-ordering-and-timing)
 19. [Notes on RAM1 usage](#notes-on-ram1-usage)
@@ -215,7 +222,12 @@ The `Ethernet` object is the main Ethernet interface.
 
 * `broadcastIP()`: Returns the broadcast IP address associated with the current
   local IP and subnet mask.
+* `dnsServerIP(index)`: Gets a specific DNS server IP address. This returns
+  `INADDR_NONE` if the index not in the exclusive range,
+  [0, `DNSClient::maxServers()`).
 * `end()`: Shuts down the library, including the Ethernet clocks.
+* `hostByName()`: Convenience function that tries to resolve a hostname into an
+  IP address. This returns whether successful.
 * `hostname()`: Gets the DHCP client hostname. An empty string means that no
   hostname is set. The default is "teensy-lwip".
 * `interfaceStatus()`: Returns the network interface status, `true` for UP and
@@ -231,6 +243,8 @@ The `Ethernet` object is the main Ethernet interface.
   duplex (`false`).
 * `joinGroup(ip)`: Joins a multicast group.
 * `leaveGroup(ip)`: Leaves a multicast group.
+* `macAddress()`: Convenience function that returns a pointer to the current
+  MAC address.
 * `macAddress(mac)`: Fills the 6-byte `mac` array with the current MAC address.
   Note that the equivalent Arduino function is `MACAddress(mac)`.
 * `setDHCPEnabled(flag)`: Enables or disables the DHCP client. This may be
@@ -240,6 +254,9 @@ The `Ethernet` object is the main Ethernet interface.
   successful or if no restart attempt is required.
 * `setDNSServerIP(dnsServerIP)`: Sets the DNS server IP address. Note that the
   equivalent Arduino function is `setDnsServerIP(dnsServerIP)`.
+* `setDNSServerIP(index, ip)`: Sets a specific DNS server IP address. This does
+  nothing if the index is not in the exclusive range,
+  [0, `DNSClient::maxServers()`).
 * `setHostname(hostname)`: Sets the DHCP client hostname. The empty string will
   set the hostname to nothing. To use something other than the default at system
   start, call this before calling `begin()`.
@@ -289,6 +306,8 @@ The `Ethernet` object is the main Ethernet interface.
   It will return non-zero if connected and zero if not connected. Note that it's
   possible for new connections to reuse previously-used IDs.
 * `connectionTimeout()`: Returns the current timeout value.
+* `localIP()`: Returns the local IP of the network interface used for the
+  client. Currently, This returns the same value as `Ethernet.localIP()`.
 * `status()`: Returns the current TCP connection state. This returns one of
   lwIP's `tcp_state` enum values. To use with _altcp_, define the
   `LWIP_DEBUG` macro.
@@ -1071,7 +1090,9 @@ Things you can do:
 1. Look up an IP address by name, and
 2. Set multiple DNS servers.
 
-The `Ethernet.setDNSServerIP(ip)` function sets the zeroth DNS server.
+The `Ethernet.setDNSServerIP(ip)` function sets the zeroth DNS server address
+and the `Ethernet.setDNSServerIP(index, ip)` function sets the nth DNS server
+address. Corresponding `dnsServerIP()` functions get the DNS server addresses.
 
 ## stdio
 
@@ -1190,34 +1211,201 @@ Here are the steps to add decorated TCP:
 2. Implement two functions somewhere in your code, having these names and
    signatures:
    ```c++
-   std::function<void(const ip_addr_t *ipaddr, uint16_t port,
-                      altcp_allocator_t *allocator)> qnethernet_get_allocator;
-   std::function<void(altcp_allocator_t *allocator)> qnethernet_free_allocator;
+   std::function<bool(const ip_addr_t *ipaddr, uint16_t port,
+                      altcp_allocator_t &allocator)> qnethernet_altcp_get_allocator;
+   std::function<void(const altcp_allocator_t &allocator)> qnethernet_altcp_free_allocator;
    ```
 3. Implement all the functions necessary for the wrapping implementation. For
    example, for TLS, this means all the functions declared in
    _src/lwip/altcp_tls.h_.
 
-See _src/lwip/altcp.c_ for more information.
+See _src/lwip/altcp.c_ and the _AltcpTemplate_ example for more information.
 
 ### About the allocator functions
 
 The functions from step 2 create and destroy any resources used by the altcp
-wrapper. The first function fills in the allocator function and an argument
-appropriate to that allocator function. For example, `altcp_tcp_alloc()` doesn't
-need an argument, but `altcp_tls_alloc()` needs a pointer to a
+wrapper. The first function fills in the allocator function (`allocator->alloc`)
+and an argument appropriate to that allocator function (`allocator->arg`). For
+example, the `altcp_tcp_alloc()` allocator function doesn't need an argument (it
+can be set to NULL), but `altcp_tls_alloc()` needs a pointer to a
 `struct altcp_tls_config`.
+
+The connection will fail if the allocator function is set to NULL.
 
 The second function frees any resources that haven't already been freed. It's up
 to the application and TCP wrapper implementation to properly manage resources
 and to provide a way to determine whether a resource needs to be freed. It is
-only called if a socket could not be created.
+only called if `qnethernet_altcp_get_allocator` returns `true` and a socket
+could not be created.
 
 The `ipaddr` and `port` parameters indicate what the calling code is trying
 to do:
 
 1. If `ipaddr` is NULL then the application is trying to listen.
 2. If `ipaddr` is not NULL then the application is trying to connect.
+
+### About the TLS adapter functions
+
+The _src/altcp_tls_adapter.cpp_ file implements the allocator functions for
+altcp TLS integration. It specifies new functions that make it a little easier
+to integrate a library. These are as follows:
+
+1. Type: `std::function<bool(const ip_addr_t *ip, uint16_t port)>`\
+   Name: `qnethernet_altcp_is_tls`\
+   Description: Determines if the connection should use TLS. The IP address will
+                be NULL for a server connection.
+2. Type: `std::function<void(const ip_addr_t &ipaddr, uint16_t port,
+                             const uint8_t *&cert, size_t &cert_len)>`\
+   Name: `qnethernet_altcp_tls_client_cert`\
+   Note: All the arguments are references.\
+   Description: Retrieves the certificate for a client connection. The values
+                are initialized to NULL and zero, respectively, before this
+                function is called. The IP address and port can be used to
+                determine the certificate data, if needed.
+3. Type: `std::function<uint8_t(uint16_t port)>`\
+   Name: `qnethernet_altcp_tls_server_cert_count`\
+   Description: Returns the certificate count for a server connection.
+4. Type: `std::function<void(uint16_t port, uint8_t index,
+                             const uint8_t *&privkey,      size_t &privkey_len,
+                             const uint8_t *&privkey_pass, size_t &privkey_pass_len,
+                             const uint8_t *&cert,         size_t &cert_len)>`\
+   Name: `qnethernet_altcp_tls_server_cert`\
+   Description: Retrieves the certificate and private key for a server
+                connection. The values are initialized to NULL and zero before
+                this function is called. It will be called for each server
+                certificate, a total of N times, where N is the value returned
+                by `qnethernet_altcp_tls_server_cert_count`. The `index`
+                argument will be in the range zero to N-1. The port and
+                certificate index can be used to determine the certificate data,
+                if needed.
+
+Currently, this file is only built if the `LWIP_ALTCP`, `LWIP_ALTCP_TLS`, and
+`QNETHERNET_ALTCP_TLS_ADAPTER` macros are enabled by setting them to `1`.
+
+### How to enable Mbed TLS
+
+The lwIP distribution comes with a way to use the Mbed TLS library as an ALTCP
+TLS layer. It currently only supports the 2.x.x versions; as of this writing,
+the latest version is 2.28.6.
+
+More detailed information are in the subsections below, but here is an outline
+of how to use this feature:
+1. Set the following macros to `1` in _lwipopts.h_:
+   1. LWIP_ALTCP &mdash; Enables the ALTCP layer
+   2. LWIP_ALTCP_TLS &mdash; Enables the TLS features of ALTCP
+   3. LWIP_ALTCP_TLS_MBEDTLS &mdash; Enables the Mbed TLS code for ALTCP TLS
+   4. QNETHERNET_ALTCP_TLS_ADAPTER &mdash; Enables the _altcp_tls_adapter_
+      functions that help ease integration
+2. Install the latest Mbed TLS v2.x.x.
+3. Implement the functions required by _src/altcp_tls_adapter.cpp_. This file
+   implements the above allocator functions and simplifies the integration.
+4. Implement an entropy function for internal Mbed TLS use.
+
+#### Installing the Mbed TLS library
+
+Currently, there doesn't seem to be an Arduino-friendly version of this library.
+So, first download or clone a snapshot of the latest 2.x.x version (current as
+of this writing is 2.28.6): http://github.com/Mbed-TLS/mbedtls
+
+See the `v2.28.6` or `mbedtls-2.28.6` tags for the 2.28.6 version, or the
+`mbedtls-2.28` branch for the latest 2.28.x version. The `development` and
+`master` branches currently point to version 3.5.x.
+
+##### Mbed TLS library install for Arduino IDE
+
+In your preferred "Libraries" folder, create a folder named _mbedtls_.
+Underneath that, create a _src_ folder. Copy, recursively, all files from the
+distribution as follows:
+1. distro/library/* -> "Libraries"/mbedtls/src
+2. distro/include/* -> "Libraries"/mbedtls/src
+
+The "Libraries" folder can is the same thing as "Sketchbook location" in the
+application's Preferences. There should be a _libraries/_ folder inside
+that location.
+
+Next, create an empty _mbedtls.h_ file inside _"Libraries"/mbedtls/src/_.
+
+Next, create a _library.properties_ file inside _"Libraries"/mbedtls/_:
+```properties
+name=Mbed TLS
+version=2.28.6
+sentence=Mbed TLS is a C library that implements cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols.
+paragraph=Its small code footprint makes it suitable for embedded systems.
+category=Communication
+url=https://github.com/Mbed-TLS/mbedtls
+includes=mbedtls.h
+```
+(Ref: https://arduino.github.io/arduino-cli/latest/library-specification/)
+
+Last, modify the _mbedtls/src/mbedtls/config.h_ file by replacing it with the
+contents of _examples/MbedTLSDemo/sample_mbedtls_config.h_. Note that Mbed TLS
+uses a slightly different configuration mechanism than lwIP; it uses macro
+presence rather than macro values.
+
+For posterity, the following changes are the minimum possible set just to be
+able to get the library to compile:
+1. Define:
+   1. MBEDTLS_NO_PLATFORM_ENTROPY
+   2. MBEDTLS_ENTROPY_HARDWARE_ALT &mdash; Requires `mbedtls_hardware_poll()`
+      function implementation
+2. Undefine:
+   1. MBEDTLS_NET_C
+   2. MBEDTLS_TIMING_C
+   3. MBEDTLS_FS_IO
+   4. MBEDTLS_PSA_ITS_FILE_C
+   5. MBEDTLS_PSA_CRYPTO_STORAGE_C
+
+There are also example configuration headers in Mbed TLS under _configs/_.
+
+It's likely that, if you're using the Arduino IDE, you'll need to restart it
+after installing the library.
+
+##### Mbed TLS library install for PlatformIO
+
+In your preferred "Libraries" folder, create a folder named _mbedtls_. Copy all
+files, recursively, from the Mbed TLS distribution into that folder.
+
+The "Libraries" folder is either PlatformIO's global libraries location or the
+application's local _lib/_ folder.
+
+Next, create a _library.json_ file inside _"Libraries"/mbedtls/_:
+```json
+{
+  "name": "Mbed TLS",
+  "version": "2.28.6",
+  "description": "Mbed TLS is a C library that implements cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols. Its small code footprint makes it suitable for embedded systems.",
+  "keywords": [
+    "tls", "networking"
+  ],
+  "homepage": "https://www.trustedfirmware.org/projects/mbed-tls",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mbed-TLS/mbedtls.git"
+  },
+  "license": "Apache-2.0 OR GPL-2.0-or-later",
+  "build": {
+    "srcDir": "library",
+    "includeDir": "include"
+  }
+}
+```
+(Ref: https://docs.platformio.org/en/latest/manifests/library-json/index.html)
+
+Last, modify the _mbedtls/include/mbedtls/config.h_ file per the instructions in
+the previous, Arduino IDE install, section.
+
+#### Implementing the _altcp_tls_adapter_ functions
+
+The _MbedTLSDemo_ example illustrates how to implement these.
+
+#### Implementing the Mbed TLS entropy function
+
+See how the _MbedTLSDemo_ example does it. Look for the
+`mbedtls_hardware_poll()` function. The example uses _QNEthernet_'s internal
+entropy function, `trng_data()`. You can, of course, use your own entropy source
+if you like.
+
+If you add the function to a C++ file, then it must be declared `extern "C"`.
 
 ## On connections that hang around after cable disconnect
 
@@ -1296,7 +1484,7 @@ reason, you'd prefer to put them into RAM1, define the
 `QNETHERNET_BUFFERS_IN_RAM1` macro. _[As of this writing, no speed comparison
 tests have been done.]_
 
-There's a second configuration macro, `QNETHERNET_MEMORY_IN_RAM1`, for
+There's a second configuration macro, `QNETHERNET_LWIP_MEMORY_IN_RAM1`, for
 indicating that lwIP-declared memory should go into RAM1 instead of RAM2.
 
 These options are useful in the case where a program needs more dynamic memory,
@@ -1367,16 +1555,17 @@ _Entropy_ library.
 
 ## Configuration macros
 
-There are several macros that can be used to configure the system:
+There are several macros that can be defined to configure the system:
 
-| Macro                                 | Description                                         | Link                                        |
-| ------------------------------------- | --------------------------------------------------- | ------------------------------------------- |
-| `QNETHERNET_BUFFERS_IN_RAM1`          | Put the RX and TX buffers into RAM1                 | [Notes on RAM1 usage](#notes-on-ram1-usage) |
-| `QNETHERNET_MEMORY_IN_RAM1`           | Put lwIP-declared memory into RAM1                  | [Notes on RAM1 usage](#notes-on-ram1-usage) |
-| `QNETHERNET_ENABLE_CUSTOM_WRITE`      | Use expanded `stdio` output behaviour               | [stdio](#stdio)                             |
-| `QNETHERNET_ENABLE_PROMISCUOUS_MODE`  | Enable promiscuous mode                             | [Promiscuous mode](#promiscuous-mode)       |
-| `QNETHERNET_ENABLE_RAW_FRAME_SUPPORT` | Enable raw frame support                            | [Raw Ethernet Frames](#raw-ethernet-frames) |
-| `QNETHERNET_USE_ENTROPY_LIB`          | Use _Entropy_ library instead of internal functions | [Entropy collection](#entropy-collection)   |
+| Macro                                       | Description                                                     | Link                                                                                    |
+| ------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `QNETHERNET_BUFFERS_IN_RAM1`                | Put the RX and TX buffers into RAM1                             | [Notes on RAM1 usage](#notes-on-ram1-usage)                                             |
+| `QNETHERNET_LWIP_MEMORY_IN_RAM1`            | Put lwIP-declared memory into RAM1                              | [Notes on RAM1 usage](#notes-on-ram1-usage)                                             |
+| `QNETHERNET_ENABLE_ALTCP_DEFAULT_FUNCTIONS` | Enable default implementations of the altcp interface functions | [Application layered TCP: TLS, proxies, etc.](#application-layered-tcp-tls-proxies-etc) |
+| `QNETHERNET_ENABLE_CUSTOM_WRITE`            | Use expanded `stdio` output behaviour                           | [stdio](#stdio)                                                                         |
+| `QNETHERNET_ENABLE_PROMISCUOUS_MODE`        | Enable promiscuous mode                                         | [Promiscuous mode](#promiscuous-mode)                                                   |
+| `QNETHERNET_ENABLE_RAW_FRAME_SUPPORT`       | Enable raw frame support                                        | [Raw Ethernet Frames](#raw-ethernet-frames)                                             |
+| `QNETHERNET_USE_ENTROPY_LIB`                | Use _Entropy_ library instead of internal functions             | [Entropy collection](#entropy-collection)                                               |
 
 See
 [Changing lwIP configuration macros in `lwipopts.h`](#changing-lwip-configuration-macros-in-lwipoptsh)
@@ -1427,13 +1616,21 @@ Here's how to implement the behaviour:
    1. `recipe.S.o.pattern`
 
 Next, create a _platform.local.txt_ file in the same directory as the
-_platform.txt_ file and add the options you need. For example, to enable raw
-frame support:
+_platform.txt_ file and add the options you need. The contents of the properties
+are exactly the same as if adding them to the command line. For example, to
+enable raw frame support and disable DNS using the macros (the '-D' option
+defines a macro):
 
 ```
-compiler.cpp.extra_flags=-DQNETHERNET_ENABLE_RAW_FRAME_SUPPORT
-compiler.c.extra_flags=-DQNETHERNET_ENABLE_RAW_FRAME_SUPPORT
+compiler.cpp.extra_flags=-DQNETHERNET_ENABLE_RAW_FRAME_SUPPORT -DLWIP_DNS=0
+compiler.c.extra_flags=-DQNETHERNET_ENABLE_RAW_FRAME_SUPPORT -DLWIP_DNS=0
 ```
+
+Each additional option is simply appended. No commas or quotes are required
+unless they would be used for those same options on the command line.
+See
+[this issue comment](https://github.com/ssilverman/QNEthernet/issues/54#issuecomment-1788100978)
+for some incorrect variants.
 
 Note that both properties are needed because _QNEthernet_ contains a mixture of
 C and C++ sources.
@@ -1454,6 +1651,7 @@ References:
 4. [Platform specification - Arduino CLI](https://arduino.github.io/arduino-cli/latest/platform-specification/)
 5. This one started it all &rarr; [RawFrameMonitor example seems to be missing something... · Issue #33 · ssilverman/QNEthernet](https://github.com/ssilverman/QNEthernet/issues/33)
 6. [Open the Arduino15 folder - Arduino Help Center](https://support.arduino.cc/hc/en-us/articles/360018448279-Open-the-Arduino15-folder)
+7. [Enabling Raw Frame Support and Promiscuous · Issue #54 · ssilverman/QNEthernet](https://github.com/ssilverman/QNEthernet/issues/54)
 
 ### Configuring macros using PlatformIO
 
@@ -1481,6 +1679,9 @@ in `mdns_opts.h`:
 | Macro                     | Description                                                |
 | ------------------------- | ---------------------------------------------------------- |
 | `DNS_MAX_RETRIES`         | Maximum number of DNS retries                              |
+| `LWIP_ALTCP`              | `1` to enable application layered TCP (eg. TLS, proxies)   |
+| `LWIP_ALTCP_TLS`          | `1` to enable TLS support for ALTCP                        |
+| `LWIP_ALTCP_TLS_MBEDTLS`  | `1` to enable the Mbed TLS implementation for ALTCP TLS    |
 | `LWIP_DHCP`               | Zero to disable DHCP                                       |
 | `LWIP_DNS`                | Zero to disable DNS                                        |
 | `LWIP_IGMP`               | Zero to disable IGMP; also disables mDNS by default        |
@@ -1503,6 +1704,12 @@ Some extra conditions to keep in mind:
 * `MEMP_NUM_IGMP_GROUP`: Count must include 1 for the "all systems" group and 1
   if mDNS is enabled.
 * `MEMP_NUM_UDP_PCB`: Count must include one if mDNS is enabled.
+
+Other configuration macros, also found in `lwipopts.h`:
+
+| Macro                          | Description                                                                        | Link                                                                |
+| ------------------------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `QNETHERNET_ALTCP_TLS_ADAPTER` | `1` to enable the _altcp_tls_adapter_ functions for easier TLS library integration | [About the TLS adapter functions](#about-the-tls-adapter-functions) |
 
 ## Complete list of features
 
@@ -1576,7 +1783,8 @@ Input is welcome.
 * More examples.
 * Fix reduced frame reception when Ethernet is restarted via
   `end()`/`begin(...)`. This is a vexing one.
-  See also: https://github.com/ssilverman/QNEthernet/issues/31
+  See also:
+  [Restarting  · Issue #31 · ssilverman/QNEthernet](https://github.com/ssilverman/QNEthernet/issues/31)
 
 ## Code style
 
@@ -1588,7 +1796,7 @@ Other conventions are adopted from Bjarne Stroustrup's and Herb Sutter's
 
 ## References
 
-* [Paul Stoffregen's original Teensy 4.1 Ethernet code](https://github.com/PaulStoffregen/teensy41_ethernet)
+* [manitou48's original Teensy 4.1 Ethernet code](https://github.com/PaulStoffregen/teensy41_ethernet)
 * [Arduino Ethernet Reference](https://www.arduino.cc/reference/en/libraries/ethernet/)
 * [lwIP Home](https://savannah.nongnu.org/projects/lwip/)
 * [Forum _QNEthernet_ announcement thread](https://forum.pjrc.com/threads/68066-New-lwIP-based-Ethernet-library-for-Teensy-4-1/page7)
@@ -1596,6 +1804,7 @@ Other conventions are adopted from Bjarne Stroustrup's and Herb Sutter's
 * [Dan Drown's NTP server and 1588 timestamps](https://forum.pjrc.com/threads/61581-Teensy-4-1-NTP-server)
 * [Dan Drown's modifications to Paul's code](https://github.com/ddrown/teensy41_ethernet)
 * [Tino Hernandez's (vjmuzik) FNET-based NativeEthernet library](https://forum.pjrc.com/threads/60857-T4-1-Ethernet-Library)
+* [Juraj Andrássy's Arduino Networking API documentation](https://github.com/JAndrassy/Arduino-Networking-API)
 
 ---
 

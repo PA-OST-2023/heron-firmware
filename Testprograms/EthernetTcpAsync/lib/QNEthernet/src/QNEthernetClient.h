@@ -87,6 +87,10 @@ class EthernetClient : public Client {
   IPAddress remoteIP();
   uint16_t remotePort();
 
+  // Returns the local IP address for this connection, or INADDR_NONE if this
+  // client is not connected.
+  IPAddress localIP();
+
   // Returns an ID for the connection to which this client refers. It will
   // return non-zero if connected and zero if not connected.
   //
@@ -168,6 +172,10 @@ class EthernetClient : public Client {
   // close or timeout. Set to true to wait and false to not wait. stop() calls
   // this with true and close() calls this with false.
   void close(bool wait);
+
+  // Gets address info for this connection. This returns whether the client is
+  // connected and there was information to get.
+  bool getAddrInfo(bool local, ip_addr_t *addr, u16_t *port);
 
   // Connection state
   uint16_t connTimeout_;

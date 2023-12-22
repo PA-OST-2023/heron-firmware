@@ -6,6 +6,62 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+* Added `EthernetClient::localIP()`.
+* Added `EthernetClass::hostByName(hostname, ip)` convenience function.
+* Added `EthernetClass::setDNSServerIP(index, ip)` and `dnsServerIP(index)`.
+* Added some support for Mbed TLS v2.x.x. There's four new adapter functions
+  for assisting integration (see _src/altcp_tls_adapter.cpp_), included if the
+  `QNETHERNET_ALTCP_TLS_ADAPTER` option is set:
+  1. `qnethernet_altcp_is_tls`
+  2. `qnethernet_altcp_tls_client_cert`
+  3. `qnethernet_altcp_tls_server_cert_count`
+  4. `qnethernet_altcp_tls_server_cert`
+* Added _MbedTLSDemo_ example.
+* Added printing the message size in _LengthWidthServer_ example.
+* Added `QNETHERNET_ENABLE_ALTCP_DEFAULT_FUNCTIONS`-gated default
+  implementations of the altcp interface functions.
+* Added `EthernetClass::macAddress()` for returning a pointer to the current
+  MAC address.
+
+### Changed
+* Updated lwIP to the latest master (5e3268cf).
+* Made the driver non-blocking:
+  1. TX: if there's no available buffer descriptors (returns ERR_WOULDBLOCK)
+  2. Link checks via MDIO
+* Updated the tests:
+  * Added a 10s connection timeout to `test_client_addr_info()`
+  * Added SNTP retries to `test_udp()`
+  * Updated and added some messages
+* Made `MDNSClass::Service::operator==()` `const`.
+* Completely revamped PHY and pin initialization.
+* Gated PHY and Ethernet shutdown in `EthernetClass::end()` with a macro; the
+  default behaviour is to not execute these blocks. This and the previous are
+  part of the quest to figure out why performance drops off a cliff when
+  Ethernet is restarted via first calling `end()`.
+* Changed return type of `qnethernet_get_allocator` to `bool`.
+* Renamed `qnethernet_get_allocator` and `qnethernet_free_allocator` to
+  `qnetheret_altcp_get_allocator` and `qnethernet_altcp_free_allocator`,
+  respectively.
+* Changed `qnethernet_get_allocator` and `qnethernet_free_allocator` `allocator`
+  parameter to be a reference.
+* Renamed `QNETHERNET_MEMORY_IN_RAM1` to `QNETHERNET_LWIP_MEMORY_IN_RAM1`.
+* Updated the _AltcpTemplate_ example.
+* Fixed `IPAddress`-related build problems with the new Teensyduino 1.54-beta4.
+* Updated the _RawFrameMonitor_ example with information about how to
+  disable DHCP.
+* Disabled waiting in `EthernetClient::close()` for altcp clients because it's
+  not defined.
+
+### Fixed
+* Fixed a `printf` conversion specifier in the _RandomNumbers_ example. This was
+  causing a compile warning.
+* Fixed location of STATIC_INIT_DECL() for `RandomDevice` by putting it into
+  the header. It needs to be in a place where users of the class see it.
+* Fixed `EthernetClass::setMACAddress()` for when the interface is up.
+
 ## [0.25.0]
 
 ### Added

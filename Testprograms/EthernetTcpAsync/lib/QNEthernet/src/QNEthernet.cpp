@@ -114,11 +114,7 @@ void EthernetClass::setMACAddress(const uint8_t mac[6]) {
   }
 #endif  // LWIP_DHCP
 
-  const ip4_addr_t *addr    = netif_ip4_addr(netif_);
-  const ip4_addr_t *netmask = netif_ip4_netmask(netif_);
-  const ip4_addr_t *gw      = netif_ip4_gw(netif_);
   if (start()) {
-    netif_set_addr(netif_, addr, netmask, gw);
     (void)maybeStartDHCP();
   }
   // TODO: Return value?
@@ -448,11 +444,12 @@ IPAddress EthernetClass::gatewayIP() const {
 }
 
 IPAddress EthernetClass::dnsServerIP() const {
+  return dnsServerIP(0);
+}
+
+IPAddress EthernetClass::dnsServerIP(int index) const {
 #if LWIP_DNS
-  if (netif_ == nullptr) {
-    return INADDR_NONE;
-  }
-  return DNSClient::getServer(0);
+  return DNSClient::getServer(index);
 #else
   return INADDR_NONE;
 #endif  // LWIP_DNS
@@ -491,8 +488,12 @@ void EthernetClass::setGatewayIP(const IPAddress &gatewayIP) const {
 }
 
 void EthernetClass::setDNSServerIP(const IPAddress &dnsServerIP) const {
+  setDNSServerIP(0, dnsServerIP);
+}
+
+void EthernetClass::setDNSServerIP(int index, const IPAddress &ip) const {
 #if LWIP_DNS
-  DNSClient::setServer(0, dnsServerIP);
+  DNSClient::setServer(index, ip);
 #endif  // LWIP_DNS
 }
 
@@ -562,6 +563,18 @@ String EthernetClass::hostname() const {
 
 EthernetClass::operator bool() const {
   return (netif_ != nullptr);
+}
+
+bool EthernetClass::hostByName(const char *hostname, IPAddress &ip) {
+#if LWIP_DNS
+  if (netif_ == nullptr) {
+    return false;
+  }
+  return DNSClient::getHostByName(hostname, ip,
+                                  QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT);
+#else
+  return false;
+#endif  // LWIP_DNS
 }
 
 }  // namespace network

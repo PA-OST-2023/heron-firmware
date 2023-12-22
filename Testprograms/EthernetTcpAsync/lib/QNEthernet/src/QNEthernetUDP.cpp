@@ -29,12 +29,6 @@ static constexpr size_t kMaxPayloadSize = EthernetClass::mtu() - kHeaderSize;
 // Maximum possible payload size.
 static constexpr size_t kMaxPossiblePayloadSize = UINT16_MAX - kHeaderSize;
 
-#if LWIP_DNS
-// DNS lookup timeout.
-static constexpr uint32_t kDNSLookupTimeout =
-    DNS_MAX_RETRIES * DNS_TMR_INTERVAL;
-#endif  // LWIP_DNS
-
 void EthernetUDP::recvFunc(void *arg, struct udp_pcb *pcb, struct pbuf *p,
                            const ip_addr_t *addr, u16_t port) {
   if (arg == nullptr || pcb == nullptr) {
@@ -334,7 +328,8 @@ int EthernetUDP::beginPacket(IPAddress ip, uint16_t port) {
 int EthernetUDP::beginPacket(const char *host, uint16_t port) {
 #if LWIP_DNS
   IPAddress ip;
-  if (!DNSClient::getHostByName(host, ip, kDNSLookupTimeout)) {
+  if (!DNSClient::getHostByName(host, ip,
+                                QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT)) {
     return false;
   }
   return beginPacket(ip, port);
@@ -379,12 +374,26 @@ int EthernetUDP::endPacket() {
   }
 
   pbuf_take(p, outPacket_.data.data(), outPacket_.data.size());
-  bool retval =
-      (udp_sendto(pcb_, p, &outPacket_.addr, outPacket_.port) == ERR_OK);
+  err_t err;
+
+  // Repeat until not ERR_WOULDBLOCK because the low-level driver returns that
+  // if there are no internal TX buffers available
+  do {
+    err = udp_sendto(pcb_, p, &outPacket_.addr, outPacket_.port);
+    if (err != ERR_WOULDBLOCK) {
+      break;
+    }
+
+    // udp_sendto() may have added a header
+    if (p->tot_len > outPacket_.data.size()) {
+      pbuf_remove_header(p, p->tot_len - outPacket_.data.size());
+    }
+  } while (true);
+
   outPacket_.clear();
   pbuf_free(p);
 
-  return retval;
+  return (err == ERR_OK);
 }
 
 bool EthernetUDP::send(const IPAddress &ip, uint16_t port,
@@ -397,7 +406,8 @@ bool EthernetUDP::send(const char *host, uint16_t port,
                        const uint8_t *data, size_t len) {
 #if LWIP_DNS
   IPAddress ip;
-  if (!DNSClient::getHostByName(host, ip, kDNSLookupTimeout)) {
+  if (!DNSClient::getHostByName(host, ip,
+                                QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT)) {
     return false;
   }
   return send(ip, port, data, len);
@@ -427,10 +437,25 @@ bool EthernetUDP::send(const ip_addr_t *ipaddr, uint16_t port,
   }
 
   pbuf_take(p, data, len);
-  bool retval = (udp_sendto(pcb_, p, ipaddr, port) == ERR_OK);
+  err_t err;
+
+  // Repeat until not ERR_WOULDBLOCK because the low-level driver returns that
+  // if there are no internal TX buffers available
+  do {
+    err = udp_sendto(pcb_, p, ipaddr, port);
+    if (err != ERR_WOULDBLOCK) {
+      break;
+    }
+
+    // udp_sendto() may have added a header
+    if (p->tot_len > len) {
+      pbuf_remove_header(p, p->tot_len - len);
+    }
+  } while (true);
+
   pbuf_free(p);
 
-  return retval;
+  return (err == ERR_OK);
 }
 
 size_t EthernetUDP::write(uint8_t b) {

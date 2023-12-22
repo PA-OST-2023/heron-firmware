@@ -23,6 +23,7 @@
 #include "QNMDNS.h"
 #include "StaticInit.h"
 #include "lwip/apps/mdns_opts.h"
+#include "lwip/dns.h"
 #include "lwip/ip_addr.h"
 #include "lwip/netif.h"
 #include "lwip/opt.h"
@@ -38,7 +39,15 @@ namespace network {
 // Default DHCP client timeout, in milliseconds; default is 60 seconds
 #ifndef QNETHERNET_DEFAULT_DHCP_CLIENT_TIMEOUT
 #define QNETHERNET_DEFAULT_DHCP_CLIENT_TIMEOUT 60'000
-#endif  // !QNETHERNET_DHCP_CLIENT_TIMEOUT
+#endif  // !QNETHERNET_DEFAULT_DHCP_CLIENT_TIMEOUT
+
+// Default DNS lookup timeout, in milliseconds
+#if LWIP_DNS
+#ifndef QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT
+#define QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT \
+  (((DNS_MAX_RETRIES) + 1) * (DNS_TMR_INTERVAL))
+#endif  // !QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT
+#endif  // LWIP_DNS
 
 // See: https://www.arduino.cc/reference/en/libraries/ethernet/ethernet.linkstatus/
 enum EthernetLinkStatus {
@@ -91,6 +100,11 @@ class EthernetClass final {
     return false;
 #endif  // QNETHERNET_ENABLE_PROMISCUOUS_MODE
   }
+
+  // Returns a pointer to the current MAC address.
+  const uint8_t *macAddress() const {
+    return mac_;
+  };
 
   // Retrieves the MAC address. This does nothing if 'mac' is NULL.
   void macAddress(uint8_t mac[6]) const;
@@ -235,6 +249,10 @@ class EthernetClass final {
   // Returns INADDR_NONE if DNS is disabled.
   IPAddress dnsServerIP() const;
 
+  // Returns the DNS server IP at the specified index. This returns INADDR_NONE
+  // if there is no configured server at that index or if DNS is disabled.
+  IPAddress dnsServerIP(int index) const;
+
   // Returns the broadcast IP address. This is equal to:
   // localIP | ~subnetMask
   IPAddress broadcastIP() const;
@@ -247,6 +265,10 @@ class EthernetClass final {
 
   // Does nothing if DNS is disabled.
   void setDNSServerIP(const IPAddress &dnsServerIP) const;
+
+  // Sets a specific DNS server IP. This does nothing if the index is not in the
+  // range [0, DNSClient::maxServers()).
+  void setDNSServerIP(int index, const IPAddress &ip) const;
 
   // The MAC addresses are used in the following begin() functions
   [[deprecated("See begin() and waitForLocalIP(timeout)")]]
@@ -329,6 +351,10 @@ class EthernetClass final {
   // Tests if Ethernet is initialized.
   explicit operator bool() const;
 
+  // Convenience function that tries to resolve the given hostname into an IP
+  // address. This returns whether successful.
+  bool hostByName(const char *hostname, IPAddress &ip);
+
  private:
   static constexpr uint32_t kPollInterval = 125;  // About 8 times a second
 
@@ -352,7 +378,8 @@ class EthernetClass final {
   bool maybeStartDHCP();
 
   // Starts Ethernet. See the public version of this function, with IPAddress
-  // parameters, for information about what this does.
+  // parameters, for information about what this does. This always attempts to
+  // restart the netif.
   [[nodiscard]]
   bool start();
 

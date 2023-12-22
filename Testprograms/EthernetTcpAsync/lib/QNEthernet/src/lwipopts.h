@@ -28,6 +28,10 @@ void sys_check_core_locking(const char *file, int line, const char *func);
 #ifndef MEM_LIBC_MALLOC
 #define MEM_LIBC_MALLOC                        1  /* 0 */
 #endif  // !MEM_LIBC_MALLOC
+// #define MEM_CUSTOM_ALLOCATOR                   0  /* opt.h sets to 1 if MEM_LIBC_MALLOC */
+// #define MEM_CUSTOM_FREE                        free
+// #define MEM_CUSTOM_MALLOC                      malloc
+// #define MEM_CUSTOM_CALLOC                      calloc
 // #define MEMP_MEM_MALLOC                        0
 // #define MEMP_MEM_INIT                          0
 #define MEM_ALIGNMENT                          4  /* 1 */
@@ -133,7 +137,7 @@ void sys_check_core_locking(const char *file, int line, const char *func);
 // #define LWIP_DHCP_GET_NTP_SRV           0
 // #define LWIP_DHCP_MAX_NTP_SERVERS       1
 // #define LWIP_DHCP_MAX_DNS_SERVERS       DNS_MAX_SERVERS
-// #define LWIP_DHCP_DISCOVER_ADD_HOSTNAME 0
+// #define LWIP_DHCP_DISCOVER_ADD_HOSTNAME 1
 
 // AUTOIP options
 #if !defined(LWIP_MDNS_RESPONDER) || LWIP_MDNS_RESPONDER
@@ -196,16 +200,15 @@ void sys_check_core_locking(const char *file, int line, const char *func);
 // #define LWIP_TCP                   1
 #endif  // !LWIP_TCP
 // #define TCP_TTL                    IP_DEFAULT_TTL
-// #define TCP_WND                    (4 * TCP_MSS)
 // #define TCP_MAXRTX                 12
 // #define TCP_SYNMAXRTX              6
 // #define TCP_QUEUE_OOSEQ            LWIP_TCP
 // #define LWIP_TCP_SACK_OUT          0
 // #define LWIP_TCP_MAX_SACK_NUM      4
-#define TCP_MSS                    (1460*2)  /* 536 */
+#define TCP_MSS                    1460  /* 536 */
 // #define TCP_CALCULATE_EFF_SEND_MSS 1
 // #define LWIP_TCP_RTO_TIME          3000
-#define TCP_SND_BUF                (16 * TCP_MSS)  /* (2 * TCP_MSS) */
+#define TCP_SND_BUF                (4 * TCP_MSS)  /* (2 * TCP_MSS) */
 // #define TCP_SND_QUEUELEN           ((4 * (TCP_SND_BUF) + (TCP_MSS - 1))/(TCP_MSS))
 /* #define TCP_SNDLOWAT \
    LWIP_MIN(LWIP_MAX(((TCP_SND_BUF)/2), (2 * TCP_MSS) + 1), (TCP_SND_BUF) - 1)*/
@@ -228,15 +231,27 @@ void sys_check_core_locking(const char *file, int line, const char *func);
 // #define LWIP_WND_SCALE             0
 // #define TCP_RCV_SCALE              0
 // #define LWIP_TCP_PCB_NUM_EXT_ARGS  0
+#ifndef LWIP_ALTCP
 // #define LWIP_ALTCP                 0
+#endif  // !LWIP_ALTCP
+#ifndef LWIP_ALTCP_TLS
 // #define LWIP_ALTCP_TLS             0
+#endif  // !LWIP_ALTCP_TLS
+#ifndef TCP_WND
+#if LWIP_ALTCP && LWIP_ALTCP_TLS
+#define TCP_WND                    (16 * 1024)  /* 16KiB for TLS */
+#else
+// #define TCP_WND                    (4 * TCP_MSS)
+#endif  // LWIP_ALTCP && LWIP_ALTCP_TLS
+#endif  // !TCP_WND
 
 // Pbuf options
-// #define PBUF_LINK_HLEN               (14 + ETH_PAD_SIZE) or (18 + ETH_PAD_SIZE)
-// #define PBUF_LINK_ENCAPSULATION_HLEN 0
-// #define PBUF_POOL_BUFSIZE            LWIP_MEM_ALIGN_SIZE(TCP_MSS+PBUF_IP_HLEN+PBUF_TRANSPORT_HLEN+PBUF_LINK_ENCAPSULATION_HLEN+PBUF_LINK_HLEN)
-// #define LWIP_PBUF_REF_T              u8_t
+// #define PBUF_LINK_HLEN                (14 + ETH_PAD_SIZE) or (18 + ETH_PAD_SIZE)
+// #define PBUF_LINK_ENCAPSULATION_HLEN  0
+// #define PBUF_POOL_BUFSIZE             LWIP_MEM_ALIGN_SIZE(TCP_MSS+PBUF_IP_HLEN+PBUF_TRANSPORT_HLEN+PBUF_LINK_ENCAPSULATION_HLEN+PBUF_LINK_HLEN)
+// #define LWIP_PBUF_REF_T               u8_t
 // #define LWIP_PBUF_CUSTOM_DATA
+// #define LWIP_PBUF_CUSTOM_DATA_INIT(p)
 
 // Network Interfaces options
 #define LWIP_SINGLE_NETIF              1  /* 0 */
@@ -327,7 +342,7 @@ void sys_check_core_locking(const char *file, int line, const char *func);
 // #define IGMP_STATS         (LWIP_IGMP)
 // #define UDP_STATS          (LWIP_UDP)
 // #define TCP_STATS          (LWIP_TCP)
-// #define MEM_STATS          ((MEM_LIBC_MALLOC == 0) && (MEM_USE_POOLS == 0))
+// #define MEM_STATS          ((MEM_CUSTOM_ALLOCATOR == 0) && (MEM_USE_POOLS == 0))
 // #define MEMP_STATS         (MEMP_MEM_MALLOC == 0)
 // #define SYS_STATS          (NO_SYS == 0)
 // #define IP6_STATS          (LWIP_IPV6)
@@ -521,5 +536,26 @@ void sys_check_core_locking(const char *file, int line, const char *func);
 #define MDNS_MAX_SERVICES   3  /* 1 */
 #endif  // !MDNS_MAX_SERVICES
 // #define MDNS_DEBUG          LWIP_DBG_OFF
+
+// Mbed TLS options
+// See lwip/apps/altcp_tls_mbedtls_opts.h for descriptions
+#ifndef LWIP_ALTCP_TLS_MBEDTLS
+// #define LWIP_ALTCP_TLS_MBEDTLS                       0
+#endif  // !LWIP_ALTCP_TLS_MBEDTLS
+// #define ALTCP_MBEDTLS_DEBUG                          LWIP_DBG_OFF
+// #define ALTCP_MBEDTLS_LIB_DEBUG                      LWIP_DBG_OFF
+// #define ALTCP_MBEDTLS_LIB_DEBUG_LEVEL_MIN            0
+// #define ALTCP_MBEDTLS_USE_SESSION_CACHE              0
+// #define ALTCP_MBEDTLS_SESSION_CACHE_SIZE             30
+// #define ALTCP_MBEDTLS_SESSION_CACHE_TIMEOUT_SECONDS  (60 * 60)
+// #define ALTCP_MBEDTLS_USE_SESSION_TICKETS            0
+// #define ALTCP_MBEDTLS_SESSION_TICKET_CIPHER          MBEDTLS_CIPHER_AES_256_GCM
+// #define ALTCP_MBEDTLS_SESSION_TICKET_TIMEOUT_SECONDS (60 * 60 * 24)
+// #define ALTCP_MBEDTLS_AUTHMODE                       MBEDTLS_SSL_VERIFY_OPTIONAL
+
+// QNEthernet TLS options
+#ifndef QNETHERNET_ALTCP_TLS_ADAPTER
+// #define QNETHERNET_ALTCP_TLS_ADAPTER LWIP_ALTCP_TLS_MBEDTLS
+#endif  // !QNETHERNET_ALTCP_TLS_ADAPTER
 
 #endif  // QNETHERNET_LWIPOPTS_H_

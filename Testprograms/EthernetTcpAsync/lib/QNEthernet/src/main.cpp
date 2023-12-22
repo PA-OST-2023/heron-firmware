@@ -20,10 +20,6 @@ static constexpr uint32_t kStartupDelay = 2'000;
 
 // Timeouts
 static constexpr uint32_t kDHCPTimeout = 15'000;
-#if LWIP_DNS
-static constexpr uint32_t kDNSLookupTimeout =
-    DNS_MAX_RETRIES * DNS_TMR_INTERVAL;
-#endif  // LWIP_DNS
 
 // Flag that indicates something about the network changed.
 static volatile bool networkChanged = false;
@@ -51,6 +47,10 @@ void setup() {
   Ethernet.macAddress(mac);
   printf("[Main] MAC = %02x:%02x:%02x:%02x:%02x:%02x\r\n",
          mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+
+  Ethernet.onInterfaceStatus([](bool status) {
+    printf("[Ethernet] Interface %s\r\n", status ? "UP" : "DOWN");
+  });
 
   Ethernet.onLinkState([](bool state) {
     if (state) {
@@ -120,10 +120,13 @@ void loop() {
 
 #if LWIP_DNS
       IPAddress ip;
-      if (!DNSClient::getHostByName("dns.google", ip, kDNSLookupTimeout)) {
-        printf("[Main] Lookup failed\r\n");
+      constexpr char kHostname[]{"dns.google"};
+      if (!DNSClient::getHostByName(kHostname, ip,
+                                    QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT)) {
+        printf("[Main] Lookup for \"%s\" failed\r\n", kHostname);
       } else {
-        printf("[Main] Lookup: %u.%u.%u.%u\r\n", ip[0], ip[1], ip[2], ip[3]);
+        printf("[Main] Lookup \"%s\": %u.%u.%u.%u\r\n",
+               kHostname, ip[0], ip[1], ip[2], ip[3]);
       }
 #endif  // LWIP_DNS
     }

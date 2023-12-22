@@ -6,7 +6,10 @@
 // proxy configuration.
 //
 // Prerequisites: Enable the LWIP_ALTCP and optionally the
-//                LWIP_ALTCP_TLS lwIP options.
+//                LWIP_ALTCP_TLS lwIP options. The altcp_tls_adapter
+//                functions could also be disabled by disabling
+//                the QNETHERNET_ALTCP_TLS_ADAPTER option (it's off
+//                by default).
 // Big caveat: This example will only do TLS if there's an available
 //             TLS implementation.
 //
@@ -16,6 +19,9 @@
 #if LWIP_ALTCP
 #include <lwip/altcp_tcp.h>
 #if LWIP_ALTCP_TLS
+#if LWIP_ALTCP_TLS_MBEDTLS
+#include <mbedtls.h>
+#endif  // LWIP_ALTCP_TLS_MBEDTLS
 #include <lwip/altcp_tls.h>
 #endif  // LWIP_ALTCP_TLS
 #include <lwip/apps/altcp_proxyconnect.h>
@@ -39,71 +45,12 @@ constexpr uint16_t kPort = 80;   // TLS generally uses port 443
 #if LWIP_ALTCP
 
 // For proxy connections
-constexpr bool kUseProxy = false;  // Whether to use altcp_proxyconnect
-struct altcp_proxyconnect_config proxyConfig {
-  IPADDR4_INIT_BYTES(0, 0, 0, 0),  // Change this
-  8080,                            // TLS can be on 3128
+extern const bool kUseProxy = false;  // Whether to use altcp_proxyconnect
+struct altcp_proxyconnect_config proxyConfig{
+    IPADDR4_INIT_BYTES(0, 0, 0, 0),  // Change this
+    8080,                            // TLS can be on 3128
 };
 // Note: There's also a TLS proxyconnect; this can be an exercise for the reader
-
-// The qnethernet_get_allocator() function fills in the given
-// allocator with an appropriate allocator function and argument,
-// using the IP address and port to choose one. If creating the socket
-// failed then qnethernet_free_allocator() is called to free any
-// resources that haven't already been freed.
-std::function<void(const ip_addr_t *, uint16_t, altcp_allocator_t *)>
-    qnethernet_get_allocator = [](const ip_addr_t *ipaddr, uint16_t port,
-                                  altcp_allocator_t *allocator) {
-      printf("[[qnethernet_allocator_arg(%s, %u): %s]]\r\n",
-             ipaddr_ntoa(ipaddr), port,
-             (ipaddr == NULL) ? "Listen" : "Connect");
-
-      if (kUseProxy) {
-        if (ipaddr != nullptr) {
-          printf("[[Using proxy: %s:%u]]\r\n",
-                 ipaddr_ntoa(&proxyConfig.proxy_addr), proxyConfig.proxy_port);
-          allocator->alloc = &altcp_proxyconnect_alloc;
-          allocator->arg   = &proxyConfig;
-        } else {
-          allocator->alloc = &altcp_tcp_alloc;
-          allocator->arg = nullptr;
-        }
-      } else {
-        switch (port) {
-          case 80:
-            allocator->alloc = &altcp_tcp_alloc;
-            allocator->arg   = nullptr;
-            break;
-  #if LWIP_ALTCP_TLS
-          case 443:
-            allocator->alloc = &altcp_tls_alloc;
-            allocator->arg   = get_altcp_tls_config();  // TBD by you, the user
-            break;
-  #endif  // LWIP_ALTCP_TLS
-          default:
-            break;
-        }
-      }
-    };
-
-// The qnethernet_free_allocator() function frees any resources
-// allocated with qnethernet_get_allocator() if they haven't already
-// been freed. It is up to the implementation to decide if a resource
-// has already been freed or not.
-std::function<void(const altcp_allocator_t *)> qnethernet_free_allocator =
-    [](const altcp_allocator_t *allocator) {
-      printf("[[qnethernet_free_allocator()]]\r\n");
-      // For the proxyConfig and for altcp_tcp_alloc,
-      // there's nothing to free
-#if LWIP_ALTCP_TLS
-      if (allocator->alloc == &altcp_tls_alloc) {
-        struct altcp_tls_config *config =
-            (struct altcp_tls_config *)allocator->arg;
-        altcp_tls_free_config(config);  // <-- Example without can-free check
-            // Implementation MUST NOT free if already freed
-      }
-#endif  // LWIP_ALTCP_TLS
-    };
 
 #endif  // LWIP_ALTCP
 

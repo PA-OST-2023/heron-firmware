@@ -5,10 +5,6 @@
 #include <QNEthernet.h>
 using namespace qindesign::network;
 
-
-EthernetServer server(6666); // Port number for the server
-
-
 AudioSynthWaveformSine   sine1;
 AudioSynthWaveformSine   sine2;
 AudioSynthWaveformSine   sine3;
@@ -78,6 +74,8 @@ AudioConnection          patchCord32(sine31, 0, transmitWav1, 30);
 AudioConnection          patchCord33(sine32, 0, transmitWav1, 31);
 
 
+EthernetServer server(6666);
+
 void setup()
 {
   console.begin();
@@ -126,13 +124,10 @@ void setup()
 
   if(!Ethernet.begin(ip, subnet, gateway))
   {
-    console.println("[MAIN] Failed to configure Ethernet using static IP");
-    while (true)
-    {
-      delay(1);
-    }
+    console.error.println("[MAIN] Failed to configure Ethernet using static IP");
   }
-
+  
+  // static EthernetServer server(6666);
   if(!transmitWav1.begin(&server))
   {
     console.error.println("[MAIN] Transmit WAV buffered could not be initialized.");
@@ -147,6 +142,7 @@ void setup()
 void loop()
 {
   Ethernet.loop();
+  threads.yield();    // Call very often, otherwise Network-Stack will crash: https://forum.pjrc.com/index.php?threads/qnethernet-and-teensythreads-causes-assertions-crashes-solved.73198/
 
   static float dataRateAvr = 0;
   if(millis() < 10000)

@@ -19,24 +19,19 @@ def main():
 
     while True:                     # Keep trying to connect
         try:
-            # socket.setdefaulttimeout(10)
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(0.5)
                 s.connect((HOST, PORT))
                 s.sendall(b'0')
                 print(f"Timeout: {s.gettimeout()}")
-                # s.settimeout(5.0)
                 print(f"Connected to {HOST}:{PORT}")
                 i = 0
                 lastReceived = time.time()
                 
                 while True:         # Keep trying to receive data
                     try:
-                        # s.settimeout(0.5)
-                        # s.sendall(b'0')
-                        s.settimeout(0.5)
                         data = s.recv(10000)
                         lastReceived = time.time()
-                        # s.settimeout(None)
                         if not data:
                             continue
                         dataBuffer.extend(data)

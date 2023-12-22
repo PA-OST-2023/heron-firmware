@@ -41,12 +41,6 @@ enum class ConnectReturns {
   INVALID_RESPONSE = -4,
 };
 
-#if LWIP_DNS
-// DNS lookup timeout.
-static constexpr uint32_t kDNSLookupTimeout =
-    DNS_MAX_RETRIES * DNS_TMR_INTERVAL;
-#endif  // LWIP_DNS
-
 EthernetClient::EthernetClient() : EthernetClient(nullptr) {}
 
 EthernetClient::EthernetClient(std::shared_ptr<internal::ConnectionHolder> conn)
@@ -70,7 +64,8 @@ int EthernetClient::connect(IPAddress ip, uint16_t port) {
 int EthernetClient::connect(const char *host, uint16_t port) {
 #if LWIP_DNS
   IPAddress ip;
-  if (!DNSClient::getHostByName(host, ip, kDNSLookupTimeout)) {
+  if (!DNSClient::getHostByName(host, ip,
+                                QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT)) {
     return static_cast<int>(ConnectReturns::INVALID_SERVER);
   }
   return connect(ip, port);
@@ -87,7 +82,8 @@ int EthernetClient::connectNoWait(const IPAddress &ip, uint16_t port) {
 int EthernetClient::connectNoWait(const char *host, uint16_t port) {
 #if LWIP_DNS
   IPAddress ip;
-  if (!DNSClient::getHostByName(host, ip, kDNSLookupTimeout)) {
+  if (!DNSClient::getHostByName(host, ip,
+                                QNETHERNET_DEFAULT_DNS_LOOKUP_TIMEOUT)) {
     return static_cast<int>(ConnectReturns::INVALID_SERVER);
   }
   return connectNoWait(ip, port);
@@ -239,13 +235,16 @@ void EthernetClient::close(bool wait) {
     if (state != nullptr) {
       if (altcp_close(state->pcb) != ERR_OK) {
         altcp_abort(state->pcb);
+#if !LWIP_ALTCP
       } else if (wait) {
         elapsedMillis timer;
+        // TODO: Make this work for altcp, if possible
         // NOTE: conn_ could be set to NULL somewhere during the yield
         while (conn_ != nullptr && conn_->connected && timer < connTimeout_) {
           // NOTE: Depends on Ethernet loop being called from yield()
           yield();
         }
+#endif  // !LWIP_ALTCP
       }
     }
   }
@@ -285,60 +284,49 @@ void EthernetClient::abort() {
 }
 
 uint16_t EthernetClient::localPort() {
-  if (!static_cast<bool>(*this)) {
-    return 0;
-  }
-
-  const auto &state = conn_->state;
-  if (state == nullptr) {
-    return 0;
-  }
-
-#if LWIP_ALTCP
-  return altcp_get_port(state->pcb, 1);
-#else
   uint16_t port;
-  altcp_get_tcp_addrinfo(state->pcb, 1, nullptr, &port);
+  if (!getAddrInfo(true, nullptr, &port)) {
+    return 0;
+  }
   return port;
-#endif  // LWIP_ALTCP
 }
 
 IPAddress EthernetClient::remoteIP() {
-  if (!static_cast<bool>(*this)) {
-    return INADDR_NONE;
-  }
-
-  const auto &state = conn_->state;
-  if (state == nullptr) {
-    return INADDR_NONE;
-  }
-
-#if LWIP_ALTCP
-  return ip_addr_get_ip4_uint32(altcp_get_ip(state->pcb, 0));
-#else
   ip_addr_t ip;
-  altcp_get_tcp_addrinfo(state->pcb, 0, &ip, nullptr);
+  if (!getAddrInfo(false, &ip, nullptr)) {
+    return INADDR_NONE;
+  }
   return ip_addr_get_ip4_uint32(&ip);
-#endif  // LWIP_ALTCP
 }
 
 uint16_t EthernetClient::remotePort() {
-  if (!static_cast<bool>(*this)) {
+  uint16_t port;
+  if (!getAddrInfo(false, nullptr, &port)) {
     return 0;
+  }
+  return port;
+}
+
+IPAddress EthernetClient::localIP() {
+  ip_addr_t ip;
+  if (!getAddrInfo(true, &ip, nullptr)) {
+    return INADDR_NONE;
+  }
+  return ip_addr_get_ip4_uint32(&ip);
+}
+
+bool EthernetClient::getAddrInfo(bool local, ip_addr_t *addr, u16_t *port) {
+  if (!static_cast<bool>(*this)) {
+    return false;
   }
 
   const auto &state = conn_->state;
   if (state == nullptr) {
-    return 0;
+    return false;
   }
 
-#if LWIP_ALTCP
-  return altcp_get_port(state->pcb, 0);
-#else
-  uint16_t port;
-  altcp_get_tcp_addrinfo(state->pcb, 0, nullptr, &port);
-  return port;
-#endif  // LWIP_ALTCP
+  altcp_get_tcp_addrinfo(state->pcb, local, addr, port);
+  return true;
 }
 
 uintptr_t EthernetClient::connectionId() {
