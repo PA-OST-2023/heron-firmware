@@ -59,34 +59,15 @@ void setup()
   digitalWrite(TFT_BL, LOW);
   disp.begin(GC9A01A_SPICLOCK, GC9A01A_SPICLOCK_READ);
   disp.fillScreen(GC9A01A_BLACK);
-
-  // disp.initB();
-  // disp.setRotation(3);
-  // disp.fillScreen(ST77XX_BLACK);
-
-  // Scan all devices on Wire1
-  Wire1.begin();
-  Wire1.setClock(400000);
-  Serial.println("Scanning I2C bus...");
-  byte count = 0;
-  for(byte i = 1; i < 120; i++)
-  {
-    Wire1.beginTransmission(i);
-    if (Wire1.endTransmission() == 0)
-    {
-      Serial.print("Found address: ");
-      Serial.print(i, DEC);
-      Serial.print(" (0x");
-      Serial.print(i, HEX);
-      Serial.println(")");
-      count++;
-      delay(1);  // maybe unneeded?
-    }
-  }
+  disp.updateScreenAsync();
 
   if(!touch.begin())
   {
-    Serial.println("Failed to initialize touch screen!");
+    while(true)
+    {
+      Serial.println("Failed to initialize touch screen!");
+      delay(1000);
+    }
   }
 
   sm_set_default_pool(myHeap, myHeapSize, false, nullptr);  // use a memory pool on the external ram
@@ -111,6 +92,7 @@ void setup()
   lv_indev_drv_init(&indev_drv);
   indev_drv.type = LV_INDEV_TYPE_POINTER;
   indev_drv.read_cb = touchpad_read;
+  indev_drv.user_data = &touch;
   lv_indev_drv_register(&indev_drv);
 
   setup_ui(&guider_ui);
@@ -140,12 +122,12 @@ void my_disp_flush(lv_disp_drv_t *dispDrv, const lv_area_t *area, lv_color_t *co
 
 void touchpad_read(lv_indev_drv_t * drv, lv_indev_data_t* data)
 {
-  if (touch.available())
+  CHSC6413* touch = (CHSC6413*)drv->user_data;
+  if(touch->available())
   {
     data->state = LV_INDEV_STATE_PR;  // Indicate that the touchpad is pressed
-    Serial.printf("Touch: %d, %d\n", touch.data.x, touch.data.y);
-    data->point.x = touch.data.x;
-    data->point.y = touch.data.y;
+    data->point.x = touch->data.x;
+    data->point.y = touch->data.y;
   }
   else
   {

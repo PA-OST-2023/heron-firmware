@@ -45,22 +45,29 @@ CHSC6413::CHSC6413(TwoWire* wire, int irq) {
 /*!
     @brief  read touch data
 */
-void CHSC6413::read_touch() {
-  uint8_t raw[CHSC6X_READ_POINT_LEN] = {0};
-  // i2c_read(CHSC6X_ADDRESS, 0x00, raw, CHSC6X_READ_POINT_LEN);
-  // if (raw[0] == 0x01)
-  // {
-  //   data.x = raw[2];
-  //   data.y = raw[4];
-  // }
+bool CHSC6413::read_touch()
+{
+  uint8_t raw[CHSC6X_READ_POINT_LEN];
+  uint8_t readLen = _wire->requestFrom(CHSC6X_ADDRESS, CHSC6X_READ_POINT_LEN);
+  if(readLen == CHSC6X_READ_POINT_LEN)
+  {
+    _wire->readBytes(raw, readLen);
+    if(raw[0] == 0x01)
+    {
+      data.x = raw[2];
+      data.y = raw[4];
+    }
+    return true;    // Data is available (does not mean that a touch is detected)
+  }
+  return false;
 }
 
 /*!
     @brief  handle interrupts
 */
-void CHSC6413::handleISR(void) {
+void CHSC6413::handleISR(void)
+{
   ref->_event_available = true;
-
 }
 
 /*!
@@ -68,24 +75,27 @@ void CHSC6413::handleISR(void) {
 	@param	interrupt
 			type of interrupt FALLING, RISING..
 */
-bool CHSC6413::begin(int interrupt) {
+bool CHSC6413::begin(int interrupt)
+{
   _wire->begin();
   _wire->setClock(400000);
-
-  pinMode(_irq, INPUT_PULLUP);
-
-  uint8_t raw[16];
-  i2c_read(CHSC6X_ADDRESS, 0x00, raw, 16);
-  // print raw data
-  for (int i = 0; i < 16; i++)
+  
+  bool chipAvailable = false;
+  for(int i = 0; i < 8; i++)    // Try multiple times (somehow 1 of 8 times, the chip does not respond)
   {
-    Serial.printf("%02X ", raw[i]);
+    chipAvailable |= read_touch();
+    if(chipAvailable)
+    {
+      break;
+    }
+    delay(5);
+  }
+  if(!chipAvailable)
+  {
+    return false;
   }
 
-  // i2c_read(CHSC6X_ADDRESS, 0x15, &data.version, 1);
-  // delay(5);
-  // i2c_read(CHSC6X_ADDRESS, 0xA7, data.versionInfo, 3);
-
+  pinMode(_irq, INPUT_PULLUP);
   attachInterrupt(_irq, handleISR, interrupt);
   return true;
 }
@@ -94,56 +104,11 @@ bool CHSC6413::begin(int interrupt) {
     @brief  check for a touch event
 */
 bool CHSC6413::available() {
-  if (_event_available) {
+  if (_event_available)
+  {
     read_touch();
     _event_available = false;
     return true;
   }
   return false;
-}
-
-/*!
-    @brief  read data from i2c
-	@param	addr
-			i2c device address
-	@param	reg_addr
-			device register address
-	@param	reg_data
-			array to copy the read data
-	@param	length
-			length of data
-*/
-uint8_t CHSC6413::i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t *reg_data, uint32_t length)
-{
-  _wire->beginTransmission(addr);
-  _wire->write(reg_addr);
-  if (_wire->endTransmission(true))return -1;
-  _wire->requestFrom(addr, length);
-  for (uint32_t i = 0; i < length; i++) {
-    *reg_data++ = _wire->read();
-  }
-  return 0;
-}
-
-/*!
-    @brief  write data to i2c
-	@brief  read data from i2c
-	@param	addr
-			i2c device address
-	@param	reg_addr
-			device register address
-	@param	reg_data
-			data to be sent
-	@param	length
-			length of data
-*/
-uint8_t CHSC6413::i2c_write(uint8_t addr, uint8_t reg_addr, const uint8_t *reg_data, uint32_t length)
-{
-  _wire->beginTransmission(addr);
-  _wire->write(reg_addr);
-  for (uint32_t i = 0; i < length; i++) {
-    _wire->write(*reg_data++);
-  }
-  if (_wire->endTransmission(true))return -1;
-  return 0;
 }

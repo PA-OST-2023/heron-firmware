@@ -36,7 +36,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#define CHSC6X_ADDRESS          0xE2
+#define CHSC6X_ADDRESS          0x2E
 #define CHSC6X_MAX_POINTS_NUM   1
 #define CHSC6X_READ_POINT_LEN   5
 
@@ -45,7 +45,6 @@
 
 struct data_struct
 {
-  uint8_t points;                       // Number of touch points
   int x;
   int y;
 };
@@ -56,20 +55,17 @@ class CHSC6413
     CHSC6413(TwoWire* wire, int irq);
     bool begin(int interrupt = RISING);
     bool available();
-    data_struct data;
+    volatile data_struct data;
 
   private:
     TwoWire* _wire = nullptr;
     int _irq = -1;
-    bool _event_available;
+    volatile bool _event_available;
     
     static void handleISR();
     static CHSC6413* ref;
 
-    void read_touch();
-
-    uint8_t i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t * reg_data, uint32_t length);
-    uint8_t i2c_write(uint8_t addr, uint8_t reg_addr, const uint8_t * reg_data, uint32_t length);
+    bool read_touch();
 };
 
 #endif

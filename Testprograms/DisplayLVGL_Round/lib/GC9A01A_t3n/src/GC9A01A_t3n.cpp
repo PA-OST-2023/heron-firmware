@@ -2003,8 +2003,8 @@ FLASHMEM void GC9A01A_t3n::begin(uint32_t spi_clock, uint32_t spi_clock_read) {
   _SPI_CLOCK = spi_clock;           // #define GC9A01A_SPICLOCK 30000000
   _SPI_CLOCK_READ = spi_clock_read; //#define GC9A01A_SPICLOCK_READ 2000000
 
-  Serial.printf("_t3n::begin mosi:%d SCLK:%d CS:%d DC:%d SPI clocks:%lu %lu\n",
-              _mosi, _sclk, _cs, _dc, _SPI_CLOCK, _SPI_CLOCK_READ);
+  // Serial.printf("_t3n::begin mosi:%d SCLK:%d CS:%d DC:%d SPI clocks:%lu %lu\n",
+  //             _mosi, _sclk, _cs, _dc, _SPI_CLOCK, _SPI_CLOCK_READ);
 
   // Note this display does not use MISO so will ignore it.
   if (SPI.pinIsMOSI(_mosi) && SPI.pinIsSCK(_sclk)) {
