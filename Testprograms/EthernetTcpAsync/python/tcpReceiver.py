@@ -1,7 +1,7 @@
 import socket
 import time
 
-HOST = '192.168.33.80'
+HOST = '192.168.40.80'
 PORT = 6666
 TCP_CONNECTION_TIMEOUT = 5.0
 

@@ -114,9 +114,9 @@ void setup()
   sine31.frequency(1479.98);
   sine32.frequency(1567.98);
 
-  IPAddress ip(192, 168, 33, 80);
+  IPAddress ip(192, 168, 40, 80);
   IPAddress subnet(255, 255, 255, 0);
-  IPAddress gateway(192, 168, 33, 1);
+  IPAddress gateway(192, 168, 40, 1);
 
   Ethernet.setLocalIP(ip);
   Ethernet.setSubnetMask(subnet);

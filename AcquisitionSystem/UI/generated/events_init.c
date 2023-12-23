@@ -51,32 +51,6 @@ void events_init_screenBootup(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->screenBootup, screenBootup_event_handler, LV_EVENT_ALL, NULL);
 }
-static void screenRecording_event_handler (lv_event_t *e)
-{
-	lv_event_code_t code = lv_event_get_code(e);
-
-	switch (code) {
-	case LV_EVENT_RELEASED:
-	{
-		//Write the load screen code.
-	    lv_obj_t * act_scr = lv_scr_act();
-	    lv_disp_t * d = lv_obj_get_disp(act_scr);
-	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
-	        if (guider_ui.screenSetTime_del == true) {
-	          setup_scr_screenSetTime(&guider_ui);
-	        }
-	        lv_scr_load_anim(guider_ui.screenSetTime, LV_SCR_LOAD_ANIM_NONE, 200, 200, false);
-	        guider_ui.screenRecording_del = false;
-	    }
-		#ifdef PLATFORMIO
-	App::callbackSetRollerTime();
-	#endif
-		break;
-	}
-	default:
-		break;
-	}
-}
 static void screenRecording_btn_current_time_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -105,7 +79,6 @@ static void screenRecording_btn_current_time_event_handler (lv_event_t *e)
 }
 void events_init_screenRecording(lv_ui *ui)
 {
-	lv_obj_add_event_cb(ui->screenRecording, screenRecording_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screenRecording_btn_current_time, screenRecording_btn_current_time_event_handler, LV_EVENT_ALL, NULL);
 }
 static void screenSetTime_btn_1_event_handler (lv_event_t *e)

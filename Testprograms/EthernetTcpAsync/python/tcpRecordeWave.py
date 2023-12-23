@@ -2,7 +2,7 @@ import socket
 import numpy as np
 import wavio
 
-HOST = '192.168.33.80'  # The server's IP address
+HOST = '192.168.40.80'  # The server's IP address
 PORT = 6666             # The port used by the server
 CHANNEL_COUNT = 32
 SAMPLE_RATE = 44100     # Sample rate in Hz

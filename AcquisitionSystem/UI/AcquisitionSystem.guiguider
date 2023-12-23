@@ -464,7 +464,7 @@
 					"type": "cont",
 					"left": 14,
 					"top": 59,
-					"visible": true,
+					"visible": false,
 					"flag": [],
 					"custom_attributes": {},
 					"width": 212,
@@ -18919,7 +18919,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screenRecording"
 		},
 		{
 			"name": "screenSetTime",
@@ -21701,7 +21702,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screenSetTime"
 		}
 	],
 	"FrontStatus": {},
@@ -22136,36 +22138,7 @@
 				"chinese_library": "mini",
 				"keyboard_font_type": "simsun",
 				"keyboard_font_size": "18",
-				"event": {
-					"released": [
-						{
-							"src": "screenRecording",
-							"trigger": "released",
-							"dst": "screenSetTime",
-							"dst_type": "scr",
-							"src_screen": "screenRecording",
-							"action": "load_screen",
-							"duration": 200,
-							"delay": 200,
-							"scrId": "9n90frfx",
-							"anim_type": "LV_SCR_LOAD_ANIM_NONE",
-							"is_clean": false,
-							"is_del": false
-						},
-						{
-							"src": "screenRecording",
-							"trigger": "released",
-							"dst": "null",
-							"dst_type": "",
-							"src_screen": "screenRecording",
-							"action": "customer_code",
-							"inc_c": "#ifdef PLATFORMIO\n#include \"../../app.h\"\n#endif",
-							"code_c": "#ifdef PLATFORMIO\nApp::callbackSetRollerTime();\n#endif",
-							"inc_py": "",
-							"code_py": ""
-						}
-					]
-				},
+				"event": {},
 				"style": [
 					{
 						"part": "LV_PART_MAIN",
@@ -40806,7 +40779,7 @@
 						"name": "screenRecording_cont_recording",
 						"id": "nseryh26",
 						"type": "cont",
-						"visible": true,
+						"visible": false,
 						"scrollbar_mode": "OFF",
 						"flag": [],
 						"pos": [

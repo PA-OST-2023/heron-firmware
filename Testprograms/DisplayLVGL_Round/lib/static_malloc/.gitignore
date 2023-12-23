@@ -1,0 +1,6 @@
+makefile
+**/.vs/**
+**/obj/**
+**/bin/**
+**/.vscode/**
+**/.vsteensy/**
