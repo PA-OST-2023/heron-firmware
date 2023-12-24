@@ -3909,6 +3909,7 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_pos(ui->screenRecording_cont_recording, 14, 59);
 	lv_obj_set_size(ui->screenRecording_cont_recording, 212, 122);
 	lv_obj_set_scrollbar_mode(ui->screenRecording_cont_recording, LV_SCROLLBAR_MODE_OFF);
+	lv_obj_add_flag(ui->screenRecording_cont_recording, LV_OBJ_FLAG_HIDDEN);
 
 	//Write style for screenRecording_cont_recording, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screenRecording_cont_recording, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
