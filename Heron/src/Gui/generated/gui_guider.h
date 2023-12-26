@@ -22,8 +22,6 @@ typedef struct
 	bool screenBootup_del;
 	lv_obj_t *screenBootup_label_1;
 	lv_obj_t *screenBootup_img_2;
-	lv_obj_t *screenBootup_spinner_1;
-	lv_obj_t *screenBootup_slider_1;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);
@@ -34,6 +32,7 @@ extern lv_ui guider_ui;
 void setup_scr_screenBootup(lv_ui *ui);
 LV_IMG_DECLARE(_Heron_alpha_100x100);
 
+LV_FONT_DECLARE(lv_font_MontserratRegular_20)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
 
 

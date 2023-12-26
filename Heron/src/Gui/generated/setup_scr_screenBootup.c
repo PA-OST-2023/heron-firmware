@@ -27,10 +27,10 @@ void setup_scr_screenBootup(lv_ui *ui)
 
 	//Write codes screenBootup_label_1
 	ui->screenBootup_label_1 = lv_label_create(ui->screenBootup);
-	lv_label_set_text(ui->screenBootup_label_1, "HERON");
+	lv_label_set_text(ui->screenBootup_label_1, "Heron");
 	lv_label_set_long_mode(ui->screenBootup_label_1, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screenBootup_label_1, 78, 13);
-	lv_obj_set_size(ui->screenBootup_label_1, 84, 32);
+	lv_obj_set_pos(ui->screenBootup_label_1, 70, 27);
+	lv_obj_set_size(ui->screenBootup_label_1, 100, 33);
 
 	//Write style for screenBootup_label_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screenBootup_label_1, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -39,7 +39,7 @@ void setup_scr_screenBootup(lv_ui *ui)
 	lv_obj_set_style_border_side(ui->screenBootup_label_1, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screenBootup_label_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_color(ui->screenBootup_label_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screenBootup_label_1, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screenBootup_label_1, &lv_font_MontserratRegular_20, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screenBootup_label_1, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screenBootup_label_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_align(ui->screenBootup_label_1, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -56,57 +56,11 @@ void setup_scr_screenBootup(lv_ui *ui)
 	lv_img_set_src(ui->screenBootup_img_2, &_Heron_alpha_100x100);
 	lv_img_set_pivot(ui->screenBootup_img_2, 50,50);
 	lv_img_set_angle(ui->screenBootup_img_2, 0);
-	lv_obj_set_pos(ui->screenBootup_img_2, 70, 110);
+	lv_obj_set_pos(ui->screenBootup_img_2, 70, 81);
 	lv_obj_set_size(ui->screenBootup_img_2, 100, 100);
 
 	//Write style for screenBootup_img_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_img_opa(ui->screenBootup_img_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-
-	//Write codes screenBootup_spinner_1
-	ui->screenBootup_spinner_1 = lv_spinner_create(ui->screenBootup, 1000, 60);
-	lv_obj_set_pos(ui->screenBootup_spinner_1, 154, 136);
-	lv_obj_set_size(ui->screenBootup_spinner_1, 47, 49);
-
-	//Write style for screenBootup_spinner_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_pad_top(ui->screenBootup_spinner_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screenBootup_spinner_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screenBootup_spinner_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screenBootup_spinner_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screenBootup_spinner_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_arc_width(ui->screenBootup_spinner_1, 12, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_arc_opa(ui->screenBootup_spinner_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_arc_color(ui->screenBootup_spinner_1, lv_color_hex(0xd5d6de), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenBootup_spinner_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-
-	//Write style for screenBootup_spinner_1, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_arc_width(ui->screenBootup_spinner_1, 12, LV_PART_INDICATOR|LV_STATE_DEFAULT);
-	lv_obj_set_style_arc_opa(ui->screenBootup_spinner_1, 255, LV_PART_INDICATOR|LV_STATE_DEFAULT);
-	lv_obj_set_style_arc_color(ui->screenBootup_spinner_1, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_DEFAULT);
-
-	//Write codes screenBootup_slider_1
-	ui->screenBootup_slider_1 = lv_slider_create(ui->screenBootup);
-	lv_slider_set_range(ui->screenBootup_slider_1, 0, 100);
-	lv_slider_set_mode(ui->screenBootup_slider_1, LV_SLIDER_MODE_NORMAL);
-	lv_slider_set_value(ui->screenBootup_slider_1, 50, LV_ANIM_OFF);
-	lv_obj_set_pos(ui->screenBootup_slider_1, 40, 86);
-	lv_obj_set_size(ui->screenBootup_slider_1, 160, 10);
-
-	//Write style for screenBootup_slider_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenBootup_slider_1, 60, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenBootup_slider_1, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenBootup_slider_1, 50, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_outline_width(ui->screenBootup_slider_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screenBootup_slider_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-
-	//Write style for screenBootup_slider_1, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenBootup_slider_1, 255, LV_PART_INDICATOR|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenBootup_slider_1, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenBootup_slider_1, 50, LV_PART_INDICATOR|LV_STATE_DEFAULT);
-
-	//Write style for screenBootup_slider_1, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screenBootup_slider_1, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screenBootup_slider_1, lv_color_hex(0x2195f6), LV_PART_KNOB|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screenBootup_slider_1, 50, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Update current screen layout.
 	lv_obj_update_layout(ui->screenBootup);

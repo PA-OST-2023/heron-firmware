@@ -30,12 +30,13 @@
 * SOFTWARE.
 ******************************************************************************/
 
-#include "Arduino.h"
 #include "CHSC6413.h"
+#include "Arduino.h"
 
 CHSC6413* CHSC6413::ref = nullptr;
 
-CHSC6413::CHSC6413(TwoWire* wire, int irq) {
+CHSC6413::CHSC6413(TwoWire* wire, int irq)
+{
   _wire = wire;
   _irq = irq;
   ref = this;
@@ -54,8 +55,8 @@ bool CHSC6413::read_touch()
     _wire->readBytes(raw, readLen);
     if(raw[0] == 0x01)
     {
-      data.x = raw[2];
-      data.y = raw[4];
+      x = raw[2];
+      y = raw[4];
     }
     return true;    // Data is available (does not mean that a touch is detected)
   }
@@ -79,7 +80,7 @@ bool CHSC6413::begin(int interrupt)
 {
   _wire->begin();
   _wire->setClock(400000);
-  
+
   bool chipAvailable = false;
   for(int i = 0; i < 8; i++)    // Try multiple times (somehow 1 of 8 times, the chip does not respond)
   {
@@ -103,8 +104,9 @@ bool CHSC6413::begin(int interrupt)
 /*!
     @brief  check for a touch event
 */
-bool CHSC6413::available() {
-  if (_event_available)
+bool CHSC6413::available()
+{
+  if(_event_available)
   {
     read_touch();
     _event_available = false;

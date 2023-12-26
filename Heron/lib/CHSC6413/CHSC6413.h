@@ -36,36 +36,31 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#define CHSC6X_ADDRESS          0x2E
-#define CHSC6X_MAX_POINTS_NUM   1
-#define CHSC6X_READ_POINT_LEN   5
+#define CHSC6X_ADDRESS        0x2E
+#define CHSC6X_MAX_POINTS_NUM 1
+#define CHSC6X_READ_POINT_LEN 5
 
-#define CHSC6X_VF_FLA	          0xC0    // VF flag for Full Link Address
-#define CHSC6X_RS_CHPID	        0x04    // 4 in RS field indicates CHPID
-
-struct data_struct
-{
-  int x;
-  int y;
-};
+#define CHSC6X_VF_FLA         0xC0    // VF flag for Full Link Address
+#define CHSC6X_RS_CHPID       0x04    // 4 in RS field indicates CHPID
 
 class CHSC6413
 {
-  public:
-    CHSC6413(TwoWire* wire, int irq);
-    bool begin(int interrupt = RISING);
-    bool available();
-    volatile data_struct data;
+ public:
+  CHSC6413(TwoWire* wire, int irq);
+  bool begin(int interrupt = RISING);
+  bool available();
+  int x = 0;
+  int y = 0;
 
-  private:
-    TwoWire* _wire = nullptr;
-    int _irq = -1;
-    volatile bool _event_available;
-    
-    static void handleISR();
-    static CHSC6413* ref;
+ private:
+  TwoWire* _wire = nullptr;
+  int _irq = -1;
+  volatile bool _event_available;
 
-    bool read_touch();
+  static void handleISR();
+  static CHSC6413* ref;
+
+  bool read_touch();
 };
 
 #endif

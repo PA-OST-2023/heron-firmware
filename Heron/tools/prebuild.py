@@ -22,8 +22,8 @@ def unset_readonly(path):
 
 def copy_directory():
     src_dirs = [
-        Path("UI/DisplayLVGL_Round/generated").resolve(),
-        Path("UI/DisplayLVGL_Round/custom").resolve()
+        Path("UI/generated").resolve(),
+        Path("UI/custom").resolve()
     ]
 
     dst_dirs = [

@@ -32,6 +32,7 @@
 
 #include <Arduino.h>
 #include <console.h>
+#include <gui.h>
 #include <hmi.h>
 #include <utils.h>
 
@@ -53,6 +54,7 @@
 #define GPS_RST    31
 
 static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
+static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_BL, TCH_IRQ);
 static Hmi hmi(RGB_LED, HMI_BUZZER);
 
 void setup()
@@ -61,13 +63,14 @@ void setup()
   console.log.println("[MAIN] Initialize System...");
   utils.begin();
   hmi.begin(utils);
-
+  gui.begin(utils);
   hmi.setSystemStatus(Hmi::STATUS_OK);
 }
 
 void loop()
 {
   threads.yield();
+  gui.update();
   utils.update();
 
   static uint32_t t = 0;
