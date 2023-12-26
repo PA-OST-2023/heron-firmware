@@ -61,6 +61,8 @@ void setup()
   console.log.println("[MAIN] Initialize System...");
   utils.begin();
   hmi.begin(utils);
+
+  hmi.setSystemStatus(Hmi::STATUS_OK);
 }
 
 void loop()

@@ -41,13 +41,10 @@ bool Hmi::begin(Utils& utilsRef)
 {
   utils = &utilsRef;
 
-  leds.begin();
   leds.clear();
+  leds.begin();
   leds.setBrightness(255);
-  for(uint32_t i = 0; i < LED_COUNT; i++)
-  {
-    leds.setPixelColor(i, 0);
-  }
+  delay(5);       // Avoid flickering by waiting dor DMA to be ready
   leds.show();
 
   utils->lockWire(Wire1);
@@ -64,11 +61,11 @@ bool Hmi::begin(Utils& utilsRef)
   rtc.start();
   utils->unlockWire(Wire1);
 
+
   initialized = true;
-   // threads.addThread(update, (void*)this, 4096);
+  threads.addThread(update, (void*)this, 4096);
   console.ok.println("[HMI] Initialized");
 
-  leds.show();
   return true;
 }
 
