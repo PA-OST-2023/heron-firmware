@@ -76,26 +76,17 @@ void Console::writeTask(void* pvParameter)
 
   while(ref->initialized)
   {
-    if(
-      ref->notifyMutex.lock() &&
-      ref
-        ->streamActive)    // Wait on notification for data in buffer or console opened
+    if(ref->notifyMutex.lock() && ref->streamActive)    // Wait on notification for data in buffer or console opened
     {
       if(ref->bufferAccessMutex.lock())
       {
-        if(ref->readIdx <
-           ref->writeIdx)    // Regular case, no wrap around needed
+        if(ref->readIdx < ref->writeIdx)    // Regular case, no wrap around needed
         {
-          ref->stream.write((const uint8_t*)ref->ringBuffer + ref->readIdx,
-                            ref->writeIdx - ref->readIdx);
+          ref->stream.write((const uint8_t*)ref->ringBuffer + ref->readIdx, ref->writeIdx - ref->readIdx);
         }
-        else if(
-          ref->readIdx >
-          ref
-            ->writeIdx)    // Need to send buffer in two parts (ReadIdx to End | 0 to WriteIdx)
+        else if(ref->readIdx > ref->writeIdx)    // Need to send buffer in two parts (ReadIdx to End | 0 to WriteIdx)
         {
-          ref->stream.write((const uint8_t*)ref->ringBuffer + ref->readIdx,
-                            QUEUE_BUFFER_LENGTH - ref->readIdx);
+          ref->stream.write((const uint8_t*)ref->ringBuffer + ref->readIdx, QUEUE_BUFFER_LENGTH - ref->readIdx);
           ref->stream.write((const uint8_t*)ref->ringBuffer, ref->writeIdx);
         }
         ref->readIdx = ref->writeIdx;
@@ -137,8 +128,7 @@ void Console::interfaceTask(void* pvParameter)
       ref->bufferAccessMutex.unlock();
       ref->notifyMutex.unlock();
     }
-    if(!ref->streamActive &&
-       streamActiveOld)    // Detect if console has been closed
+    if(!ref->streamActive && streamActiveOld)    // Detect if console has been closed
     {
       ref->stream.flush();
       ref->stream.clearWriteError();
@@ -151,8 +141,8 @@ void Console::interfaceTask(void* pvParameter)
 
 size_t Console::write(const uint8_t* buffer, size_t size)
 {
-  // if(!initialized)
-  //   return 0;
+  if(!initialized)
+    return 0;
   if(size == 0)
     return 0;
   if(bufferAccessMutex.lock())
@@ -168,8 +158,7 @@ size_t Console::write(const uint8_t* buffer, size_t size)
     {
       size_t firstPartSize = QUEUE_BUFFER_LENGTH - writeIdx;
       memcpy((uint8_t*)ringBuffer + writeIdx, buffer, firstPartSize);
-      memcpy((uint8_t*)ringBuffer, buffer + firstPartSize,
-             size - firstPartSize);
+      memcpy((uint8_t*)ringBuffer, buffer + firstPartSize, size - firstPartSize);
       free = readIdx - writeIdx;
     }
     writeIdx = (writeIdx + size) & (QUEUE_BUFFER_LENGTH - 1);
@@ -179,8 +168,7 @@ size_t Console::write(const uint8_t* buffer, size_t size)
     }
 
     bufferAccessMutex.unlock();
-    notifyMutex
-      .unlock();    // Send signal to update task (for sending out data in queue buffer)
+    notifyMutex.unlock();    // Send signal to update task (for sending out data in queue buffer)
     return size;
   }
   return 0;
