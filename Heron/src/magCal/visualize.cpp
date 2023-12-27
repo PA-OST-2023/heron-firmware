@@ -1,8 +1,7 @@
 #include "imuread.h"
 
-MagCalibration_t magcal;
-
-Quaternion_t current_orientation;
+EXTMEM MagCalibration_t magcal;
+EXTMEM Quaternion_t current_orientation;
 
 void apply_calibration(int16_t rawx, int16_t rawy, int16_t rawz, Point_t* out)
 {

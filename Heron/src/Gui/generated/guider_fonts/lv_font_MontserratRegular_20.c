@@ -20,6 +20,8 @@
 
 #include <Arduino.h>
 
+#include <Arduino.h>
+
 #ifndef LV_FONT_MONTSERRATREGULAR_20
 #define LV_FONT_MONTSERRATREGULAR_20 1
 #endif

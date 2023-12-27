@@ -33,19 +33,32 @@
 #include "utils.h"
 #include <console.h>
 #include "SdCard/SdioTeensy.cpp"
+#include <static_malloc.h>
+
+EXTMEM uint8_t Utils::extHeap[Utils::EXT_HEAP_SIZE];
 
 Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps)
     : scl_sys(scl_sys), sda_sys(sda_sys), scl_hmi(scl_hmi), sda_hmi(sda_hmi), scl_gps(scl_gps), sda_gps(sda_gps)
-{}
+{
+  sm_set_default_pool(extHeap, EXT_HEAP_SIZE, false, nullptr);  // use a memory pool on the external ram
+}
 
 bool Utils::begin(const char* storageName)
 {
   bool res = true;
-  MTP.begin();
+  mtpEnabled = storageName != nullptr;
+  if(mtpEnabled)
+  {
+    MTP.begin();
+  }
   if(SD.begin(BUILTIN_SDCARD))
   {
     sdCardPresent = true;
-    MTP.addFilesystem(SD, storageName);
+    if(mtpEnabled)
+    {
+      MTP.addFilesystem(SD, storageName);
+      console.log.printf("[UTILS] MTP Storage: %s\n", storageName);
+    }
     console.ok.println("[UTILS] SD Card initialized");
   }
   else
@@ -150,10 +163,13 @@ int Utils::unlockWire(TwoWire& wire)
 
 void Utils::update(void)    // Make sure this function is non-blocking!
 {
-  if(tryLockSdCardAccess())
+  if(mtpEnabled)
   {
-    MTP.loop();
-    unlockSdCardAccess();
+    if(tryLockSdCardAccess())
+    {
+      MTP.loop();
+      unlockSdCardAccess();
+    }
   }
 
   static uint32_t t = 0;
@@ -163,41 +179,41 @@ void Utils::update(void)    // Make sure this function is non-blocking!
   }
 }
 
-// bool Utils::storeChannelEnabled(const bool* channelEnabled, int count)
-// {
-//   uint32_t channels = 0x00000000;
-//   for(int i = 0; i < count; i++)
-//   {
-//     if(channelEnabled[i])
-//     {
-//       bitSet(channels, i);
-//     }
-//   }
-//   console.log.printf("[UTILS] EEPROM Store channel enabled: 0x%08X\n", channels);
-//   return EEPROM.put(EEPROM_ADDR_CHANNEL_ENABLED, channels) != 0;
-// }
+      // bool Utils::storeChannelEnabled(const bool* channelEnabled, int count)
+   // {
+   //   uint32_t channels = 0x00000000;
+   //   for(int i = 0; i < count; i++)
+   //   {
+   //     if(channelEnabled[i])
+   //     {
+   //       bitSet(channels, i);
+   //     }
+   //   }
+   //   console.log.printf("[UTILS] EEPROM Store channel enabled: 0x%08X\n", channels);
+   //   return EEPROM.put(EEPROM_ADDR_CHANNEL_ENABLED, channels) != 0;
+   // }
 
-// void Utils::loadChannelEnabled(bool* channelEnabled, int count)
-// {
-//   uint32_t channels;
-//   EEPROM.get(EEPROM_ADDR_CHANNEL_ENABLED, channels);
-//   console.log.printf("[UTILS] EEPROM Load channel enabled: 0x%08X\n", channels);
-//   for(int i = 0; i < count; i++)
-//   {
-//     channelEnabled[i] = bitRead(channels, i);
-//   }
-// }
+      // void Utils::loadChannelEnabled(bool* channelEnabled, int count)
+   // {
+   //   uint32_t channels;
+   //   EEPROM.get(EEPROM_ADDR_CHANNEL_ENABLED, channels);
+   //   console.log.printf("[UTILS] EEPROM Load channel enabled: 0x%08X\n", channels);
+   //   for(int i = 0; i < count; i++)
+   //   {
+   //     channelEnabled[i] = bitRead(channels, i);
+   //   }
+   // }
 
-// bool Utils::storeChannelNumber(int channelNumber)
-// {
-//   console.log.printf("[UTILS] EEPROM Store channel number: %d\n", channelNumber);
-//   return EEPROM.put(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber) != 0;
-// }
+      // bool Utils::storeChannelNumber(int channelNumber)
+   // {
+   //   console.log.printf("[UTILS] EEPROM Store channel number: %d\n", channelNumber);
+   //   return EEPROM.put(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber) != 0;
+   // }
 
-// int Utils::loadChannelNumber(void)
-// {
-//   int channelNumber = 0;
-//   EEPROM.get(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber);
-//   console.log.printf("[UTILS] EEPROM Load channel number: %d\n", channelNumber);
-//   return channelNumber;
-// }
+      // int Utils::loadChannelNumber(void)
+   // {
+   //   int channelNumber = 0;
+   //   EEPROM.get(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber);
+   //   console.log.printf("[UTILS] EEPROM Load channel number: %d\n", channelNumber);
+   //   return channelNumber;
+   // }

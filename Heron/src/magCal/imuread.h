@@ -29,6 +29,8 @@
 #include <unistd.h>
 #endif
 
+#include <Arduino.h>
+
 #if defined(LINUX)
 #define PORT "/dev/ttyACM0"
 #elif defined(WINDOWS)

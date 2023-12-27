@@ -22,6 +22,7 @@ typedef struct
 	bool screenBootup_del;
 	lv_obj_t *screenBootup_label_1;
 	lv_obj_t *screenBootup_img_2;
+	lv_obj_t *screenBootup_spinner_1;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);

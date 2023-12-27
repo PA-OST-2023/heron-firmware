@@ -35,9 +35,8 @@
 #include <static_malloc.h>
 #include "Gui/generated/gui_guider.h"
 
-DMAMEM lv_ui guider_ui;
+EXTMEM lv_ui guider_ui;
 DMAMEM lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
-EXTMEM uint8_t Gui::extHeap[Gui::EXT_HEAP_SIZE];
 Utils* Gui::utils;
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), bl(bl), tch_irq(tch_irq) {}
@@ -61,7 +60,6 @@ bool Gui::begin(Utils& utilsRef)
   }
   utils->unlockWire(Wire1);
 
-  sm_set_default_pool(extHeap, EXT_HEAP_SIZE, false, nullptr);  // use a memory pool on the external ram
   lv_log_register_print_cb(lvglPrint);
   lv_init();
 
@@ -159,95 +157,95 @@ void Gui::update(void)
 {
   if(!initialized)
     return;
-  // if(flagTime)
-  // {
-  //   flagTime = false;
-  //   lv_label_set_text(guider_ui.screenRecording_btn_current_time_label, bufferTime);
-  // }
-  // if(flagDate)
-  // {
-  //   flagDate = false;
-  //   lv_roller_set_selected(guider_ui.screenSetTime_rollerDay, day - 1, LV_ANIM_OFF);
-  //   lv_roller_set_selected(guider_ui.screenSetTime_rollerMonth, month - 1, LV_ANIM_OFF);
-  //   lv_roller_set_selected(guider_ui.screenSetTime_rollerYear, year - 2023, LV_ANIM_OFF);
-  //   lv_roller_set_selected(guider_ui.screenSetTime_rollerHour, hour, LV_ANIM_OFF);
-  //   lv_roller_set_selected(guider_ui.screenSetTime_rollerMinute, minute, LV_ANIM_OFF);
-  //   lv_roller_set_selected(guider_ui.screenSetTime_rollerSecond, second, LV_ANIM_OFF);
-  // }
+      // if(flagTime)
+      // {
+      //   flagTime = false;
+      //   lv_label_set_text(guider_ui.screenRecording_btn_current_time_label, bufferTime);
+      // }
+      // if(flagDate)
+      // {
+      //   flagDate = false;
+      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerDay, day - 1, LV_ANIM_OFF);
+      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerMonth, month - 1, LV_ANIM_OFF);
+      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerYear, year - 2023, LV_ANIM_OFF);
+      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerHour, hour, LV_ANIM_OFF);
+      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerMinute, minute, LV_ANIM_OFF);
+      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerSecond, second, LV_ANIM_OFF);
+      // }
 
-                  // if(flagSdCardStatus)
-  // {
-  //   flagSdCardStatus = false;
-  //   uint32_t color = 0x00000000;
-  //   switch(sdCardStatus)
-  //   {
-  //     case SD_CARD_MISSING:
-  //       color = 0x00292831;
-  //       break;
-  //     case SD_CARD_ERROR:
-  //       color = 0x00FF8F00;
-  //       break;
-  //     case SD_CARD_OK:
-  //       color = 0x00FFFFFF;
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_sd_card, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
-  // }
-  // if(flagUsbStatus)
-  // {
-  //   flagUsbStatus = false;
-  //   uint32_t color = 0x00000000;
-  //   switch(usbStatus)
-  //   {
-  //     case USB_DISCONNECTED:
-  //       color = 0x00292831;
-  //       break;
-  //     case USB_CONNECTED:
-  //       color = 0x00FFFFFF;
-  //       break;
-  //     case USB_ACTIVE:
-  //       color = 0x0000FF00;
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_usb, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
-  // }
-  // if(flagEthStatus)
-  // {
-  //   flagEthStatus = false;
-  //   uint32_t color = 0x00000000;
-  //   switch(ethStatus)
-  //   {
-  //     case ETH_DISCONNECTED:
-  //       color = 0x00292831;
-  //       break;
-  //     case ETH_CONNECTED:
-  //       color = 0x00FFFFFF;
-  //       break;
-  //     case ETH_ACTIVE:
-  //       color = 0x0000FF00;
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_ethernet, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
-  // }
-  // if(flagWarning)
-  // {
-  //   flagWarning = false;
-  //   if(warningText[0] != '\0')
-  //   {
-  //     lv_obj_clear_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
-  //     // lv_label_set_text(guider_ui.screenRecording_label_warning, warningText);
-  //   }
-  //   else
-  //   {
-  //     lv_obj_add_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
-  //   }
-  // }
+                          // if(flagSdCardStatus)
+      // {
+      //   flagSdCardStatus = false;
+      //   uint32_t color = 0x00000000;
+      //   switch(sdCardStatus)
+      //   {
+      //     case SD_CARD_MISSING:
+      //       color = 0x00292831;
+      //       break;
+      //     case SD_CARD_ERROR:
+      //       color = 0x00FF8F00;
+      //       break;
+      //     case SD_CARD_OK:
+      //       color = 0x00FFFFFF;
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_sd_card, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
+      // }
+      // if(flagUsbStatus)
+      // {
+      //   flagUsbStatus = false;
+      //   uint32_t color = 0x00000000;
+      //   switch(usbStatus)
+      //   {
+      //     case USB_DISCONNECTED:
+      //       color = 0x00292831;
+      //       break;
+      //     case USB_CONNECTED:
+      //       color = 0x00FFFFFF;
+      //       break;
+      //     case USB_ACTIVE:
+      //       color = 0x0000FF00;
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_usb, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
+      // }
+      // if(flagEthStatus)
+      // {
+      //   flagEthStatus = false;
+      //   uint32_t color = 0x00000000;
+      //   switch(ethStatus)
+      //   {
+      //     case ETH_DISCONNECTED:
+      //       color = 0x00292831;
+      //       break;
+      //     case ETH_CONNECTED:
+      //       color = 0x00FFFFFF;
+      //       break;
+      //     case ETH_ACTIVE:
+      //       color = 0x0000FF00;
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_ethernet, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
+      // }
+      // if(flagWarning)
+      // {
+      //   flagWarning = false;
+      //   if(warningText[0] != '\0')
+      //   {
+      //     lv_obj_clear_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
+      //     // lv_label_set_text(guider_ui.screenRecording_label_warning, warningText);
+      //   }
+      //   else
+      //   {
+      //     lv_obj_add_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
+      //   }
+      // }
 
   lv_task_handler();
 }

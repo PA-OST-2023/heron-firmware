@@ -62,6 +62,27 @@ void setup_scr_screenBootup(lv_ui *ui)
 	//Write style for screenBootup_img_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_img_opa(ui->screenBootup_img_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
 
+	//Write codes screenBootup_spinner_1
+	ui->screenBootup_spinner_1 = lv_spinner_create(ui->screenBootup, 1000, 60);
+	lv_obj_set_pos(ui->screenBootup_spinner_1, 0, 0);
+	lv_obj_set_size(ui->screenBootup_spinner_1, 240, 240);
+
+	//Write style for screenBootup_spinner_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_pad_top(ui->screenBootup_spinner_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screenBootup_spinner_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screenBootup_spinner_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screenBootup_spinner_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screenBootup_spinner_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_arc_width(ui->screenBootup_spinner_1, 12, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_arc_opa(ui->screenBootup_spinner_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_arc_color(ui->screenBootup_spinner_1, lv_color_hex(0xd5d6de), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screenBootup_spinner_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style for screenBootup_spinner_1, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_arc_width(ui->screenBootup_spinner_1, 12, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+	lv_obj_set_style_arc_opa(ui->screenBootup_spinner_1, 255, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+	lv_obj_set_style_arc_color(ui->screenBootup_spinner_1, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_DEFAULT);
+
 	//Update current screen layout.
 	lv_obj_update_layout(ui->screenBootup);
 

@@ -7,6 +7,8 @@
 
 #include <Arduino.h>
 
+#include <Arduino.h>
+
 #ifndef LV_ATTRIBUTE_MEM_ALIGN
 #define LV_ATTRIBUTE_MEM_ALIGN
 #endif

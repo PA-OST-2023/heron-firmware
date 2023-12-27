@@ -50,8 +50,7 @@ class Gui
   static constexpr const uint32_t SCREEN_BUFFER_HEIGHT = 60;
   static constexpr const uint32_t AUDIO_CHANNEL_COUNT = 32;
   static constexpr const float UPDATE_RATE = 24.0;                  // Hz
-  static constexpr const size_t EXT_HEAP_SIZE = 1 * 1024 * 1024;    // 1 MB memory pool on the external ram chip
-  static constexpr const size_t SPI_FREQUENCY = 40000000;           // 40 MHz SPI clock
+  static constexpr const size_t SPI_FREQUENCY = 60000000;           // [Hz] SPI clock
 
   typedef enum
   {
@@ -91,7 +90,6 @@ class Gui
   CHSC6413 touch = CHSC6413(&Wire1, tch_irq);
 
   static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
-  static uint8_t extHeap[EXT_HEAP_SIZE];
   volatile bool initialized = false;
 
   char bufferTime[10];

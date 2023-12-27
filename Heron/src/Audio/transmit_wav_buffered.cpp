@@ -30,37 +30,45 @@
 * SOFTWARE.
 ******************************************************************************/
 
-#include <Arduino.h>
-#include <console.h>
-#include <TeensyThreads.h>
 #include "transmit_wav_buffered.h"
+#include <Arduino.h>
+#include <TeensyThreads.h>
+#include <console.h>
 
 
 using namespace qindesign::network;
 uint8_t AudioTransmitWAVbuffered::objcnt;
 EXTMEM CircularBuffer<AudioTransmitWAVbuffered::EXT_RAM_BUFFER_SIZE> AudioTransmitWAVbuffered::circularBuffer;
 
-AudioTransmitWAVbuffered::AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t **iqueue) : AudioStream(ninput, iqueue), chanCnt(ninput), writePending(false), objnum(objcnt++)
+AudioTransmitWAVbuffered::AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t** iqueue)
+    : AudioStream(ninput, iqueue), chanCnt(ninput), writePending(false), objnum(objcnt++)
 {
-	setContext(this);
-	attach(EventResponse);
+  setContext(this);
+  attach(EventResponse);
 }
 
-bool AudioTransmitWAVbuffered::begin(EthernetServer* tcpServer, bool verboseOutput)
+bool AudioTransmitWAVbuffered::begin(int port, bool verboseOutput)
 {
   if(initialized)
   {
-    console.warning.println("[TRANSMIT WAV BUFFERED] Modle was already initialized.");
+    console.warning.println("[TRANSMIT WAV BUFFERED] Module was already initialized.");
     return false;
   }
-  server = tcpServer;
-  verbose = verboseOutput;
-  if(!server)
+  if(port < 0 || port > 65535)
   {
-    console.error.println("[TRANSMIT WAV BUFFERED] Client is nullptr.");
+    console.error.printf("[TRANSMIT WAV BUFFERED] Invalid port number: %d\n", port);
     return false;
   }
-  server->begin();
+  if(!server.begin(port))
+  {
+    console.error.printf("[TRANSMIT WAV BUFFERED] Could not start server on port %d\n", port);
+    return false;
+  }
+  else
+  {
+    console.ok.printf("[TRANSMIT WAV BUFFERED] Server started on port %d\n", port);
+  }
+  verbose = verboseOutput;
   initialized = true;
   return true;
 }
@@ -72,13 +80,13 @@ void AudioTransmitWAVbuffered::end(void)
     console.warning.println("[TRANSMIT WAV BUFFERED] Modle was not initialized.");
     return;
   }
-  server->end();
+  server.end();
   initialized = false;
 }
 
 void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
 {
-	AudioTransmitWAVbuffered* pPWB = (AudioTransmitWAVbuffered*) evref.getContext();
+  AudioTransmitWAVbuffered* pPWB = (AudioTransmitWAVbuffered*)evref.getContext();
   pPWB->writePending = true;
 
   static uint8_t bufferBlock[TCP_PACKET_BLOCK_SIZE];
@@ -95,7 +103,7 @@ void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
     }
     else
     {
-      // console.warning.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
+       // console.warning.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
     }
   }
   pPWB->writePending = false;
@@ -104,7 +112,7 @@ void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
 uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
 {
   if(!initialized)
-	{
+  {
     return 0;
   }
 
@@ -120,7 +128,7 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
       {
         outN += client.write(pb + outN, sz - outN);
         Ethernet.loop();
-        server->flush();
+        server.flush();
         if(outN >= sz)
         {
           break;
@@ -131,7 +139,7 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
           {
             console.warning.printf("[TRANSMIT WAV BUFFERED] Timeout after %d ms.\n", millis() - t0);
           }
-          if(millis() - lastSendTime > TCP_CONNECTION_TIMEOUT_MS)           // If the last send was too long ago, we assume that the connection is lost
+          if(millis() - lastSendTime > TCP_CONNECTION_TIMEOUT_MS)    // If the last send was too long ago, we assume that the connection is lost
           {
             client.abort();
             searchForClient = true;
@@ -145,7 +153,7 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
 
   if(searchForClient)
   {
-    client = server->available();
+    client = server.available();
     if(client)
     {
       console.log.println("[TRANSMIT WAV BUFFERED] Client connected.");
@@ -154,47 +162,47 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
   return outN;
 }
 
-static void interleave(int16_t* buf,int16_t** blocks,uint16_t channels)     // interleave channels of audio from separate blocks into buf 
+static void interleave(int16_t* buf, int16_t** blocks, uint16_t channels)    // interleave channels of audio from separate blocks into buf
 {
-	if (1 == channels)    // mono, do the simple thing
-	{
-		if (nullptr != blocks[0])
-			memcpy(buf,blocks[0], AUDIO_BLOCK_SAMPLES * sizeof *buf);
-		else
-			memset(buf,0,AUDIO_BLOCK_SAMPLES * sizeof *buf);
-	}
-	else
-		for (uint16_t i=0;i<channels;i++)
-		{
-			int16_t* pd = buf+i;
-			int16_t* ps = blocks[i];
-			
-			if (nullptr != ps)
-			{
-				for (int j=0;j<AUDIO_BLOCK_SAMPLES;j++)
-				{
-					*pd = *ps++;
-					pd += channels;
-				}
-			}
-			else      // null data, interpret as silence
-			{
-				for (int j=0;j<AUDIO_BLOCK_SAMPLES;j++)
-				{
-					*pd = 0;
-					pd += channels;
-				}
-			}
-		}
+  if(1 == channels)    // mono, do the simple thing
+  {
+    if(nullptr != blocks[0])
+      memcpy(buf, blocks[0], AUDIO_BLOCK_SAMPLES * sizeof *buf);
+    else
+      memset(buf, 0, AUDIO_BLOCK_SAMPLES * sizeof *buf);
+  }
+  else
+    for(uint16_t i = 0; i < channels; i++)
+    {
+      int16_t* pd = buf + i;
+      int16_t* ps = blocks[i];
+
+      if(nullptr != ps)
+      {
+        for(int j = 0; j < AUDIO_BLOCK_SAMPLES; j++)
+        {
+          *pd = *ps++;
+          pd += channels;
+        }
+      }
+      else    // null data, interpret as silence
+      {
+        for(int j = 0; j < AUDIO_BLOCK_SAMPLES; j++)
+        {
+          *pd = 0;
+          pd += channels;
+        }
+      }
+    }
 }
 
 
 void AudioTransmitWAVbuffered::update(void)
 {
-	int16_t buf[chanCnt * AUDIO_BLOCK_SAMPLES];
-	audio_block_t* blocks[chanCnt];	
-	int16_t* data[chanCnt] = {0};
-	int alloCnt = 0; 	                                    // count of blocks successfully received
+  int16_t buf[chanCnt * AUDIO_BLOCK_SAMPLES];
+  audio_block_t* blocks[chanCnt];
+  int16_t* data[chanCnt] = {0};
+  int alloCnt = 0;    // count of blocks successfully received
 
   if(millis() - secondTimer > 1000)
   {
@@ -202,23 +210,23 @@ void AudioTransmitWAVbuffered::update(void)
     byteCounter = 0;
     secondTimer = millis();
   }
-	
-	while(alloCnt < chanCnt)                              // receive the audio blocks to record
-	{
-		blocks[alloCnt] = receiveReadOnly(alloCnt);
-		if (nullptr != blocks[alloCnt])
-			data[alloCnt] = blocks[alloCnt]->data;
-		alloCnt++;
-	}
 
-	if(initialized)                                       // only update if we're recording and not paused, but we must discard the received blocks!
-	{
-		if(alloCnt >= chanCnt)                              // received enough - extract the data
-		{
-			interleave(buf, data, chanCnt);	                  // make a chunk of data for the file
+  while(alloCnt < chanCnt)    // receive the audio blocks to record
+  {
+    blocks[alloCnt] = receiveReadOnly(alloCnt);
+    if(nullptr != blocks[alloCnt])
+      data[alloCnt] = blocks[alloCnt]->data;
+    alloCnt++;
+  }
+
+  if(initialized)    // only update if we're recording and not paused, but we must discard the received blocks!
+  {
+    if(alloCnt >= chanCnt)    // received enough - extract the data
+    {
+      interleave(buf, data, chanCnt);    // make a chunk of data for the file
 
       header.blockIndex++;
-      header.timestamp = (uint64_t)micros() * 1000;               // TODO Get from GPS
+      header.timestamp = (uint64_t)micros() * 1000;    // TODO Get from GPS
 
       if(circularBuffer.availableToWrite() < (sizeof(buf)))
       {
@@ -234,10 +242,10 @@ void AudioTransmitWAVbuffered::update(void)
           triggerEvent(0);
         }
       }
-		}
-	}
-	
-	while(--alloCnt >= 0)                                 // relinquish our interest in these blocks
-		if (nullptr != blocks[alloCnt])                     // stock release() can't cope with NULL pointer
-			release(blocks[alloCnt]);
+    }
+  }
+
+  while(--alloCnt >= 0)    // relinquish our interest in these blocks
+    if(nullptr != blocks[alloCnt])    // stock release() can't cope with NULL pointer
+      release(blocks[alloCnt]);
 }

@@ -32,6 +32,8 @@
 
 #include "console.h"
 
+EXTMEM char Console::ringBuffer[QUEUE_BUFFER_LENGTH];
+
 bool Console::begin(void)
 {
   if(type == USBCDC_t)
@@ -56,9 +58,6 @@ bool Console::begin(unsigned long baud, uint32_t config)
 
 bool Console::initialize(void)
 {
-  ringBuffer = (char*)malloc(QUEUE_BUFFER_LENGTH);
-  if(ringBuffer == nullptr)
-    return false;
   initialized = true;
   threads.addThread(interfaceTask, this, 1024);
   threads.addThread(writeTask, this, 4096);

@@ -44,12 +44,13 @@ class Utils
 {
  public:
   static constexpr const float UPDATE_RATE = 1.0;    // Hz
+  static constexpr const size_t EXT_HEAP_SIZE = 4 * 1024 * 1024;    // n MB memory pool on the external ram chips
 
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_ENABLED = 0;
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_NUMBER = 4;
 
   Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps);
-  bool begin(const char* storageName = "SD Card");
+  bool begin(const char* storageName = nullptr);
   void update(void);
   int scanWire(TwoWire& wire);
   int lockWire(TwoWire& wire, int timeout = 0);
@@ -63,21 +64,23 @@ class Utils
   int tryLockSdCardAccess(void) { return sdCardMutex.try_lock(); }
   int unlockSdCardAccess(void) { return sdCardMutex.unlock(); }
 
-  // bool storeChannelEnabled(const bool* channelEnabled, int count);
-  // void loadChannelEnabled(bool* channelEnabled, int count);
-  // bool storeChannelNumber(int channelNumber);
-  // int loadChannelNumber(void);
+    // bool storeChannelEnabled(const bool* channelEnabled, int count);
+   // void loadChannelEnabled(bool* channelEnabled, int count);
+   // bool storeChannelNumber(int channelNumber);
+   // int loadChannelNumber(void);
 
  private:
   const int scl_sys, sda_sys, scl_hmi, sda_hmi, scl_gps, sda_gps;
   Threads::Mutex wireMutex[3];
   Threads::Mutex sdCardMutex;
-  char storageName[50];
+  bool mtpEnabled = false;
   bool sdCardScanAccess = true;
   bool sdCardPresent = false;
   bool sdCardError = false;
   uint64_t sdCardTotalSize = 0;
   uint64_t sdCardUsedSize = 0;
+
+  static uint8_t extHeap[EXT_HEAP_SIZE];
 };
 
 #endif

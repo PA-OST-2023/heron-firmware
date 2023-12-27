@@ -31,10 +31,14 @@
 ******************************************************************************/
 
 #include <Arduino.h>
+#include <audioUtils.h>
 #include <console.h>
 #include <gui.h>
 #include <hmi.h>
 #include <utils.h>
+
+#include <QNEthernet.h>
+using namespace qindesign::network;
 
 
 #define TFT_SCLK   13
@@ -53,6 +57,8 @@
 #define HMI_BUZZER 36
 #define GPS_RST    31
 
+
+static AudioUtils audio;
 static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_BL, TCH_IRQ);
 static Hmi hmi(RGB_LED, HMI_BUZZER);
@@ -62,16 +68,43 @@ void setup()
   console.begin();
   console.log.println("[MAIN] Initialize System...");
   utils.begin();
+  audio.begin();
   hmi.begin(utils);
+    // threads.delay(2000);
   gui.begin(utils);
+    // threads.delay(2000);
+
+
+  IPAddress ip(192, 168, 40, 80);
+  IPAddress subnet(255, 255, 255, 0);
+  IPAddress gateway(192, 168, 40, 1);
+
+  Ethernet.setLocalIP(ip);
+  Ethernet.setSubnetMask(subnet);
+  Ethernet.setGatewayIP(gateway);
+
+  if(!Ethernet.begin(ip, subnet, gateway))
+  {
+    console.error.println("[MAIN] Failed to configure Ethernet using static IP");
+  }
+  if(!audio.startServer(6666))
+  {
+    console.error.println("[MAIN] Failed to start audio server");
+  }
+  else
+  {
+    console.ok.println("[MAIN] Audio server started");
+  }
+
   hmi.setSystemStatus(Hmi::STATUS_OK);
 }
 
 void loop()
 {
   threads.yield();
-  gui.update();
-  utils.update();
+  // gui.update();
+    // utils.update();
+  Ethernet.loop();
 
   static uint32_t t = 0;
   if(millis() - t > 1000)

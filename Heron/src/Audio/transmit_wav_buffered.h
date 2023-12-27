@@ -43,108 +43,119 @@ using namespace qindesign::network;
 
 struct __attribute__((packed)) Header
 {
-  const uint8_t magic [8] = {'H', 'E', 'R', 'O', 'N', '6', '6', '6'};
+  const uint8_t magic[8] = {'H', 'E', 'R', 'O', 'N', '6', '6', '6'};
   volatile uint32_t blockIndex = 0;
   volatile uint64_t timestamp = 0;
 };
 
 class AudioTransmitWAVbuffered : public EventResponder, public AudioStream
 {
-public:
-  static constexpr const size_t TCP_PACKET_MAX_SIZE       = 1460;
-  static constexpr const size_t TCP_PACKET_BLOCK_SIZE     = TCP_PACKET_MAX_SIZE * 16;   // Must be at least as big as: AUDIO_BLOCK_SAMPLES * ChannelCount * 2
-  static constexpr const size_t TCP_SEND_TIMEOUT_US       = 50;                         // Resend interval in microseconds
-  static constexpr const size_t TCP_CONNECTION_TIMEOUT_MS = 5000;                       // Connection timeout in milliseconds
-  static constexpr const size_t EXT_RAM_BUFFER_SIZE       = 12 * 1024 * 1024;           // Max is 16 MB
+ public:
+  static constexpr const size_t TCP_PACKET_MAX_SIZE = 1460;
+  static constexpr const size_t TCP_PACKET_BLOCK_SIZE = TCP_PACKET_MAX_SIZE * 16;   // Must be at >= AUDIO_BLOCK_SAMPLES * ChannelCount * 2
+  static constexpr const size_t TCP_SEND_TIMEOUT_US = 50;                           // Resend interval in microseconds
+  static constexpr const size_t TCP_CONNECTION_TIMEOUT_MS = 5000;                   // Connection timeout in milliseconds
+  static constexpr const size_t EXT_RAM_BUFFER_SIZE = 10 * 1024 * 1024;             // Max is 16 MB
 
-	AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t **iqueue);
-	AudioTransmitWAVbuffered(void) : AudioTransmitWAVbuffered(2, inputQueueArray) {}
-	virtual ~AudioTransmitWAVbuffered(void) {end();}
-	bool begin(EthernetServer* tcpServer, bool verboseOutput = false);
-	void end(void);
+  AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t** iqueue);
+  AudioTransmitWAVbuffered(void) : AudioTransmitWAVbuffered(2, inputQueueArray) {}
+  virtual ~AudioTransmitWAVbuffered(void) { end(); }
+  bool begin(int port, bool verboseOutput = false);
+  void end(void);
 
-	bool getBufferOverflowDetected(void)
-	{
-	  bool res = bufferOverflowDetected;
-	  bufferOverflowDetected = false;
-	  return res;
-	}
-  float getBufferFillLevel(void) {return (float)circularBuffer.availableToRead() / (float)circularBuffer.capacity();}
-  uint32_t getDataRate(void) {return bytesPerSecond;}                                         // Bytes per second
-  bool getConnectionState(void) {if(!client) return false; else return client.connected();}
-	virtual void update(void);
-	
-	static uint8_t objcnt;
-	friend class AudioTransmitWAVmono;
-	friend class AudioTransmitWAVstereo;
-	
-private:
-	audio_block_t *inputQueueArray[2];
-	static void EventResponse(EventResponderRef evref);
-	uint32_t flushBuffer(uint8_t* pb, size_t sz);
-	volatile bool bufferOverflowDetected = false;
+  bool getBufferOverflowDetected(void)
+  {
+    bool res = bufferOverflowDetected;
+    bufferOverflowDetected = false;
+    return res;
+  }
+  float getBufferFillLevel(void) { return (float)circularBuffer.availableToRead() / (float)circularBuffer.capacity(); }
+  uint32_t getDataRate(void) { return bytesPerSecond; }                                         // Bytes per second
+  bool getConnectionState(void)
+  {
+    if(!client)
+      return false;
+    else
+      return client.connected();
+  }
+  virtual void update(void);
+
+  static uint8_t objcnt;
+  friend class AudioTransmitWAVmono;
+  friend class AudioTransmitWAVstereo;
+
+ private:
+  audio_block_t* inputQueueArray[2];
+  static void EventResponse(EventResponderRef evref);
+  uint32_t flushBuffer(uint8_t* pb, size_t sz);
+  volatile bool bufferOverflowDetected = false;
   static EXTMEM CircularBuffer<EXT_RAM_BUFFER_SIZE> circularBuffer;
   Header header;
 
-	uint32_t byteCounter = 0;
-	uint32_t bytesPerSecond = 0;
-	uint32_t secondTimer = 0;
+  uint32_t byteCounter = 0;
+  uint32_t bytesPerSecond = 0;
+  uint32_t secondTimer = 0;
   uint32_t lastSendTime = 0;
 
-	EthernetServer* server = nullptr;
+  EthernetServer server;
   EthernetClient client;
-	uint8_t chanCnt;
-	bool initialized = false;
-	volatile bool writePending = false;
-	uint8_t objnum;
+  uint8_t chanCnt;
+  bool initialized = false;
+  volatile bool writePending = false;
+  uint8_t objnum;
   bool verbose = false;
 };
 
 class AudioTransmitWAVmono : public AudioTransmitWAVbuffered
 {
-	public:
-		AudioTransmitWAVmono(): AudioTransmitWAVbuffered(1,inputQueueArray) {}
+ public:
+  AudioTransmitWAVmono() : AudioTransmitWAVbuffered(1, inputQueueArray) {}
 };
 
 class AudioTransmitWAVstereo : public AudioTransmitWAVbuffered
 {
-	public:
-		AudioTransmitWAVstereo(): AudioTransmitWAVbuffered(2,inputQueueArray) {}
+ public:
+  AudioTransmitWAVstereo() : AudioTransmitWAVbuffered(2, inputQueueArray) {}
 };
 
 class AudioTransmitWAVquad : public AudioTransmitWAVbuffered
 {
-		audio_block_t *iqa[4];	
-	public:
-		AudioTransmitWAVquad(): AudioTransmitWAVbuffered(4,iqa) {}
+  audio_block_t* iqa[4];
+
+ public:
+  AudioTransmitWAVquad() : AudioTransmitWAVbuffered(4, iqa) {}
 };
 
 class AudioTransmitWAVhex : public AudioTransmitWAVbuffered
 {
-		audio_block_t *iqa[6];	
-	public:
-		AudioTransmitWAVhex(): AudioTransmitWAVbuffered(6,iqa) {}
+  audio_block_t* iqa[6];
+
+ public:
+  AudioTransmitWAVhex() : AudioTransmitWAVbuffered(6, iqa) {}
 };
 
 class AudioTransmitWAVoct : public AudioTransmitWAVbuffered
 {
-		audio_block_t *iqa[8];	
-	public:
-		AudioTransmitWAVoct(): AudioTransmitWAVbuffered(8,iqa) {}
+  audio_block_t* iqa[8];
+
+ public:
+  AudioTransmitWAVoct() : AudioTransmitWAVbuffered(8, iqa) {}
 };
 
 class AudioTransmitWAV16 : public AudioTransmitWAVbuffered
 {
-		audio_block_t *iqa[16];	
-	public:
-		AudioTransmitWAV16(): AudioTransmitWAVbuffered(16,iqa) {}
+  audio_block_t* iqa[16];
+
+ public:
+  AudioTransmitWAV16() : AudioTransmitWAVbuffered(16, iqa) {}
 };
 
 class AudioTransmitWAV32 : public AudioTransmitWAVbuffered
 {
-		audio_block_t *iqa[32];	
-	public:
-		AudioTransmitWAV32(): AudioTransmitWAVbuffered(32,iqa) {}
+  audio_block_t* iqa[32];
+
+ public:
+  AudioTransmitWAV32() : AudioTransmitWAVbuffered(32, iqa) {}
 };
 
 #endif
