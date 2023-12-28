@@ -58,7 +58,7 @@ lv_obj_t * lv_btn_create(lv_obj_t * parent)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_btn_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_btn_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");

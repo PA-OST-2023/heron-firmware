@@ -197,7 +197,6 @@ void setup()
   {
     console.ok.println("[MAIN] Touch screen initialized.");
   }
-  // touch.setContinuousMode(true);
 
   lv_log_register_print_cb(my_print);
   lv_init();

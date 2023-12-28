@@ -126,7 +126,7 @@ void lv_refr_now(lv_disp_t * disp)
     }
 }
 
-void lv_obj_redraw(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
+FLASHMEM void lv_obj_redraw(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
 {
     const lv_area_t * clip_area_ori = draw_ctx->clip_area;
     lv_area_t clip_coords_for_obj;
@@ -202,7 +202,7 @@ void lv_obj_redraw(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
  * @param disp pointer to display where the area should be invalidated (NULL can be used if there is
  * only one display)
  */
-void _lv_inv_area(lv_disp_t * disp, const lv_area_t * area_p)
+FLASHMEM void _lv_inv_area(lv_disp_t * disp, const lv_area_t * area_p)
 {
     if(!disp) disp = lv_disp_get_default();
     if(!disp) return;
@@ -461,7 +461,7 @@ uint32_t lv_refr_get_fps_avg(void)
 /**
  * Join the areas which has got common parts
  */
-static void lv_refr_join_area(void)
+FLASHMEM static void lv_refr_join_area(void)
 {
     uint32_t join_from;
     uint32_t join_in;
@@ -498,7 +498,7 @@ static void lv_refr_join_area(void)
 /**
  * Refresh the joined areas
  */
-static void refr_invalid_areas(void)
+FLASHMEM static void refr_invalid_areas(void)
 {
     px_num = 0;
 
@@ -542,7 +542,7 @@ static void refr_invalid_areas(void)
  * Refresh an area if there is Virtual Display Buffer
  * @param area_p  pointer to an area to refresh
  */
-static void refr_area(const lv_area_t * area_p)
+FLASHMEM static void refr_area(const lv_area_t * area_p)
 {
     lv_draw_ctx_t * draw_ctx = disp_refr->driver->draw_ctx;
     draw_ctx->buf = disp_refr->driver->draw_buf->buf_act;
@@ -609,7 +609,7 @@ static void refr_area(const lv_area_t * area_p)
     }
 }
 
-static void refr_area_part(lv_draw_ctx_t * draw_ctx)
+FLASHMEM static void refr_area_part(lv_draw_ctx_t * draw_ctx)
 {
     lv_disp_draw_buf_t * draw_buf = lv_disp_get_draw_buf(disp_refr);
 
@@ -718,7 +718,7 @@ static void refr_area_part(lv_draw_ctx_t * draw_ctx)
  * @param obj the first object to start the searching (typically a screen)
  * @return
  */
-static lv_obj_t * lv_refr_get_top_obj(const lv_area_t * area_p, lv_obj_t * obj)
+FLASHMEM static lv_obj_t * lv_refr_get_top_obj(const lv_area_t * area_p, lv_obj_t * obj)
 {
     lv_obj_t * found_p = NULL;
 
@@ -758,7 +758,7 @@ static lv_obj_t * lv_refr_get_top_obj(const lv_area_t * area_p, lv_obj_t * obj)
  * @param top_p pointer to an objects. Start the drawing from it.
  * @param mask_p pointer to an area, the objects will be drawn only here
  */
-static void refr_obj_and_children(lv_draw_ctx_t * draw_ctx, lv_obj_t * top_obj)
+FLASHMEM static void refr_obj_and_children(lv_draw_ctx_t * draw_ctx, lv_obj_t * top_obj)
 {
     /*Normally always will be a top_obj (at least the screen)
      *but in special cases (e.g. if the screen has alpha) it won't.
@@ -805,7 +805,7 @@ static void refr_obj_and_children(lv_draw_ctx_t * draw_ctx, lv_obj_t * top_obj)
 }
 
 
-static lv_res_t layer_get_area(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj, lv_layer_type_t layer_type,
+FLASHMEM static lv_res_t layer_get_area(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj, lv_layer_type_t layer_type,
                                lv_area_t * layer_area_out)
 {
     lv_coord_t ext_draw_size = _lv_obj_get_ext_draw_size(obj);
@@ -849,7 +849,7 @@ static lv_res_t layer_get_area(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj, lv_laye
     return LV_RES_OK;
 }
 
-static void layer_alpha_test(lv_obj_t * obj, lv_draw_ctx_t * draw_ctx, lv_draw_layer_ctx_t * layer_ctx,
+FLASHMEM static void layer_alpha_test(lv_obj_t * obj, lv_draw_ctx_t * draw_ctx, lv_draw_layer_ctx_t * layer_ctx,
                              lv_draw_layer_flags_t flags)
 {
     bool has_alpha;
@@ -879,7 +879,7 @@ static void layer_alpha_test(lv_obj_t * obj, lv_draw_ctx_t * draw_ctx, lv_draw_l
 }
 
 
-void refr_obj(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
+FLASHMEM void refr_obj(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
 {
     /*Do not refresh hidden objects*/
     if(lv_obj_has_flag(obj, LV_OBJ_FLAG_HIDDEN)) return;
@@ -965,7 +965,7 @@ void refr_obj(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
 }
 
 
-static uint32_t get_max_row(lv_disp_t * disp, lv_coord_t area_w, lv_coord_t area_h)
+FLASHMEM static uint32_t get_max_row(lv_disp_t * disp, lv_coord_t area_w, lv_coord_t area_h)
 {
     int32_t max_row = (uint32_t)disp->driver->draw_buf->size / area_w;
 
@@ -1003,7 +1003,7 @@ static uint32_t get_max_row(lv_disp_t * disp, lv_coord_t area_w, lv_coord_t area
     return max_row;
 }
 
-static void draw_buf_rotate_180(lv_disp_drv_t * drv, lv_area_t * area, lv_color_t * color_p)
+FLASHMEM static void draw_buf_rotate_180(lv_disp_drv_t * drv, lv_area_t * area, lv_color_t * color_p)
 {
     lv_coord_t area_w = lv_area_get_width(area);
     lv_coord_t area_h = lv_area_get_height(area);
@@ -1027,7 +1027,7 @@ static void draw_buf_rotate_180(lv_disp_drv_t * drv, lv_area_t * area, lv_color_
     area->x1 = drv->hor_res - tmp_coord - 1;
 }
 
-static void LV_ATTRIBUTE_FAST_MEM draw_buf_rotate_90(bool invert_i, lv_coord_t area_w, lv_coord_t area_h,
+FLASHMEM static void LV_ATTRIBUTE_FAST_MEM draw_buf_rotate_90(bool invert_i, lv_coord_t area_w, lv_coord_t area_h,
                                                      lv_color_t * orig_color_p, lv_color_t * rot_buf)
 {
 
@@ -1064,7 +1064,7 @@ static inline void draw_buf_rotate4(lv_color_t * a, lv_color_t * b, lv_color_t *
  * Rotate a square image 90/270 degrees in place.
  * @note inspired by https://stackoverflow.com/a/43694906
  */
-static void draw_buf_rotate_90_sqr(bool is_270, lv_coord_t w, lv_color_t * color_p)
+FLASHMEM static void draw_buf_rotate_90_sqr(bool is_270, lv_coord_t w, lv_color_t * color_p)
 {
     for(lv_coord_t i = 0; i < w / 2; i++) {
         for(lv_coord_t j = 0; j < (w + 1) / 2; j++) {
@@ -1094,7 +1094,7 @@ static void draw_buf_rotate_90_sqr(bool is_270, lv_coord_t w, lv_color_t * color
 /**
  * Rotate the draw_buf to the display's native orientation.
  */
-static void draw_buf_rotate(lv_area_t * area, lv_color_t * color_p)
+FLASHMEM static void draw_buf_rotate(lv_area_t * area, lv_color_t * color_p)
 {
     lv_disp_drv_t * drv = disp_refr->driver;
     if(disp_refr->driver->full_refresh && drv->sw_rotate) {
@@ -1183,7 +1183,7 @@ static void draw_buf_rotate(lv_area_t * area, lv_color_t * color_p)
 /**
  * Flush the content of the draw buffer
  */
-static void draw_buf_flush(lv_disp_t * disp)
+FLASHMEM static void draw_buf_flush(lv_disp_t * disp)
 {
     lv_disp_draw_buf_t * draw_buf = lv_disp_get_draw_buf(disp_refr);
 

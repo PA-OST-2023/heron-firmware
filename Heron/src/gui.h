@@ -47,7 +47,7 @@ class Gui
  public:
   static constexpr const uint32_t SCREEN_WIDTH = 240;
   static constexpr const uint32_t SCREEN_HEIGHT = 240;
-  static constexpr const uint32_t SCREEN_BUFFER_HEIGHT = 60;
+  static constexpr const uint32_t SCREEN_BUFFER_HEIGHT = 120;
   static constexpr const uint32_t AUDIO_CHANNEL_COUNT = 32;
   static constexpr const float UPDATE_RATE = 24.0;                  // Hz
   static constexpr const size_t SPI_FREQUENCY = 60000000;           // [Hz] SPI clock

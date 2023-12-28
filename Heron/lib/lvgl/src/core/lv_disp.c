@@ -154,7 +154,7 @@ lv_theme_t * lv_disp_get_theme(lv_disp_t * disp)
  * @param disp pointer to a display
  * @param color color of the background
  */
-void lv_disp_set_bg_color(lv_disp_t * disp, lv_color_t color)
+FLASHMEM void lv_disp_set_bg_color(lv_disp_t * disp, lv_color_t color)
 {
     if(!disp) disp = lv_disp_get_default();
     if(!disp) {
@@ -175,7 +175,7 @@ void lv_disp_set_bg_color(lv_disp_t * disp, lv_color_t color)
  * @param disp pointer to a display
  * @param img_src path to file or pointer to an `lv_img_dsc_t` variable
  */
-void lv_disp_set_bg_image(lv_disp_t * disp, const void  * img_src)
+FLASHMEM void lv_disp_set_bg_image(lv_disp_t * disp, const void  * img_src)
 {
     if(!disp) disp = lv_disp_get_default();
     if(!disp) {
@@ -195,7 +195,7 @@ void lv_disp_set_bg_image(lv_disp_t * disp, const void  * img_src)
  * @param disp pointer to a display
  * @param opa opacity (0..255)
  */
-void lv_disp_set_bg_opa(lv_disp_t * disp, lv_opa_t opa)
+FLASHMEM void lv_disp_set_bg_opa(lv_disp_t * disp, lv_opa_t opa)
 {
     if(!disp) disp = lv_disp_get_default();
     if(!disp) {
@@ -218,7 +218,7 @@ void lv_disp_set_bg_opa(lv_disp_t * disp, lv_opa_t opa)
  * @param delay delay before the transition
  * @param auto_del true: automatically delete the old screen
  */
-void lv_scr_load_anim(lv_obj_t * new_scr, lv_scr_load_anim_t anim_type, uint32_t time, uint32_t delay, bool auto_del)
+FLASHMEM void lv_scr_load_anim(lv_obj_t * new_scr, lv_scr_load_anim_t anim_type, uint32_t time, uint32_t delay, bool auto_del)
 {
 
     lv_disp_t * d = lv_obj_get_disp(new_scr);
@@ -367,7 +367,7 @@ void lv_scr_load_anim(lv_obj_t * new_scr, lv_scr_load_anim_t anim_type, uint32_t
  * @param disp pointer to a display (NULL to get the overall smallest inactivity)
  * @return elapsed ticks (milliseconds) since the last activity
  */
-uint32_t lv_disp_get_inactive_time(const lv_disp_t * disp)
+FLASHMEM uint32_t lv_disp_get_inactive_time(const lv_disp_t * disp)
 {
     if(disp) return lv_tick_elaps(disp->last_activity_time);
 
@@ -387,7 +387,7 @@ uint32_t lv_disp_get_inactive_time(const lv_disp_t * disp)
  * Manually trigger an activity on a display
  * @param disp pointer to a display (NULL to use the default display)
  */
-void lv_disp_trig_activity(lv_disp_t * disp)
+FLASHMEM void lv_disp_trig_activity(lv_disp_t * disp)
 {
     if(!disp) disp = lv_disp_get_default();
     if(!disp) {
@@ -402,7 +402,7 @@ void lv_disp_trig_activity(lv_disp_t * disp)
  * Clean any CPU cache that is related to the display.
  * @param disp pointer to a display (NULL to use the default display)
  */
-void lv_disp_clean_dcache(lv_disp_t * disp)
+FLASHMEM void lv_disp_clean_dcache(lv_disp_t * disp)
 {
     if(!disp) disp = lv_disp_get_default();
     if(!disp) {
@@ -419,7 +419,7 @@ void lv_disp_clean_dcache(lv_disp_t * disp)
  * @param disp pointer to a display (NULL to use the default display)
  * @param en true: enable invalidation; false: invalidation
  */
-void lv_disp_enable_invalidation(lv_disp_t * disp, bool en)
+FLASHMEM void lv_disp_enable_invalidation(lv_disp_t * disp, bool en)
 {
     if(!disp) disp = lv_disp_get_default();
     if(!disp) {
@@ -435,7 +435,7 @@ void lv_disp_enable_invalidation(lv_disp_t * disp, bool en)
  * @param disp pointer to a display (NULL to use the default display)
  * @return return true if invalidation is enabled
  */
-bool lv_disp_is_invalidation_enabled(lv_disp_t * disp)
+FLASHMEM bool lv_disp_is_invalidation_enabled(lv_disp_t * disp)
 {
     if(!disp) disp = lv_disp_get_default();
     if(!disp) {
@@ -467,7 +467,7 @@ lv_timer_t * _lv_disp_get_refr_timer(lv_disp_t * disp)
  *   STATIC FUNCTIONS
  **********************/
 
-static void scr_load_internal(lv_obj_t * scr)
+FLASHMEM static void scr_load_internal(lv_obj_t * scr)
 {
     lv_disp_t * d = lv_obj_get_disp(scr);
     if(!d) return;  /*Shouldn't happen, just to be sure*/
@@ -510,7 +510,7 @@ static void set_y_anim(void * obj, int32_t v)
     lv_obj_set_y(obj, v);
 }
 
-static void scr_anim_ready(lv_anim_t * a)
+FLASHMEM static void scr_anim_ready(lv_anim_t * a)
 {
     lv_disp_t * d = lv_obj_get_disp(a->var);
 

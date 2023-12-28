@@ -32,7 +32,7 @@
 
 #include "console.h"
 
-EXTMEM char Console::ringBuffer[QUEUE_BUFFER_LENGTH];
+DMAMEM char Console::ringBuffer[QUEUE_BUFFER_LENGTH];
 
 bool Console::begin(void)
 {
@@ -182,7 +182,7 @@ void Console::printTimestamp(void)
   printf("[%02d:%02d:%02d.%03d] ", h, m, s, ms);
 }
 
-void Console::printStartupMessage(void)
+FLASHMEM void Console::printStartupMessage(void)
 {
   stream.print(CONSOLE_CLEAR);
   stream.print(CONSOLE_COLOR_BOLD_CYAN CONSOLE_BACKGROUND_DEFAULT);

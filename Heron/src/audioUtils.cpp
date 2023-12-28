@@ -35,45 +35,14 @@
 #include <TeensyThreads.h>
 #include <console.h>
 
-EXTMEM AudioInputTDM AudioUtils::tdmIn1;
-EXTMEM AudioInputTDM2 AudioUtils::tdmIn2;
-EXTMEM AudioTransmitWAV32 AudioUtils::transmitter;
-EXTMEM AudioAnalyzePeak AudioUtils::peak[CHANNEL_COUNT];
+DMAMEM AudioInputTDM AudioUtils::tdmIn1;
+DMAMEM AudioInputTDM2 AudioUtils::tdmIn2;
+DMAMEM AudioTransmitWAV32 AudioUtils::transmitter;
+DMAMEM AudioAnalyzePeak AudioUtils::peak[CHANNEL_COUNT];
 
 AudioUtils::AudioUtils()
 {
   AudioMemory(128);
-
-        // for(int i = 0; i < CHANNEL_COUNT; i++)
-     // {
-     //   if(i < 16)
-     //   {
-     //     transmitterConnection[i] = new AudioConnection(tdmIn1, i, transmitter, i);
-     //     peakConnection[i] = new AudioConnection(tdmIn1, i, peak[i], 0);
-     //   }
-     //   else
-     //   {
-     //     transmitterConnection[i] = new AudioConnection(tdmIn2, i - 16, transmitter, i);
-     //     peakConnection[i] = new AudioConnection(tdmIn2, i - 16, peak[i], 0);
-     //   }
-     // }
-}
-
-AudioUtils::~AudioUtils()
-{
-     // for(int i = 0; i < CHANNEL_COUNT; i++)
-     // {
-     //   if(transmitterConnection[i] != nullptr)
-     //   {
-     //     delete transmitterConnection[i];
-     //     transmitterConnection[i] = nullptr;
-     //   }
-     //   if(peakConnection[i] != nullptr)
-     //   {
-     //     delete peakConnection[i];
-     //     peakConnection[i] = nullptr;
-     //   }
-     // }
 }
 
 bool AudioUtils::begin(void)
@@ -89,8 +58,7 @@ bool AudioUtils::begin(void)
   }
   console.log.println("[AUDIO] Initialized ADAU7118");
 
-  threads.addThread(update, this, 1024);
-  console.ok.println("[AUDIO] Initialized");
+  threads.addThread(update, this, 4096);
   return true;
 }
 
@@ -131,26 +99,21 @@ void AudioUtils::update(void* parameter)
   AudioUtils* ref = (AudioUtils*)parameter;
   while(true)
   {
-             // if(ref->recorder != nullptr)
-             // {
-             //   if(ref->recording)
-             //   {
-             //     if(ref->recorder->getBufferOverflowDetected())
-             //     {
-             //       console.error.println("[AUDIO] Buffer overflow detected!");
-             //       ref->recordingError = true;
-             //       ref->recorder->stop();
-             //     }
-             //     if(ref->recorder->getWriteErrorDetected())
-             //     {
-             //       console.error.println("[AUDIO] Write error detected!");
-             //       ref->recordingError = true;
-             //       ref->recorder->stop();
-             //     }
-             //   }
-             // }
+    static uint32_t t = 0;
+    if(millis() - t > 200)
+    {
+      t = millis();
+      if(ref->transmitter.getConnectionState())
+      {
+        console.log.printf("[MAIN] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n",
+                           (ref->transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0, ref->transmitter.getBufferFillLevel() * 100.0);
+      }
+      else
+      {
+        console.warning.println("[MAIN] No client connected.");
+      }
+    }
 
-                      // TODO: So something usefull with error status
     threads.delay(1000.0 / UPDATE_RATE);
   }
 }

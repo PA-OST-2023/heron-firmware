@@ -164,7 +164,7 @@ void _lv_area_join(lv_area_t * a_res_p, const lv_area_t * a1_p, const lv_area_t 
  * @param radius radius of area (e.g. for rounded rectangle)
  * @return false:the point is out of the area
  */
-bool _lv_area_is_point_on(const lv_area_t * a_p, const lv_point_t * p_p, lv_coord_t radius)
+FLASHMEM bool _lv_area_is_point_on(const lv_area_t * a_p, const lv_point_t * p_p, lv_coord_t radius)
 {
     /*First check the basic area*/
     bool is_on_rect = false;
@@ -247,7 +247,7 @@ bool _lv_area_is_on(const lv_area_t * a1_p, const lv_area_t * a2_p)
  * @param radius radius of `aholder_p` (e.g. for rounded rectangle)
  * @return true: `ain_p` is fully inside `aholder_p`
  */
-bool _lv_area_is_in(const lv_area_t * ain_p, const lv_area_t * aholder_p, lv_coord_t radius)
+FLASHMEM bool _lv_area_is_in(const lv_area_t * ain_p, const lv_area_t * aholder_p, lv_coord_t radius)
 {
     bool is_in = false;
 
@@ -288,7 +288,7 @@ bool _lv_area_is_in(const lv_area_t * ain_p, const lv_area_t * aholder_p, lv_coo
  * @param radius radius of `aholder_p` (e.g. for rounded rectangle)
  * @return true: `aout_p` is fully outside `aholder_p`
  */
-bool _lv_area_is_out(const lv_area_t * aout_p, const lv_area_t * aholder_p, lv_coord_t radius)
+FLASHMEM bool _lv_area_is_out(const lv_area_t * aout_p, const lv_area_t * aholder_p, lv_coord_t radius)
 {
     if(aout_p->x2 < aholder_p->x1 || aout_p->y2 < aholder_p->y1 || aout_p->x1 > aholder_p->x2 ||
        aout_p->y1 > aholder_p->y2) {
@@ -331,7 +331,7 @@ bool _lv_area_is_equal(const lv_area_t * a, const lv_area_t * b)
  * @param align `LV_ALIGN_...`
  * @param res x/y coordinates where `to_align` align area should be placed
  */
-void lv_area_align(const lv_area_t * base, lv_area_t * to_align, lv_align_t align, lv_coord_t ofs_x, lv_coord_t ofs_y)
+FLASHMEM void lv_area_align(const lv_area_t * base, lv_area_t * to_align, lv_align_t align, lv_coord_t ofs_x, lv_coord_t ofs_y)
 {
 
     lv_coord_t x;
@@ -457,7 +457,7 @@ void lv_area_align(const lv_area_t * base, lv_area_t * to_align, lv_align_t alig
 }
 
 #define _LV_TRANSFORM_TRIGO_SHIFT 10
-void lv_point_transform(lv_point_t * p, int32_t angle, int32_t zoom, const lv_point_t * pivot)
+FLASHMEM void lv_point_transform(lv_point_t * p, int32_t angle, int32_t zoom, const lv_point_t * pivot)
 {
     if(angle == 0 && zoom == 256) {
         return;
@@ -513,7 +513,7 @@ void lv_point_transform(lv_point_t * p, int32_t angle, int32_t zoom, const lv_po
  *   STATIC FUNCTIONS
  **********************/
 
-static bool lv_point_within_circle(const lv_area_t * area, const lv_point_t * p)
+FLASHMEM static bool lv_point_within_circle(const lv_area_t * area, const lv_point_t * p)
 {
     lv_coord_t r = (area->x2 - area->x1) / 2;
 

@@ -46,7 +46,6 @@ class AudioUtils
   static constexpr const float UPDATE_RATE = 30.0;    // Hz
 
   AudioUtils();
-  ~AudioUtils();
   bool begin(void);
   bool startServer(int port);
   bool stopServer(void);
@@ -60,36 +59,36 @@ class AudioUtils
   static AudioTransmitWAV32 transmitter;
   static AudioAnalyzePeak peak[CHANNEL_COUNT];
 
-  AudioConnection(tdmIn1, 6, transmitter, 6), AudioConnection(tdmIn1, 7, transmitter, 7), AudioConnection(tdmIn1, 8, transmitter, 8),
-    AudioConnection(tdmIn1, 9, transmitter, 9), AudioConnection(tdmIn1, 10, transmitter, 10), AudioConnection(tdmIn1, 11, transmitter, 11),
+  AudioConnection transmitterConnection[CHANNEL_COUNT] = {
+    AudioConnection(tdmIn1, 0, transmitter, 0),   AudioConnection(tdmIn1, 1, transmitter, 1),   AudioConnection(tdmIn1, 2, transmitter, 2),
+    AudioConnection(tdmIn1, 3, transmitter, 3),   AudioConnection(tdmIn1, 4, transmitter, 4),   AudioConnection(tdmIn1, 5, transmitter, 5),
+    AudioConnection(tdmIn1, 6, transmitter, 6),   AudioConnection(tdmIn1, 7, transmitter, 7),   AudioConnection(tdmIn1, 8, transmitter, 8),
+    AudioConnection(tdmIn1, 9, transmitter, 9),   AudioConnection(tdmIn1, 10, transmitter, 10), AudioConnection(tdmIn1, 11, transmitter, 11),
     AudioConnection(tdmIn1, 12, transmitter, 12), AudioConnection(tdmIn1, 13, transmitter, 13), AudioConnection(tdmIn1, 14, transmitter, 14),
-    AudioConnection(tdmIn1, 15, transmitter, 15), AudioConnection(tdmIn2, 0, transmitter, 16), AudioConnection(tdmIn2, 1, transmitter, 17),
-    AudioConnection(tdmIn2, 2, transmitter, 18), AudioConnection(tdmIn2, 3, transmitter, 19), AudioConnection(tdmIn2, 4, transmitter, 20),
-    AudioConnection(tdmIn2, 5, transmitter, 21), AudioConnection(tdmIn2, 6, transmitter, 22), AudioConnection(tdmIn2, 7, transmitter, 23),
-    AudioConnection(tdmIn2, 8, transmitter, 24), AudioConnection(tdmIn2, 9, transmitter, 25), AudioConnection(tdmIn2, 10, transmitter, 26),
+    AudioConnection(tdmIn1, 15, transmitter, 15), AudioConnection(tdmIn2, 0, transmitter, 16),  AudioConnection(tdmIn2, 1, transmitter, 17),
+    AudioConnection(tdmIn2, 2, transmitter, 18),  AudioConnection(tdmIn2, 3, transmitter, 19),  AudioConnection(tdmIn2, 4, transmitter, 20),
+    AudioConnection(tdmIn2, 5, transmitter, 21),  AudioConnection(tdmIn2, 6, transmitter, 22),  AudioConnection(tdmIn2, 7, transmitter, 23),
+    AudioConnection(tdmIn2, 8, transmitter, 24),  AudioConnection(tdmIn2, 9, transmitter, 25),  AudioConnection(tdmIn2, 10, transmitter, 26),
     AudioConnection(tdmIn2, 11, transmitter, 27), AudioConnection(tdmIn2, 12, transmitter, 28), AudioConnection(tdmIn2, 13, transmitter, 29),
-    AudioConnection(tdmIn2, 14, transmitter, 30), AudioConnection(tdmIn2, 15, transmitter, 31)
+    AudioConnection(tdmIn2, 14, transmitter, 30), AudioConnection(tdmIn2, 15, transmitter, 31)};
+
+  AudioConnection peakConnection[CHANNEL_COUNT] = {
+    AudioConnection(tdmIn1, 0, peak[0], 0),   AudioConnection(tdmIn1, 1, peak[1], 0),   AudioConnection(tdmIn1, 2, peak[2], 0),
+    AudioConnection(tdmIn1, 3, peak[3], 0),   AudioConnection(tdmIn1, 4, peak[4], 0),   AudioConnection(tdmIn1, 5, peak[5], 0),
+    AudioConnection(tdmIn1, 6, peak[6], 0),   AudioConnection(tdmIn1, 7, peak[7], 0),   AudioConnection(tdmIn1, 8, peak[8], 0),
+    AudioConnection(tdmIn1, 9, peak[9], 0),   AudioConnection(tdmIn1, 10, peak[10], 0), AudioConnection(tdmIn1, 11, peak[11], 0),
+    AudioConnection(tdmIn1, 12, peak[12], 0), AudioConnection(tdmIn1, 13, peak[13], 0), AudioConnection(tdmIn1, 14, peak[14], 0),
+    AudioConnection(tdmIn1, 15, peak[15], 0), AudioConnection(tdmIn2, 0, peak[16], 0),  AudioConnection(tdmIn2, 1, peak[17], 0),
+    AudioConnection(tdmIn2, 2, peak[18], 0),  AudioConnection(tdmIn2, 3, peak[19], 0),  AudioConnection(tdmIn2, 4, peak[20], 0),
+    AudioConnection(tdmIn2, 5, peak[21], 0),  AudioConnection(tdmIn2, 6, peak[22], 0),  AudioConnection(tdmIn2, 7, peak[23], 0),
+    AudioConnection(tdmIn2, 8, peak[24], 0),  AudioConnection(tdmIn2, 9, peak[25], 0),  AudioConnection(tdmIn2, 10, peak[26], 0),
+    AudioConnection(tdmIn2, 11, peak[27], 0), AudioConnection(tdmIn2, 12, peak[28], 0), AudioConnection(tdmIn2, 13, peak[29], 0),
+    AudioConnection(tdmIn2, 14, peak[30], 0), AudioConnection(tdmIn2, 15, peak[31], 0)};
+
+  bool serverRunning = false;
+  float volumeValue[CHANNEL_COUNT];
+
+  static void update(void* parameter);
 };
-
-AudioConnection peakConnection[CHANNEL_COUNT] = {
-  AudioConnection(tdmIn1, 0, peak[0], 0),   AudioConnection(tdmIn1, 1, peak[1], 0),   AudioConnection(tdmIn1, 2, peak[2], 0),
-  AudioConnection(tdmIn1, 3, peak[3], 0),   AudioConnection(tdmIn1, 4, peak[4], 0),   AudioConnection(tdmIn1, 5, peak[5], 0),
-  AudioConnection(tdmIn1, 6, peak[6], 0),   AudioConnection(tdmIn1, 7, peak[7], 0),   AudioConnection(tdmIn1, 8, peak[8], 0),
-  AudioConnection(tdmIn1, 9, peak[9], 0),   AudioConnection(tdmIn1, 10, peak[10], 0), AudioConnection(tdmIn1, 11, peak[11], 0),
-  AudioConnection(tdmIn1, 12, peak[12], 0), AudioConnection(tdmIn1, 13, peak[13], 0), AudioConnection(tdmIn1, 14, peak[14], 0),
-  AudioConnection(tdmIn1, 15, peak[15], 0), AudioConnection(tdmIn2, 0, peak[16], 0),  AudioConnection(tdmIn2, 1, peak[17], 0),
-  AudioConnection(tdmIn2, 2, peak[18], 0),  AudioConnection(tdmIn2, 3, peak[19], 0),  AudioConnection(tdmIn2, 4, peak[20], 0),
-  AudioConnection(tdmIn2, 5, peak[21], 0),  AudioConnection(tdmIn2, 6, peak[22], 0),  AudioConnection(tdmIn2, 7, peak[23], 0),
-  AudioConnection(tdmIn2, 8, peak[24], 0),  AudioConnection(tdmIn2, 9, peak[25], 0),  AudioConnection(tdmIn2, 10, peak[26], 0),
-  AudioConnection(tdmIn2, 11, peak[27], 0), AudioConnection(tdmIn2, 12, peak[28], 0), AudioConnection(tdmIn2, 13, peak[29], 0),
-  AudioConnection(tdmIn2, 14, peak[30], 0), AudioConnection(tdmIn2, 15, peak[31], 0)};
-
-
-bool serverRunning = false;
-float volumeValue[CHANNEL_COUNT];
-
-static void update(void* parameter);
-}
-;
 
 #endif

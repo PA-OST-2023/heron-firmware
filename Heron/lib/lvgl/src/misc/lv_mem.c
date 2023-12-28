@@ -273,7 +273,7 @@ void lv_mem_monitor(lv_mem_monitor_t * mon_p)
  * Get a temporal buffer with the given size.
  * @param size the required size
  */
-void * lv_mem_buf_get(uint32_t size)
+FLASHMEM void * lv_mem_buf_get(uint32_t size)
 {
     if(size == 0) return NULL;
 

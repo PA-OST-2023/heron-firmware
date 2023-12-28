@@ -204,9 +204,9 @@ void AudioTransmitWAVbuffered::update(void)
   int16_t* data[chanCnt] = {0};
   int alloCnt = 0;    // count of blocks successfully received
 
-  if(millis() - secondTimer > 1000)
+  if(millis() - secondTimer > TRANSMISSION_INTERVAL_RATE)
   {
-    bytesPerSecond = byteCounter;
+    bytesPerInterval = byteCounter;
     byteCounter = 0;
     secondTimer = millis();
   }

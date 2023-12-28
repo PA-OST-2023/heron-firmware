@@ -87,7 +87,7 @@ lv_obj_t * lv_bar_create(lv_obj_t * parent)
  * Setter functions
  *====================*/
 
-void lv_bar_set_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim)
+FLASHMEM void lv_bar_set_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_bar_t * bar = (lv_bar_t *)obj;
@@ -101,7 +101,7 @@ void lv_bar_set_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim)
     lv_bar_set_value_with_anim(obj, value, &bar->cur_value, &bar->cur_value_anim, anim);
 }
 
-void lv_bar_set_start_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim)
+FLASHMEM void lv_bar_set_start_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -118,7 +118,7 @@ void lv_bar_set_start_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim
     lv_bar_set_value_with_anim(obj, value, &bar->start_value, &bar->start_value_anim, anim);
 }
 
-void lv_bar_set_range(lv_obj_t * obj, int32_t min, int32_t max)
+FLASHMEM void lv_bar_set_range(lv_obj_t * obj, int32_t min, int32_t max)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -143,7 +143,7 @@ void lv_bar_set_range(lv_obj_t * obj, int32_t min, int32_t max)
     lv_obj_invalidate(obj);
 }
 
-void lv_bar_set_mode(lv_obj_t * obj, lv_bar_mode_t mode)
+FLASHMEM void lv_bar_set_mode(lv_obj_t * obj, lv_bar_mode_t mode)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_bar_t * bar = (lv_bar_t *)obj;
@@ -205,7 +205,7 @@ lv_bar_mode_t lv_bar_get_mode(lv_obj_t * obj)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_bar_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_bar_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -231,7 +231,7 @@ static void lv_bar_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_bar_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_bar_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     lv_bar_t * bar = (lv_bar_t *)obj;
@@ -240,7 +240,7 @@ static void lv_bar_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     lv_anim_del(&bar->start_value_anim, NULL);
 }
 
-static void draw_indic(lv_event_t * e)
+FLASHMEM static void draw_indic(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_bar_t * bar = (lv_bar_t *)obj;

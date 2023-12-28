@@ -70,7 +70,7 @@ static lv_lru_item_t * lv_lru_pop_or_create_item(lv_lru_t * cache);
  *   GLOBAL FUNCTIONS
  **********************/
 
-lv_lru_t * lv_lru_create(size_t cache_size, size_t average_length, lv_lru_free_t * value_free,
+FLASHMEM lv_lru_t * lv_lru_create(size_t cache_size, size_t average_length, lv_lru_free_t * value_free,
                          lv_lru_free_t * key_free)
 {
     // create the cache
@@ -100,7 +100,7 @@ lv_lru_t * lv_lru_create(size_t cache_size, size_t average_length, lv_lru_free_t
 }
 
 
-void lv_lru_del(lv_lru_t * cache)
+FLASHMEM void lv_lru_del(lv_lru_t * cache)
 {
     LV_ASSERT_NULL(cache);
 
@@ -136,7 +136,7 @@ void lv_lru_del(lv_lru_t * cache)
 }
 
 
-lv_lru_res_t lv_lru_set(lv_lru_t * cache, const void * key, size_t key_length, void * value, size_t value_length)
+FLASHMEM lv_lru_res_t lv_lru_set(lv_lru_t * cache, const void * key, size_t key_length, void * value, size_t value_length)
 {
     test_for_missing_cache();
     test_for_missing_key();
@@ -189,7 +189,7 @@ lv_lru_res_t lv_lru_set(lv_lru_t * cache, const void * key, size_t key_length, v
 }
 
 
-lv_lru_res_t lv_lru_get(lv_lru_t * cache, const void * key, size_t key_size, void ** value)
+FLASHMEM lv_lru_res_t lv_lru_get(lv_lru_t * cache, const void * key, size_t key_size, void ** value)
 {
     test_for_missing_cache();
     test_for_missing_key();
@@ -212,7 +212,7 @@ lv_lru_res_t lv_lru_get(lv_lru_t * cache, const void * key, size_t key_size, voi
     return LV_LRU_OK;
 }
 
-lv_lru_res_t lv_lru_remove(lv_lru_t * cache, const void * key, size_t key_size)
+FLASHMEM lv_lru_res_t lv_lru_remove(lv_lru_t * cache, const void * key, size_t key_size)
 {
     test_for_missing_cache();
     test_for_missing_key();
@@ -234,7 +234,7 @@ lv_lru_res_t lv_lru_remove(lv_lru_t * cache, const void * key, size_t key_size)
     return LV_LRU_OK;
 }
 
-void lv_lru_remove_lru_item(lv_lru_t * cache)
+FLASHMEM void lv_lru_remove_lru_item(lv_lru_t * cache)
 {
     lv_lru_item_t * min_item = NULL, *min_prev = NULL;
     lv_lru_item_t * item = NULL, *prev = NULL;
@@ -266,7 +266,7 @@ void lv_lru_remove_lru_item(lv_lru_t * cache)
  *   STATIC FUNCTIONS
  **********************/
 
-static uint32_t lv_lru_hash(lv_lru_t * cache, const void * key, uint32_t key_length)
+FLASHMEM static uint32_t lv_lru_hash(lv_lru_t * cache, const void * key, uint32_t key_length)
 {
     uint32_t m = 0x5bd1e995;
     uint32_t r = 24;
@@ -301,7 +301,7 @@ static uint32_t lv_lru_hash(lv_lru_t * cache, const void * key, uint32_t key_len
     return h % cache->hash_table_size;
 }
 
-static int lv_lru_cmp_keys(lv_lru_item_t * item, const void * key, uint32_t key_length)
+FLASHMEM static int lv_lru_cmp_keys(lv_lru_item_t * item, const void * key, uint32_t key_length)
 {
     if(key_length != item->key_length) {
         return 1;
@@ -311,7 +311,7 @@ static int lv_lru_cmp_keys(lv_lru_item_t * item, const void * key, uint32_t key_
     }
 }
 
-static void lv_lru_remove_item(lv_lru_t * cache, lv_lru_item_t * prev, lv_lru_item_t * item, uint32_t hash_index)
+FLASHMEM static void lv_lru_remove_item(lv_lru_t * cache, lv_lru_item_t * prev, lv_lru_item_t * item, uint32_t hash_index)
 {
     if(prev) {
         prev->next = item->next;
@@ -331,7 +331,7 @@ static void lv_lru_remove_item(lv_lru_t * cache, lv_lru_item_t * prev, lv_lru_it
     cache->free_items = item;
 }
 
-static lv_lru_item_t * lv_lru_pop_or_create_item(lv_lru_t * cache)
+FLASHMEM static lv_lru_item_t * lv_lru_pop_or_create_item(lv_lru_t * cache)
 {
     lv_lru_item_t * item = NULL;
 

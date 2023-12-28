@@ -35,13 +35,13 @@
 #include <static_malloc.h>
 #include "Gui/generated/gui_guider.h"
 
-EXTMEM lv_ui guider_ui;
+DMAMEM lv_ui guider_ui;
 DMAMEM lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
 Utils* Gui::utils;
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), bl(bl), tch_irq(tch_irq) {}
 
-bool Gui::begin(Utils& utilsRef)
+FLASHMEM bool Gui::begin(Utils& utilsRef)
 {
   bool res = true;
   utils = &utilsRef;

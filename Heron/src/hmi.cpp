@@ -34,10 +34,10 @@
 #include <TeensyThreads.h>
 #include <console.h>
 
-uint8_t Hmi::drawingMemory[Hmi::LED_COUNT * 3] = {};
+DMAMEM uint8_t Hmi::drawingMemory[Hmi::LED_COUNT * 3] = {};
 DMAMEM uint8_t Hmi::displayMemory[Hmi::LED_COUNT * 12] = {};
 
-bool Hmi::begin(Utils& utilsRef)
+FLASHMEM bool Hmi::begin(Utils& utilsRef)
 {
   utils = &utilsRef;
 

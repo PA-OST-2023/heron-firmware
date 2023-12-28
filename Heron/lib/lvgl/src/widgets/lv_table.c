@@ -83,7 +83,7 @@ lv_obj_t * lv_table_create(lv_obj_t * parent)
  * Setter functions
  *====================*/
 
-void lv_table_set_cell_value(lv_obj_t * obj, uint16_t row, uint16_t col, const char * txt)
+FLASHMEM void lv_table_set_cell_value(lv_obj_t * obj, uint16_t row, uint16_t col, const char * txt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(txt);
@@ -112,7 +112,7 @@ void lv_table_set_cell_value(lv_obj_t * obj, uint16_t row, uint16_t col, const c
     refr_cell_size(obj, row, col);
 }
 
-void lv_table_set_cell_value_fmt(lv_obj_t * obj, uint16_t row, uint16_t col, const char * fmt, ...)
+FLASHMEM void lv_table_set_cell_value_fmt(lv_obj_t * obj, uint16_t row, uint16_t col, const char * fmt, ...)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(fmt);
@@ -183,7 +183,7 @@ void lv_table_set_cell_value_fmt(lv_obj_t * obj, uint16_t row, uint16_t col, con
     refr_cell_size(obj, row, col);
 }
 
-void lv_table_set_row_cnt(lv_obj_t * obj, uint16_t row_cnt)
+FLASHMEM void lv_table_set_row_cnt(lv_obj_t * obj, uint16_t row_cnt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -222,7 +222,7 @@ void lv_table_set_row_cnt(lv_obj_t * obj, uint16_t row_cnt)
     refr_size_form_row(obj, 0);
 }
 
-void lv_table_set_col_cnt(lv_obj_t * obj, uint16_t col_cnt)
+FLASHMEM void lv_table_set_col_cnt(lv_obj_t * obj, uint16_t col_cnt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -278,7 +278,7 @@ void lv_table_set_col_cnt(lv_obj_t * obj, uint16_t col_cnt)
     refr_size_form_row(obj, 0) ;
 }
 
-void lv_table_set_col_width(lv_obj_t * obj, uint16_t col_id, lv_coord_t w)
+FLASHMEM void lv_table_set_col_width(lv_obj_t * obj, uint16_t col_id, lv_coord_t w)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -291,7 +291,7 @@ void lv_table_set_col_width(lv_obj_t * obj, uint16_t col_id, lv_coord_t w)
     refr_size_form_row(obj, 0);
 }
 
-void lv_table_add_cell_ctrl(lv_obj_t * obj, uint16_t row, uint16_t col, lv_table_cell_ctrl_t ctrl)
+FLASHMEM void lv_table_add_cell_ctrl(lv_obj_t * obj, uint16_t row, uint16_t col, lv_table_cell_ctrl_t ctrl)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -315,7 +315,7 @@ void lv_table_add_cell_ctrl(lv_obj_t * obj, uint16_t row, uint16_t col, lv_table
     table->cell_data[cell][0] |= ctrl;
 }
 
-void lv_table_clear_cell_ctrl(lv_obj_t * obj, uint16_t row, uint16_t col, lv_table_cell_ctrl_t ctrl)
+FLASHMEM void lv_table_clear_cell_ctrl(lv_obj_t * obj, uint16_t row, uint16_t col, lv_table_cell_ctrl_t ctrl)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -343,7 +343,7 @@ void lv_table_clear_cell_ctrl(lv_obj_t * obj, uint16_t row, uint16_t col, lv_tab
  * Getter functions
  *====================*/
 
-const char * lv_table_get_cell_value(lv_obj_t * obj, uint16_t row, uint16_t col)
+FLASHMEM const char * lv_table_get_cell_value(lv_obj_t * obj, uint16_t row, uint16_t col)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -415,7 +415,7 @@ void lv_table_get_selected_cell(lv_obj_t * obj, uint16_t * row, uint16_t * col)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_table_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_table_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -434,7 +434,7 @@ static void lv_table_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_table_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_table_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     lv_table_t * table = (lv_table_t *)obj;
@@ -452,7 +452,7 @@ static void lv_table_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     if(table->col_w) lv_mem_free(table->col_w);
 }
 
-static void lv_table_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_table_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -574,7 +574,7 @@ static void lv_table_event(const lv_obj_class_t * class_p, lv_event_t * e)
 }
 
 
-static void draw_main(lv_event_t * e)
+FLASHMEM static void draw_main(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_table_t * table = (lv_table_t *)obj;
@@ -770,7 +770,7 @@ static void draw_main(lv_event_t * e)
 }
 
 /* Refreshes size of the table starting from @start_row row */
-static void refr_size_form_row(lv_obj_t * obj, uint32_t start_row)
+FLASHMEM static void refr_size_form_row(lv_obj_t * obj, uint32_t start_row)
 {
     const lv_coord_t cell_pad_left = lv_obj_get_style_pad_left(obj, LV_PART_ITEMS);
     const lv_coord_t cell_pad_right = lv_obj_get_style_pad_right(obj, LV_PART_ITEMS);
@@ -797,7 +797,7 @@ static void refr_size_form_row(lv_obj_t * obj, uint32_t start_row)
 }
 
 
-static void refr_cell_size(lv_obj_t * obj, uint32_t row, uint32_t col)
+FLASHMEM static void refr_cell_size(lv_obj_t * obj, uint32_t row, uint32_t col)
 {
     const lv_coord_t cell_pad_left = lv_obj_get_style_pad_left(obj, LV_PART_ITEMS);
     const lv_coord_t cell_pad_right = lv_obj_get_style_pad_right(obj, LV_PART_ITEMS);
@@ -831,7 +831,7 @@ static void refr_cell_size(lv_obj_t * obj, uint32_t row, uint32_t col)
     }
 }
 
-static lv_coord_t get_row_height(lv_obj_t * obj, uint16_t row_id, const lv_font_t * font,
+FLASHMEM static lv_coord_t get_row_height(lv_obj_t * obj, uint16_t row_id, const lv_font_t * font,
                                  lv_coord_t letter_space, lv_coord_t line_space,
                                  lv_coord_t cell_left, lv_coord_t cell_right, lv_coord_t cell_top, lv_coord_t cell_bottom)
 {
@@ -896,7 +896,7 @@ static lv_coord_t get_row_height(lv_obj_t * obj, uint16_t row_id, const lv_font_
     return h_max;
 }
 
-static lv_res_t get_pressed_cell(lv_obj_t * obj, uint16_t * row, uint16_t * col)
+FLASHMEM static lv_res_t get_pressed_cell(lv_obj_t * obj, uint16_t * row, uint16_t * col)
 {
     lv_table_t * table = (lv_table_t *)obj;
 
@@ -973,7 +973,7 @@ static void copy_cell_txt(char * dst, const char * txt)
 #endif
 }
 
-static void get_cell_area(lv_obj_t * obj, uint16_t row, uint16_t col, lv_area_t * area)
+FLASHMEM static void get_cell_area(lv_obj_t * obj, uint16_t row, uint16_t col, lv_area_t * area)
 {
     lv_table_t * table = (lv_table_t *)obj;
 
@@ -1009,7 +1009,7 @@ static void get_cell_area(lv_obj_t * obj, uint16_t row, uint16_t col, lv_area_t 
 }
 
 
-static void scroll_to_selected_cell(lv_obj_t * obj)
+FLASHMEM static void scroll_to_selected_cell(lv_obj_t * obj)
 {
     lv_table_t * table = (lv_table_t *)obj;
 

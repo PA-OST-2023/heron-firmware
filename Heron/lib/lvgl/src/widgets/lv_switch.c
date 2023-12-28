@@ -82,7 +82,7 @@ lv_obj_t * lv_switch_create(lv_obj_t * parent)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_switch_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_switch_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -98,7 +98,7 @@ static void lv_switch_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_switch_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_switch_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     lv_switch_t * sw = (lv_switch_t *)obj;
@@ -106,7 +106,7 @@ static void lv_switch_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     lv_anim_del(sw, NULL);
 }
 
-static void lv_switch_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_switch_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -143,7 +143,7 @@ static void lv_switch_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
 }
 
-static void draw_main(lv_event_t * e)
+FLASHMEM static void draw_main(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_switch_t * sw = (lv_switch_t *)obj;
@@ -235,7 +235,7 @@ static void lv_switch_anim_ready(lv_anim_t * a)
  * Starts an animation for the switch knob. if the anim_time style property is greater than 0
  * @param obj the switch to animate
  */
-static void lv_switch_trigger_anim(lv_obj_t * obj)
+FLASHMEM static void lv_switch_trigger_anim(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_switch_t * sw = (lv_switch_t *)obj;

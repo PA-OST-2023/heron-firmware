@@ -61,7 +61,7 @@ static lv_obj_t * indev_obj_act = NULL;
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_indev_read_timer_cb(lv_timer_t * timer)
+FLASHMEM void lv_indev_read_timer_cb(lv_timer_t * timer)
 {
     INDEV_TRACE("begin");
 
@@ -120,7 +120,7 @@ void lv_indev_read_timer_cb(lv_timer_t * timer)
     INDEV_TRACE("finished");
 }
 
-void lv_indev_enable(lv_indev_t * indev, bool en)
+FLASHMEM void lv_indev_enable(lv_indev_t * indev, bool en)
 {
     uint8_t enable = en ? 0 : 1;
 
@@ -148,7 +148,7 @@ lv_indev_type_t lv_indev_get_type(const lv_indev_t * indev)
     return indev->driver->type;
 }
 
-void lv_indev_reset(lv_indev_t * indev, lv_obj_t * obj)
+FLASHMEM void lv_indev_reset(lv_indev_t * indev, lv_obj_t * obj)
 {
     if(indev) {
         indev->proc.reset_query = 1;
@@ -297,7 +297,7 @@ lv_timer_t * lv_indev_get_read_timer(lv_disp_t * indev)
 }
 
 
-lv_obj_t * lv_indev_search_obj(lv_obj_t * obj, lv_point_t * point)
+FLASHMEM lv_obj_t * lv_indev_search_obj(lv_obj_t * obj, lv_point_t * point)
 {
     lv_obj_t * found_p = NULL;
 
@@ -337,7 +337,7 @@ lv_obj_t * lv_indev_search_obj(lv_obj_t * obj, lv_point_t * point)
  * @param i pointer to an input device
  * @param data pointer to the data read from the input device
  */
-static void indev_pointer_proc(lv_indev_t * i, lv_indev_data_t * data)
+FLASHMEM static void indev_pointer_proc(lv_indev_t * i, lv_indev_data_t * data)
 {
     lv_disp_t * disp = i->driver->disp;
     /*Save the raw points so they can be used again in _lv_indev_read*/
@@ -393,7 +393,7 @@ static void indev_pointer_proc(lv_indev_t * i, lv_indev_data_t * data)
  * @param i pointer to an input device
  * @param data pointer to the data read from the input device
  */
-static void indev_keypad_proc(lv_indev_t * i, lv_indev_data_t * data)
+FLASHMEM static void indev_keypad_proc(lv_indev_t * i, lv_indev_data_t * data)
 {
     if(data->state == LV_INDEV_STATE_PRESSED && i->proc.wait_until_release) return;
 
@@ -544,7 +544,7 @@ static void indev_keypad_proc(lv_indev_t * i, lv_indev_data_t * data)
  * @param i pointer to an input device
  * @param data pointer to the data read from the input device
  */
-static void indev_encoder_proc(lv_indev_t * i, lv_indev_data_t * data)
+FLASHMEM static void indev_encoder_proc(lv_indev_t * i, lv_indev_data_t * data)
 {
     if(data->state == LV_INDEV_STATE_PRESSED && i->proc.wait_until_release) return;
 
@@ -765,7 +765,7 @@ static void indev_encoder_proc(lv_indev_t * i, lv_indev_data_t * data)
  * @param x x coordinate of the next point
  * @param y y coordinate of the next point
  */
-static void indev_button_proc(lv_indev_t * i, lv_indev_data_t * data)
+FLASHMEM static void indev_button_proc(lv_indev_t * i, lv_indev_data_t * data)
 {
     /*Die gracefully if i->btn_points is NULL*/
     if(i->btn_points == NULL) {
@@ -814,7 +814,7 @@ static void indev_button_proc(lv_indev_t * i, lv_indev_data_t * data)
  * @param indev pointer to an input device 'proc'
  * @return LV_RES_OK: no indev reset required; LV_RES_INV: indev reset is required
  */
-static void indev_proc_press(_lv_indev_proc_t * proc)
+FLASHMEM static void indev_proc_press(_lv_indev_proc_t * proc)
 {
     LV_LOG_INFO("pressed at x:%d y:%d", proc->types.pointer.act_point.x, proc->types.pointer.act_point.y);
     indev_obj_act = proc->types.pointer.act_obj;
@@ -947,7 +947,7 @@ static void indev_proc_press(_lv_indev_proc_t * proc)
  * Process the released state of LV_INDEV_TYPE_POINTER input devices
  * @param proc pointer to an input device 'proc'
  */
-static void indev_proc_release(_lv_indev_proc_t * proc)
+FLASHMEM static void indev_proc_release(_lv_indev_proc_t * proc)
 {
     if(proc->wait_until_release != 0) {
         lv_event_send(proc->types.pointer.act_obj, LV_EVENT_PRESS_LOST, indev_act);
@@ -1023,7 +1023,7 @@ static void indev_proc_release(_lv_indev_proc_t * proc)
  * Reset input device if a reset query has been sent to it
  * @param indev pointer to an input device
  */
-static void indev_proc_reset_query_handler(lv_indev_t * indev)
+FLASHMEM static void indev_proc_reset_query_handler(lv_indev_t * indev)
 {
     if(indev->proc.reset_query) {
         indev->proc.types.pointer.act_obj           = NULL;
@@ -1048,7 +1048,7 @@ static void indev_proc_reset_query_handler(lv_indev_t * indev)
  * Handle focus/defocus on click for POINTER input devices
  * @param proc pointer to the state of the indev
  */
-static void indev_click_focus(_lv_indev_proc_t * proc)
+FLASHMEM static void indev_click_focus(_lv_indev_proc_t * proc)
 {
     /*Handle click focus*/
     if(lv_obj_has_flag(indev_obj_act, LV_OBJ_FLAG_CLICK_FOCUSABLE) == false ||
@@ -1117,7 +1117,7 @@ static void indev_click_focus(_lv_indev_proc_t * proc)
 * Handle the gesture of indev_proc_p->types.pointer.act_obj
 * @param indev pointer to an input device state
 */
-void indev_gesture(_lv_indev_proc_t * proc)
+FLASHMEM void indev_gesture(_lv_indev_proc_t * proc)
 {
 
     if(proc->types.pointer.scroll_obj) return;

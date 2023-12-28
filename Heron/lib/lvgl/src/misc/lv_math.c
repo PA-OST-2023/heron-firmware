@@ -129,7 +129,7 @@ void LV_ATTRIBUTE_FAST_MEM lv_sqrt(uint32_t x, lv_sqrt_res_t * q, uint32_t mask)
  * @param y
  * @return the angle in degree calculated from the given parameters in range of [0..360]
  */
-uint16_t lv_atan2(int x, int y)
+FLASHMEM uint16_t lv_atan2(int x, int y)
 {
     // Fast XY vector to integer degree algorithm - Jan 2011 www.RomanBlack.com
     // Converts any XY values including 0 to a degree value that should be
