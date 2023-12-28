@@ -24,6 +24,8 @@
 #include "util/PrintUtils.h"
 #include "util/ip_tools.h"
 
+#include <console.h>
+
 namespace qindesign {
 namespace network {
 
@@ -409,7 +411,15 @@ size_t EthernetClient::write(const uint8_t *buf, size_t size) {
   if (sndBufSize == 0) {  // Possibly flush if there's no space
     altcp_output(state->pcb);
     Ethernet.loop();  // Loop to allow incoming data
-    sndBufSize = altcp_sndbuf(state->pcb);
+    if(state)         // Added nullptr check by Florian Baumgartner (prevent crash)
+    {
+      sndBufSize = altcp_sndbuf(state->pcb);
+    }
+    else
+    {
+      sndBufSize = 0;
+      console.warning.println("[QNETHERNET_CLIENT] write: state->pcb is null");
+    }
   }
   size = std::min(size, sndBufSize);
   if (size > 0) {

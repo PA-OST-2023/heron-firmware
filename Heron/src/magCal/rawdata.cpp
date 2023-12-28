@@ -10,7 +10,7 @@ static int cal_confirm_needed = 0;
 
 // Quaternion_t current_orientation;
 
-void raw_data_reset(void)
+FLASHMEM void raw_data_reset(void)
 {
   rawcount = OVERSAMPLE_RATIO;
   fusion_init();
@@ -24,7 +24,7 @@ void raw_data_reset(void)
   magcal.B = 50.0f;
 }
 
-static int choose_discard_magcal(void)
+FLASHMEM static int choose_discard_magcal(void)
 {
   int32_t rawx, rawy, rawz;
   int32_t dx, dy, dz;
@@ -103,7 +103,7 @@ static int choose_discard_magcal(void)
   return minindex;
 }
 
-static void add_magcal_data(const int16_t* data)
+FLASHMEM static void add_magcal_data(const int16_t* data)
 {
   int i;
 
@@ -138,7 +138,7 @@ static void add_magcal_data(const int16_t* data)
   magcal.valid[i] = 1;
 }
 
-static int is_float_ok(float actual, float expected)
+FLASHMEM static int is_float_ok(float actual, float expected)
 {
   float err, maxerr;
 
@@ -149,7 +149,7 @@ static int is_float_ok(float actual, float expected)
   return 0;
 }
 
-void cal1_data(const float* data)
+FLASHMEM void cal1_data(const float* data)
 {
   int i, ok;
 
@@ -183,7 +183,7 @@ void cal1_data(const float* data)
   }
 }
 
-void cal2_data(const float* data)
+FLASHMEM void cal2_data(const float* data)
 {
   int i, ok;
 
@@ -217,7 +217,7 @@ void cal2_data(const float* data)
   }
 }
 
-void raw_data(const int16_t* data)
+FLASHMEM void raw_data(const int16_t* data)
 {
   static int force_orientation_counter = 0;
   float x, y, z, ratio, magdiff;
@@ -305,7 +305,7 @@ void raw_data(const int16_t* data)
   }
 }
 
-static uint16_t crc16(uint16_t crc, uint8_t data)
+FLASHMEM static uint16_t crc16(uint16_t crc, uint8_t data)
 {
   unsigned int i;
 
@@ -324,7 +324,7 @@ static uint16_t crc16(uint16_t crc, uint8_t data)
   return crc;
 }
 
-static uint8_t* copy_lsb_first(uint8_t* dst, float f)
+FLASHMEM static uint8_t* copy_lsb_first(uint8_t* dst, float f)
 {
   union
   {
@@ -340,7 +340,7 @@ static uint8_t* copy_lsb_first(uint8_t* dst, float f)
   return dst;
 }
 
-int send_calibration(void)
+FLASHMEM int send_calibration(void)
 {
   uint8_t *p, buf[68];
   uint16_t crc;

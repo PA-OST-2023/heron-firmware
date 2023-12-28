@@ -61,7 +61,7 @@ static void fUpdateCalibration10EIG(MagCalibration_t* MagCal);
 // MagCalibration_t magcal;
 
 // run the magnetic calibration
-int MagCal_Run(void)
+FLASHMEM int MagCal_Run(void)
 {
   int i, j;       // loop counters
   int isolver;    // magnetic solver used
@@ -151,7 +151,7 @@ int MagCal_Run(void)
 }
 
 // 4 element calibration using 4x4 matrix inverse
-static void fUpdateCalibration4INV(MagCalibration_t* MagCal)
+FLASHMEM static void fUpdateCalibration4INV(MagCalibration_t* MagCal)
 {
   float fBp2;            // fBp[X]^2+fBp[Y]^2+fBp[Z]^2
   float fSumBp4;         // sum of fBp2
@@ -331,7 +331,7 @@ static void fUpdateCalibration4INV(MagCalibration_t* MagCal)
 }
 
 // 7 element calibration using direct eigen-decomposition
-static void fUpdateCalibration7EIG(MagCalibration_t* MagCal)
+FLASHMEM static void fUpdateCalibration7EIG(MagCalibration_t* MagCal)
 {
   float det;             // matrix determinant
   float fscaling;        // set to FUTPERCOUNT * FMATRIXSCALING
@@ -481,7 +481,7 @@ static void fUpdateCalibration7EIG(MagCalibration_t* MagCal)
 }
 
 // 10 element calibration using direct eigen-decomposition
-static void fUpdateCalibration10EIG(MagCalibration_t* MagCal)
+FLASHMEM static void fUpdateCalibration10EIG(MagCalibration_t* MagCal)
 {
   float det;             // matrix determinant
   float fscaling;        // set to FUTPERCOUNT * FMATRIXSCALING

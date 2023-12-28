@@ -14,8 +14,9 @@ def main():
     blockSampleCount = 128
     audioBlockSize = channelCount * blockSampleCount * 2
     packetSize = audioBlockSize + headerSize
-    
 
+    lastPacketIndex = -1
+    
     while True:                     # Keep trying to connect
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -28,7 +29,7 @@ def main():
                 
                 while True:         # Keep trying to receive data
                     try:
-                        data = s.recv(10000)
+                        data = s.recv(1460 * 8)
                         lastReceived = time.time()
                         if not data:
                             continue
@@ -39,22 +40,44 @@ def main():
                             packetIndex = int.from_bytes(dataBuffer[headerIndex + 8 : headerIndex + 12], 'little')
                             timestamp = int.from_bytes(dataBuffer[headerIndex + 12 : headerIndex + headerSize], 'little')
                             audioData = dataBuffer[headerIndex + headerSize : headerIndex + headerSize + audioBlockSize]
-                            dataBuffer = dataBuffer[packetSize:]
+                            dataBuffer = dataBuffer[headerIndex + packetSize:]
+                            if(len(audioData) != audioBlockSize):
+                                continue
+
+                            if(lastPacketIndex == -1):
+                                lastPacketIndex = packetIndex - 1
+                            if(packetIndex != lastPacketIndex + 1):
+                                print(f"Packet Drop Detected: {packetIndex}, Timestamp: {timestamp/1000000000:.6f}")
+                            lastPacketIndex = packetIndex
+
                             i+=1
                             if i%100 == 0:
-                                # print(f"Received {len(audioData)} bytes: {[int(i) for i in audioData[:20]]}")
                                 print(f"Packet index: {packetIndex}, Timestamp: {timestamp/1000000000:.6f}")
 
                     except (socket.timeout, TimeoutError) as e:      # Don't care about short connection drops, as long as the connection is re-established
                         if(time.time() - lastReceived > TCP_CONNECTION_TIMEOUT):
                             break
                         continue
+                    except KeyboardInterrupt:
+                        print("Interrupted by user")
+                        raise KeyboardInterrupt
+                    except OSError as e:
+                        if(e.strerror == "Stream closed"):
+                            print("Stream closed")
+                            s.shutdown(socket.SHUT_RDWR)
+                            break
+                        else:
+                            print("Trying to re-establish connection: ", e, type(e))
+                            break
                     except Exception as e:
-                        print("Trying to re-establish connection")
+                        print("Trying to re-establish connection: ", e, type(e))
                         break
 
         except (socket.timeout, TimeoutError, ConnectionRefusedError) as e:
             pass
+        except KeyboardInterrupt:
+            print("Terminating")
+            break
 
 
 if __name__ == '__main__':

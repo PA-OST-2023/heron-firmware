@@ -7,7 +7,7 @@
 //static int pr=0;
 
 // return 0 to 99 - which region on the sphere (100 of equal surface area)
-static int sphere_region(float x, float y, float z)
+FLASHMEM static int sphere_region(float x, float y, float z)
 {
 	float latitude, longitude;
 	int region;
@@ -72,7 +72,7 @@ static int quality_gaps_computed=0;
 static int quality_variance_computed=0;
 static int quality_wobble_computed=0;
 
-void quality_reset(void)
+FLASHMEM void quality_reset(void)
 {
 	float longitude;
 	int i;
@@ -126,7 +126,7 @@ void quality_reset(void)
 	quality_wobble_computed = 0;
 }
 
-void quality_update(const Point_t *point)
+FLASHMEM void quality_update(const Point_t *point)
 {
 	float x, y, z;
 	int region;
@@ -147,7 +147,7 @@ void quality_update(const Point_t *point)
 }
 
 // How many surface gaps
-float quality_surface_gap_error(void)
+FLASHMEM float quality_surface_gap_error(void)
 {
 	float error=0.0f;
 	int i, num;
@@ -169,7 +169,7 @@ float quality_surface_gap_error(void)
 }
 
 // Variance in magnitude
-float quality_magnitude_variance_error(void)
+FLASHMEM float quality_magnitude_variance_error(void)
 {
 	float sum, mean, diff, variance;
 	int i;
@@ -192,7 +192,7 @@ float quality_magnitude_variance_error(void)
 }
 
 // Offset of piecewise average data from ideal sphere surface
-float quality_wobble_error(void)
+FLASHMEM float quality_wobble_error(void)
 {
 	float sum, radius, x, y, z, xi, yi, zi;
 	float xoff=0.0f, yoff=0.0f, zoff=0.0f;

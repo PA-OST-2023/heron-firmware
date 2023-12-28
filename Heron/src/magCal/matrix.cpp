@@ -118,7 +118,7 @@ void f3x3matrixAeqMinusA(float A[][3])
 
 // function directly calculates the symmetric inverse of a symmetric 3x3 matrix
 // only the on and above diagonal terms in B are used and need to be specified
-void f3x3matrixAeqInvSymB(float A[][3], float B[][3])
+FLASHMEM void f3x3matrixAeqInvSymB(float A[][3], float B[][3])
 {
 	float fB11B22mB12B12;	// B[1][1] * B[2][2] - B[1][2] * B[1][2]
 	float fB12B02mB01B22;	// B[1][2] * B[0][2] - B[0][1] * B[2][2]
@@ -149,7 +149,7 @@ void f3x3matrixAeqInvSymB(float A[][3], float B[][3])
 }
 
 // function calculates the determinant of a 3x3 matrix
-float f3x3matrixDetA(float A[][3])
+FLASHMEM float f3x3matrixDetA(float A[][3])
 {
 	return (A[X][X] * (A[Y][Y] * A[Z][Z] - A[Y][Z] * A[Z][Y]) +
 			A[X][Y] * (A[Y][Z] * A[Z][X] - A[Y][X] * A[Z][Z]) +
@@ -162,7 +162,7 @@ float f3x3matrixDetA(float A[][3])
 // eigval[0..n-1] returns the eigenvalues of A[][].
 // eigvec[0..n-1][0..n-1] returns the normalized eigenvectors of A[][]
 // the eigenvectors are not sorted by value
-void eigencompute(float A[][10], float eigval[], float eigvec[][10], int8_t n)
+FLASHMEM void eigencompute(float A[][10], float eigval[], float eigvec[][10], int8_t n)
 {
 	// maximum number of iterations to achieve convergence: in practice 6 is typical
 #define NITERATIONS 15
@@ -289,7 +289,7 @@ void eigencompute(float A[][10], float eigval[], float eigvec[][10], int8_t n)
 
 // function uses Gauss-Jordan elimination to compute the inverse of matrix A in situ
 // on exit, A is replaced with its inverse
-void fmatrixAeqInvA(float *A[], int8_t iColInd[], int8_t iRowInd[], int8_t iPivot[], int8_t isize)
+FLASHMEM void fmatrixAeqInvA(float *A[], int8_t iColInd[], int8_t iRowInd[], int8_t iPivot[], int8_t isize)
 {
 	float largest;					// largest element used for pivoting
 	float scaling;					// scaling factor in pivoting
@@ -401,7 +401,7 @@ void fmatrixAeqInvA(float *A[], int8_t iColInd[], int8_t iRowInd[], int8_t iPivo
 }
 
 // function re-orthonormalizes a 3x3 rotation matrix
-void fmatrixAeqRenormRotA(float A[][3])
+FLASHMEM void fmatrixAeqRenormRotA(float A[][3])
 {
 	float ftmp;					// scratch variable
 

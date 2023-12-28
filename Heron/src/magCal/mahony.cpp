@@ -57,7 +57,7 @@ void fusion_init(void)
 	mahony_init();
 }
 
-void fusion_update(const AccelSensor_t *Accel, const MagSensor_t *Mag, const GyroSensor_t *Gyro,
+FLASHMEM void fusion_update(const AccelSensor_t *Accel, const MagSensor_t *Mag, const GyroSensor_t *Gyro,
     const MagCalibration_t *MagCal)
 {
 	int i;
@@ -81,7 +81,7 @@ void fusion_update(const AccelSensor_t *Accel, const MagSensor_t *Mag, const Gyr
 	}
 }
 
-void fusion_read(Quaternion_t *q)
+FLASHMEM void fusion_read(Quaternion_t *q)
 {
 	q->q0 = q0;
 	q->q1 = q1;
@@ -93,7 +93,7 @@ void fusion_read(Quaternion_t *q)
 //----------------------------------------------------------------------------------------------
 // AHRS algorithm update
 
-static void mahony_init()
+FLASHMEM static void mahony_init()
 {
 	static int first=1;
 
@@ -112,7 +112,7 @@ static void mahony_init()
 	integralFBz = 0.0f;
 }
 
-static void mahony_update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz)
+FLASHMEM static void mahony_update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz)
 {
 	float recipNorm;
 	float q0q0, q0q1, q0q2, q0q3, q1q1, q1q2, q1q3, q2q2, q2q3, q3q3;
@@ -236,7 +236,7 @@ static void mahony_update(float gx, float gy, float gz, float ax, float ay, floa
 //---------------------------------------------------------------------------------------------
 // IMU algorithm update
 
-void mahony_updateIMU(float gx, float gy, float gz, float ax, float ay, float az)
+FLASHMEM void mahony_updateIMU(float gx, float gy, float gz, float ax, float ay, float az)
 {
 	float recipNorm;
 	float halfvx, halfvy, halfvz;
@@ -308,7 +308,7 @@ void mahony_updateIMU(float gx, float gy, float gz, float ax, float ay, float az
 // Fast inverse square-root
 // See: http://en.wikipedia.org/wiki/Fast_inverse_square_root
 
-static float invSqrt(float x) {
+FLASHMEM static float invSqrt(float x) {
 	union {
 		float f;
 		int32_t i;

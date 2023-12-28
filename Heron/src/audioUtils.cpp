@@ -45,7 +45,7 @@ AudioUtils::AudioUtils()
   AudioMemory(128);
 }
 
-bool AudioUtils::begin(void)
+FLASHMEM bool AudioUtils::begin(void)
 {
   for(int i = 0; i < ADAU7118_COUNT; i++)
   {
@@ -105,13 +105,17 @@ void AudioUtils::update(void* parameter)
       t = millis();
       if(ref->transmitter.getConnectionState())
       {
-        console.log.printf("[MAIN] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n",
+        console.log.printf("[AUDIO] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n",
                            (ref->transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0, ref->transmitter.getBufferFillLevel() * 100.0);
       }
       else
       {
-        console.warning.println("[MAIN] No client connected.");
+        console.warning.println("[AUDIO] No client connected.");
       }
+    }
+    if(ref->transmitter.getBufferOverflowDetected())
+    {
+      console.warning.println("[AUDIO] Buffer overflow detected.");
     }
 
     threads.delay(1000.0 / UPDATE_RATE);

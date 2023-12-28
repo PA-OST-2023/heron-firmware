@@ -221,6 +221,14 @@ FLASHMEM void Console::printStartupMessage(void)
   stream.println("*       ...::...:::-=+++*###*=--.:::::.            *");
   stream.println("****************************************************");
   stream.println(CONSOLE_LOG);
+
+  if(CrashReport)
+  {
+    stream.println("[CONSOLE] Crash report found:");
+    stream.print(CONSOLE_COLOR_BOLD_RED CONSOLE_BACKGROUND_DEFAULT);
+    stream.println(CrashReport);
+    stream.println(CONSOLE_LOG);
+  }
 }
 
 #ifndef USE_CUSTOM_CONSOLE

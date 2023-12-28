@@ -68,16 +68,6 @@ void setup()
 {
   console.begin();
   console.log.println("[MAIN] Initialize System...");
-
-  if (CrashReport)
-  {
-    util::StdioPrint p{stdout};
-    p.println();
-    p.println(CrashReport);
-    p.println();
-    CrashReport.clear();
-  }
-
   utils.begin();
   audio.begin();
   hmi.begin(utils);
