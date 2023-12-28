@@ -92,11 +92,11 @@ IPAddress subnet(255, 255, 255, 0);
 IPAddress gateway(192, 168, 40, 1);
 
 EthernetServer server(6666);
-Utils utils;
+// Utils utils;
 
 DMAMEM lv_ui guider_ui;
 GC9A01A_t3n disp = GC9A01A_t3n(TFT_CS, TFT_DC, -1, TFT_MOSI, TFT_SCLK);
-CHSC6413 touch(&Wire1, TCH_IRQ);
+CHSC6413 touch = CHSC6413(&Wire1, TCH_IRQ);
 
 const int screenWidth = 240;
 const int screenHeight = 240;
@@ -191,8 +191,13 @@ void setup()
 
   if (!touch.begin())
   {
-    console.error.println("Failed to initialize touch screen!");
+    console.error.println("[MAIN] Failed to initialize touch screen!");
   }
+  else
+  {
+    console.ok.println("[MAIN] Touch screen initialized.");
+  }
+  // touch.setContinuousMode(true);
 
   lv_log_register_print_cb(my_print);
   lv_init();
@@ -274,8 +279,8 @@ void touchpad_read(lv_indev_drv_t *drv, lv_indev_data_t *data)
   if (touch->available())
   {
     data->state = LV_INDEV_STATE_PR; // Indicate that the touchpad is pressed
-    data->point.x = touch->data.x;
-    data->point.y = touch->data.y;
+    data->point.x = touch->x;
+    data->point.y = touch->y;
   }
   else
   {
