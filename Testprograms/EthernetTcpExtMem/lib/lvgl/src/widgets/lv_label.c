@@ -82,7 +82,7 @@ lv_obj_t * lv_label_create(lv_obj_t * parent)
  * Setter functions
  *====================*/
 
-void lv_label_set_text(lv_obj_t * obj, const char * text)
+FLASHMEM void lv_label_set_text(lv_obj_t * obj, const char * text)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_label_t * label = (lv_label_t *)obj;
@@ -144,7 +144,7 @@ void lv_label_set_text(lv_obj_t * obj, const char * text)
     lv_label_refr_text(obj);
 }
 
-void lv_label_set_text_fmt(lv_obj_t * obj, const char * fmt, ...)
+FLASHMEM void lv_label_set_text_fmt(lv_obj_t * obj, const char * fmt, ...)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(fmt);
@@ -172,7 +172,7 @@ void lv_label_set_text_fmt(lv_obj_t * obj, const char * fmt, ...)
     lv_label_refr_text(obj);
 }
 
-void lv_label_set_text_static(lv_obj_t * obj, const char * text)
+FLASHMEM void lv_label_set_text_static(lv_obj_t * obj, const char * text)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_label_t * label = (lv_label_t *)obj;
@@ -190,7 +190,7 @@ void lv_label_set_text_static(lv_obj_t * obj, const char * text)
     lv_label_refr_text(obj);
 }
 
-void lv_label_set_long_mode(lv_obj_t * obj, lv_label_long_mode_t long_mode)
+FLASHMEM void lv_label_set_long_mode(lv_obj_t * obj, lv_label_long_mode_t long_mode)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -283,7 +283,7 @@ bool lv_label_get_recolor(const lv_obj_t * obj)
     return label->recolor == 0 ? false : true;
 }
 
-void lv_label_get_letter_pos(const lv_obj_t * obj, uint32_t char_id, lv_point_t * pos)
+FLASHMEM void lv_label_get_letter_pos(const lv_obj_t * obj, uint32_t char_id, lv_point_t * pos)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(pos);
@@ -397,7 +397,7 @@ void lv_label_get_letter_pos(const lv_obj_t * obj, uint32_t char_id, lv_point_t 
 #endif
 }
 
-uint32_t lv_label_get_letter_on(const lv_obj_t * obj, lv_point_t * pos_in)
+FLASHMEM uint32_t lv_label_get_letter_on(const lv_obj_t * obj, lv_point_t * pos_in)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(pos_in);
@@ -521,7 +521,7 @@ uint32_t lv_label_get_letter_on(const lv_obj_t * obj, lv_point_t * pos_in)
     return  logical_pos + _lv_txt_encoded_get_char_id(txt, line_start);
 }
 
-bool lv_label_is_char_under_pos(const lv_obj_t * obj, lv_point_t * pos)
+FLASHMEM bool lv_label_is_char_under_pos(const lv_obj_t * obj, lv_point_t * pos)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(pos);
@@ -635,7 +635,7 @@ uint32_t lv_label_get_text_selection_end(const lv_obj_t * obj)
  * Other functions
  *====================*/
 
-void lv_label_ins_text(lv_obj_t * obj, uint32_t pos, const char * txt)
+FLASHMEM void lv_label_ins_text(lv_obj_t * obj, uint32_t pos, const char * txt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(txt);
@@ -663,7 +663,7 @@ void lv_label_ins_text(lv_obj_t * obj, uint32_t pos, const char * txt)
     lv_label_set_text(obj, NULL);
 }
 
-void lv_label_cut_text(lv_obj_t * obj, uint32_t pos, uint32_t cnt)
+FLASHMEM void lv_label_cut_text(lv_obj_t * obj, uint32_t pos, uint32_t cnt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_label_t * label = (lv_label_t *)obj;
@@ -685,7 +685,7 @@ void lv_label_cut_text(lv_obj_t * obj, uint32_t pos, uint32_t cnt)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_label_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_label_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -721,7 +721,7 @@ static void lv_label_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_label_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_label_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     lv_label_t * label = (lv_label_t *)obj;
@@ -731,7 +731,7 @@ static void lv_label_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     label->text = NULL;
 }
 
-static void lv_label_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_label_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -788,7 +788,7 @@ static void lv_label_event(const lv_obj_class_t * class_p, lv_event_t * e)
 }
 
 
-static void draw_main(lv_event_t * e)
+FLASHMEM static void draw_main(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_label_t * label = (lv_label_t *)obj;
@@ -892,7 +892,7 @@ static void draw_main(lv_event_t * e)
  * Refresh the label with its text stored in its extended data
  * @param label pointer to a label object
  */
-static void lv_label_refr_text(lv_obj_t * obj)
+FLASHMEM static void lv_label_refr_text(lv_obj_t * obj)
 {
     lv_label_t * label = (lv_label_t *)obj;
     if(label->text == NULL) return;
@@ -1169,7 +1169,7 @@ static void lv_label_refr_text(lv_obj_t * obj)
 }
 
 
-static void lv_label_revert_dots(lv_obj_t * obj)
+FLASHMEM static void lv_label_revert_dots(lv_obj_t * obj)
 {
 
     lv_label_t * label = (lv_label_t *)obj;
@@ -1199,7 +1199,7 @@ static void lv_label_revert_dots(lv_obj_t * obj)
  * @param len Number of characters to store.
  * @return true on success.
  */
-static bool lv_label_set_dot_tmp(lv_obj_t * obj, char * data, uint32_t len)
+FLASHMEM static bool lv_label_set_dot_tmp(lv_obj_t * obj, char * data, uint32_t len)
 {
 
     lv_label_t * label = (lv_label_t *)obj;

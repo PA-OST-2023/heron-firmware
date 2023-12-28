@@ -73,7 +73,7 @@ void lv_anim_init(lv_anim_t * a)
     a->early_apply = 1;
 }
 
-lv_anim_t * lv_anim_start(const lv_anim_t * a)
+FLASHMEM lv_anim_t * lv_anim_start(const lv_anim_t * a)
 {
     TRACE_ANIM("begin");
 
@@ -114,7 +114,7 @@ lv_anim_t * lv_anim_start(const lv_anim_t * a)
     return new_anim;
 }
 
-uint32_t lv_anim_get_playtime(lv_anim_t * a)
+FLASHMEM uint32_t lv_anim_get_playtime(lv_anim_t * a)
 {
     uint32_t playtime = LV_ANIM_PLAYTIME_INFINITE;
 
@@ -135,7 +135,7 @@ uint32_t lv_anim_get_playtime(lv_anim_t * a)
     return playtime;
 }
 
-bool lv_anim_del(void * var, lv_anim_exec_xcb_t exec_cb)
+FLASHMEM bool lv_anim_del(void * var, lv_anim_exec_xcb_t exec_cb)
 {
     lv_anim_t * a;
     lv_anim_t * a_next;
@@ -280,7 +280,7 @@ int32_t lv_anim_path_overshoot(const lv_anim_t * a)
     return new_value;
 }
 
-int32_t lv_anim_path_bounce(const lv_anim_t * a)
+FLASHMEM int32_t lv_anim_path_bounce(const lv_anim_t * a)
 {
     /*Calculate the current step*/
     int32_t t = lv_map(a->act_time, 0, a->time, 0, LV_BEZIER_VAL_MAX);
@@ -347,7 +347,7 @@ int32_t lv_anim_path_step(const lv_anim_t * a)
  * Periodically handle the animations.
  * @param param unused
  */
-static void anim_timer(lv_timer_t * param)
+FLASHMEM static void anim_timer(lv_timer_t * param)
 {
     LV_UNUSED(param);
 
@@ -415,7 +415,7 @@ static void anim_timer(lv_timer_t * param)
  * e.g. repeat, play back, delete etc.
  * @param a pointer to an animation descriptor
  */
-static void anim_ready_handler(lv_anim_t * a)
+FLASHMEM static void anim_ready_handler(lv_anim_t * a)
 {
     /*In the end of a forward anim decrement repeat cnt.*/
     if(a->playback_now == 0 && a->repeat_cnt > 0 && a->repeat_cnt != LV_ANIM_REPEAT_INFINITE) {
@@ -460,7 +460,7 @@ static void anim_ready_handler(lv_anim_t * a)
     }
 }
 
-static void anim_mark_list_change(void)
+FLASHMEM static void anim_mark_list_change(void)
 {
     anim_list_changed = true;
     if(_lv_ll_get_head(&LV_GC_ROOT(_lv_anim_ll)) == NULL)

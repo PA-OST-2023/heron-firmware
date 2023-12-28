@@ -214,7 +214,7 @@ void _lv_ll_clear(lv_ll_t * ll_p)
  * @param head true: be the head in the new list
  *             false be the tail in the new list
  */
-void _lv_ll_chg_list(lv_ll_t * ll_ori_p, lv_ll_t * ll_new_p, void * node, bool head)
+FLASHMEM void _lv_ll_chg_list(lv_ll_t * ll_ori_p, lv_ll_t * ll_new_p, void * node, bool head)
 {
     _lv_ll_remove(ll_ori_p, node);
 
@@ -323,7 +323,7 @@ uint32_t _lv_ll_get_len(const lv_ll_t * ll_p)
  * @param n_act pointer to node to move
  * @param n_after pointer to a node which should be after `n_act`
  */
-void _lv_ll_move_before(lv_ll_t * ll_p, void * n_act, void * n_after)
+FLASHMEM void _lv_ll_move_before(lv_ll_t * ll_p, void * n_act, void * n_after)
 {
     if(n_act == n_after) return; /*Can't move before itself*/
 

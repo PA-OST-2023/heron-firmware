@@ -40,7 +40,7 @@ static uint32_t get_instance_size(const lv_obj_class_t * class_p);
  *   GLOBAL FUNCTIONS
  **********************/
 
-lv_obj_t * lv_obj_class_create_obj(const lv_obj_class_t * class_p, lv_obj_t * parent)
+FLASHMEM lv_obj_t * lv_obj_class_create_obj(const lv_obj_class_t * class_p, lv_obj_t * parent)
 {
     LV_TRACE_OBJ_CREATE("Creating object with %p class on %p parent", (void *)class_p, (void *)parent);
     uint32_t s = get_instance_size(class_p);
@@ -101,7 +101,7 @@ lv_obj_t * lv_obj_class_create_obj(const lv_obj_class_t * class_p, lv_obj_t * pa
     return obj;
 }
 
-void lv_obj_class_init_obj(lv_obj_t * obj)
+FLASHMEM void lv_obj_class_init_obj(lv_obj_t * obj)
 {
     lv_obj_mark_layout_as_dirty(obj);
     lv_obj_enable_style_refresh(false);

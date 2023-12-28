@@ -108,7 +108,7 @@ lv_group_t * lv_group_get_default(void)
     return default_group;
 }
 
-void lv_group_add_obj(lv_group_t * group, lv_obj_t * obj)
+FLASHMEM void lv_group_add_obj(lv_group_t * group, lv_obj_t * obj)
 {
     if(group == NULL) return;
 
@@ -153,7 +153,7 @@ void lv_group_add_obj(lv_group_t * group, lv_obj_t * obj)
     LV_LOG_TRACE("finished");
 }
 
-void lv_group_swap_obj(lv_obj_t * obj1, lv_obj_t * obj2)
+FLASHMEM void lv_group_swap_obj(lv_obj_t * obj1, lv_obj_t * obj2)
 {
     lv_group_t * g1 = lv_obj_get_group(obj1);
     lv_group_t * g2 = lv_obj_get_group(obj2);
@@ -172,7 +172,7 @@ void lv_group_swap_obj(lv_obj_t * obj1, lv_obj_t * obj2)
 
 }
 
-void lv_group_remove_obj(lv_obj_t * obj)
+FLASHMEM void lv_group_remove_obj(lv_obj_t * obj)
 {
     lv_group_t * g = lv_obj_get_group(obj);
     if(g == NULL) return;
@@ -213,7 +213,7 @@ void lv_group_remove_obj(lv_obj_t * obj)
     LV_LOG_TRACE("finished");
 }
 
-void lv_group_remove_all_objs(lv_group_t * group)
+FLASHMEM void lv_group_remove_all_objs(lv_group_t * group)
 {
     /*Defocus the currently focused object*/
     if(group->obj_focus != NULL) {
@@ -231,7 +231,7 @@ void lv_group_remove_all_objs(lv_group_t * group)
     _lv_ll_clear(&(group->obj_ll));
 }
 
-void lv_group_focus_obj(lv_obj_t * obj)
+FLASHMEM void lv_group_focus_obj(lv_obj_t * obj)
 {
     if(obj == NULL) return;
     lv_group_t * g = lv_obj_get_group(obj);
@@ -376,7 +376,7 @@ uint32_t lv_group_get_obj_count(lv_group_t * group)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_group_refocus(lv_group_t * g)
+FLASHMEM static void lv_group_refocus(lv_group_t * g)
 {
     /*Refocus must temporarily allow wrapping to work correctly*/
     uint8_t temp_wrap = g->wrap;
@@ -390,7 +390,7 @@ static void lv_group_refocus(lv_group_t * g)
     g->wrap = temp_wrap;
 }
 
-static bool focus_next_core(lv_group_t * group, void * (*begin)(const lv_ll_t *),
+FLASHMEM static bool focus_next_core(lv_group_t * group, void * (*begin)(const lv_ll_t *),
                             void * (*move)(const lv_ll_t *, const void *))
 {
     bool focus_changed = false;
@@ -473,7 +473,7 @@ static bool focus_next_core(lv_group_t * group, void * (*begin)(const lv_ll_t *)
  * @param g     a group the find in the indevs
  * @return      the suggested indev
  */
-static lv_indev_t * get_indev(const lv_group_t * g)
+FLASHMEM static lv_indev_t * get_indev(const lv_group_t * g)
 {
     lv_indev_t * indev_encoder = NULL;
     lv_indev_t * indev_group = NULL;

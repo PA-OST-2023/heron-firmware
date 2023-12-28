@@ -95,7 +95,7 @@ bool lv_is_initialized(void)
     return lv_initialized;
 }
 
-void lv_init(void)
+FLASHMEM void lv_init(void)
 {
     /*Do nothing if already initialized*/
     if(lv_initialized) {
@@ -226,7 +226,7 @@ lv_obj_t * lv_obj_create(lv_obj_t * parent)
  * Attribute set
  *----------------*/
 
-void lv_obj_add_flag(lv_obj_t * obj, lv_obj_flag_t f)
+FLASHMEM void lv_obj_add_flag(lv_obj_t * obj, lv_obj_flag_t f)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -263,7 +263,7 @@ void lv_obj_add_flag(lv_obj_t * obj, lv_obj_flag_t f)
     }
 }
 
-void lv_obj_clear_flag(lv_obj_t * obj, lv_obj_flag_t f)
+FLASHMEM void lv_obj_clear_flag(lv_obj_t * obj, lv_obj_flag_t f)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -416,7 +416,7 @@ bool lv_obj_is_valid(const lv_obj_t * obj)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_obj_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_obj_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -447,7 +447,7 @@ static void lv_obj_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_obj_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_obj_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
 
@@ -480,7 +480,7 @@ static void lv_obj_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     }
 }
 
-static void lv_obj_draw(lv_event_t * e)
+FLASHMEM static void lv_obj_draw(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target(e);
@@ -624,7 +624,7 @@ static void lv_obj_draw(lv_event_t * e)
     }
 }
 
-static void draw_scrollbar(lv_obj_t * obj, lv_draw_ctx_t * draw_ctx)
+FLASHMEM static void draw_scrollbar(lv_obj_t * obj, lv_draw_ctx_t * draw_ctx)
 {
 
     lv_area_t hor_area;
@@ -717,7 +717,7 @@ static lv_res_t scrollbar_init_draw_dsc(lv_obj_t * obj, lv_draw_rect_dsc_t * dsc
 #endif
 }
 
-static void lv_obj_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_obj_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -872,7 +872,7 @@ static void lv_obj_event(const lv_obj_class_t * class_p, lv_event_t * e)
  * @param obj       pointer to an object
  * @param state     the new state
  */
-static void lv_obj_set_state(lv_obj_t * obj, lv_state_t new_state)
+FLASHMEM static void lv_obj_set_state(lv_obj_t * obj, lv_state_t new_state)
 {
     if(obj->state == new_state) return;
 
@@ -945,7 +945,7 @@ static void lv_obj_set_state(lv_obj_t * obj, lv_state_t new_state)
     }
 }
 
-static bool obj_valid_child(const lv_obj_t * parent, const lv_obj_t * obj_to_find)
+FLASHMEM static bool obj_valid_child(const lv_obj_t * parent, const lv_obj_t * obj_to_find)
 {
     /*Check all children of `parent`*/
     uint32_t child_cnt = 0;

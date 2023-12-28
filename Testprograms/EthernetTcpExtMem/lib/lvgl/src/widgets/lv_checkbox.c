@@ -65,7 +65,7 @@ lv_obj_t * lv_checkbox_create(lv_obj_t * parent)
  * Setter functions
  *====================*/
 
-void lv_checkbox_set_text(lv_obj_t * obj, const char * txt)
+FLASHMEM void lv_checkbox_set_text(lv_obj_t * obj, const char * txt)
 {
     lv_checkbox_t * cb = (lv_checkbox_t *)obj;
 #if LV_USE_ARABIC_PERSIAN_CHARS
@@ -88,7 +88,7 @@ void lv_checkbox_set_text(lv_obj_t * obj, const char * txt)
     lv_obj_invalidate(obj);
 }
 
-void lv_checkbox_set_text_static(lv_obj_t * obj, const char * txt)
+FLASHMEM void lv_checkbox_set_text_static(lv_obj_t * obj, const char * txt)
 {
     lv_checkbox_t * cb = (lv_checkbox_t *)obj;
 
@@ -115,7 +115,7 @@ const char * lv_checkbox_get_text(const lv_obj_t * obj)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_checkbox_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_checkbox_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -131,7 +131,7 @@ static void lv_checkbox_constructor(const lv_obj_class_t * class_p, lv_obj_t * o
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_checkbox_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_checkbox_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -144,7 +144,7 @@ static void lv_checkbox_destructor(const lv_obj_class_t * class_p, lv_obj_t * ob
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_checkbox_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_checkbox_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -190,7 +190,7 @@ static void lv_checkbox_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
 }
 
-static void lv_checkbox_draw(lv_event_t * e)
+FLASHMEM static void lv_checkbox_draw(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_checkbox_t * cb = (lv_checkbox_t *)obj;

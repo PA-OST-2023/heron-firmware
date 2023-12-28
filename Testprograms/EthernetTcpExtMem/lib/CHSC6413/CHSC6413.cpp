@@ -122,7 +122,7 @@ bool CHSC6413::begin(int interrupt)
     threads.delay(INIT_RETRY_DELAY);
   }
 
-  return chipAvailable;
+  return chipAvailable; // Sometimes the chip is not recogined until a first touch is detected
 }
 
 /*!

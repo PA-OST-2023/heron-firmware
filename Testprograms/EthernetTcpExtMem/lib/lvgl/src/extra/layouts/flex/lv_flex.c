@@ -207,7 +207,7 @@ void lv_obj_set_style_flex_grow(lv_obj_t * obj, uint8_t value, lv_style_selector
  *   STATIC FUNCTIONS
  **********************/
 
-static void flex_update(lv_obj_t * cont, void * user_data)
+FLASHMEM static void flex_update(lv_obj_t * cont, void * user_data)
 {
     LV_LOG_INFO("update %p container", (void *)cont);
     LV_UNUSED(user_data);
@@ -315,7 +315,7 @@ static void flex_update(lv_obj_t * cont, void * user_data)
 /**
  * Find the last item of a track
  */
-static int32_t find_track_end(lv_obj_t * cont, flex_t * f, int32_t item_start_id, lv_coord_t max_main_size,
+FLASHMEM static int32_t find_track_end(lv_obj_t * cont, flex_t * f, int32_t item_start_id, lv_coord_t max_main_size,
                               lv_coord_t item_gap, track_t * t)
 {
     lv_coord_t w_set = lv_obj_get_style_width(cont, LV_PART_MAIN);
@@ -403,7 +403,7 @@ static int32_t find_track_end(lv_obj_t * cont, flex_t * f, int32_t item_start_id
 /**
  * Position the children in the same track
  */
-static void children_repos(lv_obj_t * cont, flex_t * f, int32_t item_first_id, int32_t item_last_id, lv_coord_t abs_x,
+FLASHMEM static void children_repos(lv_obj_t * cont, flex_t * f, int32_t item_first_id, int32_t item_last_id, lv_coord_t abs_x,
                            lv_coord_t abs_y, lv_coord_t max_main_size, lv_coord_t item_gap, track_t * t)
 {
     void (*area_set_main_size)(lv_area_t *, lv_coord_t) = (f->row ? lv_area_set_width : lv_area_set_height);
@@ -546,7 +546,7 @@ static void children_repos(lv_obj_t * cont, flex_t * f, int32_t item_first_id, i
 /**
  * Tell a start coordinate and gap for a placement type.
  */
-static void place_content(lv_flex_align_t place, lv_coord_t max_size, lv_coord_t content_size, lv_coord_t item_cnt,
+FLASHMEM static void place_content(lv_flex_align_t place, lv_coord_t max_size, lv_coord_t content_size, lv_coord_t item_cnt,
                           lv_coord_t * start_pos, lv_coord_t * gap)
 {
     if(item_cnt <= 1) {

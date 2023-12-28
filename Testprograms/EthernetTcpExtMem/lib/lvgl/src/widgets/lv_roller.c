@@ -93,7 +93,7 @@ lv_obj_t * lv_roller_create(lv_obj_t * parent)
  * @param options a string with '\n' separated options. E.g. "One\nTwo\nThree"
  * @param mode `LV_ROLLER_MODE_NORMAL` or `LV_ROLLER_MODE_INFINITE`
  */
-void lv_roller_set_options(lv_obj_t * obj, const char * options, lv_roller_mode_t mode)
+FLASHMEM void lv_roller_set_options(lv_obj_t * obj, const char * options, lv_roller_mode_t mode)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(options);
@@ -149,7 +149,7 @@ void lv_roller_set_options(lv_obj_t * obj, const char * options, lv_roller_mode_
  * @param sel_opt id of the selected option (0 ... number of option - 1);
  * @param anim_en LV_ANIM_ON: set with animation; LV_ANOM_OFF set immediately
  */
-void lv_roller_set_selected(lv_obj_t * obj, uint16_t sel_opt, lv_anim_enable_t anim)
+FLASHMEM void lv_roller_set_selected(lv_obj_t * obj, uint16_t sel_opt, lv_anim_enable_t anim)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -227,7 +227,7 @@ uint16_t lv_roller_get_selected(const lv_obj_t * obj)
  * @param buf pointer to an array to store the string
  * @param buf_size size of `buf` in bytes. 0: to ignore it.
  */
-void lv_roller_get_selected_str(const lv_obj_t * obj, char * buf, uint32_t buf_size)
+FLASHMEM void lv_roller_get_selected_str(const lv_obj_t * obj, char * buf, uint32_t buf_size)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -291,7 +291,7 @@ uint16_t lv_roller_get_option_cnt(const lv_obj_t * obj)
  **********************/
 
 
-static void lv_roller_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_roller_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     lv_roller_t * roller = (lv_roller_t *)obj;
@@ -312,7 +312,7 @@ static void lv_roller_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj
     LV_LOG_TRACE("finshed");
 }
 
-static void lv_roller_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_roller_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -415,7 +415,7 @@ static void lv_roller_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
 }
 
-static void lv_roller_label_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_roller_label_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -447,7 +447,7 @@ static void lv_roller_label_event(const lv_obj_class_t * class_p, lv_event_t * e
 }
 
 
-static void draw_main(lv_event_t * e)
+FLASHMEM static void draw_main(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target(e);
@@ -521,7 +521,7 @@ static void draw_main(lv_event_t * e)
     }
 }
 
-static void draw_label(lv_event_t * e)
+FLASHMEM static void draw_label(lv_event_t * e)
 {
     /* Split the drawing of the label into  an upper (above the selected area)
      * and a lower (below the selected area)*/
@@ -571,7 +571,7 @@ static void draw_label(lv_event_t * e)
     draw_ctx->clip_area = clip_area_ori;
 }
 
-static void get_sel_area(lv_obj_t * obj, lv_area_t * sel_area)
+FLASHMEM static void get_sel_area(lv_obj_t * obj, lv_area_t * sel_area)
 {
 
     const lv_font_t * font_main = lv_obj_get_style_text_font(obj, LV_PART_MAIN);
@@ -595,7 +595,7 @@ static void get_sel_area(lv_obj_t * obj, lv_area_t * sel_area)
  * @param roller pointer to a roller object
  * @param anim_en LV_ANIM_ON: refresh with animation; LV_ANOM_OFF: without animation
  */
-static void refr_position(lv_obj_t * obj, lv_anim_enable_t anim_en)
+FLASHMEM static void refr_position(lv_obj_t * obj, lv_anim_enable_t anim_en)
 {
     lv_obj_t * label = get_label(obj);
     if(label == NULL) return;
@@ -650,7 +650,7 @@ static void refr_position(lv_obj_t * obj, lv_anim_enable_t anim_en)
     }
 }
 
-static lv_res_t release_handler(lv_obj_t * obj)
+FLASHMEM static lv_res_t release_handler(lv_obj_t * obj)
 {
     lv_obj_t * label = get_label(obj);
     if(label == NULL) return LV_RES_OK;
@@ -727,7 +727,7 @@ static lv_res_t release_handler(lv_obj_t * obj)
  * Set the middle page for the roller if infinite is enabled
  * @param roller pointer to a roller object
  */
-static void inf_normalize(lv_obj_t * obj)
+FLASHMEM static void inf_normalize(lv_obj_t * obj)
 {
     lv_roller_t * roller = (lv_roller_t *)obj;
 
@@ -761,7 +761,7 @@ static lv_obj_t * get_label(const lv_obj_t * obj)
 }
 
 
-static lv_coord_t get_selected_label_width(const lv_obj_t * obj)
+FLASHMEM static lv_coord_t get_selected_label_width(const lv_obj_t * obj)
 {
     lv_obj_t * label = get_label(obj);
     if(label == NULL) return 0;

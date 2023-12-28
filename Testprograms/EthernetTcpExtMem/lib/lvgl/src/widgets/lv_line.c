@@ -105,7 +105,7 @@ bool lv_line_get_y_invert(const lv_obj_t * obj)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_line_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_line_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -121,7 +121,7 @@ static void lv_line_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_line_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_line_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 

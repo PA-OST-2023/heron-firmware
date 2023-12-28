@@ -60,7 +60,7 @@
  * @param color color The color of the image with `LV_IMG_CF_ALPHA_...`
  * @return pointer to the cache entry or NULL if can open the image
  */
-_lv_img_cache_entry_t * _lv_img_cache_open(const void * src, lv_color_t color, int32_t frame_id)
+FLASHMEM _lv_img_cache_entry_t * _lv_img_cache_open(const void * src, lv_color_t color, int32_t frame_id)
 {
     /*Is the image cached?*/
     _lv_img_cache_entry_t * cached_src = NULL;
@@ -146,7 +146,7 @@ _lv_img_cache_entry_t * _lv_img_cache_open(const void * src, lv_color_t color, i
  * E.g. if 20 PNG or JPG images are open in the RAM they consume memory while opened in the cache.
  * @param new_entry_cnt number of image to cache
  */
-void lv_img_cache_set_size(uint16_t new_entry_cnt)
+FLASHMEM void lv_img_cache_set_size(uint16_t new_entry_cnt)
 {
 #if LV_IMG_CACHE_DEF_SIZE == 0
     LV_UNUSED(new_entry_cnt);
@@ -177,7 +177,7 @@ void lv_img_cache_set_size(uint16_t new_entry_cnt)
  * Useful if the image source is updated therefore it needs to be cached again.
  * @param src an image source path to a file or pointer to an `lv_img_dsc_t` variable.
  */
-void lv_img_cache_invalidate_src(const void * src)
+FLASHMEM void lv_img_cache_invalidate_src(const void * src)
 {
     LV_UNUSED(src);
 #if LV_IMG_CACHE_DEF_SIZE

@@ -38,7 +38,7 @@
  *   GLOBAL FUNCTIONS
  **********************/
 
-lv_color_t lv_img_buf_get_px_color(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t y, lv_color_t color)
+FLASHMEM lv_color_t lv_img_buf_get_px_color(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t y, lv_color_t color)
 {
     lv_color_t p_color = lv_color_black();
     uint8_t * buf_u8 = (uint8_t *)dsc->data;
@@ -97,7 +97,7 @@ lv_color_t lv_img_buf_get_px_color(const lv_img_dsc_t * dsc, lv_coord_t x, lv_co
     return p_color;
 }
 
-lv_opa_t lv_img_buf_get_px_alpha(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t y)
+FLASHMEM lv_opa_t lv_img_buf_get_px_alpha(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t y)
 {
     uint8_t * buf_u8 = (uint8_t *)dsc->data;
 
@@ -152,7 +152,7 @@ lv_opa_t lv_img_buf_get_px_alpha(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coor
     return LV_OPA_COVER;
 }
 
-void lv_img_buf_set_px_alpha(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t y, lv_opa_t opa)
+FLASHMEM void lv_img_buf_set_px_alpha(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t y, lv_opa_t opa)
 {
     uint8_t * buf_u8 = (uint8_t *)dsc->data;
 
@@ -203,7 +203,7 @@ void lv_img_buf_set_px_alpha(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t 
     }
 }
 
-void lv_img_buf_set_px_color(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t y, lv_color_t c)
+FLASHMEM void lv_img_buf_set_px_color(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t y, lv_color_t c)
 {
     uint8_t * buf_u8 = (uint8_t *)dsc->data;
 
@@ -262,7 +262,7 @@ void lv_img_buf_set_px_color(const lv_img_dsc_t * dsc, lv_coord_t x, lv_coord_t 
     }
 }
 
-void lv_img_buf_set_palette(const lv_img_dsc_t * dsc, uint8_t id, lv_color_t c)
+FLASHMEM void lv_img_buf_set_palette(const lv_img_dsc_t * dsc, uint8_t id, lv_color_t c)
 {
     if((dsc->header.cf == LV_IMG_CF_ALPHA_1BIT && id > 1) || (dsc->header.cf == LV_IMG_CF_ALPHA_2BIT && id > 3) ||
        (dsc->header.cf == LV_IMG_CF_ALPHA_4BIT && id > 15) || (dsc->header.cf == LV_IMG_CF_ALPHA_8BIT)) {
@@ -276,7 +276,7 @@ void lv_img_buf_set_palette(const lv_img_dsc_t * dsc, uint8_t id, lv_color_t c)
     lv_memcpy_small(&buf[id * sizeof(c32)], &c32, sizeof(c32));
 }
 
-lv_img_dsc_t * lv_img_buf_alloc(lv_coord_t w, lv_coord_t h, lv_img_cf_t cf)
+FLASHMEM lv_img_dsc_t * lv_img_buf_alloc(lv_coord_t w, lv_coord_t h, lv_img_cf_t cf)
 {
     /*Allocate image descriptor*/
     lv_img_dsc_t * dsc = lv_mem_alloc(sizeof(lv_img_dsc_t));
@@ -318,7 +318,7 @@ void lv_img_buf_free(lv_img_dsc_t * dsc)
     }
 }
 
-uint32_t lv_img_buf_get_img_size(lv_coord_t w, lv_coord_t h, lv_img_cf_t cf)
+FLASHMEM uint32_t lv_img_buf_get_img_size(lv_coord_t w, lv_coord_t h, lv_img_cf_t cf)
 {
     switch(cf) {
         case LV_IMG_CF_TRUE_COLOR:
@@ -349,7 +349,7 @@ uint32_t lv_img_buf_get_img_size(lv_coord_t w, lv_coord_t h, lv_img_cf_t cf)
     }
 }
 
-void _lv_img_buf_get_transformed_area(lv_area_t * res, lv_coord_t w, lv_coord_t h, int16_t angle, uint16_t zoom,
+FLASHMEM void _lv_img_buf_get_transformed_area(lv_area_t * res, lv_coord_t w, lv_coord_t h, int16_t angle, uint16_t zoom,
                                       const lv_point_t * pivot)
 {
 #if LV_DRAW_COMPLEX

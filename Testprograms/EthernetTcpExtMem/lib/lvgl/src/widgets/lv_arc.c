@@ -80,7 +80,7 @@ lv_obj_t * lv_arc_create(lv_obj_t * parent)
  * Setter functions
  *====================*/
 
-void lv_arc_set_start_angle(lv_obj_t * obj, uint16_t start)
+FLASHMEM void lv_arc_set_start_angle(lv_obj_t * obj, uint16_t start)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -104,7 +104,7 @@ void lv_arc_set_start_angle(lv_obj_t * obj, uint16_t start)
     inv_knob_area(obj);
 }
 
-void lv_arc_set_end_angle(lv_obj_t * obj, uint16_t end)
+FLASHMEM void lv_arc_set_end_angle(lv_obj_t * obj, uint16_t end)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -133,7 +133,7 @@ void lv_arc_set_angles(lv_obj_t * obj, uint16_t start, uint16_t end)
     lv_arc_set_start_angle(obj, start);
 }
 
-void lv_arc_set_bg_start_angle(lv_obj_t * obj, uint16_t start)
+FLASHMEM void lv_arc_set_bg_start_angle(lv_obj_t * obj, uint16_t start)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -155,7 +155,7 @@ void lv_arc_set_bg_start_angle(lv_obj_t * obj, uint16_t start)
     value_update(obj);
 }
 
-void lv_arc_set_bg_end_angle(lv_obj_t * obj, uint16_t end)
+FLASHMEM void lv_arc_set_bg_end_angle(lv_obj_t * obj, uint16_t end)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -183,7 +183,7 @@ void lv_arc_set_bg_angles(lv_obj_t * obj, uint16_t start, uint16_t end)
     lv_arc_set_bg_start_angle(obj, start);
 }
 
-void lv_arc_set_rotation(lv_obj_t * obj, uint16_t rotation)
+FLASHMEM void lv_arc_set_rotation(lv_obj_t * obj, uint16_t rotation)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -193,7 +193,7 @@ void lv_arc_set_rotation(lv_obj_t * obj, uint16_t rotation)
     lv_obj_invalidate(obj);
 }
 
-void lv_arc_set_mode(lv_obj_t * obj, lv_arc_mode_t type)
+FLASHMEM void lv_arc_set_mode(lv_obj_t * obj, lv_arc_mode_t type)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -222,7 +222,7 @@ void lv_arc_set_mode(lv_obj_t * obj, lv_arc_mode_t type)
     lv_arc_set_value(obj, val);
 }
 
-void lv_arc_set_value(lv_obj_t * obj, int16_t value)
+FLASHMEM void lv_arc_set_value(lv_obj_t * obj, int16_t value)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -239,7 +239,7 @@ void lv_arc_set_value(lv_obj_t * obj, int16_t value)
     value_update(obj);
 }
 
-void lv_arc_set_range(lv_obj_t * obj, int16_t min, int16_t max)
+FLASHMEM void lv_arc_set_range(lv_obj_t * obj, int16_t min, int16_t max)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -324,7 +324,7 @@ lv_arc_mode_t lv_arc_get_mode(const lv_obj_t * obj)
  *====================*/
 
 
-void lv_arc_align_obj_to_angle(const lv_obj_t * obj, lv_obj_t * obj_to_align, lv_coord_t r_offset)
+FLASHMEM void lv_arc_align_obj_to_angle(const lv_obj_t * obj, lv_obj_t * obj_to_align, lv_coord_t r_offset)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(obj_to_align);
@@ -345,7 +345,7 @@ void lv_arc_align_obj_to_angle(const lv_obj_t * obj, lv_obj_t * obj_to_align, lv
     lv_obj_align_to(obj_to_align, obj, LV_ALIGN_CENTER, knob_x, knob_y);
 }
 
-void lv_arc_rotate_obj_to_angle(const lv_obj_t * obj, lv_obj_t * obj_to_rotate, lv_coord_t r_offset)
+FLASHMEM void lv_arc_rotate_obj_to_angle(const lv_obj_t * obj, lv_obj_t * obj_to_rotate, lv_coord_t r_offset)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(obj_to_rotate);
@@ -377,7 +377,7 @@ void lv_arc_rotate_obj_to_angle(const lv_obj_t * obj, lv_obj_t * obj_to_rotate, 
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_arc_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_arc_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -408,7 +408,7 @@ static void lv_arc_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_arc_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_arc_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -612,7 +612,7 @@ static void lv_arc_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
 }
 
-static void lv_arc_draw(lv_event_t * e)
+FLASHMEM static void lv_arc_draw(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -691,7 +691,7 @@ static void lv_arc_draw(lv_event_t * e)
     lv_event_send(obj, LV_EVENT_DRAW_PART_END, &part_draw_dsc);
 }
 
-static void inv_arc_area(lv_obj_t * obj, uint16_t start_angle, uint16_t end_angle, lv_part_t part)
+FLASHMEM static void inv_arc_area(lv_obj_t * obj, uint16_t start_angle, uint16_t end_angle, lv_part_t part)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -724,7 +724,7 @@ static void inv_arc_area(lv_obj_t * obj, uint16_t start_angle, uint16_t end_angl
     lv_obj_invalidate_area(obj, &inv_area);
 }
 
-static void inv_knob_area(lv_obj_t * obj)
+FLASHMEM static void inv_knob_area(lv_obj_t * obj)
 {
     lv_point_t c;
     lv_coord_t r;
@@ -742,7 +742,7 @@ static void inv_knob_area(lv_obj_t * obj)
     lv_obj_invalidate_area(obj, &a);
 }
 
-static void get_center(const lv_obj_t * obj, lv_point_t * center, lv_coord_t * arc_r)
+FLASHMEM static void get_center(const lv_obj_t * obj, lv_point_t * center, lv_coord_t * arc_r)
 {
     lv_coord_t left_bg = lv_obj_get_style_pad_left(obj, LV_PART_MAIN);
     lv_coord_t right_bg = lv_obj_get_style_pad_right(obj, LV_PART_MAIN);
@@ -758,7 +758,7 @@ static void get_center(const lv_obj_t * obj, lv_point_t * center, lv_coord_t * a
     if(arc_r) *arc_r = r;
 }
 
-static lv_coord_t get_angle(const lv_obj_t * obj)
+FLASHMEM static lv_coord_t get_angle(const lv_obj_t * obj)
 {
     lv_arc_t * arc = (lv_arc_t *)obj;
     uint16_t angle = arc->rotation;
@@ -784,7 +784,7 @@ static lv_coord_t get_angle(const lv_obj_t * obj)
 }
 
 
-static void get_knob_area(lv_obj_t * obj, const lv_point_t * center, lv_coord_t r, lv_area_t * knob_area)
+FLASHMEM static void get_knob_area(lv_obj_t * obj, const lv_point_t * center, lv_coord_t r, lv_area_t * knob_area)
 {
     lv_coord_t indic_width = lv_obj_get_style_arc_width(obj, LV_PART_INDICATOR);
     lv_coord_t indic_width_half = indic_width / 2;
@@ -809,7 +809,7 @@ static void get_knob_area(lv_obj_t * obj, const lv_point_t * center, lv_coord_t 
  * Used internally to update arc angles after a value change
  * @param arc pointer to an arc object
  */
-static void value_update(lv_obj_t * obj)
+FLASHMEM static void value_update(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_arc_t * arc = (lv_arc_t *)obj;
@@ -853,7 +853,7 @@ static void value_update(lv_obj_t * obj)
     arc->last_angle = angle; /*Cache angle for slew rate limiting*/
 }
 
-static lv_coord_t knob_get_extra_size(lv_obj_t * obj)
+FLASHMEM static lv_coord_t knob_get_extra_size(lv_obj_t * obj)
 {
     lv_coord_t knob_shadow_size = 0;
     knob_shadow_size += lv_obj_get_style_shadow_width(obj, LV_PART_KNOB);

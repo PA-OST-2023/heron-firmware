@@ -237,6 +237,8 @@ void loop()
     lv_task_handler();
   }
 
+  
+
   static float dataRateAvr = 0;
   if (millis() < 10000)
   {

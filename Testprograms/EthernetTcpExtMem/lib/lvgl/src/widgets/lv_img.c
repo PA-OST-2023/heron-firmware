@@ -67,7 +67,7 @@ lv_obj_t * lv_img_create(lv_obj_t * parent)
  * Setter functions
  *====================*/
 
-void lv_img_set_src(lv_obj_t * obj, const void * src)
+FLASHMEM void lv_img_set_src(lv_obj_t * obj, const void * src)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -180,7 +180,7 @@ void lv_img_set_offset_y(lv_obj_t * obj, lv_coord_t y)
     lv_obj_invalidate(obj);
 }
 
-void lv_img_set_angle(lv_obj_t * obj, int16_t angle)
+FLASHMEM void lv_img_set_angle(lv_obj_t * obj, int16_t angle)
 {
     while(angle >= 3600) angle -= 3600;
     while(angle < 0) angle += 3600;
@@ -216,7 +216,7 @@ void lv_img_set_angle(lv_obj_t * obj, int16_t angle)
     lv_obj_invalidate_area(obj, &a);
 }
 
-void lv_img_set_pivot(lv_obj_t * obj, lv_coord_t x, lv_coord_t y)
+FLASHMEM void lv_img_set_pivot(lv_obj_t * obj, lv_coord_t x, lv_coord_t y)
 {
     lv_img_t * img = (lv_img_t *)obj;
     if(img->pivot.x == x && img->pivot.y == y) return;
@@ -250,7 +250,7 @@ void lv_img_set_pivot(lv_obj_t * obj, lv_coord_t x, lv_coord_t y)
     lv_obj_invalidate_area(obj, &a);
 }
 
-void lv_img_set_zoom(lv_obj_t * obj, uint16_t zoom)
+FLASHMEM void lv_img_set_zoom(lv_obj_t * obj, uint16_t zoom)
 {
     lv_img_t * img = (lv_img_t *)obj;
     if(zoom == img->zoom) return;
@@ -382,7 +382,7 @@ lv_img_size_mode_t lv_img_get_size_mode(lv_obj_t * obj)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_img_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_img_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -409,7 +409,7 @@ static void lv_img_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_img_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_img_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     lv_img_t * img = (lv_img_t *)obj;
@@ -420,7 +420,7 @@ static void lv_img_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     }
 }
 
-static lv_point_t lv_img_get_transformed_size(lv_obj_t * obj)
+FLASHMEM static lv_point_t lv_img_get_transformed_size(lv_obj_t * obj)
 {
     lv_img_t * img = (lv_img_t *)obj;
 
@@ -434,7 +434,7 @@ static lv_point_t lv_img_get_transformed_size(lv_obj_t * obj)
     };
 }
 
-static void lv_img_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_img_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -516,7 +516,7 @@ static void lv_img_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
 }
 
-static void draw_img(lv_event_t * e)
+FLASHMEM static void draw_img(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target(e);
