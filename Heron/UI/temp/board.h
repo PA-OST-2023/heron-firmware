@@ -428,11 +428,11 @@
  *================*/
 
 /*Documentation of the widgets: https://docs.lvgl.io/latest/en/html/widgets/index.html*/
-#define LV_USE_ARC 1
+#define LV_USE_ARC 0
 
 #define LV_USE_BAR 0
 
-#define LV_USE_BTN 0
+#define LV_USE_BTN 1
 
 #define LV_USE_BTNMATRIX 0
 
@@ -512,7 +512,7 @@
 
 #define LV_USE_MENU 0
 
-#define LV_USE_METER 0
+#define LV_USE_METER 1
 
 #define LV_USE_MSGBOX 0
 
@@ -526,11 +526,11 @@
 
 #define LV_USE_SPINBOX 0
 
-#define LV_USE_SPINNER 1
+#define LV_USE_SPINNER 0
 
 #define LV_USE_TABVIEW 0
 
-#define LV_USE_TILEVIEW 0
+#define LV_USE_TILEVIEW 1
 
 #define LV_USE_VIDEO 0
 

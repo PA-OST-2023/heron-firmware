@@ -76,8 +76,8 @@
 					"visible": true,
 					"flag": [],
 					"custom_attributes": {},
-					"width": 240,
-					"height": 33,
+					"width": 246,
+					"height": 32,
 					"default_style": false,
 					"text": "Acquisition System",
 					"long_mode": "LV_LABEL_LONG_WRAP",
@@ -779,7 +779,7 @@
 					"type": "cont",
 					"left": 0,
 					"top": 0,
-					"visible": true,
+					"visible": false,
 					"flag": [
 						"LV_OBJ_FLAG_HIDDEN"
 					],
@@ -18110,8 +18110,8 @@
 							"visible": true,
 							"flag": [],
 							"custom_attributes": {},
-							"width": 60,
-							"height": 28,
+							"width": 66,
+							"height": 30,
 							"default_style": false,
 							"long_mode": "LV_LABEL_LONG_WRAP",
 							"text": "00:00",
@@ -21999,8 +21999,8 @@
 							11
 						],
 						"size": [
-							240,
-							33
+							246,
+							32
 						],
 						"default_style": false,
 						"custom_attributes": {},
@@ -22542,8 +22542,8 @@
 									6
 								],
 								"size": [
-									60,
-									28
+									66,
+									30
 								],
 								"default_style": false,
 								"custom_attributes": {},
@@ -40726,7 +40726,7 @@
 						"name": "screenRecording_cont_background_opaque",
 						"id": "le1sa98m",
 						"type": "cont",
-						"visible": true,
+						"visible": false,
 						"scrollbar_mode": "OFF",
 						"flag": [
 							"LV_OBJ_FLAG_HIDDEN"

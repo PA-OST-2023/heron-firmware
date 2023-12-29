@@ -18,11 +18,51 @@ extern "C" {
 typedef struct
 {
   
-	lv_obj_t *screenBootup;
-	bool screenBootup_del;
-	lv_obj_t *screenBootup_label_1;
-	lv_obj_t *screenBootup_img_2;
-	lv_obj_t *screenBootup_spinner_1;
+	lv_obj_t *screen_bootup;
+	bool screen_bootup_del;
+	lv_obj_t *screen_bootup_label_1;
+	lv_obj_t *screen_bootup_img_2;
+	lv_obj_t *screen_home;
+	bool screen_home_del;
+	lv_obj_t *screen_home_tileview_menu;
+	lv_obj_t *screen_home_tileview_menu_tile_system;
+	lv_obj_t *screen_home_tileview_menu_tile_ethernet;
+	lv_obj_t *screen_home_tileview_menu_tile_gnss;
+	lv_obj_t *screen_home_tileview_menu_tile_compass;
+	lv_obj_t *screen_home_label_system;
+	lv_obj_t *screen_home_btn_system;
+	lv_obj_t *screen_home_btn_system_label;
+	lv_obj_t *screen_home_label_ethernet;
+	lv_obj_t *screen_home_btn_ethernet;
+	lv_obj_t *screen_home_btn_ethernet_label;
+	lv_obj_t *screen_home_label_gnss;
+	lv_obj_t *screen_home_btn_gnss;
+	lv_obj_t *screen_home_btn_gnss_label;
+	lv_obj_t *screen_home_label_compass;
+	lv_obj_t *screen_home_btn_compass;
+	lv_obj_t *screen_home_btn_compass_label;
+	lv_obj_t *screen_home_cont_top_bar;
+	lv_obj_t *screen_home_btn_warning;
+	lv_obj_t *screen_home_btn_warning_label;
+	lv_obj_t *screen_home_label_usb_status;
+	lv_obj_t *screen_home_label_ethernet_status;
+	lv_obj_t *screen_home_label_gnss_status;
+	lv_obj_t *screen_home_label_current_time;
+	lv_obj_t *screen_ethernet;
+	bool screen_ethernet_del;
+	lv_obj_t *screen_ethernet_btn_config;
+	lv_obj_t *screen_ethernet_btn_config_label;
+	lv_obj_t *screen_ethernet_label_setup;
+	lv_obj_t *screen_ethernet_btn_back;
+	lv_obj_t *screen_ethernet_btn_back_label;
+	lv_obj_t *screen_ethernet_label_back;
+	lv_obj_t *screen_ethernet_label_title;
+	lv_obj_t *screen_ethernet_label_buffer;
+	lv_obj_t *screen_ethernet_meter_buffer;
+	lv_obj_t *screen_ethernet_label_buffer_title;
+	lv_obj_t *screen_ethernet_label_speed;
+	lv_obj_t *screen_ethernet_meter_speed;
+	lv_obj_t *screen_ethernet_label_speed_title;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);
@@ -30,11 +70,21 @@ void init_scr_del_flag(lv_ui *ui);
 void setup_ui(lv_ui *ui);
 extern lv_ui guider_ui;
 
-void setup_scr_screenBootup(lv_ui *ui);
+void setup_scr_screen_bootup(lv_ui *ui);
+void setup_scr_screen_home(lv_ui *ui);
+void setup_scr_screen_ethernet(lv_ui *ui);
 LV_IMG_DECLARE(_Heron_alpha_100x100);
 
 LV_FONT_DECLARE(lv_font_MontserratRegular_20)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
+LV_FONT_DECLARE(lv_font_FontAwesome6ProLight_300_50)
+LV_FONT_DECLARE(lv_font_montserratMedium_12)
+LV_FONT_DECLARE(lv_font_FontAwesome5ProLight_300_40)
+LV_FONT_DECLARE(lv_font_FontAwesome6SharpLight_300_50)
+LV_FONT_DECLARE(lv_font_FontAwesome5ProSolid_900_16)
+LV_FONT_DECLARE(lv_font_FontAwesome5_15)
+LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_16)
+LV_FONT_DECLARE(lv_font_montserratMedium_14)
 
 
 #ifdef __cplusplus

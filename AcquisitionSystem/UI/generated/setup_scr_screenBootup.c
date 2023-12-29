@@ -30,7 +30,7 @@ void setup_scr_screenBootup(lv_ui *ui)
 	lv_label_set_text(ui->screenBootup_label_1, "Acquisition System");
 	lv_label_set_long_mode(ui->screenBootup_label_1, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screenBootup_label_1, 0, 11);
-	lv_obj_set_size(ui->screenBootup_label_1, 240, 33);
+	lv_obj_set_size(ui->screenBootup_label_1, 246, 32);
 
 	//Write style for screenBootup_label_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screenBootup_label_1, 2, LV_PART_MAIN|LV_STATE_DEFAULT);

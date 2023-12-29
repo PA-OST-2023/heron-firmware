@@ -40,6 +40,12 @@
 #include <QNEthernet.h>
 using namespace qindesign::network;
 
+#include <OSFS.h>
+#include <EEPROM.h>
+
+// #include <Preferences.h>
+// Preferences prefs;
+
 
 #define TFT_SCLK   13
 #define TFT_MOSI   11
@@ -62,6 +68,25 @@ static AudioUtils audio;
 static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_BL, TCH_IRQ);
 static Hmi hmi(RGB_LED, HMI_BUZZER);
+
+
+uint16_t OSFS::startOfEEPROM = 1;
+uint16_t OSFS::endOfEEPROM = 4096;
+
+void OSFS::readNBytes(uint16_t address, unsigned int num, byte* output) {
+	for (uint16_t i = address; i < address + num; i++) {
+		*output = EEPROM.read(i);
+		output++;
+	}
+}
+
+// 4) How to I write to the medium?
+void OSFS::writeNBytes(uint16_t address, unsigned int num, const byte* input) {
+	for (uint16_t i = address; i < address + num; i++) {
+		EEPROM.update(i, *input);
+		input++;
+	}
+}
 
 
 void setup()
@@ -89,6 +114,51 @@ void setup()
   {
     console.ok.println("[MAIN] Audio server started");
   }
+
+  // int counter = prefs.getInt("counter", 1);     // default to 1
+  // console.log.printf("Reboot count: %d\n", counter);
+  // counter++;
+  // prefs.putInt("counter", counter);
+
+  if(OSFS::checkLibVersion() != OSFS::result::NO_ERROR)
+  {
+    console.warning.println("[MAIN] OSFS not formatted, formatting now...");
+    OSFS::format();
+    console.log.println("[MAIN] OSFS formatted");
+  }
+  else
+  {
+    console.ok.println("[MAIN] OSFS initialized");
+  }
+
+
+  int counter = 999;
+  if(OSFS::getFile("counter", counter) != OSFS::result::NO_ERROR)
+  {
+    console.warning.println("[MAIN] Counter not found, creating now...");
+    counter = 1;    // default to 1
+    OSFS::newFile("counter", counter);  
+  }
+  console.log.printf("Reboot count: %d\n", counter);
+  counter++;
+  OSFS::newFile("counter", counter, true);  // overwrite existing file
+
+  // console.log.println(F("Storing a string"));
+  // char testStr[15] = "this is a test";
+  // OSFS::newFile("testStr", testStr, 15);
+
+  // console.log.println(F("Storing a complex data type"));
+  // struct complexType {
+  // 	int a;
+  // 	char b;
+  // 	uint32_t c;
+  // };
+
+  // complexType testCplx;
+  // testCplx.a = 123;
+  // testCplx.b = 'a';
+  // testCplx.c = 0xABCDEF00;
+  // OSFS::newFile("testCplx", testCplx);
 
   hmi.setSystemStatus(Hmi::STATUS_OK);
 }

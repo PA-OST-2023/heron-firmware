@@ -116,7 +116,7 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_align(ui->screenRecording_btn_current_time_label, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_style_pad_all(ui->screenRecording_btn_current_time, 0, LV_STATE_DEFAULT);
 	lv_obj_set_pos(ui->screenRecording_btn_current_time, 7, 6);
-	lv_obj_set_size(ui->screenRecording_btn_current_time, 60, 28);
+	lv_obj_set_size(ui->screenRecording_btn_current_time, 66, 30);
 
 	//Write style for screenRecording_btn_current_time, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->screenRecording_btn_current_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -3891,6 +3891,7 @@ void setup_scr_screenRecording(lv_ui *ui)
 	lv_obj_set_pos(ui->screenRecording_cont_background_opaque, 0, 0);
 	lv_obj_set_size(ui->screenRecording_cont_background_opaque, 240, 240);
 	lv_obj_set_scrollbar_mode(ui->screenRecording_cont_background_opaque, LV_SCROLLBAR_MODE_OFF);
+	lv_obj_add_flag(ui->screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
 	lv_obj_add_flag(ui->screenRecording_cont_background_opaque, LV_OBJ_FLAG_HIDDEN);
 
 	//Write style for screenRecording_cont_background_opaque, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.

@@ -18,7 +18,9 @@ extern "C" {
 
 void events_init(lv_ui *ui);
 
-void events_init_screenBootup(lv_ui *ui);
+void events_init_screen_bootup(lv_ui *ui);
+void events_init_screen_home(lv_ui *ui);
+void events_init_screen_ethernet(lv_ui *ui);
 
 #ifdef __cplusplus
 }

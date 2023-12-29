@@ -23,12 +23,14 @@ void ui_init_style(lv_style_t * style)
 void init_scr_del_flag(lv_ui *ui)
 {
   
-	ui->screenBootup_del = true;
+	ui->screen_bootup_del = true;
+	ui->screen_home_del = true;
+	ui->screen_ethernet_del = true;
 }
 
 void setup_ui(lv_ui *ui)
 {
   init_scr_del_flag(ui);
-  setup_scr_screenBootup(ui);
-  lv_scr_load(ui->screenBootup);
+  setup_scr_screen_bootup(ui);
+  lv_scr_load(ui->screen_bootup);
 }
