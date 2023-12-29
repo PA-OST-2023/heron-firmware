@@ -95,9 +95,31 @@ def modify_flash_constants(dir):
         with open(Path(dir).resolve() / "images" / image, "w", encoding="utf8") as f:
             f.writelines(lines)
 
+def addFlashmemToScreens(dir):
+    screenFiles = os.listdir(Path(dir).resolve())    # get all files in font directory
+    screenFiles = [file for file in screenFiles if file.startswith("setup_scr")]
+    for screen in screenFiles:
+        with open(Path(dir).resolve() / screen, "r", encoding="utf8") as f:
+            lines = f.readlines()
+
+        # search for the line which starts with [#include "custom.h"] and add #include <Arduino.h> before it
+        for i, line in enumerate(lines):
+            if line.startswith('#include "custom.h"'):
+                lines.insert(i + 1, "#include <pgmspace.h>\n")
+                break
+
+        # search for the line which starts with "void" and add "FLASHMEM" before it
+        for i, line in enumerate(lines):
+            if line.startswith('void'):
+                lines.insert(i, "FLASHMEM ")
+                break
+
+        with open(Path(dir).resolve() / screen, "w", encoding="utf8") as f:
+            f.writelines(lines)
 
 
 copy_directory()
 modify_flash_constants(Path("src/Gui/generated").resolve())
+addFlashmemToScreens(Path("src/Gui/generated").resolve())
 
 # env.AddPreAction("buildprog", copy_directory())

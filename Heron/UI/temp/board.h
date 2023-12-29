@@ -454,7 +454,7 @@
 
 #define LV_USE_LINE 0
 
-#define LV_USE_ROLLER 0
+#define LV_USE_ROLLER 1
 #if LV_USE_ROLLER
 /*Number of extra "pages" when the roller is infinite*/
 #define LV_ROLLER_INF_PAGES 7

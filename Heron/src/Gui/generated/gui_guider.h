@@ -63,6 +63,25 @@ typedef struct
 	lv_obj_t *screen_ethernet_label_speed;
 	lv_obj_t *screen_ethernet_meter_speed;
 	lv_obj_t *screen_ethernet_label_speed_title;
+	lv_obj_t *screen_ethernet_setup;
+	bool screen_ethernet_setup_del;
+	lv_obj_t *screen_ethernet_setup_btn_config;
+	lv_obj_t *screen_ethernet_setup_btn_config_label;
+	lv_obj_t *screen_ethernet_setup_label_setup;
+	lv_obj_t *screen_ethernet_setup_btn_back;
+	lv_obj_t *screen_ethernet_setup_btn_back_label;
+	lv_obj_t *screen_ethernet_setup_label_back;
+	lv_obj_t *screen_ethernet_setup_label_title;
+	lv_obj_t *screen_ethernet_setup_roller_ip_3;
+	lv_obj_t *screen_ethernet_setup_roller_ip_2;
+	lv_obj_t *screen_ethernet_setup_roller_ip_1;
+	lv_obj_t *screen_ethernet_setup_roller_ip_0;
+	lv_obj_t *screen_ethernet_setup_label_ip_address;
+	lv_obj_t *screen_ethernet_setup_label_configuration_port;
+	lv_obj_t *screen_ethernet_setup_label_streaming_port;
+	lv_obj_t *screen_ethernet_setup_cont_confirmed_background;
+	lv_obj_t *screen_ethernet_setup_cont_confirmed;
+	lv_obj_t *screen_ethernet_setup_label_confirmed;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);
@@ -73,6 +92,7 @@ extern lv_ui guider_ui;
 void setup_scr_screen_bootup(lv_ui *ui);
 void setup_scr_screen_home(lv_ui *ui);
 void setup_scr_screen_ethernet(lv_ui *ui);
+void setup_scr_screen_ethernet_setup(lv_ui *ui);
 LV_IMG_DECLARE(_Heron_alpha_100x100);
 
 LV_FONT_DECLARE(lv_font_MontserratRegular_20)

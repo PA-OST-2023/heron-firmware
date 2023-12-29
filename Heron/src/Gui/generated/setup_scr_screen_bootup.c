@@ -13,9 +13,10 @@
 #include "events_init.h"
 #include "widgets_init.h"
 #include "custom.h"
+#include <pgmspace.h>
 
 
-void setup_scr_screen_bootup(lv_ui *ui)
+FLASHMEM void setup_scr_screen_bootup(lv_ui *ui)
 {
 	//Write codes screen_bootup
 	ui->screen_bootup = lv_obj_create(NULL);

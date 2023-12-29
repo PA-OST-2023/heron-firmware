@@ -13,9 +13,10 @@
 #include "events_init.h"
 #include "widgets_init.h"
 #include "custom.h"
+#include <pgmspace.h>
 
 
-void setup_scr_screen_ethernet(lv_ui *ui)
+FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 {
 	//Write codes screen_ethernet
 	ui->screen_ethernet = lv_obj_create(NULL);
