@@ -101,6 +101,18 @@ typedef struct
 	lv_obj_t *screen_compass_label_east;
 	lv_obj_t *screen_compass_label_west;
 	lv_obj_t *screen_compass_label_needle;
+	lv_obj_t *screen_compass_calib;
+	bool screen_compass_calib_del;
+	lv_obj_t *screen_compass_calib_btn_back;
+	lv_obj_t *screen_compass_calib_btn_back_label;
+	lv_obj_t *screen_compass_calib_label_back;
+	lv_obj_t *screen_compass_calib_label_title;
+	lv_obj_t *screen_compass_calib_meter_coverage;
+	lv_obj_t *screen_compass_calib_label_coverage_title;
+	lv_obj_t *screen_compass_calib_label_coverage;
+	lv_obj_t *screen_compass_calib_label_variance;
+	lv_obj_t *screen_compass_calib_label_fit_error;
+	lv_obj_t *screen_compass_calib_label_wobble_error;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);
@@ -113,6 +125,7 @@ void setup_scr_screen_home(lv_ui *ui);
 void setup_scr_screen_ethernet(lv_ui *ui);
 void setup_scr_screen_ethernet_setup(lv_ui *ui);
 void setup_scr_screen_compass(lv_ui *ui);
+void setup_scr_screen_compass_calib(lv_ui *ui);
 LV_IMG_DECLARE(_Heron_alpha_100x100);
 
 LV_FONT_DECLARE(lv_font_MontserratRegular_20)
@@ -126,6 +139,7 @@ LV_FONT_DECLARE(lv_font_FontAwesome5_15)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_16)
 LV_FONT_DECLARE(lv_font_montserratMedium_14)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProSolid_900_10)
+LV_FONT_DECLARE(lv_font_montserratMedium_20)
 
 
 #ifdef __cplusplus

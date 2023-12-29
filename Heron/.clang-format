@@ -84,6 +84,6 @@ AlignConsecutiveMacros:
   Enabled: true
   AcrossEmptyLines: true
   AcrossComments: true
-AlignTrailingComments:
-  Kind: Leave
-  OverEmptyLines: 4
+# AlignTrailingComments:
+#   Kind: Leave
+#   OverEmptyLines: 1

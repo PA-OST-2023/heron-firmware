@@ -44,11 +44,11 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
   leds.clear();
   leds.begin();
   leds.setBrightness(255);
-  delay(5);       // Avoid flickering by waiting dor DMA to be ready
+  delay(5);    // Avoid flickering by waiting dor DMA to be ready
   leds.show();
 
-  utils->lockWire(Wire1);
-  if(!rtc.begin(&Wire1))
+  utils->lockWire(RTC_WIRE);
+  if(!rtc.begin(&RTC_WIRE))
   {
     console.error.println("[HMI] RTC could not be initialized");
     return false;
@@ -59,7 +59,7 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
   rtc.start();
-  utils->unlockWire(Wire1);
+  utils->unlockWire(RTC_WIRE);
 
 
   initialized = true;
@@ -72,16 +72,16 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
 void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)
 {
   DateTime time = DateTime(year, month, day, hour, minute, second);
-  utils->lockWire(Wire1);
+  utils->lockWire(RTC_WIRE);
   rtc.adjust(time);
-  utils->unlockWire(Wire1);
+  utils->unlockWire(RTC_WIRE);
 }
 
 void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
 {
-  utils->lockWire(Wire1);
+  utils->lockWire(RTC_WIRE);
   DateTime time = rtc.now();
-  utils->unlockWire(Wire1);
+  utils->unlockWire(RTC_WIRE);
   year = time.year();
   month = time.month();
   day = time.day();
@@ -92,9 +92,9 @@ void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hou
 
 void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
 {
-  utils->lockWire(Wire1);
+  utils->lockWire(RTC_WIRE);
   DateTime time = rtc.now();
-  utils->unlockWire(Wire1);
+  utils->unlockWire(RTC_WIRE);
   hour = time.hour();
   minute = time.minute();
   second = time.second();
@@ -102,9 +102,9 @@ void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
 
 void Hmi::getDate(uint16_t& year, uint8_t& month, uint8_t& day)
 {
-  utils->lockWire(Wire1);
+  utils->lockWire(RTC_WIRE);
   DateTime time = rtc.now();
-  utils->unlockWire(Wire1);
+  utils->unlockWire(RTC_WIRE);
   year = time.year();
   month = time.month();
   day = time.day();
@@ -134,7 +134,7 @@ void Hmi::update(void* parameter)
           break;
       }
     }
-    else  // Bootup animation
+    else    // Bootup animation
     {}
     ref->leds.show();
 

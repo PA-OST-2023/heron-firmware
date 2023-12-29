@@ -52,13 +52,13 @@ FLASHMEM bool Gui::begin(Utils& utilsRef)
   disp.begin(SPI_FREQUENCY, GC9A01A_SPICLOCK_READ);
   disp.fillScreen(GC9A01A_BLACK);
 
-  utils->lockWire(Wire1);
+  utils->lockWire(GUI_WIRE);
   if(!touch.begin())
   {
     console.error.println("[GUI] Touch controller could not be initialized");
     res = false;
   }
-  utils->unlockWire(Wire1);
+  utils->unlockWire(GUI_WIRE);
 
   lv_log_register_print_cb(lvglPrint);
   lv_init();
@@ -273,9 +273,9 @@ void Gui::dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* c
 void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
 {
   CHSC6413* touch = (CHSC6413*)drv->user_data;
-  utils->lockWire(Wire1);
+  utils->lockWire(GUI_WIRE);
   bool available = touch->available();
-  utils->unlockWire(Wire1);
+  utils->unlockWire(GUI_WIRE);
   if(available)
   {
     int x = touch->x;

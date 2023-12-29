@@ -28,6 +28,7 @@ void init_scr_del_flag(lv_ui *ui)
 	ui->screen_ethernet_del = true;
 	ui->screen_ethernet_setup_del = true;
 	ui->screen_compass_del = true;
+	ui->screen_compass_calib_del = true;
 }
 
 void setup_ui(lv_ui *ui)

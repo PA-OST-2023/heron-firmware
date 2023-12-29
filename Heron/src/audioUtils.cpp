@@ -100,7 +100,7 @@ void AudioUtils::update(void* parameter)
   while(true)
   {
     static uint32_t t = 0;
-    if(millis() - t > 200)
+    if(millis() - t > 1000)
     {
       t = millis();
       if(ref->transmitter.getConnectionState())

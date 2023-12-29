@@ -23,6 +23,7 @@ void events_init_screen_home(lv_ui *ui);
 void events_init_screen_ethernet(lv_ui *ui);
 void events_init_screen_ethernet_setup(lv_ui *ui);
 void events_init_screen_compass(lv_ui *ui);
+void events_init_screen_compass_calib(lv_ui *ui);
 
 #ifdef __cplusplus
 }

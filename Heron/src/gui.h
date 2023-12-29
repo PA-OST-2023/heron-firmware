@@ -42,6 +42,8 @@
 #include <lvgl.h>
 #include <utils.h>
 
+#define GUI_WIRE Wire1                                              // Wire interface to use
+
 class Gui
 {
  public:
@@ -87,7 +89,7 @@ class Gui
  private:
   const int sclk, mosi, cs, dc, bl, tch_irq;
   GC9A01A_t3n disp = GC9A01A_t3n(cs, dc, -1, mosi, sclk);
-  CHSC6413 touch = CHSC6413(&Wire1, tch_irq);
+  CHSC6413 touch = CHSC6413(&GUI_WIRE, tch_irq);
 
   static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
   volatile bool initialized = false;

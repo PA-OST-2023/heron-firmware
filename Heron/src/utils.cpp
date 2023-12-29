@@ -40,7 +40,7 @@
 Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps)
     : scl_sys(scl_sys), sda_sys(sda_sys), scl_hmi(scl_hmi), sda_hmi(sda_hmi), scl_gps(scl_gps), sda_gps(sda_gps)
 {
-   // sm_set_default_pool(extHeap, EXT_HEAP_SIZE, false, nullptr);  // use a memory pool on the external ram
+  // sm_set_default_pool(extHeap, EXT_HEAP_SIZE, false, nullptr);  // use a memory pool on the external ram
 }
 
 FLASHMEM bool Utils::begin(const char* storageName)
@@ -76,13 +76,13 @@ FLASHMEM bool Utils::begin(const char* storageName)
   unlockWire(Wire);
 
   Wire1.begin();
-  Wire1.setClock(400000);
+  Wire1.setClock(1000000);
   Wire1.setSCL(scl_hmi);
   Wire1.setSDA(sda_hmi);
   unlockWire(Wire1);
 
   Wire2.begin();
-  Wire2.setClock(400000);
+  Wire2.setClock(1000000);
   Wire2.setSCL(scl_gps);
   Wire2.setSDA(sda_gps);
   unlockWire(Wire2);
@@ -179,41 +179,41 @@ void Utils::update(void)    // Make sure this function is non-blocking!
   }
 }
 
-        // bool Utils::storeChannelEnabled(const bool* channelEnabled, int count)
-    // {
-    //   uint32_t channels = 0x00000000;
-    //   for(int i = 0; i < count; i++)
-    //   {
-    //     if(channelEnabled[i])
-    //     {
-    //       bitSet(channels, i);
-    //     }
-    //   }
-    //   console.log.printf("[UTILS] EEPROM Store channel enabled: 0x%08X\n", channels);
-    //   return EEPROM.put(EEPROM_ADDR_CHANNEL_ENABLED, channels) != 0;
-    // }
+// bool Utils::storeChannelEnabled(const bool* channelEnabled, int count)
+// {
+//   uint32_t channels = 0x00000000;
+//   for(int i = 0; i < count; i++)
+//   {
+//     if(channelEnabled[i])
+//     {
+//       bitSet(channels, i);
+//     }
+//   }
+//   console.log.printf("[UTILS] EEPROM Store channel enabled: 0x%08X\n", channels);
+//   return EEPROM.put(EEPROM_ADDR_CHANNEL_ENABLED, channels) != 0;
+// }
 
-        // void Utils::loadChannelEnabled(bool* channelEnabled, int count)
-    // {
-    //   uint32_t channels;
-    //   EEPROM.get(EEPROM_ADDR_CHANNEL_ENABLED, channels);
-    //   console.log.printf("[UTILS] EEPROM Load channel enabled: 0x%08X\n", channels);
-    //   for(int i = 0; i < count; i++)
-    //   {
-    //     channelEnabled[i] = bitRead(channels, i);
-    //   }
-    // }
+// void Utils::loadChannelEnabled(bool* channelEnabled, int count)
+// {
+//   uint32_t channels;
+//   EEPROM.get(EEPROM_ADDR_CHANNEL_ENABLED, channels);
+//   console.log.printf("[UTILS] EEPROM Load channel enabled: 0x%08X\n", channels);
+//   for(int i = 0; i < count; i++)
+//   {
+//     channelEnabled[i] = bitRead(channels, i);
+//   }
+// }
 
-        // bool Utils::storeChannelNumber(int channelNumber)
-    // {
-    //   console.log.printf("[UTILS] EEPROM Store channel number: %d\n", channelNumber);
-    //   return EEPROM.put(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber) != 0;
-    // }
+// bool Utils::storeChannelNumber(int channelNumber)
+// {
+//   console.log.printf("[UTILS] EEPROM Store channel number: %d\n", channelNumber);
+//   return EEPROM.put(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber) != 0;
+// }
 
-        // int Utils::loadChannelNumber(void)
-    // {
-    //   int channelNumber = 0;
-    //   EEPROM.get(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber);
-    //   console.log.printf("[UTILS] EEPROM Load channel number: %d\n", channelNumber);
-    //   return channelNumber;
-    // }
+// int Utils::loadChannelNumber(void)
+// {
+//   int channelNumber = 0;
+//   EEPROM.get(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber);
+//   console.log.printf("[UTILS] EEPROM Load channel number: %d\n", channelNumber);
+//   return channelNumber;
+// }

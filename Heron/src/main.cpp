@@ -35,13 +35,14 @@
 #include <console.h>
 #include <gui.h>
 #include <hmi.h>
+#include <sensors.h>
 #include <utils.h>
 
 #include <QNEthernet.h>
 using namespace qindesign::network;
 
-#include <OSFS.h>
 #include <EEPROM.h>
+#include <OSFS.h>
 
 // #include <Preferences.h>
 // Preferences prefs;
@@ -68,24 +69,29 @@ static AudioUtils audio;
 static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_BL, TCH_IRQ);
 static Hmi hmi(RGB_LED, HMI_BUZZER);
+static Sensors sensors;
 
 
 uint16_t OSFS::startOfEEPROM = 1;
 uint16_t OSFS::endOfEEPROM = 4096;
 
-void OSFS::readNBytes(uint16_t address, unsigned int num, byte* output) {
-	for (uint16_t i = address; i < address + num; i++) {
-		*output = EEPROM.read(i);
-		output++;
-	}
+void OSFS::readNBytes(uint16_t address, unsigned int num, byte* output)
+{
+  for(uint16_t i = address; i < address + num; i++)
+  {
+    *output = EEPROM.read(i);
+    output++;
+  }
 }
 
 // 4) How to I write to the medium?
-void OSFS::writeNBytes(uint16_t address, unsigned int num, const byte* input) {
-	for (uint16_t i = address; i < address + num; i++) {
-		EEPROM.update(i, *input);
-		input++;
-	}
+void OSFS::writeNBytes(uint16_t address, unsigned int num, const byte* input)
+{
+  for(uint16_t i = address; i < address + num; i++)
+  {
+    EEPROM.update(i, *input);
+    input++;
+  }
 }
 
 
@@ -96,6 +102,7 @@ void setup()
   utils.begin();
   audio.begin();
   hmi.begin(utils);
+  sensors.begin(utils);
   gui.begin(utils);
 
   IPAddress ip(192, 168, 40, 80);
@@ -137,11 +144,11 @@ void setup()
   {
     console.warning.println("[MAIN] Counter not found, creating now...");
     counter = 1;    // default to 1
-    OSFS::newFile("counter", counter);  
+    OSFS::newFile("counter", counter);
   }
   console.log.printf("Reboot count: %d\n", counter);
   counter++;
-  OSFS::newFile("counter", counter, true);  // overwrite existing file
+  OSFS::newFile("counter", counter, true);    // overwrite existing file
 
   // console.log.println(F("Storing a string"));
   // char testStr[15] = "this is a test";
@@ -174,6 +181,8 @@ void loop()
   if(millis() - t > 1000)
   {
     t = millis();
-    console.log.printf("[MAIN] Time: %d\n", t);
+    // console.log.printf("[MAIN] Time: %d\n", t);
+
+    console.log.printf("[MAIN] Heading: %.1f, Pitch: %.1f, Roll: %.1f\n", sensors.getHeading(), sensors.getPitch(), sensors.getRoll());
   }
 }

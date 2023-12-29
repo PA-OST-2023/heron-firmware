@@ -213,6 +213,29 @@ static void screen_compass_event_handler (lv_event_t *e)
 		break;
 	}
 }
+static void screen_compass_btn_calib_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_compass_calib_del == true) {
+	          setup_scr_screen_compass_calib(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_compass_calib, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, true);
+	        guider_ui.screen_compass_del = true;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
 static void screen_compass_btn_back_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -239,7 +262,35 @@ static void screen_compass_btn_back_event_handler (lv_event_t *e)
 void events_init_screen_compass(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->screen_compass, screen_compass_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_compass_btn_calib, screen_compass_btn_calib_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_compass_btn_back, screen_compass_btn_back_event_handler, LV_EVENT_ALL, NULL);
+}
+static void screen_compass_calib_btn_back_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_compass_del == true) {
+	          setup_scr_screen_compass(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_compass, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, true);
+	        guider_ui.screen_compass_calib_del = true;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
+void events_init_screen_compass_calib(lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->screen_compass_calib_btn_back, screen_compass_calib_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
 
 void events_init(lv_ui *ui)
