@@ -65,11 +65,35 @@ static void screen_home_btn_ethernet_event_handler (lv_event_t *e)
 		break;
 	}
 }
+static void screen_home_btn_compass_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_compass_del == true) {
+	          setup_scr_screen_compass(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_compass, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, false);
+	        guider_ui.screen_home_del = false;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
 void events_init_screen_home(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->screen_home_btn_ethernet, screen_home_btn_ethernet_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_home_btn_compass, screen_home_btn_compass_event_handler, LV_EVENT_ALL, NULL);
 }
-static void screen_ethernet_btn_config_event_handler (lv_event_t *e)
+static void screen_ethernet_btn_setup_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
 
@@ -117,15 +141,15 @@ static void screen_ethernet_btn_back_event_handler (lv_event_t *e)
 }
 void events_init_screen_ethernet(lv_ui *ui)
 {
-	lv_obj_add_event_cb(ui->screen_ethernet_btn_config, screen_ethernet_btn_config_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_ethernet_btn_setup, screen_ethernet_btn_setup_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_ethernet_btn_back, screen_ethernet_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
-static void screen_ethernet_setup_btn_config_event_handler (lv_event_t *e)
+static void screen_ethernet_setup_btn_confirm_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
 
 	switch (code) {
-	case LV_EVENT_CLICKED:
+	case LV_EVENT_RELEASED:
 	{
 		//Write the load screen code.
 	    lv_obj_t * act_scr = lv_scr_act();
@@ -170,8 +194,52 @@ static void screen_ethernet_setup_btn_back_event_handler (lv_event_t *e)
 }
 void events_init_screen_ethernet_setup(lv_ui *ui)
 {
-	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_config, screen_ethernet_setup_btn_config_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_confirm, screen_ethernet_setup_btn_confirm_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_back, screen_ethernet_setup_btn_back_event_handler, LV_EVENT_ALL, NULL);
+}
+static void screen_compass_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_SCREEN_LOADED:
+	{
+		lv_obj_set_style_transform_pivot_x(guider_ui.screen_compass_label_needle, 8, 0);
+	lv_obj_set_style_transform_pivot_y(guider_ui.screen_compass_label_needle, 49, 0);
+	//lv_obj_set_style_transform_angle(guider_ui.screen_compass_label_needle, 1800, 0);
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_compass_btn_back_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_home_del == true) {
+	          setup_scr_screen_home(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, true);
+	        guider_ui.screen_compass_del = true;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
+void events_init_screen_compass(lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->screen_compass, screen_compass_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_compass_btn_back, screen_compass_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
 
 void events_init(lv_ui *ui)

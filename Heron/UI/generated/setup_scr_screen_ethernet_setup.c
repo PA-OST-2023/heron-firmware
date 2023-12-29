@@ -25,50 +25,116 @@ void setup_scr_screen_ethernet_setup(lv_ui *ui)
 	lv_obj_set_style_bg_opa(ui->screen_ethernet_setup, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_color(ui->screen_ethernet_setup, lv_color_hex(0x101418), LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_ethernet_setup_btn_config
-	ui->screen_ethernet_setup_btn_config = lv_btn_create(ui->screen_ethernet_setup);
-	ui->screen_ethernet_setup_btn_config_label = lv_label_create(ui->screen_ethernet_setup_btn_config);
-	lv_label_set_text(ui->screen_ethernet_setup_btn_config_label, "");
-	lv_label_set_long_mode(ui->screen_ethernet_setup_btn_config_label, LV_LABEL_LONG_WRAP);
-	lv_obj_align(ui->screen_ethernet_setup_btn_config_label, LV_ALIGN_LEFT_MID, 0, 0);
-	lv_obj_set_style_pad_all(ui->screen_ethernet_setup_btn_config, 0, LV_STATE_DEFAULT);
-	lv_obj_set_pos(ui->screen_ethernet_setup_btn_config, 0, 200);
-	lv_obj_set_size(ui->screen_ethernet_setup_btn_config, 240, 40);
+	//Write codes screen_ethernet_setup_label_dot_2
+	ui->screen_ethernet_setup_label_dot_2 = lv_label_create(ui->screen_ethernet_setup);
+	lv_label_set_text(ui->screen_ethernet_setup_label_dot_2, ".");
+	lv_label_set_long_mode(ui->screen_ethernet_setup_label_dot_2, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_ethernet_setup_label_dot_2, 169, 116);
+	lv_obj_set_size(ui->screen_ethernet_setup_label_dot_2, 16, 16);
 
-	//Write style for screen_ethernet_setup_btn_config, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screen_ethernet_setup_btn_config, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screen_ethernet_setup_btn_config, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screen_ethernet_setup_btn_config, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_opa(ui->screen_ethernet_setup_btn_config, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_color(ui->screen_ethernet_setup_btn_config, lv_color_hex(0x00c92c), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_side(ui->screen_ethernet_setup_btn_config, LV_BORDER_SIDE_TOP, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_ethernet_setup_btn_config, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_ethernet_setup_btn_config, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_ethernet_setup_btn_config, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_ethernet_setup_btn_config, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screen_ethernet_setup_btn_config, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screen_ethernet_setup_label_dot_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_ethernet_setup_label_dot_2, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_setup_label_dot_2, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_ethernet_setup_label_dot_2, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_setup_label_dot_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_ethernet_setup_label_setup
-	ui->screen_ethernet_setup_label_setup = lv_label_create(ui->screen_ethernet_setup);
-	lv_label_set_text(ui->screen_ethernet_setup_label_setup, "Confirm");
-	lv_label_set_long_mode(ui->screen_ethernet_setup_label_setup, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_ethernet_setup_label_setup, 60, 210);
-	lv_obj_set_size(ui->screen_ethernet_setup_label_setup, 120, 18);
+	//Write codes screen_ethernet_setup_label_dot_1
+	ui->screen_ethernet_setup_label_dot_1 = lv_label_create(ui->screen_ethernet_setup);
+	lv_label_set_text(ui->screen_ethernet_setup_label_dot_1, ".");
+	lv_label_set_long_mode(ui->screen_ethernet_setup_label_dot_1, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_ethernet_setup_label_dot_1, 112, 116);
+	lv_obj_set_size(ui->screen_ethernet_setup_label_dot_1, 16, 16);
 
-	//Write style for screen_ethernet_setup_label_setup, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_ethernet_setup_label_setup, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_ethernet_setup_label_setup, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screen_ethernet_setup_label_setup, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_ethernet_setup_label_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screen_ethernet_setup_label_dot_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_ethernet_setup_label_dot_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_setup_label_dot_1, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_ethernet_setup_label_dot_1, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_setup_label_dot_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_ethernet_setup_label_dot_0
+	ui->screen_ethernet_setup_label_dot_0 = lv_label_create(ui->screen_ethernet_setup);
+	lv_label_set_text(ui->screen_ethernet_setup_label_dot_0, ".");
+	lv_label_set_long_mode(ui->screen_ethernet_setup_label_dot_0, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_ethernet_setup_label_dot_0, 55, 116);
+	lv_obj_set_size(ui->screen_ethernet_setup_label_dot_0, 16, 16);
+
+	//Write style for screen_ethernet_setup_label_dot_0, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_ethernet_setup_label_dot_0, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_setup_label_dot_0, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_ethernet_setup_label_dot_0, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_setup_label_dot_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_ethernet_setup_btn_confirm
+	ui->screen_ethernet_setup_btn_confirm = lv_btn_create(ui->screen_ethernet_setup);
+	ui->screen_ethernet_setup_btn_confirm_label = lv_label_create(ui->screen_ethernet_setup_btn_confirm);
+	lv_label_set_text(ui->screen_ethernet_setup_btn_confirm_label, "");
+	lv_label_set_long_mode(ui->screen_ethernet_setup_btn_confirm_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->screen_ethernet_setup_btn_confirm_label, LV_ALIGN_LEFT_MID, 0, 0);
+	lv_obj_set_style_pad_all(ui->screen_ethernet_setup_btn_confirm, 0, LV_STATE_DEFAULT);
+	lv_obj_set_pos(ui->screen_ethernet_setup_btn_confirm, 0, 200);
+	lv_obj_set_size(ui->screen_ethernet_setup_btn_confirm, 240, 40);
+
+	//Write style for screen_ethernet_setup_btn_confirm, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_setup_btn_confirm, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_ethernet_setup_btn_confirm, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_ethernet_setup_btn_confirm, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screen_ethernet_setup_btn_confirm, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screen_ethernet_setup_btn_confirm, lv_color_hex(0x00c92c), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screen_ethernet_setup_btn_confirm, LV_BORDER_SIDE_TOP, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_setup_btn_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_setup_btn_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_ethernet_setup_btn_confirm, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_setup_btn_confirm, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_ethernet_setup_btn_confirm, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_ethernet_setup_label_confirm
+	ui->screen_ethernet_setup_label_confirm = lv_label_create(ui->screen_ethernet_setup);
+	lv_label_set_text(ui->screen_ethernet_setup_label_confirm, "Confirm");
+	lv_label_set_long_mode(ui->screen_ethernet_setup_label_confirm, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_ethernet_setup_label_confirm, 60, 210);
+	lv_obj_set_size(ui->screen_ethernet_setup_label_confirm, 120, 18);
+
+	//Write style for screen_ethernet_setup_label_confirm, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_ethernet_setup_label_confirm, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_setup_label_confirm, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_ethernet_setup_label_confirm, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_setup_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Write codes screen_ethernet_setup_btn_back
 	ui->screen_ethernet_setup_btn_back = lv_btn_create(ui->screen_ethernet_setup);

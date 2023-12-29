@@ -50,8 +50,8 @@ typedef struct
 	lv_obj_t *screen_home_label_current_time;
 	lv_obj_t *screen_ethernet;
 	bool screen_ethernet_del;
-	lv_obj_t *screen_ethernet_btn_config;
-	lv_obj_t *screen_ethernet_btn_config_label;
+	lv_obj_t *screen_ethernet_btn_setup;
+	lv_obj_t *screen_ethernet_btn_setup_label;
 	lv_obj_t *screen_ethernet_label_setup;
 	lv_obj_t *screen_ethernet_btn_back;
 	lv_obj_t *screen_ethernet_btn_back_label;
@@ -65,9 +65,12 @@ typedef struct
 	lv_obj_t *screen_ethernet_label_speed_title;
 	lv_obj_t *screen_ethernet_setup;
 	bool screen_ethernet_setup_del;
-	lv_obj_t *screen_ethernet_setup_btn_config;
-	lv_obj_t *screen_ethernet_setup_btn_config_label;
-	lv_obj_t *screen_ethernet_setup_label_setup;
+	lv_obj_t *screen_ethernet_setup_label_dot_2;
+	lv_obj_t *screen_ethernet_setup_label_dot_1;
+	lv_obj_t *screen_ethernet_setup_label_dot_0;
+	lv_obj_t *screen_ethernet_setup_btn_confirm;
+	lv_obj_t *screen_ethernet_setup_btn_confirm_label;
+	lv_obj_t *screen_ethernet_setup_label_confirm;
 	lv_obj_t *screen_ethernet_setup_btn_back;
 	lv_obj_t *screen_ethernet_setup_btn_back_label;
 	lv_obj_t *screen_ethernet_setup_label_back;
@@ -82,6 +85,22 @@ typedef struct
 	lv_obj_t *screen_ethernet_setup_cont_confirmed_background;
 	lv_obj_t *screen_ethernet_setup_cont_confirmed;
 	lv_obj_t *screen_ethernet_setup_label_confirmed;
+	lv_obj_t *screen_compass;
+	bool screen_compass_del;
+	lv_obj_t *screen_compass_btn_calib;
+	lv_obj_t *screen_compass_btn_calib_label;
+	lv_obj_t *screen_compass_label_calib;
+	lv_obj_t *screen_compass_btn_back;
+	lv_obj_t *screen_compass_btn_back_label;
+	lv_obj_t *screen_compass_label_back;
+	lv_obj_t *screen_compass_label_title;
+	lv_obj_t *screen_compass_canvas_compass;
+	lv_obj_t *screen_compass_label_heading;
+	lv_obj_t *screen_compass_label_pitch;
+	lv_obj_t *screen_compass_label_roll;
+	lv_obj_t *screen_compass_label_east;
+	lv_obj_t *screen_compass_label_west;
+	lv_obj_t *screen_compass_label_needle;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);
@@ -93,6 +112,7 @@ void setup_scr_screen_bootup(lv_ui *ui);
 void setup_scr_screen_home(lv_ui *ui);
 void setup_scr_screen_ethernet(lv_ui *ui);
 void setup_scr_screen_ethernet_setup(lv_ui *ui);
+void setup_scr_screen_compass(lv_ui *ui);
 LV_IMG_DECLARE(_Heron_alpha_100x100);
 
 LV_FONT_DECLARE(lv_font_MontserratRegular_20)
@@ -105,6 +125,7 @@ LV_FONT_DECLARE(lv_font_FontAwesome5ProSolid_900_16)
 LV_FONT_DECLARE(lv_font_FontAwesome5_15)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_16)
 LV_FONT_DECLARE(lv_font_montserratMedium_14)
+LV_FONT_DECLARE(lv_font_FontAwesome5ProSolid_900_10)
 
 
 #ifdef __cplusplus

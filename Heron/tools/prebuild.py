@@ -114,6 +114,15 @@ def addFlashmemToScreens(dir):
                 lines.insert(i, "FLASHMEM ")
                 break
 
+        # search for the line which starts with "static lv_color_t" and add "DMAMEM" before it -> TODO: Check if EXTMEM is needed here
+        for i, line in enumerate(lines):
+            if line.strip().startswith('static lv_color_t'):
+                spaces = line.split("static")[0]
+                lineStripped = line.strip()
+                lines.remove(line)
+                lines.insert(i, f"{spaces}DMAMEM {lineStripped}\n")
+                break
+
         with open(Path(dir).resolve() / screen, "w", encoding="utf8") as f:
             f.writelines(lines)
 

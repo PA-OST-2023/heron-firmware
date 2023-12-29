@@ -26,28 +26,28 @@ FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 	lv_obj_set_style_bg_opa(ui->screen_ethernet, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_color(ui->screen_ethernet, lv_color_hex(0x101418), LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_ethernet_btn_config
-	ui->screen_ethernet_btn_config = lv_btn_create(ui->screen_ethernet);
-	ui->screen_ethernet_btn_config_label = lv_label_create(ui->screen_ethernet_btn_config);
-	lv_label_set_text(ui->screen_ethernet_btn_config_label, "");
-	lv_label_set_long_mode(ui->screen_ethernet_btn_config_label, LV_LABEL_LONG_WRAP);
-	lv_obj_align(ui->screen_ethernet_btn_config_label, LV_ALIGN_LEFT_MID, 0, 0);
-	lv_obj_set_style_pad_all(ui->screen_ethernet_btn_config, 0, LV_STATE_DEFAULT);
-	lv_obj_set_pos(ui->screen_ethernet_btn_config, 0, 200);
-	lv_obj_set_size(ui->screen_ethernet_btn_config, 240, 40);
+	//Write codes screen_ethernet_btn_setup
+	ui->screen_ethernet_btn_setup = lv_btn_create(ui->screen_ethernet);
+	ui->screen_ethernet_btn_setup_label = lv_label_create(ui->screen_ethernet_btn_setup);
+	lv_label_set_text(ui->screen_ethernet_btn_setup_label, "");
+	lv_label_set_long_mode(ui->screen_ethernet_btn_setup_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->screen_ethernet_btn_setup_label, LV_ALIGN_LEFT_MID, 0, 0);
+	lv_obj_set_style_pad_all(ui->screen_ethernet_btn_setup, 0, LV_STATE_DEFAULT);
+	lv_obj_set_pos(ui->screen_ethernet_btn_setup, 0, 200);
+	lv_obj_set_size(ui->screen_ethernet_btn_setup, 240, 40);
 
-	//Write style for screen_ethernet_btn_config, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screen_ethernet_btn_config, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screen_ethernet_btn_config, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screen_ethernet_btn_config, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_opa(ui->screen_ethernet_btn_config, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_color(ui->screen_ethernet_btn_config, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_side(ui->screen_ethernet_btn_config, LV_BORDER_SIDE_TOP, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_ethernet_btn_config, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_ethernet_btn_config, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_ethernet_btn_config, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_ethernet_btn_config, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screen_ethernet_btn_config, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screen_ethernet_btn_setup, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_btn_setup, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_ethernet_btn_setup, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_ethernet_btn_setup, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screen_ethernet_btn_setup, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screen_ethernet_btn_setup, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screen_ethernet_btn_setup, LV_BORDER_SIDE_TOP, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_btn_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_btn_setup, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_ethernet_btn_setup, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_btn_setup, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_ethernet_btn_setup, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Write codes screen_ethernet_label_setup
 	ui->screen_ethernet_label_setup = lv_label_create(ui->screen_ethernet);
