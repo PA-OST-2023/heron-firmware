@@ -42,6 +42,11 @@
 #include <lvgl.h>
 #include <utils.h>
 
+#include <audioUtils.h>
+#include <sensors.h>
+#include <hmi.h>
+
+
 #define GUI_WIRE Wire1                                              // Wire interface to use
 
 class Gui
@@ -51,7 +56,8 @@ class Gui
   static constexpr const uint32_t SCREEN_HEIGHT = 240;
   static constexpr const uint32_t SCREEN_BUFFER_HEIGHT = 120;
   static constexpr const uint32_t AUDIO_CHANNEL_COUNT = 32;
-  static constexpr const float UPDATE_RATE = 24.0;                  // Hz
+  static constexpr const float DISPLAY_REFRESH_RATE = 24.0;         // Hz
+  static constexpr const float WIDGET_UPDATE_RATE = 10.0;           // Hz
   static constexpr const size_t SPI_FREQUENCY = 60000000;           // [Hz] SPI clock
 
   typedef enum
@@ -74,7 +80,7 @@ class Gui
   } EthStatus_t;
 
   Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq);
-  bool begin(Utils& utilsRef);
+  bool begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, Sensors& sensorsRef);
   void update(void);
   bool isReady(void) { return initialized; }
   void setBrightness(int brightness) { analogWrite(bl, constrain(brightness, 0, 255)); }
@@ -86,6 +92,10 @@ class Gui
   void setEthStatus(EthStatus_t status);
   void setSystemWarning(const char* warning = nullptr);
 
+  // Screen callback functions
+  static void callbackScreenEthernetCalibrationStart(void);
+  static void callbackScreenEthernetCalibrationAbort(void);
+
  private:
   const int sclk, mosi, cs, dc, bl, tch_irq;
   GC9A01A_t3n disp = GC9A01A_t3n(cs, dc, -1, mosi, sclk);
@@ -94,6 +104,7 @@ class Gui
   static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
   volatile bool initialized = false;
 
+  // Screen Home
   char bufferTime[10];
   bool flagTime = false, flagDate = false;
   uint16_t year = 0xFFFF;
@@ -111,7 +122,18 @@ class Gui
   char warningText[50];
   bool flagWarning = false;
 
+  // Screen Ethernet
+
+
+  // Screen update functions
+  void updateScreenEthernet(void);
+  void updateScreenCompass(void);
+  void updateScreenCompassCalibrate(void);
+
   static Utils* utils;
+  static Hmi* hmi;
+  static AudioUtils* audioUtils;
+  static Sensors* sensors;
   static void lvglPrint(const char* buf);
   static void dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p);
   static void touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data);

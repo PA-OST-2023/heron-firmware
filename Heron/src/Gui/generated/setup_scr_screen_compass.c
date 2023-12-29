@@ -138,87 +138,6 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screen_compass_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_compass_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_compass_canvas_compass
-	ui->screen_compass_canvas_compass = lv_canvas_create(ui->screen_compass);
-	DMAMEM static lv_color_t buf_screen_compass_canvas_compass[82*82*4];
-	lv_canvas_set_buffer(ui->screen_compass_canvas_compass, buf_screen_compass_canvas_compass, 82, 82, LV_IMG_CF_TRUE_COLOR_ALPHA);
-	lv_canvas_fill_bg(ui->screen_compass_canvas_compass, lv_color_hex(0xffffff), 0);
-	//Canvas draw arc
-	lv_draw_arc_dsc_t arc_dsc_0;
-	lv_draw_arc_dsc_init(&arc_dsc_0);
-	arc_dsc_0.color = lv_color_hex(0x757478);
-	arc_dsc_0.opa = 255;
-	arc_dsc_0.width = 2;
-	lv_canvas_draw_arc(ui->screen_compass_canvas_compass, 41, 41, 12, 0, 360, &arc_dsc_0);
-
-	//Canvas draw line
-	static lv_point_t points_array_1[] ={{1, 41},{31, 41},};
-	lv_draw_line_dsc_t line_dsc_1;
-	lv_draw_line_dsc_init(&line_dsc_1);
-	line_dsc_1.color = lv_color_hex(0x757478);
-	line_dsc_1.opa = 255;
-	line_dsc_1.width = 2;
-	line_dsc_1.round_start = false;
-	line_dsc_1.round_end = false;
-	lv_canvas_draw_line(ui->screen_compass_canvas_compass, points_array_1, 2, &line_dsc_1);
-
-	//Canvas draw line
-	static lv_point_t points_array_2[] ={{51, 41},{81, 41},};
-	lv_draw_line_dsc_t line_dsc_2;
-	lv_draw_line_dsc_init(&line_dsc_2);
-	line_dsc_2.color = lv_color_hex(0x757478);
-	line_dsc_2.opa = 255;
-	line_dsc_2.width = 2;
-	line_dsc_2.round_start = false;
-	line_dsc_2.round_end = false;
-	lv_canvas_draw_line(ui->screen_compass_canvas_compass, points_array_2, 2, &line_dsc_2);
-
-	//Canvas draw line
-	static lv_point_t points_array_3[] ={{41, 1},{41, 31},};
-	lv_draw_line_dsc_t line_dsc_3;
-	lv_draw_line_dsc_init(&line_dsc_3);
-	line_dsc_3.color = lv_color_hex(0x757478);
-	line_dsc_3.opa = 255;
-	line_dsc_3.width = 2;
-	line_dsc_3.round_start = false;
-	line_dsc_3.round_end = false;
-	lv_canvas_draw_line(ui->screen_compass_canvas_compass, points_array_3, 2, &line_dsc_3);
-
-	//Canvas draw line
-	static lv_point_t points_array_4[] ={{41, 51},{41, 81},};
-	lv_draw_line_dsc_t line_dsc_4;
-	lv_draw_line_dsc_init(&line_dsc_4);
-	line_dsc_4.color = lv_color_hex(0x757478);
-	line_dsc_4.opa = 255;
-	line_dsc_4.width = 2;
-	line_dsc_4.round_start = false;
-	line_dsc_4.round_end = false;
-	lv_canvas_draw_line(ui->screen_compass_canvas_compass, points_array_4, 2, &line_dsc_4);
-
-	//Canvas draw arc
-	lv_draw_arc_dsc_t arc_dsc_5;
-	lv_draw_arc_dsc_init(&arc_dsc_5);
-	arc_dsc_5.color = lv_color_hex(0x757478);
-	arc_dsc_5.opa = 255;
-	arc_dsc_5.width = 2;
-	lv_canvas_draw_arc(ui->screen_compass_canvas_compass, 41, 41, 40, 0, 360, &arc_dsc_5);
-
-	//Canvas draw rectangle
-	lv_draw_rect_dsc_t rect_dsc_6;
-	lv_draw_rect_dsc_init(&rect_dsc_6);
-	rect_dsc_6.radius = 18;
-	rect_dsc_6.bg_opa = 255;
-	rect_dsc_6.bg_color = lv_color_hex(0x00c92c);
-	rect_dsc_6.bg_grad.dir = LV_GRAD_DIR_NONE;
-	rect_dsc_6.border_width = 3;
-	rect_dsc_6.border_opa = 255;
-	rect_dsc_6.border_color = lv_color_hex(0x00c92c);
-	lv_canvas_draw_rect(ui->screen_compass_canvas_compass, 34, 34, 14, 14, &rect_dsc_6);
-
-	lv_obj_set_pos(ui->screen_compass_canvas_compass, 79, 86);
-	lv_obj_set_size(ui->screen_compass_canvas_compass, 82, 82);
-	lv_obj_set_scrollbar_mode(ui->screen_compass_canvas_compass, LV_SCROLLBAR_MODE_OFF);
-
 	//Write codes screen_compass_label_heading
 	ui->screen_compass_label_heading = lv_label_create(ui->screen_compass);
 	lv_label_set_text(ui->screen_compass_label_heading, "Heading: 23.5°");
@@ -246,7 +165,7 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 	lv_label_set_text(ui->screen_compass_label_pitch, "Pitch: 10.5°");
 	lv_label_set_long_mode(ui->screen_compass_label_pitch, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_label_pitch, 34, 177);
-	lv_obj_set_size(ui->screen_compass_label_pitch, 80, 18);
+	lv_obj_set_size(ui->screen_compass_label_pitch, 90, 18);
 
 	//Write style for screen_compass_label_pitch, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_compass_label_pitch, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -267,8 +186,8 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 	ui->screen_compass_label_roll = lv_label_create(ui->screen_compass);
 	lv_label_set_text(ui->screen_compass_label_roll, "Roll: 10.5°");
 	lv_label_set_long_mode(ui->screen_compass_label_roll, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_compass_label_roll, 136, 177);
-	lv_obj_set_size(ui->screen_compass_label_roll, 80, 18);
+	lv_obj_set_pos(ui->screen_compass_label_roll, 133, 177);
+	lv_obj_set_size(ui->screen_compass_label_roll, 90, 18);
 
 	//Write style for screen_compass_label_roll, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_compass_label_roll, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -285,49 +204,37 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screen_compass_label_roll, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_compass_label_roll, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_compass_label_east
-	ui->screen_compass_label_east = lv_label_create(ui->screen_compass);
-	lv_label_set_text(ui->screen_compass_label_east, "E");
-	lv_label_set_long_mode(ui->screen_compass_label_east, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_compass_label_east, 165, 120);
-	lv_obj_set_size(ui->screen_compass_label_east, 20, 18);
+	//Write codes screen_compass_img_compass_background
+	ui->screen_compass_img_compass_background = lv_img_create(ui->screen_compass);
+	lv_obj_add_flag(ui->screen_compass_img_compass_background, LV_OBJ_FLAG_CLICKABLE);
+	lv_img_set_src(ui->screen_compass_img_compass_background, &_compass_background_alpha_82x82);
+	lv_img_set_pivot(ui->screen_compass_img_compass_background, 50,50);
+	lv_img_set_angle(ui->screen_compass_img_compass_background, 0);
+	lv_obj_set_pos(ui->screen_compass_img_compass_background, 79, 86);
+	lv_obj_set_size(ui->screen_compass_img_compass_background, 82, 82);
 
-	//Write style for screen_compass_label_east, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_compass_label_east, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_compass_label_east, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screen_compass_label_east, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_compass_label_east, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screen_compass_img_compass_background, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_img_opa(ui->screen_compass_img_compass_background, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_compass_label_west
-	ui->screen_compass_label_west = lv_label_create(ui->screen_compass);
-	lv_label_set_text(ui->screen_compass_label_west, "W");
-	lv_label_set_long_mode(ui->screen_compass_label_west, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_compass_label_west, 53, 120);
-	lv_obj_set_size(ui->screen_compass_label_west, 20, 18);
+	//Write codes screen_compass_cont_dot
+	ui->screen_compass_cont_dot = lv_obj_create(ui->screen_compass);
+	lv_obj_set_pos(ui->screen_compass_cont_dot, 113, 120);
+	lv_obj_set_size(ui->screen_compass_cont_dot, 14, 14);
+	lv_obj_set_scrollbar_mode(ui->screen_compass_cont_dot, LV_SCROLLBAR_MODE_OFF);
 
-	//Write style for screen_compass_label_west, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_border_width(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_compass_label_west, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_compass_label_west, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_letter_space(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screen_compass_label_west, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_opa(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_top(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_right(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_bottom(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_pad_left(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_compass_label_west, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screen_compass_cont_dot, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_compass_cont_dot, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screen_compass_cont_dot, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screen_compass_cont_dot, lv_color_hex(0x00C92C), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screen_compass_cont_dot, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_compass_cont_dot, 14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_compass_cont_dot, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_compass_cont_dot, lv_color_hex(0x00C92C), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_compass_cont_dot, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_compass_cont_dot, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_compass_cont_dot, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_compass_cont_dot, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_compass_cont_dot, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Write codes screen_compass_label_needle
 	ui->screen_compass_label_needle = lv_label_create(ui->screen_compass);
@@ -335,6 +242,7 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 	lv_label_set_long_mode(ui->screen_compass_label_needle, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_label_needle, 112, 78);
 	lv_obj_set_size(ui->screen_compass_label_needle, 17, 15);
+	lv_obj_add_flag(ui->screen_compass_label_needle, LV_OBJ_FLAG_HIDDEN);
 
 	//Write style for screen_compass_label_needle, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_compass_label_needle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

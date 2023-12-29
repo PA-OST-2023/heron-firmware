@@ -23,7 +23,7 @@ def unset_readonly(path):
 def copy_directory():
     src_dirs = [
         Path("UI/generated").resolve(),
-        Path("UI/custom").resolve()
+        Path("UI/custom").resolve(),
     ]
 
     dst_dirs = [
@@ -127,8 +127,55 @@ def addFlashmemToScreens(dir):
             f.writelines(lines)
 
 
+def addMissingWIdgetReferences(dir):
+    screenFiles = os.listdir(Path(dir).resolve())    # get all files in font directory
+    screenFiles = [file for file in screenFiles if file.startswith("setup_scr")]
+
+    widgetPointerTypes = ["lv_meter_indicator_t"]
+    additionalWidgetsPointers = []
+    for screen in screenFiles:
+        with open(Path(dir).resolve() / screen, "r", encoding="utf8") as f:
+            lines = f.readlines()
+
+        # search for the "lv_meter_indicator_t"
+        for i, line in enumerate(lines):
+            if any(line.strip().startswith(widgetType) for widgetType in widgetPointerTypes):
+                for widgetType in widgetPointerTypes:
+                    if line.strip().startswith(f"{widgetType} *"):
+                        widgetName = line.split("*")[1].split(";")[0].strip()
+                        lines.remove(line)
+                        additionalWidgetsPointers.append((widgetType, widgetName))
+
+        # add ui reference to all widgets
+        for i, line in enumerate(lines):
+            for widgetType, widgetName in additionalWidgetsPointers:        # search for each widget anywehere in the file name and place "ui->" before it
+                if widgetName in line:
+                    lines[i] = line.replace(widgetName, f"ui->{widgetName}")
+        
+        with open(Path(dir).resolve() / screen, "w", encoding="utf8") as f:
+            f.writelines(lines)
+
+    # Adding missing widget references to gui_guider.h
+    with open(Path(dir).resolve() / "gui_guider.h", "r", encoding="utf8") as f:
+        lines = f.readlines()
+        for i, line in enumerate(lines):
+            if line.strip().startswith("}lv_ui;"):  # serach for end of struct
+                for w in additionalWidgetsPointers:
+                    lines.insert(i, f"\t{w[0]} *{w[1]};\n")
+                break
+    with open(Path(dir).resolve() / "gui_guider.h", "w", encoding="utf8") as f:
+        f.writelines(lines)
+        
+
+def redefine_as_cpp(c_file):
+    cpp_file = c_file.with_suffix(".cpp")
+    os.rename(c_file, cpp_file)
+
+
 copy_directory()
 modify_flash_constants(Path("src/Gui/generated").resolve())
 addFlashmemToScreens(Path("src/Gui/generated").resolve())
+addMissingWIdgetReferences(Path("src/Gui/generated").resolve())
+redefine_as_cpp(Path("src/Gui/generated/events_init.c").resolve())
 
 # env.AddPreAction("buildprog", copy_directory())

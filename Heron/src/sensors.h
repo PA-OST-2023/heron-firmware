@@ -58,7 +58,7 @@ class Sensors
   static constexpr const size_t HEADING_UPDATE_RATE = 8;                 // [Hz] Update rate for heading readout (ignored in calibration mode)
   static constexpr const size_t CALIBRATION_UPDATE_RATE = 10;            // [Hz] Update rate for calibration
   static constexpr const size_t ACCEL_UPDATE_RATE = 5;                   // [Hz] Update rate for accelerometer
-  static constexpr const float CALIBRATION_COVERAGE_THRESHOLD = 99.0;    // [0.0 - 1.0] Threshold for calibration coverage
+  static constexpr const float CALIBRATION_COVERAGE_THRESHOLD = 98.0;    // [%] Threshold for calibration coverage
 
 
   Sensors() {}
@@ -73,6 +73,9 @@ class Sensors
   float getCalibVariance(void) { return calibVariance; }
   float getCalibWobbleError(void) { return calibWobbleError; }
   float getCalibFitError(void) { return calibFitError; }
+
+  static void update(void* parameter);
+
 
 
  private:
@@ -100,10 +103,12 @@ class Sensors
 
   volatile bool initialized = false;
 
-  static void update(void* parameter);
+  // static void update(void* parameter);
+
   float calculatePitch(float x, float y, float z);
   float calculateRoll(float x, float y, float z);
   float calculateHeading(float x, float y, float z);
+  float calculateHeadingCompensated(float x, float y, float z);
   void calibrate(float x, float y, float z);
   void calculateCalibrationQuality(void);
   bool updateAndSaveCalibration(void);

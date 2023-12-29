@@ -38,13 +38,20 @@
 DMAMEM lv_ui guider_ui;
 DMAMEM lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
 Utils* Gui::utils;
+Hmi* Gui::hmi;
+AudioUtils* Gui::audioUtils;
+Sensors* Gui::sensors;
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), bl(bl), tch_irq(tch_irq) {}
 
-FLASHMEM bool Gui::begin(Utils& utilsRef)
+FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, Sensors& sensorsRef)
 {
   bool res = true;
   utils = &utilsRef;
+  hmi = &hmiRef;
+  audioUtils = &audioUtilsRef;
+  sensors = &sensorsRef;
+
   digitalWrite(bl, LOW);
   pinMode(bl, OUTPUT);
 
@@ -75,7 +82,7 @@ FLASHMEM bool Gui::begin(Utils& utilsRef)
   disp_drv.draw_buf = &draw_buf;
   disp_drv.user_data = this;
   lv_disp_t* dispDrv = lv_disp_drv_register(&disp_drv);
-  lv_timer_set_period(dispDrv->refr_timer, 1000.0 / UPDATE_RATE);
+  lv_timer_set_period(dispDrv->refr_timer, 1000.0 / DISPLAY_REFRESH_RATE);
 
   static lv_indev_drv_t indev_drv;
   lv_indev_drv_init(&indev_drv);
@@ -157,99 +164,165 @@ void Gui::update(void)
 {
   if(!initialized)
     return;
-      // if(flagTime)
-      // {
-      //   flagTime = false;
-      //   lv_label_set_text(guider_ui.screenRecording_btn_current_time_label, bufferTime);
-      // }
-      // if(flagDate)
-      // {
-      //   flagDate = false;
-      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerDay, day - 1, LV_ANIM_OFF);
-      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerMonth, month - 1, LV_ANIM_OFF);
-      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerYear, year - 2023, LV_ANIM_OFF);
-      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerHour, hour, LV_ANIM_OFF);
-      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerMinute, minute, LV_ANIM_OFF);
-      //   lv_roller_set_selected(guider_ui.screenSetTime_rollerSecond, second, LV_ANIM_OFF);
-      // }
 
-                          // if(flagSdCardStatus)
-      // {
-      //   flagSdCardStatus = false;
-      //   uint32_t color = 0x00000000;
-      //   switch(sdCardStatus)
-      //   {
-      //     case SD_CARD_MISSING:
-      //       color = 0x00292831;
-      //       break;
-      //     case SD_CARD_ERROR:
-      //       color = 0x00FF8F00;
-      //       break;
-      //     case SD_CARD_OK:
-      //       color = 0x00FFFFFF;
-      //       break;
-      //     default:
-      //       break;
-      //   }
-      //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_sd_card, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
-      // }
-      // if(flagUsbStatus)
-      // {
-      //   flagUsbStatus = false;
-      //   uint32_t color = 0x00000000;
-      //   switch(usbStatus)
-      //   {
-      //     case USB_DISCONNECTED:
-      //       color = 0x00292831;
-      //       break;
-      //     case USB_CONNECTED:
-      //       color = 0x00FFFFFF;
-      //       break;
-      //     case USB_ACTIVE:
-      //       color = 0x0000FF00;
-      //       break;
-      //     default:
-      //       break;
-      //   }
-      //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_usb, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
-      // }
-      // if(flagEthStatus)
-      // {
-      //   flagEthStatus = false;
-      //   uint32_t color = 0x00000000;
-      //   switch(ethStatus)
-      //   {
-      //     case ETH_DISCONNECTED:
-      //       color = 0x00292831;
-      //       break;
-      //     case ETH_CONNECTED:
-      //       color = 0x00FFFFFF;
-      //       break;
-      //     case ETH_ACTIVE:
-      //       color = 0x0000FF00;
-      //       break;
-      //     default:
-      //       break;
-      //   }
-      //   lv_obj_set_style_text_color(guider_ui.screenRecording_label_ethernet, lv_color_hex(color), LV_PART_MAIN | LV_STATE_DEFAULT);
-      // }
-      // if(flagWarning)
-      // {
-      //   flagWarning = false;
-      //   if(warningText[0] != '\0')
-      //   {
-      //     lv_obj_clear_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
-      //     // lv_label_set_text(guider_ui.screenRecording_label_warning, warningText);
-      //   }
-      //   else
-      //   {
-      //     lv_obj_add_flag(guider_ui.screenRecording_btn_warning, LV_OBJ_FLAG_HIDDEN);
-      //   }
-      // }
+  static uint32_t t = 0;
+  if(millis() - t > WIDGET_UPDATE_RATE)
+  {
+    t = millis();
 
+    updateScreenEthernet();
+    updateScreenCompass();
+    updateScreenCompassCalibrate();
+  }
   lv_task_handler();
 }
 
+
+void Gui::updateScreenEthernet(void)
+{
+  if(lv_scr_act() != guider_ui.screen_ethernet)
+  {
+    return;
+  }
+
+  static float updateRate = 0.0;
+  static float bufferSize = 0.0;
+  if(updateRate != audioUtils->getDataRateMBit())
+  {
+    updateRate = audioUtils->getDataRateMBit();
+    static char buffer[14];
+    snprintf(buffer, sizeof(buffer), "%2.1f MBit/s", updateRate);
+    lv_label_set_text_static(guider_ui.screen_ethernet_label_speed, buffer);
+    lv_meter_set_indicator_end_value(guider_ui.screen_ethernet_meter_speed, guider_ui.screen_ethernet_meter_speed_scale_1_arc_1,
+                                     (int)map(constrain(updateRate, 0.0, 70.0), 0.0, 70.0, 0, 100));
+  }
+  if(bufferSize != audioUtils->getBufferFillLevelPercent())
+  {
+    bufferSize = audioUtils->getBufferFillLevelPercent();
+    static char buffer[14];
+    snprintf(buffer, sizeof(buffer), "%.0f %%", bufferSize);
+    lv_label_set_text_static(guider_ui.screen_ethernet_label_buffer, buffer);
+    lv_meter_set_indicator_end_value(guider_ui.screen_ethernet_meter_buffer, guider_ui.screen_ethernet_meter_buffer_scale_1_arc_1,
+                                     (int)map(constrain(bufferSize, 0.0, 100.0), 0.0, 100.0, 0, 100));
+  }
+}
+
+void Gui::updateScreenCompass(void)
+{
+  if(lv_scr_act() != guider_ui.screen_compass)
+  {
+    return;
+  }
+
+  static float heading = 0.0;
+  static float pitch = 0.0;
+  static float roll = 0.0;
+  static const int dotXOffset = 113, dotYOffset = 120;
+  static const float dotScale = 2.0;    // Pixels per degree
+
+  float headingInverted = 360.0 - sensors->getHeading();
+  if(heading != headingInverted)
+  {
+    heading = headingInverted;
+    static char buffer[20];
+    snprintf(buffer, sizeof(buffer), "Heading: %.1f°", heading);
+    lv_label_set_text_static(guider_ui.screen_compass_label_heading, buffer);
+    lv_obj_set_style_transform_angle(guider_ui.screen_compass_label_needle, (int)(heading * 10.0), 0);
+    lv_obj_invalidate(guider_ui.screen_compass_img_compass_background);    // Invalidate compass backrgound
+  }
+  if(pitch != sensors->getPitch() || roll != sensors->getRoll())
+  {
+    pitch = sensors->getPitch();
+    roll = sensors->getRoll();
+
+    static char bufferPitch[20];
+    snprintf(bufferPitch, sizeof(bufferPitch), "Pitch: %.1f°", pitch);
+    lv_label_set_text_static(guider_ui.screen_compass_label_pitch, bufferPitch);
+
+    static char bufferRoll[20];
+    snprintf(bufferRoll, sizeof(bufferRoll), "Roll: %.1f°", roll);
+    lv_label_set_text_static(guider_ui.screen_compass_label_roll, bufferRoll);
+
+    int newX = dotXOffset - (int)(roll * dotScale);
+    int newY = dotYOffset - (int)(pitch * dotScale);
+    int dist = sqrt((newX - dotXOffset) * (newX - dotXOffset) + (newY - dotYOffset) * (newY - dotYOffset));
+
+    if(dist > 30)    // If the distance is greater than 30 pixels, scale the x and y positions accordingly
+    {
+      newX = dotXOffset + (newX - dotXOffset) * 30 / dist;
+      newY = dotYOffset + (newY - dotYOffset) * 30 / dist;
+    }
+    lv_color_t color = (dist < 5) ? lv_color_hex(0x00C92C) : lv_color_hex(0xFF0000);    // Green if inside small circle, red otherwise
+    lv_obj_set_style_border_color(guider_ui.screen_compass_cont_dot, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(guider_ui.screen_compass_cont_dot, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_pos(guider_ui.screen_compass_cont_dot, newX, newY);
+  }
+}
+
+void Gui::updateScreenCompassCalibrate(void)
+{
+  if(lv_scr_act() != guider_ui.screen_compass_calib)
+  {
+    return;
+  }
+
+  static float calibCoverage = 0.0;
+  static float calibVariance = 0.0;
+  static float calibWobbleError = 0.0;
+  static float calibFitError = 0.0;
+  // static bool calibRunning = false;
+  // static bool calibDone = false;
+
+  if(calibCoverage != sensors->getCalibCoverage())
+  {
+    calibCoverage = sensors->getCalibCoverage();
+    static char buffer[10];
+    snprintf(buffer, sizeof(buffer), "%.0f %%", calibCoverage);
+    lv_label_set_text_static(guider_ui.screen_compass_calib_label_coverage, buffer);
+    lv_meter_set_indicator_end_value(guider_ui.screen_compass_calib_meter_coverage, guider_ui.screen_compass_calib_meter_coverage_scale_1_arc_1,
+                                     (int)map(constrain(calibCoverage, 0.0, 100.0), 0.0, 100.0, 0, 100));
+  }
+  if(calibWobbleError != sensors->getCalibWobbleError())
+  {
+    calibWobbleError = sensors->getCalibWobbleError();
+    static char buffer[25];
+    snprintf(buffer, sizeof(buffer), "Wobble Error: %.1f %%", calibWobbleError);
+    lv_label_set_text_static(guider_ui.screen_compass_calib_label_wobble_error, buffer);
+  }
+  if(calibFitError != sensors->getCalibFitError())
+  {
+    calibFitError = sensors->getCalibFitError();
+    static char buffer[25];
+    snprintf(buffer, sizeof(buffer), "Fit Error: %.1f %%", calibFitError);
+    lv_label_set_text_static(guider_ui.screen_compass_calib_label_fit_error, buffer);
+  }
+  if(calibVariance != sensors->getCalibVariance())
+  {
+    calibVariance = sensors->getCalibVariance();
+    static char buffer[20];
+    snprintf(buffer, sizeof(buffer), "Variance: %.1f", calibVariance);
+    lv_label_set_text_static(guider_ui.screen_compass_calib_label_variance, buffer);
+  }
+
+  // TODO: Check if calibration is finished
+}
+
+
+// Screen callback functions
+void Gui::callbackScreenEthernetCalibrationStart(void)
+{
+  console.log.println("[GUI] [CALLBACK] Starting calibration");
+  sensors->startCalibration();
+}
+
+void Gui::callbackScreenEthernetCalibrationAbort(void)
+{
+  console.log.println("[GUI] [CALLBACK] Aborting calibration");
+  sensors->abortCalibration();
+}
+
+
+// Internal functions
 
 void Gui::lvglPrint(const char* buf)
 {
@@ -263,7 +336,7 @@ void Gui::dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* c
   gui->disp.writeRect(area->x1, area->y1, (area->x2 - area->x1 + 1), (area->y2 - area->y1 + 1), (uint16_t*)color_p);
   gui->disp.updateScreenAsync();    // DMA the stuff to the screen
   lv_disp_flush_ready(dispDrv);
-  if(firstFlush)                    // Turn on backlight after first flush
+  if(firstFlush)    // Turn on backlight after first flush
   {
     firstFlush = false;
     gui->setBrightness(255);

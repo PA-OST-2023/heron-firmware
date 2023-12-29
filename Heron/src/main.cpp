@@ -103,7 +103,7 @@ void setup()
   audio.begin();
   hmi.begin(utils);
   sensors.begin(utils);
-  gui.begin(utils);
+  gui.begin(utils, hmi, audio, sensors);
 
   IPAddress ip(192, 168, 40, 80);
   IPAddress subnet(255, 255, 255, 0);
@@ -177,12 +177,19 @@ void loop()
   utils.update();
   Ethernet.loop();
 
+  static uint32_t sensorT = 0;
+  if(millis() - sensorT > 10)
+  {
+    sensorT = millis();
+    sensors.update(&sensors);    // TODO: Remove and run in thread
+  }
+
   static uint32_t t = 0;
   if(millis() - t > 1000)
   {
     t = millis();
     // console.log.printf("[MAIN] Time: %d\n", t);
 
-    console.log.printf("[MAIN] Heading: %.1f, Pitch: %.1f, Roll: %.1f\n", sensors.getHeading(), sensors.getPitch(), sensors.getRoll());
+    // console.log.printf("[MAIN] Heading: %.1f, Pitch: %.1f, Roll: %.1f\n", sensors.getHeading(), sensors.getPitch(), sensors.getRoll());
   }
 }

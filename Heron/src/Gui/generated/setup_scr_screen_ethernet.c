@@ -167,16 +167,14 @@ FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 	lv_meter_set_scale_ticks(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 2, 1, 1, lv_color_hex(0x101418));
 
 	// add arc for screen_ethernet_meter_buffer_scale_1
-	lv_meter_indicator_t *screen_ethernet_meter_buffer_scale_1_arc_0;
-	screen_ethernet_meter_buffer_scale_1_arc_0 = lv_meter_add_arc(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 10, lv_color_hex(0x757478), -1);
-	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1_arc_0, 0);
-	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1_arc_0, 100);
+	ui->screen_ethernet_meter_buffer_scale_1_arc_0 = lv_meter_add_arc(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 10, lv_color_hex(0x757478), -1);
+	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_0, 0);
+	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_0, 100);
 
 	// add arc for screen_ethernet_meter_buffer_scale_1
-	lv_meter_indicator_t *screen_ethernet_meter_buffer_scale_1_arc_1;
-	screen_ethernet_meter_buffer_scale_1_arc_1 = lv_meter_add_arc(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 10, lv_color_hex(0x2195f6), -1);
-	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1_arc_1, 0);
-	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1_arc_1, 20);
+	ui->screen_ethernet_meter_buffer_scale_1_arc_1 = lv_meter_add_arc(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 10, lv_color_hex(0x2195f6), -1);
+	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_1, 0);
+	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_1, 20);
 	lv_obj_set_pos(ui->screen_ethernet_meter_buffer, 130, 74);
 	lv_obj_set_size(ui->screen_ethernet_meter_buffer, 85, 85);
 
@@ -244,16 +242,14 @@ FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 	lv_meter_set_scale_ticks(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 2, 1, 1, lv_color_hex(0x101418));
 
 	// add arc for screen_ethernet_meter_speed_scale_1
-	lv_meter_indicator_t *screen_ethernet_meter_speed_scale_1_arc_0;
-	screen_ethernet_meter_speed_scale_1_arc_0 = lv_meter_add_arc(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 10, lv_color_hex(0x757478), -1);
-	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1_arc_0, 0);
-	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1_arc_0, 100);
+	ui->screen_ethernet_meter_speed_scale_1_arc_0 = lv_meter_add_arc(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 10, lv_color_hex(0x757478), -1);
+	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_0, 0);
+	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_0, 100);
 
 	// add arc for screen_ethernet_meter_speed_scale_1
-	lv_meter_indicator_t *screen_ethernet_meter_speed_scale_1_arc_1;
-	screen_ethernet_meter_speed_scale_1_arc_1 = lv_meter_add_arc(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 10, lv_color_hex(0xD200AC), -1);
-	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1_arc_1, 0);
-	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1_arc_1, 20);
+	ui->screen_ethernet_meter_speed_scale_1_arc_1 = lv_meter_add_arc(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 10, lv_color_hex(0xD200AC), -1);
+	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_1, 0);
+	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_1, 20);
 	lv_obj_set_pos(ui->screen_ethernet_meter_speed, 25, 74);
 	lv_obj_set_size(ui->screen_ethernet_meter_speed, 85, 85);
 

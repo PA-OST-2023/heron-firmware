@@ -46,11 +46,14 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
     console.error.println("[SENSORS] Magnetometer could not be initialized");
     res = false;
   }
+  mag.setDataRate(lis2mdl_rate_t::LIS2MDL_RATE_20_HZ);
   if(!accel.begin(ADDR_ACCELEROMETER, &SENSOR_WIRE))
   {
     console.error.println("[SENSORS] Accelerometer could not be initialized");
     res = false;
   }
+  accel.setRange(lsm303_accel_range_t::LSM303_RANGE_2G);
+  // accel.setMode(lsm303_accel_mode_t::LSM303_MODE_HIGH_RESOLUTION);
   utils->unlockWire(SENSOR_WIRE);
 
   raw_data_reset();    // Reset calibration stack
@@ -58,7 +61,7 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
   // TODO: Load calibration data from Preferences (set to default values if not available)
 
   initialized = true;
-  threads.addThread(update, (void*)this, 4096);
+  // threads.addThread(update, (void*)this, 4096);
   console.ok.println("[SENORS] Initialized");
 
   return res;
@@ -67,7 +70,7 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
 void Sensors::update(void* parameter)
 {
   Sensors* ref = (Sensors*)parameter;
-  while(ref->initialized)
+  //while(ref->initialized)
   {
     if(ref->calibrationAborted)
     {
@@ -90,6 +93,19 @@ void Sensors::update(void* parameter)
       console.log.println("[SENSORS] Starting magnetometer calibration...");
     }
 
+    // static uint32_t tAcc = 0;
+    // if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
+    // {
+    //   tAcc = millis();
+    //   if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
+    //   {
+    //     float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
+    //     ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
+    //     float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
+    //     ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
+    //   }
+    // }
+
     // ref->utils->lockWire(SENSOR_WIRE);
     static uint32_t tMag = 0;
     if(!ref->calibrationRunning)    // Normal operation
@@ -99,7 +115,7 @@ void Sensors::update(void* parameter)
         tMag = millis();
         if(ref->mag.getEvent(&ref->mag_event))    // Check if magnetometer has new data
         {
-          float heading = ref->calculateHeading(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);
+          float heading = ref->calculateHeadingCompensated(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);
           ref->heading = (ref->HEADING_FILTER_ALPHA * heading) + ((1.0 - ref->HEADING_FILTER_ALPHA) * ref->heading);
         }
       }
@@ -111,12 +127,12 @@ void Sensors::update(void* parameter)
       {
         ref->calibrate(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);
 
-        ref->calibCoverage = 100.0 - constrain(quality_surface_gap_error(), 0.0, 100.0);
+        ref->calibCoverage = constrain(map(quality_surface_gap_error(), CALIBRATION_COVERAGE_THRESHOLD, 0.0, 0.0, 100.0), 0.0, 100.0);
         ref->calibFitError = constrain(quality_spherical_fit_error(), 0.0, 100.0);
         ref->calibWobbleError = constrain(quality_wobble_error(), 0.0, 100.0);
         ref->calibVariance = quality_magnitude_variance_error();
 
-        if(ref->calibCoverage >= CALIBRATION_COVERAGE_THRESHOLD)
+        if(ref->calibCoverage >= 99.0)    // Scaled coverage goes from 0 to 100 % (CALIBRATION_COVERAGE_THRESHOLD)
         {
           console.ok.println("[SENSORS] Calibration completed!");
           ref->calibrationDone = true;
@@ -132,22 +148,9 @@ void Sensors::update(void* parameter)
         }
       }
     }
-
-    static uint32_t tAcc = 0;
-    if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
-    {
-      tAcc = millis();
-      if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
-      {
-        float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-        ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
-        float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-        ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
-      }
-    }
     // ref->utils->unlockWire(SENSOR_WIRE);
 
-    threads.delay(1000.0 / UPDATE_RATE);
+    // threads.delay(1000.0 / UPDATE_RATE);
   }
 }
 
@@ -169,11 +172,11 @@ float Sensors::calculateHeading(float x, float y, float z)
   static float hi_cal[3];
   static float heading = 0;
 
-  for(uint8_t i = 0; i < 3; i++)      // Apply hard-iron offsets
+  for(uint8_t i = 0; i < 3; i++)    // Apply hard-iron offsets
   {
     hi_cal[i] = mag_data[i] - hardIron[i];
   }
-  for(uint8_t i = 0; i < 3; i++)      // Apply soft-iron scaling
+  for(uint8_t i = 0; i < 3; i++)    // Apply soft-iron scaling
   {
     mag_data[i] = (softIron[i][0] * hi_cal[0]) + (softIron[i][1] * hi_cal[1]) + (softIron[i][2] * hi_cal[2]);
   }
@@ -183,6 +186,27 @@ float Sensors::calculateHeading(float x, float y, float z)
   if(heading < 0)                     // Convert heading to 0..360 degrees
   {
     heading += 360;
+  }
+  return heading;
+}
+
+float Sensors::calculateHeadingCompensated(float x, float y, float z)
+{
+  float pitchRad = pitch * M_PI / 180.0;    // Convert pitch and roll angles to radians
+  float rollRad = roll * M_PI / 180.0;
+
+  // Adjust the x, y, and z components of the magnetic field vector for pitch and roll
+  float xh = x * cosf(pitchRad) + z * sinf(pitchRad);
+  float yh = x * sinf(rollRad) * sinf(pitchRad) + y * cosf(rollRad) - z * sinf(rollRad) * cosf(pitchRad);
+  float heading = atan2f(yh, xh) * 180.0 / M_PI;    // Calculate the heading
+  heading += MAGNETIC_DECLINATION;                  // Adjust for magnetic declination
+  if(heading < 0)                                   // Ensure the heading is between 0 and 360 degrees
+  {
+    heading += 360;
+  }
+  else if(heading > 360)
+  {
+    heading -= 360;
   }
   return heading;
 }
@@ -205,7 +229,7 @@ void Sensors::calculateCalibrationQuality(void)
   static int invert_q3 = 1;
   int i;
   float rotation[9];
-  Point_t point;//, draw;
+  Point_t point, draw;
   Quaternion_t orientation;
   quality_reset();
   memcpy(&orientation, &current_orientation, sizeof(orientation));
@@ -224,7 +248,7 @@ void Sensors::calculateCalibrationQuality(void)
     {
       apply_calibration(magcal.BpFast[0][i], magcal.BpFast[1][i], magcal.BpFast[2][i], &point);
       quality_update(&point);
-      // rotate(&point, &draw, rotation);
+      rotate(&point, &draw, rotation);
     }
   }
 }

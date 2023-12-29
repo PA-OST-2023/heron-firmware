@@ -50,6 +50,9 @@ class AudioUtils
   bool startServer(int port);
   bool stopServer(void);
   float getPeak(int channel);
+  float getDataRateMBit(void) { return (transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0; }
+  float getBufferFillLevelPercent(void) { return transmitter.getBufferFillLevel() * 100.0; }
+  bool getBufferOverflowDetected(void) { return transmitter.getBufferOverflowDetected(); }
 
  private:
   ADAU7118 adau7118[ADAU7118_COUNT] = {ADAU7118(Wire, 0x14), ADAU7118(Wire, 0x15), ADAU7118(Wire, 0x16), ADAU7118(Wire, 0x17)};

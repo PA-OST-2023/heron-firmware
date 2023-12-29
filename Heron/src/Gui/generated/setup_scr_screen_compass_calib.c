@@ -100,16 +100,14 @@ FLASHMEM void setup_scr_screen_compass_calib(lv_ui *ui)
 	lv_meter_set_scale_ticks(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1, 2, 1, 1, lv_color_hex(0x101418));
 
 	// add arc for screen_compass_calib_meter_coverage_scale_1
-	lv_meter_indicator_t *screen_compass_calib_meter_coverage_scale_1_arc_0;
-	screen_compass_calib_meter_coverage_scale_1_arc_0 = lv_meter_add_arc(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1, 10, lv_color_hex(0x757478), -1);
-	lv_meter_set_indicator_start_value(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1_arc_0, 0);
-	lv_meter_set_indicator_end_value(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1_arc_0, 100);
+	ui->screen_compass_calib_meter_coverage_scale_1_arc_0 = lv_meter_add_arc(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1, 10, lv_color_hex(0x757478), -1);
+	lv_meter_set_indicator_start_value(ui->screen_compass_calib_meter_coverage, ui->screen_compass_calib_meter_coverage_scale_1_arc_0, 0);
+	lv_meter_set_indicator_end_value(ui->screen_compass_calib_meter_coverage, ui->screen_compass_calib_meter_coverage_scale_1_arc_0, 100);
 
 	// add arc for screen_compass_calib_meter_coverage_scale_1
-	lv_meter_indicator_t *screen_compass_calib_meter_coverage_scale_1_arc_1;
-	screen_compass_calib_meter_coverage_scale_1_arc_1 = lv_meter_add_arc(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1, 10, lv_color_hex(0xD200AC), -1);
-	lv_meter_set_indicator_start_value(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1_arc_1, 0);
-	lv_meter_set_indicator_end_value(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1_arc_1, 20);
+	ui->screen_compass_calib_meter_coverage_scale_1_arc_1 = lv_meter_add_arc(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1, 10, lv_color_hex(0xD200AC), -1);
+	lv_meter_set_indicator_start_value(ui->screen_compass_calib_meter_coverage, ui->screen_compass_calib_meter_coverage_scale_1_arc_1, 0);
+	lv_meter_set_indicator_end_value(ui->screen_compass_calib_meter_coverage, ui->screen_compass_calib_meter_coverage_scale_1_arc_1, 20);
 	lv_obj_set_pos(ui->screen_compass_calib_meter_coverage, 53, 72);
 	lv_obj_set_size(ui->screen_compass_calib_meter_coverage, 132, 132);
 

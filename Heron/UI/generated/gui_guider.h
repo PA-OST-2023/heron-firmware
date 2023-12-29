@@ -94,12 +94,11 @@ typedef struct
 	lv_obj_t *screen_compass_btn_back_label;
 	lv_obj_t *screen_compass_label_back;
 	lv_obj_t *screen_compass_label_title;
-	lv_obj_t *screen_compass_canvas_compass;
 	lv_obj_t *screen_compass_label_heading;
 	lv_obj_t *screen_compass_label_pitch;
 	lv_obj_t *screen_compass_label_roll;
-	lv_obj_t *screen_compass_label_east;
-	lv_obj_t *screen_compass_label_west;
+	lv_obj_t *screen_compass_img_compass_background;
+	lv_obj_t *screen_compass_cont_dot;
 	lv_obj_t *screen_compass_label_needle;
 	lv_obj_t *screen_compass_calib;
 	bool screen_compass_calib_del;
@@ -127,6 +126,7 @@ void setup_scr_screen_ethernet_setup(lv_ui *ui);
 void setup_scr_screen_compass(lv_ui *ui);
 void setup_scr_screen_compass_calib(lv_ui *ui);
 LV_IMG_DECLARE(_Heron_alpha_100x100);
+LV_IMG_DECLARE(_compass_background_alpha_82x82);
 
 LV_FONT_DECLARE(lv_font_MontserratRegular_20)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)

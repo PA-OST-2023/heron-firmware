@@ -12,6 +12,12 @@
 #include "lvgl.h"
 
 
+#ifdef PLATFORMIO
+#include "../../gui.h"
+#endif
+#ifdef PLATFORMIO
+#include "../../gui.h"
+#endif
 static void screen_bootup_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -207,6 +213,7 @@ static void screen_compass_event_handler (lv_event_t *e)
 		lv_obj_set_style_transform_pivot_x(guider_ui.screen_compass_label_needle, 8, 0);
 	lv_obj_set_style_transform_pivot_y(guider_ui.screen_compass_label_needle, 49, 0);
 	//lv_obj_set_style_transform_angle(guider_ui.screen_compass_label_needle, 1800, 0);
+		lv_obj_clear_flag(guider_ui.screen_compass_label_needle, LV_OBJ_FLAG_HIDDEN);
 		break;
 	}
 	default:
@@ -230,6 +237,9 @@ static void screen_compass_btn_calib_event_handler (lv_event_t *e)
 	        lv_scr_load_anim(guider_ui.screen_compass_calib, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, true);
 	        guider_ui.screen_compass_del = true;
 	    }
+		#ifdef PLATFORMIO
+	Gui::callbackScreenEthernetCalibrationStart();
+	#endif
 		break;
 	}
 	default:
@@ -282,6 +292,9 @@ static void screen_compass_calib_btn_back_event_handler (lv_event_t *e)
 	        lv_scr_load_anim(guider_ui.screen_compass, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, true);
 	        guider_ui.screen_compass_calib_del = true;
 	    }
+		#ifdef PLATFORMIO
+	Gui::callbackScreenEthernetCalibrationAbort();
+	#endif
 		break;
 	}
 	default:
