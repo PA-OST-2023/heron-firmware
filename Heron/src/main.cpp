@@ -76,41 +76,6 @@ void setup()
   sensors.begin(utils);
   ethernet.begin(utils, audio);
   gui.begin(utils, hmi, audio, ethernet, sensors);
-
-  uint32_t counter = utils.preferences.getUInt("test", 0);     // Default value is 0
-  console.log.printf("Reboot count: %d\n", counter);
-  counter++;
-  utils.preferences.putULong("test", counter);
-
-
-
-  // if(OSFS::getFile("counter", counter) != OSFS::result::NO_ERROR)
-  // {
-  //   console.warning.println("[MAIN] Counter not found, creating now...");
-  //   counter = 1;    // default to 1
-  //   OSFS::newFile("counter", counter);
-  // }
-  // console.log.printf("Reboot count: %d\n", counter);
-  // counter++;
-  // OSFS::newFile("counter", counter, true);    // overwrite existing file
-
-  // console.log.println(F("Storing a string"));
-  // char testStr[15] = "this is a test";
-  // OSFS::newFile("testStr", testStr, 15);
-
-  // console.log.println(F("Storing a complex data type"));
-  // struct complexType {
-  // 	int a;
-  // 	char b;
-  // 	uint32_t c;
-  // };
-
-  // complexType testCplx;
-  // testCplx.a = 123;
-  // testCplx.b = 'a';
-  // testCplx.c = 0xABCDEF00;
-  // OSFS::newFile("testCplx", testCplx);
-
   hmi.setSystemStatus(Hmi::STATUS_OK);
 }
 
