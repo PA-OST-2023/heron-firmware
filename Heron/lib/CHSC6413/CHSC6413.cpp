@@ -111,18 +111,18 @@ bool CHSC6413::begin(int interrupt)
 
   _interruptType = interrupt;
   _invalidCount = 0;
-  bool chipAvailable = false;
-  for(int i = 0; i < INIT_RETRY_COUNT; i++)
-  {
-    chipAvailable |= read_touch();
-    if(chipAvailable)
-    {
-      break;
-    }
-    threads.delay(INIT_RETRY_DELAY);
-  }
-
-  return chipAvailable;    // Sometimes the chip is not recogined until a first touch is detected
+  // bool chipAvailable = false;
+  // for(int i = 0; i < INIT_RETRY_COUNT; i++)
+  // {
+  //   chipAvailable |= read_touch();
+  //   if(chipAvailable)
+  //   {
+  //     break;
+  //   }
+  //   threads.delay(INIT_RETRY_DELAY);
+  // }
+  // return chipAvailable;    // Sometimes the chip is not recogined until a first touch is detected
+  return true;
 }
 
 /*!

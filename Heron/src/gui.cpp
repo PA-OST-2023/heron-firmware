@@ -146,7 +146,6 @@ void Gui::updateScreenHome(void)
     rtcTimer = millis();
     uint8_t hour, minute, second;
     hmi->getTime(hour, minute, second);
-    console.log.printf("[GUI] Updating time to %02d:%02d:%02d\n", hour, minute, second);
     static char buffer[10];
     snprintf(buffer, sizeof(buffer), "%02d:%02d", hour, minute);
     lv_label_set_text_static(guider_ui.screen_home_label_current_time, buffer);
@@ -442,6 +441,9 @@ void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
   CHSC6413* touch = (CHSC6413*)drv->user_data;
   Utils::lockWire(GUI_WIRE);
   bool available = touch->available();
+  Utils::turnOffWire(GUI_WIRE);    // Somehow the touch controller locks up the I2C-Bus, so we have to turn it off and on again
+  delayMicroseconds(10);
+  Utils::turnOnWire(GUI_WIRE);
   Utils::unlockWire(GUI_WIRE);
   if(available)
   {
