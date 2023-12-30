@@ -107,18 +107,18 @@ void Sensors::update(void* parameter)
     }
 
     // ref->utils->lockWire(SENSOR_WIRE);
-    static uint32_t tAcc = 0;
-    if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
-    {
-      tAcc = millis();
-      if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
-      {
-        float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-        ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
-        float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-        ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
-      }
-    }
+    // static uint32_t tAcc = 0;
+    // if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
+    // {
+    //   tAcc = millis();
+    //   if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
+    //   {
+    //     float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
+    //     ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
+    //     float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
+    //     ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
+    //   }
+    // }
 
     static uint32_t tMag = 0;
     if(!ref->calibrationRunning)    // Normal operation
@@ -157,13 +157,13 @@ void Sensors::update(void* parameter)
       if(ref->mag.getEvent(&ref->mag_event))    // Check if magnetometer has new data
       {
         ref->calibrate(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);
-
-        ref->calibCoverage = constrain(map(quality_surface_gap_error(), CALIBRATION_COVERAGE_THRESHOLD, 0.0, 0.0, 100.0), 0.0, 100.0);
+        float coverage = 100.0 - quality_surface_gap_error();
+        ref->calibCoverage = constrain(map(coverage, 0.0, CALIBRATION_COVERAGE_THRESHOLD, 0.0, 100.0), 0.0, 100.0);
         ref->calibFitError = constrain(quality_spherical_fit_error(), 0.0, 100.0);
         ref->calibWobbleError = constrain(quality_wobble_error(), 0.0, 100.0);
         ref->calibVariance = quality_magnitude_variance_error();
 
-        if(ref->calibCoverage >= 99.0)    // Scaled coverage goes from 0 to 100 % (CALIBRATION_COVERAGE_THRESHOLD)
+        if(coverage >= CALIBRATION_COVERAGE_THRESHOLD)    // Check if calibration is done
         {
           console.ok.println("[SENSORS] Calibration completed!");
           ref->calibrationDone = true;

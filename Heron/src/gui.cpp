@@ -239,7 +239,7 @@ void Gui::updateScreenCompass(void)
     lv_label_set_text_static(guider_ui.screen_compass_label_heading, buffer);
     lv_obj_set_style_transform_angle(guider_ui.screen_compass_label_needle, (int)(heading * 10.0), 0);
     lv_obj_invalidate(guider_ui.screen_compass_img_compass_background);    // Invalidate compass backrgound
-    lv_color_t color = (heading > 3.0 && heading < 357.0) ? lv_color_hex(0x00C92C) : lv_color_hex(0xD200AC);
+    lv_color_t color = (heading > 3.0 && heading < 357.0) ? lv_color_hex(0xD200AC) : lv_color_hex(0x00C92C);
     lv_obj_set_style_text_color(guider_ui.screen_compass_label_needle, color, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
   if(pitch != sensors->getPitch() || roll != sensors->getRoll())
@@ -264,7 +264,7 @@ void Gui::updateScreenCompass(void)
       newX = dotXOffset + (newX - dotXOffset) * 30 / dist;
       newY = dotYOffset + (newY - dotYOffset) * 30 / dist;
     }
-    lv_color_t color = (dist < 5) ? lv_color_hex(0x00C92C) : lv_color_hex(0xFF0000);    // Green if inside small circle, red otherwise
+    lv_color_t color = (dist >= 4) ? lv_color_hex(0xFF0000) : lv_color_hex(0x00C92C);    // Green if inside small circle, red otherwise
     lv_obj_set_style_border_color(guider_ui.screen_compass_cont_dot, color, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(guider_ui.screen_compass_cont_dot, color, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_pos(guider_ui.screen_compass_cont_dot, newX, newY);
@@ -283,7 +283,7 @@ void Gui::updateScreenCompassCalibrate(void)
   static float calibWobbleError = 0.0;
   static float calibFitError = 0.0;
   // static bool calibRunning = false;
-  // static bool calibDone = false;
+  static bool calibDone = false;
 
   if(calibCoverage != sensors->getCalibCoverage())
   {
@@ -316,7 +316,24 @@ void Gui::updateScreenCompassCalibrate(void)
     lv_label_set_text_static(guider_ui.screen_compass_calib_label_variance, buffer);
   }
 
-  // TODO: Check if calibration is finished
+  if(!calibDone && sensors->isCalibrationDone())
+  {
+    console.log.println("[GUI] Calibration done");
+    lv_obj_t* act_scr = lv_scr_act();
+    lv_disp_t* d = lv_obj_get_disp(act_scr);
+    if(d->prev_scr == nullptr && (d->scr_to_load == nullptr || d->scr_to_load == act_scr))
+    {
+      if(guider_ui.screen_compass_del == true)
+      {
+        setup_scr_screen_compass(&guider_ui);
+      }
+      lv_scr_load_anim(guider_ui.screen_compass, LV_SCR_LOAD_ANIM_FADE_ON, 200, 3500, true);
+      guider_ui.screen_compass_calib_del = true;
+    }
+    lv_obj_clear_flag(guider_ui.screen_compass_calib_cont_successful, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(guider_ui.screen_compass_calib_cont_successful_background, LV_OBJ_FLAG_HIDDEN);
+  }
+  calibDone = sensors->isCalibrationDone();
 }
 
 
