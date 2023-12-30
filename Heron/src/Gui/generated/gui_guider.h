@@ -112,6 +112,9 @@ typedef struct
 	lv_obj_t *screen_compass_calib_label_variance;
 	lv_obj_t *screen_compass_calib_label_fit_error;
 	lv_obj_t *screen_compass_calib_label_wobble_error;
+	lv_obj_t *screen_compass_calib_cont_successful_background;
+	lv_obj_t *screen_compass_calib_cont_successful;
+	lv_obj_t *screen_compass_calib_label_successful;
 	lv_meter_indicator_t *screen_ethernet_meter_speed_scale_1_arc_1;
 	lv_meter_indicator_t *screen_ethernet_meter_speed_scale_1_arc_0;
 	lv_meter_indicator_t *screen_ethernet_meter_buffer_scale_1_arc_1;

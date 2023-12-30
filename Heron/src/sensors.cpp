@@ -53,12 +53,25 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
     res = false;
   }
   accel.setRange(lsm303_accel_range_t::LSM303_RANGE_2G);
-  // accel.setMode(lsm303_accel_mode_t::LSM303_MODE_HIGH_RESOLUTION);
+  accel.setMode(lsm303_accel_mode_t::LSM303_MODE_HIGH_RESOLUTION);
   utils->unlockWire(SENSOR_WIRE);
 
   raw_data_reset();    // Reset calibration stack
 
-  // TODO: Load calibration data from Preferences (set to default values if not available)
+  // Load calibration data from Preferences (set to default values if not available)
+  hardIron[0] = utils->preferences.getFloat("mag_h0", hardIron[0]);
+  hardIron[1] = utils->preferences.getFloat("mag_h1", hardIron[1]);
+  hardIron[2] = utils->preferences.getFloat("mag_h2", hardIron[2]);
+
+  softIron[0][0] = utils->preferences.getFloat("mag_s00", softIron[0][0]);
+  softIron[0][1] = utils->preferences.getFloat("mag_s01", softIron[0][1]);
+  softIron[0][2] = utils->preferences.getFloat("mag_s02", softIron[0][2]);
+  softIron[1][0] = utils->preferences.getFloat("mag_s10", softIron[1][0]);
+  softIron[1][1] = utils->preferences.getFloat("mag_s11", softIron[1][1]);
+  softIron[1][2] = utils->preferences.getFloat("mag_s12", softIron[1][2]);
+  softIron[2][0] = utils->preferences.getFloat("mag_s20", softIron[2][0]);
+  softIron[2][1] = utils->preferences.getFloat("mag_s21", softIron[2][1]);
+  softIron[2][2] = utils->preferences.getFloat("mag_s22", softIron[2][2]);
 
   initialized = true;
   // threads.addThread(update, (void*)this, 4096);
@@ -93,20 +106,20 @@ void Sensors::update(void* parameter)
       console.log.println("[SENSORS] Starting magnetometer calibration...");
     }
 
-    // static uint32_t tAcc = 0;
-    // if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
-    // {
-    //   tAcc = millis();
-    //   if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
-    //   {
-    //     float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-    //     ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
-    //     float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-    //     ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
-    //   }
-    // }
-
     // ref->utils->lockWire(SENSOR_WIRE);
+    static uint32_t tAcc = 0;
+    if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
+    {
+      tAcc = millis();
+      if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
+      {
+        float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
+        ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
+        float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
+        ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
+      }
+    }
+
     static uint32_t tMag = 0;
     if(!ref->calibrationRunning)    // Normal operation
     {
@@ -115,8 +128,26 @@ void Sensors::update(void* parameter)
         tMag = millis();
         if(ref->mag.getEvent(&ref->mag_event))    // Check if magnetometer has new data
         {
-          float heading = ref->calculateHeading(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);     // TODO: Use compensated heading if tested
-          ref->heading = (ref->HEADING_FILTER_ALPHA * heading) + ((1.0 - ref->HEADING_FILTER_ALPHA) * ref->heading);
+          float newHeading =
+            ref->calculateHeadingCompensated(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z, ref->pitch, ref->roll);
+          float diff = newHeading - ref->heading;    // Compute the difference in heading, adjusting for the 360 degree wrap-around
+          if(diff > 180.0f)
+          {
+            diff -= 360.0f;
+          }
+          else if(diff < -180.0f)
+          {
+            diff += 360.0f;
+          }
+          ref->heading += ref->HEADING_FILTER_ALPHA * diff;    // Apply the alpha coefficient to the difference
+          if(ref->heading < 0.0f)                              // Ensure the heading is within 0 to 360 degrees
+          {
+            ref->heading += 360.0f;
+          }
+          else if(ref->heading >= 360.0f)
+          {
+            ref->heading -= 360.0f;
+          }
         }
       }
     }
@@ -170,7 +201,6 @@ float Sensors::calculateHeading(float x, float y, float z)
 {
   float mag_data[] = {x, y, z};
   static float hi_cal[3];
-  static float heading = 0;
 
   for(uint8_t i = 0; i < 3; i++)    // Apply hard-iron offsets
   {
@@ -180,7 +210,7 @@ float Sensors::calculateHeading(float x, float y, float z)
   {
     mag_data[i] = (softIron[i][0] * hi_cal[0]) + (softIron[i][1] * hi_cal[1]) + (softIron[i][2] * hi_cal[2]);
   }
-  heading = -1 * (atan2f(mag_data[0], mag_data[1]) * 180) / M_PI;
+  float heading = -1 * (atan2f(mag_data[0], mag_data[1]) * 180) / M_PI;
   heading -= 90.0;                    // Ajdusting sensor orientation to match the board
   heading += MAGNETIC_DECLINATION;    // Adjust for magnetic declination
   if(heading < 0)                     // Convert heading to 0..360 degrees
@@ -190,17 +220,28 @@ float Sensors::calculateHeading(float x, float y, float z)
   return heading;
 }
 
-float Sensors::calculateHeadingCompensated(float x, float y, float z)
+float Sensors::calculateHeadingCompensated(float x, float y, float z, float pitch, float roll)
 {
-  float pitchRad = pitch * M_PI / 180.0;    // Convert pitch and roll angles to radians
-  float rollRad = roll * M_PI / 180.0;
+  float mag_data[3] = {x, y, z};
+  float hi_cal[3];
 
-  // Adjust the x, y, and z components of the magnetic field vector for pitch and roll
-  float xh = x * cosf(pitchRad) + z * sinf(pitchRad);
-  float yh = x * sinf(rollRad) * sinf(pitchRad) + y * cosf(rollRad) - z * sinf(rollRad) * cosf(pitchRad);
-  float heading = atan2f(yh, xh) * 180.0 / M_PI;    // Calculate the heading
-  heading += MAGNETIC_DECLINATION;                  // Adjust for magnetic declination
-  if(heading < 0)                                   // Ensure the heading is between 0 and 360 degrees
+  for(uint8_t i = 0; i < 3; i++)    // Apply hard-iron offsets
+  {
+    hi_cal[i] = mag_data[i] - hardIron[i];
+  }
+  for(uint8_t i = 0; i < 3; i++)    // Apply soft-iron scaling
+  {
+    mag_data[i] = (softIron[i][0] * hi_cal[0]) + (softIron[i][1] * hi_cal[1]) + (softIron[i][2] * hi_cal[2]);
+  }
+  float pitchRad = pitch * M_PI / 180.0;    // Convert pitch and roll to radians
+  float rollRad = roll * M_PI / 180.0;
+  float xh = mag_data[0] * cosf(pitchRad) + mag_data[2] * sinf(pitchRad);    // Adjust the magnetic field vector for pitch and roll
+  float yh = mag_data[0] * sinf(rollRad) * sinf(pitchRad) + mag_data[1] * cosf(rollRad) - mag_data[2] * sinf(rollRad) * cosf(pitchRad);
+
+  float heading = -1 * atan2f(xh, yh) * 180.0 / M_PI;    // Calculate the heading
+  heading -= 90.0;                                       // Adjusting for sensor orientation, if needed
+  heading += MAGNETIC_DECLINATION;                       // Adjust for magnetic declination
+  if(heading < 0)                                        // Convert heading to 0..360 degrees
   {
     heading += 360;
   }
@@ -210,6 +251,7 @@ float Sensors::calculateHeadingCompensated(float x, float y, float z)
   }
   return heading;
 }
+
 
 void Sensors::calibrate(float x, float y, float z)
 {
@@ -269,6 +311,20 @@ bool Sensors::updateAndSaveCalibration(void)
   softIron[2][1] = magcal.invW[2][1];
   softIron[2][2] = magcal.invW[2][2];
 
-  // TODO: Save calibration data to Preferences
-  return true;
+  bool res = true;
+  res &= utils->preferences.putFloat("mag_h0", hardIron[0]);
+  res &= utils->preferences.putFloat("mag_h1", hardIron[1]);
+  res &= utils->preferences.putFloat("mag_h2", hardIron[2]);
+
+  res &= utils->preferences.putFloat("mag_s00", softIron[0][0]);
+  res &= utils->preferences.putFloat("mag_s01", softIron[0][1]);
+  res &= utils->preferences.putFloat("mag_s02", softIron[0][2]);
+  res &= utils->preferences.putFloat("mag_s10", softIron[1][0]);
+  res &= utils->preferences.putFloat("mag_s11", softIron[1][1]);
+  res &= utils->preferences.putFloat("mag_s12", softIron[1][2]);
+  res &= utils->preferences.putFloat("mag_s20", softIron[2][0]);
+  res &= utils->preferences.putFloat("mag_s21", softIron[2][1]);
+  res &= utils->preferences.putFloat("mag_s22", softIron[2][2]);
+
+  return res;
 }

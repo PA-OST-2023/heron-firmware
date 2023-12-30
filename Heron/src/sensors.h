@@ -77,7 +77,6 @@ class Sensors
   static void update(void* parameter);
 
 
-
  private:
   Utils* utils = nullptr;
 
@@ -108,7 +107,7 @@ class Sensors
   float calculatePitch(float x, float y, float z);
   float calculateRoll(float x, float y, float z);
   float calculateHeading(float x, float y, float z);
-  float calculateHeadingCompensated(float x, float y, float z);
+  float calculateHeadingCompensated(float x, float y, float z, float pitch, float roll);
   void calibrate(float x, float y, float z);
   void calculateCalibrationQuality(void);
   bool updateAndSaveCalibration(void);

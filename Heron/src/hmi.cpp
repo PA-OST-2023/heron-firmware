@@ -40,6 +40,7 @@ DMAMEM uint8_t Hmi::displayMemory[Hmi::LED_COUNT * 12] = {};
 FLASHMEM bool Hmi::begin(Utils& utilsRef)
 {
   utils = &utilsRef;
+  bool res = true;
 
   leds.clear();
   leds.begin();
@@ -51,7 +52,7 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
   if(!rtc.begin(&RTC_WIRE))
   {
     console.error.println("[HMI] RTC could not be initialized");
-    return false;
+    res = false;
   }
   if(rtc.lostPower())
   {
@@ -66,7 +67,7 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
   threads.addThread(update, (void*)this, 4096);
   console.ok.println("[HMI] Initialized");
 
-  return true;
+  return res;
 }
 
 void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)

@@ -107,7 +107,7 @@ FLASHMEM void setup_scr_screen_compass_calib(lv_ui *ui)
 	// add arc for screen_compass_calib_meter_coverage_scale_1
 	ui->screen_compass_calib_meter_coverage_scale_1_arc_1 = lv_meter_add_arc(ui->screen_compass_calib_meter_coverage, screen_compass_calib_meter_coverage_scale_1, 10, lv_color_hex(0xD200AC), -1);
 	lv_meter_set_indicator_start_value(ui->screen_compass_calib_meter_coverage, ui->screen_compass_calib_meter_coverage_scale_1_arc_1, 0);
-	lv_meter_set_indicator_end_value(ui->screen_compass_calib_meter_coverage, ui->screen_compass_calib_meter_coverage_scale_1_arc_1, 20);
+	lv_meter_set_indicator_end_value(ui->screen_compass_calib_meter_coverage, ui->screen_compass_calib_meter_coverage_scale_1_arc_1, 0);
 	lv_obj_set_pos(ui->screen_compass_calib_meter_coverage, 53, 72);
 	lv_obj_set_size(ui->screen_compass_calib_meter_coverage, 132, 132);
 
@@ -233,6 +233,67 @@ FLASHMEM void setup_scr_screen_compass_calib(lv_ui *ui)
 	lv_obj_set_style_pad_bottom(ui->screen_compass_calib_label_wobble_error, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_left(ui->screen_compass_calib_label_wobble_error, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_compass_calib_label_wobble_error, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_compass_calib_cont_successful_background
+	ui->screen_compass_calib_cont_successful_background = lv_obj_create(ui->screen_compass_calib);
+	lv_obj_set_pos(ui->screen_compass_calib_cont_successful_background, 0, 0);
+	lv_obj_set_size(ui->screen_compass_calib_cont_successful_background, 240, 240);
+	lv_obj_set_scrollbar_mode(ui->screen_compass_calib_cont_successful_background, LV_SCROLLBAR_MODE_OFF);
+	lv_obj_add_flag(ui->screen_compass_calib_cont_successful_background, LV_OBJ_FLAG_HIDDEN);
+
+	//Write style for screen_compass_calib_cont_successful_background, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_compass_calib_cont_successful_background, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_compass_calib_cont_successful_background, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_compass_calib_cont_successful_background, 108, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_compass_calib_cont_successful_background, lv_color_hex(0x828282), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_compass_calib_cont_successful_background, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_compass_calib_cont_successful_background, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_compass_calib_cont_successful_background, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_compass_calib_cont_successful_background, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_compass_calib_cont_successful_background, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_compass_calib_cont_successful
+	ui->screen_compass_calib_cont_successful = lv_obj_create(ui->screen_compass_calib);
+	lv_obj_set_pos(ui->screen_compass_calib_cont_successful, 25, 80.5);
+	lv_obj_set_size(ui->screen_compass_calib_cont_successful, 190, 79);
+	lv_obj_set_scrollbar_mode(ui->screen_compass_calib_cont_successful, LV_SCROLLBAR_MODE_OFF);
+	lv_obj_add_flag(ui->screen_compass_calib_cont_successful, LV_OBJ_FLAG_HIDDEN);
+
+	//Write style for screen_compass_calib_cont_successful, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_compass_calib_cont_successful, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screen_compass_calib_cont_successful, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screen_compass_calib_cont_successful, lv_color_hex(0x00c92c), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screen_compass_calib_cont_successful, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_compass_calib_cont_successful, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_compass_calib_cont_successful, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_compass_calib_cont_successful, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_compass_calib_cont_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_compass_calib_cont_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_compass_calib_cont_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_compass_calib_cont_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_compass_calib_cont_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_compass_calib_label_successful
+	ui->screen_compass_calib_label_successful = lv_label_create(ui->screen_compass_calib_cont_successful);
+	lv_label_set_text(ui->screen_compass_calib_label_successful, "Calibration Successful");
+	lv_label_set_long_mode(ui->screen_compass_calib_label_successful, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_compass_calib_label_successful, 0, 30);
+	lv_obj_set_size(ui->screen_compass_calib_label_successful, 190, 15);
+
+	//Write style for screen_compass_calib_label_successful, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_compass_calib_label_successful, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_compass_calib_label_successful, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_compass_calib_label_successful, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_compass_calib_label_successful, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Update current screen layout.
 	lv_obj_update_layout(ui->screen_compass_calib);

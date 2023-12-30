@@ -112,6 +112,9 @@ typedef struct
 	lv_obj_t *screen_compass_calib_label_variance;
 	lv_obj_t *screen_compass_calib_label_fit_error;
 	lv_obj_t *screen_compass_calib_label_wobble_error;
+	lv_obj_t *screen_compass_calib_cont_successful_background;
+	lv_obj_t *screen_compass_calib_cont_successful;
+	lv_obj_t *screen_compass_calib_label_successful;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);

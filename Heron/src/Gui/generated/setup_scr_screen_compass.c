@@ -140,7 +140,7 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 
 	//Write codes screen_compass_label_heading
 	ui->screen_compass_label_heading = lv_label_create(ui->screen_compass);
-	lv_label_set_text(ui->screen_compass_label_heading, "Heading: 23.5°");
+	lv_label_set_text(ui->screen_compass_label_heading, "Heading: 0.0°");
 	lv_label_set_long_mode(ui->screen_compass_label_heading, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_label_heading, 60, 59);
 	lv_obj_set_size(ui->screen_compass_label_heading, 120, 18);
@@ -162,7 +162,7 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 
 	//Write codes screen_compass_label_pitch
 	ui->screen_compass_label_pitch = lv_label_create(ui->screen_compass);
-	lv_label_set_text(ui->screen_compass_label_pitch, "Pitch: 10.5°");
+	lv_label_set_text(ui->screen_compass_label_pitch, "Pitch: 0.0°");
 	lv_label_set_long_mode(ui->screen_compass_label_pitch, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_label_pitch, 34, 177);
 	lv_obj_set_size(ui->screen_compass_label_pitch, 90, 18);
@@ -184,7 +184,7 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 
 	//Write codes screen_compass_label_roll
 	ui->screen_compass_label_roll = lv_label_create(ui->screen_compass);
-	lv_label_set_text(ui->screen_compass_label_roll, "Roll: 10.5°");
+	lv_label_set_text(ui->screen_compass_label_roll, "Roll: 0.0°");
 	lv_label_set_long_mode(ui->screen_compass_label_roll, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_label_roll, 133, 177);
 	lv_obj_set_size(ui->screen_compass_label_roll, 90, 18);

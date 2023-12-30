@@ -235,10 +235,12 @@ void Gui::updateScreenCompass(void)
   {
     heading = headingInverted;
     static char buffer[20];
-    snprintf(buffer, sizeof(buffer), "Heading: %.1f°", heading);
+    snprintf(buffer, sizeof(buffer), "Heading: %.1f°", 360.0 - heading);
     lv_label_set_text_static(guider_ui.screen_compass_label_heading, buffer);
     lv_obj_set_style_transform_angle(guider_ui.screen_compass_label_needle, (int)(heading * 10.0), 0);
     lv_obj_invalidate(guider_ui.screen_compass_img_compass_background);    // Invalidate compass backrgound
+    lv_color_t color = (heading > 3.0 && heading < 357.0) ? lv_color_hex(0x00C92C) : lv_color_hex(0xD200AC);
+    lv_obj_set_style_text_color(guider_ui.screen_compass_label_needle, color, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
   if(pitch != sensors->getPitch() || roll != sensors->getRoll())
   {
