@@ -62,6 +62,11 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
   rtc.start();
   utils->unlockWire(RTC_WIRE);
 
+  if(!buzzer.begin())
+  {
+    console.error.println("[HMI] Buzzer could not be initialized");
+    res = false;
+  }
 
   initialized = true;
   threads.addThread(update, (void*)this, 4096);

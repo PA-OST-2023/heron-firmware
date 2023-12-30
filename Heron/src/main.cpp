@@ -56,14 +56,15 @@
 #define SDA_GPS    25
 #define HMI_BUZZER 36
 #define GPS_RST    31
+#define LINK_LED   41
 
 
 static AudioUtils audio;
 static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_BL, TCH_IRQ);
 static Hmi hmi(RGB_LED, HMI_BUZZER);
+static EthernetUtils ethernet(LINK_LED);
 static Sensors sensors;
-static EthernetUtils ethernet;
 
 
 void setup()
@@ -77,6 +78,8 @@ void setup()
   ethernet.begin(utils, audio);
   gui.begin(utils, hmi, audio, ethernet, sensors);
   hmi.setSystemStatus(Hmi::STATUS_OK);
+  // hmi.buzzer.playMelody(MELODIE_POWER_ON);
+  // TODO: Add watchdog
 }
 
 void loop()

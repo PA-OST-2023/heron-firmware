@@ -36,9 +36,11 @@
 #include <Arduino.h>
 #include <RTClib.h>
 #include <WS2812Serial.h>
+#include <buzzer.h>
+#include <melodies.h>
 #include <utils.h>
 
-#define RTC_WIRE Wire1                                              // Wire interface to use
+#define RTC_WIRE Wire1    // Wire interface to use
 
 class Hmi
 {
@@ -55,7 +57,7 @@ class Hmi
     STATUS_ERROR
   } systemStatus_t;
 
-  constexpr Hmi(int rgbLed, int buzzer) : rgbLed(rgbLed), buzzer(buzzer) {}
+  constexpr Hmi(int rgbLed, int buzzer) : rgbLedPin(rgbLed), buzzerPin(buzzer) {}
   bool begin(Utils& utilsRef);
   void setSystemStatus(systemStatus_t status) { systemStatus = status; }
   void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
@@ -65,17 +67,17 @@ class Hmi
 
   static uint32_t Color(uint8_t r, uint8_t g, uint8_t b, uint8_t w = 0) { return ((uint32_t)w << 24) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b; }
 
- private:
-  const int rgbLed, buzzer;
+  const int rgbLedPin, buzzerPin;
+  Buzzer buzzer = Buzzer(buzzerPin);
 
-  static uint8_t drawingMemory[LED_COUNT * 3];             //  3 bytes per LED
-  DMAMEM static uint8_t displayMemory[LED_COUNT * 12];     // 12 bytes per LED
-  WS2812Serial leds = WS2812Serial(LED_COUNT, displayMemory, drawingMemory, rgbLed, WS2812_GRB);
+ private:
+  static uint8_t drawingMemory[LED_COUNT * 3];            //  3 bytes per LED
+  DMAMEM static uint8_t displayMemory[LED_COUNT * 12];    // 12 bytes per LED
+  WS2812Serial leds = WS2812Serial(LED_COUNT, displayMemory, drawingMemory, rgbLedPin, WS2812_GRB);
   RTC_PCF8563 rtc;
 
   Utils* utils = nullptr;
   systemStatus_t systemStatus = STATUS_BOOTUP;
-
   volatile bool initialized = false;
 
   static void update(void* parameter);

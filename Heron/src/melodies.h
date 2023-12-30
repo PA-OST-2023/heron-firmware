@@ -1,7 +1,7 @@
 /******************************************************************************
-* file    ethernetUtils.h
+* file    melodies.h
 *******************************************************************************
-* brief   Ethernet class for handling streaming and configuration
+* brief   Array of melodies
 *******************************************************************************
 * author  Florian Baumgartner
 * version 1.0
@@ -14,7 +14,7 @@
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell          
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
 *
@@ -30,57 +30,22 @@
 * SOFTWARE.
 ******************************************************************************/
 
-#ifndef ETHERNET_UTILS_H
-#define ETHERNET_UTILS_H
+#ifndef MELODIES_H
+#define MELODIES_H
 
 #include <Arduino.h>
-#include <QNEthernet.h>
-#include <audioUtils.h>
-#include <utils.h>
+#include <buzzer.h>
 
-using namespace qindesign::network;
+constexpr static const Tone MELODIE_POWER_ON[] = {{NOTE_D5, 120}, {0, 25}, {NOTE_A5, 120}, {0, 200}, END_OF_MELODY};
+constexpr static const Tone MELODIE_CALIB_STARTED[] = {{NOTE_A5, 120}, END_OF_MELODY};
+constexpr static const Tone MELODIE_CALIB_DONE[] = {{NOTE_G5, 150}, {NOTE_B5, 150}, {NOTE_D6, 150}, {NOTE_G6, 150}, END_OF_MELODY};
 
-#define ETHERNET_DEFAULT_IP      192, 168, 40, 80
-#define ETHERNET_DEFAULT_GATEWAY 192, 168, 40, 1
-#define ETHERNET_DEFAULT_SUBNET  255, 255, 255, 0
-#define ETHERNET_STREAMING_PORT  6666
-#define ETHERNET_CONFIG_PORT     6667
+// constexpr static const Tone MELODIE_CARD_INSERTED[] = {{NOTE_D6, 120}, {0, 25}, {NOTE_D6, 120}, {0, 200}};
+// constexpr static const Tone MELODIE_CARD_REMOVED[] = {{NOTE_G5, 200}, {0, 200}};
+// constexpr static const Tone MELODIE_DISCHARGING[] = {{NOTE_D6, 350}, {0, 200}, {NOTE_D6, 350}, {0, 200}};
+// constexpr static const Tone MELODIE_SUCCESS[] = {{NOTE_G5, 150}, {NOTE_B5, 150}, {NOTE_D6, 150}, {NOTE_G6, 150}};
+// constexpr static const Tone MELODIE_ERROR[] = {{NOTE_B5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200},
+//                              {NOTE_B5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200}};
 
-class EthernetUtils
-{
- public:
-  typedef enum
-  {
-    ETH_DISCONNECTED,
-    ETH_CONNECTED,
-    ETH_STREAMING
-  } EthStatus_t;
-
-  EthernetUtils(int link_led) : linkLed(link_led) {}
-  bool begin(Utils& utilsRef, AudioUtils& audioUtilsRef);
-  bool setIp(uint8_t ip_0, uint8_t ip_1, uint8_t ip_2, uint8_t ip_3, bool save = true);
-  void getIp(uint8_t& ip_0, uint8_t& ip_1, uint8_t& ip_2, uint8_t& ip_3)
-  {
-    ip_0 = ip[0];
-    ip_1 = ip[1];
-    ip_2 = ip[2];
-    ip_3 = ip[3];
-  }
-  int getStreamingPort(void) { return ETHERNET_STREAMING_PORT; }
-  int getConfigPort(void) { return ETHERNET_CONFIG_PORT; }
-  EthStatus_t getStatus(void);
-  void update(void);  
-
- private:
-  int linkLed = -1;
-  Utils* utils = nullptr;
-  AudioUtils* audioUtils = nullptr;
-
-  IPAddress ip = IPAddress(ETHERNET_DEFAULT_IP);
-  IPAddress gateway = IPAddress(ETHERNET_DEFAULT_GATEWAY);
-  IPAddress subnet = IPAddress(ETHERNET_DEFAULT_SUBNET);
-
-  volatile bool initialized = false;
-};
 
 #endif

@@ -107,6 +107,7 @@ void Sensors::update(void* parameter)
     }
 
     // ref->utils->lockWire(SENSOR_WIRE);
+    
     // static uint32_t tAcc = 0;
     // if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
     // {

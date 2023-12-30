@@ -40,6 +40,9 @@ FLASHMEM bool EthernetUtils::begin(Utils& utilsRef, AudioUtils& audioUtilsRef)
   audioUtils = &audioUtilsRef;
   bool res = true;
 
+  pinMode(linkLed, OUTPUT);
+  digitalWrite(linkLed, LOW);
+
   uint8_t ip_0 = utils->preferences.getUChar("ip_0", ip[0]);
   uint8_t ip_1 = utils->preferences.getUChar("ip_1", ip[1]);
   uint8_t ip_2 = utils->preferences.getUChar("ip_2", ip[2]);
@@ -88,4 +91,31 @@ bool EthernetUtils::setIp(uint8_t ip_0, uint8_t ip_1, uint8_t ip_2, uint8_t ip_3
     }
   }
   return true;
+}
+
+EthernetUtils::EthStatus_t EthernetUtils::getStatus(void)
+{
+  if(!initialized)
+  {
+    return ETH_DISCONNECTED;
+  }
+  if(Ethernet.linkStatus() == LinkON)
+  {
+    if(audioUtils->getDataRateMBit() > 0)
+    {
+      return ETH_STREAMING;
+    }
+    return ETH_CONNECTED;
+  }
+  return ETH_DISCONNECTED;
+}
+
+void EthernetUtils::update(void)
+{
+  if(!initialized)
+  {
+    return;
+  }
+  Ethernet.loop();
+  digitalWrite(linkLed, Ethernet.linkStatus() == LinkON);
 }

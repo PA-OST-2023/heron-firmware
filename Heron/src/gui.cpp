@@ -282,7 +282,6 @@ void Gui::updateScreenCompassCalibrate(void)
   static float calibVariance = 0.0;
   static float calibWobbleError = 0.0;
   static float calibFitError = 0.0;
-  // static bool calibRunning = false;
   static bool calibDone = false;
 
   if(calibCoverage != sensors->getCalibCoverage())
@@ -319,6 +318,7 @@ void Gui::updateScreenCompassCalibrate(void)
   if(!calibDone && sensors->isCalibrationDone())
   {
     console.log.println("[GUI] Calibration done");
+    hmi->buzzer.playMelody(MELODIE_CALIB_DONE);
     lv_obj_t* act_scr = lv_scr_act();
     lv_disp_t* d = lv_obj_get_disp(act_scr);
     if(d->prev_scr == nullptr && (d->scr_to_load == nullptr || d->scr_to_load == act_scr))
@@ -378,6 +378,7 @@ void Gui::callbackScreenCompassCalibrationStart(void)
 {
   console.log.println("[GUI] [CALLBACK] Starting calibration");
   sensors->startCalibration();
+  hmi->buzzer.playMelody(MELODIE_CALIB_STARTED);
 }
 
 void Gui::callbackScreenCompassCalibrationAbort(void)

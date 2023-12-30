@@ -58,7 +58,7 @@ class Sensors
   static constexpr const size_t HEADING_UPDATE_RATE = 8;                 // [Hz] Update rate for heading readout (ignored in calibration mode)
   static constexpr const size_t CALIBRATION_UPDATE_RATE = 10;            // [Hz] Update rate for calibration
   static constexpr const size_t ACCEL_UPDATE_RATE = 5;                   // [Hz] Update rate for accelerometer
-  static constexpr const float CALIBRATION_COVERAGE_THRESHOLD = 98.0;    // [%] Threshold for calibration coverage
+  static constexpr const float CALIBRATION_COVERAGE_THRESHOLD = 97.0;    // [%] Threshold for calibration coverage
 
 
   Sensors() {}
