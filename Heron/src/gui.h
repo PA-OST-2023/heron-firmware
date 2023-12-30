@@ -41,6 +41,7 @@
 #include <console.h>
 #include <lvgl.h>
 #include <utils.h>
+#include <ethernetUtils.h>
 
 #include <audioUtils.h>
 #include <sensors.h>
@@ -80,7 +81,7 @@ class Gui
   } EthStatus_t;
 
   Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq);
-  bool begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, Sensors& sensorsRef);
+  bool begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, EthernetUtils& ethernetUtilsRef, Sensors& sensorsRef);
   void update(void);
   bool isReady(void) { return initialized; }
   void setBrightness(int brightness) { analogWrite(bl, constrain(brightness, 0, 255)); }
@@ -93,8 +94,11 @@ class Gui
   void setSystemWarning(const char* warning = nullptr);
 
   // Screen callback functions
-  static void callbackScreenEthernetCalibrationStart(void);
-  static void callbackScreenEthernetCalibrationAbort(void);
+  static void callbackScreenEthernetSetupLoaded(void);
+  static void callbackScreenEthernetSetupConfirmed(void);
+
+  static void callbackScreenCompassCalibrationStart(void);
+  static void callbackScreenCompassCalibrationAbort(void);
 
  private:
   const int sclk, mosi, cs, dc, bl, tch_irq;
@@ -127,12 +131,14 @@ class Gui
 
   // Screen update functions
   void updateScreenEthernet(void);
+  void updateScreenEthernetSetup(void);
   void updateScreenCompass(void);
   void updateScreenCompassCalibrate(void);
 
   static Utils* utils;
   static Hmi* hmi;
   static AudioUtils* audioUtils;
+  static EthernetUtils* ethernetUtils;
   static Sensors* sensors;
   static void lvglPrint(const char* buf);
   static void dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p);

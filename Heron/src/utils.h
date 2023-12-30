@@ -34,17 +34,17 @@
 #define UTILS_H
 
 #include <Arduino.h>
-#include <EEPROM.h>
 #include <MTP_Teensy.h>
 #include <SD.h>
 #include <TeensyThreads.h>
 #include <Wire.h>
+#include <preferences.h>
 
 class Utils
 {
  public:
   static constexpr const float UPDATE_RATE = 1.0;    // Hz
-   // static constexpr const size_t EXT_HEAP_SIZE = 4 * 1024 * 1024;    // n MB memory pool on the external ram chips
+    // static constexpr const size_t EXT_HEAP_SIZE = 4 * 1024 * 1024;    // n MB memory pool on the external ram chips
 
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_ENABLED = 0;
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_NUMBER = 4;
@@ -64,10 +64,7 @@ class Utils
   int tryLockSdCardAccess(void) { return sdCardMutex.try_lock(); }
   int unlockSdCardAccess(void) { return sdCardMutex.unlock(); }
 
-      // bool storeChannelEnabled(const bool* channelEnabled, int count);
-    // void loadChannelEnabled(bool* channelEnabled, int count);
-    // bool storeChannelNumber(int channelNumber);
-    // int loadChannelNumber(void);
+  Preferences preferences;
 
  private:
   const int scl_sys, sda_sys, scl_hmi, sda_hmi, scl_gps, sda_gps;
@@ -80,7 +77,8 @@ class Utils
   uint64_t sdCardTotalSize = 0;
   uint64_t sdCardUsedSize = 0;
 
-    // static uint8_t extHeap[EXT_HEAP_SIZE];
+  // static uint8_t extHeap[EXT_HEAP_SIZE];
 };
+
 
 #endif

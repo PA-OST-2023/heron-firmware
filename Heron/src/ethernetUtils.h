@@ -40,17 +40,29 @@
 
 using namespace qindesign::network;
 
-#define ETHERNET_DEFAULT_IP      192, 168, 40, 81    //80
+#define ETHERNET_DEFAULT_IP      192, 168, 40, 80
 #define ETHERNET_DEFAULT_GATEWAY 192, 168, 40, 1
 #define ETHERNET_DEFAULT_SUBNET  255, 255, 255, 0
 #define ETHERNET_STREAMING_PORT  6666
+#define ETHERNET_CONFIG_PORT     6667
 
 class EthernetUtils
 {
  public:
-  EthernetUtils() {}
+  EthernetUtils() {}    // TODO: Implement Link status for LED
   bool begin(Utils& utilsRef, AudioUtils& audioUtilsRef);
-  bool setIp(uint8_t ip_0, uint8_t ip_1, uint8_t ip_2, uint8_t ip_3);
+  bool setIp(uint8_t ip_0, uint8_t ip_1, uint8_t ip_2, uint8_t ip_3, bool save = true);
+  void getIp(uint8_t& ip_0, uint8_t& ip_1, uint8_t& ip_2, uint8_t& ip_3)
+  {
+    ip_0 = ip[0];
+    ip_1 = ip[1];
+    ip_2 = ip[2];
+    ip_3 = ip[3];
+  }
+  int getStreamingPort(void) { return ETHERNET_STREAMING_PORT; }
+  int getConfigPort(void) { return ETHERNET_CONFIG_PORT; }
+
+  
 
   inline void update(void)
   {

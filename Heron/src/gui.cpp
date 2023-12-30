@@ -41,15 +41,17 @@ Utils* Gui::utils;
 Hmi* Gui::hmi;
 AudioUtils* Gui::audioUtils;
 Sensors* Gui::sensors;
+EthernetUtils* Gui::ethernetUtils;
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), bl(bl), tch_irq(tch_irq) {}
 
-FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, Sensors& sensorsRef)
+FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, EthernetUtils& ethernetUtilsRef, Sensors& sensorsRef)
 {
   bool res = true;
   utils = &utilsRef;
   hmi = &hmiRef;
   audioUtils = &audioUtilsRef;
+  ethernetUtils = &ethernetUtilsRef;
   sensors = &sensorsRef;
 
   digitalWrite(bl, LOW);
@@ -207,6 +209,14 @@ void Gui::updateScreenEthernet(void)
   }
 }
 
+void Gui::updateScreenEthernetSetup(void)
+{
+  if(lv_scr_act() != guider_ui.screen_ethernet_setup)
+  {
+    return;
+  }
+}
+
 void Gui::updateScreenCompass(void)
 {
   if(lv_scr_act() != guider_ui.screen_compass)
@@ -309,13 +319,49 @@ void Gui::updateScreenCompassCalibrate(void)
 
 
 // Screen callback functions
-void Gui::callbackScreenEthernetCalibrationStart(void)
+
+void Gui::callbackScreenEthernetSetupLoaded(void)
+{
+  console.log.println("[GUI] [CALLBACK] Ethernet Setup screen loaded");
+  uint8_t ip_0, ip_1, ip_2, ip_3;
+  ethernetUtils->getIp(ip_0, ip_1, ip_2, ip_3);
+  lv_roller_set_selected(guider_ui.screen_ethernet_setup_roller_ip_0, ip_0, LV_ANIM_OFF);
+  lv_roller_set_selected(guider_ui.screen_ethernet_setup_roller_ip_1, ip_1, LV_ANIM_OFF);
+  lv_roller_set_selected(guider_ui.screen_ethernet_setup_roller_ip_2, ip_2, LV_ANIM_OFF);
+  lv_roller_set_selected(guider_ui.screen_ethernet_setup_roller_ip_3, ip_3, LV_ANIM_OFF);
+
+  static char bufferStreamingPort[30];
+  snprintf(bufferStreamingPort, sizeof(bufferStreamingPort), "Streaming Port: %d", ethernetUtils->getStreamingPort());
+  lv_label_set_text_static(guider_ui.screen_ethernet_setup_label_streaming_port, bufferStreamingPort);
+
+  static char bufferConfigPort[30];
+  snprintf(bufferConfigPort, sizeof(bufferConfigPort), "Configuration Port: %d", ethernetUtils->getConfigPort());
+  lv_label_set_text_static(guider_ui.screen_ethernet_setup_label_configuration_port, bufferConfigPort);
+}
+
+void Gui::callbackScreenEthernetSetupConfirmed(void)
+{
+  console.log.println("[GUI] [CALLBACK] Ethernet Setup confirmed");
+  uint8_t ip_0, ip_1, ip_2, ip_3;
+  char buffer[6];
+  lv_roller_get_selected_str(guider_ui.screen_ethernet_setup_roller_ip_0, buffer, sizeof(buffer));
+  ip_0 = atoi(buffer);
+  lv_roller_get_selected_str(guider_ui.screen_ethernet_setup_roller_ip_1, buffer, sizeof(buffer));
+  ip_1 = atoi(buffer);
+  lv_roller_get_selected_str(guider_ui.screen_ethernet_setup_roller_ip_2, buffer, sizeof(buffer));
+  ip_2 = atoi(buffer);
+  lv_roller_get_selected_str(guider_ui.screen_ethernet_setup_roller_ip_3, buffer, sizeof(buffer));
+  ip_3 = atoi(buffer);
+  ethernetUtils->setIp(ip_0, ip_1, ip_2, ip_3);
+}
+
+void Gui::callbackScreenCompassCalibrationStart(void)
 {
   console.log.println("[GUI] [CALLBACK] Starting calibration");
   sensors->startCalibration();
 }
 
-void Gui::callbackScreenEthernetCalibrationAbort(void)
+void Gui::callbackScreenCompassCalibrationAbort(void)
 {
   console.log.println("[GUI] [CALLBACK] Aborting calibration");
   sensors->abortCalibration();

@@ -40,7 +40,11 @@ FLASHMEM bool EthernetUtils::begin(Utils& utilsRef, AudioUtils& audioUtilsRef)
   audioUtils = &audioUtilsRef;
   bool res = true;
 
-  // TODO: Load IP from EEPROM
+  uint8_t ip_0 = utils->preferences.getUChar("ip_0", ip[0]);
+  uint8_t ip_1 = utils->preferences.getUChar("ip_1", ip[1]);
+  uint8_t ip_2 = utils->preferences.getUChar("ip_2", ip[2]);
+  uint8_t ip_3 = utils->preferences.getUChar("ip_3", ip[3]);
+  setIp(ip_0, ip_1, ip_2, ip_3, false);
 
   if(!Ethernet.begin(ip, subnet, gateway))
   {
@@ -61,7 +65,7 @@ FLASHMEM bool EthernetUtils::begin(Utils& utilsRef, AudioUtils& audioUtilsRef)
   return res;
 }
 
-bool EthernetUtils::setIp(uint8_t ip_0, uint8_t ip_1, uint8_t ip_2, uint8_t ip_3)
+bool EthernetUtils::setIp(uint8_t ip_0, uint8_t ip_1, uint8_t ip_2, uint8_t ip_3, bool save)
 {
   ip = IPAddress(ip_0, ip_1, ip_2, ip_3);
   gateway = IPAddress(ip_0, ip_1, ip_2, 1);
@@ -69,5 +73,19 @@ bool EthernetUtils::setIp(uint8_t ip_0, uint8_t ip_1, uint8_t ip_2, uint8_t ip_3
 
   Ethernet.setLocalIP(ip);
   Ethernet.setGatewayIP(gateway);
+
+  if(save)
+  {
+    bool res = true;
+    res &= utils->preferences.putUChar("ip_0", ip_0);
+    res &= utils->preferences.putUChar("ip_1", ip_1);
+    res &= utils->preferences.putUChar("ip_2", ip_2);
+    res &= utils->preferences.putUChar("ip_3", ip_3);
+    if(!res)
+    {
+      console.error.println("[ETHERNET] Failed to save IP to preferences");
+      return false;
+    }
+  }
   return true;
 }

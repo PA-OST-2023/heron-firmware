@@ -31,16 +31,14 @@
 ******************************************************************************/
 
 #include <Arduino.h>
+#include <EthernetUtils.h>
 #include <audioUtils.h>
 #include <console.h>
 #include <gui.h>
 #include <hmi.h>
+#include <preferences.h>
 #include <sensors.h>
 #include <utils.h>
-#include <EthernetUtils.h>
-
-#include <EEPROM.h>
-#include <OSFS.h>
 
 
 #define TFT_SCLK   13
@@ -68,29 +66,6 @@ static Sensors sensors;
 static EthernetUtils ethernet;
 
 
-uint16_t OSFS::startOfEEPROM = 1;
-uint16_t OSFS::endOfEEPROM = 4096;
-
-void OSFS::readNBytes(uint16_t address, unsigned int num, byte* output)
-{
-  for(uint16_t i = address; i < address + num; i++)
-  {
-    *output = EEPROM.read(i);
-    output++;
-  }
-}
-
-// 4) How to I write to the medium?
-void OSFS::writeNBytes(uint16_t address, unsigned int num, const byte* input)
-{
-  for(uint16_t i = address; i < address + num; i++)
-  {
-    EEPROM.update(i, *input);
-    input++;
-  }
-}
-
-
 void setup()
 {
   console.begin();
@@ -100,30 +75,24 @@ void setup()
   hmi.begin(utils);
   sensors.begin(utils);
   ethernet.begin(utils, audio);
-  gui.begin(utils, hmi, audio, sensors);
+  gui.begin(utils, hmi, audio, ethernet, sensors);
 
-  if(OSFS::checkLibVersion() != OSFS::result::NO_ERROR)
-  {
-    console.warning.println("[MAIN] OSFS not formatted, formatting now...");
-    OSFS::format();
-    console.log.println("[MAIN] OSFS formatted");
-  }
-  else
-  {
-    console.ok.println("[MAIN] OSFS initialized");
-  }
-
-
-  int counter = 0;
-  if(OSFS::getFile("counter", counter) != OSFS::result::NO_ERROR)
-  {
-    console.warning.println("[MAIN] Counter not found, creating now...");
-    counter = 1;    // default to 1
-    OSFS::newFile("counter", counter);
-  }
+  uint32_t counter = utils.preferences.getUInt("test", 0);     // Default value is 0
   console.log.printf("Reboot count: %d\n", counter);
   counter++;
-  OSFS::newFile("counter", counter, true);    // overwrite existing file
+  utils.preferences.putULong("test", counter);
+
+
+
+  // if(OSFS::getFile("counter", counter) != OSFS::result::NO_ERROR)
+  // {
+  //   console.warning.println("[MAIN] Counter not found, creating now...");
+  //   counter = 1;    // default to 1
+  //   OSFS::newFile("counter", counter);
+  // }
+  // console.log.printf("Reboot count: %d\n", counter);
+  // counter++;
+  // OSFS::newFile("counter", counter, true);    // overwrite existing file
 
   // console.log.println(F("Storing a string"));
   // char testStr[15] = "this is a test";
@@ -157,13 +126,6 @@ void loop()
   {
     sensorT = millis();
     sensors.update(&sensors);    // TODO: Remove and run in thread
-  }
-
-  static bool once = false;
-  if(millis() > 10000 && !once)
-  {
-    once = true;
-    ethernet.setIp(192, 168, 40, 80);
   }
 
   static uint32_t t = 0;

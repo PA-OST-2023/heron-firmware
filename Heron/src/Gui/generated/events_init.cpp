@@ -18,6 +18,12 @@
 #ifdef PLATFORMIO
 #include "../../gui.h"
 #endif
+#ifdef PLATFORMIO
+#include "../../gui.h"
+#endif
+#ifdef PLATFORMIO
+#include "../../gui.h"
+#endif
 static void screen_bootup_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -150,6 +156,22 @@ void events_init_screen_ethernet(lv_ui *ui)
 	lv_obj_add_event_cb(ui->screen_ethernet_btn_setup, screen_ethernet_btn_setup_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_ethernet_btn_back, screen_ethernet_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
+static void screen_ethernet_setup_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_SCREEN_LOADED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenEthernetSetupLoaded();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
 static void screen_ethernet_setup_btn_confirm_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -169,6 +191,9 @@ static void screen_ethernet_setup_btn_confirm_event_handler (lv_event_t *e)
 	    }
 		lv_obj_clear_flag(guider_ui.screen_ethernet_setup_cont_confirmed, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(guider_ui.screen_ethernet_setup_cont_confirmed_background, LV_OBJ_FLAG_HIDDEN);
+		#ifdef PLATFORMIO
+	Gui::callbackScreenEthernetSetupConfirmed();
+	#endif
 		break;
 	}
 	default:
@@ -200,6 +225,7 @@ static void screen_ethernet_setup_btn_back_event_handler (lv_event_t *e)
 }
 void events_init_screen_ethernet_setup(lv_ui *ui)
 {
+	lv_obj_add_event_cb(ui->screen_ethernet_setup, screen_ethernet_setup_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_confirm, screen_ethernet_setup_btn_confirm_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_back, screen_ethernet_setup_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
@@ -238,7 +264,7 @@ static void screen_compass_btn_calib_event_handler (lv_event_t *e)
 	        guider_ui.screen_compass_del = true;
 	    }
 		#ifdef PLATFORMIO
-	Gui::callbackScreenEthernetCalibrationStart();
+	Gui::callbackScreenCompassCalibrationStart();
 	#endif
 		break;
 	}
@@ -293,7 +319,7 @@ static void screen_compass_calib_btn_back_event_handler (lv_event_t *e)
 	        guider_ui.screen_compass_calib_del = true;
 	    }
 		#ifdef PLATFORMIO
-	Gui::callbackScreenEthernetCalibrationAbort();
+	Gui::callbackScreenCompassCalibrationAbort();
 	#endif
 		break;
 	}

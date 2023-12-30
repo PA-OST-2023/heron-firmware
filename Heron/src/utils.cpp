@@ -46,6 +46,13 @@ Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, in
 FLASHMEM bool Utils::begin(const char* storageName)
 {
   bool res = true;
+
+  if(!preferences.begin())
+  {
+    console.error.println("[UTILS] Failed to initialize preferences");
+    res = false;
+  }
+
   mtpEnabled = storageName != nullptr;
   if(mtpEnabled)
   {
@@ -178,42 +185,3 @@ void Utils::update(void)    // Make sure this function is non-blocking!
     t = millis();
   }
 }
-
-// bool Utils::storeChannelEnabled(const bool* channelEnabled, int count)
-// {
-//   uint32_t channels = 0x00000000;
-//   for(int i = 0; i < count; i++)
-//   {
-//     if(channelEnabled[i])
-//     {
-//       bitSet(channels, i);
-//     }
-//   }
-//   console.log.printf("[UTILS] EEPROM Store channel enabled: 0x%08X\n", channels);
-//   return EEPROM.put(EEPROM_ADDR_CHANNEL_ENABLED, channels) != 0;
-// }
-
-// void Utils::loadChannelEnabled(bool* channelEnabled, int count)
-// {
-//   uint32_t channels;
-//   EEPROM.get(EEPROM_ADDR_CHANNEL_ENABLED, channels);
-//   console.log.printf("[UTILS] EEPROM Load channel enabled: 0x%08X\n", channels);
-//   for(int i = 0; i < count; i++)
-//   {
-//     channelEnabled[i] = bitRead(channels, i);
-//   }
-// }
-
-// bool Utils::storeChannelNumber(int channelNumber)
-// {
-//   console.log.printf("[UTILS] EEPROM Store channel number: %d\n", channelNumber);
-//   return EEPROM.put(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber) != 0;
-// }
-
-// int Utils::loadChannelNumber(void)
-// {
-//   int channelNumber = 0;
-//   EEPROM.get(EEPROM_ADDR_CHANNEL_NUMBER, channelNumber);
-//   console.log.printf("[UTILS] EEPROM Load channel number: %d\n", channelNumber);
-//   return channelNumber;
-// }
