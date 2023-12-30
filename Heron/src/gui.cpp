@@ -123,25 +123,32 @@ void Gui::update(void)
   {
     t = millis();
 
-    updateScreenHome();
-    updateScreenEthernet();
-    updateScreenCompass();
-    updateScreenCompassCalibrate();
+    bool screenLoaded = false;
+    screenLoaded |= updateScreenHome();
+    screenLoaded |= updateScreenEthernet();
+    screenLoaded |= updateScreenCompass();
+    screenLoaded |= updateScreenCompassCalibrate();
+    if(screenLoaded)
+    {
+      console.log.println("[GUI] New screen loaded");
+    }
   }
   lv_task_handler();
 }
 
 // Screen update functions
 
-void Gui::updateScreenHome(void)
+FLASHMEM bool Gui::updateScreenHome(void)
 {
+  static bool screenFreshlyLoaded = true;
   if(lv_scr_act() != guider_ui.screen_home)
   {
-    return;
+    screenFreshlyLoaded = true;
+    return false;
   }
 
   static uint32_t rtcTimer = 0;
-  if(millis() - rtcTimer > 1000)    // Update time every second
+  if(millis() - rtcTimer > 1000 || screenFreshlyLoaded)    // Update time every second
   {
     rtcTimer = millis();
     uint8_t hour, minute, second;
@@ -154,7 +161,7 @@ void Gui::updateScreenHome(void)
 
   static bool linkState = false;
   static bool streamingState = false;
-  if(linkState != ethernetUtils->getLinkStatus() || streamingState != ethernetUtils->getStreamingState())
+  if(linkState != ethernetUtils->getLinkStatus() || streamingState != ethernetUtils->getStreamingState() || screenFreshlyLoaded)
   {
     linkState = ethernetUtils->getLinkStatus();
     streamingState = ethernetUtils->getStreamingState();
@@ -168,7 +175,7 @@ void Gui::updateScreenHome(void)
   }
 
   static Utils::UsbStatus_t usbStatus = (Utils::UsbStatus_t)-1;
-  if(usbStatus != utils->getUsbStatus())
+  if(usbStatus != utils->getUsbStatus() || screenFreshlyLoaded)
   {
     usbStatus = utils->getUsbStatus();
     lv_color_t color = lv_color_hex(0x000000);
@@ -192,18 +199,24 @@ void Gui::updateScreenHome(void)
   // TODO: Implement GNSS Status
 
   // TODO: Implement warning screen
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
 }
 
-void Gui::updateScreenEthernet(void)
+FLASHMEM bool Gui::updateScreenEthernet(void)
 {
+  static bool screenFreshlyLoaded = true;
   if(lv_scr_act() != guider_ui.screen_ethernet)
   {
-    return;
+    screenFreshlyLoaded = true;
+    return false;
   }
 
   static float updateRate = 0.0;
   static float bufferSize = 0.0;
-  if(updateRate != audioUtils->getDataRateMBit())
+  if(updateRate != audioUtils->getDataRateMBit() || screenFreshlyLoaded)
   {
     updateRate = audioUtils->getDataRateMBit();
     static char buffer[14];
@@ -212,7 +225,7 @@ void Gui::updateScreenEthernet(void)
     lv_meter_set_indicator_end_value(guider_ui.screen_ethernet_meter_speed, guider_ui.screen_ethernet_meter_speed_scale_1_arc_1,
                                      (int)map(constrain(updateRate, 0.0, 70.0), 0.0, 70.0, 0, 100));
   }
-  if(bufferSize != audioUtils->getBufferFillLevelPercent())
+  if(bufferSize != audioUtils->getBufferFillLevelPercent() || screenFreshlyLoaded)
   {
     bufferSize = audioUtils->getBufferFillLevelPercent();
     static char buffer[14];
@@ -223,7 +236,7 @@ void Gui::updateScreenEthernet(void)
   }
 
   static bool streamingPortConnectionState = false;
-  if(streamingPortConnectionState != ethernetUtils->getStreamingConnectionStatus())
+  if(streamingPortConnectionState != ethernetUtils->getStreamingConnectionStatus() || screenFreshlyLoaded)
   {
     streamingPortConnectionState = ethernetUtils->getStreamingConnectionStatus();
     lv_color_t color = (streamingPortConnectionState) ? lv_color_hex(0x00FF00) : lv_color_hex(0x757478);
@@ -235,7 +248,7 @@ void Gui::updateScreenEthernet(void)
   }
 
   static bool configurationPortConnectionState = false;
-  if(configurationPortConnectionState != ethernetUtils->getConfigurationConnectionStatus())
+  if(configurationPortConnectionState != ethernetUtils->getConfigurationConnectionStatus() || screenFreshlyLoaded)
   {
     configurationPortConnectionState = ethernetUtils->getConfigurationConnectionStatus();
     lv_color_t color = (configurationPortConnectionState) ? lv_color_hex(0x00FF00) : lv_color_hex(0x757478);
@@ -245,21 +258,33 @@ void Gui::updateScreenEthernet(void)
     lv_obj_set_style_shadow_color(guider_ui.screen_ethernet_cont_configuration_port, color, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_opa(guider_ui.screen_ethernet_cont_configuration_port, shadow, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
 }
 
-void Gui::updateScreenEthernetSetup(void)
+FLASHMEM bool Gui::updateScreenEthernetSetup(void)
 {
+  static bool screenFreshlyLoaded = true;
   if(lv_scr_act() != guider_ui.screen_ethernet_setup)
   {
-    return;
+    screenFreshlyLoaded = true;
+    return false;
   }
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
 }
 
-void Gui::updateScreenCompass(void)
+FLASHMEM bool Gui::updateScreenCompass(void)
 {
+  static bool screenFreshlyLoaded = true;
   if(lv_scr_act() != guider_ui.screen_compass)
   {
-    return;
+    screenFreshlyLoaded = true;
+    return false;
   }
 
   static float heading = 0.0;
@@ -269,7 +294,7 @@ void Gui::updateScreenCompass(void)
   static const float dotScale = 2.0;    // Pixels per degree
 
   float headingInverted = 360.0 - sensors->getHeading();
-  if(heading != headingInverted)
+  if(heading != headingInverted || screenFreshlyLoaded)
   {
     heading = headingInverted;
     static char buffer[20];
@@ -280,7 +305,7 @@ void Gui::updateScreenCompass(void)
     lv_color_t color = (heading > 3.0 && heading < 357.0) ? lv_color_hex(0xD200AC) : lv_color_hex(0x00C92C);
     lv_obj_set_style_text_color(guider_ui.screen_compass_label_needle, color, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  if(pitch != sensors->getPitch() || roll != sensors->getRoll())
+  if(pitch != sensors->getPitch() || roll != sensors->getRoll() || screenFreshlyLoaded)
   {
     pitch = sensors->getPitch();
     roll = sensors->getRoll();
@@ -307,13 +332,19 @@ void Gui::updateScreenCompass(void)
     lv_obj_set_style_bg_color(guider_ui.screen_compass_cont_dot, color, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_pos(guider_ui.screen_compass_cont_dot, newX, newY);
   }
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
 }
 
-void Gui::updateScreenCompassCalibrate(void)
+FLASHMEM bool Gui::updateScreenCompassCalibrate(void)
 {
+  static bool screenFreshlyLoaded = true;
   if(lv_scr_act() != guider_ui.screen_compass_calib)
   {
-    return;
+    screenFreshlyLoaded = true;
+    return false;
   }
 
   static float calibCoverage = 0.0;
@@ -322,7 +353,7 @@ void Gui::updateScreenCompassCalibrate(void)
   static float calibFitError = 0.0;
   static bool calibDone = false;
 
-  if(calibCoverage != sensors->getCalibCoverage())
+  if(calibCoverage != sensors->getCalibCoverage() || screenFreshlyLoaded)
   {
     calibCoverage = sensors->getCalibCoverage();
     static char buffer[10];
@@ -331,21 +362,21 @@ void Gui::updateScreenCompassCalibrate(void)
     lv_meter_set_indicator_end_value(guider_ui.screen_compass_calib_meter_coverage, guider_ui.screen_compass_calib_meter_coverage_scale_1_arc_1,
                                      (int)map(constrain(calibCoverage, 0.0, 100.0), 0.0, 100.0, 0, 100));
   }
-  if(calibWobbleError != sensors->getCalibWobbleError())
+  if(calibWobbleError != sensors->getCalibWobbleError() || screenFreshlyLoaded)
   {
     calibWobbleError = sensors->getCalibWobbleError();
     static char buffer[25];
     snprintf(buffer, sizeof(buffer), "Wobble Error: %.1f %%", calibWobbleError);
     lv_label_set_text_static(guider_ui.screen_compass_calib_label_wobble_error, buffer);
   }
-  if(calibFitError != sensors->getCalibFitError())
+  if(calibFitError != sensors->getCalibFitError() || screenFreshlyLoaded)
   {
     calibFitError = sensors->getCalibFitError();
     static char buffer[25];
     snprintf(buffer, sizeof(buffer), "Fit Error: %.1f %%", calibFitError);
     lv_label_set_text_static(guider_ui.screen_compass_calib_label_fit_error, buffer);
   }
-  if(calibVariance != sensors->getCalibVariance())
+  if(calibVariance != sensors->getCalibVariance() || screenFreshlyLoaded)
   {
     calibVariance = sensors->getCalibVariance();
     static char buffer[20];
@@ -372,6 +403,10 @@ void Gui::updateScreenCompassCalibrate(void)
     lv_obj_clear_flag(guider_ui.screen_compass_calib_cont_successful_background, LV_OBJ_FLAG_HIDDEN);
   }
   calibDone = sensors->isCalibrationDone();
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
 }
 
 

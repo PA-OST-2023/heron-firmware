@@ -33,6 +33,8 @@
 #include "ethernetUtils.h"
 #include <console.h>
 
+DMAMEM StaticJsonDocument<EthernetUtils::DEVICE_DATA_JSON_SIZE> EthernetUtils::deviceDataJson;
+DMAMEM StaticJsonDocument<EthernetUtils::COMMAND_JSON_SIZE> EthernetUtils::commandJson;
 
 FLASHMEM bool EthernetUtils::begin(Utils& utilsRef, AudioUtils& audioUtilsRef)
 {
@@ -60,6 +62,15 @@ FLASHMEM bool EthernetUtils::begin(Utils& utilsRef, AudioUtils& audioUtilsRef)
   else
   {
     console.ok.println("[ETHERNET] Audio server started");
+  }
+
+  if(!configServer.begin(ETHERNET_CONFIG_PORT))
+  {
+    console.error.printf("[ETHERNET] Could not start server on port %d\n", ETHERNET_CONFIG_PORT);
+  }
+  else
+  {
+    console.ok.printf("[ETHERNET] Server started on port %d\n", ETHERNET_CONFIG_PORT);
   }
 
   initialized = true;
@@ -105,7 +116,11 @@ bool EthernetUtils::getStreamingConnectionStatus(void)
 
 bool EthernetUtils::getConfigurationConnectionStatus(void)
 {
-  return false && getLinkStatus();    // TODO: Implement
+  if(!configClient || !getLinkStatus())
+  {
+    return false;
+  }
+  return configClient.connected();
 }
 
 bool EthernetUtils::getStreamingState(void)
@@ -120,5 +135,111 @@ void EthernetUtils::update(void)
     return;
   }
   Ethernet.loop();
+  handleConfigServer();
   digitalWrite(linkLed, getLinkStatus());
+}
+
+void EthernetUtils::handleConfigServer(bool verbose)
+{
+  bool connected = false;
+  if(!configClient)
+  {                                             // If there's no existing client...
+    configClient = configServer.available();    // Check for a new client
+  }
+  if(configClient && configClient.connected())
+  {
+    connected = true;
+    if(configClient.available())    // Check if the client has sent any data
+    {
+      String req = configClient.readStringUntil('\r');    // Read the first line of the request
+      configClient.flush();
+      if(req.indexOf("GET") != -1)
+      {
+        if(!sendJsonResponse(configClient))
+        {
+          console.error.println("[ETHERNET] Failed to send JSON response");
+        }
+      }
+      else if(req.indexOf("POST") != -1)
+      {
+        if(!receiveAndHandleJson(configClient))
+        {
+          console.error.println("[ETHERNET] Failed to receive and handle JSON");
+        }
+      }
+    }
+  }
+  else if(configClient)    // If the client was previously connected but is now disconnected
+  {
+    configClient.stop();
+    configClient = EthernetClient();    // Reset the global client object
+  }
+
+  static bool clientConnected = false;
+  if((clientConnected != connected) && verbose)
+  {
+    console.log.printf("[ETHERNET] Configuration Client %s\n", clientConnected ? "connected" : "disconnected");
+  }
+  clientConnected = connected;
+}
+
+bool EthernetUtils::sendJsonResponse(EthernetClient& client, bool verbose)
+{
+  if(verbose)
+  {
+    console.log.println("[ETHERNET] Sending JSON response");
+    serializeJson(deviceDataJson, console);
+    console.log.println();
+  }
+  client.println(F("HTTP/1.1 200 OK"));
+  client.println(F("Content-Type: application/json"));
+  client.println(F("Connection: close"));
+  client.print(F("Content-Length: "));
+  client.println(measureJsonPretty(deviceDataJson));
+  client.println();
+  serializeJsonPretty(deviceDataJson, client);    // Write JSON document
+  return true;
+}
+
+bool EthernetUtils::receiveAndHandleJson(EthernetClient& client)
+{
+  String header = "";    // Read the complete HTTP header
+  while(client.available())
+  {
+    char c = client.read();
+    header += c;
+    if(c == '\n' && header.endsWith("\r\n\r\n"))
+    {
+      break;
+    }
+  }
+
+  int contentLength = 0;
+  int index = header.indexOf("Content-Length: ");
+  if(index != -1)    // Find the Content-Length header
+  {
+    int start = index + 16;    // Length of "Content-Length: "
+    int end = header.indexOf("\r", start);
+    contentLength = header.substring(start, end).toInt();
+  }
+
+  String json = "";    // Allocate a buffer to store the HTTP body
+  while(json.length() < contentLength && client.available())
+  {
+    json += (char)client.read();
+  }
+  DeserializationError error = deserializeJson(commandJson, json);    // Deserialize the JSON document
+  if(error)
+  {
+    console.error.printf("[ETHERNET] deserializeJson() failed: %s\n", error.c_str());
+    return false;
+  }
+  commandJsonReceived = true;
+
+  client.println(F("HTTP/1.1 200 OK"));    // Send a simple response
+  client.println(F("Content-Type: text/plain"));
+  client.println(F("Connection: close"));
+  client.println();
+  client.println(F("JSON received"));
+  return true;
 }

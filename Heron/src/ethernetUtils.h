@@ -34,6 +34,7 @@
 #define ETHERNET_UTILS_H
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
 #include <QNEthernet.h>
 #include <audioUtils.h>
 #include <utils.h>
@@ -49,6 +50,9 @@ using namespace qindesign::network;
 class EthernetUtils
 {
  public:
+  static constexpr const size_t DEVICE_DATA_JSON_SIZE = 4096;    // JSON File size for sending data to client
+  static constexpr const size_t COMMAND_JSON_SIZE = 1024;        // JSON File size for receiving commands from client
+
   typedef enum
   {
     ETH_DISCONNECTED,
@@ -71,7 +75,17 @@ class EthernetUtils
   bool getStreamingConnectionStatus(void);
   bool getConfigurationConnectionStatus(void);
   bool getStreamingState(void);
-  void update(void);  
+  bool commandJsonAvailable(bool clearNotifcation = true)
+  {
+    bool res = commandJsonReceived;
+    if(clearNotifcation)
+      commandJsonReceived = false;
+    return res;
+  }
+  StaticJsonDocument<DEVICE_DATA_JSON_SIZE>& deviceData(void) { return deviceDataJson; }
+  StaticJsonDocument<COMMAND_JSON_SIZE>& commandData(void) { return commandJson; }
+
+  void update(void);
 
  private:
   int linkLed = -1;
@@ -82,7 +96,18 @@ class EthernetUtils
   IPAddress gateway = IPAddress(ETHERNET_DEFAULT_GATEWAY);
   IPAddress subnet = IPAddress(ETHERNET_DEFAULT_SUBNET);
 
+  EthernetServer configServer;
+  EthernetClient configClient;
+
+  static StaticJsonDocument<DEVICE_DATA_JSON_SIZE> deviceDataJson;    // Contains all device data (status, config, sensors), gets set from main app
+  static StaticJsonDocument<COMMAND_JSON_SIZE> commandJson;    // Contains all commands from client, can be read out by main app (check notifcation)
+
   volatile bool initialized = false;
+  volatile bool commandJsonReceived = false;
+
+  void handleConfigServer(bool verbose = false);
+  bool sendJsonResponse(EthernetClient& client, bool verbose = false);
+  bool receiveAndHandleJson(EthernetClient& client);
 };
 
 #endif

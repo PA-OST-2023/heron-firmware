@@ -51,12 +51,12 @@ FLASHMEM bool AudioUtils::begin(void)
   {
     if(!adau7118[i].begin(i & 1, ADAU7118::DECIMATION_RATIO_64))
     {
-      console.error.printf("[AUDIO] Failed to initialize ADAU7118 %d\n", i);
+      console.error.printf("[AUDIO UTILS] Failed to initialize ADAU7118 %d\n", i);
       return false;
     }
     adau7118[i].setHighPassFilter(ADAU7118::FILTER_27_474HZ);
   }
-  console.log.println("[AUDIO] Initialized ADAU7118");
+  console.log.println("[AUDIO UTILS] Initialized ADAU7118");
 
   threads.addThread(update, this, 4096);
   return true;
@@ -66,7 +66,7 @@ bool AudioUtils::startServer(int port)
 {
   if(serverRunning)
   {
-    console.warning.println("[AUDIO] Server is already running -> stop it first");
+    console.warning.println("[AUDIO UTILS] Server is already running -> stop it first");
     transmitter.end();
   }
   return transmitter.begin(port);
@@ -76,7 +76,7 @@ bool AudioUtils::stopServer(void)
 {
   if(!serverRunning)
   {
-    console.warning.println("[AUDIO] Server is not running!");
+    console.warning.println("[AUDIO UTILS] Server is not running!");
     return false;
   }
   transmitter.end();
@@ -105,17 +105,17 @@ void AudioUtils::update(void* parameter)
       t = millis();
       if(ref->transmitter.getConnectionState())
       {
-        console.log.printf("[AUDIO] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n",
+        console.log.printf("[AUDIO UTILS] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n",
                            (ref->transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0, ref->transmitter.getBufferFillLevel() * 100.0);
       }
       else
       {
-        console.warning.println("[AUDIO] No client connected.");
+        console.warning.println("[AUDIO UTILS] No client connected.");
       }
     }
     if(ref->transmitter.getBufferOverflowDetected())
     {
-      console.warning.println("[AUDIO] Buffer overflow detected.");
+      console.warning.println("[AUDIO UTILS] Buffer overflow detected.");
     }
 
     threads.delay(1000.0 / UPDATE_RATE);

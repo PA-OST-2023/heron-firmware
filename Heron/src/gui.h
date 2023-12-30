@@ -91,11 +91,11 @@ class Gui
   bool flagWarning = false;
 
   // Screen update functions
-  void updateScreenHome(void);
-  void updateScreenEthernet(void);
-  void updateScreenEthernetSetup(void);
-  void updateScreenCompass(void);
-  void updateScreenCompassCalibrate(void);
+  bool updateScreenHome(void);
+  bool updateScreenEthernet(void);
+  bool updateScreenEthernetSetup(void);
+  bool updateScreenCompass(void);
+  bool updateScreenCompassCalibrate(void);
 
   static Utils* utils;
   static Hmi* hmi;

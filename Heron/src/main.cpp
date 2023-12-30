@@ -40,8 +40,6 @@
 #include <sensors.h>
 #include <utils.h>
 
-#include <ArduinoJson.h>
-
 
 #define TFT_SCLK   13
 #define TFT_MOSI   11
@@ -69,12 +67,6 @@ static EthernetUtils ethernet(LINK_LED);
 static Sensors sensors;
 
 
-EthernetServer server;
-
-void handleServer(void);
-void sendJsonResponse(EthernetClient& client);
-void receiveAndHandleJson(EthernetClient& client);
-
 void setup()
 {
   console.begin();
@@ -89,15 +81,7 @@ void setup()
   // hmi.buzzer.playMelody(MELODIE_POWER_ON);
   // TODO: Add watchdog
 
-  const int port = 6667;
-  if(!server.begin(port))
-  {
-    console.error.printf("[MAIN] Could not start server on port %d\n", port);
-  }
-  else
-  {
-    console.ok.printf("[MAIN] Server started on port %d\n", port);
-  }
+  ethernet.deviceData()["device"] = "Heron";
 }
 
 void loop()
@@ -107,13 +91,20 @@ void loop()
   utils.update();
   ethernet.update();
 
-  handleServer();
-
   static uint32_t sensorT = 0;
   if(millis() - sensorT > 10)
   {
     sensorT = millis();
     sensors.update(&sensors);    // TODO: Remove and run in thread
+  }
+
+  if(ethernet.commandJsonAvailable())
+  {
+    if(ethernet.commandData().containsKey("index"))
+    {
+      int index = ethernet.commandData()["index"];
+      console.log.printf("[MAIN] Received index: %d\n", index);
+    }
   }
 
   static uint32_t t = 0;
@@ -123,110 +114,4 @@ void loop()
     // console.log.printf("[MAIN] Time: %d\n", t);
     // console.log.printf("[MAIN] Heading: %.1f, Pitch: %.1f, Roll: %.1f\n", sensors.getHeading(), sensors.getPitch(), sensors.getRoll());
   }
-}
-
-void handleServer()
-{
-  EthernetClient client = server.available();
-
-  // Do we have a client?
-  if(!client)
-    return;
-
-  console.log.println(F("New client"));
-
-  // Check if we have an incoming request
-  if(client.available())
-  {
-    // Read the first line of the request
-    String req = client.readStringUntil('\r');
-    client.flush();
-
-    // Determine the type of HTTP request
-    if(req.indexOf("GET") != -1)
-    {
-      sendJsonResponse(client);
-    }
-    else if(req.indexOf("POST") != -1)
-    {
-      receiveAndHandleJson(client);
-    }
-  }
-
-  // Disconnect
-  client.stop();
-}
-
-void sendJsonResponse(EthernetClient& client)
-{
-  StaticJsonDocument<500> doc;
-
-  // Add millis to json file
-  doc["millis"] = millis();
-
-  console.log.print(F("Sending: "));
-  serializeJson(doc, console);
-  console.log.println();
-
-  // Write response headers
-  client.println(F("HTTP/1.1 200 OK"));
-  client.println(F("Content-Type: application/json"));
-  client.println(F("Connection: close"));
-  client.print(F("Content-Length: "));
-  client.println(measureJsonPretty(doc));
-  client.println();
-
-  // Write JSON document
-  serializeJsonPretty(doc, client);
-}
-
-void receiveAndHandleJson(EthernetClient& client) {
-  // Read the complete HTTP header
-  String header = "";
-  while (client.available()) {
-    char c = client.read();
-    header += c;
-    if (c == '\n' && header.endsWith("\r\n\r\n")) {
-      break;
-    }
-  }
-
-  // Find the Content-Length header
-  int contentLength = 0;
-  int index = header.indexOf("Content-Length: ");
-  if (index != -1) {
-    int start = index + 16; // Length of "Content-Length: "
-    int end = header.indexOf("\r", start);
-    contentLength = header.substring(start, end).toInt();
-  }
-
-  // Read the JSON data
-  String json = "";
-  while (json.length() < contentLength && client.available()) {
-    json += (char)client.read();
-  }
-
-  // Deserialize the JSON document
-  StaticJsonDocument<500> doc;
-  DeserializationError error = deserializeJson(doc, json);
-
-  if (error) {
-    console.log.print(F("deserializeJson() failed: "));
-    console.log.println(error.c_str());
-    return;
-  }
-
-  // Handle the JSON document
-  if (doc.containsKey("index")) {
-    int index = doc["index"];
-    console.log.print(F("Received index: "));
-    console.log.println(index);
-  }
-
-  // Send a simple response
-  client.println(F("HTTP/1.1 200 OK"));
-  client.println(F("Content-Type: text/plain"));
-  client.println(F("Connection: close"));
-  client.println();
-  client.println(F("JSON received"));
 }
