@@ -53,8 +53,7 @@ class EthernetUtils
   {
     ETH_DISCONNECTED,
     ETH_CONNECTED,
-    ETH_STREAMING
-  } EthStatus_t;
+  } EthLinkStatus_t;
 
   EthernetUtils(int link_led) : linkLed(link_led) {}
   bool begin(Utils& utilsRef, AudioUtils& audioUtilsRef);
@@ -68,7 +67,10 @@ class EthernetUtils
   }
   int getStreamingPort(void) { return ETHERNET_STREAMING_PORT; }
   int getConfigPort(void) { return ETHERNET_CONFIG_PORT; }
-  EthStatus_t getStatus(void);
+  bool getLinkStatus(void);
+  bool getStreamingConnectionStatus(void);
+  bool getConfigurationConnectionStatus(void);
+  bool getStreamingState(void);
   void update(void);  
 
  private:

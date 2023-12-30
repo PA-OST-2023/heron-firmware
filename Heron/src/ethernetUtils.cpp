@@ -93,21 +93,24 @@ bool EthernetUtils::setIp(uint8_t ip_0, uint8_t ip_1, uint8_t ip_2, uint8_t ip_3
   return true;
 }
 
-EthernetUtils::EthStatus_t EthernetUtils::getStatus(void)
+bool EthernetUtils::getLinkStatus(void)
 {
-  if(!initialized)
-  {
-    return ETH_DISCONNECTED;
-  }
-  if(Ethernet.linkStatus() == LinkON)
-  {
-    if(audioUtils->getDataRateMBit() > 0)
-    {
-      return ETH_STREAMING;
-    }
-    return ETH_CONNECTED;
-  }
-  return ETH_DISCONNECTED;
+  return Ethernet.linkStatus() == LinkON;
+}
+
+bool EthernetUtils::getStreamingConnectionStatus(void)
+{
+  return audioUtils->getConnectionStatus() && getLinkStatus();
+}
+
+bool EthernetUtils::getConfigurationConnectionStatus(void)
+{
+  return false && getLinkStatus();    // TODO: Implement
+}
+
+bool EthernetUtils::getStreamingState(void)
+{
+  return audioUtils->getDataRateMBit() > 0;
 }
 
 void EthernetUtils::update(void)
@@ -117,5 +120,5 @@ void EthernetUtils::update(void)
     return;
   }
   Ethernet.loop();
-  digitalWrite(linkLed, Ethernet.linkStatus() == LinkON);
+  digitalWrite(linkLed, getLinkStatus());
 }

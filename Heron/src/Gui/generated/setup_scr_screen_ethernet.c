@@ -138,12 +138,43 @@ FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screen_ethernet_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_ethernet_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
+	//Write codes screen_ethernet_meter_buffer
+	ui->screen_ethernet_meter_buffer = lv_meter_create(ui->screen_ethernet);
+	// add scale screen_ethernet_meter_buffer_scale_1
+	lv_meter_scale_t *screen_ethernet_meter_buffer_scale_1 = lv_meter_add_scale(ui->screen_ethernet_meter_buffer);
+	lv_meter_set_scale_ticks(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 2, 1, 1, lv_color_hex(0x101418));
+
+	// add arc for screen_ethernet_meter_buffer_scale_1
+	ui->screen_ethernet_meter_buffer_scale_1_arc_0 = lv_meter_add_arc(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 10, lv_color_hex(0x757478), -1);
+	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_0, 0);
+	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_0, 100);
+
+	// add arc for screen_ethernet_meter_buffer_scale_1
+	ui->screen_ethernet_meter_buffer_scale_1_arc_1 = lv_meter_add_arc(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 10, lv_color_hex(0x2195f6), -1);
+	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_1, 0);
+	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_1, 0);
+	lv_obj_set_pos(ui->screen_ethernet_meter_buffer, 128, 66);
+	lv_obj_set_size(ui->screen_ethernet_meter_buffer, 80, 80);
+
+	//Write style for screen_ethernet_meter_buffer, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_meter_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_meter_buffer, 200, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_ethernet_meter_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_meter_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style for screen_ethernet_meter_buffer, Part: LV_PART_TICKS, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_text_color(ui->screen_ethernet_meter_buffer, lv_color_hex(0xffffff), LV_PART_TICKS|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_meter_buffer, &lv_font_montserratMedium_14, LV_PART_TICKS|LV_STATE_DEFAULT);
+
+	//Write style for screen_ethernet_meter_buffer, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_meter_buffer, 0, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+
 	//Write codes screen_ethernet_label_buffer
 	ui->screen_ethernet_label_buffer = lv_label_create(ui->screen_ethernet);
 	lv_label_set_text(ui->screen_ethernet_label_buffer, "0 %");
 	lv_label_set_long_mode(ui->screen_ethernet_label_buffer, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_ethernet_label_buffer, 130, 146);
-	lv_obj_set_size(ui->screen_ethernet_label_buffer, 85, 15);
+	lv_obj_set_pos(ui->screen_ethernet_label_buffer, 128, 131);
+	lv_obj_set_size(ui->screen_ethernet_label_buffer, 80, 15);
 
 	//Write style for screen_ethernet_label_buffer, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_ethernet_label_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -160,43 +191,12 @@ FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screen_ethernet_label_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_ethernet_label_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_ethernet_meter_buffer
-	ui->screen_ethernet_meter_buffer = lv_meter_create(ui->screen_ethernet);
-	// add scale screen_ethernet_meter_buffer_scale_1
-	lv_meter_scale_t *screen_ethernet_meter_buffer_scale_1 = lv_meter_add_scale(ui->screen_ethernet_meter_buffer);
-	lv_meter_set_scale_ticks(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 2, 1, 1, lv_color_hex(0x101418));
-
-	// add arc for screen_ethernet_meter_buffer_scale_1
-	ui->screen_ethernet_meter_buffer_scale_1_arc_0 = lv_meter_add_arc(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 10, lv_color_hex(0x757478), -1);
-	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_0, 0);
-	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_0, 100);
-
-	// add arc for screen_ethernet_meter_buffer_scale_1
-	ui->screen_ethernet_meter_buffer_scale_1_arc_1 = lv_meter_add_arc(ui->screen_ethernet_meter_buffer, screen_ethernet_meter_buffer_scale_1, 10, lv_color_hex(0x2195f6), -1);
-	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_1, 0);
-	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_buffer, ui->screen_ethernet_meter_buffer_scale_1_arc_1, 0);
-	lv_obj_set_pos(ui->screen_ethernet_meter_buffer, 130, 74);
-	lv_obj_set_size(ui->screen_ethernet_meter_buffer, 85, 85);
-
-	//Write style for screen_ethernet_meter_buffer, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screen_ethernet_meter_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_ethernet_meter_buffer, 200, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screen_ethernet_meter_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_ethernet_meter_buffer, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-
-	//Write style for screen_ethernet_meter_buffer, Part: LV_PART_TICKS, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_text_color(ui->screen_ethernet_meter_buffer, lv_color_hex(0xffffff), LV_PART_TICKS|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_ethernet_meter_buffer, &lv_font_montserratMedium_14, LV_PART_TICKS|LV_STATE_DEFAULT);
-
-	//Write style for screen_ethernet_meter_buffer, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screen_ethernet_meter_buffer, 0, LV_PART_INDICATOR|LV_STATE_DEFAULT);
-
 	//Write codes screen_ethernet_label_buffer_title
 	ui->screen_ethernet_label_buffer_title = lv_label_create(ui->screen_ethernet);
 	lv_label_set_text(ui->screen_ethernet_label_buffer_title, "Buffer");
 	lv_label_set_long_mode(ui->screen_ethernet_label_buffer_title, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_ethernet_label_buffer_title, 130, 64);
-	lv_obj_set_size(ui->screen_ethernet_label_buffer_title, 85, 15);
+	lv_obj_set_pos(ui->screen_ethernet_label_buffer_title, 128, 60);
+	lv_obj_set_size(ui->screen_ethernet_label_buffer_title, 80, 15);
 
 	//Write style for screen_ethernet_label_buffer_title, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_ethernet_label_buffer_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -213,12 +213,43 @@ FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screen_ethernet_label_buffer_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_ethernet_label_buffer_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
+	//Write codes screen_ethernet_meter_speed
+	ui->screen_ethernet_meter_speed = lv_meter_create(ui->screen_ethernet);
+	// add scale screen_ethernet_meter_speed_scale_1
+	lv_meter_scale_t *screen_ethernet_meter_speed_scale_1 = lv_meter_add_scale(ui->screen_ethernet_meter_speed);
+	lv_meter_set_scale_ticks(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 2, 1, 1, lv_color_hex(0x101418));
+
+	// add arc for screen_ethernet_meter_speed_scale_1
+	ui->screen_ethernet_meter_speed_scale_1_arc_0 = lv_meter_add_arc(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 10, lv_color_hex(0x757478), -1);
+	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_0, 0);
+	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_0, 100);
+
+	// add arc for screen_ethernet_meter_speed_scale_1
+	ui->screen_ethernet_meter_speed_scale_1_arc_1 = lv_meter_add_arc(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 10, lv_color_hex(0xD200AC), -1);
+	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_1, 0);
+	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_1, 0);
+	lv_obj_set_pos(ui->screen_ethernet_meter_speed, 28, 66);
+	lv_obj_set_size(ui->screen_ethernet_meter_speed, 80, 80);
+
+	//Write style for screen_ethernet_meter_speed, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_meter_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_meter_speed, 200, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_ethernet_meter_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_meter_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style for screen_ethernet_meter_speed, Part: LV_PART_TICKS, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_text_color(ui->screen_ethernet_meter_speed, lv_color_hex(0xffffff), LV_PART_TICKS|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_meter_speed, &lv_font_montserratMedium_14, LV_PART_TICKS|LV_STATE_DEFAULT);
+
+	//Write style for screen_ethernet_meter_speed, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_meter_speed, 0, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+
 	//Write codes screen_ethernet_label_speed
 	ui->screen_ethernet_label_speed = lv_label_create(ui->screen_ethernet);
 	lv_label_set_text(ui->screen_ethernet_label_speed, "00.0 MBit/s");
 	lv_label_set_long_mode(ui->screen_ethernet_label_speed, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_ethernet_label_speed, 25, 146);
-	lv_obj_set_size(ui->screen_ethernet_label_speed, 85, 15);
+	lv_obj_set_pos(ui->screen_ethernet_label_speed, 28, 131);
+	lv_obj_set_size(ui->screen_ethernet_label_speed, 80, 15);
 
 	//Write style for screen_ethernet_label_speed, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_ethernet_label_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -235,43 +266,12 @@ FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screen_ethernet_label_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_ethernet_label_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_ethernet_meter_speed
-	ui->screen_ethernet_meter_speed = lv_meter_create(ui->screen_ethernet);
-	// add scale screen_ethernet_meter_speed_scale_1
-	lv_meter_scale_t *screen_ethernet_meter_speed_scale_1 = lv_meter_add_scale(ui->screen_ethernet_meter_speed);
-	lv_meter_set_scale_ticks(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 2, 1, 1, lv_color_hex(0x101418));
-
-	// add arc for screen_ethernet_meter_speed_scale_1
-	ui->screen_ethernet_meter_speed_scale_1_arc_0 = lv_meter_add_arc(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 10, lv_color_hex(0x757478), -1);
-	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_0, 0);
-	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_0, 100);
-
-	// add arc for screen_ethernet_meter_speed_scale_1
-	ui->screen_ethernet_meter_speed_scale_1_arc_1 = lv_meter_add_arc(ui->screen_ethernet_meter_speed, screen_ethernet_meter_speed_scale_1, 10, lv_color_hex(0xD200AC), -1);
-	lv_meter_set_indicator_start_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_1, 0);
-	lv_meter_set_indicator_end_value(ui->screen_ethernet_meter_speed, ui->screen_ethernet_meter_speed_scale_1_arc_1, 0);
-	lv_obj_set_pos(ui->screen_ethernet_meter_speed, 25, 74);
-	lv_obj_set_size(ui->screen_ethernet_meter_speed, 85, 85);
-
-	//Write style for screen_ethernet_meter_speed, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screen_ethernet_meter_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_ethernet_meter_speed, 200, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screen_ethernet_meter_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_ethernet_meter_speed, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-
-	//Write style for screen_ethernet_meter_speed, Part: LV_PART_TICKS, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_text_color(ui->screen_ethernet_meter_speed, lv_color_hex(0xffffff), LV_PART_TICKS|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_ethernet_meter_speed, &lv_font_montserratMedium_14, LV_PART_TICKS|LV_STATE_DEFAULT);
-
-	//Write style for screen_ethernet_meter_speed, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screen_ethernet_meter_speed, 0, LV_PART_INDICATOR|LV_STATE_DEFAULT);
-
 	//Write codes screen_ethernet_label_speed_title
 	ui->screen_ethernet_label_speed_title = lv_label_create(ui->screen_ethernet);
 	lv_label_set_text(ui->screen_ethernet_label_speed_title, "Speed");
 	lv_label_set_long_mode(ui->screen_ethernet_label_speed_title, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_ethernet_label_speed_title, 25, 64);
-	lv_obj_set_size(ui->screen_ethernet_label_speed_title, 85, 15);
+	lv_obj_set_pos(ui->screen_ethernet_label_speed_title, 28, 60);
+	lv_obj_set_size(ui->screen_ethernet_label_speed_title, 80, 15);
 
 	//Write style for screen_ethernet_label_speed_title, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_ethernet_label_speed_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -287,6 +287,100 @@ FLASHMEM void setup_scr_screen_ethernet(lv_ui *ui)
 	lv_obj_set_style_pad_bottom(ui->screen_ethernet_label_speed_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_left(ui->screen_ethernet_label_speed_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_ethernet_label_speed_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_ethernet_label_streaming_port
+	ui->screen_ethernet_label_streaming_port = lv_label_create(ui->screen_ethernet);
+	lv_label_set_text(ui->screen_ethernet_label_streaming_port, "Streaming Port:");
+	lv_label_set_long_mode(ui->screen_ethernet_label_streaming_port, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_ethernet_label_streaming_port, 20, 176);
+	lv_obj_set_size(ui->screen_ethernet_label_streaming_port, 150, 15);
+
+	//Write style for screen_ethernet_label_streaming_port, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_ethernet_label_streaming_port, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_label_streaming_port, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_ethernet_label_streaming_port, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_label_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_ethernet_label_configuration_port
+	ui->screen_ethernet_label_configuration_port = lv_label_create(ui->screen_ethernet);
+	lv_label_set_text(ui->screen_ethernet_label_configuration_port, "Configuration Port:");
+	lv_label_set_long_mode(ui->screen_ethernet_label_configuration_port, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_ethernet_label_configuration_port, 20, 156);
+	lv_obj_set_size(ui->screen_ethernet_label_configuration_port, 150, 15);
+
+	//Write style for screen_ethernet_label_configuration_port, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_ethernet_label_configuration_port, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_ethernet_label_configuration_port, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_ethernet_label_configuration_port, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_label_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_ethernet_cont_configuration_port
+	ui->screen_ethernet_cont_configuration_port = lv_obj_create(ui->screen_ethernet);
+	lv_obj_set_pos(ui->screen_ethernet_cont_configuration_port, 177, 159);
+	lv_obj_set_size(ui->screen_ethernet_cont_configuration_port, 10, 10);
+	lv_obj_set_scrollbar_mode(ui->screen_ethernet_cont_configuration_port, LV_SCROLLBAR_MODE_OFF);
+
+	//Write style for screen_ethernet_cont_configuration_port, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_ethernet_cont_configuration_port, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screen_ethernet_cont_configuration_port, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screen_ethernet_cont_configuration_port, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screen_ethernet_cont_configuration_port, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_cont_configuration_port, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_cont_configuration_port, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_ethernet_cont_configuration_port, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_ethernet_cont_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_ethernet_cont_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_ethernet_cont_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_ethernet_cont_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_cont_configuration_port, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_color(ui->screen_ethernet_cont_configuration_port, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_opa(ui->screen_ethernet_cont_configuration_port, 69, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_spread(ui->screen_ethernet_cont_configuration_port, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_ofs_x(ui->screen_ethernet_cont_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_ofs_y(ui->screen_ethernet_cont_configuration_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_ethernet_cont_streaming_port
+	ui->screen_ethernet_cont_streaming_port = lv_obj_create(ui->screen_ethernet);
+	lv_obj_set_pos(ui->screen_ethernet_cont_streaming_port, 177, 179);
+	lv_obj_set_size(ui->screen_ethernet_cont_streaming_port, 10, 10);
+	lv_obj_set_scrollbar_mode(ui->screen_ethernet_cont_streaming_port, LV_SCROLLBAR_MODE_OFF);
+
+	//Write style for screen_ethernet_cont_streaming_port, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_ethernet_cont_streaming_port, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screen_ethernet_cont_streaming_port, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screen_ethernet_cont_streaming_port, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screen_ethernet_cont_streaming_port, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_ethernet_cont_streaming_port, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_ethernet_cont_streaming_port, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_ethernet_cont_streaming_port, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_ethernet_cont_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_ethernet_cont_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_ethernet_cont_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_ethernet_cont_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_ethernet_cont_streaming_port, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_color(ui->screen_ethernet_cont_streaming_port, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_opa(ui->screen_ethernet_cont_streaming_port, 69, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_spread(ui->screen_ethernet_cont_streaming_port, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_ofs_x(ui->screen_ethernet_cont_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_ofs_y(ui->screen_ethernet_cont_streaming_port, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Update current screen layout.
 	lv_obj_update_layout(ui->screen_ethernet);

@@ -58,12 +58,16 @@ typedef struct
 	lv_obj_t *screen_ethernet_btn_back_label;
 	lv_obj_t *screen_ethernet_label_back;
 	lv_obj_t *screen_ethernet_label_title;
-	lv_obj_t *screen_ethernet_label_buffer;
 	lv_obj_t *screen_ethernet_meter_buffer;
+	lv_obj_t *screen_ethernet_label_buffer;
 	lv_obj_t *screen_ethernet_label_buffer_title;
-	lv_obj_t *screen_ethernet_label_speed;
 	lv_obj_t *screen_ethernet_meter_speed;
+	lv_obj_t *screen_ethernet_label_speed;
 	lv_obj_t *screen_ethernet_label_speed_title;
+	lv_obj_t *screen_ethernet_label_streaming_port;
+	lv_obj_t *screen_ethernet_label_configuration_port;
+	lv_obj_t *screen_ethernet_cont_configuration_port;
+	lv_obj_t *screen_ethernet_cont_streaming_port;
 	lv_obj_t *screen_ethernet_setup;
 	bool screen_ethernet_setup_del;
 	lv_obj_t *screen_ethernet_setup_label_dot_2;

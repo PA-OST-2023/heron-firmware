@@ -152,24 +152,17 @@ void Gui::updateScreenHome(void)
     lv_obj_invalidate(guider_ui.screen_home_label_current_time);
   }
 
-  static EthernetUtils::EthStatus_t ethStatus = (EthernetUtils::EthStatus_t)-1;
-  if(ethStatus != ethernetUtils->getStatus())
+  static bool linkState = false;
+  static bool streamingState = false;
+  if(linkState != ethernetUtils->getLinkStatus() || streamingState != ethernetUtils->getStreamingState())
   {
-    ethStatus = ethernetUtils->getStatus();
-    lv_color_t color = lv_color_hex(0x000000);
-    switch(ethStatus)
+    linkState = ethernetUtils->getLinkStatus();
+    streamingState = ethernetUtils->getStreamingState();
+    lv_color_t color = lv_color_hex(0x444447);    // Gray if disconnected
+    if(linkState)
     {
-      case EthernetUtils::ETH_DISCONNECTED:
-        color = lv_color_hex(0x444447);
-        break;
-      case EthernetUtils::ETH_CONNECTED:
-        color = lv_color_hex(0xFFFFFF);
-        break;
-      case EthernetUtils::ETH_STREAMING:
-        color = lv_color_hex(0x00FF00);
-        break;
-      default:
-        break;
+      color = (streamingState) ? lv_color_hex(0x00FF00)
+                               : lv_color_hex(0xFFFFFF);    // Green if connected and streaming, white if connected but not streaming
     }
     lv_obj_set_style_text_color(guider_ui.screen_home_label_ethernet_status, color, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
@@ -227,6 +220,30 @@ void Gui::updateScreenEthernet(void)
     lv_label_set_text_static(guider_ui.screen_ethernet_label_buffer, buffer);
     lv_meter_set_indicator_end_value(guider_ui.screen_ethernet_meter_buffer, guider_ui.screen_ethernet_meter_buffer_scale_1_arc_1,
                                      (int)map(constrain(bufferSize, 0.0, 100.0), 0.0, 100.0, 0, 100));
+  }
+
+  static bool streamingPortConnectionState = false;
+  if(streamingPortConnectionState != ethernetUtils->getStreamingConnectionStatus())
+  {
+    streamingPortConnectionState = ethernetUtils->getStreamingConnectionStatus();
+    lv_color_t color = (streamingPortConnectionState) ? lv_color_hex(0x00FF00) : lv_color_hex(0x757478);
+    uint8_t shadow = (streamingPortConnectionState) ? 69 : 0;    // Shadow only if connected
+    lv_obj_set_style_border_color(guider_ui.screen_ethernet_cont_streaming_port, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(guider_ui.screen_ethernet_cont_streaming_port, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(guider_ui.screen_ethernet_cont_streaming_port, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(guider_ui.screen_ethernet_cont_streaming_port, shadow, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+
+  static bool configurationPortConnectionState = false;
+  if(configurationPortConnectionState != ethernetUtils->getConfigurationConnectionStatus())
+  {
+    configurationPortConnectionState = ethernetUtils->getConfigurationConnectionStatus();
+    lv_color_t color = (configurationPortConnectionState) ? lv_color_hex(0x00FF00) : lv_color_hex(0x757478);
+    uint8_t shadow = (configurationPortConnectionState) ? 69 : 0;    // Shadow only if connected
+    lv_obj_set_style_border_color(guider_ui.screen_ethernet_cont_configuration_port, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(guider_ui.screen_ethernet_cont_configuration_port, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(guider_ui.screen_ethernet_cont_configuration_port, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(guider_ui.screen_ethernet_cont_configuration_port, shadow, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
 }
 
@@ -442,7 +459,7 @@ void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
   Utils::lockWire(GUI_WIRE);
   bool available = touch->available();
   Utils::turnOffWire(GUI_WIRE);    // Somehow the touch controller locks up the I2C-Bus, so we have to turn it off and on again
-  delayMicroseconds(10);
+  delayMicroseconds(100);
   Utils::turnOnWire(GUI_WIRE);
   Utils::unlockWire(GUI_WIRE);
   if(available)
