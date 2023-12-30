@@ -115,7 +115,7 @@ void Sensors::update(void* parameter)
         tMag = millis();
         if(ref->mag.getEvent(&ref->mag_event))    // Check if magnetometer has new data
         {
-          float heading = ref->calculateHeadingCompensated(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);
+          float heading = ref->calculateHeading(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);     // TODO: Use compensated heading if tested
           ref->heading = (ref->HEADING_FILTER_ALPHA * heading) + ((1.0 - ref->HEADING_FILTER_ALPHA) * ref->heading);
         }
       }

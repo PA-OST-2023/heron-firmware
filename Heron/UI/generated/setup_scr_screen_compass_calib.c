@@ -149,7 +149,7 @@ void setup_scr_screen_compass_calib(lv_ui *ui)
 
 	//Write codes screen_compass_calib_label_coverage
 	ui->screen_compass_calib_label_coverage = lv_label_create(ui->screen_compass_calib);
-	lv_label_set_text(ui->screen_compass_calib_label_coverage, "100 %");
+	lv_label_set_text(ui->screen_compass_calib_label_coverage, "0 %");
 	lv_label_set_long_mode(ui->screen_compass_calib_label_coverage, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_calib_label_coverage, 80, 126);
 	lv_obj_set_size(ui->screen_compass_calib_label_coverage, 80, 18);
@@ -171,7 +171,7 @@ void setup_scr_screen_compass_calib(lv_ui *ui)
 
 	//Write codes screen_compass_calib_label_variance
 	ui->screen_compass_calib_label_variance = lv_label_create(ui->screen_compass_calib);
-	lv_label_set_text(ui->screen_compass_calib_label_variance, "Variance: 23.4");
+	lv_label_set_text(ui->screen_compass_calib_label_variance, "Variance: 0.0");
 	lv_label_set_long_mode(ui->screen_compass_calib_label_variance, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_calib_label_variance, 50, 212);
 	lv_obj_set_size(ui->screen_compass_calib_label_variance, 140, 18);
@@ -193,7 +193,7 @@ void setup_scr_screen_compass_calib(lv_ui *ui)
 
 	//Write codes screen_compass_calib_label_fit_error
 	ui->screen_compass_calib_label_fit_error = lv_label_create(ui->screen_compass_calib);
-	lv_label_set_text(ui->screen_compass_calib_label_fit_error, "Fit Error: 23.4 %");
+	lv_label_set_text(ui->screen_compass_calib_label_fit_error, "Fit Error: 0.0 %");
 	lv_label_set_long_mode(ui->screen_compass_calib_label_fit_error, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_calib_label_fit_error, 50, 198);
 	lv_obj_set_size(ui->screen_compass_calib_label_fit_error, 140, 18);
@@ -215,7 +215,7 @@ void setup_scr_screen_compass_calib(lv_ui *ui)
 
 	//Write codes screen_compass_calib_label_wobble_error
 	ui->screen_compass_calib_label_wobble_error = lv_label_create(ui->screen_compass_calib);
-	lv_label_set_text(ui->screen_compass_calib_label_wobble_error, "Wobble Error: 23.4 %");
+	lv_label_set_text(ui->screen_compass_calib_label_wobble_error, "Wobble Error: 0.0 %");
 	lv_label_set_long_mode(ui->screen_compass_calib_label_wobble_error, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_calib_label_wobble_error, 50, 184);
 	lv_obj_set_size(ui->screen_compass_calib_label_wobble_error, 140, 18);

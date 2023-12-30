@@ -37,15 +37,10 @@
 #include <hmi.h>
 #include <sensors.h>
 #include <utils.h>
-
-#include <QNEthernet.h>
-using namespace qindesign::network;
+#include <EthernetUtils.h>
 
 #include <EEPROM.h>
 #include <OSFS.h>
-
-// #include <Preferences.h>
-// Preferences prefs;
 
 
 #define TFT_SCLK   13
@@ -70,6 +65,7 @@ static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_BL, TCH_IRQ);
 static Hmi hmi(RGB_LED, HMI_BUZZER);
 static Sensors sensors;
+static EthernetUtils ethernet;
 
 
 uint16_t OSFS::startOfEEPROM = 1;
@@ -103,29 +99,8 @@ void setup()
   audio.begin();
   hmi.begin(utils);
   sensors.begin(utils);
+  ethernet.begin(utils, audio);
   gui.begin(utils, hmi, audio, sensors);
-
-  IPAddress ip(192, 168, 40, 80);
-  IPAddress subnet(255, 255, 255, 0);
-  IPAddress gateway(192, 168, 40, 1);
-
-  if(!Ethernet.begin(ip, subnet, gateway))
-  {
-    console.error.println("[MAIN] Failed to configure Ethernet using static IP");
-  }
-  if(!audio.startServer(6666))
-  {
-    console.error.println("[MAIN] Failed to start audio server");
-  }
-  else
-  {
-    console.ok.println("[MAIN] Audio server started");
-  }
-
-  // int counter = prefs.getInt("counter", 1);     // default to 1
-  // console.log.printf("Reboot count: %d\n", counter);
-  // counter++;
-  // prefs.putInt("counter", counter);
 
   if(OSFS::checkLibVersion() != OSFS::result::NO_ERROR)
   {
@@ -139,7 +114,7 @@ void setup()
   }
 
 
-  int counter = 999;
+  int counter = 0;
   if(OSFS::getFile("counter", counter) != OSFS::result::NO_ERROR)
   {
     console.warning.println("[MAIN] Counter not found, creating now...");
@@ -175,7 +150,7 @@ void loop()
   threads.yield();
   gui.update();
   utils.update();
-  Ethernet.loop();
+  ethernet.update();
 
   static uint32_t sensorT = 0;
   if(millis() - sensorT > 10)
@@ -184,12 +159,18 @@ void loop()
     sensors.update(&sensors);    // TODO: Remove and run in thread
   }
 
+  static bool once = false;
+  if(millis() > 10000 && !once)
+  {
+    once = true;
+    ethernet.setIp(192, 168, 40, 80);
+  }
+
   static uint32_t t = 0;
   if(millis() - t > 1000)
   {
     t = millis();
     // console.log.printf("[MAIN] Time: %d\n", t);
-
     // console.log.printf("[MAIN] Heading: %.1f, Pitch: %.1f, Roll: %.1f\n", sensors.getHeading(), sensors.getPitch(), sensors.getRoll());
   }
 }

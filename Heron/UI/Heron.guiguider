@@ -11164,7 +11164,7 @@
 					"width": 140,
 					"height": 18,
 					"default_style": false,
-					"text": "Wobble Error: 23.4 %",
+					"text": "Wobble Error: 0.0 %",
 					"long_mode": "LV_LABEL_LONG_WRAP",
 					"style": [
 						{
@@ -11253,7 +11253,7 @@
 					"width": 140,
 					"height": 18,
 					"default_style": false,
-					"text": "Fit Error: 23.4 %",
+					"text": "Fit Error: 0.0 %",
 					"long_mode": "LV_LABEL_LONG_WRAP",
 					"style": [
 						{
@@ -11342,7 +11342,7 @@
 					"width": 140,
 					"height": 18,
 					"default_style": false,
-					"text": "Variance: 23.4",
+					"text": "Variance: 0.0",
 					"long_mode": "LV_LABEL_LONG_WRAP",
 					"style": [
 						{
@@ -11431,7 +11431,7 @@
 					"width": 80,
 					"height": 18,
 					"default_style": false,
-					"text": "100 %",
+					"text": "0 %",
 					"long_mode": "LV_LABEL_LONG_WRAP",
 					"style": [
 						{
@@ -12564,7 +12564,7 @@
 			"height": "240"
 		},
 		"version": "test_v1",
-		"default_scr": "screen_compass",
+		"default_scr": "screen_bootup",
 		"theme": "LV_THEME_MATERIAL_FLAG_LIGHT",
 		"screen": [
 			{
@@ -20818,7 +20818,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"text": "100 %",
+						"text": "0 %",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"style": [
 							{
@@ -20911,7 +20911,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"text": "Variance: 23.4",
+						"text": "Variance: 0.0",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"style": [
 							{
@@ -21004,7 +21004,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"text": "Fit Error: 23.4 %",
+						"text": "Fit Error: 0.0 %",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"style": [
 							{
@@ -21097,7 +21097,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"text": "Wobble Error: 23.4 %",
+						"text": "Wobble Error: 0.0 %",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"style": [
 							{

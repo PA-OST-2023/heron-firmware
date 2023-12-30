@@ -34,6 +34,6 @@ void init_scr_del_flag(lv_ui *ui)
 void setup_ui(lv_ui *ui)
 {
   init_scr_del_flag(ui);
-  setup_scr_screen_compass(ui);
-  lv_scr_load(ui->screen_compass);
+  setup_scr_screen_bootup(ui);
+  lv_scr_load(ui->screen_bootup);
 }
