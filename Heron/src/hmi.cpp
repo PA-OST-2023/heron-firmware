@@ -48,7 +48,7 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
   delay(5);    // Avoid flickering by waiting dor DMA to be ready
   leds.show();
 
-  utils->lockWire(RTC_WIRE);
+  Utils::lockWire(RTC_WIRE);
   if(!rtc.begin(&RTC_WIRE))
   {
     console.error.println("[HMI] RTC could not be initialized");
@@ -60,7 +60,7 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
   rtc.start();
-  utils->unlockWire(RTC_WIRE);
+  Utils::unlockWire(RTC_WIRE);
 
   if(!buzzer.begin())
   {
@@ -78,16 +78,16 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
 void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)
 {
   DateTime time = DateTime(year, month, day, hour, minute, second);
-  utils->lockWire(RTC_WIRE);
+  Utils::lockWire(RTC_WIRE);
   rtc.adjust(time);
-  utils->unlockWire(RTC_WIRE);
+  Utils::unlockWire(RTC_WIRE);
 }
 
 void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
 {
-  utils->lockWire(RTC_WIRE);
+  Utils::lockWire(RTC_WIRE);
   DateTime time = rtc.now();
-  utils->unlockWire(RTC_WIRE);
+  Utils::unlockWire(RTC_WIRE);
   year = time.year();
   month = time.month();
   day = time.day();
@@ -98,9 +98,9 @@ void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hou
 
 void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
 {
-  utils->lockWire(RTC_WIRE);
+  Utils::lockWire(RTC_WIRE);
   DateTime time = rtc.now();
-  utils->unlockWire(RTC_WIRE);
+  Utils::unlockWire(RTC_WIRE);
   hour = time.hour();
   minute = time.minute();
   second = time.second();
@@ -108,9 +108,9 @@ void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
 
 void Hmi::getDate(uint16_t& year, uint8_t& month, uint8_t& day)
 {
-  utils->lockWire(RTC_WIRE);
+  Utils::lockWire(RTC_WIRE);
   DateTime time = rtc.now();
-  utils->unlockWire(RTC_WIRE);
+  Utils::unlockWire(RTC_WIRE);
   year = time.year();
   month = time.month();
   day = time.day();
@@ -121,7 +121,6 @@ void Hmi::update(void* parameter)
   Hmi* ref = (Hmi*)parameter;
   while(ref->initialized)
   {
-
     ref->leds.clear();
     if(ref->systemStatus != STATUS_BOOTUP)
     {

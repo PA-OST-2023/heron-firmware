@@ -24,6 +24,9 @@
 #ifdef PLATFORMIO
 #include "../../gui.h"
 #endif
+#ifdef PLATFORMIO
+#include "../../gui.h"
+#endif
 static void screen_bootup_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -100,10 +103,27 @@ static void screen_home_btn_compass_event_handler (lv_event_t *e)
 		break;
 	}
 }
+static void screen_home_btn_warning_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenHomeShowWarning();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
 void events_init_screen_home(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->screen_home_btn_ethernet, screen_home_btn_ethernet_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_btn_compass, screen_home_btn_compass_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_home_btn_warning, screen_home_btn_warning_event_handler, LV_EVENT_ALL, NULL);
 }
 static void screen_ethernet_btn_setup_event_handler (lv_event_t *e)
 {

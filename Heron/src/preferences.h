@@ -34,7 +34,6 @@
 #define PREFERENCES_H
 
 #include <Arduino.h>
-#include <EEPROM.h>
 #include <OSFS.h>
 
 class Preferences

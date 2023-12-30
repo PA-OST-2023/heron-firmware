@@ -40,7 +40,7 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
   utils = &utilsRef;
   bool res = true;
 
-  utils->lockWire(SENSOR_WIRE);
+  Utils::lockWire(SENSOR_WIRE);
   if(!mag.begin(ADDR_MAGNETOMETER, &SENSOR_WIRE))
   {
     console.error.println("[SENSORS] Magnetometer could not be initialized");
@@ -54,7 +54,7 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
   }
   accel.setRange(lsm303_accel_range_t::LSM303_RANGE_2G);
   accel.setMode(lsm303_accel_mode_t::LSM303_MODE_HIGH_RESOLUTION);
-  utils->unlockWire(SENSOR_WIRE);
+  Utils::unlockWire(SENSOR_WIRE);
 
   raw_data_reset();    // Reset calibration stack
 
@@ -106,8 +106,8 @@ void Sensors::update(void* parameter)
       console.log.println("[SENSORS] Starting magnetometer calibration...");
     }
 
-    // ref->utils->lockWire(SENSOR_WIRE);
-    
+    // Utils::lockWire(SENSOR_WIRE);
+
     // static uint32_t tAcc = 0;
     // if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
     // {
@@ -180,7 +180,7 @@ void Sensors::update(void* parameter)
         }
       }
     }
-    // ref->utils->unlockWire(SENSOR_WIRE);
+    // Utils::unlockWire(SENSOR_WIRE);
 
     // threads.delay(1000.0 / UPDATE_RATE);
   }

@@ -42,12 +42,13 @@ typedef struct
 	lv_obj_t *screen_home_btn_compass;
 	lv_obj_t *screen_home_btn_compass_label;
 	lv_obj_t *screen_home_cont_top_bar;
-	lv_obj_t *screen_home_btn_warning;
-	lv_obj_t *screen_home_btn_warning_label;
+	lv_obj_t *screen_home_label_warning;
 	lv_obj_t *screen_home_label_usb_status;
 	lv_obj_t *screen_home_label_ethernet_status;
 	lv_obj_t *screen_home_label_gnss_status;
 	lv_obj_t *screen_home_label_current_time;
+	lv_obj_t *screen_home_btn_warning;
+	lv_obj_t *screen_home_btn_warning_label;
 	lv_obj_t *screen_ethernet;
 	bool screen_ethernet_del;
 	lv_obj_t *screen_ethernet_btn_setup;

@@ -31,6 +31,7 @@
 ******************************************************************************/
 
 #include "preferences.h"
+#include <EEPROM.h>
 #include <console.h>
 
 bool Preferences::begin(void)

@@ -261,25 +261,28 @@ void setup_scr_screen_home(lv_ui *ui)
 	lv_obj_set_style_pad_right(ui->screen_home_cont_top_bar, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_home_cont_top_bar, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_home_btn_warning
-	ui->screen_home_btn_warning = lv_btn_create(ui->screen_home_cont_top_bar);
-	ui->screen_home_btn_warning_label = lv_label_create(ui->screen_home_btn_warning);
-	lv_label_set_text(ui->screen_home_btn_warning_label, "");
-	lv_label_set_long_mode(ui->screen_home_btn_warning_label, LV_LABEL_LONG_WRAP);
-	lv_obj_align(ui->screen_home_btn_warning_label, LV_ALIGN_RIGHT_MID, 0, 0);
-	lv_obj_set_style_pad_all(ui->screen_home_btn_warning, 0, LV_STATE_DEFAULT);
-	lv_obj_set_pos(ui->screen_home_btn_warning, 52, 23);
-	lv_obj_set_size(ui->screen_home_btn_warning, 136, 20);
-	lv_obj_add_flag(ui->screen_home_btn_warning, LV_OBJ_FLAG_HIDDEN);
+	//Write codes screen_home_label_warning
+	ui->screen_home_label_warning = lv_label_create(ui->screen_home_cont_top_bar);
+	lv_label_set_text(ui->screen_home_label_warning, "");
+	lv_label_set_long_mode(ui->screen_home_label_warning, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_home_label_warning, 168, 24);
+	lv_obj_set_size(ui->screen_home_label_warning, 22, 19);
+	lv_obj_add_flag(ui->screen_home_label_warning, LV_OBJ_FLAG_HIDDEN);
 
-	//Write style for screen_home_btn_warning, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screen_home_btn_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screen_home_btn_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_home_btn_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_home_btn_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_home_btn_warning, lv_color_hex(0xff8f00), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_home_btn_warning, &lv_font_FontAwesome5ProSolid_900_16, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screen_home_btn_warning, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for screen_home_label_warning, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_label_warning, lv_color_hex(0xff8f00), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_home_label_warning, &lv_font_FontAwesome5ProSolid_900_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_home_label_warning, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_home_label_warning, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_home_label_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Write codes screen_home_label_usb_status
 	ui->screen_home_label_usb_status = lv_label_create(ui->screen_home_cont_top_bar);
@@ -291,7 +294,7 @@ void setup_scr_screen_home(lv_ui *ui)
 	//Write style for screen_home_label_usb_status, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_home_label_usb_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_home_label_usb_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_home_label_usb_status, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_label_usb_status, lv_color_hex(0x444447), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_home_label_usb_status, &lv_font_FontAwesome5_15, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_home_label_usb_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screen_home_label_usb_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -313,7 +316,7 @@ void setup_scr_screen_home(lv_ui *ui)
 	//Write style for screen_home_label_ethernet_status, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_home_label_ethernet_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_home_label_ethernet_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_home_label_ethernet_status, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_label_ethernet_status, lv_color_hex(0x444447), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_home_label_ethernet_status, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_home_label_ethernet_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screen_home_label_ethernet_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -335,7 +338,7 @@ void setup_scr_screen_home(lv_ui *ui)
 	//Write style for screen_home_label_gnss_status, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_home_label_gnss_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_home_label_gnss_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_home_label_gnss_status, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_label_gnss_status, lv_color_hex(0x444447), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_home_label_gnss_status, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_home_label_gnss_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screen_home_label_gnss_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -368,6 +371,25 @@ void setup_scr_screen_home(lv_ui *ui)
 	lv_obj_set_style_pad_bottom(ui->screen_home_label_current_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_left(ui->screen_home_label_current_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_home_label_current_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_home_btn_warning
+	ui->screen_home_btn_warning = lv_btn_create(ui->screen_home);
+	ui->screen_home_btn_warning_label = lv_label_create(ui->screen_home_btn_warning);
+	lv_label_set_text(ui->screen_home_btn_warning_label, "");
+	lv_label_set_long_mode(ui->screen_home_btn_warning_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->screen_home_btn_warning_label, LV_ALIGN_LEFT_MID, 0, 0);
+	lv_obj_set_style_pad_all(ui->screen_home_btn_warning, 0, LV_STATE_DEFAULT);
+	lv_obj_set_pos(ui->screen_home_btn_warning, 0, 0);
+	lv_obj_set_size(ui->screen_home_btn_warning, 240, 50);
+
+	//Write style for screen_home_btn_warning, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_home_btn_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_home_btn_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_home_btn_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_home_btn_warning, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_btn_warning, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_home_btn_warning, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_home_btn_warning, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Update current screen layout.
 	lv_obj_update_layout(ui->screen_home);

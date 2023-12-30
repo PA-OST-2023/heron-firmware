@@ -61,13 +61,13 @@ FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef
   disp.begin(SPI_FREQUENCY, GC9A01A_SPICLOCK_READ);
   disp.fillScreen(GC9A01A_BLACK);
 
-  utils->lockWire(GUI_WIRE);
+  Utils::lockWire(GUI_WIRE);
   if(!touch.begin())
   {
     console.error.println("[GUI] Touch controller could not be initialized");
     res = false;
   }
-  utils->unlockWire(GUI_WIRE);
+  Utils::unlockWire(GUI_WIRE);
 
   lv_log_register_print_cb(lvglPrint);
   lv_init();
@@ -99,55 +99,6 @@ FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef
   return res;
 }
 
-void Gui::setTime(uint8_t hour, uint8_t minute)
-{
-  if((hour == this->hour) && (minute == this->minute))
-    return;
-  this->hour = hour;
-  this->minute = minute;
-  flagTime = true;
-  sprintf(bufferTime, "%02d:%02d", hour, minute);
-}
-
-void Gui::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)
-{
-  if((year == this->year) && (month == this->month) && (day == this->day) && (hour == this->hour) && (minute == this->minute) &&
-     (second == this->second))
-    return;
-  this->year = year;
-  this->month = month;
-  this->day = day;
-  this->hour = hour;
-  this->minute = minute;
-  this->second = second;
-  flagDate = true;
-  setTime(hour, minute);
-}
-
-void Gui::setSdCardStatus(SdCardStatus_t status)
-{
-  if(sdCardStatus == status)
-    return;
-  sdCardStatus = status;
-  flagSdCardStatus = true;
-}
-
-void Gui::setUsbStatus(UsbStatus_t status)
-{
-  if(usbStatus == status)
-    return;
-  usbStatus = status;
-  flagUsbStatus = true;
-}
-
-void Gui::setEthStatus(EthStatus_t status)
-{
-  if(ethStatus == status)
-    return;
-  ethStatus = status;
-  flagEthStatus = true;
-}
-
 void Gui::setSystemWarning(const char* warning)
 {
   if(warning)
@@ -172,6 +123,7 @@ void Gui::update(void)
   {
     t = millis();
 
+    updateScreenHome();
     updateScreenEthernet();
     updateScreenCompass();
     updateScreenCompassCalibrate();
@@ -179,6 +131,76 @@ void Gui::update(void)
   lv_task_handler();
 }
 
+// Screen update functions
+
+void Gui::updateScreenHome(void)
+{
+  if(lv_scr_act() != guider_ui.screen_home)
+  {
+    return;
+  }
+
+  static uint32_t rtcTimer = 0;
+  if(millis() - rtcTimer > 1000)    // Update time every second
+  {
+    rtcTimer = millis();
+    uint8_t hour, minute, second;
+    hmi->getTime(hour, minute, second);
+    console.log.printf("[GUI] Updating time to %02d:%02d:%02d\n", hour, minute, second);
+    static char buffer[10];
+    snprintf(buffer, sizeof(buffer), "%02d:%02d", hour, minute);
+    lv_label_set_text_static(guider_ui.screen_home_label_current_time, buffer);
+    lv_obj_invalidate(guider_ui.screen_home_label_current_time);
+  }
+
+  static EthernetUtils::EthStatus_t ethStatus = (EthernetUtils::EthStatus_t)-1;
+  if(ethStatus != ethernetUtils->getStatus())
+  {
+    ethStatus = ethernetUtils->getStatus();
+    lv_color_t color = lv_color_hex(0x000000);
+    switch(ethStatus)
+    {
+      case EthernetUtils::ETH_DISCONNECTED:
+        color = lv_color_hex(0x444447);
+        break;
+      case EthernetUtils::ETH_CONNECTED:
+        color = lv_color_hex(0xFFFFFF);
+        break;
+      case EthernetUtils::ETH_STREAMING:
+        color = lv_color_hex(0x00FF00);
+        break;
+      default:
+        break;
+    }
+    lv_obj_set_style_text_color(guider_ui.screen_home_label_ethernet_status, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+
+  static Utils::UsbStatus_t usbStatus = (Utils::UsbStatus_t)-1;
+  if(usbStatus != utils->getUsbStatus())
+  {
+    usbStatus = utils->getUsbStatus();
+    lv_color_t color = lv_color_hex(0x000000);
+    switch(usbStatus)
+    {
+      case Utils::USB_DISCONNECTED:
+        color = lv_color_hex(0x444447);
+        break;
+      case Utils::USB_CONNECTED:
+        color = lv_color_hex(0xFFFFFF);
+        break;
+      case Utils::USB_ACTIVE:
+        color = lv_color_hex(0x00FF00);
+        break;
+      default:
+        break;
+    }
+    lv_obj_set_style_text_color(guider_ui.screen_home_label_usb_status, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+
+  // TODO: Implement GNSS Status
+
+  // TODO: Implement warning screen
+}
 
 void Gui::updateScreenEthernet(void)
 {
@@ -339,6 +361,12 @@ void Gui::updateScreenCompassCalibrate(void)
 
 // Screen callback functions
 
+void Gui::callbackScreenHomeShowWarning(void)
+{
+  console.log.println("[GUI] [CALLBACK] Home screen show warning");
+  // TODO: Implement warning screen
+}
+
 void Gui::callbackScreenEthernetSetupLoaded(void)
 {
   console.log.println("[GUI] [CALLBACK] Ethernet Setup screen loaded");
@@ -412,9 +440,9 @@ void Gui::dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* c
 void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
 {
   CHSC6413* touch = (CHSC6413*)drv->user_data;
-  utils->lockWire(GUI_WIRE);
+  Utils::lockWire(GUI_WIRE);
   bool available = touch->available();
-  utils->unlockWire(GUI_WIRE);
+  Utils::unlockWire(GUI_WIRE);
   if(available)
   {
     int x = touch->x;

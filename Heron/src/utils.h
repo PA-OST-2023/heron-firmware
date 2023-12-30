@@ -34,8 +34,6 @@
 #define UTILS_H
 
 #include <Arduino.h>
-#include <MTP_Teensy.h>
-#include <SD.h>
 #include <TeensyThreads.h>
 #include <Wire.h>
 #include <preferences.h>
@@ -43,42 +41,45 @@
 class Utils
 {
  public:
-  static constexpr const float UPDATE_RATE = 1.0;    // Hz
+  static constexpr const float UPDATE_RATE = 10.0;    // Hz
     // static constexpr const size_t EXT_HEAP_SIZE = 4 * 1024 * 1024;    // n MB memory pool on the external ram chips
 
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_ENABLED = 0;
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_NUMBER = 4;
+  static constexpr const size_t SYS_WIRE_FREQENCY = 1000000;    // [Hz]
+  static constexpr const size_t HMI_WIRE_FREQENCY = 400000;     // [Hz]
+  static constexpr const size_t GPS_WIRE_FREQENCY = 400000;     // [Hz]
+
+  typedef enum
+  {
+    USB_DISCONNECTED,
+    USB_CONNECTED,
+    USB_ACTIVE
+  } UsbStatus_t;
 
   Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps);
-  bool begin(const char* storageName = nullptr);
+  bool begin(void);
   void update(void);
-  int scanWire(TwoWire& wire);
-  int lockWire(TwoWire& wire, int timeout = 0);
-  int unlockWire(TwoWire& wire);
-  bool isSdCardPresent(void) { return sdCardPresent; }
-  bool getSdCardError(void) { return sdCardError; }
-  bool usbConnected(void) { return !bitRead(USB1_PORTSC1, 7); }
-  float getSdCardTotalSizeMb(void) { return (float)sdCardTotalSize / 1048576.0; }
-  float getSdCardUsedSizeMb(void) { return (float)sdCardUsedSize / 1048576.0; }
-  int lockSdCardAccess(uint32_t timeout = 0) { return sdCardMutex.lock(timeout); }
-  int tryLockSdCardAccess(void) { return sdCardMutex.try_lock(); }
-  int unlockSdCardAccess(void) { return sdCardMutex.unlock(); }
+
+  UsbStatus_t getUsbStatus(void) { return usbStatus; }
+
+  static bool turnOnWire(TwoWire& wire);
+  static bool turnOffWire(TwoWire& wire);
+  static int scanWire(TwoWire& wire);
+  static int lockWire(TwoWire& wire, int timeout = 0);
+  static int unlockWire(TwoWire& wire);
 
   Preferences preferences;
 
  private:
-  const int scl_sys, sda_sys, scl_hmi, sda_hmi, scl_gps, sda_gps;
-  Threads::Mutex wireMutex[3];
-  Threads::Mutex sdCardMutex;
-  bool mtpEnabled = false;
-  bool sdCardScanAccess = true;
-  bool sdCardPresent = false;
-  bool sdCardError = false;
-  uint64_t sdCardTotalSize = 0;
-  uint64_t sdCardUsedSize = 0;
+  static int scl_sys, sda_sys, scl_hmi, sda_hmi, scl_gps, sda_gps;
+  static Threads::Mutex wireMutex[3];
+
+  UsbStatus_t usbStatus = USB_DISCONNECTED;
+
+  bool usbConnected(void) { return !bitRead(USB1_PORTSC1, 7); }
 
   // static uint8_t extHeap[EXT_HEAP_SIZE];
 };
-
 
 #endif

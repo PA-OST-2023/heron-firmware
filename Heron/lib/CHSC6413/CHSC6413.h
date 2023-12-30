@@ -36,25 +36,25 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#define CHSC6X_ADDRESS 0x2E
+#define CHSC6X_ADDRESS        0x2E
 #define CHSC6X_MAX_POINTS_NUM 1
 #define CHSC6X_READ_POINT_LEN 5
 
-#define CHSC6X_VF_FLA 0xC0   // VF flag for Full Link Address
-#define CHSC6X_RS_CHPID 0x04 // 4 in RS field indicates CHPID
+#define CHSC6X_VF_FLA         0xC0    // VF flag for Full Link Address
+#define CHSC6X_RS_CHPID       0x04    // 4 in RS field indicates CHPID
 
 class CHSC6413
 {
-public:
-  constexpr static const int INIT_RETRY_COUNT = 8; // Try multiple times (somehow 1 of 8 times, the chip does not respond)
+ public:
+  constexpr static const int INIT_RETRY_COUNT = 8;    // Try multiple times (somehow 1 of 8 times, the chip does not respond)
   constexpr static const int MAX_INVALID_COUNT = 12;
   constexpr static const int WIDTH = 240;
   constexpr static const int HEIGHT = 240;
-  constexpr static const int BUS_RESTART_DELAY = 25;  // [ms]
-  constexpr static const int INIT_RETRY_DELAY = 25;   // [ms]
-  constexpr static const int I2C_FREQUENCY = 1000000; // [Hz]
+  constexpr static const int BUS_RESTART_DELAY = 25;    // [ms]
+  constexpr static const int INIT_RETRY_DELAY = 25;     // [ms]
+  // constexpr static const int I2C_FREQUENCY = 10000000;    // [Hz]
 
-  CHSC6413(TwoWire *wire, int irq = -1);
+  CHSC6413(TwoWire* wire, int irq = -1);
   bool begin(int interrupt = RISING);
   void end();
   bool available();
@@ -62,8 +62,8 @@ public:
   volatile int x;
   volatile int y;
 
-private:
-  TwoWire *_wire = nullptr;
+ private:
+  TwoWire* _wire = nullptr;
   volatile int _irq = -1;
   volatile bool _event_available = false;
   volatile bool _continuous_mode = false;
@@ -71,7 +71,7 @@ private:
   int _invalidCount = 0;
 
   static void handleISR();
-  static CHSC6413 *ref;
+  static CHSC6413* ref;
 
   bool read_touch();
 };
