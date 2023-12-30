@@ -32,8 +32,10 @@
 
 #include <Arduino.h>
 #include <EthernetUtils.h>
+#include <app.h>
 #include <audioUtils.h>
 #include <console.h>
+#include <gnss.h>
 #include <gui.h>
 #include <hmi.h>
 #include <preferences.h>
@@ -60,28 +62,31 @@
 
 
 static AudioUtils audio;
+static EthernetUtils ethernet(LINK_LED);
 static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_BL, TCH_IRQ);
 static Hmi hmi(RGB_LED, HMI_BUZZER);
-static EthernetUtils ethernet(LINK_LED);
+static Gnss gnss(GPS_RST);
 static Sensors sensors;
+static App app;
 
 
 void setup()
 {
   console.begin();
-  console.log.println("[MAIN] Initialize System...");
   utils.begin();
   audio.begin();
   hmi.begin(utils);
   sensors.begin(utils);
+  gnss.begin(utils);
   ethernet.begin(utils, audio);
   gui.begin(utils, hmi, audio, ethernet, sensors);
   hmi.setSystemStatus(Hmi::STATUS_OK);
+  app.begin(audio, utils, gui, hmi, ethernet, gnss, sensors);
   // hmi.buzzer.playMelody(MELODIE_POWER_ON);
   // TODO: Add watchdog
 
-  ethernet.deviceData()["device"] = "Heron";
+  // ethernet.deviceData()["device"] = "Heron";
 }
 
 void loop()
@@ -98,14 +103,14 @@ void loop()
     sensors.update(&sensors);    // TODO: Remove and run in thread
   }
 
-  if(ethernet.commandJsonAvailable())
-  {
-    if(ethernet.commandData().containsKey("index"))
-    {
-      int index = ethernet.commandData()["index"];
-      console.log.printf("[MAIN] Received index: %d\n", index);
-    }
-  }
+  // if(ethernet.commandJsonAvailable())
+  // {
+  //   if(ethernet.commandData().containsKey("index"))
+  //   {
+  //     int index = ethernet.commandData()["index"];
+  //     console.log.printf("[MAIN] Received index: %d\n", index);
+  //   }
+  // }
 
   static uint32_t t = 0;
   if(millis() - t > 1000)
