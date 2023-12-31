@@ -85,6 +85,7 @@ class EthernetUtils
   StaticJsonDocument<DEVICE_DATA_JSON_SIZE>& deviceData(void) { return deviceDataJson; }
   StaticJsonDocument<COMMAND_JSON_SIZE>& commandData(void) { return commandJson; }
 
+  static const uint8_t* getMacAddress(void) { return Ethernet.macAddress(); }
   void update(void);
 
  private:

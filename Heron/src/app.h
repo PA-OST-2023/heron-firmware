@@ -63,6 +63,16 @@ class App
   volatile bool initialized = false;
 
   static void update(void* parameter);
+  void updateDeviceData(StaticJsonDocument<EthernetUtils::DEVICE_DATA_JSON_SIZE>& doc);
+  bool handleIncommingCommands(StaticJsonDocument<EthernetUtils::COMMAND_JSON_SIZE>& doc);
+
+  static const char* getBuildDate(void)
+  {
+    DateTime date = DateTime(F(__DATE__), F(__TIME__));
+    static char buffer[9];
+    snprintf(buffer, sizeof(buffer), "%02d%02d%02d", date.year() % 100, date.month(), date.day());
+    return buffer;
+  }
 };
 
 #endif

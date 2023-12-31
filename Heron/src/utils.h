@@ -69,6 +69,9 @@ class Utils
   static int lockWire(TwoWire& wire, int timeout = 0);
   static int unlockWire(TwoWire& wire);
 
+  static float getCpuTemperature(void) { return tempmonGetTemp();}
+  static int getCpuFrequency(void) { return F_CPU; }
+
   Preferences preferences;
 
  private:
