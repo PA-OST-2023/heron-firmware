@@ -76,17 +76,15 @@ void setup()
   console.begin();
   utils.begin();
   audio.begin();
+  gnss.begin(utils);
   hmi.begin(utils);
   sensors.begin(utils);
-  gnss.begin(utils);
   ethernet.begin(utils, audio);
   gui.begin(utils, hmi, audio, ethernet, sensors);
   hmi.setSystemStatus(Hmi::STATUS_OK);
   app.begin(audio, utils, gui, hmi, ethernet, gnss, sensors);
   // hmi.buzzer.playMelody(MELODIE_POWER_ON);
   // TODO: Add watchdog
-
-  // ethernet.deviceData()["device"] = "Heron";
 }
 
 void loop()
@@ -103,14 +101,15 @@ void loop()
     sensors.update(&sensors);    // TODO: Remove and run in thread
   }
 
-  // if(ethernet.commandJsonAvailable())
+  // static uint32_t gnssT = 0;
+  // if(millis() - gnssT > 1000)
   // {
-  //   if(ethernet.commandData().containsKey("index"))
-  //   {
-  //     int index = ethernet.commandData()["index"];
-  //     console.log.printf("[MAIN] Received index: %d\n", index);
-  //   }
+  //   gnssT = millis();
+  //   Gnss::update(&gnss);    // TODO: Remove and run in thread
+  //   console.log.printf("[GNSS] Lat: %f, Lon: %f, Alt: %f, MagDec: %f, Sats: %d, Fix: %d, FixType: %d\n", gnss.getLatitude(), gnss.getLongitude(),
+  //                      gnss.getAltitude(), gnss.getMagneticDeclination(), gnss.getSateliteCount(), gnss.getFix(), gnss.getFixType());
   // }
+
 
   static uint32_t t = 0;
   if(millis() - t > 1000)

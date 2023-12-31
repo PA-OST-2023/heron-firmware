@@ -41,7 +41,6 @@ bool Preferences::begin(void)
     console.warning.println("[PREFERENCES] OSFS not formatted, formatting now...");
     OSFS::format();
     console.log.println("[PREFERENCES] OSFS formatted");
-    return false;
   }
 
   console.ok.println("[PREFERENCES] OSFS initialized");

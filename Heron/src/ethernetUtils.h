@@ -52,6 +52,7 @@ class EthernetUtils
  public:
   static constexpr const size_t DEVICE_DATA_JSON_SIZE = 4096;    // JSON File size for sending data to client
   static constexpr const size_t COMMAND_JSON_SIZE = 1024;        // JSON File size for receiving commands from client
+  static constexpr const size_t CONFIG_SERVER_UPDATE_RATE = 10;  // Hz
 
   typedef enum
   {

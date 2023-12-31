@@ -34,25 +34,45 @@
 #define GNSS_H
 
 #include <Arduino.h>
+#include <SparkFun_u-blox_GNSS_Arduino_Library.h>
 #include <utils.h>
+
+#define GPS_WIRE Wire2    // Wire interface to use
 
 class Gnss
 {
  public:
-  static constexpr const float UPDATE_RATE = 10.0;    // Hz
+  static constexpr const float UPDATE_RATE = 5.0;    // Hz
 
   Gnss(int rst) : rstPin(rst) {}
   bool begin(Utils& utilsRef);
   void end(void);
+  float getLatitude(void) { return latitude; }
+  float getLongitude(void) { return longitude; }
+  float getAltitude(void) { return altitude; }
+  float getMagneticDeclination(void) { return magneticDeclination; }
+  int getSateliteCount(void) { return sateliteCount; }
+  bool getFix(void) { return fix; }
+  uint8_t getFixType(void) { return fixType; }
+
+  static void update(void* parameter);
 
  private:
   const int rstPin;
-
   Utils* utils = nullptr;
 
+  float latitude = 0.0;
+  float longitude = 0.0;
+  float altitude = 0.0;
+  float magneticDeclination = 0.0;
+  int sateliteCount = 0;
+  bool fix = false;
+  uint8_t fixType = 0;
+
+  SFE_UBLOX_GNSS gnss;
   volatile bool initialized = false;
 
-  static void update(void* parameter);
+  // static void update(void* parameter);
 };
 
 #endif

@@ -34,12 +34,28 @@
 #include <TeensyThreads.h>
 #include <console.h>
 
-bool Gnss::begin(Utils& utilsRef)
+bool Gnss::begin(Utils& utilsRef)    // Don't mess with the Reset Pin, somehow it causes the GNSS module to not work anymore
 {
   utils = &utilsRef;
 
+  if(!gnss.begin(GPS_WIRE))
+  {
+    console.error.println("[GNSS] GNSS module not detected");
+    return false;
+  }
+  else
+  {
+    console.ok.println("[GNSS] GNSS module initialized");
+  }
+
+  gnss.setI2COutput(COM_TYPE_UBX);                    // Set the I2C port to output UBX only (turn off NMEA noise)
+  gnss.saveConfigSelective(VAL_CFG_SUBSEC_IOPORT);    // Save (only) the communications port settings to flash and BBR
+  gnss.setNavigationFrequency(5);                     // Set output to 5 times a second
+
+  // gnss.enableDebugging(console, false);    // TODO: Remove
+
   initialized = true;
-  threads.addThread(update, this, 4096);
+  // threads.addThread(update, this, 8192);
   return true;
 }
 
@@ -52,10 +68,19 @@ void Gnss::update(void* parameter)
 {
   Gnss* ref = (Gnss*)parameter;
 
-
   while(ref->initialized)
   {
+    if(ref->gnss.getPVT())    // Check if new data is available
+    {
+      ref->latitude = ref->gnss.getLatitude() / 10000000.0;
+      ref->longitude = ref->gnss.getLongitude() / 10000000.0;
+      ref->altitude = ref->gnss.getAltitudeMSL() / 1000.0;
+      ref->magneticDeclination = ref->gnss.getMagDec();
+      ref->sateliteCount = ref->gnss.getSIV();
+      ref->fix = ref->gnss.getGnssFixOk();
+      ref->fixType = ref->gnss.getFixType();
+    }
 
-    threads.delay(1000.0 / UPDATE_RATE);
+    // threads.delay(1000.0 / UPDATE_RATE);
   }
 }

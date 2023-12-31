@@ -47,7 +47,7 @@ class Utils
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_ENABLED = 0;
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_NUMBER = 4;
   static constexpr const size_t SYS_WIRE_FREQENCY = 1000000;    // [Hz]
-  static constexpr const size_t HMI_WIRE_FREQENCY = 400000;     // [Hz]
+  static constexpr const size_t HMI_WIRE_FREQENCY = 1000000;     // [Hz]
   static constexpr const size_t GPS_WIRE_FREQENCY = 400000;     // [Hz]
 
   typedef enum

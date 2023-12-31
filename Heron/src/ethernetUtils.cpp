@@ -135,8 +135,14 @@ void EthernetUtils::update(void)
     return;
   }
   Ethernet.loop();
-  handleConfigServer();
-  digitalWrite(linkLed, getLinkStatus());
+
+  static uint32_t t = 0;
+  if(millis() - t > (1000.0 / CONFIG_SERVER_UPDATE_RATE))
+  {
+    t = millis();
+    handleConfigServer();
+    digitalWrite(linkLed, getLinkStatus());
+  }
 }
 
 void EthernetUtils::handleConfigServer(bool verbose)

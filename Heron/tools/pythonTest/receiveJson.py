@@ -30,7 +30,7 @@ def main():
     while True:
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.settimeout(0.5)  # Set a timeout
+                s.settimeout(1.0)  # Set a timeout
                 s.connect((ip, port))
 
                 while True:
