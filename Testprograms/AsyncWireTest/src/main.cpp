@@ -113,7 +113,23 @@ void loop()
     lv_task_handler();
   }
 
- 
+  static uint32_t sensorT = 0;
+  if(millis() - sensorT > 10)   
+  {
+    sensorT = millis();
+    sensors.update(&sensors);    // TODO: Remove and run in thread
+    // console.log.printf("[MAIN] Exceution Time Sensors: %d ms\n", millis() - sensorT);
+  }
+
+  // static uint32_t gnssT = 0;
+  // if (millis() - gnssT > 200)     // takes between 50 and 220 ms (~ 155 ms average)
+  // {
+  //   gnssT = millis();
+  //   Gnss::update(&gnss); // TODO: Remove and run in thread
+  //   console.log.printf("[MAIN] Exceution Time GNSS: %d ms\n", millis() - gnssT);
+  //   // console.log.printf("[GNSS] Lat: %f, Lon: %f, Alt: %f, MagDec: %f, Sats: %d, Fix: %d, FixType: %d\n", gnss.getLatitude(), gnss.getLongitude(),
+  //   //                    gnss.getAltitude(), gnss.getMagneticDeclination(), gnss.getSateliteCount(), gnss.getFix(), gnss.getFixType());
+  // }
 }
 
 void my_disp_flush(lv_disp_drv_t *dispDrv, const lv_area_t *area, lv_color_t *color_p)

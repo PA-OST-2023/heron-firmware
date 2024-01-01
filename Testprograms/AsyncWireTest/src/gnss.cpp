@@ -68,10 +68,11 @@ void Gnss::update(void* parameter)
 {
   Gnss* ref = (Gnss*)parameter;
 
-  while(ref->initialized)
+  // while(ref->initialized)
   {
     if(ref->gnss.getPVT())    // Check if new data is available
     {
+      uint32_t t = millis();
       ref->latitude = ref->gnss.getLatitude() / 10000000.0;
       ref->longitude = ref->gnss.getLongitude() / 10000000.0;
       ref->altitude = ref->gnss.getAltitudeMSL() / 1000.0;
@@ -79,6 +80,8 @@ void Gnss::update(void* parameter)
       ref->sateliteCount = ref->gnss.getSIV();
       ref->fix = ref->gnss.getGnssFixOk();
       ref->fixType = ref->gnss.getFixType();
+
+      // console.log.printf("[GNSS] %d ms\n", millis() - t);
     }
 
     // threads.delay(1000.0 / UPDATE_RATE);

@@ -38,18 +38,26 @@ bool Preferences::begin(void)
 {
   if(OSFS::checkLibVersion() != OSFS::result::NO_ERROR)
   {
-    console.warning.println("[PREFERENCES] OSFS not formatted, formatting now...");
-    OSFS::format();
-    console.log.println("[PREFERENCES] OSFS formatted");
+    OSFS::result res = OSFS::checkLibVersion();
+    console.warning.printf("[PREFERENCES] OSFS not formatted [Error: %d], formatting now...\n", res);
+    format();
+    if(OSFS::checkLibVersion() != OSFS::result::NO_ERROR)
+    {
+      console.error.println("[PREFERENCES] OSFS format failed");
+      return false;
+    }
   }
-
   console.ok.println("[PREFERENCES] OSFS initialized");
   return true;
 }
 
 void Preferences::format(void)
 {
-  OSFS::format();
+  if(OSFS::format() != OSFS::result::NO_ERROR)
+  {
+    console.error.println("[PREFERENCES] OSFS format failed");
+    return;
+  }
   console.log.println("[PREFERENCES] OSFS formatted");
 }
 

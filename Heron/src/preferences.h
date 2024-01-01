@@ -39,8 +39,8 @@
 class Preferences
 {
  public:
-  static constexpr const size_t EEPROM_START = 1;
-  static constexpr const size_t EEPROM_END = 4096;
+  static constexpr const size_t EEPROM_START = 0;
+  static constexpr const size_t EEPROM_END = 4095;
 
   Preferences() {}
   bool begin(void);

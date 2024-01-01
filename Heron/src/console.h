@@ -202,8 +202,8 @@ class Console : public Stream
   Stream& stream;
   SerialType type = Virtual_t;
   volatile bool initialized = false;
-  volatile bool enabled = false;          // Indicates if the stream is enabled (e.g. is set after USB MSC setup is done)
-  volatile bool streamActive = false;     // Indicates if the console is opened and data is tranmitted
+  volatile bool enabled = false;         // Indicates if the stream is enabled (e.g. is set after USB MSC setup is done)
+  volatile bool streamActive = false;    // Indicates if the console is opened and data is tranmitted
   static char ringBuffer[QUEUE_BUFFER_LENGTH];
   volatile uint32_t writeIdx = 0, readIdx = 0;
   Threads::Mutex bufferAccessMutex;

@@ -108,18 +108,19 @@ void Sensors::update(void* parameter)
 
     // Utils::lockWire(SENSOR_WIRE);
 
-    // static uint32_t tAcc = 0;
-    // if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
-    // {
-    //   tAcc = millis();
-    //   if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
-    //   {
-    //     float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-    //     ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
-    //     float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-    //     ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
-    //   }
-    // }
+    static uint32_t tAcc = 0;
+    if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
+    {
+      tAcc = millis();
+      if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
+      {
+        float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
+        ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
+        float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
+        ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
+        console.log.printf("[SENSORS] Time: %d, Pitch: %f, Roll: %f\n", millis() - tAcc, ref->pitch, ref->roll);
+      }
+    }
 
     static uint32_t tMag = 0;
     if(!ref->calibrationRunning)    // Normal operation
@@ -149,6 +150,7 @@ void Sensors::update(void* parameter)
           {
             ref->heading -= 360.0f;
           }
+          console.log.printf("[SENSORS] Time: %d, Heading: %f\n", millis() - tMag, ref->heading);
         }
       }
     }
