@@ -107,8 +107,9 @@ FLASHMEM void App::updateDeviceData(StaticJsonDocument<EthernetUtils::DEVICE_DAT
   doc["sensor_heading"] = sensors->getHeading();
   doc["sensor_pitch"] = sensors->getPitch();
   doc["sensor_roll"] = sensors->getRoll();
-  // Temperature
-  // Pressure
+  doc["sensor_temperature"] = sensors->getTemperature();
+  doc["sensor_pressure"] = sensors->getPressure();
+  doc["sensor_altitude"] = sensors->getAltitude();
   // Angle
 
   // GNSS Data

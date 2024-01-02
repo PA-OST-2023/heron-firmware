@@ -38,10 +38,13 @@
 #ifndef SENSORS_H
 #define SENSORS_H
 
+#include <AS5600.h>
 #include <Adafruit_LIS2MDL.h>
 #include <Adafruit_LSM303_Accel.h>
+#include <Adafruit_Sensor.h>
 #include <Arduino.h>
 #include <utils.h>
+#include "Adafruit_BMP3XX.h"
 
 #define SENSOR_WIRE Wire    // Wire interface to use
 
@@ -49,16 +52,20 @@ class Sensors
 {
  public:
   static constexpr const float UPDATE_RATE = 10.0;                       // Hz
+  static constexpr const size_t ACCEL_UPDATE_RATE = 10;                  // [Hz] Update rate for accelerometer
+  static constexpr const size_t MAGNETOMETER_UPDATE_RATE = 10;           // [Hz] Update rate for magnetometer
+  static constexpr const size_t BAROMETER_UPDATE_RATE = 5;               // [Hz] Update rate for barometer
+  static constexpr const size_t ANGLE_SENSOR_UPDATE_RATE = 10;           // [Hz] Update rate for angle sensor
+  static constexpr const size_t MAX_SENSOR_READOUT_DELAY = 25;           // [ms] Maximum delay for sensor readout
   static constexpr const double DEGREES_PER_RADIAN = (180.0 / M_PI);     // Degrees per radian for conversion
-  static constexpr const uint8_t ADDR_MAGNETOMETER = 0x1E;               // I2C address of the magnetometer
-  static constexpr const uint8_t ADDR_ACCELEROMETER = 0x19;              // I2C address of the accelerometer
   static constexpr const float MAGNETIC_DECLINATION = 3.0833;            // Magnetic declination in degrees for Zurich CH
   static constexpr const float HEADING_FILTER_ALPHA = 0.3;               // Filter alpha for heading (0.0 = no change, 1.0 = no filter)
   static constexpr const float PITCH_ROLL_FILTER_ALPHA = 0.5;            // Filter alpha for pitch and roll (0.0 = no change, 1.0 = no filter)
-  static constexpr const size_t HEADING_UPDATE_RATE = 8;                 // [Hz] Update rate for heading readout (ignored in calibration mode)
-  static constexpr const size_t CALIBRATION_UPDATE_RATE = 10;            // [Hz] Update rate for calibration
-  static constexpr const size_t ACCEL_UPDATE_RATE = 5;                   // [Hz] Update rate for accelerometer
   static constexpr const float CALIBRATION_COVERAGE_THRESHOLD = 97.0;    // [%] Threshold for calibration coverage
+  static constexpr const float SEA_LEVEL_PRESSURE_HPA = 1013.25;         // [hPa] Sea level pressure for altitude calculation
+  static constexpr const uint8_t ADDR_MAGNETOMETER = 0x1E;               // I2C address of the magnetometer (LIS2MDL)
+  static constexpr const uint8_t ADDR_ACCELEROMETER = 0x19;              // I2C address of the accelerometer (LSM303AGR)
+  static constexpr const uint8_t ADDR_BAROMETER = 0x76;                  // I2C address of the barometer (BMP388)
 
 
   Sensors() {}
@@ -66,6 +73,13 @@ class Sensors
   float getHeading(void) { return heading; }
   float getPitch(void) { return pitch; }
   float getRoll(void) { return roll; }
+  float getTemperature(void) { return temperature; }
+  float getPressure(void) { return pressure; }
+  float getAltitude(void) { return altitude; }
+  float getAngle(void) { return angle; }
+  bool isMagnetDetected(void) { return magnetDetected; }
+  bool isMagnetTooWeak(void) { return magnetTooWeak; }
+  bool isMagnetTooStrong(void) { return magnetTooStrong; }
   void startCalibration(void) { calibrationStarted = true; }
   void abortCalibration(void) { calibrationAborted = true; }
   bool isCalibrationDone(void) { return calibrationDone; }
@@ -82,11 +96,22 @@ class Sensors
 
   Adafruit_LIS2MDL mag = Adafruit_LIS2MDL(12345);
   Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(54321);
+  AS5600 angleSensor = AS5600(&SENSOR_WIRE);
+  Adafruit_BMP3XX baro;
   sensors_event_t accel_event, mag_event;
 
   float heading = 0.0;
   float pitch = 0.0;
   float roll = 0.0;
+  float temperature = 0.0;
+  float pressure = 0.0;
+  float altitude = 0.0;
+
+  float angle = 0.0;
+  bool magnetDetected = false;
+  bool magnetTooWeak = false;
+  bool magnetTooStrong = false;
+
   bool calibrationStarted = false;
   bool calibrationAborted = false;
   bool calibrationRunning = false;
@@ -100,6 +125,10 @@ class Sensors
   float hardIron[3] = {0.0, 0.0, 0.0};
   float softIron[3][3] = {{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
 
+  bool magInitialized = false;
+  bool accelInitialized = false;
+  bool baroInitialized = false;
+  bool angleSensorInitialized = false;
   volatile bool initialized = false;
 
   // static void update(void* parameter);

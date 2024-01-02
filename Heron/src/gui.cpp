@@ -322,10 +322,11 @@ FLASHMEM bool Gui::updateScreenCompass(void)
     int newY = dotYOffset - (int)(pitch * dotScale);
     int dist = sqrt((newX - dotXOffset) * (newX - dotXOffset) + (newY - dotYOffset) * (newY - dotYOffset));
 
-    if(dist > 30)    // If the distance is greater than 30 pixels, scale the x and y positions accordingly
+    const int maxDist = 31;
+    if(dist > maxDist)    // If the distance is greater than 30 pixels, scale the x and y positions accordingly
     {
-      newX = dotXOffset + (newX - dotXOffset) * 30 / dist;
-      newY = dotYOffset + (newY - dotYOffset) * 30 / dist;
+      newX = dotXOffset + (newX - dotXOffset) * maxDist / dist;
+      newY = dotYOffset + (newY - dotYOffset) * maxDist / dist;
     }
     lv_color_t color = (dist >= 4) ? lv_color_hex(0xFF0000) : lv_color_hex(0x00C92C);    // Green if inside small circle, red otherwise
     lv_obj_set_style_border_color(guider_ui.screen_compass_cont_dot, color, LV_PART_MAIN | LV_STATE_DEFAULT);

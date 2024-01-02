@@ -116,6 +116,8 @@ void loop()
   {
     t = millis();
     // console.log.printf("[MAIN] Time: %d\n", t);
-    // console.log.printf("[MAIN] Heading: %.1f, Pitch: %.1f, Roll: %.1f\n", sensors.getHeading(), sensors.getPitch(), sensors.getRoll());
+    // console.log.printf("[MAIN] Temperture: %.1f, Pressure: %.1f\n", sensors.getTemperature(), sensors.getPressure());
+    console.log.printf("[MAIN] AS5600: %.1f, detected: %d, tooWeek: %d, tooStrong: %d\n", sensors.getAngle(), sensors.isMagnetDetected(),
+                       sensors.isMagnetTooWeak(), sensors.isMagnetTooStrong());
   }
 }

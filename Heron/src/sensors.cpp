@@ -46,14 +46,50 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
     console.error.println("[SENSORS] Magnetometer could not be initialized");
     res = false;
   }
-  mag.setDataRate(lis2mdl_rate_t::LIS2MDL_RATE_20_HZ);
+  else
+  {
+    magInitialized = true;
+    mag.setDataRate(lis2mdl_rate_t::LIS2MDL_RATE_20_HZ);
+  }
+
   if(!accel.begin(ADDR_ACCELEROMETER, &SENSOR_WIRE))
   {
     console.error.println("[SENSORS] Accelerometer could not be initialized");
     res = false;
   }
-  accel.setRange(lsm303_accel_range_t::LSM303_RANGE_2G);
-  accel.setMode(lsm303_accel_mode_t::LSM303_MODE_HIGH_RESOLUTION);
+  else
+  {
+    accelInitialized = true;
+    accel.setRange(lsm303_accel_range_t::LSM303_RANGE_2G);
+    accel.setMode(lsm303_accel_mode_t::LSM303_MODE_HIGH_RESOLUTION);
+  }
+
+  if(!baro.begin_I2C(ADDR_BAROMETER, &SENSOR_WIRE))
+  {
+    console.error.println("[SENSORS] Barometer could not be initialized");
+    res = false;
+  }
+  else
+  {
+    baroInitialized = true;
+    baro.setTemperatureOversampling(BMP3_OVERSAMPLING_32X);
+    baro.setPressureOversampling(BMP3_OVERSAMPLING_32X);
+    baro.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_31);
+    baro.setOutputDataRate(BMP3_ODR_1_5_HZ);
+  }
+
+  if(!angleSensor.begin())
+  {
+    console.error.println("[SENSORS] Angle sensor could not be initialized");
+    res = false;
+  }
+  else
+  {
+    angleSensorInitialized = true;
+    angleSensor.setDirection(AS5600_CLOCK_WISE);
+    angleSensor.setOutputMode(AS5600_OUTMODE_PWM);
+  }
+
   Utils::unlockWire(SENSOR_WIRE);
 
   raw_data_reset();    // Reset calibration stack
@@ -83,8 +119,13 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
 void Sensors::update(void* parameter)
 {
   Sensors* ref = (Sensors*)parameter;
+
+  static uint32_t tUpdate = 0;
   //while(ref->initialized)
+  if(millis() - tUpdate > (1000.0 / UPDATE_RATE))
   {
+    tUpdate = millis();
+
     if(ref->calibrationAborted)
     {
       ref->calibrationDone = false;
@@ -106,10 +147,32 @@ void Sensors::update(void* parameter)
       console.log.println("[SENSORS] Starting magnetometer calibration...");
     }
 
-    // Utils::lockWire(SENSOR_WIRE);
+    bool wireError = false;
+    Utils::lockWire(SENSOR_WIRE);
+
+    static uint32_t tBaro = 0;
+    if((millis() - tBaro > (1000.0 / BAROMETER_UPDATE_RATE)) && ref->baroInitialized)
+    {
+      tBaro = millis();
+      if(ref->baro.performReading())
+      {
+        ref->temperature = (float)ref->baro.temperature;
+        ref->pressure = (float)ref->baro.pressure / 100.0;
+        ref->altitude = ref->baro.readAltitude(SEA_LEVEL_PRESSURE_HPA);
+        if(millis() - tBaro > MAX_SENSOR_READOUT_DELAY)
+        {
+          console.warning.printf("[SENSORS] <Barometer> Possible I2C-Bus stall (Time: %d)\n", millis() - tBaro);
+        }
+      }
+      else
+      {
+        wireError = true;
+        console.error.println("[SENSORS] Barometer reading failed");
+      }
+    }
 
     static uint32_t tAcc = 0;
-    if(millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE))
+    if((millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE)) && !wireError && ref->accelInitialized)
     {
       tAcc = millis();
       if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
@@ -118,71 +181,92 @@ void Sensors::update(void* parameter)
         ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
         float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
         ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
-        console.log.printf("[SENSORS] Time: %d, Pitch: %f, Roll: %f\n", millis() - tAcc, ref->pitch, ref->roll);
+        if(millis() - tAcc > MAX_SENSOR_READOUT_DELAY)
+        {
+          console.warning.printf("[SENSORS] <Accelerometer> Possible I2C-Bus stall (Time: %d)\n", millis() - tAcc);
+        }
       }
     }
 
     static uint32_t tMag = 0;
-    if(!ref->calibrationRunning)    // Normal operation
-    {
-      if(millis() - tMag > (1000.0 / HEADING_UPDATE_RATE))
-      {
-        tMag = millis();
-        if(ref->mag.getEvent(&ref->mag_event))    // Check if magnetometer has new data
-        {
-          float newHeading =
-            ref->calculateHeadingCompensated(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z, ref->pitch, ref->roll);
-          float diff = newHeading - ref->heading;    // Compute the difference in heading, adjusting for the 360 degree wrap-around
-          if(diff > 180.0f)
-          {
-            diff -= 360.0f;
-          }
-          else if(diff < -180.0f)
-          {
-            diff += 360.0f;
-          }
-          ref->heading += ref->HEADING_FILTER_ALPHA * diff;    // Apply the alpha coefficient to the difference
-          if(ref->heading < 0.0f)                              // Ensure the heading is within 0 to 360 degrees
-          {
-            ref->heading += 360.0f;
-          }
-          else if(ref->heading >= 360.0f)
-          {
-            ref->heading -= 360.0f;
-          }
-          console.log.printf("[SENSORS] Time: %d, Heading: %f\n", millis() - tMag, ref->heading);
-        }
-      }
-    }
-    else if(millis() - tMag > (1000 / CALIBRATION_UPDATE_RATE))    // Calibration mode
+    if((millis() - tMag > (1000.0 / MAGNETOMETER_UPDATE_RATE)) && !wireError && ref->magInitialized)
     {
       tMag = millis();
       if(ref->mag.getEvent(&ref->mag_event))    // Check if magnetometer has new data
       {
-        ref->calibrate(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);
-        float coverage = 100.0 - quality_surface_gap_error();
-        ref->calibCoverage = constrain(map(coverage, 0.0, CALIBRATION_COVERAGE_THRESHOLD, 0.0, 100.0), 0.0, 100.0);
-        ref->calibFitError = constrain(quality_spherical_fit_error(), 0.0, 100.0);
-        ref->calibWobbleError = constrain(quality_wobble_error(), 0.0, 100.0);
-        ref->calibVariance = quality_magnitude_variance_error();
-
-        if(coverage >= CALIBRATION_COVERAGE_THRESHOLD)    // Check if calibration is done
+        float newHeading =
+          ref->calculateHeadingCompensated(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z, ref->pitch, ref->roll);
+        float diff = newHeading - ref->heading;    // Compute the difference in heading, adjusting for the 360 degree wrap-around
+        if(diff > 180.0f)
         {
-          console.ok.println("[SENSORS] Calibration completed!");
-          ref->calibrationDone = true;
-          ref->calibrationRunning = false;
-          if(!ref->updateAndSaveCalibration())
+          diff -= 360.0f;
+        }
+        else if(diff < -180.0f)
+        {
+          diff += 360.0f;
+        }
+        ref->heading += ref->HEADING_FILTER_ALPHA * diff;    // Apply the alpha coefficient to the difference
+        if(ref->heading < 0.0f)                              // Ensure the heading is within 0 to 360 degrees
+        {
+          ref->heading += 360.0f;
+        }
+        else if(ref->heading >= 360.0f)
+        {
+          ref->heading -= 360.0f;
+        }
+
+        if(ref->calibrationRunning)    // Check if magnetometer has new data
+        {
+          ref->calibrate(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);
+          float coverage = 100.0 - quality_surface_gap_error();
+          ref->calibCoverage = constrain(map(coverage, 0.0, CALIBRATION_COVERAGE_THRESHOLD, 0.0, 100.0), 0.0, 100.0);
+          ref->calibFitError = constrain(quality_spherical_fit_error(), 0.0, 100.0);
+          ref->calibWobbleError = constrain(quality_wobble_error(), 0.0, 100.0);
+          ref->calibVariance = quality_magnitude_variance_error();
+
+          if(coverage >= CALIBRATION_COVERAGE_THRESHOLD)    // Check if calibration is done
           {
-            console.error.println("[SENSORS] Calibration could not be saved");
+            console.ok.println("[SENSORS] Calibration completed!");
+            ref->calibrationDone = true;
+            ref->calibrationRunning = false;
+            if(!ref->updateAndSaveCalibration())
+            {
+              console.error.println("[SENSORS] Calibration could not be saved");
+            }
+            else
+            {
+              console.ok.println("[SENSORS] Calibration saved");
+            }
           }
-          else
-          {
-            console.ok.println("[SENSORS] Calibration saved");
-          }
+        }
+        if(millis() - tMag > MAX_SENSOR_READOUT_DELAY)
+        {
+          console.warning.printf("[SENSORS] <Magnetometer> Possible I2C-Bus stall (Time: %d)\n", millis() - tMag);
         }
       }
     }
-    // Utils::unlockWire(SENSOR_WIRE);
+
+    static uint32_t tAngle = 0;
+    if((millis() - tAngle > (1000.0 / ANGLE_SENSOR_UPDATE_RATE)) && !wireError && ref->angleSensorInitialized)
+    {
+      tAngle = millis();
+      float angle = ref->angleSensor.readAngle();
+      uint8_t status = ref->angleSensor.readStatus();
+      ref->angle = angle;    // TODO: Filter angle and apply calibration
+
+      ref->magnetDetected = (status & AS5600::AS5600_MAGNET_DETECT) > 1;
+      ref->magnetTooWeak = (status & AS5600::AS5600_MAGNET_LOW) > 1;
+      ref->magnetTooStrong = (status & AS5600::AS5600_MAGNET_HIGH) > 1;
+      if(millis() - tAngle > MAX_SENSOR_READOUT_DELAY)
+      {
+        console.warning.printf("[SENSORS] <Angle Sensor> Possible I2C-Bus stall (Time: %d)\n", millis() - tAngle);
+      }
+    }
+
+    Utils::turnOffWire(SENSOR_WIRE);    // Somehow the I2C bus gets locked up after some time, force it to reset after each update
+    delayMicroseconds(50);
+    Utils::turnOnWire(SENSOR_WIRE);
+    Utils::unlockWire(SENSOR_WIRE);
 
     // threads.delay(1000.0 / UPDATE_RATE);
   }
@@ -236,7 +320,7 @@ float Sensors::calculateHeadingCompensated(float x, float y, float z, float pitc
   {
     mag_data[i] = (softIron[i][0] * hi_cal[0]) + (softIron[i][1] * hi_cal[1]) + (softIron[i][2] * hi_cal[2]);
   }
-  float pitchRad = pitch * M_PI / 180.0;    // Convert pitch and roll to radians
+  float pitchRad = -pitch * M_PI / 180.0;    // Convert pitch and roll to radians
   float rollRad = roll * M_PI / 180.0;
   float xh = mag_data[0] * cosf(pitchRad) + mag_data[2] * sinf(pitchRad);    // Adjust the magnetic field vector for pitch and roll
   float yh = mag_data[0] * sinf(rollRad) * sinf(pitchRad) + mag_data[1] * cosf(rollRad) - mag_data[2] * sinf(rollRad) * cosf(pitchRad);
