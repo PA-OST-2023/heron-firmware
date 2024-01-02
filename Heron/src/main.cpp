@@ -91,7 +91,6 @@ void loop()
 {
   threads.yield();
   gui.update();
-  utils.update();
   ethernet.update();
 
   static uint32_t sensorT = 0;
@@ -117,7 +116,6 @@ void loop()
     t = millis();
     // console.log.printf("[MAIN] Time: %d\n", t);
     // console.log.printf("[MAIN] Temperture: %.1f, Pressure: %.1f\n", sensors.getTemperature(), sensors.getPressure());
-    console.log.printf("[MAIN] AS5600: %.1f, detected: %d, tooWeek: %d, tooStrong: %d\n", sensors.getAngle(), sensors.isMagnetDetected(),
-                       sensors.isMagnetTooWeak(), sensors.isMagnetTooStrong());
+    // console.log.printf("[MAIN] AS5600: %.1f, detected: %d, tooWeek: %d, tooStrong: %d\n", sensors.getAngle(), sensors.isMagnetDetected(), sensors.isMagnetTooWeak(), sensors.isMagnetTooStrong());
   }
 }

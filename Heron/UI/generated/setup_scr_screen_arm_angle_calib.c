@@ -159,29 +159,6 @@ void setup_scr_screen_arm_angle_calib(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screen_arm_angle_calib_label_raw_value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_arm_angle_calib_label_raw_value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_arm_angle_calib_btn_calibrate_0
-	ui->screen_arm_angle_calib_btn_calibrate_0 = lv_btn_create(ui->screen_arm_angle_calib);
-	ui->screen_arm_angle_calib_btn_calibrate_0_label = lv_label_create(ui->screen_arm_angle_calib_btn_calibrate_0);
-	lv_label_set_text(ui->screen_arm_angle_calib_btn_calibrate_0_label, "Calibrate 0° (unfolded)");
-	lv_label_set_long_mode(ui->screen_arm_angle_calib_btn_calibrate_0_label, LV_LABEL_LONG_WRAP);
-	lv_obj_align(ui->screen_arm_angle_calib_btn_calibrate_0_label, LV_ALIGN_CENTER, 0, 0);
-	lv_obj_set_style_pad_all(ui->screen_arm_angle_calib_btn_calibrate_0, 0, LV_STATE_DEFAULT);
-	lv_obj_set_pos(ui->screen_arm_angle_calib_btn_calibrate_0, 17, 75);
-	lv_obj_set_size(ui->screen_arm_angle_calib_btn_calibrate_0, 206, 40);
-
-	//Write style for screen_arm_angle_calib_btn_calibrate_0, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->screen_arm_angle_calib_btn_calibrate_0, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screen_arm_angle_calib_btn_calibrate_0, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->screen_arm_angle_calib_btn_calibrate_0, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_opa(ui->screen_arm_angle_calib_btn_calibrate_0, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_color(ui->screen_arm_angle_calib_btn_calibrate_0, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_side(ui->screen_arm_angle_calib_btn_calibrate_0, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->screen_arm_angle_calib_btn_calibrate_0, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->screen_arm_angle_calib_btn_calibrate_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_arm_angle_calib_btn_calibrate_0, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->screen_arm_angle_calib_btn_calibrate_0, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->screen_arm_angle_calib_btn_calibrate_0, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-
 	//Write codes screen_arm_angle_calib_btn_calibrate_90
 	ui->screen_arm_angle_calib_btn_calibrate_90 = lv_btn_create(ui->screen_arm_angle_calib);
 	ui->screen_arm_angle_calib_btn_calibrate_90_label = lv_label_create(ui->screen_arm_angle_calib_btn_calibrate_90);
@@ -204,6 +181,29 @@ void setup_scr_screen_arm_angle_calib(lv_ui *ui)
 	lv_obj_set_style_text_color(ui->screen_arm_angle_calib_btn_calibrate_90, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_arm_angle_calib_btn_calibrate_90, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_align(ui->screen_arm_angle_calib_btn_calibrate_90, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_arm_angle_calib_btn_calibrate_0
+	ui->screen_arm_angle_calib_btn_calibrate_0 = lv_btn_create(ui->screen_arm_angle_calib);
+	ui->screen_arm_angle_calib_btn_calibrate_0_label = lv_label_create(ui->screen_arm_angle_calib_btn_calibrate_0);
+	lv_label_set_text(ui->screen_arm_angle_calib_btn_calibrate_0_label, "Calibrate 0° (unfolded)");
+	lv_label_set_long_mode(ui->screen_arm_angle_calib_btn_calibrate_0_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->screen_arm_angle_calib_btn_calibrate_0_label, LV_ALIGN_CENTER, 0, 0);
+	lv_obj_set_style_pad_all(ui->screen_arm_angle_calib_btn_calibrate_0, 0, LV_STATE_DEFAULT);
+	lv_obj_set_pos(ui->screen_arm_angle_calib_btn_calibrate_0, 17, 75);
+	lv_obj_set_size(ui->screen_arm_angle_calib_btn_calibrate_0, 206, 40);
+
+	//Write style for screen_arm_angle_calib_btn_calibrate_0, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_arm_angle_calib_btn_calibrate_0, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_arm_angle_calib_btn_calibrate_0, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_arm_angle_calib_btn_calibrate_0, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_opa(ui->screen_arm_angle_calib_btn_calibrate_0, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screen_arm_angle_calib_btn_calibrate_0, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_side(ui->screen_arm_angle_calib_btn_calibrate_0, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_arm_angle_calib_btn_calibrate_0, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_arm_angle_calib_btn_calibrate_0, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_arm_angle_calib_btn_calibrate_0, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_arm_angle_calib_btn_calibrate_0, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_arm_angle_calib_btn_calibrate_0, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Write codes screen_arm_angle_calib_cont_confirmed_background
 	ui->screen_arm_angle_calib_cont_confirmed_background = lv_obj_create(ui->screen_arm_angle_calib);

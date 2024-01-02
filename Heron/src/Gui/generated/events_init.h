@@ -20,11 +20,11 @@ void events_init(lv_ui *ui);
 
 void events_init_screen_bootup(lv_ui *ui);
 void events_init_screen_home(lv_ui *ui);
-void events_init_screen_gnss(lv_ui *ui);
-void events_init_screen_gnss_location(lv_ui *ui);
 void events_init_screen_system(lv_ui *ui);
 void events_init_screen_ethernet(lv_ui *ui);
 void events_init_screen_ethernet_setup(lv_ui *ui);
+void events_init_screen_gnss(lv_ui *ui);
+void events_init_screen_gnss_location(lv_ui *ui);
 void events_init_screen_compass(lv_ui *ui);
 void events_init_screen_compass_calib(lv_ui *ui);
 void events_init_screen_arm_angle(lv_ui *ui);

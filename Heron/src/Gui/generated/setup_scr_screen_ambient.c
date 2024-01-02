@@ -84,7 +84,7 @@ FLASHMEM void setup_scr_screen_ambient(lv_ui *ui)
 	lv_obj_set_style_text_color(ui->screen_ambient_label_title, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_ambient_label_title, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_ambient_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screen_ambient_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_ambient_label_title, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_align(ui->screen_ambient_label_title, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_opa(ui->screen_ambient_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_top(ui->screen_ambient_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

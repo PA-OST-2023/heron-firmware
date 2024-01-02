@@ -77,6 +77,7 @@ class Sensors
   float getPressure(void) { return pressure; }
   float getAltitude(void) { return altitude; }
   float getAngle(void) { return angle; }
+  uint16_t getAngleRaw(void) { return angleRaw; }
   bool isMagnetDetected(void) { return magnetDetected; }
   bool isMagnetTooWeak(void) { return magnetTooWeak; }
   bool isMagnetTooStrong(void) { return magnetTooStrong; }
@@ -108,6 +109,7 @@ class Sensors
   float altitude = 0.0;
 
   float angle = 0.0;
+  uint16_t angleRaw = 0;
   bool magnetDetected = false;
   bool magnetTooWeak = false;
   bool magnetTooStrong = false;

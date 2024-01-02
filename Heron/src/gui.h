@@ -78,6 +78,10 @@ class Gui
   static void callbackScreenCompassCalibrationStart(void);
   static void callbackScreenCompassCalibrationAbort(void);
 
+  static void callbackScreenArmAngleCalibration0(void);
+  static void callbackScreenArmAngleCalibration90(void);
+  static void callbackScreenArmAngleCalibrationConfirmed(void);
+
  private:
   const int sclk, mosi, cs, dc, bl, tch_irq;
   GC9A01A_t3n disp = GC9A01A_t3n(cs, dc, -1, mosi, sclk);
@@ -91,11 +95,18 @@ class Gui
   bool flagWarning = false;
 
   // Screen update functions
+  bool updateScreenBootup(void);
   bool updateScreenHome(void);
+  bool updateScreenSystem(void);
   bool updateScreenEthernet(void);
   bool updateScreenEthernetSetup(void);
+  bool updateScreenGnss(void);
+  bool updateScreenGnssLocation(void);
   bool updateScreenCompass(void);
   bool updateScreenCompassCalibrate(void);
+  bool updateScreenArmAngle(void);
+  bool updateScreenArmAngleCalibrate(void);
+  bool updateScreenAmbient(void);
 
   static Utils* utils;
   static Hmi* hmi;

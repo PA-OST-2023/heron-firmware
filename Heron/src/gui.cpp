@@ -94,6 +94,7 @@ FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef
   lv_indev_drv_register(&indev_drv);
 
   setup_ui(&guider_ui);
+  updateScreenBootup();
   console.ok.println("[GUI] Initialized");
   initialized = true;
   return res;
@@ -125,9 +126,16 @@ void Gui::update(void)
 
     bool screenLoaded = false;
     screenLoaded |= updateScreenHome();
+    screenLoaded |= updateScreenSystem();
     screenLoaded |= updateScreenEthernet();
+    screenLoaded |= updateScreenEthernetSetup();
+    screenLoaded |= updateScreenGnss();
+    screenLoaded |= updateScreenGnssLocation();
     screenLoaded |= updateScreenCompass();
     screenLoaded |= updateScreenCompassCalibrate();
+    screenLoaded |= updateScreenArmAngle();
+    screenLoaded |= updateScreenArmAngleCalibrate();
+    screenLoaded |= updateScreenAmbient();
     if(screenLoaded)
     {
       console.log.println("[GUI] New screen loaded");
@@ -137,6 +145,18 @@ void Gui::update(void)
 }
 
 // Screen update functions
+
+FLASHMEM bool Gui::updateScreenBootup(void)
+{
+  if(lv_scr_act() != guider_ui.screen_bootup)
+  {
+    return false;
+  }
+  static char buffer[20];
+  snprintf(buffer, sizeof(buffer), "V%s-%s", FIRMWARE_VERSION, utils->getBuildDate());
+  lv_label_set_text_static(guider_ui.screen_bootup_label_version, buffer);
+  return true;
+}
 
 FLASHMEM bool Gui::updateScreenHome(void)
 {
@@ -199,6 +219,56 @@ FLASHMEM bool Gui::updateScreenHome(void)
   // TODO: Implement GNSS Status
 
   // TODO: Implement warning screen
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
+}
+
+FLASHMEM bool Gui::updateScreenSystem(void)
+{
+  static bool screenFreshlyLoaded = true;
+  if(lv_scr_act() != guider_ui.screen_system)
+  {
+    screenFreshlyLoaded = true;
+    return false;
+  }
+
+  if(screenFreshlyLoaded)
+  {
+    static char bufferFirmwareVersion[30];
+    snprintf(bufferFirmwareVersion, sizeof(bufferFirmwareVersion), "Firmware-Version: V%s", FIRMWARE_VERSION);
+    lv_label_set_text_static(guider_ui.screen_system_label_firmware_version, bufferFirmwareVersion);
+    static char bufferFirmwareBuild[30];
+    snprintf(bufferFirmwareBuild, sizeof(bufferFirmwareBuild), "Firmware-Build: %s", utils->getBuildDate());
+    lv_label_set_text_static(guider_ui.screen_system_label_firmware_build, bufferFirmwareBuild);
+    static char bufferCpuFrequency[30];
+    snprintf(bufferCpuFrequency, sizeof(bufferCpuFrequency), "CPU-Frequency: %.1f MHz", ((float)utils->getCpuFrequency() / 1000000.0));
+    lv_label_set_text_static(guider_ui.screen_system_label_cpu_frequency, bufferCpuFrequency);
+    static char bufferMac[40];
+    uint8_t mac[6];
+    memcpy(mac, EthernetUtils::getMacAddress(), 6);
+    snprintf(bufferMac, sizeof(bufferMac), "MAC-Address: %02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    lv_label_set_text_static(guider_ui.screen_system_label_mac_address, bufferMac);
+  }
+
+  static float cpuTemp = 0.0;
+  if(cpuTemp != utils->getCpuTemperature() || screenFreshlyLoaded)
+  {
+    cpuTemp = utils->getCpuTemperature();
+    static char buffer[30];
+    snprintf(buffer, sizeof(buffer), "CPU-Temperature: %.1f °C", cpuTemp);
+    lv_label_set_text_static(guider_ui.screen_system_label_cpu_temperature, buffer);
+  }
+
+  static uint32_t opTime = 0;
+  if(opTime != utils->getOperationTime() || screenFreshlyLoaded)
+  {
+    opTime = utils->getOperationTime();
+    static char buffer[30];
+    snprintf(buffer, sizeof(buffer), "Operating Time: %dh%02d'", (int)utils->getOperationTime() / 3600, (int)(utils->getOperationTime() / 60) % 60);
+    lv_label_set_text_static(guider_ui.screen_system_label_operating_time, buffer);
+  }
 
   bool loaded = screenFreshlyLoaded;
   screenFreshlyLoaded = false;
@@ -268,6 +338,34 @@ FLASHMEM bool Gui::updateScreenEthernetSetup(void)
 {
   static bool screenFreshlyLoaded = true;
   if(lv_scr_act() != guider_ui.screen_ethernet_setup)
+  {
+    screenFreshlyLoaded = true;
+    return false;
+  }
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
+}
+
+FLASHMEM bool Gui::updateScreenGnss(void)
+{
+  static bool screenFreshlyLoaded = true;
+  if(lv_scr_act() != guider_ui.screen_gnss)
+  {
+    screenFreshlyLoaded = true;
+    return false;
+  }
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
+}
+
+FLASHMEM bool Gui::updateScreenGnssLocation(void)
+{
+  static bool screenFreshlyLoaded = true;
+  if(lv_scr_act() != guider_ui.screen_gnss_location)
   {
     screenFreshlyLoaded = true;
     return false;
@@ -361,7 +459,7 @@ FLASHMEM bool Gui::updateScreenCompassCalibrate(void)
     snprintf(buffer, sizeof(buffer), "%.0f %%", calibCoverage);
     lv_label_set_text_static(guider_ui.screen_compass_calib_label_coverage, buffer);
     lv_meter_set_indicator_end_value(guider_ui.screen_compass_calib_meter_coverage, guider_ui.screen_compass_calib_meter_coverage_scale_1_arc_1,
-                                     (int)map(constrain(calibCoverage, 0.0, 100.0), 0.0, 100.0, 0, 100));
+                                     (int)map(constrain(calibCoverage, 0.0, 100.0), 0.0, 100.0, 100, 0));
   }
   if(calibWobbleError != sensors->getCalibWobbleError() || screenFreshlyLoaded)
   {
@@ -404,6 +502,104 @@ FLASHMEM bool Gui::updateScreenCompassCalibrate(void)
     lv_obj_clear_flag(guider_ui.screen_compass_calib_cont_successful_background, LV_OBJ_FLAG_HIDDEN);
   }
   calibDone = sensors->isCalibrationDone();
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
+}
+
+FLASHMEM bool Gui::updateScreenArmAngle(void)
+{
+  static bool screenFreshlyLoaded = true;
+  if(lv_scr_act() != guider_ui.screen_arm_angle)
+  {
+    screenFreshlyLoaded = true;
+    return false;
+  }
+
+  static float angle = 0.0;
+  if(angle != sensors->getAngle() || screenFreshlyLoaded)
+  {
+    angle = sensors->getAngle();
+    static char buffer[20];
+    snprintf(buffer, sizeof(buffer), "%.1f°", angle);
+    lv_label_set_text_static(guider_ui.screen_arm_angle_label_angle, buffer);
+    lv_meter_set_indicator_end_value(guider_ui.screen_arm_angle_meter_angle, guider_ui.screen_arm_angle_meter_angle_scale_1_arc_1,
+                                     (int)map(constrain(angle, 0.0, 90.0), 0.0, 90.0, 0, 100));
+  }
+
+  static bool magnetDetected = false;
+  if(magnetDetected != sensors->isMagnetDetected() || screenFreshlyLoaded)
+  {
+    magnetDetected = sensors->isMagnetDetected();
+    lv_color_t color = (magnetDetected) ? lv_color_hex(0x00FF00) : lv_color_hex(0x757478);
+    uint8_t shadow = (magnetDetected) ? 69 : 0;    // Shadow only if connected
+    lv_obj_set_style_border_color(guider_ui.screen_arm_angle_cont_magnet_detected, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(guider_ui.screen_arm_angle_cont_magnet_detected, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(guider_ui.screen_arm_angle_cont_magnet_detected, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(guider_ui.screen_arm_angle_cont_magnet_detected, shadow, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+
+  static bool magnetTooWeak = false;
+  if(magnetTooWeak != sensors->isMagnetTooWeak() || screenFreshlyLoaded)
+  {
+    magnetTooWeak = sensors->isMagnetTooWeak();
+    lv_color_t color = (magnetTooWeak) ? lv_color_hex(0xFFB300) : lv_color_hex(0x757478);
+    uint8_t shadow = (magnetTooWeak) ? 69 : 0;    // Shadow only if connected
+    lv_obj_set_style_border_color(guider_ui.screen_arm_angle_cont_magnet_too_weak, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(guider_ui.screen_arm_angle_cont_magnet_too_weak, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(guider_ui.screen_arm_angle_cont_magnet_too_weak, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(guider_ui.screen_arm_angle_cont_magnet_too_weak, shadow, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+
+  static bool magnetTooStrong = false;
+  if(magnetTooStrong != sensors->isMagnetTooStrong() || screenFreshlyLoaded)
+  {
+    magnetTooStrong = sensors->isMagnetTooStrong();
+    lv_color_t color = (magnetTooStrong) ? lv_color_hex(0xFFB300) : lv_color_hex(0x757478);
+    uint8_t shadow = (magnetTooStrong) ? 69 : 0;    // Shadow only if connected
+    lv_obj_set_style_border_color(guider_ui.screen_arm_angle_cont_magnet_too_strong, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(guider_ui.screen_arm_angle_cont_magnet_too_strong, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(guider_ui.screen_arm_angle_cont_magnet_too_strong, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(guider_ui.screen_arm_angle_cont_magnet_too_strong, shadow, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
+}
+
+FLASHMEM bool Gui::updateScreenArmAngleCalibrate(void)
+{
+  static bool screenFreshlyLoaded = true;
+  if(lv_scr_act() != guider_ui.screen_arm_angle_calib)
+  {
+    screenFreshlyLoaded = true;
+    return false;
+  }
+
+  static uint16_t angleRaw = 0;
+  if(angleRaw != sensors->getAngleRaw() || screenFreshlyLoaded)
+  {
+    angleRaw = sensors->getAngleRaw();
+    static char buffer[20];
+    snprintf(buffer, sizeof(buffer), "Raw Value: %d", angleRaw);
+    lv_label_set_text_static(guider_ui.screen_arm_angle_calib_label_raw_value, buffer);
+  }
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
+}
+
+FLASHMEM bool Gui::updateScreenAmbient(void)
+{
+  static bool screenFreshlyLoaded = true;
+  if(lv_scr_act() != guider_ui.screen_ambient)
+  {
+    screenFreshlyLoaded = true;
+    return false;
+  }
 
   bool loaded = screenFreshlyLoaded;
   screenFreshlyLoaded = false;
@@ -465,6 +661,21 @@ void Gui::callbackScreenCompassCalibrationAbort(void)
 {
   console.log.println("[GUI] [CALLBACK] Aborting calibration");
   sensors->abortCalibration();
+}
+
+void Gui::callbackScreenArmAngleCalibration0(void)
+{
+  console.log.println("[GUI] [CALLBACK] Arm angle calibration 0°");
+}
+
+void Gui::callbackScreenArmAngleCalibration90(void)
+{
+  console.log.println("[GUI] [CALLBACK] Arm angle calibration 90°");
+}
+
+void Gui::callbackScreenArmAngleCalibrationConfirmed(void)
+{
+  console.log.println("[GUI] [CALLBACK] Arm angle calibration confirmed");
 }
 
 

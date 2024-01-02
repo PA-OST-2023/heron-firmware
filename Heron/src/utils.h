@@ -36,19 +36,20 @@
 #include <Arduino.h>
 #include <TeensyThreads.h>
 #include <Wire.h>
+#include <console.h>
 #include <preferences.h>
+#include <rtclib.h>
 
 class Utils
 {
  public:
   static constexpr const float UPDATE_RATE = 10.0;    // Hz
-    // static constexpr const size_t EXT_HEAP_SIZE = 4 * 1024 * 1024;    // n MB memory pool on the external ram chips
-
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_ENABLED = 0;
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_NUMBER = 4;
-  static constexpr const size_t SYS_WIRE_FREQENCY = 3400000;    // [Hz]
-  static constexpr const size_t HMI_WIRE_FREQENCY = 3400000;    // [Hz]
-  static constexpr const size_t GPS_WIRE_FREQENCY = 400000;     // [Hz]
+  static constexpr const size_t SYS_WIRE_FREQENCY = 3400000;     // [Hz]
+  static constexpr const size_t HMI_WIRE_FREQENCY = 3400000;     // [Hz]
+  static constexpr const size_t GPS_WIRE_FREQENCY = 400000;      // [Hz]
+  static constexpr const size_t OP_TIME_UPDATE_INTERVAL = 60;    // [s]
 
   typedef enum
   {
@@ -59,9 +60,9 @@ class Utils
 
   Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps);
   bool begin(void);
-  void update(void);
 
-  UsbStatus_t getUsbStatus(void) { return usbStatus; }
+  UsbStatus_t getUsbStatus(void) { return !usbConnected() ? USB_DISCONNECTED : console ? USB_ACTIVE : USB_CONNECTED; }
+  uint32_t getOperationTime(void) { return operationTime; }
 
   static bool turnOnWire(TwoWire& wire);
   static bool turnOffWire(TwoWire& wire);
@@ -69,8 +70,15 @@ class Utils
   static int lockWire(TwoWire& wire, int timeout = 0);
   static int unlockWire(TwoWire& wire);
 
-  static float getCpuTemperature(void) { return tempmonGetTemp(); }
+  static float getCpuTemperature(void);
   static int getCpuFrequency(void) { return F_CPU; }
+  static const char* getBuildDate(void)
+  {
+    DateTime date = DateTime(F(__DATE__), F(__TIME__));
+    static char buffer[9];
+    snprintf(buffer, sizeof(buffer), "%02d%02d%02d", date.year() % 100, date.month(), date.day());
+    return buffer;
+  }
 
   Preferences preferences;
 
@@ -78,11 +86,12 @@ class Utils
   static int scl_sys, sda_sys, scl_hmi, sda_hmi, scl_gps, sda_gps;
   static Threads::Mutex wireMutex[3];
 
-  UsbStatus_t usbStatus = USB_DISCONNECTED;
 
-  bool usbConnected(void) { return !bitRead(USB1_PORTSC1, 7); }
+  volatile bool initialized = false;
+  uint32_t operationTime = 0;
 
-  // static uint8_t extHeap[EXT_HEAP_SIZE];
+  static void update(void* parameter);
+  static bool usbConnected(void) { return !bitRead(USB1_PORTSC1, 7); }
 };
 
 #endif

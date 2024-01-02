@@ -250,9 +250,9 @@ void Sensors::update(void* parameter)
     if((millis() - tAngle > (1000.0 / ANGLE_SENSOR_UPDATE_RATE)) && !wireError && ref->angleSensorInitialized)
     {
       tAngle = millis();
-      float angle = ref->angleSensor.readAngle();
+      ref->angleRaw = ref->angleSensor.readAngle();
       uint8_t status = ref->angleSensor.readStatus();
-      ref->angle = angle;    // TODO: Filter angle and apply calibration
+      ref->angle = map((float)ref->angleRaw, 0.0, 4095.0, 0.0, 90.0);    // TODO: Filter angle and apply calibration
 
       ref->magnetDetected = (status & AS5600::AS5600_MAGNET_DETECT) > 1;
       ref->magnetTooWeak = (status & AS5600::AS5600_MAGNET_LOW) > 1;

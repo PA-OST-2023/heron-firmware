@@ -83,7 +83,7 @@ FLASHMEM void App::updateDeviceData(StaticJsonDocument<EthernetUtils::DEVICE_DAT
   if(firstRun)
   {
     doc["device_firmware_version"] = FIRMWARE_VERSION;
-    doc["device_firmware_build"] = getBuildDate();
+    doc["device_firmware_build"] = utils->getBuildDate();
     doc["device_cpu_frequency"] = utils->getCpuFrequency();
   }
   doc["device_cpu_temperature"] = utils->getCpuTemperature();

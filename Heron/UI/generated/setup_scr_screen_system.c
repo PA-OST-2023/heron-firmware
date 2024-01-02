@@ -29,8 +29,8 @@ void setup_scr_screen_system(lv_ui *ui)
 	ui->screen_system_label_operating_time = lv_label_create(ui->screen_system);
 	lv_label_set_text(ui->screen_system_label_operating_time, "Operating Time: ");
 	lv_label_set_long_mode(ui->screen_system_label_operating_time, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_system_label_operating_time, 20, 160);
-	lv_obj_set_size(ui->screen_system_label_operating_time, 200, 15);
+	lv_obj_set_pos(ui->screen_system_label_operating_time, 0, 160);
+	lv_obj_set_size(ui->screen_system_label_operating_time, 240, 15);
 
 	//Write style for screen_system_label_operating_time, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_system_label_operating_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -51,8 +51,8 @@ void setup_scr_screen_system(lv_ui *ui)
 	ui->screen_system_label_mac_address = lv_label_create(ui->screen_system);
 	lv_label_set_text(ui->screen_system_label_mac_address, "MAC-Address: ");
 	lv_label_set_long_mode(ui->screen_system_label_mac_address, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_system_label_mac_address, 20, 140);
-	lv_obj_set_size(ui->screen_system_label_mac_address, 200, 15);
+	lv_obj_set_pos(ui->screen_system_label_mac_address, 0, 100);
+	lv_obj_set_size(ui->screen_system_label_mac_address, 240, 15);
 
 	//Write style for screen_system_label_mac_address, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_system_label_mac_address, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -73,8 +73,8 @@ void setup_scr_screen_system(lv_ui *ui)
 	ui->screen_system_label_cpu_temperature = lv_label_create(ui->screen_system);
 	lv_label_set_text(ui->screen_system_label_cpu_temperature, "CPU-Temperature: ");
 	lv_label_set_long_mode(ui->screen_system_label_cpu_temperature, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_system_label_cpu_temperature, 20, 120);
-	lv_obj_set_size(ui->screen_system_label_cpu_temperature, 200, 15);
+	lv_obj_set_pos(ui->screen_system_label_cpu_temperature, 0, 140);
+	lv_obj_set_size(ui->screen_system_label_cpu_temperature, 240, 15);
 
 	//Write style for screen_system_label_cpu_temperature, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_system_label_cpu_temperature, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -95,8 +95,8 @@ void setup_scr_screen_system(lv_ui *ui)
 	ui->screen_system_label_cpu_frequency = lv_label_create(ui->screen_system);
 	lv_label_set_text(ui->screen_system_label_cpu_frequency, "CPU-Frequency: ");
 	lv_label_set_long_mode(ui->screen_system_label_cpu_frequency, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_system_label_cpu_frequency, 20, 100);
-	lv_obj_set_size(ui->screen_system_label_cpu_frequency, 200, 15);
+	lv_obj_set_pos(ui->screen_system_label_cpu_frequency, 0, 120);
+	lv_obj_set_size(ui->screen_system_label_cpu_frequency, 240, 15);
 
 	//Write style for screen_system_label_cpu_frequency, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_system_label_cpu_frequency, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -117,8 +117,8 @@ void setup_scr_screen_system(lv_ui *ui)
 	ui->screen_system_label_firmware_build = lv_label_create(ui->screen_system);
 	lv_label_set_text(ui->screen_system_label_firmware_build, "Firmware-Build: ");
 	lv_label_set_long_mode(ui->screen_system_label_firmware_build, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_system_label_firmware_build, 20, 80);
-	lv_obj_set_size(ui->screen_system_label_firmware_build, 200, 15);
+	lv_obj_set_pos(ui->screen_system_label_firmware_build, 0, 80);
+	lv_obj_set_size(ui->screen_system_label_firmware_build, 240, 15);
 
 	//Write style for screen_system_label_firmware_build, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_system_label_firmware_build, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -139,8 +139,8 @@ void setup_scr_screen_system(lv_ui *ui)
 	ui->screen_system_label_firmware_version = lv_label_create(ui->screen_system);
 	lv_label_set_text(ui->screen_system_label_firmware_version, "Firmware-Version: ");
 	lv_label_set_long_mode(ui->screen_system_label_firmware_version, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_system_label_firmware_version, 20, 60);
-	lv_obj_set_size(ui->screen_system_label_firmware_version, 200, 15);
+	lv_obj_set_pos(ui->screen_system_label_firmware_version, 0, 60);
+	lv_obj_set_size(ui->screen_system_label_firmware_version, 240, 15);
 
 	//Write style for screen_system_label_firmware_version, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_system_label_firmware_version, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

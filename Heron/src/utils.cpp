@@ -31,13 +31,11 @@
 ******************************************************************************/
 
 #include "utils.h"
-#include <console.h>
 #include <static_malloc.h>
 #include "SdCard/SdioTeensy.cpp"
 
 int Utils::scl_sys, Utils::sda_sys, Utils::scl_hmi, Utils::sda_hmi, Utils::scl_gps, Utils::sda_gps;
 Threads::Mutex Utils::wireMutex[3];
-// EXTMEM uint8_t Utils::extHeap[Utils::EXT_HEAP_SIZE];
 
 Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps)
 {
@@ -47,7 +45,6 @@ Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, in
   Utils::sda_hmi = sda_hmi;
   Utils::scl_gps = scl_gps;
   Utils::sda_gps = sda_gps;
-  // sm_set_default_pool(extHeap, EXT_HEAP_SIZE, false, nullptr);  // use a memory pool on the external ram
 }
 
 FLASHMEM bool Utils::begin(void)
@@ -58,6 +55,7 @@ FLASHMEM bool Utils::begin(void)
     console.error.println("[UTILS] Failed to initialize preferences");
     res = false;
   }
+  operationTime = preferences.getLong("op_time");
 
   if(!turnOnWire(Wire))
   {
@@ -79,6 +77,8 @@ FLASHMEM bool Utils::begin(void)
   unlockWire(Wire1);
   unlockWire(Wire2);
 
+  initialized = true;
+  threads.addThread(update, this, 2048);
   return res;
 }
 
@@ -202,20 +202,34 @@ int Utils::unlockWire(TwoWire& wire)
   }
 }
 
-void Utils::update(void)    // Make sure this function is non-blocking!
+float Utils::getCpuTemperature(void)
 {
-  static uint32_t t = 0;
-  if(millis() - t > 1000 / UPDATE_RATE)
+  static const float FILTER_COEFFICIENT = 0.01;
+  static float temp = NAN;
+  if(isnan(temp))
   {
-    t = millis();
+    temp = tempmonGetTemp();
+  }
+  else
+  {
+    temp = temp * (1.0 - FILTER_COEFFICIENT) + tempmonGetTemp() * FILTER_COEFFICIENT;
+  }
+  return temp;
+}
 
-    if(usbConnected())
+void Utils::update(void* parameter)
+{
+  Utils* ref = (Utils*)parameter;
+  while(ref->initialized)
+  {
+    static uint32_t tOpTime = millis();
+    if(millis() - tOpTime > OP_TIME_UPDATE_INTERVAL * 1000)
     {
-      usbStatus = console ? USB_ACTIVE : USB_CONNECTED;
+      tOpTime = millis();
+      ref->operationTime = ref->preferences.getLong("op_time", 0) + OP_TIME_UPDATE_INTERVAL;
+      ref->preferences.putLong("op_time", ref->operationTime);
     }
-    else
-    {
-      usbStatus = USB_DISCONNECTED;
-    }
+
+    threads.delay(1000.0 / UPDATE_RATE);
   }
 }

@@ -25,11 +25,11 @@ void init_scr_del_flag(lv_ui *ui)
   
 	ui->screen_bootup_del = true;
 	ui->screen_home_del = true;
-	ui->screen_gnss_del = true;
-	ui->screen_gnss_location_del = true;
 	ui->screen_system_del = true;
 	ui->screen_ethernet_del = true;
 	ui->screen_ethernet_setup_del = true;
+	ui->screen_gnss_del = true;
+	ui->screen_gnss_location_del = true;
 	ui->screen_compass_del = true;
 	ui->screen_compass_calib_del = true;
 	ui->screen_arm_angle_del = true;

@@ -307,7 +307,7 @@ void setup_scr_screen_home(lv_ui *ui)
 	lv_obj_set_style_text_color(ui->screen_home_label_ambient, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_home_label_ambient, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_line_space(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_home_label_ambient, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_align(ui->screen_home_label_ambient, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_opa(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_top(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

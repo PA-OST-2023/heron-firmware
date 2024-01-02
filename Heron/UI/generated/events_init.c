@@ -221,84 +221,6 @@ void events_init_screen_home(lv_ui *ui)
 	lv_obj_add_event_cb(ui->screen_home_btn_ambient, screen_home_btn_ambient_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_btn_warning, screen_home_btn_warning_event_handler, LV_EVENT_ALL, NULL);
 }
-static void screen_gnss_btn_location_event_handler (lv_event_t *e)
-{
-	lv_event_code_t code = lv_event_get_code(e);
-
-	switch (code) {
-	case LV_EVENT_RELEASED:
-	{
-		//Write the load screen code.
-	    lv_obj_t * act_scr = lv_scr_act();
-	    lv_disp_t * d = lv_obj_get_disp(act_scr);
-	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
-	        if (guider_ui.screen_gnss_location_del == true) {
-	          setup_scr_screen_gnss_location(&guider_ui);
-	        }
-	        lv_scr_load_anim(guider_ui.screen_gnss_location, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, true);
-	        guider_ui.screen_gnss_del = true;
-	    }
-		break;
-	}
-	default:
-		break;
-	}
-}
-static void screen_gnss_btn_back_event_handler (lv_event_t *e)
-{
-	lv_event_code_t code = lv_event_get_code(e);
-
-	switch (code) {
-	case LV_EVENT_RELEASED:
-	{
-		//Write the load screen code.
-	    lv_obj_t * act_scr = lv_scr_act();
-	    lv_disp_t * d = lv_obj_get_disp(act_scr);
-	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
-	        if (guider_ui.screen_home_del == true) {
-	          setup_scr_screen_home(&guider_ui);
-	        }
-	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, true);
-	        guider_ui.screen_gnss_del = true;
-	    }
-		break;
-	}
-	default:
-		break;
-	}
-}
-void events_init_screen_gnss(lv_ui *ui)
-{
-	lv_obj_add_event_cb(ui->screen_gnss_btn_location, screen_gnss_btn_location_event_handler, LV_EVENT_ALL, NULL);
-	lv_obj_add_event_cb(ui->screen_gnss_btn_back, screen_gnss_btn_back_event_handler, LV_EVENT_ALL, NULL);
-}
-static void screen_gnss_location_btn_back_event_handler (lv_event_t *e)
-{
-	lv_event_code_t code = lv_event_get_code(e);
-
-	switch (code) {
-	case LV_EVENT_RELEASED:
-	{
-		//Write the load screen code.
-	    lv_obj_t * act_scr = lv_scr_act();
-	    lv_disp_t * d = lv_obj_get_disp(act_scr);
-	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
-	        if (guider_ui.screen_gnss_del == true) {
-	          setup_scr_screen_gnss(&guider_ui);
-	        }
-	        lv_scr_load_anim(guider_ui.screen_gnss, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, true);
-	        guider_ui.screen_gnss_location_del = true;
-	    }
-		break;
-	}
-	default:
-		break;
-	}
-}
-void events_init_screen_gnss_location(lv_ui *ui)
-{
-	lv_obj_add_event_cb(ui->screen_gnss_location_btn_back, screen_gnss_location_btn_back_event_handler, LV_EVENT_ALL, NULL);
-}
 static void screen_system_btn_back_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -449,6 +371,84 @@ void events_init_screen_ethernet_setup(lv_ui *ui)
 	lv_obj_add_event_cb(ui->screen_ethernet_setup, screen_ethernet_setup_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_confirm, screen_ethernet_setup_btn_confirm_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_back, screen_ethernet_setup_btn_back_event_handler, LV_EVENT_ALL, NULL);
+}
+static void screen_gnss_btn_location_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_gnss_location_del == true) {
+	          setup_scr_screen_gnss_location(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_gnss_location, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, true);
+	        guider_ui.screen_gnss_del = true;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_gnss_btn_back_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_home_del == true) {
+	          setup_scr_screen_home(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, true);
+	        guider_ui.screen_gnss_del = true;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
+void events_init_screen_gnss(lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->screen_gnss_btn_location, screen_gnss_btn_location_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_gnss_btn_back, screen_gnss_btn_back_event_handler, LV_EVENT_ALL, NULL);
+}
+static void screen_gnss_location_btn_back_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_gnss_del == true) {
+	          setup_scr_screen_gnss(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_gnss, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, true);
+	        guider_ui.screen_gnss_location_del = true;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
+void events_init_screen_gnss_location(lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->screen_gnss_location_btn_back, screen_gnss_location_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
 static void screen_compass_event_handler (lv_event_t *e)
 {
@@ -622,6 +622,9 @@ static void screen_arm_angle_calib_btn_confirm_event_handler (lv_event_t *e)
 	    }
 		lv_obj_clear_flag(guider_ui.screen_arm_angle_calib_cont_confirmed, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(guider_ui.screen_arm_angle_calib_cont_confirmed_background, LV_OBJ_FLAG_HIDDEN);
+		#ifdef PLATFORMIO
+	Gui::callbackScreenArmAngleCalibrationConfirmed();
+	#endif
 		break;
 	}
 	default:
@@ -651,10 +654,61 @@ static void screen_arm_angle_calib_btn_back_event_handler (lv_event_t *e)
 		break;
 	}
 }
+static void screen_arm_angle_calib_btn_calibrate_90_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenArmAngleCalibration90();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_arm_angle_calib_btn_calibrate_0_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenArmAngleCalibration0();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_arm_angle_calib_cont_confirmed_background_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenArmAngleCalibration0();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
 void events_init_screen_arm_angle_calib(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->screen_arm_angle_calib_btn_confirm, screen_arm_angle_calib_btn_confirm_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_arm_angle_calib_btn_back, screen_arm_angle_calib_btn_back_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_arm_angle_calib_btn_calibrate_90, screen_arm_angle_calib_btn_calibrate_90_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_arm_angle_calib_btn_calibrate_0, screen_arm_angle_calib_btn_calibrate_0_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_arm_angle_calib_cont_confirmed_background, screen_arm_angle_calib_cont_confirmed_background_event_handler, LV_EVENT_ALL, NULL);
 }
 static void screen_ambient_btn_back_event_handler (lv_event_t *e)
 {
