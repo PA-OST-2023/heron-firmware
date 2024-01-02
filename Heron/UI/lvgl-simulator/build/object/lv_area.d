@@ -1,20 +1,20 @@
 build/object/lv_area.o: \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_area.c \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\lv_conf_internal.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\lv_conf_kconfig.h \
- C:/Users/Admin/GoogleDrive/MSE/PA-OST-2023/heron-firmware/Heron/UI/lvgl-simulator/lv_conf.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\custom\lv_conf_ext.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_area.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_math.h
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_area.c \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\lv_conf_internal.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\lv_conf_kconfig.h \
+ D:/GoogleDrive/MSE/PA-OST-2023/heron-firmware/Heron/UI/lvgl-simulator/lv_conf.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\custom\lv_conf_ext.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_area.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_math.h
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\lv_conf_internal.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\lv_conf_internal.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\lv_conf_kconfig.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\lv_conf_kconfig.h:
 
-C:/Users/Admin/GoogleDrive/MSE/PA-OST-2023/heron-firmware/Heron/UI/lvgl-simulator/lv_conf.h:
+D:/GoogleDrive/MSE/PA-OST-2023/heron-firmware/Heron/UI/lvgl-simulator/lv_conf.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\custom\lv_conf_ext.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\custom\lv_conf_ext.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_area.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_area.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_math.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\heron\ui\lvgl\src\misc\lv_math.h:

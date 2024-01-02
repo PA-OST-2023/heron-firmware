@@ -1,5 +1,5 @@
 /*
-* Copyright 2023 NXP
+* Copyright 2024 NXP
 * NXP Confidential and Proprietary. This software is owned or controlled by NXP and may only be used strictly in
 * accordance with the applicable license terms. By expressly accepting such terms or by downloading, installing,
 * activating and/or otherwise using the software, you are agreeing that you have read, and that you agree to
@@ -140,7 +140,7 @@ FLASHMEM void setup_scr_screen_compass(lv_ui *ui)
 
 	//Write codes screen_compass_label_heading
 	ui->screen_compass_label_heading = lv_label_create(ui->screen_compass);
-	lv_label_set_text(ui->screen_compass_label_heading, "Heading: 0.0°");
+	lv_label_set_text(ui->screen_compass_label_heading, "Heading: 0°");
 	lv_label_set_long_mode(ui->screen_compass_label_heading, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->screen_compass_label_heading, 60, 59);
 	lv_obj_set_size(ui->screen_compass_label_heading, 120, 18);

@@ -1,5 +1,5 @@
 /*
-* Copyright 2023 NXP
+* Copyright 2024 NXP
 * NXP Confidential and Proprietary. This software is owned or controlled by NXP and may only be used strictly in
 * accordance with the applicable license terms. By expressly accepting such terms or by downloading, installing,
 * activating and/or otherwise using the software, you are agreeing that you have read, and that you agree to
@@ -30,7 +30,9 @@ void setup_scr_screen_home(lv_ui *ui)
 	ui->screen_home_tileview_menu_tile_system = lv_tileview_add_tile(ui->screen_home_tileview_menu, 0, 0, LV_DIR_RIGHT);
 	ui->screen_home_tileview_menu_tile_ethernet = lv_tileview_add_tile(ui->screen_home_tileview_menu, 1, 0, LV_DIR_LEFT | LV_DIR_RIGHT);
 	ui->screen_home_tileview_menu_tile_gnss = lv_tileview_add_tile(ui->screen_home_tileview_menu, 2, 0, LV_DIR_LEFT | LV_DIR_RIGHT);
-	ui->screen_home_tileview_menu_tile_compass = lv_tileview_add_tile(ui->screen_home_tileview_menu, 3, 0, LV_DIR_LEFT);
+	ui->screen_home_tileview_menu_tile_compass = lv_tileview_add_tile(ui->screen_home_tileview_menu, 3, 0, LV_DIR_LEFT | LV_DIR_RIGHT);
+	ui->screen_home_tileview_menu_tile_arm_angle = lv_tileview_add_tile(ui->screen_home_tileview_menu, 4, 0, LV_DIR_LEFT | LV_DIR_RIGHT);
+	ui->screen_home_tileview_menu_tile_ambient = lv_tileview_add_tile(ui->screen_home_tileview_menu, 5, 0, LV_DIR_LEFT);
 	lv_obj_set_pos(ui->screen_home_tileview_menu, 0, 55);
 	lv_obj_set_size(ui->screen_home_tileview_menu, 240, 180);
 	lv_obj_set_scrollbar_mode(ui->screen_home_tileview_menu, LV_SCROLLBAR_MODE_OFF);
@@ -179,11 +181,11 @@ void setup_scr_screen_home(lv_ui *ui)
 
 	//Write style for screen_home_btn_gnss, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->screen_home_btn_gnss, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->screen_home_btn_gnss, lv_color_hex(0xfcca46), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_home_btn_gnss, lv_color_hex(0xc30d72), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_width(ui->screen_home_btn_gnss, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_home_btn_gnss, 14, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_home_btn_gnss, 13, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_color(ui->screen_home_btn_gnss, lv_color_hex(0xfcca46), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_color(ui->screen_home_btn_gnss, lv_color_hex(0xc30d72), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_opa(ui->screen_home_btn_gnss, 52, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_spread(ui->screen_home_btn_gnss, 3, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_ofs_x(ui->screen_home_btn_gnss, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -240,6 +242,104 @@ void setup_scr_screen_home(lv_ui *ui)
 	lv_obj_set_style_text_color(ui->screen_home_btn_compass, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_home_btn_compass, &lv_font_FontAwesome6SharpLight_300_50, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_align(ui->screen_home_btn_compass, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+
+
+	//Write codes screen_home_label_arm_angle
+	ui->screen_home_label_arm_angle = lv_label_create(ui->screen_home_tileview_menu_tile_arm_angle);
+	lv_label_set_text(ui->screen_home_label_arm_angle, "Arm Angle");
+	lv_label_set_long_mode(ui->screen_home_label_arm_angle, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_home_label_arm_angle, 60, 140);
+	lv_obj_set_size(ui->screen_home_label_arm_angle, 120, 20);
+
+	//Write style for screen_home_label_arm_angle, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_label_arm_angle, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_home_label_arm_angle, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_home_label_arm_angle, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_home_label_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_home_btn_arm_angle
+	ui->screen_home_btn_arm_angle = lv_btn_create(ui->screen_home_tileview_menu_tile_arm_angle);
+	ui->screen_home_btn_arm_angle_label = lv_label_create(ui->screen_home_btn_arm_angle);
+	lv_label_set_text(ui->screen_home_btn_arm_angle_label, "");
+	lv_label_set_long_mode(ui->screen_home_btn_arm_angle_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->screen_home_btn_arm_angle_label, LV_ALIGN_CENTER, 0, 0);
+	lv_obj_set_style_pad_all(ui->screen_home_btn_arm_angle, 0, LV_STATE_DEFAULT);
+	lv_obj_set_pos(ui->screen_home_btn_arm_angle, 70, 20);
+	lv_obj_set_size(ui->screen_home_btn_arm_angle, 100, 100);
+
+	//Write style for screen_home_btn_arm_angle, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_home_btn_arm_angle, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_home_btn_arm_angle, lv_color_hex(0xE94560), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_home_btn_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_home_btn_arm_angle, 14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_home_btn_arm_angle, 13, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_color(ui->screen_home_btn_arm_angle, lv_color_hex(0xE94560), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_opa(ui->screen_home_btn_arm_angle, 52, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_spread(ui->screen_home_btn_arm_angle, 3, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_ofs_x(ui->screen_home_btn_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_ofs_y(ui->screen_home_btn_arm_angle, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_btn_arm_angle, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_home_btn_arm_angle, &lv_font_FontAwesome6Regular_400_50, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_home_btn_arm_angle, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+
+
+	//Write codes screen_home_label_ambient
+	ui->screen_home_label_ambient = lv_label_create(ui->screen_home_tileview_menu_tile_ambient);
+	lv_label_set_text(ui->screen_home_label_ambient, "Ambient\nSensor");
+	lv_label_set_long_mode(ui->screen_home_label_ambient, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->screen_home_label_ambient, 60, 140);
+	lv_obj_set_size(ui->screen_home_label_ambient, 120, 40);
+
+	//Write style for screen_home_label_ambient, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_label_ambient, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_home_label_ambient, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_home_label_ambient, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_home_label_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes screen_home_btn_ambient
+	ui->screen_home_btn_ambient = lv_btn_create(ui->screen_home_tileview_menu_tile_ambient);
+	ui->screen_home_btn_ambient_label = lv_label_create(ui->screen_home_btn_ambient);
+	lv_label_set_text(ui->screen_home_btn_ambient_label, "");
+	lv_label_set_long_mode(ui->screen_home_btn_ambient_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->screen_home_btn_ambient_label, LV_ALIGN_CENTER, 0, 0);
+	lv_obj_set_style_pad_all(ui->screen_home_btn_ambient, 0, LV_STATE_DEFAULT);
+	lv_obj_set_pos(ui->screen_home_btn_ambient, 70, 20);
+	lv_obj_set_size(ui->screen_home_btn_ambient, 100, 100);
+
+	//Write style for screen_home_btn_ambient, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->screen_home_btn_ambient, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->screen_home_btn_ambient, lv_color_hex(0xF6C90E), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_home_btn_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_home_btn_ambient, 14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_home_btn_ambient, 13, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_color(ui->screen_home_btn_ambient, lv_color_hex(0xF6C90E), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_opa(ui->screen_home_btn_ambient, 52, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_spread(ui->screen_home_btn_ambient, 3, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_ofs_x(ui->screen_home_btn_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_ofs_y(ui->screen_home_btn_ambient, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_home_btn_ambient, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_home_btn_ambient, &lv_font_FontAwesome6ProLight_300_50, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_home_btn_ambient, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Write codes screen_home_cont_top_bar
 	ui->screen_home_cont_top_bar = lv_obj_create(ui->screen_home);
