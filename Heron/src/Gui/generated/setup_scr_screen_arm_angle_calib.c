@@ -41,11 +41,11 @@ FLASHMEM void setup_scr_screen_arm_angle_calib(lv_ui *ui)
 	lv_obj_set_style_bg_color(ui->screen_arm_angle_calib_btn_confirm, lv_color_hex(0x292831), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_width(ui->screen_arm_angle_calib_btn_confirm, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_opa(ui->screen_arm_angle_calib_btn_confirm, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_color(ui->screen_arm_angle_calib_btn_confirm, lv_color_hex(0x00c92c), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_color(ui->screen_arm_angle_calib_btn_confirm, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_side(ui->screen_arm_angle_calib_btn_confirm, LV_BORDER_SIDE_TOP, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_arm_angle_calib_btn_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_arm_angle_calib_btn_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_arm_angle_calib_btn_confirm, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_arm_angle_calib_btn_confirm, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_arm_angle_calib_btn_confirm, &lv_font_FontAwesome5ProRegular_400_16, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_align(ui->screen_arm_angle_calib_btn_confirm, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
 
@@ -59,7 +59,7 @@ FLASHMEM void setup_scr_screen_arm_angle_calib(lv_ui *ui)
 	//Write style for screen_arm_angle_calib_label_confirm, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_arm_angle_calib_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_arm_angle_calib_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_arm_angle_calib_label_confirm, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_arm_angle_calib_label_confirm, lv_color_hex(0x757478), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_arm_angle_calib_label_confirm, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_arm_angle_calib_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screen_arm_angle_calib_label_confirm, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

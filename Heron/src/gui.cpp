@@ -525,7 +525,7 @@ FLASHMEM bool Gui::updateScreenArmAngle(void)
     snprintf(buffer, sizeof(buffer), "%.1f°", angle);
     lv_label_set_text_static(guider_ui.screen_arm_angle_label_angle, buffer);
     lv_meter_set_indicator_end_value(guider_ui.screen_arm_angle_meter_angle, guider_ui.screen_arm_angle_meter_angle_scale_1_arc_1,
-                                     (int)map(constrain(angle, 0.0, 90.0), 0.0, 90.0, 0, 100));
+                                     (int)map(angle, 0.0, 90.0, 100.0, 0.0));
   }
 
   static bool magnetDetected = false;
@@ -666,16 +666,61 @@ void Gui::callbackScreenCompassCalibrationAbort(void)
 void Gui::callbackScreenArmAngleCalibration0(void)
 {
   console.log.println("[GUI] [CALLBACK] Arm angle calibration 0°");
+  sensors->calibrateAngle0();
+  hmi->buzzer.playMelody(MELODIE_CALIB_STARTED);
+  lv_obj_set_style_border_color(guider_ui.screen_arm_angle_calib_btn_calibrate_0, lv_color_hex(0x00c92c), LV_PART_MAIN | LV_STATE_DEFAULT);
+  screenArmAngleCalibrationCheckValid(true, false);
 }
 
 void Gui::callbackScreenArmAngleCalibration90(void)
 {
   console.log.println("[GUI] [CALLBACK] Arm angle calibration 90°");
+  sensors->calibrateAngle90();
+  hmi->buzzer.playMelody(MELODIE_CALIB_STARTED);
+  lv_obj_set_style_border_color(guider_ui.screen_arm_angle_calib_btn_calibrate_90, lv_color_hex(0x00c92c), LV_PART_MAIN | LV_STATE_DEFAULT);
+  screenArmAngleCalibrationCheckValid(false, true);
+}
+
+void Gui::callbackScreenArmAngleCalibrationStart(void)
+{
+  console.log.println("[GUI] [CALLBACK] Starting arm angle calibration");
+  sensors->calibrateAngleStart();
+  screenArmAngleCalibrationCheckValid();
+}
+
+void Gui::callbackScreenArmAngleCalibrationAbort(void)
+{
+  console.log.println("[GUI] [CALLBACK] Aborting arm angle calibration");
+  sensors->calibrateAngleAbort();
+  screenArmAngleCalibrationCheckValid();
 }
 
 void Gui::callbackScreenArmAngleCalibrationConfirmed(void)
 {
   console.log.println("[GUI] [CALLBACK] Arm angle calibration confirmed");
+  sensors->calibrateAngleConfirm();
+  hmi->buzzer.playMelody(MELODIE_CALIB_DONE);
+}
+
+
+// Helper functions
+void Gui::screenArmAngleCalibrationCheckValid(bool angle0, bool angle90)
+{
+  static bool _valid0 = false;
+  static bool _valid90 = false;
+  if(!angle0 && !angle90)
+  {
+    _valid0 = _valid90 = false;
+    return;
+  }
+  _valid0 |= angle0;
+  _valid90 |= angle90;
+  if(_valid0 && _valid90)
+  {
+    lv_obj_set_style_border_color(guider_ui.screen_arm_angle_calib_btn_confirm, lv_color_hex(0x00c92c), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_add_flag(guider_ui.screen_arm_angle_calib_btn_confirm, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_set_style_text_color(guider_ui.screen_arm_angle_calib_label_confirm, lv_color_hex(0xffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
 }
 
 

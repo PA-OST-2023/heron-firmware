@@ -24,9 +24,6 @@
 #ifdef PLATFORMIO
 #include "../../gui.h"
 #endif
-#ifdef PLATFORMIO
-#include "../../gui.h"
-#endif
 static void screen_bootup_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -484,9 +481,6 @@ static void screen_compass_btn_calib_event_handler (lv_event_t *e)
 	        lv_scr_load_anim(guider_ui.screen_compass_calib, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, true);
 	        guider_ui.screen_compass_del = true;
 	    }
-		#ifdef PLATFORMIO
-	Gui::callbackScreenCompassCalibrationStart();
-	#endif
 		break;
 	}
 	default:
@@ -522,6 +516,22 @@ void events_init_screen_compass(lv_ui *ui)
 	lv_obj_add_event_cb(ui->screen_compass_btn_calib, screen_compass_btn_calib_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_compass_btn_back, screen_compass_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
+static void screen_compass_calib_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_SCREEN_LOADED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenCompassCalibrationStart();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
 static void screen_compass_calib_btn_back_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -550,6 +560,7 @@ static void screen_compass_calib_btn_back_event_handler (lv_event_t *e)
 }
 void events_init_screen_compass_calib(lv_ui *ui)
 {
+	lv_obj_add_event_cb(ui->screen_compass_calib, screen_compass_calib_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_compass_calib_btn_back, screen_compass_calib_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
 static void screen_arm_angle_btn_calib_event_handler (lv_event_t *e)
@@ -603,6 +614,25 @@ void events_init_screen_arm_angle(lv_ui *ui)
 	lv_obj_add_event_cb(ui->screen_arm_angle_btn_calib, screen_arm_angle_btn_calib_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_arm_angle_btn_back, screen_arm_angle_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
+static void screen_arm_angle_calib_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_SCREEN_LOADED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenArmAngleCalibrationStart();
+	#endif
+		lv_obj_clear_flag(guider_ui.screen_arm_angle_calib_btn_confirm, LV_OBJ_FLAG_CLICKABLE);
+		lv_obj_clear_flag(guider_ui.screen_arm_angle_calib_btn_confirm, LV_OBJ_FLAG_CLICK_FOCUSABLE);
+		lv_obj_clear_flag(guider_ui.screen_arm_angle_calib_btn_confirm, LV_OBJ_FLAG_CHECKABLE);
+		break;
+	}
+	default:
+		break;
+	}
+}
 static void screen_arm_angle_calib_btn_confirm_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -648,6 +678,9 @@ static void screen_arm_angle_calib_btn_back_event_handler (lv_event_t *e)
 	        lv_scr_load_anim(guider_ui.screen_arm_angle, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 200, true);
 	        guider_ui.screen_arm_angle_calib_del = true;
 	    }
+		#ifdef PLATFORMIO
+	Gui::callbackScreenArmAngleCalibrationAbort();
+	#endif
 		break;
 	}
 	default:
@@ -704,6 +737,7 @@ static void screen_arm_angle_calib_cont_confirmed_background_event_handler (lv_e
 }
 void events_init_screen_arm_angle_calib(lv_ui *ui)
 {
+	lv_obj_add_event_cb(ui->screen_arm_angle_calib, screen_arm_angle_calib_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_arm_angle_calib_btn_confirm, screen_arm_angle_calib_btn_confirm_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_arm_angle_calib_btn_back, screen_arm_angle_calib_btn_back_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_arm_angle_calib_btn_calibrate_90, screen_arm_angle_calib_btn_calibrate_90_event_handler, LV_EVENT_ALL, NULL);

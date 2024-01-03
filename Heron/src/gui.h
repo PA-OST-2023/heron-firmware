@@ -80,6 +80,8 @@ class Gui
 
   static void callbackScreenArmAngleCalibration0(void);
   static void callbackScreenArmAngleCalibration90(void);
+  static void callbackScreenArmAngleCalibrationStart(void);
+  static void callbackScreenArmAngleCalibrationAbort(void);
   static void callbackScreenArmAngleCalibrationConfirmed(void);
 
  private:
@@ -107,6 +109,9 @@ class Gui
   bool updateScreenArmAngle(void);
   bool updateScreenArmAngleCalibrate(void);
   bool updateScreenAmbient(void);
+
+  // Helper functions
+  static void screenArmAngleCalibrationCheckValid(bool angle0 = false, bool angle90 = false);
 
   static Utils* utils;
   static Hmi* hmi;

@@ -69,38 +69,52 @@ void Buzzer::update(void* parameter)
 {
   Buzzer* ref = (Buzzer*)parameter;
   bool playing = false;
-  int32_t buzzerTimer = -1;
+  int melodyIndex = 0;
+  int melodyPlayTime = 0;
+  int melodyStartTime = 0;
+  int freq = 0, freqOld = 0;
 
   while(ref->initialized)
   {
     if(ref->playing && !playing)
     {
-      buzzerTimer = millis();
+      melodyStartTime = millis();
+      if(ref->melody == nullptr)
+      {
+        console.error.println("[BUZZER] Melody is nullptr");
+      }
+      else
+      {
+        melodyPlayTime = ref->melody[0].length;
+      }
     }
-    if(!ref->playing)
+    else if(!ref->playing)
     {
-      buzzerTimer = -1;
+      melodyStartTime = millis();
+      melodyPlayTime = 0;
+      melodyIndex = 0;
+      freqOld = -1;
+      ref->melody = nullptr;
       noTone(ref->buzzerPin);
     }
-    if(buzzerTimer != -1)
+    if(ref->melody)
     {
-      static int freq = 0, freqOld = 0;
-      if(ref->melody != nullptr)
+      freq = ref->melody[melodyIndex].freq;
+      int length = ref->melody[melodyIndex].length;
+      if(freq == END_OF_MELODY.freq && length == END_OF_MELODY.length)
       {
-        int i = 0, t = 0;
-        while(ref->melody[i].freq != END_OF_MELODY.freq || ref->melody[i].length != END_OF_MELODY.length)
+        ref->playing = false;
+        ref->melody = nullptr;
+        noTone(ref->buzzerPin);
+      }
+      else
+      {
+        if(millis() - melodyStartTime >= melodyPlayTime)
         {
-          if(t >= millis() - buzzerTimer)
-            break;
-          t += ref->melody[i].length;
-          freq = ref->melody[i].freq;
-          i++;
+          melodyPlayTime += length;
+          melodyIndex++;
         }
-        if((ref->melody[i].freq == END_OF_MELODY.freq && ref->melody[i].length == END_OF_MELODY.length) && (millis() - buzzerTimer > t))
-        {
-          ref->playing = false;
-        }
-        else if(freq != freqOld)
+        if(freq != freqOld)
         {
           freqOld = freq;
           if(freq == 0)
@@ -113,4 +127,5 @@ void Buzzer::update(void* parameter)
     playing = ref->playing;
     threads.delay(1000.0 / UPDATE_RATE);
   }
+  noTone(ref->buzzerPin);
 }

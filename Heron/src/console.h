@@ -37,9 +37,9 @@
 #include "../lib/TeensyThreads/TeensyThreads.h"
 
 #define INTERFACE_UPDATE_RATE      4            // [Hz]
-#define QUEUE_BUFFER_LENGTH        (1 << 12)    // [#]    Buffer Size must be power of 2
-#define CONSOLE_ACTIVE_DELAY       0            // [ms]   Data transmission hold-back delay after console object has been enabled
-#define INTERFACE_ACTIVE_DELAY     200          // [ms]   Transmission hold-back delay after connection is established (Terminal opened)
+#define QUEUE_BUFFER_LENGTH        (1 << 14)    // [#]    Buffer Size must be power of 2
+#define CONSOLE_ACTIVE_DELAY       200          // [ms]   Data transmission hold-back delay after console object has been enabled
+#define INTERFACE_ACTIVE_DELAY     300          // [ms]   Transmission hold-back delay after connection is established (Terminal opened)
 
 #define CONSOLE_CLEAR              "\033[2J\033[1;1H"
 

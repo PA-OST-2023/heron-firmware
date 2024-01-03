@@ -63,6 +63,7 @@ class Sensors
   static constexpr const float PITCH_ROLL_FILTER_ALPHA = 0.5;            // Filter alpha for pitch and roll (0.0 = no change, 1.0 = no filter)
   static constexpr const float CALIBRATION_COVERAGE_THRESHOLD = 97.0;    // [%] Threshold for calibration coverage
   static constexpr const float SEA_LEVEL_PRESSURE_HPA = 1013.25;         // [hPa] Sea level pressure for altitude calculation
+  static constexpr const float ANGLE_SENSOR_FILTER_ALPHA = 0.2;          // Filter alpha for angle sensor (0.0 = no change, 1.0 = no filter)
   static constexpr const uint8_t ADDR_MAGNETOMETER = 0x1E;               // I2C address of the magnetometer (LIS2MDL)
   static constexpr const uint8_t ADDR_ACCELEROMETER = 0x19;              // I2C address of the accelerometer (LSM303AGR)
   static constexpr const uint8_t ADDR_BAROMETER = 0x76;                  // I2C address of the barometer (BMP388)
@@ -81,6 +82,11 @@ class Sensors
   bool isMagnetDetected(void) { return magnetDetected; }
   bool isMagnetTooWeak(void) { return magnetTooWeak; }
   bool isMagnetTooStrong(void) { return magnetTooStrong; }
+  void calibrateAngle0(void) { angle0Unconfirmed = angleRaw; }
+  void calibrateAngle90(void) { angle90Unconfirmed = angleRaw; }
+  void calibrateAngleStart(void);
+  void calibrateAngleAbort(void);
+  bool calibrateAngleConfirm(void);
   void startCalibration(void) { calibrationStarted = true; }
   void abortCalibration(void) { calibrationAborted = true; }
   bool isCalibrationDone(void) { return calibrationDone; }
@@ -110,6 +116,8 @@ class Sensors
 
   float angle = 0.0;
   uint16_t angleRaw = 0;
+  uint16_t angle0 = 0, angle0Unconfirmed = (uint16_t)(-1);
+  uint16_t angle90 = 0, angle90Unconfirmed = (uint16_t)(-1);
   bool magnetDetected = false;
   bool magnetTooWeak = false;
   bool magnetTooStrong = false;

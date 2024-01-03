@@ -88,6 +88,10 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
     angleSensorInitialized = true;
     angleSensor.setDirection(AS5600_CLOCK_WISE);
     angleSensor.setOutputMode(AS5600_OUTMODE_PWM);
+    angle0 = utils->preferences.getUShort("angle0", angle0);
+    angle90 = utils->preferences.getUShort("angle90", angle90);
+    angleSensor.setZPosition(angle90);    // Set start position
+    angleSensor.setMPosition(angle0);     // Set end position
   }
 
   Utils::unlockWire(SENSOR_WIRE);
@@ -114,6 +118,52 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
   console.ok.println("[SENORS] Initialized");
 
   return res;
+}
+
+void Sensors::calibrateAngleStart(void)
+{
+  angle0Unconfirmed = (uint16_t)(-1);
+  angle90Unconfirmed = (uint16_t)(-1);
+
+  utils->lockWire(SENSOR_WIRE);
+  angleSensor.setZPosition(0);    // Reset start position
+  angleSensor.setMPosition(0);    // Reset end position
+  utils->unlockWire(SENSOR_WIRE);
+}
+
+void Sensors::calibrateAngleAbort(void)
+{
+  console.warning.println("[SENSORS] Angle calibration aborted, restoring previous values");
+  utils->lockWire(SENSOR_WIRE);
+  angleSensor.setZPosition(angle90);    // Set start position
+  angleSensor.setMPosition(angle0);     // Set end position
+  utils->unlockWire(SENSOR_WIRE);
+}
+
+bool Sensors::calibrateAngleConfirm(void)
+{
+  bool angleSet = false;
+  if(angle0Unconfirmed != (uint16_t)(-1))
+  {
+    angle0 = angle0Unconfirmed;
+    utils->preferences.putUShort("angle0", angle0);
+    angleSet = true;
+  }
+  if(angle90Unconfirmed != (uint16_t)(-1))
+  {
+    angle90 = angle90Unconfirmed;
+    utils->preferences.putUShort("angle90", angle90);
+    angleSet = true;
+  }
+  if(!angleSet)
+  {
+    console.warning.println("[SENSORS] No angle set");
+  }
+  utils->lockWire(SENSOR_WIRE);
+  angleSensor.setZPosition(angle90);    // Set start position
+  angleSensor.setMPosition(angle0);     // Set end position
+  utils->unlockWire(SENSOR_WIRE);
+  return angleSet;
 }
 
 void Sensors::update(void* parameter)
@@ -252,8 +302,8 @@ void Sensors::update(void* parameter)
       tAngle = millis();
       ref->angleRaw = ref->angleSensor.readAngle();
       uint8_t status = ref->angleSensor.readStatus();
-      ref->angle = map((float)ref->angleRaw, 0.0, 4095.0, 0.0, 90.0);    // TODO: Filter angle and apply calibration
-
+      float angle = constrain(map((float)ref->angleRaw, 0.0, 4095.0, 90.0, 0.0), 0.0, 90.0);
+      ref->angle = (ref->ANGLE_SENSOR_FILTER_ALPHA * angle) + ((1.0 - ref->ANGLE_SENSOR_FILTER_ALPHA) * ref->angle);
       ref->magnetDetected = (status & AS5600::AS5600_MAGNET_DETECT) > 1;
       ref->magnetTooWeak = (status & AS5600::AS5600_MAGNET_LOW) > 1;
       ref->magnetTooStrong = (status & AS5600::AS5600_MAGNET_HIGH) > 1;
