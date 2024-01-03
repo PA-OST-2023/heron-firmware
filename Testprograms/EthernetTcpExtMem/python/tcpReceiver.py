@@ -50,9 +50,10 @@ def main():
                                 print(f"Packet Drop Detected: {packetIndex}, Timestamp: {timestamp/1000000000:.6f}")
                             lastPacketIndex = packetIndex
 
-                            i+=1
-                            if i%100 == 0:
-                                print(f"Packet index: {packetIndex}, Timestamp: {timestamp/1000000000:.6f}")
+                            print(f"Timestamp: {timestamp/1000000000:.6f}")
+                            # i+=1
+                            # if i%100 == 0:
+                            #     print(f"Packet index: {packetIndex}, Timestamp: {timestamp/1000000000:.6f}")
 
                     except (socket.timeout, TimeoutError) as e:      # Don't care about short connection drops, as long as the connection is re-established
                         if(time.time() - lastReceived > TCP_CONNECTION_TIMEOUT):

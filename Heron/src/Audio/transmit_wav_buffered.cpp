@@ -95,7 +95,7 @@ void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
     pPWB->circularBuffer.peek(bufferBlock, sizeof(bufferBlock));
     uint32_t outN = pPWB->flushBuffer(bufferBlock, sizeof(bufferBlock));
     pPWB->circularBuffer.markBytesRead(outN);
-    pPWB->byteCounter += outN;                   // Count the bytes that have been sent out for the data rate calculation
+    pPWB->byteCounter += outN;    // Count the bytes that have been sent out for the data rate calculation
 
     if(outN == sizeof(bufferBlock))
     {
@@ -103,7 +103,7 @@ void AudioTransmitWAVbuffered::EventResponse(EventResponderRef evref)
     }
     else
     {
-       // console.warning.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
+      // console.warning.printf("[TRANSMIT WAV BUFFERED] Transmitting of %d bytes failed: Transmitted %d\n", sizeof(bufferBlock), outN);
     }
   }
   pPWB->writePending = false;
@@ -117,7 +117,7 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
   }
 
   bool searchForClient = true;
-  size_t outN = 0;                                                    // Effective amount of samples that have been sent out
+  size_t outN = 0;    // Effective amount of samples that have been sent out
   if(client)
   {
     if(client.connected())
@@ -226,7 +226,31 @@ void AudioTransmitWAVbuffered::update(void)
       interleave(buf, data, chanCnt);    // make a chunk of data for the file
 
       header.blockIndex++;
-      header.timestamp = (uint64_t)micros() * 1000;    // TODO Get from GPS
+
+      bool timeValid = false;
+      if(getTimestamp)
+      {
+        header.timestamp = getTimestamp();
+        if(header.timestamp != 0)
+        {
+          timeValid = true;
+        }
+      }
+      if(!timeValid)    // primary source of time is not valid, check secondary
+      {
+        if(getBackupTimestamp)
+        {
+          header.timestamp = getBackupTimestamp();
+          if(header.timestamp != 0)
+          {
+            timeValid = true;
+          }
+        }
+      }
+      if(!timeValid)    // secondary source of time is not valid, use micros()
+      {
+        header.timestamp = (uint64_t)micros() * 1000;    // TODO Get from GPS
+      }
 
       if(circularBuffer.availableToWrite() < (sizeof(buf)))
       {
@@ -245,7 +269,7 @@ void AudioTransmitWAVbuffered::update(void)
     }
   }
 
-  while(--alloCnt >= 0)    // relinquish our interest in these blocks
+  while(--alloCnt >= 0)               // relinquish our interest in these blocks
     if(nullptr != blocks[alloCnt])    // stock release() can't cope with NULL pointer
       release(blocks[alloCnt]);
 }

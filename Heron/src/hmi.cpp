@@ -36,6 +36,8 @@
 
 DMAMEM uint8_t Hmi::drawingMemory[Hmi::LED_COUNT * 3] = {};
 DMAMEM uint8_t Hmi::displayMemory[Hmi::LED_COUNT * 12] = {};
+uint64_t Hmi::timeNanoUtc = 0;
+uint32_t Hmi::tUpdateMicros = 0;
 
 FLASHMEM bool Hmi::begin(Utils& utilsRef)
 {
@@ -83,39 +85,6 @@ void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, u
   Utils::unlockWire(RTC_WIRE);
 }
 
-void Hmi::getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
-{
-  Utils::lockWire(RTC_WIRE);
-  DateTime time = rtc.now();
-  Utils::unlockWire(RTC_WIRE);
-  year = time.year();
-  month = time.month();
-  day = time.day();
-  hour = time.hour();
-  minute = time.minute();
-  second = time.second();
-}
-
-void Hmi::getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
-{
-  Utils::lockWire(RTC_WIRE);
-  DateTime time = rtc.now();
-  Utils::unlockWire(RTC_WIRE);
-  hour = time.hour();
-  minute = time.minute();
-  second = time.second();
-}
-
-void Hmi::getDate(uint16_t& year, uint8_t& month, uint8_t& day)
-{
-  Utils::lockWire(RTC_WIRE);
-  DateTime time = rtc.now();
-  Utils::unlockWire(RTC_WIRE);
-  year = time.year();
-  month = time.month();
-  day = time.day();
-}
-
 void Hmi::update(void* parameter)
 {
   Hmi* ref = (Hmi*)parameter;
@@ -142,6 +111,35 @@ void Hmi::update(void* parameter)
     else    // Bootup animation
     {}
     ref->leds.show();
+
+    static uint32_t tRtc = 0;
+    if(millis() - tRtc > 500)
+    {
+      static uint8_t secOld = 0;
+      tRtc = millis();
+      Utils::lockWire(RTC_WIRE);
+      DateTime time = ref->rtc.now();
+      Utils::unlockWire(RTC_WIRE);
+      if(time.second() != secOld)
+      {
+        secOld = time.second();
+        ref->tUpdateMicros = micros();
+      }
+      ref->year = time.year();
+      ref->month = time.month();
+      ref->day = time.day();
+      ref->hour = time.hour();
+      ref->min = time.minute();
+      ref->sec = time.second();
+
+      DateTimeFields utc = {.sec = ref->sec,
+                            .min = ref->min,
+                            .hour = ref->hour,
+                            .mday = (uint8_t)((int8_t)ref->day - 1),
+                            .mon = (uint8_t)((int8_t)ref->month - 1),
+                            .year = (uint8_t)(ref->year - 1900)};
+      ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL + ref->tUpdateMicros % 1000000ULL;
+    }
 
     threads.delay(1000.0 / UPDATE_RATE);
   }

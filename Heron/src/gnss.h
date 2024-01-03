@@ -44,7 +44,7 @@ class Gnss
  public:
   static constexpr const float UPDATE_RATE = 30.0;    // Hz
 
-  Gnss(int rst) : rstPin(rst) {ref = this;}
+  Gnss(int rst) : rstPin(rst) { ref = this; }
   bool begin(Utils& utilsRef);
   void end(void);
   float getLatitude(void) { return latitude; }
@@ -54,7 +54,15 @@ class Gnss
   int getSateliteCount(void) { return sateliteCount; }
   bool getFix(void) { return fix; }
   uint8_t getFixType(void) { return fixType; }
+  bool getTimeValid(void) { return timeValid; }
+  uint16_t getYear(void) { return year + 1970; }
+  uint8_t getMonth(void) { return month; }
+  uint8_t getDay(void) { return day; }
+  uint8_t getHour(void) { return hour; }
+  uint8_t getMin(void) { return min; }
+  uint8_t getSec(void) { return sec; }
 
+  static uint64_t getTimeNanoUtc(void);    // returns 0 if time is not valid
   void update(void);
 
  private:
@@ -69,11 +77,23 @@ class Gnss
   int sateliteCount = 0;
   bool fix = false;
   uint8_t fixType = 0;
+  bool timeValid = false;
+
+  uint16_t year;    // Year (UTC)
+  uint8_t month;    // Month, range 1..12 (UTC)
+  uint8_t day;      // Day of month, range 1..31 (UTC)
+  uint8_t hour;     // Hour of day, range 0..23 (UTC)
+  uint8_t min;      // Minute of hour, range 0..59 (UTC)
+  uint8_t sec;      // Seconds of minute, range 0..60 (UTC)
+  uint32_t nano;    // Fraction of second in nanoseconds
+
+  uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
+  uint32_t tUpdateMicros;
 
   SFE_UBLOX_GNSS gnss;
   volatile bool initialized = false;
 
-  static void callbackPVTdata(UBX_NAV_PVT_data_t *ubxDataStruct);
+  static void callbackPVTdata(UBX_NAV_PVT_data_t* ubxDataStruct);
 };
 
 #endif

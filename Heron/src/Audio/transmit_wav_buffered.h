@@ -52,17 +52,19 @@ class AudioTransmitWAVbuffered : public EventResponder, public AudioStream
 {
  public:
   static constexpr const size_t TCP_PACKET_MAX_SIZE = 1460;
-  static constexpr const size_t TCP_PACKET_BLOCK_SIZE = TCP_PACKET_MAX_SIZE * 16;   // Must be at >= AUDIO_BLOCK_SAMPLES * ChannelCount * 2
-  static constexpr const size_t TCP_SEND_TIMEOUT_US = 50;                           // Resend interval in microseconds
-  static constexpr const size_t TCP_CONNECTION_TIMEOUT_MS = 5000;                   // Connection timeout in milliseconds
-  static constexpr const size_t EXT_RAM_BUFFER_SIZE = 12 * 1024 * 1024;             // Max is 16 MB
-  static constexpr const size_t TRANSMISSION_INTERVAL_RATE = 250;                   // Interval in milliseconds
+  static constexpr const size_t TCP_PACKET_BLOCK_SIZE = TCP_PACKET_MAX_SIZE * 16;    // Must be at >= AUDIO_BLOCK_SAMPLES * ChannelCount * 2
+  static constexpr const size_t TCP_SEND_TIMEOUT_US = 50;                            // Resend interval in microseconds
+  static constexpr const size_t TCP_CONNECTION_TIMEOUT_MS = 5000;                    // Connection timeout in milliseconds
+  static constexpr const size_t EXT_RAM_BUFFER_SIZE = 12 * 1024 * 1024;              // Max is 16 MB
+  static constexpr const size_t TRANSMISSION_INTERVAL_RATE = 250;                    // Interval in milliseconds
 
   AudioTransmitWAVbuffered(unsigned char ninput, audio_block_t** iqueue);
   AudioTransmitWAVbuffered(void) : AudioTransmitWAVbuffered(2, inputQueueArray) {}
   virtual ~AudioTransmitWAVbuffered(void) { end(); }
   bool begin(int port, bool verboseOutput = false);
   void end(void);
+  void setTimestampCallback(uint64_t (*callback)(void)) { getTimestamp = callback; }
+  void setBackupTimestampCallback(uint64_t (*callback)(void)) { getBackupTimestamp = callback; }
 
   bool getBufferOverflowDetected(void)
   {
@@ -71,7 +73,7 @@ class AudioTransmitWAVbuffered : public EventResponder, public AudioStream
     return res;
   }
   float getBufferFillLevel(void) { return (float)circularBuffer.availableToRead() / (float)circularBuffer.capacity(); }
-  uint32_t getDataRate(void) { return bytesPerInterval * (1000 / TRANSMISSION_INTERVAL_RATE); } // Bytes per second
+  uint32_t getDataRate(void) { return bytesPerInterval * (1000 / TRANSMISSION_INTERVAL_RATE); }    // Bytes per second
   bool getConnectionState(void)
   {
     if(!client)
@@ -105,6 +107,9 @@ class AudioTransmitWAVbuffered : public EventResponder, public AudioStream
   volatile bool writePending = false;
   uint8_t objnum;
   bool verbose = false;
+
+  uint64_t (*getTimestamp)(void) = nullptr;
+  uint64_t (*getBackupTimestamp)(void) = nullptr;
 };
 
 class AudioTransmitWAVmono : public AudioTransmitWAVbuffered

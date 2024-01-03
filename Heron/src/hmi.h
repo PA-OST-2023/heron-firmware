@@ -61,10 +61,28 @@ class Hmi
   bool begin(Utils& utilsRef);
   void setSystemStatus(systemStatus_t status) { systemStatus = status; }
   void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
-  void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second);
-  void getTime(uint8_t& hour, uint8_t& minute, uint8_t& second);
-  void getDate(uint16_t& year, uint8_t& month, uint8_t& day);
-
+  void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
+  {
+    year = this->year;
+    month = this->month;
+    day = this->day;
+    hour = this->hour;
+    minute = this->min;
+    second = this->sec;
+  }
+  void getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
+  {
+    hour = this->hour;
+    minute = this->min;
+    second = this->sec;
+  }
+  void getDate(uint16_t& year, uint8_t& month, uint8_t& day)
+  {
+    year = this->year;
+    month = this->month;
+    day = this->day;
+  }
+  static uint64_t getTimeNanoUtc(void) { return timeNanoUtc + (uint64_t)(micros() - tUpdateMicros) * 1000ULL; }
   static uint32_t Color(uint8_t r, uint8_t g, uint8_t b, uint8_t w = 0) { return ((uint32_t)w << 24) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b; }
 
   const int rgbLedPin, buzzerPin;
@@ -75,6 +93,16 @@ class Hmi
   DMAMEM static uint8_t displayMemory[LED_COUNT * 12];    // 12 bytes per LED
   WS2812Serial leds = WS2812Serial(LED_COUNT, displayMemory, drawingMemory, rgbLedPin, WS2812_GRB);
   RTC_PCF8563 rtc;
+
+  uint16_t year = 0;
+  uint8_t month = 0;
+  uint8_t day = 0;
+  uint8_t hour = 0;
+  uint8_t min = 0;
+  uint8_t sec = 0;
+
+  static uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
+  static uint32_t tUpdateMicros;
 
   Utils* utils = nullptr;
   systemStatus_t systemStatus = STATUS_BOOTUP;

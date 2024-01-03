@@ -188,7 +188,7 @@ FLASHMEM void Console::printStartupMessage(void)
   stream.print(CONSOLE_COLOR_BOLD_CYAN CONSOLE_BACKGROUND_DEFAULT);
   stream.println("****************************************************");
   stream.println("*                      Heron                       *");
-  stream.println("*      2023, Florian Baumgartner, Alain Keller     *");
+  stream.println("*      2024, Florian Baumgartner, Alain Keller     *");
   stream.println("****************************************************");
   stream.println("*                                                  *");
   stream.println("*                              +%@@#==+++++-.      *");

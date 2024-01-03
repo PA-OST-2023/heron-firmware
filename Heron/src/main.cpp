@@ -76,6 +76,8 @@ void setup()
   console.begin();
   utils.begin();
   audio.begin();
+  audio.setTimestampCallback(Gnss::getTimeNanoUtc);
+  audio.setBackupTimestampCallback(Hmi::getTimeNanoUtc);
   gnss.begin(utils);
   hmi.begin(utils);
   sensors.begin(utils);
@@ -83,7 +85,7 @@ void setup()
   gui.begin(utils, hmi, audio, ethernet, sensors);
   hmi.setSystemStatus(Hmi::STATUS_OK);
   app.begin(audio, utils, gui, hmi, ethernet, gnss, sensors);
-  hmi.buzzer.playMelody(MELODIE_POWER_ON);
+  // hmi.buzzer.playMelody(MELODIE_POWER_ON);
   // TODO: Add watchdog
 }
 

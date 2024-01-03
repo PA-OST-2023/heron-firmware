@@ -34,7 +34,7 @@
 #include <TeensyThreads.h>
 #include <console.h>
 
-Gnss* Gnss::ref;
+Gnss* Gnss::ref = nullptr;
 
 bool Gnss::begin(Utils& utilsRef)    // Don't mess with the Reset Pin, somehow it causes the GNSS module to not work anymore
 {
@@ -75,64 +75,63 @@ void Gnss::update(void)
   if(millis() - tUpdate > (1000.0 / UPDATE_RATE))
   {
     tUpdate = millis();
-    // if(gnss.getPVT())    // Check if new data is available
-    // {
-    //   latitude = gnss.getLatitude() / 10000000.0;
-    //   longitude = gnss.getLongitude() / 10000000.0;
-    //   altitude = gnss.getAltitudeMSL() / 1000.0;
-    //   magneticDeclination = gnss.getMagDec();
-    //   sateliteCount = gnss.getSIV();
-    //   fix = gnss.getGnssFixOk();
-    //   fixType = gnss.getFixType();
-
-    //   console.log.printf("[GNSS] ExeTime: %dms, Lat: %.6f, Lon: %.6f, Alt: %.2fm, MagDec: %.2f, Sats: %d, Fix: %d, FixType: %d\n", millis() - tUpdate, latitude, longitude, altitude, magneticDeclination, sateliteCount, fix, fixType);
-    // }
 
     gnss.checkUblox();        // Check for the arrival of new data and process it.
     gnss.checkCallbacks();    // Check if any callbacks are waiting to be processed.
     if(millis() - tUpdate > 50)
     {
       console.warning.printf("[GNSS] ExeTime: %d ms\n", millis() - tUpdate);
+
+      utils->turnOffWire(GPS_WIRE);
+      delayMicroseconds(50);
+      utils->turnOnWire(GPS_WIRE);
     }
   }
 }
 
-FLASHMEM void Gnss::callbackPVTdata(UBX_NAV_PVT_data_t* ubxDataStruct)
+uint64_t Gnss::getTimeNanoUtc(void)
 {
-  console.log.print(F("[GNSS] Time: "));    // Print the time
-  uint8_t hms = ubxDataStruct->hour;        // Print the hours
-  if(hms < 10)
-    console.log.print(F("0"));    // Print a leading zero if required
-  console.log.print(hms);
-  console.log.print(F(":"));
-  hms = ubxDataStruct->min;    // Print the minutes
-  if(hms < 10)
-    console.log.print(F("0"));    // Print a leading zero if required
-  console.log.print(hms);
-  console.log.print(F(":"));
-  hms = ubxDataStruct->sec;    // Print the seconds
-  if(hms < 10)
-    console.log.print(F("0"));    // Print a leading zero if required
-  console.log.print(hms);
-  console.log.print(F("."));
-  unsigned long millisecs = ubxDataStruct->iTOW % 1000;    // Print the milliseconds
-  if(millisecs < 100)
-    console.log.print(F("0"));    // Print the trailing zeros correctly
-  if(millisecs < 10)
-    console.log.print(F("0"));
-  console.log.print(millisecs);
+  if(ref == nullptr)
+  {
+    return 0;
+  }
+  if(!ref->initialized || !ref->timeValid)
+  {
+    return 0;
+  }
+  return ref->timeNanoUtc + (micros() - ref->tUpdateMicros) * 1000ULL;
+}
 
-  long latitude = ubxDataStruct->lat;    // Print the latitude
-  console.log.print(F(" Lat: "));
-  console.log.print(latitude);
+void Gnss::callbackPVTdata(UBX_NAV_PVT_data_t* ubxDataStruct)
+{
+  if(ref == nullptr)
+  {
+    return;
+  }
+  ref->tUpdateMicros = micros();
 
-  long longitude = ubxDataStruct->lon;    // Print the longitude
-  console.log.print(F(" Long: "));
-  console.log.print(longitude);
-  console.log.print(F(" (degrees * 10^-7)"));
+  ref->latitude = ubxDataStruct->lat / 10000000.0;
+  ref->longitude = ubxDataStruct->lon / 10000000.0;
+  ref->altitude = ubxDataStruct->hMSL / 1000.0;
+  ref->magneticDeclination = ubxDataStruct->magDec;
+  ref->sateliteCount = ubxDataStruct->numSV;
+  ref->fixType = ubxDataStruct->fixType;
+  ref->fix = ubxDataStruct->flags.bits.gnssFixOK;
+  ref->timeValid = ubxDataStruct->valid.bits.fullyResolved;
 
-  long altitude = ubxDataStruct->hMSL;    // Print the height above mean sea level
-  console.log.print(F(" Height above MSL: "));
-  console.log.print(altitude);
-  console.log.println(F(" (mm)"));
+  ref->year = ubxDataStruct->year;
+  ref->month = ubxDataStruct->month;
+  ref->day = ubxDataStruct->day;
+  ref->hour = ubxDataStruct->hour;
+  ref->min = ubxDataStruct->min;
+  ref->sec = ubxDataStruct->sec;
+  ref->nano = ubxDataStruct->nano;
+
+  DateTimeFields utc = {.sec = ref->sec,
+                        .min = ref->min,
+                        .hour = ref->hour,
+                        .mday = ref->day,
+                        .mon = (uint8_t)((int8_t)ref->month - 1),
+                        .year = (uint8_t)(ref->year - 1900)};
+  ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL + (uint64_t)ref->nano;
 }
