@@ -49,7 +49,7 @@
 #define LV_MEM_CUSTOM 1
 #if LV_MEM_CUSTOM == 1
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
-    #define LV_MEM_SIZE (48U * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (64U * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
     #define LV_MEM_ADR 0     /*0: unused*/
@@ -60,13 +60,16 @@
     #endif
 
 #else       /*LV_MEM_CUSTOM*/
-    #define LV_MEM_CUSTOM_INCLUDE "../../../static_malloc/src/smalloc/smalloc.h"   /*Header for the dynamic memory function*/
-    #define LV_MEM_CUSTOM_ALLOC   sm_malloc
-    #define LV_MEM_CUSTOM_FREE    sm_free
-    #define LV_MEM_CUSTOM_REALLOC sm_realloc
+    // #define LV_MEM_CUSTOM_INCLUDE "../../../static_malloc/src/smalloc/smalloc.h"   /*Header for the dynamic memory function*/
+    // #define LV_MEM_CUSTOM_ALLOC   sm_malloc
+    // #define LV_MEM_CUSTOM_FREE    sm_free
+    // #define LV_MEM_CUSTOM_REALLOC sm_realloc
     // #define LV_MEM_CUSTOM_ALLOC   malloc
     // #define LV_MEM_CUSTOM_FREE    free
     // #define LV_MEM_CUSTOM_REALLOC realloc
+    // #define LV_MEM_CUSTOM_ALLOC   extmem_malloc
+    // #define LV_MEM_CUSTOM_FREE    extmem_free
+    // #define LV_MEM_CUSTOM_REALLOC extmem_realloc
 #endif     /*LV_MEM_CUSTOM*/
 
 /*Number of the intermediate memory buffer used during rendering and other internal processing mechanisms.

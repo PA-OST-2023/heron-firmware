@@ -114,14 +114,17 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
   softIron[2][2] = utils->preferences.getFloat("mag_s22", softIron[2][2]);
 
   initialized = true;
-  // threads.addThread(update, (void*)this, 4096);
   console.ok.println("[SENORS] Initialized");
-
   return res;
 }
 
 void Sensors::calibrateAngleStart(void)
 {
+  if(!angleSensorInitialized)
+  {
+    console.error.println("[SENSORS] Angle sensor not initialized");
+    return;
+  }
   angle0Unconfirmed = (uint16_t)(-1);
   angle90Unconfirmed = (uint16_t)(-1);
 
@@ -133,6 +136,11 @@ void Sensors::calibrateAngleStart(void)
 
 void Sensors::calibrateAngleAbort(void)
 {
+  if(!angleSensorInitialized)
+  {
+    console.error.println("[SENSORS] Angle sensor not initialized");
+    return;
+  }
   console.warning.println("[SENSORS] Angle calibration aborted, restoring previous values");
   utils->lockWire(SENSOR_WIRE);
   angleSensor.setZPosition(angle90);    // Set start position
@@ -142,6 +150,11 @@ void Sensors::calibrateAngleAbort(void)
 
 bool Sensors::calibrateAngleConfirm(void)
 {
+  if(!angleSensorInitialized)
+  {
+    console.error.println("[SENSORS] Angle sensor not initialized");
+    return false;
+  }
   bool angleSet = false;
   if(angle0Unconfirmed != (uint16_t)(-1))
   {
@@ -166,33 +179,34 @@ bool Sensors::calibrateAngleConfirm(void)
   return angleSet;
 }
 
-void Sensors::update(void* parameter)
+void Sensors::update(void)
 {
-  Sensors* ref = (Sensors*)parameter;
-
+  if(!initialized)
+  {
+    return;
+  }
   static uint32_t tUpdate = 0;
-  //while(ref->initialized)
   if(millis() - tUpdate > (1000.0 / UPDATE_RATE))
   {
     tUpdate = millis();
 
-    if(ref->calibrationAborted)
+    if(calibrationAborted)
     {
-      ref->calibrationDone = false;
-      ref->calibrationStarted = false;
-      ref->calibrationRunning = false;
-      ref->calibrationAborted = false;
+      calibrationDone = false;
+      calibrationStarted = false;
+      calibrationRunning = false;
+      calibrationAborted = false;
       console.warning.println("[SENSORS] Magnetometer calibration aborted");
     }
-    if(ref->calibrationStarted)
+    if(calibrationStarted)
     {
-      ref->calibrationDone = false;
-      ref->calibrationStarted = false;
-      ref->calibrationRunning = true;
-      ref->calibCoverage = 0.0;
-      ref->calibVariance = 0.0;
-      ref->calibWobbleError = 0.0;
-      ref->calibFitError = 0.0;
+      calibrationDone = false;
+      calibrationStarted = false;
+      calibrationRunning = true;
+      calibCoverage = 0.0;
+      calibVariance = 0.0;
+      calibWobbleError = 0.0;
+      calibFitError = 0.0;
       raw_data_reset();    // Reset calibration stack
       console.log.println("[SENSORS] Starting magnetometer calibration...");
     }
@@ -201,14 +215,14 @@ void Sensors::update(void* parameter)
     Utils::lockWire(SENSOR_WIRE);
 
     static uint32_t tBaro = 0;
-    if((millis() - tBaro > (1000.0 / BAROMETER_UPDATE_RATE)) && ref->baroInitialized)
+    if((millis() - tBaro > (1000.0 / BAROMETER_UPDATE_RATE)) && baroInitialized)
     {
       tBaro = millis();
-      if(ref->baro.performReading())
+      if(baro.performReading())
       {
-        ref->temperature = (float)ref->baro.temperature;
-        ref->pressure = (float)ref->baro.pressure / 100.0;
-        ref->altitude = ref->baro.readAltitude(SEA_LEVEL_PRESSURE_HPA);
+        temperature = (float)baro.temperature;
+        pressure = (float)baro.pressure / 100.0;
+        altitude = baro.readAltitude(SEA_LEVEL_PRESSURE_HPA);
         if(millis() - tBaro > MAX_SENSOR_READOUT_DELAY)
         {
           console.warning.printf("[SENSORS] <Barometer> Possible I2C-Bus stall (Time: %d)\n", millis() - tBaro);
@@ -222,15 +236,15 @@ void Sensors::update(void* parameter)
     }
 
     static uint32_t tAcc = 0;
-    if((millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE)) && !wireError && ref->accelInitialized)
+    if((millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE)) && !wireError && accelInitialized)
     {
       tAcc = millis();
-      if(ref->accel.getEvent(&ref->accel_event))    // Check if accelerometer has new data
+      if(accel.getEvent(&accel_event))    // Check if accelerometer has new data
       {
-        float pitch = ref->calculatePitch(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-        ref->pitch = (ref->PITCH_ROLL_FILTER_ALPHA * pitch) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->pitch);
-        float roll = ref->calculateRoll(ref->accel_event.acceleration.x, ref->accel_event.acceleration.y, ref->accel_event.acceleration.z);
-        ref->roll = (ref->PITCH_ROLL_FILTER_ALPHA * roll) + ((1.0 - ref->PITCH_ROLL_FILTER_ALPHA) * ref->roll);
+        float p = calculatePitch(accel_event.acceleration.x, accel_event.acceleration.y, accel_event.acceleration.z);
+        pitch = (PITCH_ROLL_FILTER_ALPHA * p) + ((1.0 - PITCH_ROLL_FILTER_ALPHA) * pitch);
+        float r = calculateRoll(accel_event.acceleration.x, accel_event.acceleration.y, accel_event.acceleration.z);
+        roll = (PITCH_ROLL_FILTER_ALPHA * r) + ((1.0 - PITCH_ROLL_FILTER_ALPHA) * roll);
         if(millis() - tAcc > MAX_SENSOR_READOUT_DELAY)
         {
           console.warning.printf("[SENSORS] <Accelerometer> Possible I2C-Bus stall (Time: %d)\n", millis() - tAcc);
@@ -239,14 +253,13 @@ void Sensors::update(void* parameter)
     }
 
     static uint32_t tMag = 0;
-    if((millis() - tMag > (1000.0 / MAGNETOMETER_UPDATE_RATE)) && !wireError && ref->magInitialized)
+    if((millis() - tMag > (1000.0 / MAGNETOMETER_UPDATE_RATE)) && !wireError && magInitialized)
     {
       tMag = millis();
-      if(ref->mag.getEvent(&ref->mag_event))    // Check if magnetometer has new data
+      if(mag.getEvent(&mag_event))    // Check if magnetometer has new data
       {
-        float newHeading =
-          ref->calculateHeadingCompensated(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z, ref->pitch, ref->roll);
-        float diff = newHeading - ref->heading;    // Compute the difference in heading, adjusting for the 360 degree wrap-around
+        float newHeading = calculateHeadingCompensated(mag_event.magnetic.x, mag_event.magnetic.y, mag_event.magnetic.z, pitch, roll);
+        float diff = newHeading - heading;    // Compute the difference in heading, adjusting for the 360 degree wrap-around
         if(diff > 180.0f)
         {
           diff -= 360.0f;
@@ -255,31 +268,31 @@ void Sensors::update(void* parameter)
         {
           diff += 360.0f;
         }
-        ref->heading += ref->HEADING_FILTER_ALPHA * diff;    // Apply the alpha coefficient to the difference
-        if(ref->heading < 0.0f)                              // Ensure the heading is within 0 to 360 degrees
+        heading += HEADING_FILTER_ALPHA * diff;    // Apply the alpha coefficient to the difference
+        if(heading < 0.0f)                         // Ensure the heading is within 0 to 360 degrees
         {
-          ref->heading += 360.0f;
+          heading += 360.0f;
         }
-        else if(ref->heading >= 360.0f)
+        else if(heading >= 360.0f)
         {
-          ref->heading -= 360.0f;
+          heading -= 360.0f;
         }
 
-        if(ref->calibrationRunning)    // Check if magnetometer has new data
+        if(calibrationRunning)    // Check if magnetometer has new data
         {
-          ref->calibrate(ref->mag_event.magnetic.x, ref->mag_event.magnetic.y, ref->mag_event.magnetic.z);
+          calibrate(mag_event.magnetic.x, mag_event.magnetic.y, mag_event.magnetic.z);
           float coverage = 100.0 - quality_surface_gap_error();
-          ref->calibCoverage = constrain(map(coverage, 0.0, CALIBRATION_COVERAGE_THRESHOLD, 0.0, 100.0), 0.0, 100.0);
-          ref->calibFitError = constrain(quality_spherical_fit_error(), 0.0, 100.0);
-          ref->calibWobbleError = constrain(quality_wobble_error(), 0.0, 100.0);
-          ref->calibVariance = quality_magnitude_variance_error();
+          calibCoverage = constrain(map(coverage, 0.0, CALIBRATION_COVERAGE_THRESHOLD, 0.0, 100.0), 0.0, 100.0);
+          calibFitError = constrain(quality_spherical_fit_error(), 0.0, 100.0);
+          calibWobbleError = constrain(quality_wobble_error(), 0.0, 100.0);
+          calibVariance = quality_magnitude_variance_error();
 
           if(coverage >= CALIBRATION_COVERAGE_THRESHOLD)    // Check if calibration is done
           {
             console.ok.println("[SENSORS] Calibration completed!");
-            ref->calibrationDone = true;
-            ref->calibrationRunning = false;
-            if(!ref->updateAndSaveCalibration())
+            calibrationDone = true;
+            calibrationRunning = false;
+            if(!updateAndSaveCalibration())
             {
               console.error.println("[SENSORS] Calibration could not be saved");
             }
@@ -297,16 +310,16 @@ void Sensors::update(void* parameter)
     }
 
     static uint32_t tAngle = 0;
-    if((millis() - tAngle > (1000.0 / ANGLE_SENSOR_UPDATE_RATE)) && !wireError && ref->angleSensorInitialized)
+    if((millis() - tAngle > (1000.0 / ANGLE_SENSOR_UPDATE_RATE)) && !wireError && angleSensorInitialized)
     {
       tAngle = millis();
-      ref->angleRaw = ref->angleSensor.readAngle();
-      uint8_t status = ref->angleSensor.readStatus();
-      float angle = constrain(map((float)ref->angleRaw, 0.0, 4095.0, 90.0, 0.0), 0.0, 90.0);
-      ref->angle = (ref->ANGLE_SENSOR_FILTER_ALPHA * angle) + ((1.0 - ref->ANGLE_SENSOR_FILTER_ALPHA) * ref->angle);
-      ref->magnetDetected = (status & AS5600::AS5600_MAGNET_DETECT) > 1;
-      ref->magnetTooWeak = (status & AS5600::AS5600_MAGNET_LOW) > 1;
-      ref->magnetTooStrong = (status & AS5600::AS5600_MAGNET_HIGH) > 1;
+      angleRaw = angleSensor.readAngle();
+      uint8_t status = angleSensor.readStatus();
+      float angle = constrain(map((float)angleRaw, 0.0, 4095.0, 90.0, 0.0), 0.0, 90.0);
+      angle = (ANGLE_SENSOR_FILTER_ALPHA * angle) + ((1.0 - ANGLE_SENSOR_FILTER_ALPHA) * angle);
+      magnetDetected = (status & AS5600::AS5600_MAGNET_DETECT) > 1;
+      magnetTooWeak = (status & AS5600::AS5600_MAGNET_LOW) > 1;
+      magnetTooStrong = (status & AS5600::AS5600_MAGNET_HIGH) > 1;
       if(millis() - tAngle > MAX_SENSOR_READOUT_DELAY)
       {
         console.warning.printf("[SENSORS] <Angle Sensor> Possible I2C-Bus stall (Time: %d)\n", millis() - tAngle);
@@ -317,8 +330,6 @@ void Sensors::update(void* parameter)
     delayMicroseconds(50);
     Utils::turnOnWire(SENSOR_WIRE);
     Utils::unlockWire(SENSOR_WIRE);
-
-    // threads.delay(1000.0 / UPDATE_RATE);
   }
 }
 

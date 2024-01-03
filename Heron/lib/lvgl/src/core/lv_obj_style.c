@@ -569,10 +569,11 @@ FLASHMEM static _lv_obj_style_t * get_trans_style(lv_obj_t * obj,  lv_style_sele
 }
 
 
-FLASHMEM static lv_style_res_t get_prop_core(const lv_obj_t * obj, lv_part_t part, lv_style_prop_t prop, lv_style_value_t * v)
+static lv_style_res_t get_prop_core(const lv_obj_t * obj, lv_part_t part, lv_style_prop_t prop, lv_style_value_t * v)
 {
     uint8_t group = 1 << _lv_style_get_prop_group(prop);
     int32_t weight = -1;
+    if(obj == NULL) return LV_STYLE_RES_NOT_FOUND;   // Added by Florian
     lv_state_t state = obj->state;
     lv_state_t state_inv = ~state;
     lv_style_value_t value_tmp;
@@ -580,7 +581,9 @@ FLASHMEM static lv_style_res_t get_prop_core(const lv_obj_t * obj, lv_part_t par
     uint32_t i;
     lv_style_res_t found;
     for(i = 0; i < obj->style_cnt; i++) {
+        if(obj == NULL) continue;   // Added by Florian
         _lv_obj_style_t * obj_style = &obj->styles[i];
+        if(obj_style == NULL) continue;  // Added by Florian
         if(obj_style->is_trans == false) break;
         if(skip_trans) continue;
 
@@ -599,6 +602,9 @@ FLASHMEM static lv_style_res_t get_prop_core(const lv_obj_t * obj, lv_part_t par
     }
 
     for(; i < obj->style_cnt; i++) {
+        if(obj == NULL) continue;   // Added by Florian
+        if(obj->styles == NULL) continue;  // Added by Florian
+        if(obj->styles[i].style == NULL) continue;  // Added by Florian
         if((obj->styles[i].style->has_group & group) == 0) continue;
         _lv_obj_style_t * obj_style = &obj->styles[i];
         lv_part_t part_act = lv_obj_style_get_selector_part(obj->styles[i].selector);

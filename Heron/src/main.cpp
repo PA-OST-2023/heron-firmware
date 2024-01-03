@@ -90,21 +90,16 @@ void setup()
 void loop()
 {
   threads.yield();
+  sensors.update();
+  gnss.update();
   gui.update();
   ethernet.update();
 
-  static uint32_t sensorT = 0;
-  if(millis() - sensorT > 10)
-  {
-    sensorT = millis();
-    sensors.update(&sensors);    // TODO: Remove and run in thread
-  }
 
   // static uint32_t gnssT = 0;
   // if(millis() - gnssT > 1000)
   // {
   //   gnssT = millis();
-  //   Gnss::update(&gnss);    // TODO: Remove and run in thread
   //   console.log.printf("[GNSS] Lat: %f, Lon: %f, Alt: %f, MagDec: %f, Sats: %d, Fix: %d, FixType: %d\n", gnss.getLatitude(), gnss.getLongitude(),
   //                      gnss.getAltitude(), gnss.getMagneticDeclination(), gnss.getSateliteCount(), gnss.getFix(), gnss.getFixType());
   // }

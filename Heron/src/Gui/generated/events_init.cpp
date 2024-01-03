@@ -232,8 +232,8 @@ static void screen_system_btn_back_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_home_del == true) {
 	          setup_scr_screen_home(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, true);
-	        guider_ui.screen_system_del = true;
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, false);
+	        guider_ui.screen_system_del = false;
 	    }
 		break;
 	}
@@ -259,8 +259,8 @@ static void screen_ethernet_btn_setup_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_ethernet_setup_del == true) {
 	          setup_scr_screen_ethernet_setup(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_ethernet_setup, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, true);
-	        guider_ui.screen_ethernet_del = true;
+	        lv_scr_load_anim(guider_ui.screen_ethernet_setup, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, false);
+	        guider_ui.screen_ethernet_del = false;
 	    }
 		break;
 	}
@@ -282,8 +282,8 @@ static void screen_ethernet_btn_back_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_home_del == true) {
 	          setup_scr_screen_home(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, true);
-	        guider_ui.screen_ethernet_del = true;
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, false);
+	        guider_ui.screen_ethernet_del = false;
 	    }
 		break;
 	}
@@ -383,8 +383,8 @@ static void screen_gnss_btn_location_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_gnss_location_del == true) {
 	          setup_scr_screen_gnss_location(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_gnss_location, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, true);
-	        guider_ui.screen_gnss_del = true;
+	        lv_scr_load_anim(guider_ui.screen_gnss_location, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, false);
+	        guider_ui.screen_gnss_del = false;
 	    }
 		break;
 	}
@@ -406,8 +406,8 @@ static void screen_gnss_btn_back_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_home_del == true) {
 	          setup_scr_screen_home(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, true);
-	        guider_ui.screen_gnss_del = true;
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, false);
+	        guider_ui.screen_gnss_del = false;
 	    }
 		break;
 	}
@@ -434,8 +434,8 @@ static void screen_gnss_location_btn_back_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_gnss_del == true) {
 	          setup_scr_screen_gnss(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_gnss, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, true);
-	        guider_ui.screen_gnss_location_del = true;
+	        lv_scr_load_anim(guider_ui.screen_gnss, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 200, 0, false);
+	        guider_ui.screen_gnss_location_del = false;
 	    }
 		break;
 	}
@@ -478,8 +478,8 @@ static void screen_compass_btn_calib_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_compass_calib_del == true) {
 	          setup_scr_screen_compass_calib(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_compass_calib, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, true);
-	        guider_ui.screen_compass_del = true;
+	        lv_scr_load_anim(guider_ui.screen_compass_calib, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, false);
+	        guider_ui.screen_compass_del = false;
 	    }
 		break;
 	}
@@ -501,8 +501,8 @@ static void screen_compass_btn_back_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_home_del == true) {
 	          setup_scr_screen_home(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, true);
-	        guider_ui.screen_compass_del = true;
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, false);
+	        guider_ui.screen_compass_del = false;
 	    }
 		break;
 	}
@@ -577,8 +577,8 @@ static void screen_arm_angle_btn_calib_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_arm_angle_calib_del == true) {
 	          setup_scr_screen_arm_angle_calib(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_arm_angle_calib, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, true);
-	        guider_ui.screen_arm_angle_del = true;
+	        lv_scr_load_anim(guider_ui.screen_arm_angle_calib, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 200, false);
+	        guider_ui.screen_arm_angle_del = false;
 	    }
 		break;
 	}
@@ -600,8 +600,8 @@ static void screen_arm_angle_btn_back_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_home_del == true) {
 	          setup_scr_screen_home(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, true);
-	        guider_ui.screen_arm_angle_del = true;
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, false);
+	        guider_ui.screen_arm_angle_del = false;
 	    }
 		break;
 	}
@@ -758,8 +758,8 @@ static void screen_ambient_btn_back_event_handler (lv_event_t *e)
 	        if (guider_ui.screen_home_del == true) {
 	          setup_scr_screen_home(&guider_ui);
 	        }
-	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, true);
-	        guider_ui.screen_ambient_del = true;
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, false);
+	        guider_ui.screen_ambient_del = false;
 	    }
 		break;
 	}

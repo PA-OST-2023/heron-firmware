@@ -648,7 +648,7 @@ FLASHMEM static void inv_arc(lv_obj_t * obj, lv_meter_indicator_t * indic, int32
 }
 
 
-FLASHMEM static void inv_line(lv_obj_t * obj, lv_meter_indicator_t * indic, int32_t value)
+static void inv_line(lv_obj_t * obj, lv_meter_indicator_t * indic, int32_t value)
 {
     lv_area_t scale_area;
     lv_obj_get_content_coords(obj, &scale_area);
@@ -676,6 +676,7 @@ FLASHMEM static void inv_line(lv_obj_t * obj, lv_meter_indicator_t * indic, int3
         lv_obj_invalidate_area(obj, &a);
     }
     else if(indic->type == LV_METER_INDICATOR_TYPE_NEEDLE_IMG) {
+        if(scale == NULL) return;       // Added by Florian
         int32_t angle = lv_map(value, scale->min, scale->max, scale->rotation, scale->rotation + scale->angle_range);       // This line caused one a nullptr crash
         lv_img_header_t info;
         lv_img_decoder_get_info(indic->type_data.needle_img.src, &info);

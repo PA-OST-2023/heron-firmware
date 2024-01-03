@@ -107,17 +107,12 @@ void AudioUtils::update(void* parameter)
       {
         console.log.printf("[AUDIO UTILS] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n",
                            (ref->transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0, ref->transmitter.getBufferFillLevel() * 100.0);
-      }
-      else
-      {
-        console.warning.println("[AUDIO UTILS] No client connected.");
+        if(ref->transmitter.getBufferOverflowDetected())
+        {
+          console.warning.println("[AUDIO UTILS] Buffer overflow detected.");
+        }
       }
     }
-    if(ref->transmitter.getBufferOverflowDetected())
-    {
-      console.warning.println("[AUDIO UTILS] Buffer overflow detected.");
-    }
-
     threads.delay(1000.0 / UPDATE_RATE);
   }
 }

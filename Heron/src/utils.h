@@ -40,6 +40,10 @@
 #include <preferences.h>
 #include <rtclib.h>
 
+extern unsigned long _heap_start;
+extern unsigned long _heap_end;
+extern char* __brkval;
+
 class Utils
 {
  public:
@@ -79,6 +83,8 @@ class Utils
     snprintf(buffer, sizeof(buffer), "%02d%02d%02d", date.year() % 100, date.month(), date.day());
     return buffer;
   }
+  static uint32_t getFreeRam() { return (char*)&_heap_end - __brkval; }
+
 
   Preferences preferences;
 

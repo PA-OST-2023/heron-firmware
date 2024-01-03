@@ -1632,7 +1632,7 @@
 					"default_style": false,
 					"scrollbar_mode": "OFF",
 					"direction": "horizon",
-					"current_item": 5,
+					"current_item": 0,
 					"tile_count": 1,
 					"child": [
 						{
@@ -4409,7 +4409,7 @@
 										"scrId": "0l0ns91v",
 										"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -6353,7 +6353,7 @@
 										"scrId": "0l0ns91v",
 										"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -6740,7 +6740,7 @@
 										"scrId": "yo3ohk5w",
 										"anim_type": "LV_SCR_LOAD_ANIM_MOVE_LEFT",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -13548,7 +13548,7 @@
 										"scrId": "0l0ns91v",
 										"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -13935,7 +13935,7 @@
 										"scrId": "9f13df05",
 										"anim_type": "LV_SCR_LOAD_ANIM_MOVE_LEFT",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -14465,7 +14465,7 @@
 										"scrId": "1qk5dcmb",
 										"anim_type": "LV_SCR_LOAD_ANIM_MOVE_RIGHT",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -15416,7 +15416,7 @@
 										"scrId": "0l0ns91v",
 										"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -15803,7 +15803,7 @@
 										"scrId": "z166oraw",
 										"anim_type": "LV_SCR_LOAD_ANIM_MOVE_LEFT",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -18210,7 +18210,7 @@
 										"scrId": "0l0ns91v",
 										"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -19138,7 +19138,7 @@
 										"scrId": "yv7w9cru",
 										"anim_type": "LV_SCR_LOAD_ANIM_MOVE_LEFT",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -23148,7 +23148,7 @@
 										"scrId": "0l0ns91v",
 										"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 										"is_clean": false,
-										"is_del": true
+										"is_del": false
 									},
 									"bg_color": {
 										"ische": false,
@@ -27231,7 +27231,7 @@
 									"scrId": "0l0ns91v",
 									"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -27648,7 +27648,7 @@
 									"scrId": "yo3ohk5w",
 									"anim_type": "LV_SCR_LOAD_ANIM_MOVE_LEFT",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -27928,7 +27928,7 @@
 									"scrId": "0l0ns91v",
 									"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -32365,7 +32365,7 @@
 									"scrId": "9f13df05",
 									"anim_type": "LV_SCR_LOAD_ANIM_MOVE_LEFT",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -32645,7 +32645,7 @@
 									"scrId": "0l0ns91v",
 									"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -33620,7 +33620,7 @@
 									"scrId": "1qk5dcmb",
 									"anim_type": "LV_SCR_LOAD_ANIM_MOVE_RIGHT",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -34080,7 +34080,7 @@
 									"scrId": "z166oraw",
 									"anim_type": "LV_SCR_LOAD_ANIM_MOVE_LEFT",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -34360,7 +34360,7 @@
 									"scrId": "0l0ns91v",
 									"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -36478,7 +36478,7 @@
 									"scrId": "yv7w9cru",
 									"anim_type": "LV_SCR_LOAD_ANIM_MOVE_LEFT",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -37330,7 +37330,7 @@
 									"scrId": "0l0ns91v",
 									"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},
@@ -39280,7 +39280,7 @@
 									"scrId": "0l0ns91v",
 									"anim_type": "LV_SCR_LOAD_ANIM_FADE_ON",
 									"is_clean": false,
-									"is_del": true
+									"is_del": false
 								}
 							]
 						},

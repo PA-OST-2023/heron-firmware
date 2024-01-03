@@ -42,9 +42,9 @@
 class Gnss
 {
  public:
-  static constexpr const float UPDATE_RATE = 5.0;    // Hz
+  static constexpr const float UPDATE_RATE = 30.0;    // Hz
 
-  Gnss(int rst) : rstPin(rst) {}
+  Gnss(int rst) : rstPin(rst) {ref = this;}
   bool begin(Utils& utilsRef);
   void end(void);
   float getLatitude(void) { return latitude; }
@@ -55,11 +55,12 @@ class Gnss
   bool getFix(void) { return fix; }
   uint8_t getFixType(void) { return fixType; }
 
-  static void update(void* parameter);
+  void update(void);
 
  private:
   const int rstPin;
   Utils* utils = nullptr;
+  static Gnss* ref;
 
   float latitude = 0.0;
   float longitude = 0.0;
@@ -72,7 +73,7 @@ class Gnss
   SFE_UBLOX_GNSS gnss;
   volatile bool initialized = false;
 
-  // static void update(void* parameter);
+  static void callbackPVTdata(UBX_NAV_PVT_data_t *ubxDataStruct);
 };
 
 #endif

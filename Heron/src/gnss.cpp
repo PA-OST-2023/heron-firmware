@@ -34,6 +34,8 @@
 #include <TeensyThreads.h>
 #include <console.h>
 
+Gnss* Gnss::ref;
+
 bool Gnss::begin(Utils& utilsRef)    // Don't mess with the Reset Pin, somehow it causes the GNSS module to not work anymore
 {
   utils = &utilsRef;
@@ -50,12 +52,10 @@ bool Gnss::begin(Utils& utilsRef)    // Don't mess with the Reset Pin, somehow i
 
   gnss.setI2COutput(COM_TYPE_UBX);                    // Set the I2C port to output UBX only (turn off NMEA noise)
   gnss.saveConfigSelective(VAL_CFG_SUBSEC_IOPORT);    // Save (only) the communications port settings to flash and BBR
-  gnss.setNavigationFrequency(5);                     // Set output to 5 times a second
+  gnss.setNavigationFrequency(2);                     // Set output to 2 times a second
 
-  // gnss.enableDebugging(console, false);    // TODO: Remove
-
+  gnss.setAutoPVTcallbackPtr(&callbackPVTdata);
   initialized = true;
-  // threads.addThread(update, this, 8192);
   return true;
 }
 
@@ -64,23 +64,75 @@ void Gnss::end(void)
   initialized = false;
 }
 
-void Gnss::update(void* parameter)
+void Gnss::update(void)
 {
-  Gnss* ref = (Gnss*)parameter;
-
-  while(ref->initialized)
+  if(!initialized)
   {
-    if(ref->gnss.getPVT())    // Check if new data is available
-    {
-      ref->latitude = ref->gnss.getLatitude() / 10000000.0;
-      ref->longitude = ref->gnss.getLongitude() / 10000000.0;
-      ref->altitude = ref->gnss.getAltitudeMSL() / 1000.0;
-      ref->magneticDeclination = ref->gnss.getMagDec();
-      ref->sateliteCount = ref->gnss.getSIV();
-      ref->fix = ref->gnss.getGnssFixOk();
-      ref->fixType = ref->gnss.getFixType();
-    }
-
-    // threads.delay(1000.0 / UPDATE_RATE);
+    return;
   }
+
+  static uint32_t tUpdate = 0;
+  if(millis() - tUpdate > (1000.0 / UPDATE_RATE))
+  {
+    tUpdate = millis();
+    // if(gnss.getPVT())    // Check if new data is available
+    // {
+    //   latitude = gnss.getLatitude() / 10000000.0;
+    //   longitude = gnss.getLongitude() / 10000000.0;
+    //   altitude = gnss.getAltitudeMSL() / 1000.0;
+    //   magneticDeclination = gnss.getMagDec();
+    //   sateliteCount = gnss.getSIV();
+    //   fix = gnss.getGnssFixOk();
+    //   fixType = gnss.getFixType();
+
+    //   console.log.printf("[GNSS] ExeTime: %dms, Lat: %.6f, Lon: %.6f, Alt: %.2fm, MagDec: %.2f, Sats: %d, Fix: %d, FixType: %d\n", millis() - tUpdate, latitude, longitude, altitude, magneticDeclination, sateliteCount, fix, fixType);
+    // }
+
+    gnss.checkUblox();        // Check for the arrival of new data and process it.
+    gnss.checkCallbacks();    // Check if any callbacks are waiting to be processed.
+    if(millis() - tUpdate > 50)
+    {
+      console.warning.printf("[GNSS] ExeTime: %d ms\n", millis() - tUpdate);
+    }
+  }
+}
+
+FLASHMEM void Gnss::callbackPVTdata(UBX_NAV_PVT_data_t* ubxDataStruct)
+{
+  console.log.print(F("[GNSS] Time: "));    // Print the time
+  uint8_t hms = ubxDataStruct->hour;        // Print the hours
+  if(hms < 10)
+    console.log.print(F("0"));    // Print a leading zero if required
+  console.log.print(hms);
+  console.log.print(F(":"));
+  hms = ubxDataStruct->min;    // Print the minutes
+  if(hms < 10)
+    console.log.print(F("0"));    // Print a leading zero if required
+  console.log.print(hms);
+  console.log.print(F(":"));
+  hms = ubxDataStruct->sec;    // Print the seconds
+  if(hms < 10)
+    console.log.print(F("0"));    // Print a leading zero if required
+  console.log.print(hms);
+  console.log.print(F("."));
+  unsigned long millisecs = ubxDataStruct->iTOW % 1000;    // Print the milliseconds
+  if(millisecs < 100)
+    console.log.print(F("0"));    // Print the trailing zeros correctly
+  if(millisecs < 10)
+    console.log.print(F("0"));
+  console.log.print(millisecs);
+
+  long latitude = ubxDataStruct->lat;    // Print the latitude
+  console.log.print(F(" Lat: "));
+  console.log.print(latitude);
+
+  long longitude = ubxDataStruct->lon;    // Print the longitude
+  console.log.print(F(" Long: "));
+  console.log.print(longitude);
+  console.log.print(F(" (degrees * 10^-7)"));
+
+  long altitude = ubxDataStruct->hMSL;    // Print the height above mean sea level
+  console.log.print(F(" Height above MSL: "));
+  console.log.print(altitude);
+  console.log.println(F(" (mm)"));
 }

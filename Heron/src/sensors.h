@@ -95,7 +95,7 @@ class Sensors
   float getCalibWobbleError(void) { return calibWobbleError; }
   float getCalibFitError(void) { return calibFitError; }
 
-  static void update(void* parameter);
+  void update(void);
 
 
  private:
@@ -140,8 +140,6 @@ class Sensors
   bool baroInitialized = false;
   bool angleSensorInitialized = false;
   volatile bool initialized = false;
-
-  // static void update(void* parameter);
 
   float calculatePitch(float x, float y, float z);
   float calculateRoll(float x, float y, float z);

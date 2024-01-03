@@ -72,21 +72,21 @@ FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef
   lv_log_register_print_cb(lvglPrint);
   lv_init();
 
-  static lv_disp_draw_buf_t draw_buf;
+  DMAMEM static lv_disp_draw_buf_t draw_buf;
   lv_disp_draw_buf_init(&draw_buf, buf, NULL, SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT);
   disp.setFrameBuffer((uint16_t*)buf);
 
-  static lv_disp_drv_t disp_drv;
+  DMAMEM static lv_disp_drv_t disp_drv;
   lv_disp_drv_init(&disp_drv);
   disp_drv.hor_res = SCREEN_WIDTH;
   disp_drv.ver_res = SCREEN_HEIGHT;
   disp_drv.flush_cb = dispflush;
   disp_drv.draw_buf = &draw_buf;
   disp_drv.user_data = this;
-  lv_disp_t* dispDrv = lv_disp_drv_register(&disp_drv);
+  DMAMEM static lv_disp_t* dispDrv = lv_disp_drv_register(&disp_drv);
   lv_timer_set_period(dispDrv->refr_timer, 1000.0 / DISPLAY_REFRESH_RATE);
 
-  static lv_indev_drv_t indev_drv;
+  DMAMEM static lv_indev_drv_t indev_drv;
   lv_indev_drv_init(&indev_drv);
   indev_drv.type = LV_INDEV_TYPE_POINTER;
   indev_drv.read_cb = touchpadRead;
@@ -459,7 +459,7 @@ FLASHMEM bool Gui::updateScreenCompassCalibrate(void)
     snprintf(buffer, sizeof(buffer), "%.0f %%", calibCoverage);
     lv_label_set_text_static(guider_ui.screen_compass_calib_label_coverage, buffer);
     lv_meter_set_indicator_end_value(guider_ui.screen_compass_calib_meter_coverage, guider_ui.screen_compass_calib_meter_coverage_scale_1_arc_1,
-                                     (int)map(constrain(calibCoverage, 0.0, 100.0), 0.0, 100.0, 100, 0));
+                                     (int)map(constrain(calibCoverage, 0.0, 100.0), 0.0, 100.0, 0, 100));
   }
   if(calibWobbleError != sensors->getCalibWobbleError() || screenFreshlyLoaded)
   {
@@ -761,6 +761,7 @@ void Gui::screenArmAngleCalibrationCheckValid(bool angle0, bool angle90)
 void Gui::lvglPrint(const char* buf)
 {
   console.log.printf("[LVGL] %s", buf);
+  threads.delay(10);
 }
 
 void Gui::dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p)
