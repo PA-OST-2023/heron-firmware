@@ -139,7 +139,7 @@ enum
 class Buzzer
 {
  public:
-  static constexpr const float UPDATE_RATE = 30.0;    // Hz
+  static constexpr const float UPDATE_RATE = 60.0;    // Hz
 
   constexpr Buzzer(int pin) : buzzerPin(pin) {}
   bool begin();

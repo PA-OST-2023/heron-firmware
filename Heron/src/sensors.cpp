@@ -315,8 +315,8 @@ void Sensors::update(void)
       tAngle = millis();
       angleRaw = angleSensor.readAngle();
       uint8_t status = angleSensor.readStatus();
-      float angle = constrain(map((float)angleRaw, 0.0, 4095.0, 90.0, 0.0), 0.0, 90.0);
-      angle = (ANGLE_SENSOR_FILTER_ALPHA * angle) + ((1.0 - ANGLE_SENSOR_FILTER_ALPHA) * angle);
+      float a = constrain(map((float)angleRaw, 0.0, 4095.0, 90.0, 0.0), 0.0, 90.0);
+      angle = (ANGLE_SENSOR_FILTER_ALPHA * a) + ((1.0 - ANGLE_SENSOR_FILTER_ALPHA) * angle);
       magnetDetected = (status & AS5600::AS5600_MAGNET_DETECT) > 1;
       magnetTooWeak = (status & AS5600::AS5600_MAGNET_LOW) > 1;
       magnetTooStrong = (status & AS5600::AS5600_MAGNET_HIGH) > 1;

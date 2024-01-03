@@ -70,8 +70,8 @@ void Buzzer::update(void* parameter)
   Buzzer* ref = (Buzzer*)parameter;
   bool playing = false;
   int melodyIndex = 0;
-  int melodyPlayTime = 0;
   int melodyStartTime = 0;
+  int melodyPlayTime = 0;
   int freq = 0, freqOld = 0;
 
   while(ref->initialized)
@@ -83,14 +83,9 @@ void Buzzer::update(void* parameter)
       {
         console.error.println("[BUZZER] Melody is nullptr");
       }
-      else
-      {
-        melodyPlayTime = ref->melody[0].length;
-      }
     }
     else if(!ref->playing)
     {
-      melodyStartTime = millis();
       melodyPlayTime = 0;
       melodyIndex = 0;
       freqOld = -1;
@@ -109,10 +104,10 @@ void Buzzer::update(void* parameter)
       }
       else
       {
-        if(millis() - melodyStartTime >= melodyPlayTime)
+        if(millis() >= melodyStartTime + melodyPlayTime + length)
         {
-          melodyPlayTime += length;
           melodyIndex++;
+          melodyPlayTime += length;
         }
         if(freq != freqOld)
         {
