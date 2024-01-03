@@ -601,6 +601,37 @@ FLASHMEM bool Gui::updateScreenAmbient(void)
     return false;
   }
 
+  static float temperature = 0.0;
+  if(temperature != sensors->getTemperature() || screenFreshlyLoaded)
+  {
+    temperature = sensors->getTemperature();
+    static char buffer[10];
+    snprintf(buffer, sizeof(buffer), "%.1f °C", temperature);
+    lv_label_set_text_static(guider_ui.screen_ambient_label_temperature, buffer);
+    lv_meter_set_indicator_end_value(guider_ui.screen_ambient_meter_temperature, guider_ui.screen_ambient_meter_temperature_scale_1_arc_1,
+                                     (int)map(constrain(temperature, -10.0, 40.0), -10.0, 40.0, 0.0, 100.0));
+  }
+
+  static float pressure = 0.0;
+  if(pressure != sensors->getPressure() || screenFreshlyLoaded)
+  {
+    pressure = sensors->getPressure();
+    static char buffer[10];
+    snprintf(buffer, sizeof(buffer), "%.0f hPa", pressure);
+    lv_label_set_text_static(guider_ui.screen_ambient_label_pressure, buffer);
+    lv_meter_set_indicator_end_value(guider_ui.screen_ambient_meter_pressure, guider_ui.screen_ambient_meter_pressure_scale_1_arc_1,
+                                     (int)map(constrain(pressure, 800.0, 1200.0), 800.0, 1200.0, 0.0, 100.0));
+  }
+
+  static float altitude = 0.0;
+  if(altitude != sensors->getAltitude() || screenFreshlyLoaded)
+  {
+    altitude = sensors->getAltitude();
+    static char buffer[10];
+    snprintf(buffer, sizeof(buffer), "%.0f m", altitude);
+    lv_label_set_text_static(guider_ui.screen_ambient_label_altitude, buffer);
+  }
+
   bool loaded = screenFreshlyLoaded;
   screenFreshlyLoaded = false;
   return loaded;
@@ -704,6 +735,7 @@ void Gui::callbackScreenArmAngleCalibrationConfirmed(void)
 
 
 // Helper functions
+
 void Gui::screenArmAngleCalibrationCheckValid(bool angle0, bool angle90)
 {
   static bool _valid0 = false;
