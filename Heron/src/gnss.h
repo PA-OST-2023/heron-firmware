@@ -49,18 +49,33 @@ class Gnss
   void end(void);
   float getLatitude(void) { return latitude; }
   float getLongitude(void) { return longitude; }
-  float getAltitude(void) { return altitude; }
+  float getAltitude(void) { return max(altitude, 0.0); }
   float getMagneticDeclination(void) { return magneticDeclination; }
   int getSateliteCount(void) { return sateliteCount; }
   bool getFix(void) { return fix; }
   uint8_t getFixType(void) { return fixType; }
   bool getTimeValid(void) { return timeValid; }
-  uint16_t getYear(void) { return year + 1970; }
-  uint8_t getMonth(void) { return month; }
-  uint8_t getDay(void) { return day; }
-  uint8_t getHour(void) { return hour; }
-  uint8_t getMin(void) { return min; }
-  uint8_t getSec(void) { return sec; }
+  void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
+  {
+    year = this->year;
+    month = this->month;
+    day = this->day;
+    hour = this->hour;
+    minute = this->min;
+    second = this->sec;
+  }
+  void getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
+  {
+    hour = this->hour;
+    minute = this->min;
+    second = this->sec;
+  }
+  void getDate(uint16_t& year, uint8_t& month, uint8_t& day)
+  {
+    year = this->year;
+    month = this->month;
+    day = this->day;
+  }
 
   static uint64_t getTimeNanoUtc(void);    // returns 0 if time is not valid
   void update(void);

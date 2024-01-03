@@ -82,7 +82,7 @@ void setup()
   hmi.begin(utils);
   sensors.begin(utils);
   ethernet.begin(utils, audio);
-  gui.begin(utils, hmi, audio, ethernet, sensors);
+  gui.begin(utils, hmi, audio, ethernet, gnss, sensors);
   hmi.setSystemStatus(Hmi::STATUS_OK);
   app.begin(audio, utils, gui, hmi, ethernet, gnss, sensors);
   // hmi.buzzer.playMelody(MELODIE_POWER_ON);

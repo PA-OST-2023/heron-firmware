@@ -113,7 +113,7 @@ void Hmi::update(void* parameter)
     ref->leds.show();
 
     static uint32_t tRtc = 0;
-    if(millis() - tRtc > 500)
+    if(millis() - tRtc > (1000.0 / RTC_UPDATE_RATE))
     {
       static uint8_t secOld = 0;
       tRtc = millis();

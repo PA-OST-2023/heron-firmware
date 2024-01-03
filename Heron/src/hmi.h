@@ -47,7 +47,8 @@ class Hmi
  public:
   static constexpr const uint32_t LED_COUNT = 81;
   static constexpr const uint32_t AUDIO_CHANNEL_COUNT = 32;
-  static constexpr const float UPDATE_RATE = 30.0;    // Hz
+  static constexpr const float UPDATE_RATE = 30.0;       // Hz
+  static constexpr const float RTC_UPDATE_RATE = 5.0;    // Hz
 
   typedef enum
   {

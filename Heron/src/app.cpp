@@ -69,7 +69,18 @@ void App::update(void* parameter)
       }
     }
 
-    // TODO: Update RTC Time if GNSS is available
+    if(ref->gnss->getTimeValid())
+    {
+      if(abs(ref->gnss->getTimeNanoUtc() - ref->hmi->getTimeNanoUtc()) > 1000000000)
+      {
+        uint16_t year;
+        uint8_t month, day, hour, minute, second;
+        ref->gnss->getTimeDate(year, month, day, hour, minute, second);
+        // TODO: Compensate for UTC + 1
+        ref->hmi->setTimeDate(year, month, day, hour, minute, second);
+        console.log.printf("[APP] Updated RTC Time: %02d.%02d.%04d %02d:%02d:%02d\n", day, month, year, hour, minute, second);
+      }
+    }
 
     threads.delay(1000.0 / UPDATE_RATE);
   }

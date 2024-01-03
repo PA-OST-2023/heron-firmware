@@ -129,7 +129,7 @@ typedef struct
 	lv_obj_t *screen_gnss_label_altitude;
 	lv_obj_t *screen_gnss_label_time;
 	lv_obj_t *screen_gnss_label_satelite_count;
-	lv_obj_t *screen_gnss_label_1;
+	lv_obj_t *screen_gnss_label_fix_status;
 	lv_obj_t *screen_gnss_location;
 	bool screen_gnss_location_del;
 	lv_obj_t *screen_gnss_location_btn_back;

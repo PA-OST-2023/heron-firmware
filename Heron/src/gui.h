@@ -45,6 +45,7 @@
 
 #include <audioUtils.h>
 #include <sensors.h>
+#include <gnss.h>
 #include <hmi.h>
 
 
@@ -62,7 +63,7 @@ class Gui
   static constexpr const size_t SPI_FREQUENCY = 60000000;           // [Hz] SPI clock
 
   Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq);
-  bool begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, EthernetUtils& ethernetUtilsRef, Sensors& sensorsRef);
+  bool begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, EthernetUtils& ethernetUtilsRef, Gnss& gnssRef, Sensors& sensorsRef);
   void update(void);
   bool isReady(void) { return initialized; }
   void setBrightness(int brightness) { analogWrite(bl, constrain(brightness, 0, 255)); }
@@ -117,6 +118,7 @@ class Gui
   static Hmi* hmi;
   static AudioUtils* audioUtils;
   static EthernetUtils* ethernetUtils;
+  static Gnss* gnss;
   static Sensors* sensors;
   static void lvglPrint(const char* buf);
   static void dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p);

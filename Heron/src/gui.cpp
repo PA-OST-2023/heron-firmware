@@ -40,18 +40,20 @@ DMAMEM lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
 Utils* Gui::utils;
 Hmi* Gui::hmi;
 AudioUtils* Gui::audioUtils;
+Gnss* Gui::gnss;
 Sensors* Gui::sensors;
 EthernetUtils* Gui::ethernetUtils;
 
 Gui::Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq) : sclk(sclk), mosi(mosi), cs(cs), dc(dc), bl(bl), tch_irq(tch_irq) {}
 
-FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, EthernetUtils& ethernetUtilsRef, Sensors& sensorsRef)
+FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, EthernetUtils& ethernetUtilsRef, Gnss& gnssRef, Sensors& sensorsRef)
 {
   bool res = true;
   utils = &utilsRef;
   hmi = &hmiRef;
   audioUtils = &audioUtilsRef;
   ethernetUtils = &ethernetUtilsRef;
+  gnss = &gnssRef;
   sensors = &sensorsRef;
 
   digitalWrite(bl, LOW);
@@ -355,6 +357,69 @@ FLASHMEM bool Gui::updateScreenGnss(void)
   {
     screenFreshlyLoaded = true;
     return false;
+  }
+
+  static float latitude = 0.0;
+  if(latitude != gnss->getLatitude() || screenFreshlyLoaded)
+  {
+    latitude = gnss->getLatitude();
+    float degrees = (int)latitude;
+    float minutes = (latitude - (int)latitude) * 60.0;
+    float seconds = (minutes - (int)minutes) * 60.0;
+    bool north = latitude >= 0.0;
+    static char buffer[30];
+    snprintf(buffer, sizeof(buffer), "Latitude: %s %02d° %02d' %.2f\"", (north) ? "N" : "S", (int)degrees, (int)minutes, seconds);
+    lv_label_set_text_static(guider_ui.screen_gnss_label_latitude, buffer);
+  }
+
+  static float longitude = 0.0;
+  if(longitude != gnss->getLongitude() || screenFreshlyLoaded)
+  {
+    longitude = gnss->getLongitude();
+    float degrees = (int)longitude;
+    float minutes = (longitude - (int)longitude) * 60.0;
+    float seconds = (minutes - (int)minutes) * 60.0;
+    bool east = longitude >= 0.0;
+    static char buffer[30];
+    snprintf(buffer, sizeof(buffer), "Longitude: %s %02d° %02d' %.2f\"", (east) ? "E" : "W", (int)degrees, (int)minutes, seconds);
+    lv_label_set_text_static(guider_ui.screen_gnss_label_longitude, buffer);
+  }
+
+  static float altitude = 0.0;
+  if(altitude != gnss->getAltitude() || screenFreshlyLoaded)
+  {
+    altitude = gnss->getAltitude();
+    static char buffer[25];
+    snprintf(buffer, sizeof(buffer), "Altitude (MSL): %.1f m", altitude);
+    lv_label_set_text_static(guider_ui.screen_gnss_label_altitude, buffer);
+  }
+
+  static uint64_t timeNanoUtc = 0;
+  if(timeNanoUtc != gnss->getTimeNanoUtc() || screenFreshlyLoaded)
+  {
+    timeNanoUtc = gnss->getTimeNanoUtc();
+    static char buffer[30];
+    // TODO: change format
+    snprintf(buffer, sizeof(buffer), "Time (UTC): %llu", timeNanoUtc / 1000000);
+    lv_label_set_text_static(guider_ui.screen_gnss_label_time, buffer);
+  }
+
+  static int sateliteCount = 0;
+  if(sateliteCount != gnss->getSateliteCount() || screenFreshlyLoaded)
+  {
+    sateliteCount = gnss->getSateliteCount();
+    static char buffer[25];
+    snprintf(buffer, sizeof(buffer), "Satelite Count: %d", sateliteCount);
+    lv_label_set_text_static(guider_ui.screen_gnss_label_satelite_count, buffer);
+  }
+
+  static uint8_t fixType = 0;
+  if(fixType != gnss->getFixType() || screenFreshlyLoaded)
+  {
+    fixType = gnss->getFixType();
+    static char buffer[25];
+    snprintf(buffer, sizeof(buffer), "Fix Status: %d", fixType);    // TODO: Add strings for fix types
+    lv_label_set_text_static(guider_ui.screen_gnss_label_fix_status, buffer);
   }
 
   bool loaded = screenFreshlyLoaded;
