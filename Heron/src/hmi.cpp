@@ -40,6 +40,10 @@ uint64_t Hmi::timeNanoUtc = 0;
 uint64_t Hmi::timeNanoSync = 0;
 uint32_t Hmi::tUpdateMicros = 0;
 
+volatile int64_t Hmi::lastRtcTime = 0;
+volatile int64_t Hmi::lastMicros = 0;
+volatile int64_t Hmi::phaseError = 0;
+
 FLASHMEM bool Hmi::begin(Utils& utilsRef)
 {
   utils = &utilsRef;
@@ -122,18 +126,12 @@ void Hmi::update(void* parameter)
     static uint32_t tRtc = 0;
     if(millis() - tRtc > (1000.0 / RTC_UPDATE_RATE))
     {
-      bool secondChanged = false;
-      static bool initialSynchronization = true;
-      static uint8_t secOld = 0;
       tRtc = millis();
       Utils::lockWire(RTC_WIRE);
       DateTime time = ref->rtc.now();
       Utils::unlockWire(RTC_WIRE);
-      if(time.second() != secOld)
-      {
-        secOld = time.second();
-        secondChanged = true;
-      }
+      lastMicros = (int64_t)micros();
+
       ref->year = time.year();
       ref->month = time.month();
       ref->day = time.day();
@@ -146,14 +144,13 @@ void Hmi::update(void* parameter)
                             .mday = ref->day,
                             .mon = (uint8_t)((int8_t)ref->month - 1),
                             .year = (uint8_t)(ref->year - 1900)};
+      lastRtcTime = (int64_t)makeTime(utc) * 1000000 + ref->timeAdjustment;
+      // ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL;
       ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL;
-      if(secondChanged && initialSynchronization)
-      {
-        ref->timeNanoSync = ref->timeNanoUtc;
-        ref->tUpdateMicros = micros();
-        initialSynchronization = false;
-      }
     }
+    ref->runPhaseLockedLoop();
+    // console.log.printf("%02d.%06d\n", ref->sec, (micros() + (int32_t)ref->timeAdjustment) % 1000000);
+    console.log.printf("%lld\n", ref->timeAdjustment);
 
     threads.delay(1000.0 / UPDATE_RATE);
   }
@@ -255,4 +252,21 @@ void Hmi::convertUtcToLocalTime(uint16_t& year, uint8_t& month, uint8_t& day, ui
     }
     day = daysInMonth[month - 1];
   }
+}
+
+void Hmi::runPhaseLockedLoop(void)
+{
+  int64_t currentRtcTime = lastRtcTime;
+  int64_t currentMicros = lastMicros;
+  // uint32_t currentTime = micros();
+
+  phaseError = currentRtcTime - currentMicros; // Convert RTC time to microseconds if needed
+
+  // PI Controller
+  integral += phaseError;
+  timeAdjustment = Kp * phaseError + Ki * integral;
+
+  // Adjust micros() - this is symbolic as you cannot directly change micros()
+  // You might need to adjust a separate timekeeping variable instead
+  // currentTime += timeAdjustment;
 }

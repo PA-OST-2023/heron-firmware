@@ -113,11 +113,22 @@ class Hmi
   static uint64_t timeNanoSync;
   static uint32_t tUpdateMicros;
 
+  volatile static int64_t lastRtcTime;
+  volatile static int64_t lastMicros;
+  volatile static int64_t phaseError;
+
+  int64_t timeAdjustment = 0;
+
+  static constexpr const float Kp = 0.01;     // Proportional gain - adjust based on your system
+  static constexpr const float Ki = 0.00;    // Integral gain - adjust based on your system
+  float integral = 0;
+
   Utils* utils = nullptr;
   systemStatus_t systemStatus = STATUS_BOOTUP;
   volatile bool initialized = false;
 
   static void update(void* parameter);
+  void runPhaseLockedLoop(void);
 };
 
 #endif

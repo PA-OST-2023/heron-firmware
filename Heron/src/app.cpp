@@ -85,18 +85,18 @@ void App::update(void* parameter)
 
     // Set HMI LED Status based on warnings, errors and connection status and GNSS Fix
 
-    if(ref->gnss->getTimeValid())    // Update RTC Time if GNSS Time is valid
-    {
-      if(abs(ref->gnss->getTimeUtc() - ref->hmi->getTimeUtc()) > 1)
-      {
-        uint16_t year;
-        uint8_t month, day, hour, minute, second;
-        ref->gnss->getTimeDate(year, month, day, hour, minute, second);
-        ref->hmi->setTimeDate(year, month, day, hour, minute, second);
-        console.log.printf("[APP] Updated RTC Time: %02d.%02d.%04d %02d:%02d:%02d [Difference: %d s]\n", day, month, year, hour, minute, second,
-                           ref->gnss->getTimeUtc() - ref->hmi->getTimeUtc());
-      }
-    }
+    // if(ref->gnss->getTimeValid())    // Update RTC Time if GNSS Time is valid
+    // {
+    //   if(abs(ref->gnss->getTimeUtc() - ref->hmi->getTimeUtc()) > 1)
+    //   {
+    //     uint16_t year;
+    //     uint8_t month, day, hour, minute, second;
+    //     ref->gnss->getTimeDate(year, month, day, hour, minute, second);
+    //     ref->hmi->setTimeDate(year, month, day, hour, minute, second);
+    //     console.log.printf("[APP] Updated RTC Time: %02d.%02d.%04d %02d:%02d:%02d [Difference: %d s]\n", day, month, year, hour, minute, second,
+    //                        ref->gnss->getTimeUtc() - ref->hmi->getTimeUtc());
+    //   }
+    // }
 
     // If GNSS is fix, update magnetic declination on magnetometer
     if(ref->gnss->getFix() && (ref->gnss->getMagneticDeclination() != ref->sensors->getMagneticDeclination()))

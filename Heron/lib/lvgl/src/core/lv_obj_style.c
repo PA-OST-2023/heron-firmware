@@ -511,6 +511,8 @@ FLASHMEM static lv_style_t * get_local_style(lv_obj_t * obj, lv_style_selector_t
 {
     uint32_t i;
     for(i = 0; i < obj->style_cnt; i++) {
+        if(obj == NULL) continue;   // Added by Florian
+        if(obj->styles == NULL) continue;  // Added by Florian
         if(obj->styles[i].is_local &&
            obj->styles[i].selector == selector) {
             return obj->styles[i].style;
