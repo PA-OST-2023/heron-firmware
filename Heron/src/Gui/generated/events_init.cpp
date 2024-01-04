@@ -407,6 +407,15 @@ void events_init_screen_ethernet_setup(lv_ui *ui)
 	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_confirm, screen_ethernet_setup_btn_confirm_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_ethernet_setup_btn_back, screen_ethernet_setup_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
+static void screen_gnss_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	default:
+		break;
+	}
+}
 static void screen_gnss_btn_location_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -458,6 +467,7 @@ static void screen_gnss_btn_back_event_handler (lv_event_t *e)
 }
 void events_init_screen_gnss(lv_ui *ui)
 {
+	lv_obj_add_event_cb(ui->screen_gnss, screen_gnss_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_gnss_btn_location, screen_gnss_btn_location_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_gnss_btn_back, screen_gnss_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
@@ -666,8 +676,6 @@ static void screen_arm_angle_calib_event_handler (lv_event_t *e)
 	Gui::callbackScreenArmAngleCalibrationStart();
 	#endif
 		lv_obj_clear_flag(guider_ui.screen_arm_angle_calib_btn_confirm, LV_OBJ_FLAG_CLICKABLE);
-		lv_obj_clear_flag(guider_ui.screen_arm_angle_calib_btn_confirm, LV_OBJ_FLAG_CLICK_FOCUSABLE);
-		lv_obj_clear_flag(guider_ui.screen_arm_angle_calib_btn_confirm, LV_OBJ_FLAG_CHECKABLE);
 		break;
 	}
 	default:

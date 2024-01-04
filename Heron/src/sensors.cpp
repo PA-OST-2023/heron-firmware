@@ -359,9 +359,9 @@ float Sensors::calculateHeading(float x, float y, float z)
     mag_data[i] = (softIron[i][0] * hi_cal[0]) + (softIron[i][1] * hi_cal[1]) + (softIron[i][2] * hi_cal[2]);
   }
   float heading = -1 * (atan2f(mag_data[0], mag_data[1]) * 180) / M_PI;
-  heading -= 90.0;                    // Ajdusting sensor orientation to match the board
-  heading += MAGNETIC_DECLINATION;    // Adjust for magnetic declination
-  if(heading < 0)                     // Convert heading to 0..360 degrees
+  heading -= 90.0;                   // Ajdusting sensor orientation to match the board
+  heading += magneticDeclination;    // Adjust for magnetic declination
+  if(heading < 0)                    // Convert heading to 0..360 degrees
   {
     heading += 360;
   }
@@ -388,7 +388,7 @@ float Sensors::calculateHeadingCompensated(float x, float y, float z, float pitc
 
   float heading = -1 * atan2f(xh, yh) * 180.0 / M_PI;    // Calculate the heading
   heading -= 90.0;                                       // Adjusting for sensor orientation, if needed
-  heading += MAGNETIC_DECLINATION;                       // Adjust for magnetic declination
+  heading += magneticDeclination;                        // Adjust for magnetic declination
   if(heading < 0)                                        // Convert heading to 0..360 degrees
   {
     heading += 360;

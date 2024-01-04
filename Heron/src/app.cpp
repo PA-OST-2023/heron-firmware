@@ -85,18 +85,25 @@ void App::update(void* parameter)
 
     // Set HMI LED Status based on warnings, errors and connection status and GNSS Fix
 
-    // Update RTC Time if GNSS Time is valid
-    if(ref->gnss->getTimeValid())
+    if(ref->gnss->getTimeValid())    // Update RTC Time if GNSS Time is valid
     {
-      if(abs(ref->gnss->getTimeNanoUtc() - ref->hmi->getTimeNanoUtc()) > 1000000000)
+      if(abs(ref->gnss->getTimeUtc() - ref->hmi->getTimeUtc()) > 1)
       {
         uint16_t year;
         uint8_t month, day, hour, minute, second;
         ref->gnss->getTimeDate(year, month, day, hour, minute, second);
-        // TODO: Compensate for UTC + 1
         ref->hmi->setTimeDate(year, month, day, hour, minute, second);
-        console.log.printf("[APP] Updated RTC Time: %02d.%02d.%04d %02d:%02d:%02d\n", day, month, year, hour, minute, second);
+        console.log.printf("[APP] Updated RTC Time: %02d.%02d.%04d %02d:%02d:%02d [Difference: %d s]\n", day, month, year, hour, minute, second,
+                           ref->gnss->getTimeUtc() - ref->hmi->getTimeUtc());
       }
+    }
+
+    // If GNSS is fix, update magnetic declination on magnetometer
+    if(ref->gnss->getFix() && (ref->gnss->getMagneticDeclination() != ref->sensors->getMagneticDeclination()))
+    {
+      float magneticDeclination = ref->gnss->getMagneticDeclination();
+      ref->sensors->setMagneticDeclination(magneticDeclination);
+      console.log.printf("[APP] Updated magnetic declination: %.2f°\n", magneticDeclination);
     }
 
     threads.delay(1000.0 / UPDATE_RATE);
@@ -115,10 +122,8 @@ FLASHMEM void App::updateDeviceData(StaticJsonDocument<EthernetUtils::DEVICE_DAT
     doc["device_cpu_frequency"] = utils->getCpuFrequency();
   }
   doc["device_cpu_temperature"] = utils->getCpuTemperature();
-
-
-  // Change System Status in HMI based on GNSS Fix and Audio Streaming
-
+  doc["device_operating_time"] = utils->getOperationTime();
+  doc["device_system_warning"] = gui->getSystemWarning();
 
   // Ethernet Stats
   if(firstRun)
@@ -133,6 +138,10 @@ FLASHMEM void App::updateDeviceData(StaticJsonDocument<EthernetUtils::DEVICE_DAT
   ethernet->getIp(ip_0, ip_1, ip_2, ip_3);
   doc["ethernet_ip"] = String(ip_0) + "." + String(ip_1) + "." + String(ip_2) + "." + String(ip_3);
 
+  // Audio Streaming Stats
+  doc["streaming_state"] = ethernet->getStreamingState();
+  doc["streaming_speed"] = audio->getDataRateMBit();
+  doc["streaming_buffer"] = audio->getBufferFillLevelPercent();
 
   // Sensor Data
   doc["sensor_heading"] = sensors->getHeading();
@@ -141,9 +150,20 @@ FLASHMEM void App::updateDeviceData(StaticJsonDocument<EthernetUtils::DEVICE_DAT
   doc["sensor_temperature"] = sensors->getTemperature();
   doc["sensor_pressure"] = sensors->getPressure();
   doc["sensor_altitude"] = sensors->getAltitude();
-  // Angle
+  doc["sensor_angle"] = sensors->getAngle();
+  doc["sensor_magnet_detected"] = sensors->isMagnetDetected();
+  doc["sensor_magnet_too_weak"] = sensors->isMagnetTooWeak();
+  doc["sensor_magnet_too_strong"] = sensors->isMagnetTooStrong();
 
   // GNSS Data
+  doc["gnss_latitude"] = gnss->getLatitude();
+  doc["gnss_longitude"] = gnss->getLongitude();
+  doc["gnss_altitude"] = gnss->getAltitude();
+  doc["gnss_magnetic_declination"] = gnss->getMagneticDeclination();
+  doc["gnss_satelite_count"] = gnss->getSateliteCount();
+  doc["gnss_fix"] = gnss->getFix();
+  doc["gnss_fix_type"] = (uint8_t)gnss->getFixType();
+  doc["gnss_time_valid"] = gnss->getTimeValid();
 
   firstRun = false;
 }

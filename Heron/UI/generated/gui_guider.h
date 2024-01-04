@@ -142,7 +142,7 @@ typedef struct
 	lv_obj_t *screen_gnss_location_btn_back_label;
 	lv_obj_t *screen_gnss_location_label_back;
 	lv_obj_t *screen_gnss_location_label_title;
-	lv_obj_t *screen_gnss_location_qrcode_1;
+	lv_obj_t *screen_gnss_location_qrcode_location;
 	lv_obj_t *screen_compass;
 	bool screen_compass_del;
 	lv_obj_t *screen_compass_btn_calib;

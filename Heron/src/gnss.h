@@ -87,8 +87,7 @@ class Gnss
     month = this->month;
     day = this->day;
   }
-  uint32_t getTimeNano(void) { return nano; }
-
+  static uint32_t getTimeUtc(void) { return (uint32_t)(getTimeNanoUtc() / 1000000000ULL); }
   static uint64_t getTimeNanoUtc(void);    // returns 0 if time is not valid
   void update(void);
 

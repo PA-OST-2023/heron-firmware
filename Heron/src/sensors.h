@@ -90,6 +90,8 @@ class Sensors
   void startCalibration(void) { calibrationStarted = true; }
   void abortCalibration(void) { calibrationAborted = true; }
   bool isCalibrationDone(void) { return calibrationDone; }
+  void setMagneticDeclination(float declination) { magneticDeclination = declination; }
+  float getMagneticDeclination(void) { return magneticDeclination; }
   float getCalibCoverage(void) { return calibCoverage; }
   float getCalibVariance(void) { return calibVariance; }
   float getCalibWobbleError(void) { return calibWobbleError; }
@@ -113,6 +115,7 @@ class Sensors
   float temperature = 0.0;
   float pressure = 0.0;
   float altitude = 0.0;
+  float magneticDeclination = MAGNETIC_DECLINATION;
 
   float angle = 0.0;
   uint16_t angleRaw = 0;

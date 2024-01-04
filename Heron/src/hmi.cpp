@@ -37,6 +37,7 @@
 DMAMEM uint8_t Hmi::drawingMemory[Hmi::LED_COUNT * 3] = {};
 DMAMEM uint8_t Hmi::displayMemory[Hmi::LED_COUNT * 12] = {};
 uint64_t Hmi::timeNanoUtc = 0;
+uint64_t Hmi::timeNanoSync = 0;
 uint32_t Hmi::tUpdateMicros = 0;
 
 FLASHMEM bool Hmi::begin(Utils& utilsRef)
@@ -79,6 +80,12 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
 
 void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)
 {
+  this->year = year;
+  this->month = month;
+  this->day = day;
+  this->hour = hour;
+  this->min = minute;
+  this->sec = second;
   DateTime time = DateTime(year, month, day, hour, minute, second);
   Utils::lockWire(RTC_WIRE);
   rtc.adjust(time);
@@ -115,6 +122,8 @@ void Hmi::update(void* parameter)
     static uint32_t tRtc = 0;
     if(millis() - tRtc > (1000.0 / RTC_UPDATE_RATE))
     {
+      bool secondChanged = false;
+      static bool initialSynchronization = true;
       static uint8_t secOld = 0;
       tRtc = millis();
       Utils::lockWire(RTC_WIRE);
@@ -123,7 +132,7 @@ void Hmi::update(void* parameter)
       if(time.second() != secOld)
       {
         secOld = time.second();
-        ref->tUpdateMicros = micros();
+        secondChanged = true;
       }
       ref->year = time.year();
       ref->month = time.month();
@@ -131,16 +140,119 @@ void Hmi::update(void* parameter)
       ref->hour = time.hour();
       ref->min = time.minute();
       ref->sec = time.second();
-
       DateTimeFields utc = {.sec = ref->sec,
                             .min = ref->min,
                             .hour = ref->hour,
-                            .mday = (uint8_t)((int8_t)ref->day - 1),
+                            .mday = ref->day,
                             .mon = (uint8_t)((int8_t)ref->month - 1),
                             .year = (uint8_t)(ref->year - 1900)};
-      ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL + ref->tUpdateMicros % 1000000ULL;
+      ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL;
+      if(secondChanged && initialSynchronization)
+      {
+        ref->timeNanoSync = ref->timeNanoUtc;
+        ref->tUpdateMicros = micros();
+        initialSynchronization = false;
+      }
     }
 
     threads.delay(1000.0 / UPDATE_RATE);
+  }
+}
+
+uint64_t Hmi::getTimeNanoUtc(void)    // Crude way to get monotomic time (adds up delay time)
+{
+  static uint64_t timeNanoUtcOld = -1;
+  static uint64_t diff = -1;
+
+  if(timeNanoUtcOld == -1)
+  {
+    timeNanoUtcOld = timeNanoUtc;
+  }
+  uint64_t t = timeNanoSync + (micros() - tUpdateMicros) * 1000ULL;
+  if(timeNanoUtc == timeNanoUtcOld)
+  {
+    return t;
+  }
+  diff += t - timeNanoUtc;
+  timeNanoUtcOld = timeNanoUtc;
+  if(diff > (2 * 1000000000 / RTC_UPDATE_RATE))
+  {
+    diff = 0;
+    timeNanoSync = timeNanoUtc;
+    tUpdateMicros = micros();
+    return timeNanoUtc;
+  }
+  return t;
+}
+
+uint8_t Hmi::calculateWeekDay(uint16_t year, uint8_t month, uint8_t day)
+{
+  if(month < 3)    // Check if Jan or Feb
+  {
+    month += 10;
+    year -= 1;
+  }
+  else
+  {
+    month -= 2;
+  }
+  uint16_t iModYear = year % 100;
+  uint16_t iDivYear = year / 100;
+  uint16_t iResult = ((26 * month - 2) / 10 + day + iModYear + (iModYear / 4) + (iDivYear / 4) - 2 * iDivYear) % 7;    // Zellers Algorithm
+  if(iResult == 0)
+  {
+    iResult = 7;
+  }
+  return iResult;    // 1 = Monday, 2 = Tuesday, ...
+}
+
+bool Hmi::isDaylightSavingTime(uint16_t year, uint8_t month, uint8_t day, uint8_t hour)
+{
+  if(month < 3 || month > 10)
+    return false;    // No daylight saving time in Jan, Feb, Nov, Dec
+  if(month > 3 && month < 10)
+    return true;    // Daylight saving time in Apr, May, Jun, Jul, Aug, Sep
+  if(((month == 3) && (hour + 24 * day) >= (1 + 24 * (31 - (5 * year / 4 + 4) % 7))) ||
+     ((month == 10) && (hour + 24 * day) < (1 + 24 * (31 - (5 * year / 4 + 1) % 7))))
+  {
+    return true;
+  }
+  return false;
+}
+
+void Hmi::convertUtcToLocalTime(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second, int8_t utcOffsetHour)
+{
+  int newHour = hour + utcOffsetHour;    // Adjust the hour with the UTC offset
+  if(newHour >= 24)                      // Handle rolling over to the next or previous day
+  {
+    newHour -= 24;
+    day += 1;
+  }
+  else if(newHour < 0)
+  {
+    newHour += 24;
+    day -= 1;
+  }
+  hour = newHour;
+  const int daysInMonth[] = {31, 28 + (isLeapYear(year) ? 1 : 0), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};    // Handle month and year rollover
+  if(day > daysInMonth[month - 1])                                                                            // Adjust month and day for rollover
+  {
+    day = 1;
+    month += 1;
+    if(month > 12)
+    {
+      month = 1;
+      year += 1;
+    }
+  }
+  else if(day < 1)
+  {
+    month -= 1;
+    if(month < 1)
+    {
+      month = 12;
+      year -= 1;
+    }
+    day = daysInMonth[month - 1];
   }
 }

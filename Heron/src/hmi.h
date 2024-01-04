@@ -49,6 +49,7 @@ class Hmi
   static constexpr const uint32_t AUDIO_CHANNEL_COUNT = 32;
   static constexpr const float UPDATE_RATE = 30.0;       // Hz
   static constexpr const float RTC_UPDATE_RATE = 5.0;    // Hz
+  static constexpr const int8_t UTC_TIME_OFFSET = 1;     // UTC+1
 
   typedef enum
   {
@@ -83,8 +84,14 @@ class Hmi
     month = this->month;
     day = this->day;
   }
-  static uint64_t getTimeNanoUtc(void) { return timeNanoUtc + (uint64_t)(micros() - tUpdateMicros) * 1000ULL; }
+  static uint32_t getTimeUtc(void) { return (uint32_t)(getTimeNanoUtc() / 1000000000ULL); }
+  static uint64_t getTimeNanoUtc(void);
   static uint32_t Color(uint8_t r, uint8_t g, uint8_t b, uint8_t w = 0) { return ((uint32_t)w << 24) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b; }
+  static uint8_t calculateWeekDay(uint16_t year, uint8_t month, uint8_t day);
+  static bool isDaylightSavingTime(uint16_t year, uint8_t month, uint8_t day, uint8_t hour);
+  static bool isLeapYear(uint16_t year) { return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0); }
+  static void convertUtcToLocalTime(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second,
+                                    int8_t utcOffsetHour);
 
   const int rgbLedPin, buzzerPin;
   Buzzer buzzer = Buzzer(buzzerPin);
@@ -103,6 +110,7 @@ class Hmi
   uint8_t sec = 0;
 
   static uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
+  static uint64_t timeNanoSync;
   static uint32_t tUpdateMicros;
 
   Utils* utils = nullptr;

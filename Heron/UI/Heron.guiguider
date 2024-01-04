@@ -14879,7 +14879,7 @@
 							"border_opa": 255,
 							"border_color": "#2195f6",
 							"radius": 0,
-							"text_color": "#ffffff",
+							"text_color": "#757478",
 							"font": 16,
 							"text_align": "LV_TEXT_ALIGN_CENTER",
 							"font_family": "montserratMedium",
@@ -15368,10 +15368,144 @@
 								}
 							}
 						]
-					}
+					},
+					"layerName": "screen_gnss"
 				}
 			],
-			"event": {},
+			"event": {
+				"screen_loaded": [
+					{
+						"trigger": "screen_loaded",
+						"dst": "8cg8jchs",
+						"action": {
+							"load_screen": {
+								"ische": false,
+								"duration": 200,
+								"delay": 200,
+								"scrId": "",
+								"anim_type": "LV_SCR_LOAD_ANIM_NONE",
+								"is_clean": false,
+								"is_del": true
+							},
+							"bg_color": {
+								"ische": false,
+								"value": "#000000"
+							},
+							"grad_color": {
+								"ische": false,
+								"value": "#000000",
+								"dir": "LV_GRAD_DIR_HOR"
+							},
+							"bg_opa": {
+								"ische": false,
+								"value": 255
+							},
+							"width": {
+								"ische": false,
+								"value": 50
+							},
+							"height": {
+								"ische": false,
+								"value": 50
+							},
+							"set_text": {
+								"ische": false,
+								"value": "default",
+								"font": 12,
+								"font_family": "simsun"
+							},
+							"position": {
+								"ische": false,
+								"value_x": 0,
+								"value_y": 0
+							},
+							"isVisible": {
+								"ische": false,
+								"flag": ""
+							},
+							"customer_code": {
+								"ische": false,
+								"inc_c": "",
+								"code_c": "",
+								"inc_py": "",
+								"code_py": ""
+							},
+							"add_state": {
+								"ische": false,
+								"value": "LV_STATE_DEFAULT"
+							},
+							"add_flag": {
+								"ische": false,
+								"value": []
+							},
+							"clear_flag": {
+								"ische": false,
+								"value": []
+							},
+							"move": {
+								"ische": false,
+								"value_x": 0,
+								"value_y": 0,
+								"delay": 0,
+								"duration": 1000,
+								"repeat_count": 0,
+								"repeat_delay": 0,
+								"playback_time": 0,
+								"playback_delay": 0,
+								"start_cb": "",
+								"ready_cb": "",
+								"deleted_cb": "",
+								"path_type": "linear"
+							},
+							"scaleSize": {
+								"ische": false,
+								"width": 0,
+								"height": 0,
+								"delay": 0,
+								"duration": 1000,
+								"repeat_count": 0,
+								"repeat_delay": 0,
+								"playback_time": 0,
+								"playback_delay": 0,
+								"start_cb": "",
+								"ready_cb": "",
+								"deleted_cb": "",
+								"path_type": "linear"
+							},
+							"img_zoom": {
+								"ische": false,
+								"zoom": 0,
+								"delay": 0,
+								"duration": 1000,
+								"repeat_count": 0,
+								"repeat_delay": 0,
+								"playback_time": 0,
+								"playback_delay": 0,
+								"start_cb": "",
+								"ready_cb": "",
+								"deleted_cb": "",
+								"path_type": "linear"
+							},
+							"rotate": {
+								"ische": false,
+								"rotate": 0,
+								"x": 0,
+								"y": 0,
+								"delay": 0,
+								"duration": 1000,
+								"repeat_count": 0,
+								"repeat_delay": 0,
+								"playback_time": 0,
+								"playback_delay": 0,
+								"start_cb": "",
+								"ready_cb": "",
+								"deleted_cb": "",
+								"path_type": "linear"
+							}
+						}
+					}
+				]
+			},
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -15411,7 +15545,7 @@
 			"keyboard_font_size": "18",
 			"list": [
 				{
-					"name": "qrcode_1",
+					"name": "qrcode_location",
 					"id": "h0emhkrq",
 					"type": "qrcode",
 					"left": 45,
@@ -15420,7 +15554,7 @@
 					"flag": [],
 					"custom_attributes": {},
 					"width": 150,
-					"qr_data": "https://google.com/maps/place/47.229030,8.821840",
+					"qr_data": "google.com/maps/place/47.229030,8.821840",
 					"dark_color": "#ffffff",
 					"light_color": "#101418"
 				},
@@ -23200,9 +23334,7 @@
 							"clear_flag": {
 								"ische": true,
 								"value": [
-									"LV_OBJ_FLAG_CLICKABLE",
-									"LV_OBJ_FLAG_CLICK_FOCUSABLE",
-									"LV_OBJ_FLAG_CHECKABLE"
+									"LV_OBJ_FLAG_CLICKABLE"
 								]
 							},
 							"move": {
@@ -34108,7 +34240,9 @@
 				"chinese_library": "mini",
 				"keyboard_font_type": "simsun",
 				"keyboard_font_size": "18",
-				"event": {},
+				"event": {
+					"screen_loaded": []
+				},
 				"style": [
 					{
 						"part": "LV_PART_MAIN",
@@ -34359,7 +34493,7 @@
 								"border_opa": 255,
 								"border_color": "#2195f6",
 								"radius": 0,
-								"text_color": "#ffffff",
+								"text_color": "#757478",
 								"font": 16,
 								"text_align": "LV_TEXT_ALIGN_CENTER",
 								"font_family": "montserratMedium",
@@ -35771,7 +35905,7 @@
 						]
 					},
 					{
-						"name": "screen_gnss_location_qrcode_1",
+						"name": "screen_gnss_location_qrcode_location",
 						"id": "h0emhkrq",
 						"type": "qrcode",
 						"visible": true,
@@ -35785,7 +35919,7 @@
 							150
 						],
 						"custom_attributes": {},
-						"qr_data": "https://google.com/maps/place/47.229030,8.821840",
+						"qr_data": "google.com/maps/place/47.229030,8.821840",
 						"dark_color": "#ffffff",
 						"light_color": "#101418"
 					}
@@ -39617,9 +39751,7 @@
 							"src_screen": "screen_arm_angle_calib",
 							"action": "clear_flag",
 							"value": [
-								"LV_OBJ_FLAG_CLICKABLE",
-								"LV_OBJ_FLAG_CLICK_FOCUSABLE",
-								"LV_OBJ_FLAG_CHECKABLE"
+								"LV_OBJ_FLAG_CLICKABLE"
 							]
 						}
 					]

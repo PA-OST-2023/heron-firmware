@@ -39,17 +39,17 @@
 #include <GC9A01A_t3n.h>
 #include <SPI.h>
 #include <console.h>
+#include <ethernetUtils.h>
 #include <lvgl.h>
 #include <utils.h>
-#include <ethernetUtils.h>
 
 #include <audioUtils.h>
-#include <sensors.h>
 #include <gnss.h>
 #include <hmi.h>
+#include <sensors.h>
 
 
-#define GUI_WIRE Wire1                                              // Wire interface to use
+#define GUI_WIRE Wire1    // Wire interface to use
 
 class Gui
 {
@@ -58,9 +58,9 @@ class Gui
   static constexpr const uint32_t SCREEN_HEIGHT = 240;
   static constexpr const uint32_t SCREEN_BUFFER_HEIGHT = 120;
   static constexpr const uint32_t AUDIO_CHANNEL_COUNT = 32;
-  static constexpr const float DISPLAY_REFRESH_RATE = 24.0;         // Hz
-  static constexpr const float WIDGET_UPDATE_RATE = 10.0;           // Hz
-  static constexpr const size_t SPI_FREQUENCY = 60000000;           // [Hz] SPI clock
+  static constexpr const float DISPLAY_REFRESH_RATE = 24.0;    // Hz
+  static constexpr const float WIDGET_UPDATE_RATE = 10.0;      // Hz
+  static constexpr const size_t SPI_FREQUENCY = 60000000;      // [Hz] SPI clock
   static constexpr const size_t MAX_WARNING_LENGTH = 250;
 
   Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq);
@@ -70,6 +70,7 @@ class Gui
   void setBrightness(int brightness) { analogWrite(bl, constrain(brightness, 0, 255)); }
 
   void setSystemWarning(const char* warning = "");
+  const char* getSystemWarning(void) { return strlen(warningText) > 0 ? warningText : ""; }
 
   // Screen callback functions
   static void callbackScreenHomeShowWarning(void);

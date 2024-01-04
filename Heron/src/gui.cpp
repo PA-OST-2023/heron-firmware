@@ -174,8 +174,11 @@ FLASHMEM bool Gui::updateScreenHome(void)
   if(millis() - rtcTimer > 1000 || screenFreshlyLoaded)    // Update time every second
   {
     rtcTimer = millis();
-    uint8_t hour, minute, second;
-    hmi->getTime(hour, minute, second);
+    uint16_t year;
+    uint8_t month, day, hour, minute, second;
+    hmi->getTimeDate(year, month, day, hour, minute, second);
+    bool daylightSaving = Hmi::isDaylightSavingTime(year, month, day, hour);
+    hmi->convertUtcToLocalTime(year, month, day, hour, minute, second, Hmi::UTC_TIME_OFFSET + daylightSaving ? 1 : 0);    // Convert to local time
     static char buffer[10];
     snprintf(buffer, sizeof(buffer), "%02d:%02d", hour, minute);
     lv_label_set_text_static(guider_ui.screen_home_label_current_time, buffer);
@@ -369,6 +372,19 @@ FLASHMEM bool Gui::updateScreenGnss(void)
   {
     showLocation = gnss->getFix();
     screenFreshlyLoaded = true;    // Update all labels if fix status changes
+
+    if(showLocation)    // Enable/Disable GNSS Location Button
+    {
+      lv_obj_set_style_border_color(guider_ui.screen_gnss_btn_location, lv_color_hex(0x00c92c), LV_PART_MAIN | LV_STATE_DEFAULT);    // Green
+      lv_obj_add_flag(guider_ui.screen_gnss_btn_location, LV_OBJ_FLAG_CLICKABLE);
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_location, lv_color_hex(0xffffff), LV_PART_MAIN | LV_STATE_DEFAULT);    // White
+    }
+    else
+    {
+      lv_obj_set_style_border_color(guider_ui.screen_gnss_btn_location, lv_color_hex(0x757478), LV_PART_MAIN | LV_STATE_DEFAULT);    // Gray
+      lv_obj_clear_flag(guider_ui.screen_gnss_btn_location, LV_OBJ_FLAG_CLICKABLE);
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_location, lv_color_hex(0x757478), LV_PART_MAIN | LV_STATE_DEFAULT);    // Gray
+    }
   }
 
   static Gnss::fixType_t fixType = Gnss::fixType_t::NO_FIX;
@@ -409,26 +425,22 @@ FLASHMEM bool Gui::updateScreenGnss(void)
     lv_label_set_text_static(guider_ui.screen_gnss_label_satelite_count, buffer);
   }
 
-  static uint64_t timeNanoUtc = 0;
-  if(timeNanoUtc != gnss->getTimeNanoUtc() || screenFreshlyLoaded)
+  uint64_t timeNanoUtc = gnss->getTimeNanoUtc();
+  static char buffer[33];
+  if(gnss->getTimeValid())
   {
-    timeNanoUtc = gnss->getTimeNanoUtc();
-    static char buffer[30];
-    if(gnss->getTimeValid())
-    {
-      uint8_t hour, minute, second;
-      int mil = gnss->getTimeNano() / 1000000;
-      gnss->getTime(hour, minute, second);
-      sprintf(buffer, "Time (UTC): %02d:%02d:%02d.%03d", hour, minute, second, mil);
-      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_time, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    else
-    {
-      sprintf(buffer, "Time (UTC): -");
-      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_time, lv_color_hex(0x8A8A8A), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    lv_label_set_text_static(guider_ui.screen_gnss_label_time, buffer);
+    uint8_t hour, minute, second;
+    gnss->getTime(hour, minute, second);
+    sprintf(buffer, "Time (UTC): %02d:%02d:%02d.%03d", hour, minute, second, (int)((timeNanoUtc / 1000000ULL) % 1000ULL));
+    lv_obj_set_style_text_color(guider_ui.screen_gnss_label_time, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
+  else
+  {
+    sprintf(buffer, "Time (UTC): -");
+    lv_obj_set_style_text_color(guider_ui.screen_gnss_label_time, lv_color_hex(0x8A8A8A), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  lv_label_set_text_static(guider_ui.screen_gnss_label_time, buffer);
+
 
   static float latitude = 0.0;
   if(latitude != gnss->getLatitude() || screenFreshlyLoaded)
@@ -835,7 +847,10 @@ void Gui::callbackScreenEthernetSetupConfirmed(void)
 
 void Gui::callbackScreenGnssQrCode(void)
 {
-  console.log.println("[GUI] [CALLBACK] GNSS QR-Code");
+  static char bufferUrl[100];
+  snprintf(bufferUrl, sizeof(bufferUrl), "google.com/maps/place/%.7f,%.7f", gnss->getLatitude(), gnss->getLongitude());
+  lv_qrcode_update(guider_ui.screen_gnss_location_qrcode_location, bufferUrl, strlen(bufferUrl));
+  console.log.printf("[GUI] [CALLBACK] GNSS QR-Code URL: %s\n", bufferUrl);
 }
 
 void Gui::callbackScreenCompassCalibrationStart(void)

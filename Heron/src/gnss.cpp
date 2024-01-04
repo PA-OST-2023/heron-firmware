@@ -99,7 +99,7 @@ uint64_t Gnss::getTimeNanoUtc(void)
   {
     return 0;
   }
-  return ref->timeNanoUtc + (micros() - ref->tUpdateMicros) * 1000ULL;
+  return ref->timeNanoUtc + ((uint64_t)micros() - (uint64_t)ref->tUpdateMicros) * 1000ULL;
 }
 
 void Gnss::callbackPVTdata(UBX_NAV_PVT_data_t* ubxDataStruct)
@@ -113,7 +113,7 @@ void Gnss::callbackPVTdata(UBX_NAV_PVT_data_t* ubxDataStruct)
   ref->latitude = ubxDataStruct->lat / 10000000.0;
   ref->longitude = ubxDataStruct->lon / 10000000.0;
   ref->altitude = ubxDataStruct->hMSL / 1000.0;
-  ref->magneticDeclination = ubxDataStruct->magDec;
+  ref->magneticDeclination = ubxDataStruct->magDec / 100.0;
   ref->sateliteCount = ubxDataStruct->numSV;
   ref->fixType = ubxDataStruct->fixType;
   ref->fix = ubxDataStruct->flags.bits.gnssFixOK;

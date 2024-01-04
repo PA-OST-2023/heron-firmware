@@ -93,12 +93,12 @@ FLASHMEM void setup_scr_screen_gnss_location(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->screen_gnss_location_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->screen_gnss_location_label_title, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes screen_gnss_location_qrcode_1
-	ui->screen_gnss_location_qrcode_1 = lv_qrcode_create(ui->screen_gnss_location, 150, lv_color_hex(0xffffff), lv_color_hex(0x101418));
-	const char * screen_gnss_location_qrcode_1_data = "https://google.com/maps/place/47.229030,8.821840";
-	lv_qrcode_update(ui->screen_gnss_location_qrcode_1, screen_gnss_location_qrcode_1_data, strlen(screen_gnss_location_qrcode_1_data));
-	lv_obj_set_pos(ui->screen_gnss_location_qrcode_1, 45, 57);
-	lv_obj_set_size(ui->screen_gnss_location_qrcode_1, 150, 150);
+	//Write codes screen_gnss_location_qrcode_location
+	ui->screen_gnss_location_qrcode_location = lv_qrcode_create(ui->screen_gnss_location, 150, lv_color_hex(0xffffff), lv_color_hex(0x101418));
+	const char * screen_gnss_location_qrcode_location_data = "google.com/maps/place/47.229030,8.821840";
+	lv_qrcode_update(ui->screen_gnss_location_qrcode_location, screen_gnss_location_qrcode_location_data, strlen(screen_gnss_location_qrcode_location_data));
+	lv_obj_set_pos(ui->screen_gnss_location_qrcode_location, 45, 57);
+	lv_obj_set_size(ui->screen_gnss_location_qrcode_location, 150, 150);
 
 	//Update current screen layout.
 	lv_obj_update_layout(ui->screen_gnss_location);
