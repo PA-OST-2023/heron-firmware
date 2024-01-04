@@ -69,6 +69,23 @@ void App::update(void* parameter)
       }
     }
 
+    // Check if there are any warnings
+    bool warningSet = false;
+    if(ref->audio->getBufferOverflowDetected() && ref->audio->getConnectionStatus())
+    {
+      console.warning.println("[APP] Audio buffer overflow detected");
+      ref->gui->setSystemWarning("Audio buffer overflow detected");
+      warningSet = true;
+    }
+
+    if(warningSet)
+    {
+      ref->hmi->buzzer.playMelody(MELODIE_WARNING);
+    }
+
+    // Set HMI LED Status based on warnings, errors and connection status and GNSS Fix
+
+    // Update RTC Time if GNSS Time is valid
     if(ref->gnss->getTimeValid())
     {
       if(abs(ref->gnss->getTimeNanoUtc() - ref->hmi->getTimeNanoUtc()) > 1000000000)
@@ -98,6 +115,9 @@ FLASHMEM void App::updateDeviceData(StaticJsonDocument<EthernetUtils::DEVICE_DAT
     doc["device_cpu_frequency"] = utils->getCpuFrequency();
   }
   doc["device_cpu_temperature"] = utils->getCpuTemperature();
+
+
+  // Change System Status in HMI based on GNSS Fix and Audio Streaming
 
 
   // Ethernet Stats

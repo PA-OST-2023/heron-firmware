@@ -139,15 +139,15 @@ void setup_scr_screen_gnss(lv_ui *ui)
 
 	//Write codes screen_gnss_label_latitude
 	ui->screen_gnss_label_latitude = lv_label_create(ui->screen_gnss);
-	lv_label_set_text(ui->screen_gnss_label_latitude, "Latitude: 0°");
+	lv_label_set_text(ui->screen_gnss_label_latitude, "Latitude:");
 	lv_label_set_long_mode(ui->screen_gnss_label_latitude, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_gnss_label_latitude, 30, 65);
-	lv_obj_set_size(ui->screen_gnss_label_latitude, 180, 18);
+	lv_obj_set_pos(ui->screen_gnss_label_latitude, 27, 125);
+	lv_obj_set_size(ui->screen_gnss_label_latitude, 195, 18);
 
 	//Write style for screen_gnss_label_latitude, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_gnss_label_latitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_gnss_label_latitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_gnss_label_latitude, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_gnss_label_latitude, lv_color_hex(0x8a8a8a), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_gnss_label_latitude, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_gnss_label_latitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screen_gnss_label_latitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -161,15 +161,15 @@ void setup_scr_screen_gnss(lv_ui *ui)
 
 	//Write codes screen_gnss_label_longitude
 	ui->screen_gnss_label_longitude = lv_label_create(ui->screen_gnss);
-	lv_label_set_text(ui->screen_gnss_label_longitude, "Longitude: 0°");
+	lv_label_set_text(ui->screen_gnss_label_longitude, "Longitude:");
 	lv_label_set_long_mode(ui->screen_gnss_label_longitude, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_gnss_label_longitude, 30, 85);
-	lv_obj_set_size(ui->screen_gnss_label_longitude, 180, 18);
+	lv_obj_set_pos(ui->screen_gnss_label_longitude, 27, 145);
+	lv_obj_set_size(ui->screen_gnss_label_longitude, 195, 18);
 
 	//Write style for screen_gnss_label_longitude, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_gnss_label_longitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_gnss_label_longitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_gnss_label_longitude, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_gnss_label_longitude, lv_color_hex(0x8a8a8a), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_gnss_label_longitude, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_gnss_label_longitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screen_gnss_label_longitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -183,15 +183,15 @@ void setup_scr_screen_gnss(lv_ui *ui)
 
 	//Write codes screen_gnss_label_altitude
 	ui->screen_gnss_label_altitude = lv_label_create(ui->screen_gnss);
-	lv_label_set_text(ui->screen_gnss_label_altitude, "Altitude (MSL): 0 m");
+	lv_label_set_text(ui->screen_gnss_label_altitude, "Altitude (MSL):");
 	lv_label_set_long_mode(ui->screen_gnss_label_altitude, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_gnss_label_altitude, 30, 105);
-	lv_obj_set_size(ui->screen_gnss_label_altitude, 180, 18);
+	lv_obj_set_pos(ui->screen_gnss_label_altitude, 27, 165);
+	lv_obj_set_size(ui->screen_gnss_label_altitude, 195, 18);
 
 	//Write style for screen_gnss_label_altitude, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_gnss_label_altitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_gnss_label_altitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_gnss_label_altitude, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_gnss_label_altitude, lv_color_hex(0x8a8a8a), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_gnss_label_altitude, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_gnss_label_altitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screen_gnss_label_altitude, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -205,15 +205,15 @@ void setup_scr_screen_gnss(lv_ui *ui)
 
 	//Write codes screen_gnss_label_time
 	ui->screen_gnss_label_time = lv_label_create(ui->screen_gnss);
-	lv_label_set_text(ui->screen_gnss_label_time, "Time: 00:00:00.000");
+	lv_label_set_text(ui->screen_gnss_label_time, "Time: ");
 	lv_label_set_long_mode(ui->screen_gnss_label_time, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_gnss_label_time, 30, 125);
-	lv_obj_set_size(ui->screen_gnss_label_time, 180, 18);
+	lv_obj_set_pos(ui->screen_gnss_label_time, 27, 105);
+	lv_obj_set_size(ui->screen_gnss_label_time, 195, 18);
 
 	//Write style for screen_gnss_label_time, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_gnss_label_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->screen_gnss_label_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->screen_gnss_label_time, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->screen_gnss_label_time, lv_color_hex(0x8a8a8a), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_font(ui->screen_gnss_label_time, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_letter_space(ui->screen_gnss_label_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_text_line_space(ui->screen_gnss_label_time, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -227,10 +227,10 @@ void setup_scr_screen_gnss(lv_ui *ui)
 
 	//Write codes screen_gnss_label_satelite_count
 	ui->screen_gnss_label_satelite_count = lv_label_create(ui->screen_gnss);
-	lv_label_set_text(ui->screen_gnss_label_satelite_count, "Satelite Count: 0");
+	lv_label_set_text(ui->screen_gnss_label_satelite_count, "Satelite Count:");
 	lv_label_set_long_mode(ui->screen_gnss_label_satelite_count, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_gnss_label_satelite_count, 30, 145);
-	lv_obj_set_size(ui->screen_gnss_label_satelite_count, 180, 18);
+	lv_obj_set_pos(ui->screen_gnss_label_satelite_count, 27, 85);
+	lv_obj_set_size(ui->screen_gnss_label_satelite_count, 195, 18);
 
 	//Write style for screen_gnss_label_satelite_count, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_gnss_label_satelite_count, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -251,8 +251,8 @@ void setup_scr_screen_gnss(lv_ui *ui)
 	ui->screen_gnss_label_fix_status = lv_label_create(ui->screen_gnss);
 	lv_label_set_text(ui->screen_gnss_label_fix_status, "Fix Status: ");
 	lv_label_set_long_mode(ui->screen_gnss_label_fix_status, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_gnss_label_fix_status, 30, 165);
-	lv_obj_set_size(ui->screen_gnss_label_fix_status, 180, 18);
+	lv_obj_set_pos(ui->screen_gnss_label_fix_status, 27, 65);
+	lv_obj_set_size(ui->screen_gnss_label_fix_status, 195, 18);
 
 	//Write style for screen_gnss_label_fix_status, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->screen_gnss_label_fix_status, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

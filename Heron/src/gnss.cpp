@@ -52,7 +52,7 @@ bool Gnss::begin(Utils& utilsRef)    // Don't mess with the Reset Pin, somehow i
 
   gnss.setI2COutput(COM_TYPE_UBX);                    // Set the I2C port to output UBX only (turn off NMEA noise)
   gnss.saveConfigSelective(VAL_CFG_SUBSEC_IOPORT);    // Save (only) the communications port settings to flash and BBR
-  gnss.setNavigationFrequency(2);                     // Set output to 2 times a second
+  gnss.setNavigationFrequency(UPDATE_RATE);           // Set output to 2 times a second
 
   gnss.setAutoPVTcallbackPtr(&callbackPVTdata);
   initialized = true;

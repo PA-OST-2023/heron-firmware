@@ -97,7 +97,7 @@ void setup_scr_screen_bootup(lv_ui *ui)
 	ui->screen_bootup_label_names = lv_label_create(ui->screen_bootup);
 	lv_label_set_text(ui->screen_bootup_label_names, "Florian Baumgartner\nAlain Keller");
 	lv_label_set_long_mode(ui->screen_bootup_label_names, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->screen_bootup_label_names, 45, 180);
+	lv_obj_set_pos(ui->screen_bootup_label_names, 45, 178);
 	lv_obj_set_size(ui->screen_bootup_label_names, 150, 32);
 
 	//Write style for screen_bootup_label_names, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.

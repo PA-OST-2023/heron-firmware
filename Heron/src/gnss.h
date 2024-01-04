@@ -42,7 +42,18 @@
 class Gnss
 {
  public:
-  static constexpr const float UPDATE_RATE = 30.0;    // Hz
+  static constexpr const float UPDATE_RATE = 30.0;       // Hz
+  static constexpr const size_t GNSS_UPDATE_RATE = 2;    // Hz
+
+  enum class fixType_t : uint8_t
+  {
+    NO_FIX = 0,
+    DEAD_RECKONING_ONLY = 1,
+    FIX_2D = 2,
+    FIX_3D = 3,
+    GNSS_AND_DEAD_RECKONING = 4,
+    TIME_ONLY_FIX = 5
+  };
 
   Gnss(int rst) : rstPin(rst) { ref = this; }
   bool begin(Utils& utilsRef);
@@ -53,7 +64,7 @@ class Gnss
   float getMagneticDeclination(void) { return magneticDeclination; }
   int getSateliteCount(void) { return sateliteCount; }
   bool getFix(void) { return fix; }
-  uint8_t getFixType(void) { return fixType; }
+  fixType_t getFixType(void) { return (fixType_t)fixType; }
   bool getTimeValid(void) { return timeValid; }
   void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
   {
@@ -76,6 +87,7 @@ class Gnss
     month = this->month;
     day = this->day;
   }
+  uint32_t getTimeNano(void) { return nano; }
 
   static uint64_t getTimeNanoUtc(void);    // returns 0 if time is not valid
   void update(void);

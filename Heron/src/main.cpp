@@ -96,23 +96,4 @@ void loop()
   gnss.update();
   gui.update();
   ethernet.update();
-
-
-  // static uint32_t gnssT = 0;
-  // if(millis() - gnssT > 1000)
-  // {
-  //   gnssT = millis();
-  //   console.log.printf("[GNSS] Lat: %f, Lon: %f, Alt: %f, MagDec: %f, Sats: %d, Fix: %d, FixType: %d\n", gnss.getLatitude(), gnss.getLongitude(),
-  //                      gnss.getAltitude(), gnss.getMagneticDeclination(), gnss.getSateliteCount(), gnss.getFix(), gnss.getFixType());
-  // }
-
-
-  static uint32_t t = 0;
-  if(millis() - t > 1000)
-  {
-    t = millis();
-    // console.log.printf("[MAIN] Time: %d\n", t);
-    // console.log.printf("[MAIN] Temperture: %.1f, Pressure: %.1f\n", sensors.getTemperature(), sensors.getPressure());
-    // console.log.printf("[MAIN] AS5600: %.1f, detected: %d, tooWeek: %d, tooStrong: %d\n", sensors.getAngle(), sensors.isMagnetDetected(), sensors.isMagnetTooWeak(), sensors.isMagnetTooStrong());
-  }
 }

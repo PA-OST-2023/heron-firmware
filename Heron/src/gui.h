@@ -61,6 +61,7 @@ class Gui
   static constexpr const float DISPLAY_REFRESH_RATE = 24.0;         // Hz
   static constexpr const float WIDGET_UPDATE_RATE = 10.0;           // Hz
   static constexpr const size_t SPI_FREQUENCY = 60000000;           // [Hz] SPI clock
+  static constexpr const size_t MAX_WARNING_LENGTH = 250;
 
   Gui(int sclk, int mosi, int cs, int dc, int bl, int tch_irq);
   bool begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, EthernetUtils& ethernetUtilsRef, Gnss& gnssRef, Sensors& sensorsRef);
@@ -68,13 +69,16 @@ class Gui
   bool isReady(void) { return initialized; }
   void setBrightness(int brightness) { analogWrite(bl, constrain(brightness, 0, 255)); }
 
-  void setSystemWarning(const char* warning = nullptr);
+  void setSystemWarning(const char* warning = "");
 
   // Screen callback functions
   static void callbackScreenHomeShowWarning(void);
+  static void callbackScreenHomeWarningAcknowledge(void);
 
   static void callbackScreenEthernetSetupLoaded(void);
   static void callbackScreenEthernetSetupConfirmed(void);
+
+  static void callbackScreenGnssQrCode(void);
 
   static void callbackScreenCompassCalibrationStart(void);
   static void callbackScreenCompassCalibrationAbort(void);
@@ -93,9 +97,7 @@ class Gui
   static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
   volatile bool initialized = false;
 
-  // Warning
-  char warningText[50];
-  bool flagWarning = false;
+  static char warningText[MAX_WARNING_LENGTH];
 
   // Screen update functions
   bool updateScreenBootup(void);

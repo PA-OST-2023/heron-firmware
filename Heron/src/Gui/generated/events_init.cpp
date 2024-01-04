@@ -208,6 +208,42 @@ static void screen_home_btn_warning_event_handler (lv_event_t *e)
 		break;
 	}
 }
+static void screen_home_btn_warning_ok_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		lv_obj_add_flag(guider_ui.screen_home_cont_warning_background, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(guider_ui.screen_home_label_warning, LV_OBJ_FLAG_HIDDEN);
+		#ifdef PLATFORMIO
+	Gui::callbackScreenHomeWarningAcknowledge();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_home_label_warning_text_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		lv_obj_add_flag(guider_ui.screen_home_cont_warning_background, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(guider_ui.screen_home_label_warning, LV_OBJ_FLAG_HIDDEN);
+		#ifdef PLATFORMIO
+	Gui::callbackScreenHomeWarningAcknowledge();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
 void events_init_screen_home(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->screen_home_btn_system, screen_home_btn_system_event_handler, LV_EVENT_ALL, NULL);
@@ -217,6 +253,8 @@ void events_init_screen_home(lv_ui *ui)
 	lv_obj_add_event_cb(ui->screen_home_btn_arm_angle, screen_home_btn_arm_angle_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_btn_ambient, screen_home_btn_ambient_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_btn_warning, screen_home_btn_warning_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_home_btn_warning_ok, screen_home_btn_warning_ok_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_home_label_warning_text, screen_home_label_warning_text_event_handler, LV_EVENT_ALL, NULL);
 }
 static void screen_system_btn_back_event_handler (lv_event_t *e)
 {
@@ -386,6 +424,9 @@ static void screen_gnss_btn_location_event_handler (lv_event_t *e)
 	        lv_scr_load_anim(guider_ui.screen_gnss_location, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, false);
 	        guider_ui.screen_gnss_del = false;
 	    }
+		#ifdef PLATFORMIO
+	Gui::callbackScreenGnssQrCode();
+	#endif
 		break;
 	}
 	default:

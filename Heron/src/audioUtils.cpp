@@ -103,15 +103,17 @@ void AudioUtils::update(void* parameter)
     if(millis() - t > 1000)
     {
       t = millis();
-      if(ref->transmitter.getConnectionState())
-      {
-        console.log.printf("[AUDIO UTILS] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n",
-                           (ref->transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0, ref->transmitter.getBufferFillLevel() * 100.0);
-        if(ref->transmitter.getBufferOverflowDetected())
-        {
-          console.warning.println("[AUDIO UTILS] Buffer overflow detected.");
-        }
-      }
+      (void)ref;    // Avoid compiler warning
+
+      // if(ref->transmitter.getConnectionState())
+      // {
+      //   console.log.printf("[AUDIO UTILS] Audio Stream Datarate: %5.2f MBit/s, Buffer Fillrate: %.1f %%\n",
+      //                      (ref->transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0, ref->transmitter.getBufferFillLevel() * 100.0);
+      //   if(ref->transmitter.getBufferOverflowDetected())
+      //   {
+      //     console.warning.println("[AUDIO UTILS] Buffer overflow detected.");
+      //   }
+      // }
     }
     threads.delay(1000.0 / UPDATE_RATE);
   }

@@ -37,6 +37,7 @@
 
 DMAMEM lv_ui guider_ui;
 DMAMEM lv_color_t Gui::buf[Gui::SCREEN_WIDTH * Gui::SCREEN_BUFFER_HEIGHT];
+char Gui::warningText[Gui::MAX_WARNING_LENGTH] = "";
 Utils* Gui::utils;
 Hmi* Gui::hmi;
 AudioUtils* Gui::audioUtils;
@@ -107,12 +108,12 @@ void Gui::setSystemWarning(const char* warning)
   if(warning)
   {
     snprintf(warningText, sizeof(warningText), "%s", warning);
-    flagWarning = true;
+    lv_obj_clear_flag(guider_ui.screen_home_label_warning, LV_OBJ_FLAG_HIDDEN);
   }
   else
   {
     warningText[0] = '\0';
-    flagWarning = true;
+    console.log.println("[GUI] Warning cleared");
   }
 }
 
@@ -218,9 +219,13 @@ FLASHMEM bool Gui::updateScreenHome(void)
     lv_obj_set_style_text_color(guider_ui.screen_home_label_usb_status, color, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
 
-  // TODO: Implement GNSS Status
-
-  // TODO: Implement warning screen
+  static bool gnssFix = false;
+  if(gnssFix != gnss->getFix() || screenFreshlyLoaded)
+  {
+    gnssFix = gnss->getFix();
+    lv_color_t color = (gnssFix) ? lv_color_hex(0x00FF00) : lv_color_hex(0x444447);
+    lv_obj_set_style_text_color(guider_ui.screen_home_label_gnss_status, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
 
   bool loaded = screenFreshlyLoaded;
   screenFreshlyLoaded = false;
@@ -359,6 +364,72 @@ FLASHMEM bool Gui::updateScreenGnss(void)
     return false;
   }
 
+  static bool showLocation = false;
+  if(showLocation != gnss->getFix() || screenFreshlyLoaded)
+  {
+    showLocation = gnss->getFix();
+    screenFreshlyLoaded = true;    // Update all labels if fix status changes
+  }
+
+  static Gnss::fixType_t fixType = Gnss::fixType_t::NO_FIX;
+  if(fixType != gnss->getFixType() || screenFreshlyLoaded)
+  {
+    fixType = gnss->getFixType();
+    static char buffer[40];
+    switch(fixType)
+    {
+      case Gnss::fixType_t::NO_FIX:
+      case Gnss::fixType_t::DEAD_RECKONING_ONLY:
+        snprintf(buffer, sizeof(buffer), "#ffffff Fix Status:# #ff0000 No Fix#");    // Red
+        break;
+      case Gnss::fixType_t::FIX_2D:
+        snprintf(buffer, sizeof(buffer), "#ffffff Fix Status:# #00C92c 2D Fix#");    // Green
+        break;
+      case Gnss::fixType_t::FIX_3D:
+      case Gnss::fixType_t::GNSS_AND_DEAD_RECKONING:                                 // Considered as 3D fix
+        snprintf(buffer, sizeof(buffer), "#ffffff Fix Status:# #00C92c 3D Fix#");    // Green
+        break;
+      case Gnss::fixType_t::TIME_ONLY_FIX:
+        snprintf(buffer, sizeof(buffer), "#ffffff Fix Status:# #ffb300 Time Only Fix#");    // Orange
+        break;
+      default:
+        snprintf(buffer, sizeof(buffer), "#ffffff Fix Status:#");    // White
+        break;
+    }
+    lv_label_set_recolor(guider_ui.screen_gnss_label_fix_status, true);
+    lv_label_set_text_static(guider_ui.screen_gnss_label_fix_status, buffer);
+  }
+
+  static int sateliteCount = 0;
+  if(sateliteCount != gnss->getSateliteCount() || screenFreshlyLoaded)
+  {
+    sateliteCount = gnss->getSateliteCount();
+    static char buffer[25];
+    snprintf(buffer, sizeof(buffer), "Satelite Count: %d", sateliteCount);
+    lv_label_set_text_static(guider_ui.screen_gnss_label_satelite_count, buffer);
+  }
+
+  static uint64_t timeNanoUtc = 0;
+  if(timeNanoUtc != gnss->getTimeNanoUtc() || screenFreshlyLoaded)
+  {
+    timeNanoUtc = gnss->getTimeNanoUtc();
+    static char buffer[30];
+    if(gnss->getTimeValid())
+    {
+      uint8_t hour, minute, second;
+      int mil = gnss->getTimeNano() / 1000000;
+      gnss->getTime(hour, minute, second);
+      sprintf(buffer, "Time (UTC): %02d:%02d:%02d.%03d", hour, minute, second, mil);
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_time, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    else
+    {
+      sprintf(buffer, "Time (UTC): -");
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_time, lv_color_hex(0x8A8A8A), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    lv_label_set_text_static(guider_ui.screen_gnss_label_time, buffer);
+  }
+
   static float latitude = 0.0;
   if(latitude != gnss->getLatitude() || screenFreshlyLoaded)
   {
@@ -368,7 +439,16 @@ FLASHMEM bool Gui::updateScreenGnss(void)
     float seconds = (minutes - (int)minutes) * 60.0;
     bool north = latitude >= 0.0;
     static char buffer[30];
-    snprintf(buffer, sizeof(buffer), "Latitude: %s %02d° %02d' %.2f\"", (north) ? "N" : "S", (int)degrees, (int)minutes, seconds);
+    if(showLocation)
+    {
+      sprintf(buffer, "Latitude: %s %02d° %02d' %.2f\"", (north) ? "N" : "S", (int)degrees, (int)minutes, seconds);
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_latitude, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    else
+    {
+      sprintf(buffer, "Latitude: -");
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_latitude, lv_color_hex(0x8A8A8A), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
     lv_label_set_text_static(guider_ui.screen_gnss_label_latitude, buffer);
   }
 
@@ -381,7 +461,17 @@ FLASHMEM bool Gui::updateScreenGnss(void)
     float seconds = (minutes - (int)minutes) * 60.0;
     bool east = longitude >= 0.0;
     static char buffer[30];
-    snprintf(buffer, sizeof(buffer), "Longitude: %s %02d° %02d' %.2f\"", (east) ? "E" : "W", (int)degrees, (int)minutes, seconds);
+    if(showLocation)
+    {
+      sprintf(buffer, "Longitude: %s %02d° %02d' %.2f\"", (east) ? "E" : "W", (int)degrees, (int)minutes, seconds);
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_longitude, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    else
+    {
+      sprintf(buffer, "Longitude: -");
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_longitude, lv_color_hex(0x8A8A8A), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    lv_label_set_recolor(guider_ui.screen_gnss_label_longitude, true);
     lv_label_set_text_static(guider_ui.screen_gnss_label_longitude, buffer);
   }
 
@@ -390,36 +480,18 @@ FLASHMEM bool Gui::updateScreenGnss(void)
   {
     altitude = gnss->getAltitude();
     static char buffer[25];
-    snprintf(buffer, sizeof(buffer), "Altitude (MSL): %.1f m", altitude);
+    if(showLocation)
+    {
+      snprintf(buffer, sizeof(buffer), "Altitude (MSL): %.1f m", altitude);
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_altitude, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    else
+    {
+      snprintf(buffer, sizeof(buffer), "Altitude (MSL): -");
+      lv_obj_set_style_text_color(guider_ui.screen_gnss_label_altitude, lv_color_hex(0x8A8A8A), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    lv_label_set_recolor(guider_ui.screen_gnss_label_altitude, true);
     lv_label_set_text_static(guider_ui.screen_gnss_label_altitude, buffer);
-  }
-
-  static uint64_t timeNanoUtc = 0;
-  if(timeNanoUtc != gnss->getTimeNanoUtc() || screenFreshlyLoaded)
-  {
-    timeNanoUtc = gnss->getTimeNanoUtc();
-    static char buffer[30];
-    // TODO: change format
-    snprintf(buffer, sizeof(buffer), "Time (UTC): %llu", timeNanoUtc / 1000000);
-    lv_label_set_text_static(guider_ui.screen_gnss_label_time, buffer);
-  }
-
-  static int sateliteCount = 0;
-  if(sateliteCount != gnss->getSateliteCount() || screenFreshlyLoaded)
-  {
-    sateliteCount = gnss->getSateliteCount();
-    static char buffer[25];
-    snprintf(buffer, sizeof(buffer), "Satelite Count: %d", sateliteCount);
-    lv_label_set_text_static(guider_ui.screen_gnss_label_satelite_count, buffer);
-  }
-
-  static uint8_t fixType = 0;
-  if(fixType != gnss->getFixType() || screenFreshlyLoaded)
-  {
-    fixType = gnss->getFixType();
-    static char buffer[25];
-    snprintf(buffer, sizeof(buffer), "Fix Status: %d", fixType);    // TODO: Add strings for fix types
-    lv_label_set_text_static(guider_ui.screen_gnss_label_fix_status, buffer);
   }
 
   bool loaded = screenFreshlyLoaded;
@@ -708,7 +780,22 @@ FLASHMEM bool Gui::updateScreenAmbient(void)
 void Gui::callbackScreenHomeShowWarning(void)
 {
   console.log.println("[GUI] [CALLBACK] Home screen show warning");
-  // TODO: Implement warning screen
+  if(strlen(warningText) > 0)
+  {
+    lv_label_set_text_static(guider_ui.screen_home_label_warning_text, warningText);
+    lv_obj_clear_flag(guider_ui.screen_home_cont_warning_background, LV_OBJ_FLAG_HIDDEN);
+  }
+  else
+  {
+    console.log.println("[GUI] [CALLBACK] No warning to show");
+  }
+}
+
+void Gui::callbackScreenHomeWarningAcknowledge(void)
+{
+  console.log.println("[GUI] [CALLBACK] Home screen warning acknowledged");
+  warningText[0] = '\0';
+  hmi->buzzer.playMelody(MELODIE_WARNING_ACKNOWLAGED);
 }
 
 void Gui::callbackScreenEthernetSetupLoaded(void)
@@ -744,6 +831,11 @@ void Gui::callbackScreenEthernetSetupConfirmed(void)
   lv_roller_get_selected_str(guider_ui.screen_ethernet_setup_roller_ip_3, buffer, sizeof(buffer));
   ip_3 = atoi(buffer);
   ethernetUtils->setIp(ip_0, ip_1, ip_2, ip_3);
+}
+
+void Gui::callbackScreenGnssQrCode(void)
+{
+  console.log.println("[GUI] [CALLBACK] GNSS QR-Code");
 }
 
 void Gui::callbackScreenCompassCalibrationStart(void)

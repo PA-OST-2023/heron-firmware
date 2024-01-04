@@ -62,6 +62,12 @@ typedef struct
 	lv_obj_t *screen_home_label_current_time;
 	lv_obj_t *screen_home_btn_warning;
 	lv_obj_t *screen_home_btn_warning_label;
+	lv_obj_t *screen_home_cont_warning_background;
+	lv_obj_t *screen_home_cont_warning;
+	lv_obj_t *screen_home_cont_warning_ok;
+	lv_obj_t *screen_home_btn_warning_ok;
+	lv_obj_t *screen_home_btn_warning_ok_label;
+	lv_obj_t *screen_home_label_warning_text;
 	lv_obj_t *screen_system;
 	bool screen_system_del;
 	lv_obj_t *screen_system_label_operating_time;
