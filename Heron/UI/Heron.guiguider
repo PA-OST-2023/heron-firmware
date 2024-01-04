@@ -2018,8 +2018,7 @@
 							"shadow_ofs_y": 0
 						}
 					],
-					"event": {},
-					"layerName": "screen_home"
+					"event": {}
 				},
 				{
 					"name": "btn_warning",
@@ -2764,8 +2763,7 @@
 									"shadow_ofs_x": 0,
 									"shadow_ofs_y": 0
 								}
-							],
-							"layerName": "screen_home"
+							]
 						}
 					],
 					"style": [
@@ -5214,8 +5212,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_home"
+			]
 		},
 		{
 			"name": "screen_system",
@@ -6264,8 +6261,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_system"
+			]
 		},
 		{
 			"name": "screen_ethernet",
@@ -8061,8 +8057,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_ethernet"
+			]
 		},
 		{
 			"name": "screen_ethernet_setup",
@@ -8220,8 +8215,7 @@
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
 						}
-					],
-					"layerName": "screen_ethernet_setup"
+					]
 				},
 				{
 					"name": "cont_confirmed_background",
@@ -8266,8 +8260,7 @@
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
 						}
-					],
-					"layerName": "screen_ethernet_setup"
+					]
 				},
 				{
 					"name": "label_streaming_port",
@@ -13819,8 +13812,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_ethernet_setup"
+			]
 		},
 		{
 			"name": "screen_gnss",
@@ -15368,8 +15360,7 @@
 								}
 							}
 						]
-					},
-					"layerName": "screen_gnss"
+					}
 				}
 			],
 			"event": {
@@ -15520,8 +15511,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_gnss"
+			]
 		},
 		{
 			"name": "screen_gnss_location",
@@ -16050,8 +16040,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_gnss_location"
+			]
 		},
 		{
 			"name": "screen_compass",
@@ -16161,8 +16150,7 @@
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
 						}
-					],
-					"layerName": "screen_compass"
+					]
 				},
 				{
 					"name": "cont_dot",
@@ -17651,8 +17639,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_compass"
+			]
 		},
 		{
 			"name": "screen_compass_calib",
@@ -19190,8 +19177,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_compass_calib"
+			]
 		},
 		{
 			"name": "screen_arm_angle",
@@ -20723,8 +20709,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_arm_angle"
+			]
 		},
 		{
 			"name": "screen_arm_angle_calib",
@@ -20882,8 +20867,7 @@
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
 						}
-					],
-					"layerName": "screen_arm_angle_calib"
+					]
 				},
 				{
 					"name": "cont_confirmed_background",
@@ -21062,8 +21046,7 @@
 								}
 							}
 						]
-					},
-					"layerName": "screen_arm_angle_calib"
+					}
 				},
 				{
 					"name": "btn_calibrate_0",
@@ -23131,8 +23114,7 @@
 								}
 							}
 						]
-					},
-					"layerName": "screen_arm_angle_calib"
+					}
 				}
 			],
 			"event": {
@@ -23415,8 +23397,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_arm_angle_calib"
+			]
 		},
 		{
 			"name": "screen_ambient",
@@ -24731,8 +24712,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screen_ambient"
+			]
 		}
 	],
 	"FrontStatus": {},
