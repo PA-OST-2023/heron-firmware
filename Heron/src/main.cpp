@@ -13,7 +13,7 @@
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
+* in the Software without oktriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell          
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
@@ -21,7 +21,7 @@
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
 *
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPokS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -42,7 +42,6 @@
 #include <sensors.h>
 #include <utils.h>
 
-
 #define TFT_SCLK   13
 #define TFT_MOSI   11
 #define TFT_CS     10
@@ -60,7 +59,6 @@
 #define GPS_RST    31
 #define LINK_LED   41
 
-
 static AudioUtils audio;
 static EthernetUtils ethernet(LINK_LED);
 static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
@@ -70,27 +68,37 @@ static Gnss gnss(GPS_RST);
 static Sensors sensors;
 static App app;
 
-
 void setup()
 {
-  console.begin();
-  utils.begin();
-  audio.begin();
   audio.setTimestampCallback(Gnss::getTimeNanoUtc);
   audio.setBackupTimestampCallback(Hmi::getTimeNanoUtc);
-  gnss.begin(utils);
-  hmi.begin(utils);
-  sensors.begin(utils);
-  ethernet.begin(utils, audio);
-  gui.begin(utils, hmi, audio, ethernet, gnss, sensors);
-  hmi.setSystemStatus(Hmi::STATUS_OK);
-  app.begin(audio, utils, gui, hmi, ethernet, gnss, sensors);
-  // hmi.buzzer.playMelody(MELODIE_POWER_ON);
-  // TODO: Add watchdog
+  hmi.setGnssTimestampCallback(Gnss::getTimeNanoUtc);
+
+  bool ok = true;
+  ok |= console.begin();
+  ok |= utils.begin();
+  ok |= audio.begin();
+  ok |= gnss.begin(utils);
+  ok |= hmi.begin(utils);
+  ok |= sensors.begin(utils);
+  ok |= ethernet.begin(utils, audio);
+  ok |= gui.begin(utils, hmi, audio, ethernet, gnss, sensors);
+  ok |= app.begin(audio, utils, gui, hmi, ethernet, gnss, sensors);
+
+  if(!ok)
+  {
+    app.setError();
+    console.error.println("[MAIN] Error while initializing modules, aborting");
+    while(1)
+    {
+      threads.delay(1000);    // Wait for watchdog to reset the system
+    }
+  }
 }
 
 void loop()
 {
+  utils.feedWatchdog();
   threads.yield();
   sensors.update();
   gnss.update();

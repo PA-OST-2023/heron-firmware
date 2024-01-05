@@ -50,6 +50,7 @@ class App
   App() {}
   bool begin(AudioUtils& audio, Utils& utils, Gui& gui, Hmi& hmi, EthernetUtils& ethernet, Gnss& gnss, Sensors& sensors);
   void end(void);
+  void setError(void) { error = true; }
 
  private:
   Utils* utils = nullptr;
@@ -60,6 +61,9 @@ class App
   Sensors* sensors = nullptr;
   AudioUtils* audio = nullptr;
 
+  bool bootup = true;
+  bool warning = false;
+  bool error = false;
   volatile bool initialized = false;
 
   static void update(void* parameter);

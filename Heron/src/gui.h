@@ -67,10 +67,12 @@ class Gui
   bool begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef, EthernetUtils& ethernetUtilsRef, Gnss& gnssRef, Sensors& sensorsRef);
   void update(void);
   bool isReady(void) { return initialized; }
+  bool isBootupFinished(void);
   void setBrightness(int brightness) { analogWrite(bl, constrain(brightness, 0, 255)); }
 
   void setSystemWarning(const char* warning = "");
   const char* getSystemWarning(void) { return strlen(warningText) > 0 ? warningText : ""; }
+  bool isSystemWarningCleared(void) { return strlen(warningText) == 0; }
 
   // Screen callback functions
   static void callbackScreenHomeShowWarning(void);

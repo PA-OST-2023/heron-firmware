@@ -87,9 +87,11 @@ void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, u
   this->min = minute;
   this->sec = second;
   DateTime time = DateTime(year, month, day, hour, minute, second);
+  rtcUpdatePending = true;
   Utils::lockWire(RTC_WIRE);
   rtc.adjust(time);
   Utils::unlockWire(RTC_WIRE);
+  rtcUpdatePending = false;
 }
 
 void Hmi::update(void* parameter)
@@ -100,16 +102,28 @@ void Hmi::update(void* parameter)
     ref->leds.clear();
     if(ref->systemStatus != STATUS_BOOTUP)
     {
+      bool blinkGnss = (millis() / 1000) & 1;
+      if(ref->getGnssTimestamp)
+      {
+        if(ref->getGnssTimestamp() > 0)
+        {
+          blinkGnss = (ref->getGnssTimestamp() / 1000000000ULL) & 1;
+        }
+      }
+
       switch(ref->systemStatus)
       {
-        case STATUS_OK:
-          ref->leds.setPixelColor(0, (millis() % 1000) < 500 ? Color(0, 255, 0) : Color(0, 0, 0));
+        case STATUS_GPS_FIX:
+          ref->leds.setPixelColor(0, blinkGnss ? Color(0, 255, 0) : Color(0, 0, 0));
+          break;
+        case STATUS_GPS_NOFIX:
+          ref->leds.setPixelColor(0, (millis() / 1000) & 1 ? Color(255, 255, 255) : Color(0, 0, 0));
           break;
         case STATUS_WARNING:
-          ref->leds.setPixelColor(0, (millis() % 1000) < 500 ? Color(255, 255, 0) : Color(0, 0, 0));
+          ref->leds.setPixelColor(0, (millis() % 500) < 250 ? Color(255, 255, 0) : Color(0, 0, 0));
           break;
         case STATUS_ERROR:
-          ref->leds.setPixelColor(0, (millis() % 1000) < 500 ? Color(255, 0, 0) : Color(0, 0, 0));
+          ref->leds.setPixelColor(0, (millis() % 500) < 250 ? Color(255, 0, 0) : Color(0, 0, 0));
           break;
         default:
           break;
@@ -120,34 +134,38 @@ void Hmi::update(void* parameter)
     ref->leds.show();
 
     static uint32_t tRtc = 0;
-    if(millis() - tRtc > (1000.0 / RTC_UPDATE_RATE))
+    if((millis() - tRtc > (1000.0 / RTC_UPDATE_RATE)) && !ref->rtcUpdatePending)
     {
       tRtc = millis();
       Utils::lockWire(RTC_WIRE);
       DateTime time = ref->rtc.now();
       Utils::unlockWire(RTC_WIRE);
-
-      ref->year = time.year();
-      ref->month = time.month();
-      ref->day = time.day();
-      ref->hour = time.hour();
-      ref->min = time.minute();
-      ref->sec = time.second();
-      DateTimeFields utc = {.sec = ref->sec,
-                            .min = ref->min,
-                            .hour = ref->hour,
-                            .mday = ref->day,
-                            .mon = (uint8_t)((int8_t)ref->month - 1),
-                            .year = (uint8_t)(ref->year - 1900)};
-      ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL;
-      if(ref->timeNanoUtcInitial == 0)  // Set initial time offset
+      if(time.year() >= 2024)    // Sometimes the RTC returns invalid data (can be identified by wrong year -> e.g. 2002)
       {
-        ref->timeNanoUtcInitial = ref->timeNanoUtc;
+        ref->year = time.year();
+        ref->month = time.month();
+        ref->day = time.day();
+        ref->hour = time.hour();
+        ref->min = time.minute();
+        ref->sec = time.second();
+        DateTimeFields utc = {.sec = ref->sec,
+                              .min = ref->min,
+                              .hour = ref->hour,
+                              .mday = ref->day,
+                              .mon = (uint8_t)((int8_t)ref->month - 1),
+                              .year = (uint8_t)(ref->year - 1900)};
+        ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL;
+        if(ref->timeNanoUtcInitial == 0)    // Set initial time offset
+        {
+          ref->timeNanoUtcInitial = ref->timeNanoUtc;
+        }
+      }
+      else
+      {
+        console.warning.println("[HMI] RTC Data corrupted, ignore it...");
       }
     }
     ref->runPhaseLockedLoop();
-    // console.log.printf("%02d.%06d\n", ref->sec, (micros() + (int32_t)ref->timeAdjustment) % 1000000);
-    console.log.printf("%lld, %lld\n", ref->timeNanoUtc - ref->timeNanoUtcInitial, getTimeNanoUtc() - ref->timeNanoUtcInitial);
 
     threads.delay(1000.0 / UPDATE_RATE);
   }
@@ -155,7 +173,7 @@ void Hmi::update(void* parameter)
 
 uint64_t Hmi::getTimeNanoUtc(void)
 {
-  return micros() * 1000ULL + timeNanoUtcInitial - tineNanoUtcOffset + 500000000ULL;   // Add 500ms to get ahead of center
+  return micros() * 1000ULL + timeNanoUtcInitial - tineNanoUtcOffset + 500000000ULL;    // Add 500ms to get ahead of center
 }
 
 uint8_t Hmi::calculateWeekDay(uint16_t year, uint8_t month, uint8_t day)

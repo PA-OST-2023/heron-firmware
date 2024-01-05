@@ -31,11 +31,10 @@
 ******************************************************************************/
 
 #include "utils.h"
-#include <static_malloc.h>
-#include "SdCard/SdioTeensy.cpp"
 
 int Utils::scl_sys, Utils::sda_sys, Utils::scl_hmi, Utils::sda_hmi, Utils::scl_gps, Utils::sda_gps;
 Threads::Mutex Utils::wireMutex[3];
+WDT_T4<WDT1> Utils::wdt;
 
 Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps)
 {
@@ -50,6 +49,10 @@ Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, in
 FLASHMEM bool Utils::begin(void)
 {
   bool res = true;
+  console.log.printf("[UTILS] Starting watchdog (timeout: %ds, early warning: %ds)\n", WATCHDOG_TIMEOUT, WATCHDOG_EARLY_WARNING);
+  wdt.begin(wdtConfig);
+  wdt.feed();
+
   if(!preferences.begin())
   {
     console.error.println("[UTILS] Failed to initialize preferences");

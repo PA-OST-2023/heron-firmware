@@ -32,7 +32,6 @@
 
 #include "gui.h"
 #include <TeensyThreads.h>
-#include <static_malloc.h>
 #include "Gui/generated/gui_guider.h"
 
 DMAMEM lv_ui guider_ui;
@@ -127,24 +126,24 @@ void Gui::update(void)
   {
     t = millis();
 
-    bool screenLoaded = false;
-    screenLoaded |= updateScreenHome();
-    screenLoaded |= updateScreenSystem();
-    screenLoaded |= updateScreenEthernet();
-    screenLoaded |= updateScreenEthernetSetup();
-    screenLoaded |= updateScreenGnss();
-    screenLoaded |= updateScreenGnssLocation();
-    screenLoaded |= updateScreenCompass();
-    screenLoaded |= updateScreenCompassCalibrate();
-    screenLoaded |= updateScreenArmAngle();
-    screenLoaded |= updateScreenArmAngleCalibrate();
-    screenLoaded |= updateScreenAmbient();
-    if(screenLoaded)
-    {
-      console.log.println("[GUI] New screen loaded");
-    }
+    updateScreenHome();
+    updateScreenSystem();
+    updateScreenEthernet();
+    updateScreenEthernetSetup();
+    updateScreenGnss();
+    updateScreenGnssLocation();
+    updateScreenCompass();
+    updateScreenCompassCalibrate();
+    updateScreenArmAngle();
+    updateScreenArmAngleCalibrate();
+    updateScreenAmbient();
   }
   lv_task_handler();
+}
+
+bool Gui::isBootupFinished(void)
+{
+  return (lv_scr_act() != guider_ui.screen_bootup);
 }
 
 // Screen update functions

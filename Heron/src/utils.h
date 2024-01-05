@@ -35,6 +35,7 @@
 
 #include <Arduino.h>
 #include <TeensyThreads.h>
+#include <Watchdog_t4.h>
 #include <Wire.h>
 #include <console.h>
 #include <preferences.h>
@@ -54,6 +55,8 @@ class Utils
   static constexpr const size_t HMI_WIRE_FREQENCY = 3400000;     // [Hz]
   static constexpr const size_t GPS_WIRE_FREQENCY = 400000;      // [Hz]
   static constexpr const size_t OP_TIME_UPDATE_INTERVAL = 60;    // [s]
+  static constexpr const size_t WATCHDOG_EARLY_WARNING = 5;      // [s]
+  static constexpr const size_t WATCHDOG_TIMEOUT = 10;           // [s]
 
   typedef enum
   {
@@ -64,6 +67,7 @@ class Utils
 
   Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps);
   bool begin(void);
+  static void feedWatchdog(void) { wdt.feed(); }
 
   UsbStatus_t getUsbStatus(void) { return !usbConnected() ? USB_DISCONNECTED : console ? USB_ACTIVE : USB_CONNECTED; }
   uint32_t getOperationTime(void) { return operationTime; }
@@ -85,12 +89,13 @@ class Utils
   }
   static uint32_t getFreeRam() { return (char*)&_heap_end - __brkval; }
 
-
+  WDT_timings_t wdtConfig = {.trigger = WATCHDOG_EARLY_WARNING, .timeout = WATCHDOG_TIMEOUT, .callback = watchdogEarlyWarningCallback};
   Preferences preferences;
 
  private:
   static int scl_sys, sda_sys, scl_hmi, sda_hmi, scl_gps, sda_gps;
   static Threads::Mutex wireMutex[3];
+  static WDT_T4<WDT1> wdt;
 
 
   volatile bool initialized = false;
@@ -98,6 +103,7 @@ class Utils
 
   static void update(void* parameter);
   static bool usbConnected(void) { return !bitRead(USB1_PORTSC1, 7); }
+  static void watchdogEarlyWarningCallback(void) { console.error.println("[UTILS] Watchdog early warning"); }
 };
 
 #endif

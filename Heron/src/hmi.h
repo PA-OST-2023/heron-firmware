@@ -52,11 +52,12 @@ class Hmi
   static constexpr const int8_t UTC_TIME_OFFSET = 1;     // UTC+1
   static constexpr const double PLL_KP = 0.00;           // Proportional gain for PLL
   static constexpr const double PLL_KI = 0.01;           // Integral gain for PLL
-  
+
   typedef enum
   {
     STATUS_BOOTUP,
-    STATUS_OK,
+    STATUS_GPS_NOFIX,
+    STATUS_GPS_FIX,
     STATUS_WARNING,
     STATUS_ERROR
   } systemStatus_t;
@@ -64,6 +65,8 @@ class Hmi
   constexpr Hmi(int rgbLed, int buzzer) : rgbLedPin(rgbLed), buzzerPin(buzzer) {}
   bool begin(Utils& utilsRef);
   void setSystemStatus(systemStatus_t status) { systemStatus = status; }
+  void setGnssTimestampCallback(uint64_t (*callback)(void)) { getGnssTimestamp = callback; }
+
   void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
   void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
   {
@@ -86,7 +89,7 @@ class Hmi
     month = this->month;
     day = this->day;
   }
-  static uint32_t getTimeUtc(void) { return (uint32_t)(getTimeNanoUtc() / 1000000000ULL); }
+  static uint32_t getTimeUtc(void) { return (uint32_t)(timeNanoUtc / 1000000000ULL); }
   static uint64_t getTimeNanoUtc(void);
   static uint32_t Color(uint8_t r, uint8_t g, uint8_t b, uint8_t w = 0) { return ((uint32_t)w << 24) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b; }
   static uint8_t calculateWeekDay(uint16_t year, uint8_t month, uint8_t day);
@@ -117,7 +120,10 @@ class Hmi
 
   Utils* utils = nullptr;
   systemStatus_t systemStatus = STATUS_BOOTUP;
+  volatile bool rtcUpdatePending = false;
   volatile bool initialized = false;
+
+  uint64_t (*getGnssTimestamp)(void) = nullptr;
 
   static void update(void* parameter);
   void runPhaseLockedLoop(void);

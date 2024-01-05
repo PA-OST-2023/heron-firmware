@@ -60,6 +60,7 @@ void App::update(void* parameter)
 
   while(ref->initialized)
   {
+    // Update device data
     ref->updateDeviceData(ref->ethernet->deviceData());    // Update device data
     if(ref->ethernet->commandJsonAvailable())              // Check if any commands have been received
     {
@@ -69,41 +70,114 @@ void App::update(void* parameter)
       }
     }
 
+    if(ref->warning && ref->gui->isSystemWarningCleared())    // Check if warnings are cleared
+    {
+      ref->warning = false;
+    }
+
     // Check if there are any warnings
-    bool warningSet = false;
     if(ref->audio->getBufferOverflowDetected() && ref->audio->getConnectionStatus())
     {
       console.warning.println("[APP] Audio buffer overflow detected");
       ref->gui->setSystemWarning("Audio buffer overflow detected");
-      warningSet = true;
+      ref->warning = true;
     }
 
-    if(warningSet)
+    // Check if there are any errors
+
+
+    if(ref->bootup && ref->gui->isBootupFinished())    // Check if bootup is finished
     {
-      ref->hmi->buzzer.playMelody(MELODIE_WARNING);
+      ref->bootup = false;
+      ref->hmi->buzzer.playMelody(MELODIE_POWER_ON);
     }
 
     // Set HMI LED Status based on warnings, errors and connection status and GNSS Fix
-
-    // if(ref->gnss->getTimeValid())    // Update RTC Time if GNSS Time is valid
-    // {
-    //   if(abs(ref->gnss->getTimeUtc() - ref->hmi->getTimeUtc()) > 1)
-    //   {
-    //     uint16_t year;
-    //     uint8_t month, day, hour, minute, second;
-    //     ref->gnss->getTimeDate(year, month, day, hour, minute, second);
-    //     ref->hmi->setTimeDate(year, month, day, hour, minute, second);
-    //     console.log.printf("[APP] Updated RTC Time: %02d.%02d.%04d %02d:%02d:%02d [Difference: %d s]\n", day, month, year, hour, minute, second,
-    //                        ref->gnss->getTimeUtc() - ref->hmi->getTimeUtc());
-    //   }
-    // }
-
-    // If GNSS is fix, update magnetic declination on magnetometer
-    if(ref->gnss->getFix() && (ref->gnss->getMagneticDeclination() != ref->sensors->getMagneticDeclination()))
+    static Hmi::systemStatus_t systemStatus = Hmi::systemStatus_t::STATUS_BOOTUP;
+    Hmi::systemStatus_t status;
+    if(ref->error)
     {
-      float magneticDeclination = ref->gnss->getMagneticDeclination();
-      ref->sensors->setMagneticDeclination(magneticDeclination);
-      console.log.printf("[APP] Updated magnetic declination: %.2f°\n", magneticDeclination);
+      status = Hmi::systemStatus_t::STATUS_ERROR;
+    }
+    else if(ref->warning)
+    {
+      status = Hmi::systemStatus_t::STATUS_WARNING;
+    }
+    else if(ref->bootup)
+    {
+      status = Hmi::systemStatus_t::STATUS_BOOTUP;
+    }
+    else if(ref->gnss->getFix())
+    {
+      status = Hmi::systemStatus_t::STATUS_GPS_FIX;
+    }
+    else
+    {
+      status = Hmi::systemStatus_t::STATUS_GPS_NOFIX;
+    }
+    if(status != systemStatus)
+    {
+      systemStatus = status;
+      ref->hmi->setSystemStatus(systemStatus);
+      console.log.print("[APP] System Status changed to ");
+      switch(systemStatus)
+      {
+        case Hmi::systemStatus_t::STATUS_BOOTUP:
+          console.log.println("Bootup");
+          break;
+
+        case Hmi::systemStatus_t::STATUS_GPS_NOFIX:
+          console.log.println("GPS No Fix");
+          break;
+
+        case Hmi::systemStatus_t::STATUS_GPS_FIX:
+          console.ok.println("GPS Fix");
+          break;
+
+        case Hmi::systemStatus_t::STATUS_WARNING:
+          ref->hmi->buzzer.playMelody(MELODIE_WARNING);
+          console.log.println("Warning");
+          break;
+
+        case Hmi::systemStatus_t::STATUS_ERROR:
+          ref->hmi->buzzer.playMelody(MELODIE_ERROR);
+          console.log.println("Error");
+          break;
+
+        default:
+          console.log.println("Unknown");
+          break;
+      }
+    }
+
+    static uint32_t gnssTimeOld = 0, rtcTimeOld = 0;
+    if(ref->gnss->getFix())    // Update RTC Time if GNSS is fix
+    {
+      uint32_t gnssTime = ref->gnss->getTimeUtc();
+      uint32_t rtcTime = ref->hmi->getTimeUtc();
+      int32_t timeDiff = gnssTime - rtcTime;
+      if((abs(timeDiff) > 1) && (gnssTime != gnssTimeOld) && (rtcTime != rtcTimeOld))    // Update RTC Time if GNSS Time is different
+      {
+        gnssTimeOld = gnssTime;
+        rtcTimeOld = rtcTime;
+        DateTimeFields rtcTimeField, gnssTimeField;
+        breakTime(rtcTime, rtcTimeField);
+        breakTime(gnssTime, gnssTimeField);
+        ref->hmi->setTimeDate(gnssTimeField.year + 1900, gnssTimeField.mon + 1, gnssTimeField.mday, gnssTimeField.hour, gnssTimeField.min,
+                              gnssTimeField.sec);
+        console.log.printf("[APP] Updated Time UTC+0: [RTC] %02d.%02d.%04d %02d:%02d:%02d [GNSS] %02d.%02d.%04d %02d:%02d:%02d [DIFF] %d\n",
+                           rtcTimeField.mday, rtcTimeField.mon + 1, rtcTimeField.year + 1900, rtcTimeField.hour, rtcTimeField.min, rtcTimeField.sec,
+                           gnssTimeField.mday, gnssTimeField.mon + 1, gnssTimeField.year + 1900, gnssTimeField.hour, gnssTimeField.min,
+                           gnssTimeField.sec, timeDiff);
+      }
+
+      float gnssMagneticDeclination = ref->gnss->getMagneticDeclination();
+      float sensorsMagneticDeclination = ref->sensors->getMagneticDeclination();
+      if((gnssMagneticDeclination != sensorsMagneticDeclination) && (gnssMagneticDeclination != 0.0))
+      {
+        ref->sensors->setMagneticDeclination(gnssMagneticDeclination);
+        console.log.printf("[APP] Updated magnetic declination: %.2f°\n", gnssMagneticDeclination);
+      }
     }
 
     threads.delay(1000.0 / UPDATE_RATE);
@@ -170,10 +244,17 @@ FLASHMEM void App::updateDeviceData(StaticJsonDocument<EthernetUtils::DEVICE_DAT
 
 FLASHMEM bool App::handleIncommingCommands(StaticJsonDocument<EthernetUtils::COMMAND_JSON_SIZE>& doc)
 {
-  if(doc.containsKey("index"))    // TODO: Replace with actual commands
+  // if(doc.containsKey("index"))    // TODO: Replace with actual commands
+  // {
+  //   int index = doc["index"];
+  //   console.log.printf("[APP] Received index: %d\n", index);
+  // }
+
+  if(doc.containsKey("clear_warning"))
   {
-    int index = doc["index"];
-    console.log.printf("[APP] Received index: %d\n", index);
+    console.log.println("[APP] Received command: clear_warning");
+    warning = false;
   }
+  // TODO: Handle RTK commands
   return true;
 }

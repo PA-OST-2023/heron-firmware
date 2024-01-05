@@ -51,7 +51,7 @@
 #include "lwip/debug.h"
 #include "lwipopts.h"
 
-#include <smalloc/smalloc.h>
+// #include <smalloc/smalloc.h>
 
     /**
  * @defgroup lwip_opts Options (lwipopts.h)

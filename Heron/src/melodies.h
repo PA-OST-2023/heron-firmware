@@ -37,13 +37,11 @@
 #include <buzzer.h>
 
 constexpr static const Tone MELODIE_POWER_ON[] = {{NOTE_D5, 120}, {0, 25}, {NOTE_A5, 120}, {0, 200}, END_OF_MELODY};
+
 constexpr static const Tone MELODIE_CALIB_STARTED[] = {{NOTE_A5, 120}, END_OF_MELODY};
+
 constexpr static const Tone MELODIE_CALIB_DONE[] = {{NOTE_G5, 150}, {NOTE_B5, 150}, {NOTE_D6, 150}, {NOTE_G6, 150}, END_OF_MELODY};
 
-// constexpr static const Tone MELODIE_CARD_INSERTED[] = {{NOTE_D6, 120}, {0, 25}, {NOTE_D6, 120}, {0, 200}};
-// constexpr static const Tone MELODIE_CARD_REMOVED[] = {{NOTE_G5, 200}, {0, 200}};
-// constexpr static const Tone MELODIE_DISCHARGING[] = {{NOTE_D6, 350}, {0, 200}, {NOTE_D6, 350}, {0, 200}};
-// constexpr static const Tone MELODIE_SUCCESS[] = {{NOTE_G5, 150}, {NOTE_B5, 150}, {NOTE_D6, 150}, {NOTE_G6, 150}};
 constexpr static const Tone MELODIE_WARNING[] = {{NOTE_B5, 120}, {0, 25},        {NOTE_B5, 120}, {0, 25},      {NOTE_B5, 120},
                                                  {0, 25},        {NOTE_B5, 120}, {0, 25},        END_OF_MELODY};
 
