@@ -50,7 +50,9 @@ class Hmi
   static constexpr const float UPDATE_RATE = 30.0;       // Hz
   static constexpr const float RTC_UPDATE_RATE = 5.0;    // Hz
   static constexpr const int8_t UTC_TIME_OFFSET = 1;     // UTC+1
-
+  static constexpr const double PLL_KP = 0.00;           // Proportional gain for PLL
+  static constexpr const double PLL_KI = 0.01;           // Integral gain for PLL
+  
   typedef enum
   {
     STATUS_BOOTUP,
@@ -109,19 +111,9 @@ class Hmi
   uint8_t min = 0;
   uint8_t sec = 0;
 
-  static uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
-  static uint64_t timeNanoSync;
-  static uint32_t tUpdateMicros;
-
-  volatile static int64_t lastRtcTime;
-  volatile static int64_t lastMicros;
-  volatile static int64_t phaseError;
-
-  int64_t timeAdjustment = 0;
-
-  static constexpr const float Kp = 0.01;     // Proportional gain - adjust based on your system
-  static constexpr const float Ki = 0.00;    // Integral gain - adjust based on your system
-  float integral = 0;
+  static uint64_t timeNanoUtc;            // Guido van Rossum's "nanoseconds since 1970
+  static uint64_t timeNanoUtcInitial;
+  static int64_t tineNanoUtcOffset;
 
   Utils* utils = nullptr;
   systemStatus_t systemStatus = STATUS_BOOTUP;
