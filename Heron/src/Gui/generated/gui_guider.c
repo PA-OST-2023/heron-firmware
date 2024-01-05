@@ -35,6 +35,7 @@ void init_scr_del_flag(lv_ui *ui)
 	ui->screen_arm_angle_del = true;
 	ui->screen_arm_angle_calib_del = true;
 	ui->screen_ambient_del = true;
+	ui->screen_settings_del = true;
 }
 
 void setup_ui(lv_ui *ui)

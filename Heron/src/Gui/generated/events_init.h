@@ -30,6 +30,7 @@ void events_init_screen_compass_calib(lv_ui *ui);
 void events_init_screen_arm_angle(lv_ui *ui);
 void events_init_screen_arm_angle_calib(lv_ui *ui);
 void events_init_screen_ambient(lv_ui *ui);
+void events_init_screen_settings(lv_ui *ui);
 
 #ifdef __cplusplus
 }

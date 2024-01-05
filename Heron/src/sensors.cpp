@@ -327,7 +327,7 @@ void Sensors::update(void)
     }
 
     Utils::turnOffWire(SENSOR_WIRE);    // Somehow the I2C bus gets locked up after some time, force it to reset after each update
-    delayMicroseconds(50);
+    delayMicroseconds(200);
     Utils::turnOnWire(SENSOR_WIRE);
     Utils::unlockWire(SENSOR_WIRE);
   }

@@ -49,9 +49,9 @@ Utils::Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, in
 FLASHMEM bool Utils::begin(void)
 {
   bool res = true;
-  console.log.printf("[UTILS] Starting watchdog (timeout: %ds, early warning: %ds)\n", WATCHDOG_TIMEOUT, WATCHDOG_EARLY_WARNING);
-  wdt.begin(wdtConfig);
-  wdt.feed();
+  console.log.printf("[UTILS] Starting watchdog (timeout: %ds)\n", WATCHDOG_TIMEOUT);
+  // wdt.begin(wdtConfig);
+  // wdt.feed();
 
   if(!preferences.begin())
   {

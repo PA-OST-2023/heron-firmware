@@ -55,7 +55,6 @@ class Utils
   static constexpr const size_t HMI_WIRE_FREQENCY = 3400000;     // [Hz]
   static constexpr const size_t GPS_WIRE_FREQENCY = 400000;      // [Hz]
   static constexpr const size_t OP_TIME_UPDATE_INTERVAL = 60;    // [s]
-  static constexpr const size_t WATCHDOG_EARLY_WARNING = 5;      // [s]
   static constexpr const size_t WATCHDOG_TIMEOUT = 10;           // [s]
 
   typedef enum
@@ -89,7 +88,7 @@ class Utils
   }
   static uint32_t getFreeRam() { return (char*)&_heap_end - __brkval; }
 
-  WDT_timings_t wdtConfig = {.trigger = WATCHDOG_EARLY_WARNING, .timeout = WATCHDOG_TIMEOUT, .callback = watchdogEarlyWarningCallback};
+  WDT_timings_t wdtConfig = {.trigger = WATCHDOG_TIMEOUT, .timeout = WATCHDOG_TIMEOUT};
   Preferences preferences;
 
  private:
@@ -103,7 +102,6 @@ class Utils
 
   static void update(void* parameter);
   static bool usbConnected(void) { return !bitRead(USB1_PORTSC1, 7); }
-  static void watchdogEarlyWarningCallback(void) { console.error.println("[UTILS] Watchdog early warning"); }
 };
 
 #endif

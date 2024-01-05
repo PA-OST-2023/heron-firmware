@@ -192,6 +192,29 @@ static void screen_home_btn_ambient_event_handler (lv_event_t *e)
 		break;
 	}
 }
+static void screen_home_btn_settings_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_settings_del == true) {
+	          setup_scr_screen_settings(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_settings, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, false);
+	        guider_ui.screen_home_del = false;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
 static void screen_home_btn_warning_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -252,6 +275,7 @@ void events_init_screen_home(lv_ui *ui)
 	lv_obj_add_event_cb(ui->screen_home_btn_compass, screen_home_btn_compass_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_btn_arm_angle, screen_home_btn_arm_angle_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_btn_ambient, screen_home_btn_ambient_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_home_btn_settings, screen_home_btn_settings_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_btn_warning, screen_home_btn_warning_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_btn_warning_ok, screen_home_btn_warning_ok_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_home_label_warning_text, screen_home_label_warning_text_event_handler, LV_EVENT_ALL, NULL);
@@ -819,6 +843,33 @@ static void screen_ambient_btn_back_event_handler (lv_event_t *e)
 void events_init_screen_ambient(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->screen_ambient_btn_back, screen_ambient_btn_back_event_handler, LV_EVENT_ALL, NULL);
+}
+static void screen_settings_btn_back_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_RELEASED:
+	{
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.screen_home_del == true) {
+	          setup_scr_screen_home(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.screen_home, LV_SCR_LOAD_ANIM_FADE_ON, 200, 200, false);
+	        guider_ui.screen_settings_del = false;
+	    }
+		break;
+	}
+	default:
+		break;
+	}
+}
+void events_init_screen_settings(lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->screen_settings_btn_back, screen_settings_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
 
 void events_init(lv_ui *ui)

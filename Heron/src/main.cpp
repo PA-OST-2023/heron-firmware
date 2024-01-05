@@ -95,7 +95,7 @@ void setup()
 
 void loop()
 {
-  utils.feedWatchdog();
+  // utils.feedWatchdog();
   threads.yield();
   sensors.update();
   gnss.update();

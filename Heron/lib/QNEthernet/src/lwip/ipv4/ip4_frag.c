@@ -809,7 +809,7 @@ ip4_frag(struct pbuf *p, struct netif *netif, const ip4_addr_t *dest)
     left_to_copy = fragsize;
     while (left_to_copy) {
       struct pbuf_custom_ref *pcr;
-      u16_t plen = (u16_t)(p->len - poff);
+      u16_t plen = (u16_t)(p->len - poff);    // TODO: <Florian> somhow it crashed here once
       LWIP_ASSERT("p->len >= poff", p->len >= poff);
       newpbuflen = LWIP_MIN(left_to_copy, plen);
       /* Is this pbuf already empty? */

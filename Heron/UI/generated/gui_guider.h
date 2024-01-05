@@ -36,6 +36,7 @@ typedef struct
 	lv_obj_t *screen_home_tileview_menu_tile_compass;
 	lv_obj_t *screen_home_tileview_menu_tile_arm_angle;
 	lv_obj_t *screen_home_tileview_menu_tile_ambient;
+	lv_obj_t *screen_home_tileview_menu_tile_settings;
 	lv_obj_t *screen_home_label_system;
 	lv_obj_t *screen_home_btn_system;
 	lv_obj_t *screen_home_btn_system_label;
@@ -54,6 +55,9 @@ typedef struct
 	lv_obj_t *screen_home_label_ambient;
 	lv_obj_t *screen_home_btn_ambient;
 	lv_obj_t *screen_home_btn_ambient_label;
+	lv_obj_t *screen_home_label_settings;
+	lv_obj_t *screen_home_btn_settings;
+	lv_obj_t *screen_home_btn_settings_label;
 	lv_obj_t *screen_home_cont_top_bar;
 	lv_obj_t *screen_home_label_warning;
 	lv_obj_t *screen_home_label_usb_status;
@@ -221,6 +225,26 @@ typedef struct
 	lv_obj_t *screen_ambient_label_pressure;
 	lv_obj_t *screen_ambient_label_altitude_title;
 	lv_obj_t *screen_ambient_label_altitude;
+	lv_obj_t *screen_settings;
+	bool screen_settings_del;
+	lv_obj_t *screen_settings_cont_settings;
+	lv_obj_t *screen_settings_cont_leds;
+	lv_obj_t *screen_settings_slider_brightness_leds;
+	lv_obj_t *screen_settings_label_brightness_leds;
+	lv_obj_t *screen_settings_ddlist_mode_leds;
+	lv_obj_t *screen_settings_label_mode_leds;
+	lv_obj_t *screen_settings_sw_enable_leds;
+	lv_obj_t *screen_settings_label_enable_leds;
+	lv_obj_t *screen_settings_label_title_leds;
+	lv_obj_t *screen_settings_cont_buzzer;
+	lv_obj_t *screen_settings_sw_enable_buzzer;
+	lv_obj_t *screen_settings_label_enable_buzzer;
+	lv_obj_t *screen_settings_label_title_buzzer;
+	lv_obj_t *screen_settings_cont_spacer;
+	lv_obj_t *screen_settings_btn_back;
+	lv_obj_t *screen_settings_btn_back_label;
+	lv_obj_t *screen_settings_label_back;
+	lv_obj_t *screen_settings_label_title;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);
@@ -240,6 +264,7 @@ void setup_scr_screen_compass_calib(lv_ui *ui);
 void setup_scr_screen_arm_angle(lv_ui *ui);
 void setup_scr_screen_arm_angle_calib(lv_ui *ui);
 void setup_scr_screen_ambient(lv_ui *ui);
+void setup_scr_screen_settings(lv_ui *ui);
 LV_IMG_DECLARE(_Heron_alpha_80x80);
 LV_IMG_DECLARE(_icai_inverted_small_alpha_101x40);
 LV_IMG_DECLARE(_compass_background_alpha_82x82);
@@ -251,6 +276,7 @@ LV_FONT_DECLARE(lv_font_FontAwesome6ProLight_300_50)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProLight_300_40)
 LV_FONT_DECLARE(lv_font_FontAwesome6SharpLight_300_50)
 LV_FONT_DECLARE(lv_font_FontAwesome6Regular_400_50)
+LV_FONT_DECLARE(lv_font_FontAwesome5ProLight_300_50)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProSolid_900_16)
 LV_FONT_DECLARE(lv_font_FontAwesome5_15)
 LV_FONT_DECLARE(lv_font_FontAwesome5ProRegular_400_16)
