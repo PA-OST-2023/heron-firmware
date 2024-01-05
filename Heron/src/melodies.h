@@ -47,9 +47,9 @@ constexpr static const Tone MELODIE_WARNING[] = {{NOTE_B5, 120}, {0, 25},       
 
 constexpr static const Tone MELODIE_WARNING_ACKNOWLAGED[] = {{NOTE_A5, 120}, END_OF_MELODY};
 
-constexpr static const Tone MELODIE_ERROR[] = {{NOTE_G5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200}, {NOTE_G5, 200}, {0, 200},
-                                               {NOTE_B5, 200}, {0, 200}, {NOTE_G5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200},
-                                               {NOTE_G5, 200}, {0, 200}, {NOTE_B5, 200}, {0, 200}, END_OF_MELODY};
+constexpr static const Tone MELODIE_ERROR[] = {{NOTE_B5, 200}, {0, 25}, {NOTE_G5, 200}, {0, 25}, {NOTE_B5, 200}, {0, 25},
+                                               {NOTE_G5, 200}, {0, 25}, {NOTE_B5, 200}, {0, 25}, {NOTE_G5, 200}, {0, 25},
+                                               {NOTE_B5, 200}, {0, 25}, {NOTE_G5, 200}, {0, 25}, END_OF_MELODY};
 
 
 #endif

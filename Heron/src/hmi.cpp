@@ -102,32 +102,41 @@ void Hmi::update(void* parameter)
     ref->leds.clear();
     if(ref->systemStatus != STATUS_BOOTUP)
     {
-      bool blinkGnss = (millis() / 1000) & 1;
+      uint32_t t = (uint32_t)(ref->getTimeNanoUtc() / 1000000ULL);
       if(ref->getGnssTimestamp)
       {
         if(ref->getGnssTimestamp() > 0)
         {
-          blinkGnss = (ref->getGnssTimestamp() / 1000000000ULL) & 1;
+          t = (uint32_t)(ref->getGnssTimestamp() / 1000000ULL);
         }
+      }
+      t %= 1000;    // 1s cycle
+
+      bool blink = (t < 100);     // Blink 100ms on every second
+      if(ref->streamingStatus)    // Blink a second time between 200ms and 300ms if streaming is active
+      {
+        blink |= (t >= 200) && (t < 300);
       }
 
       switch(ref->systemStatus)
       {
         case STATUS_GPS_FIX:
-          ref->leds.setPixelColor(0, blinkGnss ? Color(0, 255, 0) : Color(0, 0, 0));
+          ref->leds.setPixelColor(0, blink ? Color(0, 255, 0) : Color(0, 0, 0));
           break;
         case STATUS_GPS_NOFIX:
-          ref->leds.setPixelColor(0, (millis() / 1000) & 1 ? Color(255, 255, 255) : Color(0, 0, 0));
+          ref->leds.setPixelColor(0, blink ? Color(255, 255, 255) : Color(0, 0, 0));
           break;
         case STATUS_WARNING:
-          ref->leds.setPixelColor(0, (millis() % 500) < 250 ? Color(255, 255, 0) : Color(0, 0, 0));
+          ref->leds.setPixelColor(0, (t % 500) < 250 ? Color(255, 255, 0) : Color(0, 0, 0));
           break;
         case STATUS_ERROR:
-          ref->leds.setPixelColor(0, (millis() % 500) < 250 ? Color(255, 0, 0) : Color(0, 0, 0));
+          ref->leds.setPixelColor(0, (t % 500) < 250 ? Color(255, 0, 0) : Color(0, 0, 0));
           break;
         default:
           break;
       }
+
+      // TODO: LED Animation
     }
     else    // Bootup animation
     {}

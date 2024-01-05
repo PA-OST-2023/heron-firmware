@@ -70,9 +70,11 @@ void App::update(void* parameter)
       }
     }
 
-    if(ref->warning && ref->gui->isSystemWarningCleared())    // Check if warnings are cleared
+    if((ref->warning || ref->error) && ref->gui->isSystemWarningCleared())    // Check if warnings are cleared
     {
+      ref->error = false;
       ref->warning = false;
+      ref->bootup = false;
     }
 
     // Check if there are any warnings
@@ -84,17 +86,19 @@ void App::update(void* parameter)
     }
 
     // Check if there are any errors
+    // There are currently no runtime error
 
-
-    if(ref->bootup && ref->gui->isBootupFinished())    // Check if bootup is finished
+    if(ref->bootup && ref->gui->isBootupFinished() && !ref->error && !ref->warning)    // Check if bootup is finished
     {
       ref->bootup = false;
       ref->hmi->buzzer.playMelody(MELODIE_POWER_ON);
     }
 
+    ref->hmi->setStreamingStatus(ref->audio->getConnectionStatus());    // Set Streaming Status in HMI to influece blink pattern
+
     // Set HMI LED Status based on warnings, errors and connection status and GNSS Fix
     static Hmi::systemStatus_t systemStatus = Hmi::systemStatus_t::STATUS_BOOTUP;
-    Hmi::systemStatus_t status;
+    Hmi::systemStatus_t status = Hmi::systemStatus_t::STATUS_GPS_NOFIX;
     if(ref->error)
     {
       status = Hmi::systemStatus_t::STATUS_ERROR;
@@ -111,41 +115,37 @@ void App::update(void* parameter)
     {
       status = Hmi::systemStatus_t::STATUS_GPS_FIX;
     }
-    else
-    {
-      status = Hmi::systemStatus_t::STATUS_GPS_NOFIX;
-    }
+
     if(status != systemStatus)
     {
       systemStatus = status;
       ref->hmi->setSystemStatus(systemStatus);
-      console.log.print("[APP] System Status changed to ");
       switch(systemStatus)
       {
         case Hmi::systemStatus_t::STATUS_BOOTUP:
-          console.log.println("Bootup");
+          console.log.println("[APP] System Status changed to \"Bootup\"");
           break;
 
         case Hmi::systemStatus_t::STATUS_GPS_NOFIX:
-          console.log.println("GPS No Fix");
+          console.log.println("[APP] System Status changed to \"GPS No Fix\"");
           break;
 
         case Hmi::systemStatus_t::STATUS_GPS_FIX:
-          console.ok.println("GPS Fix");
+          console.log.println("[APP] System Status changed to \"GPS Fix\"");
           break;
 
         case Hmi::systemStatus_t::STATUS_WARNING:
           ref->hmi->buzzer.playMelody(MELODIE_WARNING);
-          console.log.println("Warning");
+          console.log.println("[APP] System Status changed to \"Warning\"");
           break;
 
         case Hmi::systemStatus_t::STATUS_ERROR:
           ref->hmi->buzzer.playMelody(MELODIE_ERROR);
-          console.log.println("Error");
+          console.log.println("[APP] System Status changed to \"Error\"");
           break;
 
         default:
-          console.log.println("Unknown");
+          console.log.println("[APP] System Status changed to \"Unknown\"");
           break;
       }
     }

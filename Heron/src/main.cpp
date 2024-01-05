@@ -75,24 +75,21 @@ void setup()
   hmi.setGnssTimestampCallback(Gnss::getTimeNanoUtc);
 
   bool ok = true;
-  ok |= console.begin();
-  ok |= utils.begin();
-  ok |= audio.begin();
-  ok |= gnss.begin(utils);
-  ok |= hmi.begin(utils);
-  ok |= sensors.begin(utils);
-  ok |= ethernet.begin(utils, audio);
-  ok |= gui.begin(utils, hmi, audio, ethernet, gnss, sensors);
-  ok |= app.begin(audio, utils, gui, hmi, ethernet, gnss, sensors);
+  ok &= console.begin();
+  ok &= utils.begin();
+  ok &= audio.begin();
+  ok &= gnss.begin(utils);
+  ok &= hmi.begin(utils);
+  ok &= sensors.begin(utils);
+  ok &= ethernet.begin(utils, audio);
+  ok &= gui.begin(utils, hmi, audio, ethernet, gnss, sensors);
+  ok &= app.begin(audio, utils, gui, hmi, ethernet, gnss, sensors);
 
   if(!ok)
   {
+    console.error.println("[MAIN] Error while initializing modules!");
     app.setError();
-    console.error.println("[MAIN] Error while initializing modules, aborting");
-    while(1)
-    {
-      threads.delay(1000);    // Wait for watchdog to reset the system
-    }
+    gui.setSystemWarning("Error while initializing modules!");
   }
 }
 

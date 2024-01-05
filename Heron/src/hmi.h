@@ -65,6 +65,7 @@ class Hmi
   constexpr Hmi(int rgbLed, int buzzer) : rgbLedPin(rgbLed), buzzerPin(buzzer) {}
   bool begin(Utils& utilsRef);
   void setSystemStatus(systemStatus_t status) { systemStatus = status; }
+  void setStreamingStatus(bool status) { streamingStatus = status; }
   void setGnssTimestampCallback(uint64_t (*callback)(void)) { getGnssTimestamp = callback; }
 
   void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
@@ -120,6 +121,7 @@ class Hmi
 
   Utils* utils = nullptr;
   systemStatus_t systemStatus = STATUS_BOOTUP;
+  bool streamingStatus = false;
   volatile bool rtcUpdatePending = false;
   volatile bool initialized = false;
 
