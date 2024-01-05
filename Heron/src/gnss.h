@@ -42,8 +42,8 @@
 class Gnss
 {
  public:
-  static constexpr const float UPDATE_RATE = 30.0;       // Hz
-  static constexpr const size_t GNSS_UPDATE_RATE = 2;    // Hz
+  static constexpr const float UPDATE_RATE = 10.0;       // Hz
+  static constexpr const size_t GNSS_UPDATE_RATE = 5;    // Hz
 
   enum class fixType_t : uint8_t
   {

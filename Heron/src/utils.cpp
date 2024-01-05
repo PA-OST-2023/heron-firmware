@@ -50,8 +50,8 @@ FLASHMEM bool Utils::begin(void)
 {
   bool res = true;
   console.log.printf("[UTILS] Starting watchdog (timeout: %ds)\n", WATCHDOG_TIMEOUT);
-  // wdt.begin(wdtConfig);
-  // wdt.feed();
+  wdt.begin(wdtConfig);
+  wdt.feed();
 
   if(!preferences.begin())
   {

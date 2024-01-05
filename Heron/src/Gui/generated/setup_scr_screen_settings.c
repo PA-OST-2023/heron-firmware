@@ -71,7 +71,7 @@ FLASHMEM void setup_scr_screen_settings(lv_ui *ui)
 	lv_slider_set_mode(ui->screen_settings_slider_brightness_leds, LV_SLIDER_MODE_NORMAL);
 	lv_slider_set_value(ui->screen_settings_slider_brightness_leds, 127, LV_ANIM_OFF);
 	lv_obj_set_pos(ui->screen_settings_slider_brightness_leds, 20, 125);
-	lv_obj_set_size(ui->screen_settings_slider_brightness_leds, 140, 5);
+	lv_obj_set_size(ui->screen_settings_slider_brightness_leds, 140, 7);
 
 	//Write style for screen_settings_slider_brightness_leds, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->screen_settings_slider_brightness_leds, 255, LV_PART_MAIN|LV_STATE_DEFAULT);

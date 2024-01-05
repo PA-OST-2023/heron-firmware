@@ -51,7 +51,7 @@
 					"use_fs": false,
 					"fs_type": "flash",
 					"sd_path": "",
-					"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI\\import\\image\\Heron.png",
+					"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI\\import\\image\\Heron.png",
 					"rotate": 0,
 					"x": 50,
 					"y": 50,
@@ -836,7 +836,7 @@
 					"default_style": false,
 					"scrollbar_mode": "OFF",
 					"direction": "horizon",
-					"current_item": 0,
+					"current_item": 1,
 					"tile_count": 1,
 					"child": [
 						{
@@ -18919,8 +18919,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screenRecording"
+			]
 		},
 		{
 			"name": "screenSetTime",
@@ -21702,8 +21701,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "screenSetTime"
+			]
 		}
 	],
 	"FrontStatus": {},
