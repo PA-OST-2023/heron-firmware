@@ -98,7 +98,7 @@ void loop()
   utils.feedWatchdog();
   threads.yield();
   sensors.update();
-  gnss.update();
+  // gnss.update();
   gui.update();
   ethernet.update();
 }

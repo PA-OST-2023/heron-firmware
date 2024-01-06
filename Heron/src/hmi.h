@@ -52,6 +52,8 @@ class Hmi
   static constexpr const int8_t UTC_TIME_OFFSET = 1;     // UTC+1
   static constexpr const double PLL_KP = 0.00;           // Proportional gain for PLL
   static constexpr const double PLL_KI = 0.01;           // Integral gain for PLL
+  static constexpr const uint8_t LEDS_MIN_BRIGHTNESS = 1;
+  static constexpr const uint8_t LEDS_MAX_BRIGHTNESS = 255;
 
   typedef enum
   {
@@ -62,11 +64,26 @@ class Hmi
     STATUS_ERROR
   } systemStatus_t;
 
-  constexpr Hmi(int rgbLed, int buzzer) : rgbLedPin(rgbLed), buzzerPin(buzzer) {}
+  typedef enum
+  {
+    MODE_AUDIO = 0,
+    MODE_OST = 1
+  } ledMode_t;
+
+  constexpr Hmi(int rgbLedPin, int buzzerPin) : rgbLedPin(rgbLedPin), buzzer(Buzzer(buzzerPin)) {}
   bool begin(Utils& utilsRef);
   void setSystemStatus(systemStatus_t status) { systemStatus = status; }
   void setStreamingStatus(bool status) { streamingStatus = status; }
   void setGnssTimestampCallback(uint64_t (*callback)(void)) { getGnssTimestamp = callback; }
+  void setBuzzerEnabled(bool enabled);
+  void setLedsEnabled(bool enabled);
+  void setLedsBrightness(uint8_t brightness);
+  void setLedsMode(ledMode_t mode);
+
+  bool getBuzzerEnabled(void) { return buzzerEnabled; }
+  bool getLedsEnabled(void) { return ledsEnabled; }
+  uint8_t getLedsBrightness(void) { return ledsBrightness; }
+  ledMode_t getLedsMode(void) { return ledsMode; }
 
   void setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
   void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
@@ -99,14 +116,20 @@ class Hmi
   static void convertUtcToLocalTime(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second,
                                     int8_t utcOffsetHour);
 
-  const int rgbLedPin, buzzerPin;
-  Buzzer buzzer = Buzzer(buzzerPin);
+  const int rgbLedPin;
+  Buzzer buzzer;
 
  private:
   static uint8_t drawingMemory[LED_COUNT * 3];            //  3 bytes per LED
   DMAMEM static uint8_t displayMemory[LED_COUNT * 12];    // 12 bytes per LED
   WS2812Serial leds = WS2812Serial(LED_COUNT, displayMemory, drawingMemory, rgbLedPin, WS2812_GRB);
   RTC_PCF8563 rtc;
+
+  bool buzzerEnabled = true;
+  bool ledsEnabled = true;
+  uint8_t ledsBrightness = 255;
+  bool ledsBrightnessChanged = false;
+  ledMode_t ledsMode = MODE_AUDIO;
 
   uint16_t year = 0;
   uint8_t month = 0;
@@ -115,7 +138,7 @@ class Hmi
   uint8_t min = 0;
   uint8_t sec = 0;
 
-  static uint64_t timeNanoUtc;            // Guido van Rossum's "nanoseconds since 1970
+  static uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
   static uint64_t timeNanoUtcInitial;
   static int64_t tineNanoUtcOffset;
 

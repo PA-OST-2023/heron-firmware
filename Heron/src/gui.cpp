@@ -137,6 +137,7 @@ void Gui::update(void)
     updateScreenArmAngle();
     updateScreenArmAngleCalibrate();
     updateScreenAmbient();
+    updateScreenSettings();
   }
   lv_task_handler();
 }
@@ -785,6 +786,20 @@ FLASHMEM bool Gui::updateScreenAmbient(void)
   return loaded;
 }
 
+FLASHMEM bool Gui::updateScreenSettings(void)
+{
+  static bool screenFreshlyLoaded = true;
+  if(lv_scr_act() != guider_ui.screen_arm_angle_calib)
+  {
+    screenFreshlyLoaded = true;
+    return false;
+  }
+
+  bool loaded = screenFreshlyLoaded;
+  screenFreshlyLoaded = false;
+  return loaded;
+}
+
 
 // Screen callback functions
 
@@ -902,6 +917,70 @@ void Gui::callbackScreenArmAngleCalibrationConfirmed(void)
   console.log.println("[GUI] [CALLBACK] Arm angle calibration confirmed");
   sensors->calibrateAngleConfirm();
   hmi->buzzer.playMelody(MELODIE_CALIB_DONE);
+}
+
+void Gui::callbackScreenSettingsLoaded(void)
+{
+  console.log.println("[GUI] [CALLBACK] Settings screen loaded");
+
+  if(hmi->getBuzzerEnabled())
+  {
+    lv_obj_add_state(guider_ui.screen_settings_sw_enable_buzzer, LV_STATE_CHECKED);
+  }
+  else
+  {
+    lv_obj_clear_state(guider_ui.screen_settings_sw_enable_buzzer, LV_STATE_CHECKED);
+  }
+
+  if(hmi->getLedsEnabled())
+  {
+    lv_obj_add_state(guider_ui.screen_settings_sw_enable_leds, LV_STATE_CHECKED);
+  }
+  else
+  {
+    lv_obj_clear_state(guider_ui.screen_settings_sw_enable_leds, LV_STATE_CHECKED);
+  }
+
+  lv_dropdown_set_selected(guider_ui.screen_settings_ddlist_mode_leds, (uint8_t)hmi->getLedsMode());
+
+  uint8_t brightness = hmi->getLedsBrightness();
+  lv_slider_set_value(guider_ui.screen_settings_slider_brightness_leds, brightness, LV_ANIM_OFF);
+  static char bufferBrightness[20];
+  brightness = map(brightness, 0, 255, 0, 100);
+  snprintf(bufferBrightness, sizeof(bufferBrightness), "Brightness: %d %%", brightness);
+  lv_label_set_text_static(guider_ui.screen_settings_label_brightness_leds, bufferBrightness);
+}
+
+void Gui::callbackScreenSettingsSwitchBuzzerEnabledChanged(void)
+{
+  bool enabled = lv_obj_has_state(guider_ui.screen_settings_sw_enable_buzzer, LV_STATE_CHECKED);
+  console.log.printf("[GUI] [CALLBACK] Buzzer enabled: %s\n", (enabled) ? "true" : "false");
+  hmi->setBuzzerEnabled(enabled);
+}
+
+void Gui::callbackScreenSettingsSwitchLedsEnabledChanged(void)
+{
+  bool enabled = lv_obj_has_state(guider_ui.screen_settings_sw_enable_leds, LV_STATE_CHECKED);
+  console.log.printf("[GUI] [CALLBACK] LEDs enabled: %s\n", (enabled) ? "true" : "false");
+  hmi->setLedsEnabled(enabled);
+}
+
+void Gui::callbackScreenSettingsDropdownLedsModeChanged(void)
+{
+  uint8_t mode = lv_dropdown_get_selected(guider_ui.screen_settings_ddlist_mode_leds);
+  console.log.printf("[GUI] [CALLBACK] LEDs mode: %d\n", mode);
+  hmi->setLedsMode((Hmi::ledMode_t)mode);
+}
+
+void Gui::callbackScreenSettingsSliderLedsBrightnessChanged(void)
+{
+  uint8_t brightness = lv_slider_get_value(guider_ui.screen_settings_slider_brightness_leds);
+  console.log.printf("[GUI] [CALLBACK] LEDs brightness: %d\n", brightness);
+  hmi->setLedsBrightness(brightness);
+  static char bufferBrightness[20];
+  brightness = map(brightness, 0, 255, 0, 100);
+  snprintf(bufferBrightness, sizeof(bufferBrightness), "Brightness: %d %%", brightness);
+  lv_label_set_text_static(guider_ui.screen_settings_label_brightness_leds, bufferBrightness);
 }
 
 

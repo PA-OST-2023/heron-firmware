@@ -314,7 +314,7 @@
 					"use_fs": false,
 					"fs_type": "flash",
 					"sd_path": "",
-					"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\icai_inverted_small.png",
+					"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\icai_inverted_small.png",
 					"rotate": 0,
 					"x": 50,
 					"y": 50,
@@ -434,7 +434,7 @@
 					"use_fs": false,
 					"fs_type": "flash",
 					"sd_path": "",
-					"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\Heron.png",
+					"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\Heron.png",
 					"rotate": 0,
 					"x": 50,
 					"y": 50,
@@ -2018,7 +2018,8 @@
 							"shadow_ofs_y": 0
 						}
 					],
-					"event": {}
+					"event": {},
+					"layerName": "screen_home"
 				},
 				{
 					"name": "btn_warning",
@@ -2763,7 +2764,8 @@
 									"shadow_ofs_x": 0,
 									"shadow_ofs_y": 0
 								}
-							]
+							],
+							"layerName": "screen_home"
 						}
 					],
 					"style": [
@@ -5604,7 +5606,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_home"
 		},
 		{
 			"name": "screen_system",
@@ -6653,7 +6656,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_system"
 		},
 		{
 			"name": "screen_ethernet",
@@ -8449,7 +8453,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_ethernet"
 		},
 		{
 			"name": "screen_ethernet_setup",
@@ -8607,7 +8612,8 @@
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
 						}
-					]
+					],
+					"layerName": "screen_ethernet_setup"
 				},
 				{
 					"name": "cont_confirmed_background",
@@ -8652,7 +8658,8 @@
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
 						}
-					]
+					],
+					"layerName": "screen_ethernet_setup"
 				},
 				{
 					"name": "label_streaming_port",
@@ -14204,7 +14211,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_ethernet_setup"
 		},
 		{
 			"name": "screen_gnss",
@@ -15752,7 +15760,8 @@
 								}
 							}
 						]
-					}
+					},
+					"layerName": "screen_gnss"
 				}
 			],
 			"event": {
@@ -15903,7 +15912,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_gnss"
 		},
 		{
 			"name": "screen_gnss_location",
@@ -16432,7 +16442,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_gnss_location"
 		},
 		{
 			"name": "screen_compass",
@@ -16542,7 +16553,8 @@
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
 						}
-					]
+					],
+					"layerName": "screen_compass"
 				},
 				{
 					"name": "cont_dot",
@@ -16606,7 +16618,7 @@
 					"use_fs": false,
 					"fs_type": "flash",
 					"sd_path": "",
-					"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\compass_background.png",
+					"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\compass_background.png",
 					"rotate": 0,
 					"x": 50,
 					"y": 50,
@@ -18031,7 +18043,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_compass"
 		},
 		{
 			"name": "screen_compass_calib",
@@ -19569,7 +19582,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_compass_calib"
 		},
 		{
 			"name": "screen_arm_angle",
@@ -21101,7 +21115,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_arm_angle"
 		},
 		{
 			"name": "screen_arm_angle_calib",
@@ -21259,7 +21274,8 @@
 							"shadow_ofs_x": 0,
 							"shadow_ofs_y": 0
 						}
-					]
+					],
+					"layerName": "screen_arm_angle_calib"
 				},
 				{
 					"name": "cont_confirmed_background",
@@ -21438,7 +21454,8 @@
 								}
 							}
 						]
-					}
+					},
+					"layerName": "screen_arm_angle_calib"
 				},
 				{
 					"name": "btn_calibrate_0",
@@ -23506,7 +23523,8 @@
 								}
 							}
 						]
-					}
+					},
+					"layerName": "screen_arm_angle_calib"
 				}
 			],
 			"event": {
@@ -23789,7 +23807,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_arm_angle_calib"
 		},
 		{
 			"name": "screen_ambient",
@@ -25104,7 +25123,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_ambient"
 		},
 		{
 			"name": "screen_settings",
@@ -26050,7 +26070,141 @@
 											"border_color": "#2195f6",
 											"radius": 10
 										}
-									]
+									],
+									"event": {
+										"value_changed": [
+											{
+												"trigger": "value_changed",
+												"dst": "null",
+												"action": {
+													"load_screen": {
+														"ische": false,
+														"duration": 200,
+														"delay": 200,
+														"scrId": "",
+														"anim_type": "LV_SCR_LOAD_ANIM_NONE",
+														"is_clean": false,
+														"is_del": true
+													},
+													"bg_color": {
+														"ische": false,
+														"value": "#000000"
+													},
+													"grad_color": {
+														"ische": false,
+														"value": "#000000",
+														"dir": "LV_GRAD_DIR_HOR"
+													},
+													"bg_opa": {
+														"ische": false,
+														"value": 255
+													},
+													"width": {
+														"ische": false,
+														"value": 50
+													},
+													"height": {
+														"ische": false,
+														"value": 50
+													},
+													"set_text": {
+														"ische": false,
+														"value": "default",
+														"font": 12,
+														"font_family": "simsun"
+													},
+													"position": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0
+													},
+													"isVisible": {
+														"ische": false,
+														"flag": ""
+													},
+													"customer_code": {
+														"ische": true,
+														"inc_c": "",
+														"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsSwitchBuzzerEnabledChanged();\n#endif",
+														"inc_py": "",
+														"code_py": ""
+													},
+													"add_state": {
+														"ische": false,
+														"value": "LV_STATE_DEFAULT"
+													},
+													"add_flag": {
+														"ische": false,
+														"value": []
+													},
+													"clear_flag": {
+														"ische": false,
+														"value": []
+													},
+													"move": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"scaleSize": {
+														"ische": false,
+														"width": 0,
+														"height": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"img_zoom": {
+														"ische": false,
+														"zoom": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"rotate": {
+														"ische": false,
+														"rotate": 0,
+														"x": 0,
+														"y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													}
+												}
+											}
+										]
+									}
 								}
 							],
 							"style": [
@@ -26472,7 +26626,141 @@
 											"border_color": "#2195f6",
 											"radius": 10
 										}
-									]
+									],
+									"event": {
+										"value_changed": [
+											{
+												"trigger": "value_changed",
+												"dst": "null",
+												"action": {
+													"load_screen": {
+														"ische": false,
+														"duration": 200,
+														"delay": 200,
+														"scrId": "",
+														"anim_type": "LV_SCR_LOAD_ANIM_NONE",
+														"is_clean": false,
+														"is_del": true
+													},
+													"bg_color": {
+														"ische": false,
+														"value": "#000000"
+													},
+													"grad_color": {
+														"ische": false,
+														"value": "#000000",
+														"dir": "LV_GRAD_DIR_HOR"
+													},
+													"bg_opa": {
+														"ische": false,
+														"value": 255
+													},
+													"width": {
+														"ische": false,
+														"value": 50
+													},
+													"height": {
+														"ische": false,
+														"value": 50
+													},
+													"set_text": {
+														"ische": false,
+														"value": "default",
+														"font": 12,
+														"font_family": "simsun"
+													},
+													"position": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0
+													},
+													"isVisible": {
+														"ische": false,
+														"flag": ""
+													},
+													"customer_code": {
+														"ische": true,
+														"inc_c": "",
+														"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsSwitchLedsEnabledChanged();\n#endif",
+														"inc_py": "",
+														"code_py": ""
+													},
+													"add_state": {
+														"ische": false,
+														"value": "LV_STATE_DEFAULT"
+													},
+													"add_flag": {
+														"ische": false,
+														"value": []
+													},
+													"clear_flag": {
+														"ische": false,
+														"value": []
+													},
+													"move": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"scaleSize": {
+														"ische": false,
+														"width": 0,
+														"height": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"img_zoom": {
+														"ische": false,
+														"zoom": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"rotate": {
+														"ische": false,
+														"rotate": 0,
+														"x": 0,
+														"y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													}
+												}
+											}
+										]
+									}
 								},
 								{
 									"name": "label_mode_leds",
@@ -26753,14 +27041,272 @@
 											"bg_opa": 255
 										}
 									],
-									"undefined": [
-										{
-											"text": "list1"
-										},
-										{
-											"text": "list2"
-										}
-									]
+									"event": {
+										"clicked": [
+											{
+												"trigger": "clicked",
+												"dst": "null",
+												"item_index": 0,
+												"action": {
+													"load_screen": {
+														"ische": false,
+														"duration": 200,
+														"delay": 200,
+														"scrId": "",
+														"anim_type": "LV_SCR_LOAD_ANIM_NONE",
+														"is_clean": false,
+														"is_del": true
+													},
+													"bg_color": {
+														"ische": false,
+														"value": "#000000"
+													},
+													"grad_color": {
+														"ische": false,
+														"value": "#000000",
+														"dir": "LV_GRAD_DIR_HOR"
+													},
+													"bg_opa": {
+														"ische": false,
+														"value": 255
+													},
+													"width": {
+														"ische": false,
+														"value": 50
+													},
+													"height": {
+														"ische": false,
+														"value": 50
+													},
+													"set_text": {
+														"ische": false,
+														"value": "default",
+														"font": 12,
+														"font_family": "simsun"
+													},
+													"position": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0
+													},
+													"isVisible": {
+														"ische": false,
+														"flag": ""
+													},
+													"customer_code": {
+														"ische": true,
+														"inc_c": "",
+														"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsDropdownLedsModeChanged();\n#endif",
+														"inc_py": "",
+														"code_py": ""
+													},
+													"add_state": {
+														"ische": false,
+														"value": "LV_STATE_DEFAULT"
+													},
+													"add_flag": {
+														"ische": false,
+														"value": []
+													},
+													"clear_flag": {
+														"ische": false,
+														"value": []
+													},
+													"move": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"scaleSize": {
+														"ische": false,
+														"width": 0,
+														"height": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"img_zoom": {
+														"ische": false,
+														"zoom": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"rotate": {
+														"ische": false,
+														"rotate": 0,
+														"x": 0,
+														"y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													}
+												}
+											},
+											{
+												"trigger": "clicked",
+												"dst": "null",
+												"item_index": 1,
+												"action": {
+													"load_screen": {
+														"ische": false,
+														"duration": 200,
+														"delay": 200,
+														"scrId": "",
+														"anim_type": "LV_SCR_LOAD_ANIM_NONE",
+														"is_clean": false,
+														"is_del": true
+													},
+													"bg_color": {
+														"ische": false,
+														"value": "#000000"
+													},
+													"grad_color": {
+														"ische": false,
+														"value": "#000000",
+														"dir": "LV_GRAD_DIR_HOR"
+													},
+													"bg_opa": {
+														"ische": false,
+														"value": 255
+													},
+													"width": {
+														"ische": false,
+														"value": 50
+													},
+													"height": {
+														"ische": false,
+														"value": 50
+													},
+													"set_text": {
+														"ische": false,
+														"value": "default",
+														"font": 12,
+														"font_family": "simsun"
+													},
+													"position": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0
+													},
+													"isVisible": {
+														"ische": false,
+														"flag": ""
+													},
+													"customer_code": {
+														"ische": true,
+														"inc_c": "",
+														"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsDropdownLedsModeChanged();\n#endif",
+														"inc_py": "",
+														"code_py": ""
+													},
+													"add_state": {
+														"ische": false,
+														"value": "LV_STATE_DEFAULT"
+													},
+													"add_flag": {
+														"ische": false,
+														"value": []
+													},
+													"clear_flag": {
+														"ische": false,
+														"value": []
+													},
+													"move": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"scaleSize": {
+														"ische": false,
+														"width": 0,
+														"height": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"img_zoom": {
+														"ische": false,
+														"zoom": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"rotate": {
+														"ische": false,
+														"rotate": 0,
+														"x": 0,
+														"y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													}
+												}
+											}
+										]
+									}
 								},
 								{
 									"name": "label_brightness_leds",
@@ -27010,7 +27556,141 @@
 											"bg_img_recolor_opa": 0,
 											"radius": 50
 										}
-									]
+									],
+									"event": {
+										"value_changed": [
+											{
+												"trigger": "value_changed",
+												"dst": "null",
+												"action": {
+													"load_screen": {
+														"ische": false,
+														"duration": 200,
+														"delay": 200,
+														"scrId": "",
+														"anim_type": "LV_SCR_LOAD_ANIM_NONE",
+														"is_clean": false,
+														"is_del": true
+													},
+													"bg_color": {
+														"ische": false,
+														"value": "#000000"
+													},
+													"grad_color": {
+														"ische": false,
+														"value": "#000000",
+														"dir": "LV_GRAD_DIR_HOR"
+													},
+													"bg_opa": {
+														"ische": false,
+														"value": 255
+													},
+													"width": {
+														"ische": false,
+														"value": 50
+													},
+													"height": {
+														"ische": false,
+														"value": 50
+													},
+													"set_text": {
+														"ische": false,
+														"value": "default",
+														"font": 12,
+														"font_family": "simsun"
+													},
+													"position": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0
+													},
+													"isVisible": {
+														"ische": false,
+														"flag": ""
+													},
+													"customer_code": {
+														"ische": true,
+														"inc_c": "",
+														"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsSliderLedsBrightnessChanged();\n#endif",
+														"inc_py": "",
+														"code_py": ""
+													},
+													"add_state": {
+														"ische": false,
+														"value": "LV_STATE_DEFAULT"
+													},
+													"add_flag": {
+														"ische": false,
+														"value": []
+													},
+													"clear_flag": {
+														"ische": false,
+														"value": []
+													},
+													"move": {
+														"ische": false,
+														"value_x": 0,
+														"value_y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"scaleSize": {
+														"ische": false,
+														"width": 0,
+														"height": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"img_zoom": {
+														"ische": false,
+														"zoom": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													},
+													"rotate": {
+														"ische": false,
+														"rotate": 0,
+														"x": 0,
+														"y": 0,
+														"delay": 0,
+														"duration": 1000,
+														"repeat_count": 0,
+														"repeat_delay": 0,
+														"playback_time": 0,
+														"playback_delay": 0,
+														"start_cb": "",
+														"ready_cb": "",
+														"deleted_cb": "",
+														"path_type": "linear"
+													}
+												}
+											}
+										]
+									}
 								}
 							],
 							"style": [
@@ -27042,8 +27722,7 @@
 									"shadow_ofs_x": 0,
 									"shadow_ofs_y": 0
 								}
-							],
-							"text": "LED"
+							]
 						}
 					],
 					"style": [
@@ -27078,6 +27757,140 @@
 					]
 				}
 			],
+			"event": {
+				"screen_loaded": [
+					{
+						"trigger": "screen_loaded",
+						"dst": "null",
+						"action": {
+							"load_screen": {
+								"ische": false,
+								"duration": 200,
+								"delay": 200,
+								"scrId": "",
+								"anim_type": "LV_SCR_LOAD_ANIM_NONE",
+								"is_clean": false,
+								"is_del": true
+							},
+							"bg_color": {
+								"ische": false,
+								"value": "#000000"
+							},
+							"grad_color": {
+								"ische": false,
+								"value": "#000000",
+								"dir": "LV_GRAD_DIR_HOR"
+							},
+							"bg_opa": {
+								"ische": false,
+								"value": 255
+							},
+							"width": {
+								"ische": false,
+								"value": 50
+							},
+							"height": {
+								"ische": false,
+								"value": 50
+							},
+							"set_text": {
+								"ische": false,
+								"value": "default",
+								"font": 12,
+								"font_family": "simsun"
+							},
+							"position": {
+								"ische": false,
+								"value_x": 0,
+								"value_y": 0
+							},
+							"isVisible": {
+								"ische": false,
+								"flag": ""
+							},
+							"customer_code": {
+								"ische": true,
+								"inc_c": "",
+								"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsLoaded();\n#endif",
+								"inc_py": "",
+								"code_py": ""
+							},
+							"add_state": {
+								"ische": false,
+								"value": "LV_STATE_DEFAULT"
+							},
+							"add_flag": {
+								"ische": false,
+								"value": []
+							},
+							"clear_flag": {
+								"ische": false,
+								"value": []
+							},
+							"move": {
+								"ische": false,
+								"value_x": 0,
+								"value_y": 0,
+								"delay": 0,
+								"duration": 1000,
+								"repeat_count": 0,
+								"repeat_delay": 0,
+								"playback_time": 0,
+								"playback_delay": 0,
+								"start_cb": "",
+								"ready_cb": "",
+								"deleted_cb": "",
+								"path_type": "linear"
+							},
+							"scaleSize": {
+								"ische": false,
+								"width": 0,
+								"height": 0,
+								"delay": 0,
+								"duration": 1000,
+								"repeat_count": 0,
+								"repeat_delay": 0,
+								"playback_time": 0,
+								"playback_delay": 0,
+								"start_cb": "",
+								"ready_cb": "",
+								"deleted_cb": "",
+								"path_type": "linear"
+							},
+							"img_zoom": {
+								"ische": false,
+								"zoom": 0,
+								"delay": 0,
+								"duration": 1000,
+								"repeat_count": 0,
+								"repeat_delay": 0,
+								"playback_time": 0,
+								"playback_delay": 0,
+								"start_cb": "",
+								"ready_cb": "",
+								"deleted_cb": "",
+								"path_type": "linear"
+							},
+							"rotate": {
+								"ische": false,
+								"rotate": 0,
+								"x": 0,
+								"y": 0,
+								"delay": 0,
+								"duration": 1000,
+								"repeat_count": 0,
+								"repeat_delay": 0,
+								"playback_time": 0,
+								"playback_delay": 0,
+								"start_cb": "",
+								"ready_cb": "",
+								"deleted_cb": "",
+								"path_type": "linear"
+							}
+						}
+					}
+				]
+			},
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -27092,7 +27905,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "screen_settings"
 		}
 	],
 	"FrontStatus": {},
@@ -27484,7 +28298,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\Heron.png",
+						"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\Heron.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "50,50",
@@ -27612,7 +28426,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\icai_inverted_small.png",
+						"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\icai_inverted_small.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "50,50",
@@ -39585,7 +40399,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\compass_background.png",
+						"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\compass_background.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "50,50",
@@ -45068,6 +45882,22 @@
 				"chinese_library": "mini",
 				"keyboard_font_type": "simsun",
 				"keyboard_font_size": "18",
+				"event": {
+					"screen_loaded": [
+						{
+							"src": "screen_settings",
+							"trigger": "screen_loaded",
+							"dst": "null",
+							"dst_type": "",
+							"src_screen": "screen_settings",
+							"action": "customer_code",
+							"inc_c": "",
+							"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsLoaded();\n#endif",
+							"inc_py": "",
+							"code_py": ""
+						}
+					]
+				},
 				"style": [
 					{
 						"part": "LV_PART_MAIN",
@@ -45141,6 +45971,22 @@
 										],
 										"default_style": false,
 										"custom_attributes": {},
+										"event": {
+											"value_changed": [
+												{
+													"src": "screen_settings_slider_brightness_leds",
+													"trigger": "value_changed",
+													"dst": "null",
+													"dst_type": "",
+													"src_screen": "screen_settings",
+													"action": "customer_code",
+													"inc_c": "",
+													"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsSliderLedsBrightnessChanged();\n#endif",
+													"inc_py": "",
+													"code_py": ""
+												}
+											]
+										},
 										"range_s": 0,
 										"range_e": 255,
 										"slider_mode": "LV_SLIDER_MODE_NORMAL",
@@ -45403,6 +46249,36 @@
 										],
 										"default_style": false,
 										"custom_attributes": {},
+										"event": {
+											"clicked": [
+												{
+													"src": "screen_settings_ddlist_mode_leds",
+													"trigger": "clicked",
+													"dst": "null",
+													"dst_type": "",
+													"item_index": 0,
+													"src_screen": "screen_settings",
+													"action": "customer_code",
+													"inc_c": "",
+													"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsDropdownLedsModeChanged();\n#endif",
+													"inc_py": "",
+													"code_py": ""
+												},
+												{
+													"src": "screen_settings_ddlist_mode_leds",
+													"trigger": "clicked",
+													"dst": "null",
+													"dst_type": "",
+													"item_index": 1,
+													"src_screen": "screen_settings",
+													"action": "customer_code",
+													"inc_c": "",
+													"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsDropdownLedsModeChanged();\n#endif",
+													"inc_py": "",
+													"code_py": ""
+												}
+											]
+										},
 										"style": [
 											{
 												"part": "LV_PART_MAIN",
@@ -45684,6 +46560,22 @@
 										],
 										"default_style": false,
 										"custom_attributes": {},
+										"event": {
+											"value_changed": [
+												{
+													"src": "screen_settings_sw_enable_leds",
+													"trigger": "value_changed",
+													"dst": "null",
+													"dst_type": "",
+													"src_screen": "screen_settings",
+													"action": "customer_code",
+													"inc_c": "",
+													"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsSwitchLedsEnabledChanged();\n#endif",
+													"inc_py": "",
+													"code_py": ""
+												}
+											]
+										},
 										"style": [
 											{
 												"part": "LV_PART_MAIN",
@@ -46122,6 +47014,22 @@
 										],
 										"default_style": false,
 										"custom_attributes": {},
+										"event": {
+											"value_changed": [
+												{
+													"src": "screen_settings_sw_enable_buzzer",
+													"trigger": "value_changed",
+													"dst": "null",
+													"dst_type": "",
+													"src_screen": "screen_settings",
+													"action": "customer_code",
+													"inc_c": "",
+													"code_c": "#ifdef PLATFORMIO\nGui::callbackScreenSettingsSwitchBuzzerEnabledChanged();\n#endif",
+													"inc_py": "",
+													"code_py": ""
+												}
+											]
+										},
 										"style": [
 											{
 												"part": "LV_PART_MAIN",

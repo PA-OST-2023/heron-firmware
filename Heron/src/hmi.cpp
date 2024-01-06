@@ -45,10 +45,16 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
   utils = &utilsRef;
   bool res = true;
 
+  // Load settings from EEPROM
+  ledsEnabled = utils->preferences.getBool("leds_on", ledsEnabled);
+  ledsBrightness = utils->preferences.getUChar("leds_brg", ledsBrightness);
+  ledsMode = (ledMode_t)utils->preferences.getUChar("leds_mode", (uint8_t)ledsMode);
+  buzzerEnabled = utils->preferences.getBool("buzzer_on", buzzerEnabled);
+
   leds.clear();
   leds.begin();
-  leds.setBrightness(255);
-  delay(5);    // Avoid flickering by waiting dor DMA to be ready
+  leds.setBrightness(ledsBrightness);
+  threads.delay(5);    // Avoid flickering by waiting dor DMA to be ready
   leds.show();
 
   Utils::lockWire(RTC_WIRE);
@@ -70,6 +76,7 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
     console.error.println("[HMI] Buzzer could not be initialized");
     res = false;
   }
+  buzzer.setEnabled(buzzerEnabled);
 
   initialized = true;
   threads.addThread(update, (void*)this, 4096);
@@ -94,11 +101,47 @@ void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, u
   rtcUpdatePending = false;
 }
 
+void Hmi::setBuzzerEnabled(bool enabled)
+{
+  buzzerEnabled = enabled;
+  utils->preferences.putBool("buzzer_on", buzzerEnabled);
+}
+
+void Hmi::setLedsEnabled(bool enabled)
+{
+  ledsEnabled = enabled;
+  utils->preferences.putBool("leds_on", ledsEnabled);
+}
+
+void Hmi::setLedsBrightness(uint8_t brightness)
+{
+  ledsBrightness = brightness;
+  ledsBrightnessChanged = true;    // Don't write to EEPROM here, it will be done in the update thread
+}
+
+void Hmi::setLedsMode(ledMode_t mode)
+{
+  ledsMode = mode;
+  utils->preferences.putUChar("leds_mode", (uint8_t)ledsMode);
+}
+
 void Hmi::update(void* parameter)
 {
   Hmi* ref = (Hmi*)parameter;
   while(ref->initialized)
   {
+    static uint32_t tSaveBrightness = 0;
+    if(millis() - tSaveBrightness > 500)    // Save brightness not more often than every 500ms
+    {
+      tSaveBrightness = millis();
+      if(ref->ledsBrightnessChanged)
+      {
+        ref->ledsBrightnessChanged = false;
+        ref->utils->preferences.putUChar("leds_brg", ref->ledsBrightness);
+      }
+    }
+    uint8_t brightnessMapped = map(ref->ledsBrightness, 0, 255, LEDS_MIN_BRIGHTNESS, LEDS_MAX_BRIGHTNESS);
+    ref->leds.setBrightness(ref->ledsEnabled ? brightnessMapped : 0);    // Set LED brightness, turn off if disabled
     ref->leds.clear();
     if(ref->systemStatus != STATUS_BOOTUP)
     {

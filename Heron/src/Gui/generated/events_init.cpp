@@ -844,6 +844,102 @@ void events_init_screen_ambient(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->screen_ambient_btn_back, screen_ambient_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
+static void screen_settings_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_SCREEN_LOADED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenSettingsLoaded();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_settings_slider_brightness_leds_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_VALUE_CHANGED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenSettingsSliderLedsBrightnessChanged();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_settings_ddlist_mode_leds_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		uint16_t id = lv_dropdown_get_selected(guider_ui.screen_settings_ddlist_mode_leds);
+		switch(id) {
+		case 0:
+		{
+			#ifdef PLATFORMIO
+		Gui::callbackScreenSettingsDropdownLedsModeChanged();
+		#endif
+			break;
+		}
+		case 1:
+		{
+			#ifdef PLATFORMIO
+		Gui::callbackScreenSettingsDropdownLedsModeChanged();
+		#endif
+			break;
+		}
+		default:
+			break;
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_settings_sw_enable_leds_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_VALUE_CHANGED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenSettingsSwitchLedsEnabledChanged();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void screen_settings_sw_enable_buzzer_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_VALUE_CHANGED:
+	{
+		#ifdef PLATFORMIO
+	Gui::callbackScreenSettingsSwitchBuzzerEnabledChanged();
+	#endif
+		break;
+	}
+	default:
+		break;
+	}
+}
 static void screen_settings_btn_back_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -869,6 +965,11 @@ static void screen_settings_btn_back_event_handler (lv_event_t *e)
 }
 void events_init_screen_settings(lv_ui *ui)
 {
+	lv_obj_add_event_cb(ui->screen_settings, screen_settings_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_settings_slider_brightness_leds, screen_settings_slider_brightness_leds_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(lv_dropdown_get_list(ui->screen_settings_ddlist_mode_leds), screen_settings_ddlist_mode_leds_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_settings_sw_enable_leds, screen_settings_sw_enable_leds_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->screen_settings_sw_enable_buzzer, screen_settings_sw_enable_buzzer_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->screen_settings_btn_back, screen_settings_btn_back_event_handler, LV_EVENT_ALL, NULL);
 }
 

@@ -114,7 +114,7 @@ void Buzzer::update(void* parameter)
           freqOld = freq;
           if(freq == 0)
             noTone(ref->buzzerPin);
-          else
+          else if(ref->enabled)
             tone(ref->buzzerPin, freq);
         }
       }

@@ -146,14 +146,15 @@ class Buzzer
   void end();
   void playMelody(const Tone* melody);
   void stop();
+  void setEnabled(bool enabled) { this->enabled = enabled; }
 
  private:
   int buzzerPin;
+  bool enabled = true;
 
   const Tone* melody = nullptr;
-  volatile bool playing = false;
-
-  volatile bool initialized = false;
+  bool playing = false;
+  bool initialized = false;
 
   static void update(void* parameter);
 };

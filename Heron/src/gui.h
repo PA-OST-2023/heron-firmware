@@ -92,6 +92,12 @@ class Gui
   static void callbackScreenArmAngleCalibrationAbort(void);
   static void callbackScreenArmAngleCalibrationConfirmed(void);
 
+  static void callbackScreenSettingsLoaded(void);
+  static void callbackScreenSettingsSwitchBuzzerEnabledChanged(void);
+  static void callbackScreenSettingsSwitchLedsEnabledChanged(void);
+  static void callbackScreenSettingsDropdownLedsModeChanged(void);
+  static void callbackScreenSettingsSliderLedsBrightnessChanged(void);
+
  private:
   const int sclk, mosi, cs, dc, bl, tch_irq;
   GC9A01A_t3n disp = GC9A01A_t3n(cs, dc, -1, mosi, sclk);
@@ -115,6 +121,7 @@ class Gui
   bool updateScreenArmAngle(void);
   bool updateScreenArmAngleCalibrate(void);
   bool updateScreenAmbient(void);
+  bool updateScreenSettings(void);
 
   // Helper functions
   static void screenArmAngleCalibrationCheckValid(bool angle0 = false, bool angle90 = false);
