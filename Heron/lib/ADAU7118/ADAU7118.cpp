@@ -31,9 +31,10 @@
 ******************************************************************************/
 
 #include "ADAU7118.h"
+#include <utils.h>
 #include "../../src/console.h"
 
-ADAU7118::ADAU7118(TwoWire& wire, uint8_t addr) : wire(wire), addr(addr)
+ADAU7118::ADAU7118(I2CDriverWire& wire, uint8_t addr) : wire(wire), addr(addr)
 {
 }
 
@@ -41,19 +42,23 @@ bool ADAU7118::begin(bool tdmChannel, decimationRatio_t decimationRatio)
 {
   this->tdmChannel = tdmChannel;
   bool res = true;
+  Utils::lockWire(Utils::sysWire);
   if(readVendorId() != 0x41)
   {
     console.error.println("[ADAU7118] Vendor ID is not correct!");
-    return false;
+    res = false;
   }
-
-  res &= writeRegister(ADAU7118_REG_ENABLES, 0x3F);    // Enable PDM Clock 0 & 1, Enable all channels
-  res &= writeRegister(ADAU7118_REG_DEC_RATIO_CLK_MAP, 0xD0 | (uint8_t)decimationRatio);
-  res &= setHighPassFilter(FILTER_OFF);
-  res &= writeRegister(ADAU7118_REG_SPT_CTRL1, 0x53);  // Enable Tristate, 16 BCLKs per slot, Left-Justified (delay by 0), TDM-Mode
-  res &= writeRegister(ADAU7118_REG_SPT_CTRL2, 0x00);  // Frame Clock Polarity: Normal, Capture on rising edge
-  res &= setSlotsEnabled(0xFF);
-  res &= writeRegister(ADAU7118_REG_DRIVE_STRENGTH, 0x05);  // Set drive strength of TDM to max (15mA), PDM to 5mA
+  else
+  {
+    res &= writeRegister(ADAU7118_REG_ENABLES, 0x3F);    // Enable PDM Clock 0 & 1, Enable all channels
+    res &= writeRegister(ADAU7118_REG_DEC_RATIO_CLK_MAP, 0xD0 | (uint8_t)decimationRatio);
+    res &= setHighPassFilter(FILTER_OFF);
+    res &= writeRegister(ADAU7118_REG_SPT_CTRL1, 0x53);  // Enable Tristate, 16 BCLKs per slot, Left-Justified (delay by 0), TDM-Mode
+    res &= writeRegister(ADAU7118_REG_SPT_CTRL2, 0x00);  // Frame Clock Polarity: Normal, Capture on rising edge
+    res &= setSlotsEnabled(0xFF);
+    res &= writeRegister(ADAU7118_REG_DRIVE_STRENGTH, 0x05);  // Set drive strength of TDM to max (15mA), PDM to 5mA
+  }
+  Utils::unlockWire(Utils::sysWire);
   return res;
 }
 
@@ -123,4 +128,3 @@ bool ADAU7118::writeRegister(uint8_t reg, const uint8_t* data, uint32_t length)
   }
   return wire.endTransmission(true) == 0;
 }
-

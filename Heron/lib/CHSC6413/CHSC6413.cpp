@@ -37,7 +37,7 @@
 
 CHSC6413* CHSC6413::ref = nullptr;
 
-CHSC6413::CHSC6413(TwoWire* wire, int irq)
+CHSC6413::CHSC6413(I2CDriverWire* wire, int irq)
 {
   _wire = wire;
   _irq = irq;

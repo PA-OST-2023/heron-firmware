@@ -63,13 +63,13 @@ FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef
   disp.begin(SPI_FREQUENCY, GC9A01A_SPICLOCK_READ);
   disp.fillScreen(GC9A01A_BLACK);
 
-  Utils::lockWire(GUI_WIRE);
+  Utils::lockWire(Utils::hmiWire);
   if(!touch.begin())
   {
     console.error.println("[GUI] Touch controller could not be initialized");
     res = false;
   }
-  Utils::unlockWire(GUI_WIRE);
+  Utils::unlockWire(Utils::hmiWire);
 
   lv_log_register_print_cb(lvglPrint);
   lv_init();
@@ -1031,12 +1031,12 @@ void Gui::dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* c
 void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
 {
   CHSC6413* touch = (CHSC6413*)drv->user_data;
-  Utils::lockWire(GUI_WIRE);
+  Utils::lockWire(Utils::hmiWire);
   bool available = touch->available();
-  Utils::turnOffWire(GUI_WIRE);    // Somehow the touch controller locks up the I2C-Bus, so we have to turn it off and on again
+  Utils::turnOffWire(Utils::hmiWire);    // Somehow the touch controller locks up the I2C-Bus, so we have to turn it off and on again
   delayMicroseconds(100);
-  Utils::turnOnWire(GUI_WIRE);
-  Utils::unlockWire(GUI_WIRE);
+  Utils::turnOnWire(Utils::hmiWire);
+  Utils::unlockWire(Utils::hmiWire);
   if(available)
   {
     int x = touch->x;

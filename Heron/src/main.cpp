@@ -49,36 +49,33 @@
 #define TFT_BL     29
 #define TCH_IRQ    28
 #define RGB_LED    35
-#define SCL_HMI    16
-#define SDA_HMI    17
-#define SCL_SYS    19
-#define SDA_SYS    18
-#define SCL_GPS    24
-#define SDA_GPS    25
 #define HMI_BUZZER 36
 #define GPS_RST    31
 #define LINK_LED   41
 
+static Utils utils;
 static AudioUtils audio;
 static EthernetUtils ethernet(LINK_LED);
-static Utils utils(SCL_SYS, SDA_SYS, SCL_HMI, SDA_HMI, SCL_GPS, SDA_GPS);
 static Gui gui(TFT_SCLK, TFT_MOSI, TFT_CS, TFT_DC, TFT_BL, TCH_IRQ);
 static Hmi hmi(RGB_LED, HMI_BUZZER);
 static Gnss gnss(GPS_RST);
 static Sensors sensors;
 static App app;
 
+static void wireIdle(void);
+
 void setup()
 {
   audio.setTimestampCallback(Gnss::getTimeNanoUtc);
   audio.setBackupTimestampCallback(Hmi::getTimeNanoUtc);
   hmi.setGnssTimestampCallback(Gnss::getTimeNanoUtc);
+  // utils.setWireIdleCallback(wireIdle);
 
   bool ok = true;
   ok &= console.begin();
   ok &= utils.begin();
   ok &= audio.begin();
-  ok &= gnss.begin(utils);
+  // ok &= gnss.begin(utils);
   ok &= hmi.begin(utils);
   ok &= sensors.begin(utils);
   ok &= ethernet.begin(utils, audio);
@@ -96,9 +93,22 @@ void setup()
 void loop()
 {
   utils.feedWatchdog();
-  threads.yield();
   sensors.update();
   // gnss.update();
   gui.update();
   ethernet.update();
+  threads.yield();
+}
+
+static void wireIdle(void)
+{
+  ethernet.update();    // Do etherent housekeeping while I2C is busy (must be called in main "background" thread only)
+  // threads.yield();
+
+  static uint32_t tUpdate = 0;
+  if(millis() - tUpdate > 10)
+  {
+    tUpdate = millis();
+    console.log.println("[MAIN] Wire idle");
+  }
 }

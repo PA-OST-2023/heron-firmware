@@ -73,7 +73,7 @@ Adafruit_BMP3XX::Adafruit_BMP3XX(void) {
     @return True on sensor initialization success. False on failure.
 */
 /**************************************************************************/
-bool Adafruit_BMP3XX::begin_I2C(uint8_t addr, TwoWire *theWire) {
+bool Adafruit_BMP3XX::begin_I2C(uint8_t addr, I2CDriverWire *theWire) {
   if (i2c_dev)
     delete i2c_dev;
   if (spi_dev)

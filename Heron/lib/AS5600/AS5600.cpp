@@ -9,7 +9,7 @@
 
 #include "AS5600.h"
 
-AS5600::AS5600(TwoWire *wire)
+AS5600::AS5600(I2CDriverWire *wire)
 {
   _wire = wire;
 }
@@ -517,7 +517,7 @@ uint8_t AS5600::writeReg2(uint8_t reg, uint16_t value)
 //
 //  AS5600L
 //
-AS5600L::AS5600L(uint8_t address, TwoWire *wire) : AS5600(wire)
+AS5600L::AS5600L(uint8_t address, I2CDriverWire *wire) : AS5600(wire)
 {
   _address = address;;   //  0x40 = default address AS5600L.
 }
@@ -554,5 +554,4 @@ uint8_t AS5600L::getI2CUPDT()
 
 
 //  -- END OF FILE --
-
 

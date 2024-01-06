@@ -9,7 +9,7 @@
 
 
 #include "Arduino.h"
-#include "Wire.h"
+#include <i2c_driver_wire.h>
 
 
 #define AS5600_LIB_VERSION (F("0.5.0"))
@@ -124,7 +124,7 @@ class AS5600
   static constexpr const uint8_t AS5600_MAGNET_DETECT = 0x20;
 
 
-  AS5600(TwoWire* wire = &Wire);
+  AS5600(I2CDriverWire* wire);
 
   bool begin(uint8_t directionPin = AS5600_SW_DIRECTION_PIN);
   bool isConnected();
@@ -268,7 +268,7 @@ class AS5600
   uint8_t _direction = AS5600_CLOCK_WISE;
   uint8_t _error = 0;
 
-  TwoWire* _wire;
+  I2CDriverWire* _wire;
 
   //  for getAngularSpeed()
   uint32_t _lastMeasurement = 0;
@@ -293,7 +293,7 @@ class AS5600
 class AS5600L : public AS5600
 {
  public:
-  AS5600L(uint8_t address = AS5600L_DEFAULT_ADDRESS, TwoWire* wire = &Wire);
+  AS5600L(uint8_t address, I2CDriverWire* wire);
 
   bool setAddress(uint8_t address);
 

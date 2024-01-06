@@ -34,7 +34,7 @@
 #define CHSC6413_H
 
 #include <Arduino.h>
-#include <Wire.h>
+#include <i2c_driver_wire.h>
 
 #define CHSC6X_ADDRESS        0x2E
 #define CHSC6X_MAX_POINTS_NUM 1
@@ -54,7 +54,7 @@ class CHSC6413
   constexpr static const int INIT_RETRY_DELAY = 25;     // [ms]
   // constexpr static const int I2C_FREQUENCY = 10000000;    // [Hz]
 
-  CHSC6413(TwoWire* wire, int irq = -1);
+  CHSC6413(I2CDriverWire* wire, int irq = -1);
   bool begin(int interrupt = RISING);
   void end();
   bool available();
@@ -63,7 +63,7 @@ class CHSC6413
   volatile int y;
 
  private:
-  TwoWire* _wire = nullptr;
+  I2CDriverWire* _wire = nullptr;
   volatile int _irq = -1;
   volatile bool _event_available = false;
   volatile bool _continuous_mode = false;
