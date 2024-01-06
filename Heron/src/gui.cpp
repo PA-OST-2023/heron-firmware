@@ -1032,12 +1032,12 @@ void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
 {
   CHSC6413* touch = (CHSC6413*)drv->user_data;
   Utils::lockWire(Utils::hmiWire);
-  bool available = touch->available();
+  CHSC6413::TouchEvent event = touch->available();
   Utils::turnOffWire(Utils::hmiWire);    // Somehow the touch controller locks up the I2C-Bus, so we have to turn it off and on again
   delayMicroseconds(100);
   Utils::turnOnWire(Utils::hmiWire);
   Utils::unlockWire(Utils::hmiWire);
-  if(available)
+  if(event == CHSC6413::TouchEvent::TOUCH_DETECTED)
   {
     int x = touch->x;
     int y = touch->y;
@@ -1049,5 +1049,8 @@ void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
       return;
     }
   }
-  data->state = LV_INDEV_STATE_REL;    // Indicate that the touchpad is released
+  else if(event == CHSC6413::TouchEvent::TOUCH_RELEASED)
+  {
+    data->state = LV_INDEV_STATE_REL;    // Indicate that the touchpad is released
+  }
 }

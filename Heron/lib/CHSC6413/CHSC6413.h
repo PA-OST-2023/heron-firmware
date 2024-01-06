@@ -46,6 +46,13 @@
 class CHSC6413
 {
  public:
+  enum class TouchEvent : uint8_t
+  {
+    TOUCH_DETECTED,
+    TOUCH_RELEASED,
+    TOUCH_UNKNOWN
+  }; 
+
   constexpr static const int INIT_RETRY_COUNT = 8;    // Try multiple times (somehow 1 of 8 times, the chip does not respond)
   constexpr static const int MAX_INVALID_COUNT = 12;
   constexpr static const int WIDTH = 240;
@@ -55,9 +62,9 @@ class CHSC6413
   // constexpr static const int I2C_FREQUENCY = 10000000;    // [Hz]
 
   CHSC6413(I2CDriverWire* wire, int irq = -1);
-  bool begin(int interrupt = RISING);
+  bool begin(int interrupt = RISING);     // Don't mess with the interrupt type, it must be RISING
   void end();
-  bool available();
+  TouchEvent available();
   void setContinuousMode(bool enable) { _continuous_mode = enable; }
   volatile int x;
   volatile int y;
@@ -67,13 +74,13 @@ class CHSC6413
   volatile int _irq = -1;
   volatile bool _event_available = false;
   volatile bool _continuous_mode = false;
-  int _interruptType = RISING;
+  int _interruptType = RISING;    // Don't mess with the interrupt type, it must be RISING
   int _invalidCount = 0;
 
   static void handleISR();
   static CHSC6413* ref;
 
-  bool read_touch();
+  TouchEvent read_touch();
 };
 
 #endif

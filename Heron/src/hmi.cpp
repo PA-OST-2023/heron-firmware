@@ -207,14 +207,14 @@ void Hmi::update(void* parameter)
                               .mon = (uint8_t)((int8_t)ref->month - 1),
                               .year = (uint8_t)(ref->year - 1900)};
         ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL;
-        if(ref->timeNanoUtcInitial == 0)    // Set initial time offset
+        if(ref->timeNanoUtcInitial == 0)    // Set initial time offset, TODO: do again if RTC Time has be set?
         {
           ref->timeNanoUtcInitial = ref->timeNanoUtc;
         }
       }
       else
       {
-        console.warning.println("[HMI] RTC Data corrupted, ignore it...");
+        console.warning.println("[HMI] Could not read RTC time");
       }
     }
     ref->runPhaseLockedLoop();
@@ -265,6 +265,7 @@ bool Hmi::isDaylightSavingTime(uint16_t year, uint8_t month, uint8_t day, uint8_
 
 void Hmi::convertUtcToLocalTime(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second, int8_t utcOffsetHour)
 {
+  month = constrain(month, 1, 12);
   int newHour = hour + utcOffsetHour;    // Adjust the hour with the UTC offset
   if(newHour >= 24)                      // Handle rolling over to the next or previous day
   {

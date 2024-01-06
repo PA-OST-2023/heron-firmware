@@ -69,7 +69,7 @@ void setup()
   audio.setTimestampCallback(Gnss::getTimeNanoUtc);
   audio.setBackupTimestampCallback(Hmi::getTimeNanoUtc);
   hmi.setGnssTimestampCallback(Gnss::getTimeNanoUtc);
-  // utils.setWireIdleCallback(wireIdle);
+  utils.setWireIdleCallback(wireIdle);
 
   bool ok = true;
   ok &= console.begin();
@@ -105,10 +105,10 @@ static void wireIdle(void)
   ethernet.update();    // Do etherent housekeeping while I2C is busy (must be called in main "background" thread only)
   // threads.yield();
 
-  static uint32_t tUpdate = 0;
-  if(millis() - tUpdate > 10)
-  {
-    tUpdate = millis();
-    console.log.println("[MAIN] Wire idle");
-  }
+  // static uint32_t tUpdate = 0;
+  // if(millis() - tUpdate > 10)
+  // {
+  //   tUpdate = millis();
+  //   console.log.println("[MAIN] Wire idle");
+  // }
 }

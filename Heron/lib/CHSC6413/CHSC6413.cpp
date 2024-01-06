@@ -47,7 +47,7 @@ CHSC6413::CHSC6413(I2CDriverWire* wire, int irq)
 /*!
     @brief  read touch data
 */
-bool CHSC6413::read_touch()
+CHSC6413::TouchEvent CHSC6413::read_touch()
 {
   uint8_t raw[CHSC6X_READ_POINT_LEN] = {0x00, 0x00, 0x00, 0x00, 0x00};
   uint8_t readLen = _wire->requestFrom(CHSC6X_ADDRESS, CHSC6X_READ_POINT_LEN);
@@ -65,7 +65,7 @@ bool CHSC6413::read_touch()
     {
       console.ok.printf("[CHSC6413] Reset successful\n");
     }
-    return false;
+    return TouchEvent::TOUCH_UNKNOWN;
   }
   if(readLen == CHSC6X_READ_POINT_LEN)
   {
@@ -74,16 +74,17 @@ bool CHSC6413::read_touch()
     {
       if(raw[2] > WIDTH || raw[4] > HEIGHT)
       {
-        return false;
+        return TouchEvent::TOUCH_UNKNOWN;
       }
       x = raw[2];
       y = raw[4];
+      return TouchEvent::TOUCH_DETECTED;
     }
     _invalidCount = 0;
-    return true;    // Data is available (does not mean that a touch is detected)
+    return TouchEvent::TOUCH_RELEASED;    // Data is available (does not mean that a touch is detected)
   }
   _invalidCount++;
-  return false;
+  return TouchEvent::TOUCH_UNKNOWN;
 }
 
 /*!
@@ -140,13 +141,20 @@ void CHSC6413::end()
 /*!
     @brief  check for a touch event
 */
-bool CHSC6413::available()
+CHSC6413::TouchEvent CHSC6413::available()
 {
   if(_event_available || _irq == -1 || _continuous_mode)
   {
-    read_touch();
+    TouchEvent event = read_touch();
     _event_available = false;
-    return true;
+    if(event == TouchEvent::TOUCH_DETECTED)
+    {
+      return TouchEvent::TOUCH_DETECTED;
+    }
+    else if(event == TouchEvent::TOUCH_RELEASED)
+    {
+      return TouchEvent::TOUCH_RELEASED;
+    }
   }
-  return false;
+  return TouchEvent::TOUCH_UNKNOWN;
 }

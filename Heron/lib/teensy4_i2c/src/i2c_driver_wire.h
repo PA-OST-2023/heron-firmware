@@ -24,7 +24,7 @@ public:
     static const size_t tx_buffer_length = 32;
 
     // Time to wait for a read or write to complete in millis
-    static const uint32_t timeout_millis = 200;
+    static constexpr const uint32_t timeout_millis_default = 200;
 
     // Indicates that there is no more data to read.
     static const int no_more_bytes = -1;
@@ -92,6 +92,26 @@ public:
 
     int peek() override;
 
+    void setHousekeepingCallback(void (*callback)()) {housekeeping_callback = callback;}
+    void setTimeout(uint32_t timeout) {timeout_millis = timeout;}
+    int getScl(void) {return ((IMX_RT1060_I2CMaster&)master).get_config().scl_pin.pin;}
+    int getSda(void) {return ((IMX_RT1060_I2CMaster&)master).get_config().sda_pin.pin;}
+    int getBusId(void)
+    {
+        int scl = getScl();
+        switch(scl)
+        {
+        case 19:
+            return 0;
+        case 16:
+            return 1;
+        case 24:
+            return 2;
+        default:
+            return -1;
+        }
+    }
+
     // Registers a function to be called when a slave device receives
     // a transmission from a master.
     //
@@ -136,6 +156,8 @@ private:
     I2CMaster& master;
     I2CSlave& slave;
     uint32_t master_frequency = 100 * 1000U;
+    uint32_t timeout_millis = timeout_millis_default;
+    void (*housekeeping_callback)() = nullptr;
 
     void (* on_receive)(int len) = nullptr;
     void (* on_request)() = nullptr;
@@ -152,7 +174,7 @@ private:
 
     void prepare_slave();
     void before_transmit(uint16_t address);
-    void finish();
+    bool finish();
     void on_receive_wrapper(size_t num_bytes, uint16_t address);
 };
 
