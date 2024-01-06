@@ -57,8 +57,8 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
   threads.delay(5);    // Avoid flickering by waiting dor DMA to be ready
   leds.show();
 
-  Utils::lockWire(RTC_WIRE);
-  if(!rtc.begin(&RTC_WIRE))
+  Utils::lockWire(Utils::hmiWire);
+  if(!rtc.begin(&Utils::hmiWire))
   {
     console.error.println("[HMI] RTC could not be initialized");
     res = false;
@@ -69,7 +69,7 @@ FLASHMEM bool Hmi::begin(Utils& utilsRef)
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
   rtc.start();
-  Utils::unlockWire(RTC_WIRE);
+  Utils::unlockWire(Utils::hmiWire);
 
   if(!buzzer.begin())
   {
@@ -95,9 +95,9 @@ void Hmi::setTimeDate(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, u
   this->sec = second;
   DateTime time = DateTime(year, month, day, hour, minute, second);
   rtcUpdatePending = true;
-  Utils::lockWire(RTC_WIRE);
+  Utils::lockWire(Utils::hmiWire);
   rtc.adjust(time);
-  Utils::unlockWire(RTC_WIRE);
+  Utils::unlockWire(Utils::hmiWire);
   rtcUpdatePending = false;
 }
 
@@ -186,12 +186,12 @@ void Hmi::update(void* parameter)
     ref->leds.show();
 
     static uint32_t tRtc = 0;
-    if((millis() - tRtc > (1000.0 / RTC_UPDATE_RATE)) && !ref->rtcUpdatePending)
+    if(0)//(millis() - tRtc > (1000.0 / RTC_UPDATE_RATE)) && !ref->rtcUpdatePending)
     {
       tRtc = millis();
-      Utils::lockWire(RTC_WIRE);
+      Utils::lockWire(Utils::hmiWire);
       DateTime time = ref->rtc.now();
-      Utils::unlockWire(RTC_WIRE);
+      Utils::unlockWire(Utils::hmiWire);
       if(time.year() >= 2024)    // Sometimes the RTC returns invalid data (can be identified by wrong year -> e.g. 2002)
       {
         ref->year = time.year();
@@ -207,18 +207,20 @@ void Hmi::update(void* parameter)
                               .mon = (uint8_t)((int8_t)ref->month - 1),
                               .year = (uint8_t)(ref->year - 1900)};
         ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL;
-        if(ref->timeNanoUtcInitial == 0)    // Set initial time offset
+        if(ref->timeNanoUtcInitial == 0)    // Set initial time offset, TODO: do again if RTC Time has be set?
         {
           ref->timeNanoUtcInitial = ref->timeNanoUtc;
         }
+        // ref->runPhaseLockedLoop();
       }
       else
       {
-        console.warning.println("[HMI] RTC Data corrupted, ignore it...");
+        console.warning.println("[HMI] Could not read RTC time");
+        // TODO: Reset the bus?
       }
+      ref->runPhaseLockedLoop();
     }
-    ref->runPhaseLockedLoop();
-
+    
     threads.delay(1000.0 / UPDATE_RATE);
   }
 }
@@ -265,6 +267,7 @@ bool Hmi::isDaylightSavingTime(uint16_t year, uint8_t month, uint8_t day, uint8_
 
 void Hmi::convertUtcToLocalTime(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second, int8_t utcOffsetHour)
 {
+  month = constrain(month, 1, 12);
   int newHour = hour + utcOffsetHour;    // Adjust the hour with the UTC offset
   if(newHour >= 24)                      // Handle rolling over to the next or previous day
   {

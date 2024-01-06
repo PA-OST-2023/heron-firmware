@@ -36,8 +36,10 @@
 #include <Arduino.h>
 #include <TeensyThreads.h>
 #include <Watchdog_t4.h>
-#include <Wire.h>
 #include <console.h>
+#include <i2c_driver.h>
+#include <i2c_driver_wire.h>
+#include <imx_rt1060_i2c_driver.h>
 #include <preferences.h>
 #include <rtclib.h>
 
@@ -51,11 +53,13 @@ class Utils
   static constexpr const float UPDATE_RATE = 10.0;    // Hz
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_ENABLED = 0;
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_NUMBER = 4;
-  static constexpr const size_t SYS_WIRE_FREQENCY = 1000000;     // [Hz]
-  static constexpr const size_t HMI_WIRE_FREQENCY = 3400000;     // [Hz]
-  static constexpr const size_t GPS_WIRE_FREQENCY = 400000;      // [Hz]
+  static constexpr const size_t SYS_WIRE_FREQENCY = 100000;    // [Hz] Max: (ADAU1718 = 1000kHz, AS5600 = 1000kHz, BMP388 = 3400kHz, LSM303 = 3400kHz)
+  static constexpr const size_t HMI_WIRE_FREQENCY = 100000;    // [Hz] Max: (RTC = 400kHz, Touch = Unknown)
+  static constexpr const size_t GPS_WIRE_FREQENCY = 400000;    // [Hz] Max: (GPS = 400kHz)
   static constexpr const size_t OP_TIME_UPDATE_INTERVAL = 60;    // [s]
   static constexpr const size_t WATCHDOG_TIMEOUT = 10;           // [s]
+
+  static const char* WIRE_NAMES[];
 
   typedef enum
   {
@@ -64,18 +68,23 @@ class Utils
     USB_ACTIVE
   } UsbStatus_t;
 
-  Utils(int scl_sys, int sda_sys, int scl_hmi, int sda_hmi, int scl_gps, int sda_gps);
+  Utils() {}
   bool begin(void);
   static void feedWatchdog(void) { wdt.feed(); }
 
   UsbStatus_t getUsbStatus(void) { return !usbConnected() ? USB_DISCONNECTED : console ? USB_ACTIVE : USB_CONNECTED; }
   uint32_t getOperationTime(void) { return operationTime; }
 
-  static bool turnOnWire(TwoWire& wire);
-  static bool turnOffWire(TwoWire& wire);
-  static int scanWire(TwoWire& wire);
-  static int lockWire(TwoWire& wire, int timeout = 0);
-  static int unlockWire(TwoWire& wire);
+  static bool turnOnWire(I2CDriverWire& wire, bool busReset = true);
+  static bool turnOffWire(I2CDriverWire& wire);
+  static int scanWire(I2CDriverWire& wire);
+  static int lockWire(I2CDriverWire& wire, int timeout = 0);
+  static int unlockWire(I2CDriverWire& wire);
+  static void setWireIdleCallback(void (*callback)())    // Don't enable idle callback for HMI I2C-Bus as it is used in a threaded cotext
+  {
+    sysWire.setHousekeepingCallback(callback);
+    gpsWire.setHousekeepingCallback(callback);
+  }
 
   static float getCpuTemperature(void);
   static int getCpuFrequency(void) { return F_CPU; }
@@ -91,17 +100,20 @@ class Utils
   WDT_timings_t wdtConfig = {.trigger = WATCHDOG_TIMEOUT, .timeout = WATCHDOG_TIMEOUT};
   Preferences preferences;
 
+  static I2CDriverWire sysWire;
+  static I2CDriverWire hmiWire;
+  static I2CDriverWire gpsWire;
+
  private:
-  static int scl_sys, sda_sys, scl_hmi, sda_hmi, scl_gps, sda_gps;
   static Threads::Mutex wireMutex[3];
   static WDT_T4<WDT1> wdt;
-
 
   volatile bool initialized = false;
   uint32_t operationTime = 0;
 
   static void update(void* parameter);
   static bool usbConnected(void) { return !bitRead(USB1_PORTSC1, 7); }
+  static void busHardReset(I2CDriverWire& wire);
 };
 
 #endif

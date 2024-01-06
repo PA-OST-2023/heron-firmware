@@ -19,7 +19,7 @@
 Adafruit_BMP3XX bmp;
 
 
-I2CDriverWire customWire(Master, Slave);
+static I2CDriverWire customWire(Master, Slave);
 
 void housekeeping(void);
 

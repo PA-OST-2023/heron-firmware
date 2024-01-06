@@ -2,6 +2,8 @@
 // Released under the MIT License. See license.txt. (https://opensource.org/licenses/MIT)
 
 #include "i2c_driver_wire.h"
+#include <console.h>
+#include <utils.h>
 
 static int toWireResult(I2CError error) {
     if (error == I2CError::ok) return 0;
@@ -60,7 +62,11 @@ void I2CDriverWire::beginTransmission(int address) {
 
 uint8_t I2CDriverWire::endTransmission(int stop) {
     master.write_async(write_address, tx_buffer, tx_next_byte_to_write, stop);
-    finish();
+    if(!finish())
+    {
+        console.warning.printf("[I2C DRIVER WIRE] <%s> \"endTransmission\" Timeout\n", Utils::WIRE_NAMES[getBusId()]);
+        return 4;
+    }
     return toWireResult(master.error());
 }
 
@@ -83,12 +89,20 @@ size_t I2CDriverWire::write(const uint8_t* data, size_t length) {
     return 0;
 }
 
-uint8_t I2CDriverWire::requestFrom(int address, int quantity, int stop) {
+uint8_t I2CDriverWire::requestFrom(int address, int quantity, int stop, bool verbose) {
     rx_bytes_available = 0;
     rx_next_byte_to_read = 0;
     master.read_async((uint8_t)address, rxBuffer, min((size_t)quantity, rx_buffer_length), stop);
-    finish();
+    if(!finish())
+    {
+        console.warning.printf("[I2C DRIVER WIRE] <%s> \"requestFrom\" Timeout\n", Utils::WIRE_NAMES[getBusId()]);
+        return 0;
+    }
     rx_bytes_available = master.get_bytes_transferred();
+    if((rx_bytes_available != quantity) && verbose)
+    {
+        console.warning.printf("[I2C DRIVER WIRE] <%s> \"requestFrom\" Requested %d bytes, but received %d bytes\n", Utils::WIRE_NAMES[getBusId()], quantity, rx_bytes_available);
+    }
     return rx_bytes_available;
 }
 
@@ -117,14 +131,19 @@ void I2CDriverWire::before_transmit(uint16_t address) {
     slave.set_transmit_buffer(tx_buffer, tx_next_byte_to_write);
 }
 
-void I2CDriverWire::finish() {
+bool I2CDriverWire::finish() {
     elapsedMillis timeout;
     while (timeout < timeout_millis) {
         if (master.finished()) {
-            return;
+            return true;
+        }
+        if(housekeeping_callback)
+        {
+            housekeeping_callback();
         }
     }
-    Serial.println("Timed out waiting for transfer to finish.");
+    console.warning.printf("[I2C DRIVER WIRE] <%s> \"finish\" Timeout\n", Utils::WIRE_NAMES[getBusId()]);
+    return false;
 }
 
 void I2CDriverWire::on_receive_wrapper(size_t num_bytes, uint16_t address) {
@@ -136,6 +155,6 @@ void I2CDriverWire::on_receive_wrapper(size_t num_bytes, uint16_t address) {
     }
 }
 
-I2CDriverWire Wire(Master, Slave);
-I2CDriverWire Wire1(Master1, Slave1);
-I2CDriverWire Wire2(Master2, Slave2);
+// I2CDriverWire Wire(Master, Slave);
+// I2CDriverWire Wire1(Master1, Slave1);
+// I2CDriverWire Wire2(Master2, Slave2);

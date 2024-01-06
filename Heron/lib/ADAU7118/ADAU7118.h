@@ -34,7 +34,7 @@
 #define ADAU7118_H
 
 #include <Arduino.h>
-#include <Wire.h>
+#include <i2c_driver_wire.h>
 
 #define ADAU7118_REG_VENDOR_ID		        0x00
 #define ADAU7118_REG_DEVICE_ID1		        0x01
@@ -66,7 +66,7 @@ class ADAU7118
                   FILTER_0_428HZ = 0x0E,
                   FILTER_0_214HZ = 0x0F} filter_t;    // High Pass Filter Cuttoff Frequency for 44.1 kHz Sampling Rate
                   
-    ADAU7118(TwoWire& wire, uint8_t addr = 0x14);
+    ADAU7118(I2CDriverWire& wire, uint8_t addr = 0x14);
     bool begin(bool tdmChannel, decimationRatio_t decimationRatio = DECIMATION_RATIO_64);
     uint8_t readVendorId(void) {return readRegister(ADAU7118_REG_VENDOR_ID);}
     uint16_t readDeviceId(void) {return (readRegister(ADAU7118_REG_DEVICE_ID1) << 8) | readRegister(ADAU7118_REG_DEVICE_ID2);}
@@ -75,7 +75,7 @@ class ADAU7118
     bool setSlotsEnabled(uint8_t slots);
 
   private:
-    TwoWire& wire;
+    I2CDriverWire& wire;
     const uint8_t addr;
     bool tdmChannel;
 

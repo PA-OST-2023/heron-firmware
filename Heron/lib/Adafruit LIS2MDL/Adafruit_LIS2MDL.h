@@ -24,7 +24,7 @@
 #include <Adafruit_I2CDevice.h>
 #include <Adafruit_SPIDevice.h>
 #include <Adafruit_Sensor.h>
-#include <Wire.h>
+#include <i2c_driver_wire.h>
 
 /*=========================================================================
     I2C ADDRESS/BITS
@@ -95,7 +95,7 @@ class Adafruit_LIS2MDL : public Adafruit_Sensor {
 public:
   Adafruit_LIS2MDL(int32_t sensorID = -1);
 
-  bool begin(uint8_t i2c_addr = _ADDRESS_MAG, TwoWire *wire = &Wire);
+  bool begin(uint8_t i2c_addr, I2CDriverWire *wire);
   bool begin_SPI(uint8_t cs_pin, SPIClass *theSPI = &SPI);
   bool begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
                  int8_t mosi_pin);

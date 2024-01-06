@@ -46,8 +46,6 @@
 #include <utils.h>
 #include "Adafruit_BMP3XX.h"
 
-#define SENSOR_WIRE Wire    // Wire interface to use
-
 class Sensors
 {
  public:
@@ -105,7 +103,7 @@ class Sensors
 
   Adafruit_LIS2MDL mag = Adafruit_LIS2MDL(12345);
   Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(54321);
-  AS5600 angleSensor = AS5600(&SENSOR_WIRE);
+  AS5600 angleSensor = AS5600(&Utils::sysWire);
   Adafruit_BMP3XX baro;
   sensors_event_t accel_event, mag_event;
 

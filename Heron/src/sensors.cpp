@@ -40,8 +40,8 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
   utils = &utilsRef;
   bool res = true;
 
-  Utils::lockWire(SENSOR_WIRE);
-  if(!mag.begin(ADDR_MAGNETOMETER, &SENSOR_WIRE))
+  Utils::lockWire(Utils::sysWire);
+  if(!mag.begin(ADDR_MAGNETOMETER, &Utils::sysWire))
   {
     console.error.println("[SENSORS] Magnetometer could not be initialized");
     res = false;
@@ -52,7 +52,7 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
     mag.setDataRate(lis2mdl_rate_t::LIS2MDL_RATE_20_HZ);
   }
 
-  if(!accel.begin(ADDR_ACCELEROMETER, &SENSOR_WIRE))
+  if(!accel.begin(ADDR_ACCELEROMETER, &Utils::sysWire))
   {
     console.error.println("[SENSORS] Accelerometer could not be initialized");
     res = false;
@@ -64,7 +64,7 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
     accel.setMode(lsm303_accel_mode_t::LSM303_MODE_HIGH_RESOLUTION);
   }
 
-  if(!baro.begin_I2C(ADDR_BAROMETER, &SENSOR_WIRE))
+  if(!baro.begin_I2C(ADDR_BAROMETER, &Utils::sysWire))
   {
     console.error.println("[SENSORS] Barometer could not be initialized");
     res = false;
@@ -94,7 +94,7 @@ FLASHMEM bool Sensors::begin(Utils& utilsRef)
     angleSensor.setMPosition(angle0);     // Set end position
   }
 
-  Utils::unlockWire(SENSOR_WIRE);
+  Utils::unlockWire(Utils::sysWire);
 
   raw_data_reset();    // Reset calibration stack
 
@@ -128,10 +128,10 @@ void Sensors::calibrateAngleStart(void)
   angle0Unconfirmed = (uint16_t)(-1);
   angle90Unconfirmed = (uint16_t)(-1);
 
-  utils->lockWire(SENSOR_WIRE);
+  utils->lockWire(Utils::sysWire);
   angleSensor.setZPosition(0);    // Reset start position
   angleSensor.setMPosition(0);    // Reset end position
-  utils->unlockWire(SENSOR_WIRE);
+  utils->unlockWire(Utils::sysWire);
 }
 
 void Sensors::calibrateAngleAbort(void)
@@ -142,10 +142,10 @@ void Sensors::calibrateAngleAbort(void)
     return;
   }
   console.warning.println("[SENSORS] Angle calibration aborted, restoring previous values");
-  utils->lockWire(SENSOR_WIRE);
+  utils->lockWire(Utils::sysWire);
   angleSensor.setZPosition(angle90);    // Set start position
   angleSensor.setMPosition(angle0);     // Set end position
-  utils->unlockWire(SENSOR_WIRE);
+  utils->unlockWire(Utils::sysWire);
 }
 
 bool Sensors::calibrateAngleConfirm(void)
@@ -172,10 +172,10 @@ bool Sensors::calibrateAngleConfirm(void)
   {
     console.warning.println("[SENSORS] No angle set");
   }
-  utils->lockWire(SENSOR_WIRE);
+  utils->lockWire(Utils::sysWire);
   angleSensor.setZPosition(angle90);    // Set start position
   angleSensor.setMPosition(angle0);     // Set end position
-  utils->unlockWire(SENSOR_WIRE);
+  utils->unlockWire(Utils::sysWire);
   return angleSet;
 }
 
@@ -211,8 +211,8 @@ void Sensors::update(void)
       console.log.println("[SENSORS] Starting magnetometer calibration...");
     }
 
-    bool wireError = false;
-    Utils::lockWire(SENSOR_WIRE);
+    bool busLockup = false;
+    Utils::lockWire(Utils::sysWire);
 
     static uint32_t tBaro = 0;
     if((millis() - tBaro > (1000.0 / BAROMETER_UPDATE_RATE)) && baroInitialized)
@@ -225,18 +225,19 @@ void Sensors::update(void)
         altitude = baro.readAltitude(SEA_LEVEL_PRESSURE_HPA);
         if(millis() - tBaro > MAX_SENSOR_READOUT_DELAY)
         {
-          console.warning.printf("[SENSORS] <Barometer> Possible I2C-Bus stall (Time: %d)\n", millis() - tBaro);
+          busLockup = true;
+          console.warning.printf("[SENSORS] <Barometer> Possible I2C-Bus lockup (Time: %d)\n", millis() - tBaro);
         }
       }
       else
       {
-        wireError = true;
+        busLockup = true;
         console.error.println("[SENSORS] Barometer reading failed");
       }
     }
 
     static uint32_t tAcc = 0;
-    if((millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE)) && !wireError && accelInitialized)
+    if((millis() - tAcc > (1000.0 / ACCEL_UPDATE_RATE)) && !busLockup && accelInitialized)
     {
       tAcc = millis();
       if(accel.getEvent(&accel_event))    // Check if accelerometer has new data
@@ -247,13 +248,14 @@ void Sensors::update(void)
         roll = (PITCH_ROLL_FILTER_ALPHA * r) + ((1.0 - PITCH_ROLL_FILTER_ALPHA) * roll);
         if(millis() - tAcc > MAX_SENSOR_READOUT_DELAY)
         {
-          console.warning.printf("[SENSORS] <Accelerometer> Possible I2C-Bus stall (Time: %d)\n", millis() - tAcc);
+          busLockup = true;
+          console.warning.printf("[SENSORS] <Accelerometer> Possible I2C-Bus lockup (Time: %d)\n", millis() - tAcc);
         }
       }
     }
 
     static uint32_t tMag = 0;
-    if((millis() - tMag > (1000.0 / MAGNETOMETER_UPDATE_RATE)) && !wireError && magInitialized)
+    if((millis() - tMag > (1000.0 / MAGNETOMETER_UPDATE_RATE)) && !busLockup && magInitialized)
     {
       tMag = millis();
       if(mag.getEvent(&mag_event))    // Check if magnetometer has new data
@@ -304,13 +306,14 @@ void Sensors::update(void)
         }
         if(millis() - tMag > MAX_SENSOR_READOUT_DELAY)
         {
-          console.warning.printf("[SENSORS] <Magnetometer> Possible I2C-Bus stall (Time: %d)\n", millis() - tMag);
+          busLockup = true;
+          console.warning.printf("[SENSORS] <Magnetometer> Possible I2C-Bus lockup (Time: %d)\n", millis() - tMag);
         }
       }
     }
 
     static uint32_t tAngle = 0;
-    if((millis() - tAngle > (1000.0 / ANGLE_SENSOR_UPDATE_RATE)) && !wireError && angleSensorInitialized)
+    if((millis() - tAngle > (1000.0 / ANGLE_SENSOR_UPDATE_RATE)) && !busLockup && angleSensorInitialized)
     {
       tAngle = millis();
       angleRaw = angleSensor.readAngle();
@@ -322,14 +325,21 @@ void Sensors::update(void)
       magnetTooStrong = (status & AS5600::AS5600_MAGNET_HIGH) > 1;
       if(millis() - tAngle > MAX_SENSOR_READOUT_DELAY)
       {
-        console.warning.printf("[SENSORS] <Angle Sensor> Possible I2C-Bus stall (Time: %d)\n", millis() - tAngle);
+        busLockup = true;
+        console.warning.printf("[SENSORS] <Angle Sensor> Possible I2C-Bus lockup (Time: %d)\n", millis() - tAngle);
       }
     }
 
-    Utils::turnOffWire(SENSOR_WIRE);    // Somehow the I2C bus gets locked up after some time, force it to reset after each update
-    delayMicroseconds(50);
-    Utils::turnOnWire(SENSOR_WIRE);
-    Utils::unlockWire(SENSOR_WIRE);
+    if(busLockup)
+    {
+      console.warning.println("[SENSORS] I2C-Bus lockup detected, resetting bus");
+      Utils::turnOffWire(Utils::sysWire);    // Somehow the I2C bus gets locked up after some time, force it to reset after each update
+      delayMicroseconds(1000);
+      Utils::turnOnWire(Utils::sysWire);
+      Utils::unlockWire(Utils::sysWire);
+    }
+
+    Utils::unlockWire(Utils::sysWire);
   }
 }
 

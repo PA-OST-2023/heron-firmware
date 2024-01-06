@@ -40,7 +40,7 @@ bool Gnss::begin(Utils& utilsRef)    // Don't mess with the Reset Pin, somehow i
 {
   utils = &utilsRef;
 
-  if(!gnss.begin(GPS_WIRE))
+  if(!gnss.begin(Utils::gpsWire))
   {
     console.error.println("[GNSS] GNSS module not detected");
     return false;
@@ -86,9 +86,9 @@ void Gnss::update(void)
     {
       console.warning.printf("[GNSS] ExeTime: %d ms\n", millis() - tUpdate);
 
-      utils->turnOffWire(GPS_WIRE);
+      utils->turnOffWire(Utils::gpsWire);
       delayMicroseconds(200);
-      utils->turnOnWire(GPS_WIRE);
+      utils->turnOnWire(Utils::gpsWire);
     }
   }
 }

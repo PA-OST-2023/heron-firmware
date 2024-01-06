@@ -40,8 +40,6 @@
 #include <melodies.h>
 #include <utils.h>
 
-#define RTC_WIRE Wire1    // Wire interface to use
-
 class Hmi
 {
  public:

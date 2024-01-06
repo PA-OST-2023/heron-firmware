@@ -73,7 +73,7 @@ Adafruit_BMP3XX::Adafruit_BMP3XX(void) {
     @return True on sensor initialization success. False on failure.
 */
 /**************************************************************************/
-bool Adafruit_BMP3XX::begin_I2C(uint8_t addr, TwoWire *theWire) {
+bool Adafruit_BMP3XX::begin_I2C(uint8_t addr, I2CDriverWire *theWire) {
   if (i2c_dev)
     delete i2c_dev;
   if (spi_dev)
@@ -346,7 +346,9 @@ bool Adafruit_BMP3XX::performReading(void) {
   rslt = bmp3_set_sensor_settings(settings_sel, &the_sensor);
 
   if (rslt != BMP3_OK)
+  {
     return false;
+  }
 
   /* Set the power mode */
   the_sensor.settings.op_mode = BMP3_MODE_FORCED;
@@ -355,7 +357,9 @@ bool Adafruit_BMP3XX::performReading(void) {
 #endif
   rslt = bmp3_set_op_mode(&the_sensor);
   if (rslt != BMP3_OK)
+  {
     return false;
+  }
 
   /* Variable used to store the compensated data */
   struct bmp3_data data;
@@ -367,7 +371,9 @@ bool Adafruit_BMP3XX::performReading(void) {
 #endif
   rslt = bmp3_get_sensor_data(sensor_comp, &data, &the_sensor);
   if (rslt != BMP3_OK)
+  {
     return false;
+  }
 
   /*
 #ifdef BMP3XX_DEBUG

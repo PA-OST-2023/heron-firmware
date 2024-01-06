@@ -17,7 +17,7 @@
     @return True if Wire can find PCF8523 or false otherwise.
 */
 /**************************************************************************/
-bool RTC_PCF8523::begin(TwoWire *wireInstance) {
+bool RTC_PCF8523::begin(I2CDriverWire *wireInstance) {
   if (i2c_dev)
     delete i2c_dev;
   i2c_dev = new Adafruit_I2CDevice(PCF8523_ADDRESS, wireInstance);

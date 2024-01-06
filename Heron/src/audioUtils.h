@@ -36,6 +36,7 @@
 #include <ADAU7118.h>
 #include <Arduino.h>
 #include <Audio.h>
+#include <utils.h>
 #include "Audio/transmit_wav_buffered.h"
 
 class AudioUtils
@@ -58,7 +59,8 @@ class AudioUtils
   void setBackupTimestampCallback(uint64_t (*callback)(void)) { transmitter.setBackupTimestampCallback(callback); }
 
  private:
-  ADAU7118 adau7118[ADAU7118_COUNT] = {ADAU7118(Wire, 0x14), ADAU7118(Wire, 0x15), ADAU7118(Wire, 0x16), ADAU7118(Wire, 0x17)};
+  ADAU7118 adau7118[ADAU7118_COUNT] = {ADAU7118(Utils::sysWire, 0x14), ADAU7118(Utils::sysWire, 0x15), ADAU7118(Utils::sysWire, 0x16),
+                                       ADAU7118(Utils::sysWire, 0x17)};
 
   static AudioInputTDM tdmIn1;
   static AudioInputTDM2 tdmIn2;

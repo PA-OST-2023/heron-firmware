@@ -124,6 +124,11 @@ public:
 
     void read_async(uint8_t address, uint8_t* buffer, size_t num_bytes, bool send_stop) override;
 
+    IMX_RT1060_I2CBase::Config& get_config()
+    {
+        return config;
+    }
+
     // DO NOT call this method directly.
     void _interrupt_service_routine();
 

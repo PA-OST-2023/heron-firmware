@@ -49,8 +49,6 @@
 #include <sensors.h>
 
 
-#define GUI_WIRE Wire1    // Wire interface to use
-
 class Gui
 {
  public:
@@ -59,6 +57,7 @@ class Gui
   static constexpr const uint32_t SCREEN_BUFFER_HEIGHT = 120;
   static constexpr const uint32_t AUDIO_CHANNEL_COUNT = 32;
   static constexpr const float DISPLAY_REFRESH_RATE = 24.0;    // Hz
+  static constexpr const float TOUCH_UPDATE_RATE = 24.0;       // Hz
   static constexpr const float WIDGET_UPDATE_RATE = 10.0;      // Hz
   static constexpr const size_t SPI_FREQUENCY = 60000000;      // [Hz] SPI clock
   static constexpr const size_t MAX_WARNING_LENGTH = 250;
@@ -101,7 +100,7 @@ class Gui
  private:
   const int sclk, mosi, cs, dc, bl, tch_irq;
   GC9A01A_t3n disp = GC9A01A_t3n(cs, dc, -1, mosi, sclk);
-  CHSC6413 touch = CHSC6413(&GUI_WIRE, tch_irq);
+  CHSC6413 touch = CHSC6413(&Utils::hmiWire, tch_irq);
 
   static lv_color_t buf[SCREEN_WIDTH * SCREEN_BUFFER_HEIGHT];
   volatile bool initialized = false;

@@ -37,7 +37,7 @@
 
 CHSC6413* CHSC6413::ref = nullptr;
 
-CHSC6413::CHSC6413(TwoWire* wire, int irq)
+CHSC6413::CHSC6413(I2CDriverWire* wire, int irq)
 {
   _wire = wire;
   _irq = irq;
@@ -47,43 +47,45 @@ CHSC6413::CHSC6413(TwoWire* wire, int irq)
 /*!
     @brief  read touch data
 */
-bool CHSC6413::read_touch()
+CHSC6413::TouchEvent CHSC6413::read_touch()
 {
   uint8_t raw[CHSC6X_READ_POINT_LEN] = {0x00, 0x00, 0x00, 0x00, 0x00};
-  uint8_t readLen = _wire->requestFrom(CHSC6X_ADDRESS, CHSC6X_READ_POINT_LEN);
+  uint32_t startT = millis();
+  uint8_t readLen = _wire->requestFrom(CHSC6X_ADDRESS, CHSC6X_READ_POINT_LEN, true, true);
   if(_invalidCount > MAX_INVALID_COUNT)
   {
     _invalidCount = 0;
     console.warning.printf("[CHSC6413] Too many invalid reads, resetting...\n");
-    Utils::turnOffWire(*_wire);
-    threads.delay(BUS_RESTART_DELAY);
-    if(!begin(_interruptType))
-    {
-      console.error.printf("[CHSC6413] Failed to reset\n");
-    }
-    else
-    {
-      console.ok.printf("[CHSC6413] Reset successful\n");
-    }
-    return false;
+    // Utils::turnOffWire(*_wire);
+    // threads.delay(BUS_RESTART_DELAY);
+    // if(!begin(_interruptType))
+    // {
+    //   console.error.printf("[CHSC6413] Failed to reset\n");
+    // }
+    // else
+    // {
+    //   console.ok.printf("[CHSC6413] Reset successful\n");
+    // }
+    return TouchEvent::TOUCH_UNKNOWN;
   }
   if(readLen == CHSC6X_READ_POINT_LEN)
   {
+    _invalidCount = 0;
     _wire->readBytes(raw, readLen);
     if(raw[0] == 0x01)
     {
       if(raw[2] > WIDTH || raw[4] > HEIGHT)
       {
-        return false;
+        return TouchEvent::TOUCH_UNKNOWN;
       }
       x = raw[2];
       y = raw[4];
+      return TouchEvent::TOUCH_DETECTED;
     }
-    _invalidCount = 0;
-    return true;    // Data is available (does not mean that a touch is detected)
+    return TouchEvent::TOUCH_RELEASED;    // Data is available (does not mean that a touch is detected)
   }
   _invalidCount++;
-  return false;
+  return TouchEvent::TOUCH_UNKNOWN;
 }
 
 /*!
@@ -101,7 +103,7 @@ void CHSC6413::handleISR(void)
 */
 bool CHSC6413::begin(int interrupt)
 {
-  Utils::turnOnWire(*_wire);
+  // Utils::turnOnWire(*_wire);
 
   if(_irq >= 0)
   {
@@ -134,19 +136,26 @@ void CHSC6413::end()
   {
     detachInterrupt(_irq);
   }
-  Utils::turnOffWire(*_wire);
+  // Utils::turnOffWire(*_wire);
 }
 
 /*!
     @brief  check for a touch event
 */
-bool CHSC6413::available()
+CHSC6413::TouchEvent CHSC6413::available()
 {
   if(_event_available || _irq == -1 || _continuous_mode)
   {
-    read_touch();
+    TouchEvent event = read_touch();
     _event_available = false;
-    return true;
+    if(event == TouchEvent::TOUCH_DETECTED)
+    {
+      return TouchEvent::TOUCH_DETECTED;
+    }
+    else if(event == TouchEvent::TOUCH_RELEASED)
+    {
+      return TouchEvent::TOUCH_RELEASED;
+    }
   }
-  return false;
+  return TouchEvent::TOUCH_UNKNOWN;
 }

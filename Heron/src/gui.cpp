@@ -63,13 +63,13 @@ FLASHMEM bool Gui::begin(Utils& utilsRef, Hmi& hmiRef, AudioUtils& audioUtilsRef
   disp.begin(SPI_FREQUENCY, GC9A01A_SPICLOCK_READ);
   disp.fillScreen(GC9A01A_BLACK);
 
-  Utils::lockWire(GUI_WIRE);
+  Utils::lockWire(Utils::hmiWire);
   if(!touch.begin())
   {
     console.error.println("[GUI] Touch controller could not be initialized");
     res = false;
   }
-  Utils::unlockWire(GUI_WIRE);
+  Utils::unlockWire(Utils::hmiWire);
 
   lv_log_register_print_cb(lvglPrint);
   lv_init();
@@ -139,7 +139,25 @@ void Gui::update(void)
     updateScreenAmbient();
     updateScreenSettings();
   }
+  uint32_t t2 = millis();
   lv_task_handler();
+  if(millis() - t2 > 10)
+  {
+    console.warning.printf("[GUI] ExeTime: %d ms\n", millis() - t2);
+  }
+
+  // static uint32_t touchTimer = 0;
+  // if(millis() - touchTimer > TOUCH_UPDATE_RATE)
+  // {
+  //   touchTimer = millis();
+  //   Utils::lockWire(Utils::hmiWire);
+  //   CHSC6413::TouchEvent event = touch.available();
+
+  //   // Utils::turnOffWire(Utils::hmiWire);    // Somehow the touch controller locks up the I2C-Bus, so we have to turn it off and on again
+  //   // threads.delay_us(100);
+  //   // Utils::turnOnWire(Utils::hmiWire, true);
+  //   Utils::unlockWire(Utils::hmiWire);
+  // }
 }
 
 bool Gui::isBootupFinished(void)
@@ -1011,7 +1029,7 @@ void Gui::screenArmAngleCalibrationCheckValid(bool angle0, bool angle90)
 void Gui::lvglPrint(const char* buf)
 {
   console.log.printf("[LVGL] %s", buf);
-  threads.delay(10);
+  threads.delay(1);
 }
 
 void Gui::dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* color_p)
@@ -1031,13 +1049,13 @@ void Gui::dispflush(lv_disp_drv_t* dispDrv, const lv_area_t* area, lv_color_t* c
 void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
 {
   CHSC6413* touch = (CHSC6413*)drv->user_data;
-  Utils::lockWire(GUI_WIRE);
-  bool available = touch->available();
-  Utils::turnOffWire(GUI_WIRE);    // Somehow the touch controller locks up the I2C-Bus, so we have to turn it off and on again
-  delayMicroseconds(100);
-  Utils::turnOnWire(GUI_WIRE);
-  Utils::unlockWire(GUI_WIRE);
-  if(available)
+  Utils::lockWire(Utils::hmiWire);
+  CHSC6413::TouchEvent event = touch->available();
+  // Utils::turnOffWire(Utils::hmiWire);    // Somehow the touch controller locks up the I2C-Bus, so we have to turn it off and on again
+  // delayMicroseconds(100);
+  // Utils::turnOnWire(Utils::hmiWire, true);
+  Utils::unlockWire(Utils::hmiWire);
+  if(event == CHSC6413::TouchEvent::TOUCH_DETECTED)
   {
     int x = touch->x;
     int y = touch->y;
@@ -1049,5 +1067,8 @@ void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
       return;
     }
   }
-  data->state = LV_INDEV_STATE_REL;    // Indicate that the touchpad is released
+  else if(event == CHSC6413::TouchEvent::TOUCH_RELEASED)
+  {
+    data->state = LV_INDEV_STATE_REL;    // Indicate that the touchpad is released
+  }
 }

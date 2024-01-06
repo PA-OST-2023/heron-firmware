@@ -32,7 +32,6 @@
 #endif
 
 #include "Adafruit_LSM303_Accel.h"
-#include <Wire.h>
 #include <limits.h>
 
 /***************************************************************************
@@ -66,7 +65,7 @@ Adafruit_LSM303_Accel_Unified::Adafruit_LSM303_Accel_Unified(int32_t sensorID) {
  *            The Wire object to be used for I2C connections.
  *    @return True if initialization was successful, otherwise false.
  */
-bool Adafruit_LSM303_Accel_Unified::begin(uint8_t i2c_address, TwoWire *wire) {
+bool Adafruit_LSM303_Accel_Unified::begin(uint8_t i2c_address, I2CDriverWire *wire) {
 
   if (i2c_dev)
     delete i2c_dev;
