@@ -1556,7 +1556,11 @@ tcp_output_segment(struct tcp_seg *seg, struct tcp_pcb *pcb, struct netif *netif
   }
 
   seg->p->len -= len;
-  seg->p->tot_len -= len;
+  if(&seg->p->tot_len == NULL)
+  {
+    return ERR_OK;
+  }
+  seg->p->tot_len -= len;     // TODO: <Florian> investigate why the system crashes here sometimes
 
   seg->p->payload = seg->tcphdr;
 
