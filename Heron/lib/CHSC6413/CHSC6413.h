@@ -53,13 +53,10 @@ class CHSC6413
     TOUCH_UNKNOWN
   }; 
 
-  constexpr static const int INIT_RETRY_COUNT = 8;    // Try multiple times (somehow 1 of 8 times, the chip does not respond)
-  constexpr static const int MAX_INVALID_COUNT = 12;
   constexpr static const int WIDTH = 240;
   constexpr static const int HEIGHT = 240;
-  constexpr static const int BUS_RESTART_DELAY = 25;    // [ms]
-  constexpr static const int INIT_RETRY_DELAY = 25;     // [ms]
-  // constexpr static const int I2C_FREQUENCY = 10000000;    // [Hz]
+  constexpr static const int RETRY_COUNT = 4;
+  constexpr static const int RETRY_DELAY = 500;    // us
 
   CHSC6413(I2CDriverWire* wire, int irq = -1);
   bool begin(int interrupt = RISING);     // Don't mess with the interrupt type, it must be RISING
@@ -75,7 +72,6 @@ class CHSC6413
   volatile bool _event_available = false;
   volatile bool _continuous_mode = false;
   int _interruptType = RISING;    // Don't mess with the interrupt type, it must be RISING
-  int _invalidCount = 0;
 
   static void handleISR();
   static CHSC6413* ref;

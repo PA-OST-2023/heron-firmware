@@ -51,6 +51,7 @@ class AudioUtils
   bool startServer(int port);
   bool stopServer(void);
   float getPeak(int channel);
+  void clearBuffer(void) { transmitter.clearBuffer(); }
   bool getConnectionStatus(void) { return transmitter.getConnectionState(); }
   float getDataRateMBit(void) { return (transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0; }
   float getBufferFillLevelPercent(void) { return transmitter.getBufferFillLevel() * 100.0; }

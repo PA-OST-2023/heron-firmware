@@ -63,6 +63,7 @@ class AudioTransmitWAVbuffered : public EventResponder, public AudioStream
   virtual ~AudioTransmitWAVbuffered(void) { end(); }
   bool begin(int port, bool verboseOutput = false);
   void end(void);
+  void clearBuffer(void) { circularBuffer.clear(); }
   void setTimestampCallback(uint64_t (*callback)(void)) { getTimestamp = callback; }
   void setBackupTimestampCallback(uint64_t (*callback)(void)) { getBackupTimestamp = callback; }
 

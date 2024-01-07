@@ -49,45 +49,29 @@ CHSC6413::CHSC6413(I2CDriverWire* wire, int irq)
 */
 CHSC6413::TouchEvent CHSC6413::read_touch()
 {
-  uint8_t raw[CHSC6X_READ_POINT_LEN] = {0x00, 0x00, 0x00, 0x00, 0x00};
-  uint8_t readLen = _wire->requestFrom(CHSC6X_ADDRESS, CHSC6X_READ_POINT_LEN);
-  if(_invalidCount > MAX_INVALID_COUNT)
+  for(int i = 0; i < RETRY_COUNT; i++)
   {
-    _invalidCount = 0;
-    console.warning.printf("[CHSC6413] Too many invalid reads, resetting...\n");
-    Utils::turnOffWire(*_wire);
-    threads.delay(BUS_RESTART_DELAY);
-    if(!begin(_interruptType))
-    {
-      console.error.printf("[CHSC6413] Failed to reset\n");
-    }
-    else
-    {
-      console.ok.printf("[CHSC6413] Reset successful\n");
-    }
-    return TouchEvent::TOUCH_UNKNOWN;
-  }
-  if(readLen == CHSC6X_READ_POINT_LEN)
-  {
-    _invalidCount = 0;
+    uint8_t raw[CHSC6X_READ_POINT_LEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+    uint8_t readLen = _wire->requestFrom(CHSC6X_ADDRESS, CHSC6X_READ_POINT_LEN);
     _wire->readBytes(raw, readLen);
-    if(raw[0] == 0x01)
+    if(readLen == CHSC6X_READ_POINT_LEN)
     {
-      if(raw[2] > WIDTH || raw[4] > HEIGHT)
+      if(raw[0] == 0x01)
       {
-        return TouchEvent::TOUCH_UNKNOWN;
+        if(raw[2] < WIDTH && raw[4] < HEIGHT)
+        {
+          x = raw[2];
+          y = raw[4];
+          return TouchEvent::TOUCH_DETECTED;
+        }
       }
-      x = raw[2];
-      y = raw[4];
-      return TouchEvent::TOUCH_DETECTED;
     }
-    else if(raw[0] == 0x00)
+    if(raw[0] == 0x00)
     {
-      console.log.printf("[CHSC6413] Touch released [%02X, %02X, %02X, %02X, %02X]\n", raw[0], raw[1], raw[2], raw[3], raw[4]);
       return TouchEvent::TOUCH_RELEASED;    // Data is available (does not mean that a touch is detected)
     }
+    delayMicroseconds(RETRY_DELAY);
   }
-  _invalidCount++;
   return TouchEvent::TOUCH_UNKNOWN;
 }
 
@@ -106,7 +90,7 @@ void CHSC6413::handleISR(void)
 */
 bool CHSC6413::begin(int interrupt)
 {
-  Utils::turnOnWire(*_wire);
+  // Utils::turnOnWire(*_wire);
 
   if(_irq >= 0)
   {
@@ -115,18 +99,6 @@ bool CHSC6413::begin(int interrupt)
   }
 
   _interruptType = interrupt;
-  _invalidCount = 0;
-  // bool chipAvailable = false;
-  // for(int i = 0; i < INIT_RETRY_COUNT; i++)
-  // {
-  //   chipAvailable |= read_touch();
-  //   if(chipAvailable)
-  //   {
-  //     break;
-  //   }
-  //   threads.delay(INIT_RETRY_DELAY);
-  // }
-  // return chipAvailable;    // Sometimes the chip is not recogined until a first touch is detected
   return true;
 }
 
@@ -147,18 +119,12 @@ void CHSC6413::end()
 */
 CHSC6413::TouchEvent CHSC6413::available()
 {
+  static TouchEvent event = TouchEvent::TOUCH_UNKNOWN;
   if(_event_available || _irq == -1 || _continuous_mode)
   {
-    TouchEvent event = read_touch();
+    event = read_touch();
     _event_available = false;
-    if(event == TouchEvent::TOUCH_DETECTED)
-    {
-      return TouchEvent::TOUCH_DETECTED;
-    }
-    else if(event == TouchEvent::TOUCH_RELEASED)
-    {
-      return TouchEvent::TOUCH_RELEASED;
-    }
+    return event;
   }
-  return TouchEvent::TOUCH_UNKNOWN;
+  return event;
 }

@@ -1038,8 +1038,6 @@ void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
   Utils::turnOnWire(Utils::hmiWire);
   Utils::unlockWire(Utils::hmiWire);
 
-  bool touchDetected = false;
-  static bool touchDetectedOld = false;
   if(event == CHSC6413::TouchEvent::TOUCH_DETECTED)
   {
     int x = touch->x;
@@ -1049,16 +1047,11 @@ void Gui::touchpadRead(lv_indev_drv_t* drv, lv_indev_data_t* data)
       data->state = LV_INDEV_STATE_PR;    // Indicate that the touchpad is pressed
       data->point.x = (lv_coord_t)x;
       data->point.y = (lv_coord_t)y;
-      touchDetected = true;
+      return;
     }
   }
   else if(event == CHSC6413::TouchEvent::TOUCH_RELEASED)
   {
     data->state = LV_INDEV_STATE_REL;    // Indicate that the touchpad is released
-  }
-  if(touchDetected != touchDetectedOld)
-  {
-    touchDetectedOld = touchDetected;
-    console.log.printf("[GUI] Touch detected: %s\n", (touchDetected) ? "true" : "false");
   }
 }

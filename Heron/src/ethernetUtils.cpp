@@ -55,6 +55,8 @@ FLASHMEM bool EthernetUtils::begin(Utils& utilsRef, AudioUtils& audioUtilsRef)
   {
     console.error.println("[ETHERNET] Failed to configure Ethernet using static IP");
   }
+
+  audioUtils->clearBuffer();
   if(!audioUtils->startServer(ETHERNET_STREAMING_PORT))
   {
     console.error.println("[ETHERNET] Failed to start audio server");
