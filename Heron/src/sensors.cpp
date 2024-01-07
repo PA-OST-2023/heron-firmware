@@ -211,7 +211,7 @@ void Sensors::update(void)
       console.log.println("[SENSORS] Starting magnetometer calibration...");
     }
 
-     bool busLockup = false;
+    bool busLockup = false;
     Utils::lockWire(Utils::sysWire);
 
     static uint32_t tBaro = 0;
@@ -226,7 +226,7 @@ void Sensors::update(void)
         if(millis() - tBaro > MAX_SENSOR_READOUT_DELAY)
         {
           busLockup = true;
-          console.warning.printf("[SENSORS] <Barometer> Possible I2C-Bus lockup (Time: %d)\n", millis() - tBaro);
+          console.warning.printf("[SENSORS] <Barometer> Possible I2C-Bus lockup (Time: %d ms)\n", millis() - tBaro);
         }
       }
       else
@@ -249,7 +249,7 @@ void Sensors::update(void)
         if(millis() - tAcc > MAX_SENSOR_READOUT_DELAY)
         {
           busLockup = true;
-          console.warning.printf("[SENSORS] <Accelerometer> Possible I2C-Bus lockup (Time: %d)\n", millis() - tAcc);
+          console.warning.printf("[SENSORS] <Accelerometer> Possible I2C-Bus lockup (Time: %d ms)\n", millis() - tAcc);
         }
       }
     }
@@ -307,7 +307,7 @@ void Sensors::update(void)
         if(millis() - tMag > MAX_SENSOR_READOUT_DELAY)
         {
           busLockup = true;
-          console.warning.printf("[SENSORS] <Magnetometer> Possible I2C-Bus lockup (Time: %d)\n", millis() - tMag);
+          console.warning.printf("[SENSORS] <Magnetometer> Possible I2C-Bus lockup (Time: %d ms)\n", millis() - tMag);
         }
       }
     }
@@ -326,7 +326,7 @@ void Sensors::update(void)
       if(millis() - tAngle > MAX_SENSOR_READOUT_DELAY)
       {
         busLockup = true;
-        console.warning.printf("[SENSORS] <Angle Sensor> Possible I2C-Bus lockup (Time: %d)\n", millis() - tAngle);
+        console.warning.printf("[SENSORS] <Angle Sensor> Possible I2C-Bus lockup (Time: %d ms)\n", millis() - tAngle);
       }
     }
 
@@ -336,15 +336,8 @@ void Sensors::update(void)
       Utils::turnOffWire(Utils::sysWire);    // Somehow the I2C bus gets locked up after some time, force it to reset after each update
       delayMicroseconds(1000);
       Utils::turnOnWire(Utils::sysWire);
-      Utils::unlockWire(Utils::sysWire);
     }
-
     Utils::unlockWire(Utils::sysWire);
-
-    // Utils::turnOffWire(Utils::sysWire);    // Somehow the I2C bus gets locked up after some time, force it to reset after each update
-    // delayMicroseconds(50);
-    // Utils::turnOnWire(Utils::sysWire);
-    // Utils::unlockWire(Utils::sysWire);
   }
 }
 

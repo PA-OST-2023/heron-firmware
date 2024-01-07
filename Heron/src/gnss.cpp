@@ -89,10 +89,9 @@ void Gnss::update(void)
 
     gnss.checkUblox();        // Check for the arrival of new data and process it.
     gnss.checkCallbacks();    // Check if any callbacks are waiting to be processed.
-    if(millis() - tUpdate > 50)
+    if(millis() - tUpdate > I2C_PROCESSING_TIME_WARNING)
     {
-      console.warning.printf("[GNSS] ExeTime: %d ms\n", millis() - tUpdate);
-
+      console.warning.printf("[GNSS] Possible I2C-Bus lockup (Time: %d ms)\n", millis() - tUpdate);
       utils->turnOffWire(Utils::gpsWire);
       delayMicroseconds(200);
       utils->turnOnWire(Utils::gpsWire);

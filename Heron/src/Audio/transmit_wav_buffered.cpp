@@ -156,7 +156,8 @@ uint32_t AudioTransmitWAVbuffered::flushBuffer(uint8_t* pb, size_t sz)
     client = server.available();
     if(client)
     {
-      console.log.println("[TRANSMIT WAV BUFFERED] Client connected.");
+      console.log.println("[TRANSMIT WAV BUFFERED] Client connected");
+      circularBuffer.clear();       // Clear buffer as soon as client connects to prevent instant overflow
     }
   }
   return outN;

@@ -161,6 +161,8 @@ class Hmi
   void animationBootup(void);
   void animationAudio(void);
   void animationOst(void);
+
+  void setLedColorByRadius(int r, uint8_t red, uint8_t green, uint8_t blue);
 };
 
 #endif

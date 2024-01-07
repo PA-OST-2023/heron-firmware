@@ -388,12 +388,29 @@ bool Hmi::animationRampHandler(void)
 
 void Hmi::animationBootup(void)
 {
-  for(int i = 0; i < 16; i++)
+  // LED Radius [mm]: 61.000, 135.639, 161.872, 208.113, 228.266, 269.257, 289.575, 330.393, 350.885
+  static const float PEAK_MAX = 1.0;                                                                        // Max brightness at peak
+  static const float PEAK_WIDTH = 1.5;                                                                      // Width of the parabola
+  static const float RADIUS_DISTANCES[] = {0.174, 0.387, 0.461, 0.593, 0.651, 0.767, 0.825, 0.942, 1.0};    // Normalized Radius
+  static const float VALUE_MIN = -1.5;
+  static const float VALUE_MAX = 2.5;
+  static const float FREQUENCY = 0.33;    // [Hz]
+  static const float m = (VALUE_MAX - VALUE_MIN) * FREQUENCY;
+
+  static uint32_t tInit = millis();
+  float x = (((float)millis() - (float)tInit) / 1000.0) * m;
+  x = fmod(x, VALUE_MAX - VALUE_MIN) + VALUE_MIN;
+
+  for(int i = 0; i < 9; i++)
   {
-    uint8_t colorR = 0 * brightnessModifier;
-    uint8_t colorG = 0 * brightnessModifier;
-    uint8_t colorB = 255 * brightnessModifier;
-    leds.setPixelColor(i + 1, Color(colorR, colorG, colorB));
+    float r = RADIUS_DISTANCES[i];
+    float value = 1.0 - (1.0 / PEAK_WIDTH) * (r - x) * (r - x);
+    value = map(value, 0.0, 1.0, 0.0, PEAK_MAX);
+
+    uint8_t red = 233 * value * brightnessModifier;
+    uint8_t green = 30 * value * brightnessModifier;
+    uint8_t blue = 99 * value * brightnessModifier;
+    setLedColorByRadius(i, red, green, blue);
   }
 }
 
@@ -416,5 +433,27 @@ void Hmi::animationOst(void)
     uint8_t colorG = 0 * brightnessModifier;
     uint8_t colorB = 0 * brightnessModifier;
     leds.setPixelColor(i + 1, Color(colorR, colorG, colorB));
+  }
+}
+
+void Hmi::setLedColorByRadius(int r, uint8_t red, uint8_t green, uint8_t blue)
+{
+  if(r < 0 || r > 8)
+  {
+    return;
+  }
+  if(r == 0)    // Check if inner circle
+  {
+    for(int i = 0; i < 16; i++)
+    {
+      leds.setPixelColor(i + 1, Color(red, green, blue));
+    }
+  }
+  else
+  {
+    for(int i = 0; i < 8; i++)
+    {
+      leds.setPixelColor(i * 8 + r + 16, Color(red, green, blue));
+    }
   }
 }

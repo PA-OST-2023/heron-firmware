@@ -40,8 +40,9 @@
 class Gnss
 {
  public:
-  static constexpr const float UPDATE_RATE = 10.0;       // Hz
-  static constexpr const size_t GNSS_UPDATE_RATE = 5;    // Hz
+  static constexpr const float UPDATE_RATE = 10.0;                   // Hz
+  static constexpr const size_t GNSS_UPDATE_RATE = 5;                // Hz
+  static constexpr const size_t I2C_PROCESSING_TIME_WARNING = 50;    // [ms] Time after which a warning is printed if I2C processing takes very long
 
   enum class fixType_t : uint8_t
   {
@@ -115,7 +116,7 @@ class Gnss
   uint8_t hour;     // Hour of day, range 0..23 (UTC)
   uint8_t min;      // Minute of hour, range 0..59 (UTC)
   uint8_t sec;      // Seconds of minute, range 0..60 (UTC)
-  int32_t nano;    // Fraction of second in nanoseconds
+  int32_t nano;     // Fraction of second in nanoseconds
 
   static uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
   static uint32_t tUpdateMicros;

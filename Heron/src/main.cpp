@@ -104,5 +104,4 @@ void loop()
 static void wireIdle(void)
 {
   ethernet.update();    // Do etherent housekeeping while I2C is busy (must be called in main "background" thread only)
-  // threads.yield();
 }
