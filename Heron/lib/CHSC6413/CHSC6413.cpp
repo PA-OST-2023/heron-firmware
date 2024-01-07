@@ -69,6 +69,7 @@ CHSC6413::TouchEvent CHSC6413::read_touch()
   }
   if(readLen == CHSC6X_READ_POINT_LEN)
   {
+    _invalidCount = 0;
     _wire->readBytes(raw, readLen);
     if(raw[0] == 0x01)
     {
@@ -80,8 +81,11 @@ CHSC6413::TouchEvent CHSC6413::read_touch()
       y = raw[4];
       return TouchEvent::TOUCH_DETECTED;
     }
-    _invalidCount = 0;
-    return TouchEvent::TOUCH_RELEASED;    // Data is available (does not mean that a touch is detected)
+    else if(raw[0] == 0x00)
+    {
+      console.log.printf("[CHSC6413] Touch released [%02X, %02X, %02X, %02X, %02X]\n", raw[0], raw[1], raw[2], raw[3], raw[4]);
+      return TouchEvent::TOUCH_RELEASED;    // Data is available (does not mean that a touch is detected)
+    }
   }
   _invalidCount++;
   return TouchEvent::TOUCH_UNKNOWN;

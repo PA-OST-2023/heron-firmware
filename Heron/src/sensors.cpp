@@ -232,7 +232,7 @@ void Sensors::update(void)
       else
       {
         busLockup = true;
-        console.error.println("[SENSORS] Barometer reading failed");
+        console.warning.println("[SENSORS] Barometer reading failed");
       }
     }
 

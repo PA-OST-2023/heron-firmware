@@ -53,11 +53,8 @@ class Utils
   static constexpr const float UPDATE_RATE = 10.0;    // Hz
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_ENABLED = 0;
   static constexpr const uint32_t EEPROM_ADDR_CHANNEL_NUMBER = 4;
-  // static constexpr const size_t SYS_WIRE_FREQENCY = 1000000;     // [Hz]
-  static constexpr const size_t HMI_WIRE_FREQENCY = 1000000;     // [Hz]
-  // static constexpr const size_t GPS_WIRE_FREQENCY = 400000;      // [Hz]
   static constexpr const size_t SYS_WIRE_FREQENCY = 100000;    // [Hz] Max: (ADAU1718 = 1000kHz, AS5600 = 1000kHz, BMP388 = 3400kHz, LSM303 = 3400kHz)
-  // static constexpr const size_t HMI_WIRE_FREQENCY = 100000;    // [Hz] Max: (RTC = 400kHz, Touch = Unknown)
+  static constexpr const size_t HMI_WIRE_FREQENCY = 400000;    // [Hz] Max: (RTC = 400kHz, Touch = Unknown)
   static constexpr const size_t GPS_WIRE_FREQENCY = 400000;    // [Hz] Max: (GPS = 400kHz)
   static constexpr const size_t OP_TIME_UPDATE_INTERVAL = 60;    // [s]
   static constexpr const size_t WATCHDOG_TIMEOUT = 10;           // [s]

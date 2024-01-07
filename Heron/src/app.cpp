@@ -111,7 +111,7 @@ void App::update(void* parameter)
     {
       status = Hmi::systemStatus_t::STATUS_BOOTUP;
     }
-    else if(ref->gnss->getFix())
+    else if(ref->gnss->getFix() && ref->gnss->getTimeValid())
     {
       status = Hmi::systemStatus_t::STATUS_GPS_FIX;
     }
@@ -151,7 +151,7 @@ void App::update(void* parameter)
     }
 
     static uint32_t gnssTimeOld = 0, rtcTimeOld = 0;
-    if(ref->gnss->getFix())    // Update RTC Time if GNSS is fix
+    if(ref->gnss->getFix() && ref->gnss->getTimeValid())    // Update RTC Time if GNSS is fix
     {
       uint32_t gnssTime = ref->gnss->getTimeUtc();
       uint32_t rtcTime = ref->hmi->getTimeUtc();

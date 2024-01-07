@@ -66,24 +66,30 @@ class Gnss
   bool getTimeValid(void) { return timeValid; }
   void getTimeDate(uint16_t& year, uint8_t& month, uint8_t& day, uint8_t& hour, uint8_t& minute, uint8_t& second)
   {
-    year = this->year;
-    month = this->month;
-    day = this->day;
-    hour = this->hour;
-    minute = this->min;
-    second = this->sec;
+    DateTimeFields time;
+    breakTime(getTimeUtc(), time);
+    year = time.year + 1900;
+    month = time.mon + 1;
+    day = time.mday;
+    hour = time.hour;
+    minute = time.min;
+    second = time.sec;
   }
   void getTime(uint8_t& hour, uint8_t& minute, uint8_t& second)
   {
-    hour = this->hour;
-    minute = this->min;
-    second = this->sec;
+    DateTimeFields time;
+    breakTime(getTimeUtc(), time);
+    hour = time.hour;
+    minute = time.min;
+    second = time.sec;
   }
   void getDate(uint16_t& year, uint8_t& month, uint8_t& day)
   {
-    year = this->year;
-    month = this->month;
-    day = this->day;
+    DateTimeFields time;
+    breakTime(getTimeUtc(), time);
+    year = time.year + 1900;
+    month = time.mon + 1;
+    day = time.mday;
   }
   static uint32_t getTimeUtc(void) { return (uint32_t)(getTimeNanoUtc() / 1000000000ULL); }
   static uint64_t getTimeNanoUtc(void);    // returns 0 if time is not valid
@@ -111,8 +117,8 @@ class Gnss
   uint8_t sec;      // Seconds of minute, range 0..60 (UTC)
   uint32_t nano;    // Fraction of second in nanoseconds
 
-  uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
-  uint32_t tUpdateMicros;
+  static uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
+  static uint32_t tUpdateMicros;
 
   SFE_UBLOX_GNSS gnss;
   volatile bool initialized = false;

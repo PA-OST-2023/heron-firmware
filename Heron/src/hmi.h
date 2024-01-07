@@ -105,7 +105,7 @@ class Hmi
     month = this->month;
     day = this->day;
   }
-  static uint32_t getTimeUtc(void) { return (uint32_t)(timeNanoUtc / 1000000000ULL); }
+  static uint32_t getTimeUtc(void) { return (uint32_t)(getTimeNanoUtc() / 1000000000ULL); }
   static uint64_t getTimeNanoUtc(void);
   static uint32_t Color(uint8_t r, uint8_t g, uint8_t b, uint8_t w = 0) { return ((uint32_t)w << 24) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b; }
   static uint8_t calculateWeekDay(uint16_t year, uint8_t month, uint8_t day);

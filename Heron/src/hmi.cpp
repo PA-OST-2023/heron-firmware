@@ -148,7 +148,7 @@ void Hmi::update(void* parameter)
       uint32_t t = (uint32_t)(ref->getTimeNanoUtc() / 1000000ULL);
       if(ref->getGnssTimestamp)
       {
-        if(ref->getGnssTimestamp() > 0)
+        if((ref->getGnssTimestamp() > 0) && ref->systemStatus == STATUS_GPS_FIX)
         {
           t = (uint32_t)(ref->getGnssTimestamp() / 1000000ULL);
         }
