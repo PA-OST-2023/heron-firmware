@@ -39,6 +39,7 @@ DMAMEM AudioInputTDM AudioUtils::tdmIn1;
 DMAMEM AudioInputTDM2 AudioUtils::tdmIn2;
 DMAMEM AudioTransmitWAV32 AudioUtils::transmitter;
 DMAMEM AudioAnalyzePeak AudioUtils::peak[CHANNEL_COUNT];
+DMAMEM float AudioUtils::volumeValue[AudioUtils::CHANNEL_COUNT];
 
 AudioUtils::AudioUtils()
 {

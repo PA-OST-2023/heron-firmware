@@ -69,6 +69,7 @@ void setup()
   audio.setTimestampCallback(Gnss::getTimeNanoUtc);
   audio.setBackupTimestampCallback(Hmi::getTimeNanoUtc);
   hmi.setGnssTimestampCallback(Gnss::getTimeNanoUtc);
+  hmi.setAudioPeakCallback(AudioUtils::getPeak);
   utils.setWireIdleCallback(wireIdle);
 
   bool ok = true;
@@ -93,14 +94,15 @@ void setup()
 void loop()
 {
   utils.feedWatchdog();
+  ethernet.update();
   sensors.update();
   gnss.update();
   gui.update();
-  ethernet.update();
   threads.yield();
 }
 
 static void wireIdle(void)
 {
   ethernet.update();    // Do etherent housekeeping while I2C is busy (must be called in main "background" thread only)
+  // threads.yield();
 }

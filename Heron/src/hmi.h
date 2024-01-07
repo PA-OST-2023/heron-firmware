@@ -50,8 +50,11 @@ class Hmi
   static constexpr const int8_t UTC_TIME_OFFSET = 1;     // UTC+1
   static constexpr const double PLL_KP = 0.00;           // Proportional gain for PLL
   static constexpr const double PLL_KI = 0.01;           // Integral gain for PLL
+  static constexpr const float LEDS_RAMP_TIME = 2.0;     // [s]
+  static constexpr const float LEDS_OFF_TIME = 1.0;      // [s]
   static constexpr const uint8_t LEDS_MIN_BRIGHTNESS = 1;
   static constexpr const uint8_t LEDS_MAX_BRIGHTNESS = 255;
+
 
   typedef enum
   {
@@ -73,6 +76,7 @@ class Hmi
   void setSystemStatus(systemStatus_t status) { systemStatus = status; }
   void setStreamingStatus(bool status) { streamingStatus = status; }
   void setGnssTimestampCallback(uint64_t (*callback)(void)) { getGnssTimestamp = callback; }
+  void setAudioPeakCallback(float (*callback)(int channel)) { getAudioPeak = callback; }
   void setBuzzerEnabled(bool enabled);
   void setLedsEnabled(bool enabled);
   void setLedsBrightness(uint8_t brightness);
@@ -129,6 +133,8 @@ class Hmi
   bool ledsBrightnessChanged = false;
   ledMode_t ledsMode = MODE_AUDIO;
 
+  float brightnessModifier = 0.0;
+
   uint16_t year = 0;
   uint8_t month = 0;
   uint8_t day = 0;
@@ -147,9 +153,14 @@ class Hmi
   volatile bool initialized = false;
 
   uint64_t (*getGnssTimestamp)(void) = nullptr;
+  float (*getAudioPeak)(int channel) = nullptr;
 
   static void update(void* parameter);
   void runPhaseLockedLoop(void);
+  bool animationRampHandler(void);    // Return true if animation is finished and system is in normal operation
+  void animationBootup(void);
+  void animationAudio(void);
+  void animationOst(void);
 };
 
 #endif

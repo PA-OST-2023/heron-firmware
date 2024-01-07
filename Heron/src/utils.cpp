@@ -104,7 +104,7 @@ bool Utils::turnOnWire(I2CDriverWire& wire, bool busReset)
   {
     wire.begin();
     wire.setInternalPullups(InternalPullup::enabled_22k_ohm);
-    wire.setTimeout(10);    // [ms]
+    wire.setTimeout(5);    // [ms]
     wire.setClock(GPS_WIRE_FREQENCY);
     return true;
   }

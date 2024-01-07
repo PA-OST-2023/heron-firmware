@@ -143,7 +143,7 @@ void Hmi::update(void* parameter)
     uint8_t brightnessMapped = map(ref->ledsBrightness, 0, 255, LEDS_MIN_BRIGHTNESS, LEDS_MAX_BRIGHTNESS);
     ref->leds.setBrightness(ref->ledsEnabled ? brightnessMapped : 0);    // Set LED brightness, turn off if disabled
     ref->leds.clear();
-    if(ref->systemStatus != STATUS_BOOTUP)
+    if(ref->animationRampHandler())    // Switch to regular mode as soon as the ramping is done
     {
       uint32_t t = (uint32_t)(ref->getTimeNanoUtc() / 1000000ULL);
       if(ref->getGnssTimestamp)
@@ -160,7 +160,6 @@ void Hmi::update(void* parameter)
       {
         blink |= (t >= 200) && (t < 300);
       }
-
       switch(ref->systemStatus)
       {
         case STATUS_GPS_FIX:
@@ -179,10 +178,22 @@ void Hmi::update(void* parameter)
           break;
       }
 
-      // TODO: LED Animation
+      switch(ref->ledsMode)
+      {
+        case MODE_AUDIO:
+          ref->animationAudio();
+          break;
+        case MODE_OST:
+          ref->animationOst();
+          break;
+        default:
+          break;
+      }
     }
     else    // Bootup animation
-    {}
+    {
+      ref->animationBootup();
+    }
     ref->leds.show();
 
     static uint32_t tRtc = 0;
@@ -214,7 +225,12 @@ void Hmi::update(void* parameter)
       }
       else
       {
-        console.warning.println("[HMI] Could not read RTC time");
+        console.warning.println("[HMI] Could not read RTC time (I2C-Bus lockup detected, resetting bus)");
+        Utils::lockWire(Utils::hmiWire);
+        Utils::turnOffWire(Utils::hmiWire);    // Somehow the I2C bus gets locked up after some time, force it to reset after each update
+        delayMicroseconds(500);
+        Utils::turnOnWire(Utils::hmiWire);
+        Utils::unlockWire(Utils::hmiWire);
       }
     }
     ref->runPhaseLockedLoop();
@@ -308,4 +324,97 @@ void Hmi::runPhaseLockedLoop(void)
   int64_t error = micros() * 1000ULL - (int64_t)(rtcTime + tineNanoUtcOffset);
   errorSum += error;
   tineNanoUtcOffset = PLL_KP * error + PLL_KI * errorSum;
+}
+
+bool Hmi::animationRampHandler(void)
+{
+  static uint8_t startupAnimationState = 0;
+  static uint32_t t = millis();
+  switch(startupAnimationState)
+  {
+    case 0:    // Initial ramp up
+      brightnessModifier += ((float)millis() - (float)t) / (LEDS_RAMP_TIME * 1000.0);
+      if(brightnessModifier >= 1.0)
+      {
+        brightnessModifier = 1.0;
+        startupAnimationState++;
+        t = millis();
+      }
+      break;
+
+    case 1:    // Bootup
+      if(systemStatus != STATUS_BOOTUP)
+      {
+        brightnessModifier = 1.0;
+        startupAnimationState++;
+        t = millis();
+      }
+      break;
+
+    case 2:    // Ramping down
+      brightnessModifier -= ((float)millis() - (float)t) / (LEDS_RAMP_TIME * 1000.0);
+      if(brightnessModifier <= 0.0)
+      {
+        brightnessModifier = 0.0;
+        startupAnimationState++;
+        t = millis();
+      }
+      break;
+
+    case 3:    // Off break
+      if(millis() - t > LEDS_OFF_TIME * 1000)
+      {
+        brightnessModifier = 0.0;
+        startupAnimationState++;
+        t = millis();
+      }
+      break;
+
+    case 4:    // Ramping up
+      brightnessModifier += ((float)millis() - (float)t) / (LEDS_RAMP_TIME * 1000.0);
+      if(brightnessModifier >= 1.0)
+      {
+        brightnessModifier = 1.0;
+        startupAnimationState++;
+        t = millis();
+      }
+      break;
+    default:    // Normal operation
+      brightnessModifier = 1.0;
+      break;
+  }
+  return startupAnimationState >= 3;
+}
+
+void Hmi::animationBootup(void)
+{
+  for(int i = 0; i < 16; i++)
+  {
+    uint8_t colorR = 0 * brightnessModifier;
+    uint8_t colorG = 0 * brightnessModifier;
+    uint8_t colorB = 255 * brightnessModifier;
+    leds.setPixelColor(i + 1, Color(colorR, colorG, colorB));
+  }
+}
+
+void Hmi::animationAudio(void)
+{
+  for(int i = 0; i < 16; i++)
+  {
+    uint8_t colorR = 0 * brightnessModifier;
+    uint8_t colorG = 0 * brightnessModifier;
+    uint8_t colorB = 0 * brightnessModifier;
+    leds.setPixelColor(i + 1, Color(colorR, colorG, colorB));
+  }
+}
+
+void Hmi::animationOst(void)
+{
+  for(int i = 0; i < 16; i++)
+  {
+    uint8_t colorR = 255 * brightnessModifier;
+    uint8_t colorG = 0 * brightnessModifier;
+    uint8_t colorB = 0 * brightnessModifier;
+    leds.setPixelColor(i + 1, Color(colorR, colorG, colorB));
+  }
 }

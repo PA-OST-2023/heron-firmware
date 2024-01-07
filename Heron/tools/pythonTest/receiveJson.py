@@ -20,7 +20,7 @@ def send_http_request(s, path, method, data=None):
     return response
 
 def main():
-    ip = "192.168.33.80"
+    ip = "192.168.40.84"
     port = 6667
     path = "/"
     index = 0

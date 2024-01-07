@@ -50,7 +50,6 @@ class AudioUtils
   bool begin(void);
   bool startServer(int port);
   bool stopServer(void);
-  float getPeak(int channel);
   void clearBuffer(void) { transmitter.clearBuffer(); }
   bool getConnectionStatus(void) { return transmitter.getConnectionState(); }
   float getDataRateMBit(void) { return (transmitter.getDataRate() * 8.0) / 1024.0 / 1024.0; }
@@ -58,6 +57,7 @@ class AudioUtils
   bool getBufferOverflowDetected(void) { return transmitter.getBufferOverflowDetected(); }
   void setTimestampCallback(uint64_t (*callback)(void)) { transmitter.setTimestampCallback(callback); }
   void setBackupTimestampCallback(uint64_t (*callback)(void)) { transmitter.setBackupTimestampCallback(callback); }
+  static float getPeak(int channel);
 
  private:
   ADAU7118 adau7118[ADAU7118_COUNT] = {ADAU7118(Utils::sysWire, 0x14), ADAU7118(Utils::sysWire, 0x15), ADAU7118(Utils::sysWire, 0x16),
@@ -95,7 +95,7 @@ class AudioUtils
     AudioConnection(tdmIn2, 14, peak[30], 0), AudioConnection(tdmIn2, 15, peak[31], 0)};
 
   bool serverRunning = false;
-  float volumeValue[CHANNEL_COUNT];
+  static float volumeValue[CHANNEL_COUNT];
 
   static void update(void* parameter);
 };

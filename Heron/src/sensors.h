@@ -54,7 +54,7 @@ class Sensors
   static constexpr const size_t MAGNETOMETER_UPDATE_RATE = 10;           // [Hz] Update rate for magnetometer
   static constexpr const size_t BAROMETER_UPDATE_RATE = 5;               // [Hz] Update rate for barometer
   static constexpr const size_t ANGLE_SENSOR_UPDATE_RATE = 10;           // [Hz] Update rate for angle sensor
-  static constexpr const size_t MAX_SENSOR_READOUT_DELAY = 25;           // [ms] Maximum delay for sensor readout
+  static constexpr const size_t MAX_SENSOR_READOUT_DELAY = 25;           // [ms] Maximum delay for sensor readout (check if the bus has been locked)
   static constexpr const double DEGREES_PER_RADIAN = (180.0 / M_PI);     // Degrees per radian for conversion
   static constexpr const float MAGNETIC_DECLINATION = 3.0833;            // Magnetic declination in degrees for Zurich CH
   static constexpr const float HEADING_FILTER_ALPHA = 0.3;               // Filter alpha for heading (0.0 = no change, 1.0 = no filter)
