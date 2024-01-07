@@ -634,7 +634,7 @@ size_t SFE_UBLOX_GNSS::getPacketCfgSpaceRemaining()
 }
 
 // Initialize the I2C port
-bool SFE_UBLOX_GNSS::begin(TwoWire &wirePort, uint8_t deviceAddress, uint16_t maxWait, bool assumeSuccess)
+bool SFE_UBLOX_GNSS::begin(I2CDriverWire &wirePort, uint8_t deviceAddress, uint16_t maxWait, bool assumeSuccess)
 {
   commType = COMM_TYPE_I2C;
   _i2cPort = &wirePort; // Grab which port the user wants us to use

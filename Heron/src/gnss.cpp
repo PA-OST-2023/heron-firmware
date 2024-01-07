@@ -50,9 +50,9 @@ bool Gnss::begin(Utils& utilsRef)    // Don't mess with the Reset Pin, somehow i
     console.ok.println("[GNSS] GNSS module initialized");
   }
 
-  gnss.setI2COutput(COM_TYPE_UBX);                           // Set the I2C port to output UBX only (turn off NMEA noise)
-  gnss.saveConfigSelective(VAL_CFG_SUBSEC_IOPORT);           // Save (only) the communications port settings to flash and BBR
-  gnss.setNavigationFrequency(GNSS_UPDATE_RATE);             // Set output to 2 times a second
+  gnss.setI2COutput(COM_TYPE_UBX);                    // Set the I2C port to output UBX only (turn off NMEA noise)
+  gnss.saveConfigSelective(VAL_CFG_SUBSEC_IOPORT);    // Save (only) the communications port settings to flash and BBR
+  gnss.setNavigationFrequency(GNSS_UPDATE_RATE);      // Set output to 2 times a second
   // gnss.enableRTCMmessage(UBX_RTCM_1005, COM_PORT_I2C, 1);    // Enable message 1005 to output through I2C port, message every second
   // gnss.enableRTCMmessage(UBX_RTCM_1077, COM_PORT_I2C, 1);
   // gnss.enableRTCMmessage(UBX_RTCM_1087, COM_PORT_I2C, 1);
@@ -99,7 +99,7 @@ uint64_t Gnss::getTimeNanoUtc(void)
   {
     return 0;
   }
-  if(!ref->initialized || !ref->timeValid)
+  if(!ref->initialized || !ref->getFix())
   {
     return 0;
   }

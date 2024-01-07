@@ -75,7 +75,7 @@ void setup()
   ok &= console.begin();
   ok &= utils.begin();
   ok &= audio.begin();
-  // ok &= gnss.begin(utils);
+  ok &= gnss.begin(utils);
   ok &= hmi.begin(utils);
   ok &= sensors.begin(utils);
   ok &= ethernet.begin(utils, audio);
@@ -94,7 +94,7 @@ void loop()
 {
   utils.feedWatchdog();
   sensors.update();
-  // gnss.update();
+  gnss.update();
   gui.update();
   ethernet.update();
   threads.yield();
@@ -103,12 +103,4 @@ void loop()
 static void wireIdle(void)
 {
   ethernet.update();    // Do etherent housekeeping while I2C is busy (must be called in main "background" thread only)
-  // threads.yield();
-
-  // static uint32_t tUpdate = 0;
-  // if(millis() - tUpdate > 10)
-  // {
-  //   tUpdate = millis();
-  //   console.log.println("[MAIN] Wire idle");
-  // }
 }
