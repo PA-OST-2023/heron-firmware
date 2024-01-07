@@ -5,6 +5,8 @@
 #include <console.h>
 #include <utils.h>
 
+#define CONSOLE_DEBUG 0
+
 static int toWireResult(I2CError error) {
     if (error == I2CError::ok) return 0;
     if (error == I2CError::buffer_overflow) return 1;
@@ -64,7 +66,9 @@ uint8_t I2CDriverWire::endTransmission(int stop) {
     master.write_async(write_address, tx_buffer, tx_next_byte_to_write, stop);
     if(!finish())
     {
+        #if CONSOLE_DEBUG
         console.warning.printf("[I2C DRIVER WIRE] <%s> \"endTransmission\" Timeout\n", Utils::WIRE_NAMES[getBusId()]);
+        #endif
         return 4;
     }
     return toWireResult(master.error());
@@ -95,7 +99,9 @@ uint8_t I2CDriverWire::requestFrom(int address, int quantity, int stop) {
     master.read_async((uint8_t)address, rxBuffer, min((size_t)quantity, rx_buffer_length), stop);
     if(!finish())
     {
+        #if CONSOLE_DEBUG
         console.warning.printf("[I2C DRIVER WIRE] <%s> \"requestFrom\" Timeout\n", Utils::WIRE_NAMES[getBusId()]);
+        #endif
         return 0;
     }
     rx_bytes_available = master.get_bytes_transferred();
@@ -138,7 +144,9 @@ bool I2CDriverWire::finish() {
             housekeeping_callback();
         }
     }
+    #if CONSOLE_DEBUG
     console.warning.printf("[I2C DRIVER WIRE] <%s> \"finish\" Timeout\n", Utils::WIRE_NAMES[getBusId()]);
+    #endif
     return false;
 }
 

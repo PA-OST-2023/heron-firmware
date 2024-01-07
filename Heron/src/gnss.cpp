@@ -110,7 +110,7 @@ uint64_t Gnss::getTimeNanoUtc(void)
   {
     return 0;
   }
-  return ref->timeNanoUtc + ((uint64_t)micros() - (uint64_t)ref->tUpdateMicros) * 1000ULL;
+  return ref->timeNanoUtc + ((int64_t)micros() - (int64_t)ref->tUpdateMicros) * 1000ULL;
 }
 
 void Gnss::callbackPVTdata(UBX_NAV_PVT_data_t* ubxDataStruct)
@@ -144,5 +144,5 @@ void Gnss::callbackPVTdata(UBX_NAV_PVT_data_t* ubxDataStruct)
                         .mday = ref->day,
                         .mon = (uint8_t)((int8_t)ref->month - 1),
                         .year = (uint8_t)(ref->year - 1900)};
-  ref->timeNanoUtc = (uint64_t)makeTime(utc) * 1000000000ULL + (uint64_t)ref->nano;
+  ref->timeNanoUtc = (int64_t)makeTime(utc) * 1000000000ULL + (int64_t)ref->nano;
 }

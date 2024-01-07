@@ -115,7 +115,7 @@ class Gnss
   uint8_t hour;     // Hour of day, range 0..23 (UTC)
   uint8_t min;      // Minute of hour, range 0..59 (UTC)
   uint8_t sec;      // Seconds of minute, range 0..60 (UTC)
-  uint32_t nano;    // Fraction of second in nanoseconds
+  int32_t nano;    // Fraction of second in nanoseconds
 
   static uint64_t timeNanoUtc;    // Guido van Rossum's "nanoseconds since 1970
   static uint32_t tUpdateMicros;
