@@ -184,7 +184,7 @@ void Hmi::update(void* parameter)
           ref->animationAudio();
           break;
         case MODE_OST:
-          ref->animationOst();
+          ref->animationOst(blink);
           break;
         default:
           break;
@@ -388,10 +388,8 @@ bool Hmi::animationRampHandler(void)
 
 void Hmi::animationBootup(void)
 {
-  // LED Radius [mm]: 61.000, 135.639, 161.872, 208.113, 228.266, 269.257, 289.575, 330.393, 350.885
-  static const float PEAK_MAX = 1.0;                                                                        // Max brightness at peak
-  static const float PEAK_WIDTH = 1.5;                                                                      // Width of the parabola
-  static const float RADIUS_DISTANCES[] = {0.174, 0.387, 0.461, 0.593, 0.651, 0.767, 0.825, 0.942, 1.0};    // Normalized Radius
+  static const float PEAK_MAX = 1.0;      // Max brightness at peak
+  static const float PEAK_WIDTH = 1.5;    // Width of the parabola
   static const float VALUE_MIN = -1.5;
   static const float VALUE_MAX = 2.5;
   static const float FREQUENCY = 0.33;    // [Hz]
@@ -426,11 +424,18 @@ void Hmi::animationAudio(void)
     peakLevels[i] = constrain((1.21 / (1 + pow(2.71828, -7 * (getAudioPeak(i) - 0.232)))) - 0.2, 0.0, 1.0);    // Do some magic to get a nice curve
   }
 
+  float innerCircle[16];
+  for(int i = 0; i < 16; i++)
+  {
+    innerCircle[i] = 0.0;
+  }
+
   for(int mic = 0; mic < 4; mic++)
   {
     for(int i = 0; i < 8; i++)
     {
       float volume = peakLevels[i * 4 + mic];
+      innerCircle[i * 2] = max(innerCircle[i * 2], volume);
       uint8_t red = constrain((volume - 0.5) * 2.0, 0.0, 1.0) * 255 * brightnessModifier;
       uint8_t green = (1.0 - fabs(1.0 - volume * 2.0)) * 255 * brightnessModifier;
       uint8_t blue = 0 * brightnessModifier;
@@ -446,11 +451,48 @@ void Hmi::animationAudio(void)
       }
     }
   }
+
+  for(int i = 0; i < 8; i++)    // Interpolate values between mics on inner circle
+  {
+    innerCircle[i * 2 + 1] = (innerCircle[i * 2] + innerCircle[(i * 2 + 2) % 16]) / 2.0;
+  }
+  for(int i = 0; i < 16; i++)
+  {
+    float volume = innerCircle[i];
+    uint8_t red = constrain((volume - 0.5) * 2.0, 0.0, 1.0) * 255 * brightnessModifier;
+    uint8_t green = (1.0 - fabs(1.0 - volume * 2.0)) * 255 * brightnessModifier;
+    uint8_t blue = 0 * brightnessModifier;
+    leds.setPixelColor((i + 15) % 16 + 1, Color(red, green, blue));
+  }
 }
 
-void Hmi::animationOst(void)
+void Hmi::animationOst(bool blink)
 {
-  return;
+  static const float PEAK_MAX = 0.5;
+  static const float PEAK_MIN = 0.05;
+  static const float PEAK_WIDTH = 0.25;
+  static const float FREQUENCY = 0.33;    // [Hz]
+
+  static uint32_t tInit = millis();
+  float x = (((float)millis() - (float)tInit) / 1000.0) * FREQUENCY;
+  x = fmod(x, 1.0) * 2.0 * PI;
+
+  for(int i = 0; i < 9; i++)
+  {
+    float r = RADIUS_DISTANCES[i];
+    float value = sinf((r * 2.0 * PI / PEAK_WIDTH) - x);
+    value = map(value, -1.0, 1.0, PEAK_MIN, PEAK_MAX);
+
+    uint8_t red = 233 * value * brightnessModifier;
+    uint8_t green = 30 * value * brightnessModifier;
+    uint8_t blue = 99 * value * brightnessModifier;
+    setLedColorByRadius(i, red, green, blue);
+  }
+
+  if(blink)
+  {
+    setLedColorByRadius(8, 255 * brightnessModifier, 255 * brightnessModifier, 255 * brightnessModifier);
+  }
 }
 
 void Hmi::setLedColorByRadius(int r, uint8_t red, uint8_t green, uint8_t blue)

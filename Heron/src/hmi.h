@@ -155,12 +155,15 @@ class Hmi
   uint64_t (*getGnssTimestamp)(void) = nullptr;
   float (*getAudioPeak)(int channel) = nullptr;
 
+  // LED Radius [mm]: 61.000, 135.639, 161.872, 208.113, 228.266, 269.257, 289.575, 330.393, 350.885
+  const float RADIUS_DISTANCES[9] = {0.174, 0.387, 0.461, 0.593, 0.651, 0.767, 0.825, 0.942, 1.0};    // Normalized Radius
+
   static void update(void* parameter);
   void runPhaseLockedLoop(void);
   bool animationRampHandler(void);    // Return true if animation is finished and system is in normal operation
   void animationBootup(void);
   void animationAudio(void);
-  void animationOst(void);
+  void animationOst(bool blink = false);
 
   void setLedColorByRadius(int r, uint8_t red, uint8_t green, uint8_t blue);
 };
