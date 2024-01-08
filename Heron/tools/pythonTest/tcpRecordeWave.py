@@ -2,11 +2,11 @@ import socket
 import numpy as np
 import wavio
 
-HOST = '192.168.40.80'  # The server's IP address
+HOST = '192.168.40.84'  # The server's IP address
 PORT = 6666             # The port used by the server
 CHANNEL_COUNT = 32
 SAMPLE_RATE = 44100     # Sample rate in Hz
-RECORDING_TIME = 120    # Recording time in seconds
+RECORDING_TIME = 10    # Recording time in seconds
 TOTAL_SAMPLES = SAMPLE_RATE * RECORDING_TIME  # Total number of samples per channel
 
 def main():

@@ -416,24 +416,41 @@ void Hmi::animationBootup(void)
 
 void Hmi::animationAudio(void)
 {
-  for(int i = 0; i < 16; i++)
+  if(getAudioPeak == nullptr)
   {
-    uint8_t colorR = 0 * brightnessModifier;
-    uint8_t colorG = 0 * brightnessModifier;
-    uint8_t colorB = 0 * brightnessModifier;
-    leds.setPixelColor(i + 1, Color(colorR, colorG, colorB));
+    return;
+  }
+  float peakLevels[32];
+  for(int i = 0; i < sizeof(peakLevels) / sizeof(float); i++)
+  {
+    peakLevels[i] = constrain((1.21 / (1 + pow(2.71828, -7 * (getAudioPeak(i) - 0.232)))) - 0.2, 0.0, 1.0);    // Do some magic to get a nice curve
+  }
+
+  for(int mic = 0; mic < 4; mic++)
+  {
+    for(int i = 0; i < 8; i++)
+    {
+      float volume = peakLevels[i * 4 + mic];
+      uint8_t red = constrain((volume - 0.5) * 2.0, 0.0, 1.0) * 255 * brightnessModifier;
+      uint8_t green = (1.0 - fabs(1.0 - volume * 2.0)) * 255 * brightnessModifier;
+      uint8_t blue = 0 * brightnessModifier;
+      int ledIndex = mic * 2 + i * 8 + 18;
+      leds.setPixelColor(ledIndex, Color(red, green, blue));
+      if(mic == 0)
+      {
+        leds.setPixelColor(ledIndex - 1, Color(red, green, blue));
+      }
+      if(mic < 3)
+      {
+        leds.setPixelColor(ledIndex + 1, Color(red, green, blue));
+      }
+    }
   }
 }
 
 void Hmi::animationOst(void)
 {
-  for(int i = 0; i < 16; i++)
-  {
-    uint8_t colorR = 255 * brightnessModifier;
-    uint8_t colorG = 0 * brightnessModifier;
-    uint8_t colorB = 0 * brightnessModifier;
-    leds.setPixelColor(i + 1, Color(colorR, colorG, colorB));
-  }
+  return;
 }
 
 void Hmi::setLedColorByRadius(int r, uint8_t red, uint8_t green, uint8_t blue)

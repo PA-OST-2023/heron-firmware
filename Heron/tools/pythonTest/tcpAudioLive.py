@@ -4,7 +4,7 @@ import pyaudio
 import time
 
 # TCP configuration
-TCP_IP = '192.168.40.80'
+TCP_IP = '192.168.40.84'
 TCP_PORT = 6666
 TCP_CONNECTION_TIMEOUT = 5.0
 
