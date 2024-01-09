@@ -61,7 +61,7 @@ class Sensors
   static constexpr const float PITCH_ROLL_FILTER_ALPHA = 0.5;            // Filter alpha for pitch and roll (0.0 = no change, 1.0 = no filter)
   static constexpr const float CALIBRATION_COVERAGE_THRESHOLD = 97.0;    // [%] Threshold for calibration coverage
   static constexpr const float SEA_LEVEL_PRESSURE_HPA = 1013.25;         // [hPa] Sea level pressure for altitude calculation
-  static constexpr const float ANGLE_SENSOR_FILTER_ALPHA = 0.2;          // Filter alpha for angle sensor (0.0 = no change, 1.0 = no filter)
+  static constexpr const float ANGLE_SENSOR_FILTER_ALPHA = 0.65;         // Filter alpha for angle sensor (0.0 = no change, 1.0 = no filter)
   static constexpr const uint8_t ADDR_MAGNETOMETER = 0x1E;               // I2C address of the magnetometer (LIS2MDL)
   static constexpr const uint8_t ADDR_ACCELEROMETER = 0x19;              // I2C address of the accelerometer (LSM303AGR)
   static constexpr const uint8_t ADDR_BAROMETER = 0x76;                  // I2C address of the barometer (BMP388)

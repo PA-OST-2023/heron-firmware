@@ -754,7 +754,7 @@ pbuf_free(struct pbuf *p)
      * further protection. */
     SYS_ARCH_PROTECT(old_level);
     /* all pbufs in a chain are referenced at least once */
-    LWIP_ASSERT("pbuf_free: p->ref > 0", p->ref > 0);
+    LWIP_ASSERT("pbuf_free: p->ref > 0", p->ref > 0);         // TODO: <Florian> Investigate why this assertion fails sometimes
     /* decrease reference count (number of pointers to pbuf) */
     ref = --(p->ref);
     SYS_ARCH_UNPROTECT(old_level);
