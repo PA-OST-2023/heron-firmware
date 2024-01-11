@@ -69,7 +69,7 @@ void lv_anim_timeline_del(lv_anim_timeline_t * at)
     lv_mem_free(at);
 }
 
-void lv_anim_timeline_add(lv_anim_timeline_t * at, uint32_t start_time, lv_anim_t * a)
+FLASHMEM void lv_anim_timeline_add(lv_anim_timeline_t * at, uint32_t start_time, lv_anim_t * a)
 {
     LV_ASSERT_NULL(at);
 
@@ -88,7 +88,7 @@ void lv_anim_timeline_add(lv_anim_timeline_t * at, uint32_t start_time, lv_anim_
     }
 }
 
-uint32_t lv_anim_timeline_start(lv_anim_timeline_t * at)
+FLASHMEM uint32_t lv_anim_timeline_start(lv_anim_timeline_t * at)
 {
     LV_ASSERT_NULL(at);
 
@@ -131,7 +131,7 @@ void lv_anim_timeline_set_reverse(lv_anim_timeline_t * at, bool reverse)
     at->reverse = reverse;
 }
 
-void lv_anim_timeline_set_progress(lv_anim_timeline_t * at, uint16_t progress)
+FLASHMEM void lv_anim_timeline_set_progress(lv_anim_timeline_t * at, uint16_t progress)
 {
     LV_ASSERT_NULL(at);
 

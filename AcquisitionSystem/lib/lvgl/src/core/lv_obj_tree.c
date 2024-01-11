@@ -42,7 +42,7 @@ static lv_obj_tree_walk_res_t walk_core(lv_obj_t * obj, lv_obj_tree_walk_cb_t cb
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_obj_del(lv_obj_t * obj)
+FLASHMEM void lv_obj_del(lv_obj_t * obj)
 {
     LV_LOG_TRACE("begin (delete %p)", (void *)obj);
     LV_ASSERT_OBJ(obj, MY_CLASS);
@@ -82,7 +82,7 @@ void lv_obj_del(lv_obj_t * obj)
     LV_LOG_TRACE("finished (delete %p)", (void *)obj);
 }
 
-void lv_obj_clean(lv_obj_t * obj)
+FLASHMEM void lv_obj_clean(lv_obj_t * obj)
 {
     LV_LOG_TRACE("begin (delete %p)", (void *)obj);
     LV_ASSERT_OBJ(obj, MY_CLASS);
@@ -129,7 +129,7 @@ void lv_obj_del_async(lv_obj_t * obj)
     lv_async_call(lv_obj_del_async_cb, obj);
 }
 
-void lv_obj_set_parent(lv_obj_t * obj, lv_obj_t * parent)
+FLASHMEM void lv_obj_set_parent(lv_obj_t * obj, lv_obj_t * parent)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_OBJ(parent, MY_CLASS);
@@ -187,7 +187,7 @@ void lv_obj_set_parent(lv_obj_t * obj, lv_obj_t * parent)
     lv_obj_invalidate(obj);
 }
 
-void lv_obj_move_to_index(lv_obj_t * obj, int32_t index)
+FLASHMEM void lv_obj_move_to_index(lv_obj_t * obj, int32_t index)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -222,7 +222,7 @@ void lv_obj_move_to_index(lv_obj_t * obj, int32_t index)
     lv_obj_invalidate(parent);
 }
 
-void lv_obj_swap(lv_obj_t * obj1, lv_obj_t * obj2)
+FLASHMEM void lv_obj_swap(lv_obj_t * obj1, lv_obj_t * obj2)
 {
     LV_ASSERT_OBJ(obj1, MY_CLASS);
     LV_ASSERT_OBJ(obj2, MY_CLASS);
@@ -354,7 +354,7 @@ static void lv_obj_del_async_cb(void * obj)
     lv_obj_del(obj);
 }
 
-static void obj_del_core(lv_obj_t * obj)
+FLASHMEM static void obj_del_core(lv_obj_t * obj)
 {
     /*Let the user free the resources used in `LV_EVENT_DELETE`*/
     lv_res_t res = lv_event_send(obj, LV_EVENT_DELETE, NULL);
@@ -423,7 +423,7 @@ static void obj_del_core(lv_obj_t * obj)
 }
 
 
-static lv_obj_tree_walk_res_t walk_core(lv_obj_t * obj, lv_obj_tree_walk_cb_t cb, void * user_data)
+FLASHMEM static lv_obj_tree_walk_res_t walk_core(lv_obj_t * obj, lv_obj_tree_walk_cb_t cb, void * user_data)
 {
     lv_obj_tree_walk_res_t res = LV_OBJ_TREE_WALK_NEXT;
 

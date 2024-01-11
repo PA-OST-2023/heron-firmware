@@ -63,7 +63,7 @@ lv_obj_t * lv_canvas_create(lv_obj_t * parent)
  * Setter functions
  *====================*/
 
-void lv_canvas_set_buffer(lv_obj_t * obj, void * buf, lv_coord_t w, lv_coord_t h, lv_img_cf_t cf)
+FLASHMEM void lv_canvas_set_buffer(lv_obj_t * obj, void * buf, lv_coord_t w, lv_coord_t h, lv_img_cf_t cf)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(buf);
@@ -79,7 +79,7 @@ void lv_canvas_set_buffer(lv_obj_t * obj, void * buf, lv_coord_t w, lv_coord_t h
     lv_img_cache_invalidate_src(&canvas->dsc);
 }
 
-void lv_canvas_set_px_color(lv_obj_t * obj, lv_coord_t x, lv_coord_t y, lv_color_t c)
+FLASHMEM void lv_canvas_set_px_color(lv_obj_t * obj, lv_coord_t x, lv_coord_t y, lv_color_t c)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -89,7 +89,7 @@ void lv_canvas_set_px_color(lv_obj_t * obj, lv_coord_t x, lv_coord_t y, lv_color
     lv_obj_invalidate(obj);
 }
 
-void lv_canvas_set_px_opa(lv_obj_t * obj, lv_coord_t x, lv_coord_t y, lv_opa_t opa)
+FLASHMEM void lv_canvas_set_px_opa(lv_obj_t * obj, lv_coord_t x, lv_coord_t y, lv_opa_t opa)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -99,7 +99,7 @@ void lv_canvas_set_px_opa(lv_obj_t * obj, lv_coord_t x, lv_coord_t y, lv_opa_t o
     lv_obj_invalidate(obj);
 }
 
-void lv_canvas_set_palette(lv_obj_t * obj, uint8_t id, lv_color_t c)
+FLASHMEM void lv_canvas_set_palette(lv_obj_t * obj, uint8_t id, lv_color_t c)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -113,7 +113,7 @@ void lv_canvas_set_palette(lv_obj_t * obj, uint8_t id, lv_color_t c)
  * Getter functions
  *====================*/
 
-lv_color_t lv_canvas_get_px(lv_obj_t * obj, lv_coord_t x, lv_coord_t y)
+FLASHMEM lv_color_t lv_canvas_get_px(lv_obj_t * obj, lv_coord_t x, lv_coord_t y)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -123,7 +123,7 @@ lv_color_t lv_canvas_get_px(lv_obj_t * obj, lv_coord_t x, lv_coord_t y)
     return lv_img_buf_get_px_color(&canvas->dsc, x, y, color);
 }
 
-lv_img_dsc_t * lv_canvas_get_img(lv_obj_t * obj)
+FLASHMEM lv_img_dsc_t * lv_canvas_get_img(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -135,7 +135,7 @@ lv_img_dsc_t * lv_canvas_get_img(lv_obj_t * obj)
  * Other functions
  *====================*/
 
-void lv_canvas_copy_buf(lv_obj_t * obj, const void * to_copy, lv_coord_t x, lv_coord_t y, lv_coord_t w, lv_coord_t h)
+FLASHMEM void lv_canvas_copy_buf(lv_obj_t * obj, const void * to_copy, lv_coord_t x, lv_coord_t y, lv_coord_t w, lv_coord_t h)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(to_copy);
@@ -158,7 +158,7 @@ void lv_canvas_copy_buf(lv_obj_t * obj, const void * to_copy, lv_coord_t x, lv_c
     }
 }
 
-void lv_canvas_transform(lv_obj_t * obj, lv_img_dsc_t * src_img, int16_t angle, uint16_t zoom, lv_coord_t offset_x,
+FLASHMEM void lv_canvas_transform(lv_obj_t * obj, lv_img_dsc_t * src_img, int16_t angle, uint16_t zoom, lv_coord_t offset_x,
                          lv_coord_t offset_y,
                          int32_t pivot_x, int32_t pivot_y, bool antialias)
 {
@@ -223,7 +223,7 @@ void lv_canvas_transform(lv_obj_t * obj, lv_img_dsc_t * src_img, int16_t angle, 
 #endif
 }
 
-void lv_canvas_blur_hor(lv_obj_t * obj, const lv_area_t * area, uint16_t r)
+FLASHMEM void lv_canvas_blur_hor(lv_obj_t * obj, const lv_area_t * area, uint16_t r)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -351,7 +351,7 @@ void lv_canvas_blur_hor(lv_obj_t * obj, const lv_area_t * area, uint16_t r)
     lv_mem_buf_release(line_buf);
 }
 
-void lv_canvas_blur_ver(lv_obj_t * obj, const lv_area_t * area, uint16_t r)
+FLASHMEM void lv_canvas_blur_ver(lv_obj_t * obj, const lv_area_t * area, uint16_t r)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -484,7 +484,7 @@ void lv_canvas_blur_ver(lv_obj_t * obj, const lv_area_t * area, uint16_t r)
     lv_mem_buf_release(col_buf);
 }
 
-void lv_canvas_fill_bg(lv_obj_t * canvas, lv_color_t color, lv_opa_t opa)
+FLASHMEM void lv_canvas_fill_bg(lv_obj_t * canvas, lv_color_t color, lv_opa_t opa)
 {
     LV_ASSERT_OBJ(canvas, MY_CLASS);
 
@@ -513,7 +513,7 @@ void lv_canvas_fill_bg(lv_obj_t * canvas, lv_color_t color, lv_opa_t opa)
     lv_obj_invalidate(canvas);
 }
 
-void lv_canvas_draw_rect(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord_t w, lv_coord_t h,
+FLASHMEM void lv_canvas_draw_rect(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord_t w, lv_coord_t h,
                          const lv_draw_rect_dsc_t * draw_dsc)
 {
     LV_ASSERT_OBJ(canvas, MY_CLASS);
@@ -557,7 +557,7 @@ void lv_canvas_draw_rect(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord
     lv_obj_invalidate(canvas);
 }
 
-void lv_canvas_draw_text(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord_t max_w,
+FLASHMEM void lv_canvas_draw_text(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord_t max_w,
                          lv_draw_label_dsc_t * draw_dsc, const char * txt)
 {
     LV_ASSERT_OBJ(canvas, MY_CLASS);
@@ -593,7 +593,7 @@ void lv_canvas_draw_text(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord
     lv_obj_invalidate(canvas);
 }
 
-void lv_canvas_draw_img(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, const void * src,
+FLASHMEM void lv_canvas_draw_img(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, const void * src,
                         const lv_draw_img_dsc_t * draw_dsc)
 {
     LV_ASSERT_OBJ(canvas, MY_CLASS);
@@ -636,7 +636,7 @@ void lv_canvas_draw_img(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, const voi
     lv_obj_invalidate(canvas);
 }
 
-void lv_canvas_draw_line(lv_obj_t * canvas, const lv_point_t points[], uint32_t point_cnt,
+FLASHMEM void lv_canvas_draw_line(lv_obj_t * canvas, const lv_point_t points[], uint32_t point_cnt,
                          const lv_draw_line_dsc_t * draw_dsc)
 {
     LV_ASSERT_OBJ(canvas, MY_CLASS);
@@ -678,7 +678,7 @@ void lv_canvas_draw_line(lv_obj_t * canvas, const lv_point_t points[], uint32_t 
     lv_obj_invalidate(canvas);
 }
 
-void lv_canvas_draw_polygon(lv_obj_t * canvas, const lv_point_t points[], uint32_t point_cnt,
+FLASHMEM void lv_canvas_draw_polygon(lv_obj_t * canvas, const lv_point_t points[], uint32_t point_cnt,
                             const lv_draw_rect_dsc_t * draw_dsc)
 {
     LV_ASSERT_OBJ(canvas, MY_CLASS);
@@ -716,7 +716,7 @@ void lv_canvas_draw_polygon(lv_obj_t * canvas, const lv_point_t points[], uint32
     lv_obj_invalidate(canvas);
 }
 
-void lv_canvas_draw_arc(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord_t r, int32_t start_angle,
+FLASHMEM void lv_canvas_draw_arc(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord_t r, int32_t start_angle,
                         int32_t end_angle, const lv_draw_arc_dsc_t * draw_dsc)
 {
 #if LV_DRAW_COMPLEX
@@ -763,7 +763,7 @@ void lv_canvas_draw_arc(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_coord_
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_canvas_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_canvas_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -782,7 +782,7 @@ static void lv_canvas_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_canvas_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_canvas_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -792,7 +792,7 @@ static void lv_canvas_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 }
 
 
-static void init_fake_disp(lv_obj_t * canvas, lv_disp_t * disp, lv_disp_drv_t * drv, lv_area_t * clip_area)
+FLASHMEM static void init_fake_disp(lv_obj_t * canvas, lv_disp_t * disp, lv_disp_drv_t * drv, lv_area_t * clip_area)
 {
     lv_img_dsc_t * dsc = lv_canvas_get_img(canvas);
 
@@ -824,7 +824,7 @@ static void init_fake_disp(lv_obj_t * canvas, lv_disp_t * disp, lv_disp_drv_t * 
     }
 }
 
-static void deinit_fake_disp(lv_obj_t * canvas, lv_disp_t * disp)
+FLASHMEM static void deinit_fake_disp(lv_obj_t * canvas, lv_disp_t * disp)
 {
     LV_UNUSED(canvas);
     lv_draw_sw_deinit_ctx(disp->driver, disp->driver->draw_ctx);

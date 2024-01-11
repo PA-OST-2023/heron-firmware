@@ -97,7 +97,7 @@ lv_obj_t * lv_textarea_create(lv_obj_t * parent)
  * Add/remove functions
  *=====================*/
 
-void lv_textarea_add_char(lv_obj_t * obj, uint32_t c)
+FLASHMEM void lv_textarea_add_char(lv_obj_t * obj, uint32_t c)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -158,7 +158,7 @@ void lv_textarea_add_char(lv_obj_t * obj, uint32_t c)
     lv_event_send(obj, LV_EVENT_VALUE_CHANGED, NULL);
 }
 
-void lv_textarea_add_text(lv_obj_t * obj, const char * txt)
+FLASHMEM void lv_textarea_add_text(lv_obj_t * obj, const char * txt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(txt);
@@ -208,7 +208,7 @@ void lv_textarea_add_text(lv_obj_t * obj, const char * txt)
     lv_event_send(obj, LV_EVENT_VALUE_CHANGED, NULL);
 }
 
-void lv_textarea_del_char(lv_obj_t * obj)
+FLASHMEM void lv_textarea_del_char(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -265,7 +265,7 @@ void lv_textarea_del_char_forward(lv_obj_t * obj)
  * Setter functions
  *====================*/
 
-void lv_textarea_set_text(lv_obj_t * obj, const char * txt)
+FLASHMEM void lv_textarea_set_text(lv_obj_t * obj, const char * txt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(txt);
@@ -312,7 +312,7 @@ void lv_textarea_set_text(lv_obj_t * obj, const char * txt)
     lv_event_send(obj, LV_EVENT_VALUE_CHANGED, NULL);
 }
 
-void lv_textarea_set_placeholder_text(lv_obj_t * obj, const char * txt)
+FLASHMEM void lv_textarea_set_placeholder_text(lv_obj_t * obj, const char * txt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(txt);
@@ -341,7 +341,7 @@ void lv_textarea_set_placeholder_text(lv_obj_t * obj, const char * txt)
     lv_obj_invalidate(obj);
 }
 
-void lv_textarea_set_cursor_pos(lv_obj_t * obj, int32_t pos)
+FLASHMEM void lv_textarea_set_cursor_pos(lv_obj_t * obj, int32_t pos)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -401,7 +401,7 @@ void lv_textarea_set_cursor_click_pos(lv_obj_t * obj, bool en)
     ta->cursor.click_pos = en ? 1U : 0U;
 }
 
-void lv_textarea_set_password_mode(lv_obj_t * obj, bool en)
+FLASHMEM void lv_textarea_set_password_mode(lv_obj_t * obj, bool en)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -435,7 +435,7 @@ void lv_textarea_set_password_mode(lv_obj_t * obj, bool en)
     refr_cursor_area(obj);
 }
 
-void lv_textarea_set_password_bullet(lv_obj_t * obj, const char * bullet)
+FLASHMEM void lv_textarea_set_password_bullet(lv_obj_t * obj, const char * bullet)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(bullet);
@@ -465,7 +465,7 @@ void lv_textarea_set_password_bullet(lv_obj_t * obj, const char * bullet)
     lv_obj_invalidate(obj);
 }
 
-void lv_textarea_set_one_line(lv_obj_t * obj, bool en)
+FLASHMEM void lv_textarea_set_one_line(lv_obj_t * obj, bool en)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -539,7 +539,7 @@ void lv_textarea_set_password_show_time(lv_obj_t * obj, uint16_t time)
     ta->pwd_show_time = time;
 }
 
-void lv_textarea_set_align(lv_obj_t * obj, lv_text_align_t align)
+FLASHMEM void lv_textarea_set_align(lv_obj_t * obj, lv_text_align_t align)
 {
     LV_LOG_WARN("Deprecated: use the normal text_align style property instead");
     lv_obj_set_style_text_align(obj, align, 0);
@@ -562,7 +562,7 @@ void lv_textarea_set_align(lv_obj_t * obj, lv_text_align_t align)
  * Getter functions
  *====================*/
 
-const char * lv_textarea_get_text(const lv_obj_t * obj)
+FLASHMEM const char * lv_textarea_get_text(const lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -620,7 +620,7 @@ bool lv_textarea_get_password_mode(const lv_obj_t * obj)
     return ta->pwd_mode == 1U;
 }
 
-const char * lv_textarea_get_password_bullet(lv_obj_t * obj)
+FLASHMEM const char * lv_textarea_get_password_bullet(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -745,7 +745,7 @@ void lv_textarea_cursor_left(lv_obj_t * obj)
     }
 }
 
-void lv_textarea_cursor_down(lv_obj_t * obj)
+FLASHMEM void lv_textarea_cursor_down(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -774,7 +774,7 @@ void lv_textarea_cursor_down(lv_obj_t * obj)
     }
 }
 
-void lv_textarea_cursor_up(lv_obj_t * obj)
+FLASHMEM void lv_textarea_cursor_up(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -802,7 +802,7 @@ void lv_textarea_cursor_up(lv_obj_t * obj)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_textarea_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_textarea_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -839,7 +839,7 @@ static void lv_textarea_constructor(const lv_obj_class_t * class_p, lv_obj_t * o
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_textarea_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_textarea_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
 
@@ -858,7 +858,7 @@ static void lv_textarea_destructor(const lv_obj_class_t * class_p, lv_obj_t * ob
     }
 }
 
-static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -909,7 +909,7 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
 }
 
-static void label_event_cb(lv_event_t * e)
+FLASHMEM static void label_event_cb(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * label = lv_event_get_target(e);
@@ -929,7 +929,7 @@ static void label_event_cb(lv_event_t * e)
  * @param ta pointer to a text area
  * @param hide 1: hide the cursor, 0: show it
  */
-static void cursor_blink_anim_cb(void * obj, int32_t show)
+FLASHMEM static void cursor_blink_anim_cb(void * obj, int32_t show)
 {
     lv_textarea_t * ta = (lv_textarea_t *)obj;
     if(show != ta->cursor.show) {
@@ -971,7 +971,7 @@ static void pwd_char_hider_anim_ready(lv_anim_t * a)
  * Hide all characters (convert them to '*')
  * @param ta pointer to text area object
  */
-static void pwd_char_hider(lv_obj_t * obj)
+FLASHMEM static void pwd_char_hider(lv_obj_t * obj)
 {
     lv_textarea_t * ta = (lv_textarea_t *)obj;
     if(ta->pwd_mode == 0) {
@@ -1005,7 +1005,7 @@ static void pwd_char_hider(lv_obj_t * obj)
  * @param c a unicode character
  * @return true: accepted; false: rejected
  */
-static bool char_is_accepted(lv_obj_t * obj, uint32_t c)
+FLASHMEM static bool char_is_accepted(lv_obj_t * obj, uint32_t c)
 {
     lv_textarea_t * ta = (lv_textarea_t *)obj;
 
@@ -1026,7 +1026,7 @@ static bool char_is_accepted(lv_obj_t * obj, uint32_t c)
     return false; /*The character wasn't in the list*/
 }
 
-static void start_cursor_blink(lv_obj_t * obj)
+FLASHMEM static void start_cursor_blink(lv_obj_t * obj)
 {
     lv_textarea_t * ta = (lv_textarea_t *)obj;
     uint32_t blink_time = lv_obj_get_style_anim_time(obj, LV_PART_CURSOR);
@@ -1048,7 +1048,7 @@ static void start_cursor_blink(lv_obj_t * obj)
     }
 }
 
-static void refr_cursor_area(lv_obj_t * obj)
+FLASHMEM static void refr_cursor_area(lv_obj_t * obj)
 {
     lv_textarea_t * ta = (lv_textarea_t *)obj;
 
@@ -1129,7 +1129,7 @@ static void refr_cursor_area(lv_obj_t * obj)
     lv_obj_invalidate_area(obj, &area_tmp);
 }
 
-static void update_cursor_position_on_click(lv_event_t * e)
+FLASHMEM static void update_cursor_position_on_click(lv_event_t * e)
 {
     lv_indev_t * click_source = lv_indev_get_act();
     if(click_source == NULL) return;
@@ -1267,7 +1267,7 @@ static lv_res_t insert_handler(lv_obj_t * obj, const char * txt)
     return LV_RES_OK;
 }
 
-static void draw_placeholder(lv_event_t * e)
+FLASHMEM static void draw_placeholder(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_textarea_t * ta = (lv_textarea_t *)obj;
@@ -1292,7 +1292,7 @@ static void draw_placeholder(lv_event_t * e)
     }
 }
 
-static void draw_cursor(lv_event_t * e)
+FLASHMEM static void draw_cursor(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_textarea_t * ta = (lv_textarea_t *)obj;
@@ -1338,7 +1338,7 @@ static void draw_cursor(lv_event_t * e)
     }
 }
 
-static void auto_hide_characters(lv_obj_t * obj)
+FLASHMEM static void auto_hide_characters(lv_obj_t * obj)
 {
     lv_textarea_t * ta = (lv_textarea_t *) obj;
 

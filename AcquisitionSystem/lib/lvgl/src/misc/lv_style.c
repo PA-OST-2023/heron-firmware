@@ -177,7 +177,7 @@ void lv_style_reset(lv_style_t * style)
 #endif
 }
 
-lv_style_prop_t lv_style_register_prop(uint8_t flag)
+FLASHMEM lv_style_prop_t lv_style_register_prop(uint8_t flag)
 {
     if(LV_GC_ROOT(_lv_style_custom_prop_flag_lookup_table) == NULL) {
         _lv_style_custom_prop_flag_lookup_table_size = 0;
@@ -218,7 +218,7 @@ lv_style_prop_t lv_style_get_num_custom_props(void)
     return last_custom_prop_id - _LV_STYLE_LAST_BUILT_IN_PROP;
 }
 
-bool lv_style_remove_prop(lv_style_t * style, lv_style_prop_t prop)
+FLASHMEM bool lv_style_remove_prop(lv_style_t * style, lv_style_prop_t prop)
 {
     LV_ASSERT_STYLE(style);
 
@@ -309,7 +309,7 @@ void lv_style_transition_dsc_init(lv_style_transition_dsc_t * tr, const lv_style
 #endif
 }
 
-lv_style_value_t lv_style_prop_get_default(lv_style_prop_t prop)
+FLASHMEM lv_style_value_t lv_style_prop_get_default(lv_style_prop_t prop)
 {
     lv_style_value_t value;
     switch(prop) {
@@ -410,7 +410,7 @@ static void lv_style_set_prop_meta_helper(lv_style_prop_t prop, lv_style_value_t
     *prop_storage = prop; /* meta is OR-ed into the prop ID already */
 }
 
-static void lv_style_set_prop_internal(lv_style_t * style, lv_style_prop_t prop_and_meta, lv_style_value_t value,
+FLASHMEM static void lv_style_set_prop_internal(lv_style_t * style, lv_style_prop_t prop_and_meta, lv_style_value_t value,
                                        void (*value_adjustment_helper)(lv_style_prop_t, lv_style_value_t, uint16_t *, lv_style_value_t *))
 {
     LV_ASSERT_STYLE(style);

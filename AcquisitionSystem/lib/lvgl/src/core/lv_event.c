@@ -159,7 +159,7 @@ void _lv_event_mark_deleted(lv_obj_t * obj)
 }
 
 
-struct _lv_event_dsc_t * lv_obj_add_event_cb(lv_obj_t * obj, lv_event_cb_t event_cb, lv_event_code_t filter,
+FLASHMEM struct _lv_event_dsc_t * lv_obj_add_event_cb(lv_obj_t * obj, lv_event_cb_t event_cb, lv_event_code_t filter,
                                              void * user_data)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
@@ -177,7 +177,7 @@ struct _lv_event_dsc_t * lv_obj_add_event_cb(lv_obj_t * obj, lv_event_cb_t event
     return &obj->spec_attr->event_dsc[obj->spec_attr->event_dsc_cnt - 1];
 }
 
-bool lv_obj_remove_event_cb(lv_obj_t * obj, lv_event_cb_t event_cb)
+FLASHMEM bool lv_obj_remove_event_cb(lv_obj_t * obj, lv_event_cb_t event_cb)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     if(obj->spec_attr == NULL) return false;
@@ -201,7 +201,7 @@ bool lv_obj_remove_event_cb(lv_obj_t * obj, lv_event_cb_t event_cb)
     return false;
 }
 
-bool lv_obj_remove_event_cb_with_user_data(lv_obj_t * obj, lv_event_cb_t event_cb, const void * user_data)
+FLASHMEM bool lv_obj_remove_event_cb_with_user_data(lv_obj_t * obj, lv_event_cb_t event_cb, const void * user_data)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     if(obj->spec_attr == NULL) return false;
@@ -227,7 +227,7 @@ bool lv_obj_remove_event_cb_with_user_data(lv_obj_t * obj, lv_event_cb_t event_c
 }
 
 
-bool lv_obj_remove_event_dsc(lv_obj_t * obj, struct _lv_event_dsc_t * event_dsc)
+FLASHMEM bool lv_obj_remove_event_dsc(lv_obj_t * obj, struct _lv_event_dsc_t * event_dsc)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     if(obj->spec_attr == NULL) return false;
@@ -251,7 +251,7 @@ bool lv_obj_remove_event_dsc(lv_obj_t * obj, struct _lv_event_dsc_t * event_dsc)
     return false;
 }
 
-void * lv_obj_get_event_user_data(struct _lv_obj_t * obj, lv_event_cb_t event_cb)
+FLASHMEM void * lv_obj_get_event_user_data(struct _lv_obj_t * obj, lv_event_cb_t event_cb)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     if(obj->spec_attr == NULL) return NULL;
@@ -263,7 +263,7 @@ void * lv_obj_get_event_user_data(struct _lv_obj_t * obj, lv_event_cb_t event_cb
     return NULL;
 }
 
-lv_indev_t * lv_event_get_indev(lv_event_t * e)
+FLASHMEM lv_indev_t * lv_event_get_indev(lv_event_t * e)
 {
 
     if(e->code == LV_EVENT_PRESSED ||
@@ -413,7 +413,7 @@ void lv_event_set_cover_res(lv_event_t * e, lv_cover_res_t res)
  *   STATIC FUNCTIONS
  **********************/
 
-static lv_event_dsc_t * lv_obj_get_event_dsc(const lv_obj_t * obj, uint32_t id)
+FLASHMEM static lv_event_dsc_t * lv_obj_get_event_dsc(const lv_obj_t * obj, uint32_t id)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -423,7 +423,7 @@ static lv_event_dsc_t * lv_obj_get_event_dsc(const lv_obj_t * obj, uint32_t id)
     return &obj->spec_attr->event_dsc[id];
 }
 
-static lv_res_t event_send_core(lv_event_t * e)
+FLASHMEM static lv_res_t event_send_core(lv_event_t * e)
 {
     EVENT_TRACE("Sending event %d to %p with %p param", e->code, (void *)e->current_target, e->param);
 
@@ -484,7 +484,7 @@ static lv_res_t event_send_core(lv_event_t * e)
     return res;
 }
 
-static bool event_is_bubbled(lv_event_t * e)
+FLASHMEM static bool event_is_bubbled(lv_event_t * e)
 {
     if(e->stop_bubbling) return false;
 

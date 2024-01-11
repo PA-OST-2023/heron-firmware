@@ -17,6 +17,8 @@ extern "C" {
 #include "lv_hal_indev.h"
 #include "lv_hal_tick.h"
 
+#include <pgmspace.h>
+
 /*********************
  *      DEFINES
  *********************/

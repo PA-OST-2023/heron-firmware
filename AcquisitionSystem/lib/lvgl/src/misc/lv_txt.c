@@ -88,7 +88,7 @@
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_txt_get_size(lv_point_t * size_res, const char * text, const lv_font_t * font, lv_coord_t letter_space,
+FLASHMEM void lv_txt_get_size(lv_point_t * size_res, const char * text, const lv_font_t * font, lv_coord_t letter_space,
                      lv_coord_t line_space, lv_coord_t max_width, lv_text_flag_t flag)
 {
     size_res->x = 0;
@@ -168,7 +168,7 @@ void lv_txt_get_size(lv_point_t * size_res, const char * text, const lv_font_t *
  * @param force Force return the fraction of the word that can fit in the provided space.
  * @return the index of the first char of the next word (in byte index not letter index. With UTF-8 they are different)
  */
-static uint32_t lv_txt_get_next_word(const char * txt, const lv_font_t * font,
+FLASHMEM static uint32_t lv_txt_get_next_word(const char * txt, const lv_font_t * font,
                                      lv_coord_t letter_space, lv_coord_t max_width,
                                      lv_text_flag_t flag, uint32_t * word_w_ptr, lv_text_cmd_state_t * cmd_state, bool force)
 {
@@ -276,7 +276,7 @@ static uint32_t lv_txt_get_next_word(const char * txt, const lv_font_t * font,
 #endif
 }
 
-uint32_t _lv_txt_get_next_line(const char * txt, const lv_font_t * font,
+FLASHMEM uint32_t _lv_txt_get_next_line(const char * txt, const lv_font_t * font,
                                lv_coord_t letter_space, lv_coord_t max_width,
                                lv_coord_t * used_width, lv_text_flag_t flag)
 {
@@ -340,7 +340,7 @@ uint32_t _lv_txt_get_next_line(const char * txt, const lv_font_t * font,
     return i;
 }
 
-lv_coord_t lv_txt_get_width(const char * txt, uint32_t length, const lv_font_t * font, lv_coord_t letter_space,
+FLASHMEM lv_coord_t lv_txt_get_width(const char * txt, uint32_t length, const lv_font_t * font, lv_coord_t letter_space,
                             lv_text_flag_t flag)
 {
     if(txt == NULL) return 0;
@@ -379,7 +379,7 @@ lv_coord_t lv_txt_get_width(const char * txt, uint32_t length, const lv_font_t *
     return width;
 }
 
-bool _lv_txt_is_cmd(lv_text_cmd_state_t * state, uint32_t c)
+FLASHMEM bool _lv_txt_is_cmd(lv_text_cmd_state_t * state, uint32_t c)
 {
     bool ret = false;
 
@@ -410,7 +410,7 @@ bool _lv_txt_is_cmd(lv_text_cmd_state_t * state, uint32_t c)
     return ret;
 }
 
-void _lv_txt_ins(char * txt_buf, uint32_t pos, const char * ins_txt)
+FLASHMEM void _lv_txt_ins(char * txt_buf, uint32_t pos, const char * ins_txt)
 {
     if(txt_buf == NULL || ins_txt == NULL) return;
 
@@ -431,7 +431,7 @@ void _lv_txt_ins(char * txt_buf, uint32_t pos, const char * ins_txt)
     lv_memcpy_small(txt_buf + pos, ins_txt, ins_len);
 }
 
-void _lv_txt_cut(char * txt, uint32_t pos, uint32_t len)
+FLASHMEM void _lv_txt_cut(char * txt, uint32_t pos, uint32_t len)
 {
     if(txt == NULL) return;
 
@@ -447,7 +447,7 @@ void _lv_txt_cut(char * txt, uint32_t pos, uint32_t len)
     }
 }
 
-char * _lv_txt_set_text_vfmt(const char * fmt, va_list ap)
+FLASHMEM char * _lv_txt_set_text_vfmt(const char * fmt, va_list ap)
 {
     /*Allocate space for the new text by using trick from C99 standard section 7.19.6.12*/
     va_list ap_copy;
@@ -490,7 +490,7 @@ char * _lv_txt_set_text_vfmt(const char * fmt, va_list ap)
     return text;
 }
 
-void _lv_txt_encoded_letter_next_2(const char * txt, uint32_t * letter, uint32_t * letter_next, uint32_t * ofs)
+FLASHMEM void _lv_txt_encoded_letter_next_2(const char * txt, uint32_t * letter, uint32_t * letter_next, uint32_t * ofs)
 {
     *letter = _lv_txt_encoded_next(txt, ofs);
     *letter_next = *letter != '\0' ? _lv_txt_encoded_next(&txt[*ofs], NULL) : 0;
@@ -506,7 +506,7 @@ void _lv_txt_encoded_letter_next_2(const char * txt, uint32_t * letter, uint32_t
  * @param str pointer to a character in a string
  * @return length of the UTF-8 character (1,2,3 or 4), 0 on invalid code.
  */
-static uint8_t lv_txt_utf8_size(const char * str)
+FLASHMEM static uint8_t lv_txt_utf8_size(const char * str)
 {
     if(LV_IS_ASCII(str[0]))
         return 1;
@@ -524,7 +524,7 @@ static uint8_t lv_txt_utf8_size(const char * str)
  * @param letter_uni a Unicode letter
  * @return UTF-8 coded character in Little Endian to be compatible with C chars (e.g. 'Á', 'Ű')
  */
-static uint32_t lv_txt_unicode_to_utf8(uint32_t letter_uni)
+FLASHMEM static uint32_t lv_txt_unicode_to_utf8(uint32_t letter_uni)
 {
     if(letter_uni < 128) return letter_uni;
     uint8_t bytes[4];
@@ -560,7 +560,7 @@ static uint32_t lv_txt_unicode_to_utf8(uint32_t letter_uni)
  * @param c a wide character or a  Little endian number
  * @return `c` in big endian
  */
-static uint32_t lv_txt_utf8_conv_wc(uint32_t c)
+FLASHMEM static uint32_t lv_txt_utf8_conv_wc(uint32_t c)
 {
 #if LV_BIG_ENDIAN_SYSTEM == 0
     /*Swap the bytes (UTF-8 is big endian, but the MCUs are little endian)*/
@@ -588,7 +588,7 @@ static uint32_t lv_txt_utf8_conv_wc(uint32_t c)
  *          NULL to use txt[0] as index
  * @return the decoded Unicode character or 0 on invalid UTF-8 code
  */
-static uint32_t lv_txt_utf8_next(const char * txt, uint32_t * i)
+FLASHMEM static uint32_t lv_txt_utf8_next(const char * txt, uint32_t * i)
 {
     /**
      * Unicode to UTF-8
@@ -663,7 +663,7 @@ static uint32_t lv_txt_utf8_next(const char * txt, uint32_t * i)
  * UTF-8 char in 'txt'.
  * @return the decoded Unicode character or 0 on invalid UTF-8 code
  */
-static uint32_t lv_txt_utf8_prev(const char * txt, uint32_t * i)
+FLASHMEM static uint32_t lv_txt_utf8_prev(const char * txt, uint32_t * i)
 {
     uint8_t c_size;
     uint8_t cnt = 0;
@@ -696,7 +696,7 @@ static uint32_t lv_txt_utf8_prev(const char * txt, uint32_t * i)
  * @param utf8_id character index
  * @return byte index of the 'utf8_id'th letter
  */
-static uint32_t lv_txt_utf8_get_byte_id(const char * txt, uint32_t utf8_id)
+FLASHMEM static uint32_t lv_txt_utf8_get_byte_id(const char * txt, uint32_t utf8_id)
 {
     uint32_t i;
     uint32_t byte_cnt = 0;
@@ -716,7 +716,7 @@ static uint32_t lv_txt_utf8_get_byte_id(const char * txt, uint32_t utf8_id)
  * @param byte_id byte index
  * @return character index of the letter at 'byte_id'th position
  */
-static uint32_t lv_txt_utf8_get_char_id(const char * txt, uint32_t byte_id)
+FLASHMEM static uint32_t lv_txt_utf8_get_char_id(const char * txt, uint32_t byte_id)
 {
     uint32_t i        = 0;
     uint32_t char_cnt = 0;
@@ -735,7 +735,7 @@ static uint32_t lv_txt_utf8_get_char_id(const char * txt, uint32_t byte_id)
  * @param txt a '\0' terminated char string
  * @return number of characters
  */
-static uint32_t lv_txt_utf8_get_length(const char * txt)
+FLASHMEM static uint32_t lv_txt_utf8_get_length(const char * txt)
 {
     uint32_t len = 0;
     uint32_t i   = 0;

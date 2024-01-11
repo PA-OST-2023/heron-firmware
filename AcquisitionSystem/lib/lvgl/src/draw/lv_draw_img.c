@@ -192,7 +192,7 @@ bool lv_img_cf_has_alpha(lv_img_cf_t cf)
  *  - or a symbol (e.g. LV_SYMBOL_CLOSE)
  * @return type of the image source LV_IMG_SRC_VARIABLE/FILE/SYMBOL/UNKNOWN
  */
-lv_img_src_t lv_img_src_get_type(const void * src)
+FLASHMEM lv_img_src_t lv_img_src_get_type(const void * src)
 {
     lv_img_src_t img_src_type = LV_IMG_SRC_UNKNOWN;
 
@@ -237,7 +237,7 @@ void lv_draw_img_decoded(lv_draw_ctx_t * draw_ctx, const lv_draw_img_dsc_t * dsc
  *   STATIC FUNCTIONS
  **********************/
 
-static lv_res_t LV_ATTRIBUTE_FAST_MEM decode_and_draw(lv_draw_ctx_t * draw_ctx,
+FLASHMEM static lv_res_t LV_ATTRIBUTE_FAST_MEM decode_and_draw(lv_draw_ctx_t * draw_ctx,
                                                       const lv_draw_img_dsc_t * draw_dsc,
                                                       const lv_area_t * coords, const void * src)
 {
@@ -352,7 +352,7 @@ static lv_res_t LV_ATTRIBUTE_FAST_MEM decode_and_draw(lv_draw_ctx_t * draw_ctx,
 }
 
 
-static void show_error(lv_draw_ctx_t * draw_ctx, const lv_area_t * coords, const char * msg)
+FLASHMEM static void show_error(lv_draw_ctx_t * draw_ctx, const lv_area_t * coords, const char * msg)
 {
     lv_draw_rect_dsc_t rect_dsc;
     lv_draw_rect_dsc_init(&rect_dsc);

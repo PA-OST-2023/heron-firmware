@@ -34,7 +34,7 @@
  *   GLOBAL FUNCTIONS
  **********************/
 
-lv_draw_layer_ctx_t * lv_draw_layer_create(lv_draw_ctx_t * draw_ctx, const lv_area_t * layer_area,
+FLASHMEM lv_draw_layer_ctx_t * lv_draw_layer_create(lv_draw_ctx_t * draw_ctx, const lv_area_t * layer_area,
                                            lv_draw_layer_flags_t flags)
 {
     if(draw_ctx->layer_init == NULL) return NULL;

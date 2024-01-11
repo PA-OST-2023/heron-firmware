@@ -1,5 +1,5 @@
 /*
-* Copyright 2023 NXP
+* Copyright 2024 NXP
 * NXP Confidential and Proprietary. This software is owned or controlled by NXP and may only be used strictly in
 * accordance with the applicable license terms. By expressly accepting such terms or by downloading, installing,
 * activating and/or otherwise using the software, you are agreeing that you have read, and that you agree to
@@ -581,7 +581,7 @@
 #define LV_USE_FS_STDIO 0
 #if LV_USE_FS_STDIO
 /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
-#define LV_FS_STDIO_LETTER 'C'
+#define LV_FS_STDIO_LETTER 'D'
 /*Set the working directory. File/directory paths will be appended to it.*/
 #define LV_FS_STDIO_PATH ""
 /*>0 to cache this number of bytes in lv_fs_read()*/

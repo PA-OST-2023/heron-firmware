@@ -341,7 +341,7 @@ void lv_obj_set_style_grid_cell_y_align(lv_obj_t * obj, lv_coord_t value, lv_sty
  *   STATIC FUNCTIONS
  **********************/
 
-static void grid_update(lv_obj_t * cont, void * user_data)
+FLASHMEM static void grid_update(lv_obj_t * cont, void * user_data)
 {
     LV_LOG_INFO("update %p container", (void *)cont);
     LV_UNUSED(user_data);
@@ -388,7 +388,7 @@ static void grid_update(lv_obj_t * cont, void * user_data)
  * @param calc store the calculated cells sizes here
  * @note `_lv_grid_calc_free(calc_out)` needs to be called when `calc_out` is not needed anymore
  */
-static void calc(lv_obj_t * cont, _lv_grid_calc_t * calc_out)
+FLASHMEM static void calc(lv_obj_t * cont, _lv_grid_calc_t * calc_out)
 {
     if(lv_obj_get_child(cont, 0) == NULL) {
         lv_memset_00(calc_out, sizeof(_lv_grid_calc_t));
@@ -430,7 +430,7 @@ static void calc_free(_lv_grid_calc_t * calc)
     lv_mem_buf_release(calc->h);
 }
 
-static void calc_cols(lv_obj_t * cont, _lv_grid_calc_t * c)
+FLASHMEM static void calc_cols(lv_obj_t * cont, _lv_grid_calc_t * c)
 {
     const lv_coord_t * col_templ = get_col_dsc(cont);
     lv_coord_t cont_w = lv_obj_get_content_width(cont);
@@ -502,7 +502,7 @@ static void calc_cols(lv_obj_t * cont, _lv_grid_calc_t * c)
     }
 }
 
-static void calc_rows(lv_obj_t * cont, _lv_grid_calc_t * c)
+FLASHMEM static void calc_rows(lv_obj_t * cont, _lv_grid_calc_t * c)
 {
     uint32_t i;
     const lv_coord_t * row_templ = get_row_dsc(cont);
@@ -579,7 +579,7 @@ static void calc_rows(lv_obj_t * cont, _lv_grid_calc_t * c)
  * @param child_id_ext helper value if the ID of the child is know (order from the oldest) else -1
  * @param grid_abs helper value, the absolute position of the grid, NULL if unknown
  */
-static void item_repos(lv_obj_t * item, _lv_grid_calc_t * c, item_repos_hint_t * hint)
+FLASHMEM static void item_repos(lv_obj_t * item, _lv_grid_calc_t * c, item_repos_hint_t * hint)
 {
     if(lv_obj_has_flag_any(item, LV_OBJ_FLAG_IGNORE_LAYOUT | LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_FLOATING)) return;
     uint32_t col_span = get_col_span(item);
@@ -703,7 +703,7 @@ static void item_repos(lv_obj_t * item, _lv_grid_calc_t * c, item_repos_hint_t *
  * @param pos_array write the positions of the tracks here
  * @return the total size of the grid
  */
-static lv_coord_t grid_align(lv_coord_t cont_size,  bool auto_size, uint8_t align, lv_coord_t gap, uint32_t track_num,
+FLASHMEM static lv_coord_t grid_align(lv_coord_t cont_size,  bool auto_size, uint8_t align, lv_coord_t gap, uint32_t track_num,
                              lv_coord_t * size_array, lv_coord_t * pos_array, bool reverse)
 {
     lv_coord_t grid_size = 0;

@@ -111,7 +111,7 @@ void lv_dropdown_set_text(lv_obj_t * obj, const char * txt)
     lv_obj_invalidate(obj);
 }
 
-void lv_dropdown_set_options(lv_obj_t * obj, const char * options)
+FLASHMEM void lv_dropdown_set_options(lv_obj_t * obj, const char * options)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(options);
@@ -158,7 +158,7 @@ void lv_dropdown_set_options(lv_obj_t * obj, const char * options)
     if(dropdown->list) lv_obj_invalidate(dropdown->list);
 }
 
-void lv_dropdown_set_options_static(lv_obj_t * obj, const char * options)
+FLASHMEM void lv_dropdown_set_options_static(lv_obj_t * obj, const char * options)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(options);
@@ -187,7 +187,7 @@ void lv_dropdown_set_options_static(lv_obj_t * obj, const char * options)
     if(dropdown->list) lv_obj_invalidate(dropdown->list);
 }
 
-void lv_dropdown_add_option(lv_obj_t * obj, const char * option, uint32_t pos)
+FLASHMEM void lv_dropdown_add_option(lv_obj_t * obj, const char * option, uint32_t pos)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(option);
@@ -258,7 +258,7 @@ void lv_dropdown_add_option(lv_obj_t * obj, const char * option, uint32_t pos)
     if(dropdown->list) lv_obj_invalidate(dropdown->list);
 }
 
-void lv_dropdown_clear_options(lv_obj_t * obj)
+FLASHMEM void lv_dropdown_clear_options(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_dropdown_t * dropdown = (lv_dropdown_t *)obj;
@@ -275,7 +275,7 @@ void lv_dropdown_clear_options(lv_obj_t * obj)
     if(dropdown->list) lv_obj_invalidate(dropdown->list);
 }
 
-void lv_dropdown_set_selected(lv_obj_t * obj, uint16_t sel_opt)
+FLASHMEM void lv_dropdown_set_selected(lv_obj_t * obj, uint16_t sel_opt)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -288,7 +288,7 @@ void lv_dropdown_set_selected(lv_obj_t * obj, uint16_t sel_opt)
     lv_obj_invalidate(obj);
 }
 
-void lv_dropdown_set_dir(lv_obj_t * obj, lv_dir_t dir)
+FLASHMEM void lv_dropdown_set_dir(lv_obj_t * obj, lv_dir_t dir)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -364,7 +364,7 @@ uint16_t lv_dropdown_get_option_cnt(const lv_obj_t * obj)
     return dropdown->option_cnt;
 }
 
-void lv_dropdown_get_selected_str(const lv_obj_t * obj, char * buf, uint32_t buf_size)
+FLASHMEM void lv_dropdown_get_selected_str(const lv_obj_t * obj, char * buf, uint32_t buf_size)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -398,7 +398,7 @@ void lv_dropdown_get_selected_str(const lv_obj_t * obj, char * buf, uint32_t buf
     buf[c] = '\0';
 }
 
-int32_t lv_dropdown_get_option_index(lv_obj_t * obj, const char * option)
+FLASHMEM int32_t lv_dropdown_get_option_index(lv_obj_t * obj, const char * option)
 {
     const char * opts = lv_dropdown_get_options(obj);
     uint32_t char_i = 0;
@@ -443,7 +443,7 @@ lv_dir_t lv_dropdown_get_dir(const lv_obj_t * obj)
  * Other functions
  *====================*/
 
-void lv_dropdown_open(lv_obj_t * dropdown_obj)
+FLASHMEM void lv_dropdown_open(lv_obj_t * dropdown_obj)
 {
     LV_ASSERT_OBJ(dropdown_obj, MY_CLASS);
 
@@ -574,7 +574,7 @@ static lv_obj_t * lv_dropdown_list_create(lv_obj_t * parent)
     return obj;
 }
 
-static void lv_dropdown_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_dropdown_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -604,7 +604,7 @@ static void lv_dropdown_constructor(const lv_obj_class_t * class_p, lv_obj_t * o
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_dropdown_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_dropdown_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     lv_dropdown_t * dropdown = (lv_dropdown_t *)obj;
@@ -620,7 +620,7 @@ static void lv_dropdown_destructor(const lv_obj_class_t * class_p, lv_obj_t * ob
     }
 }
 
-static void lv_dropdownlist_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_dropdownlist_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
@@ -635,7 +635,7 @@ static void lv_dropdownlist_constructor(const lv_obj_class_t * class_p, lv_obj_t
     LV_TRACE_OBJ_CREATE("finished");
 }
 
-static void lv_dropdownlist_destructor(const lv_obj_class_t * class_p, lv_obj_t * list_obj)
+FLASHMEM static void lv_dropdownlist_destructor(const lv_obj_class_t * class_p, lv_obj_t * list_obj)
 {
     LV_UNUSED(class_p);
     lv_dropdown_list_t * list = (lv_dropdown_list_t *)list_obj;
@@ -644,7 +644,7 @@ static void lv_dropdownlist_destructor(const lv_obj_class_t * class_p, lv_obj_t 
     dropdown->list = NULL;
 }
 
-static void lv_dropdown_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_dropdown_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -734,7 +734,7 @@ static void lv_dropdown_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
 }
 
-static void lv_dropdown_list_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_dropdown_list_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -770,7 +770,7 @@ static void lv_dropdown_list_event(const lv_obj_class_t * class_p, lv_event_t * 
 }
 
 
-static void draw_main(lv_event_t * e)
+FLASHMEM static void draw_main(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_dropdown_t * dropdown = (lv_dropdown_t *)obj;
@@ -884,7 +884,7 @@ static void draw_main(lv_event_t * e)
     }
 }
 
-static void draw_list(lv_event_t * e)
+FLASHMEM static void draw_list(lv_event_t * e)
 {
     lv_obj_t * list_obj = lv_event_get_target(e);
     lv_dropdown_list_t * list = (lv_dropdown_list_t *)list_obj;
@@ -920,7 +920,7 @@ static void draw_list(lv_event_t * e)
     }
 }
 
-static void draw_box(lv_obj_t * dropdown_obj, lv_draw_ctx_t * draw_ctx, uint16_t id, lv_state_t state)
+FLASHMEM static void draw_box(lv_obj_t * dropdown_obj, lv_draw_ctx_t * draw_ctx, uint16_t id, lv_state_t state)
 {
     if(id == LV_DROPDOWN_PR_NONE) return;
 
@@ -958,7 +958,7 @@ static void draw_box(lv_obj_t * dropdown_obj, lv_draw_ctx_t * draw_ctx, uint16_t
     list_obj->skip_trans = 0;
 }
 
-static void draw_box_label(lv_obj_t * dropdown_obj, lv_draw_ctx_t * draw_ctx, uint16_t id, lv_state_t state)
+FLASHMEM static void draw_box_label(lv_obj_t * dropdown_obj, lv_draw_ctx_t * draw_ctx, uint16_t id, lv_state_t state)
 {
     if(id == LV_DROPDOWN_PR_NONE) return;
 
@@ -1005,7 +1005,7 @@ static void draw_box_label(lv_obj_t * dropdown_obj, lv_draw_ctx_t * draw_ctx, ui
 }
 
 
-static lv_res_t btn_release_handler(lv_obj_t * obj)
+FLASHMEM static lv_res_t btn_release_handler(lv_obj_t * obj)
 {
     lv_dropdown_t * dropdown = (lv_dropdown_t *)obj;
     lv_indev_t * indev = lv_indev_get_act();
@@ -1041,7 +1041,7 @@ static lv_res_t btn_release_handler(lv_obj_t * obj)
  * @param list pointer to the drop down list's list
  * @return LV_RES_INV if the list is not being deleted in the user callback. Else LV_RES_OK
  */
-static lv_res_t list_release_handler(lv_obj_t * list_obj)
+FLASHMEM static lv_res_t list_release_handler(lv_obj_t * list_obj)
 {
     lv_dropdown_list_t * list = (lv_dropdown_list_t *) list_obj;
     lv_obj_t * dropdown_obj = list->dropdown;
@@ -1077,7 +1077,7 @@ static lv_res_t list_release_handler(lv_obj_t * list_obj)
     return LV_RES_OK;
 }
 
-static void list_press_handler(lv_obj_t * list_obj)
+FLASHMEM static void list_press_handler(lv_obj_t * list_obj)
 {
     lv_dropdown_list_t * list = (lv_dropdown_list_t *) list_obj;
     lv_obj_t * dropdown_obj = list->dropdown;
@@ -1092,7 +1092,7 @@ static void list_press_handler(lv_obj_t * list_obj)
     }
 }
 
-static uint16_t get_id_on_point(lv_obj_t * dropdown_obj, lv_coord_t y)
+FLASHMEM static uint16_t get_id_on_point(lv_obj_t * dropdown_obj, lv_coord_t y)
 {
     lv_dropdown_t * dropdown = (lv_dropdown_t *)dropdown_obj;
     lv_obj_t * label = get_label(dropdown_obj);
@@ -1116,7 +1116,7 @@ static uint16_t get_id_on_point(lv_obj_t * dropdown_obj, lv_coord_t y)
  * Set the position of list when it is closed to show the selected item
  * @param ddlist pointer to a drop down list
  */
-static void position_to_selected(lv_obj_t * dropdown_obj)
+FLASHMEM static void position_to_selected(lv_obj_t * dropdown_obj)
 {
     lv_dropdown_t * dropdown = (lv_dropdown_t *)dropdown_obj;
 

@@ -10,6 +10,8 @@
 
 #include <stdint.h>
 
+#include <pgmspace.h>
+
 /* Handle special Kconfig options */
 #ifndef LV_KCONFIG_IGNORE
     #include "lv_conf_kconfig.h"

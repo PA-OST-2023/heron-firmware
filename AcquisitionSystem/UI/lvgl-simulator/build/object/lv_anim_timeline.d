@@ -1,32 +1,32 @@
 build/object/lv_anim_timeline.o: \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim_timeline.c \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim_timeline.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\lv_conf_internal.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\lv_conf_kconfig.h \
- C:/Users/Admin/GoogleDrive/MSE/PA-OST-2023/heron-firmware/AcquisitionSystem/UI/lvgl-simulator/lv_conf.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\custom\lv_conf_ext.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_mem.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_types.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_assert.h \
- c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_log.h
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim_timeline.c \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim_timeline.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\lv_conf_internal.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\lv_conf_kconfig.h \
+ D:/GoogleDrive/MSE/PA-OST-2023/heron-firmware/AcquisitionSystem/UI/lvgl-simulator/lv_conf.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\custom\lv_conf_ext.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_mem.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_types.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_assert.h \
+ d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_log.h
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim_timeline.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim_timeline.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_anim.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\lv_conf_internal.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\lv_conf_internal.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\lv_conf_kconfig.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\lv_conf_kconfig.h:
 
-C:/Users/Admin/GoogleDrive/MSE/PA-OST-2023/heron-firmware/AcquisitionSystem/UI/lvgl-simulator/lv_conf.h:
+D:/GoogleDrive/MSE/PA-OST-2023/heron-firmware/AcquisitionSystem/UI/lvgl-simulator/lv_conf.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\custom\lv_conf_ext.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\custom\lv_conf_ext.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_mem.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_mem.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_types.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_types.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_assert.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_assert.h:
 
-c:\users\admin\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_log.h:
+d:\googledrive\mse\pa-ost-2023\heron-firmware\acquisitionsystem\ui\lvgl\src\misc\lv_log.h:

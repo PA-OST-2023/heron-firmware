@@ -80,7 +80,7 @@ void _lv_img_decoder_init(void)
  * @param header the image info will be stored here
  * @return LV_RES_OK: success; LV_RES_INV: wasn't able to get info about the image
  */
-lv_res_t lv_img_decoder_get_info(const void * src, lv_img_header_t * header)
+FLASHMEM lv_res_t lv_img_decoder_get_info(const void * src, lv_img_header_t * header)
 {
     lv_memset_00(header, sizeof(lv_img_header_t));
 
@@ -104,7 +104,7 @@ lv_res_t lv_img_decoder_get_info(const void * src, lv_img_header_t * header)
     return res;
 }
 
-lv_res_t lv_img_decoder_open(lv_img_decoder_dsc_t * dsc, const void * src, lv_color_t color, int32_t frame_id)
+FLASHMEM lv_res_t lv_img_decoder_open(lv_img_decoder_dsc_t * dsc, const void * src, lv_color_t color, int32_t frame_id)
 {
     lv_memset_00(dsc, sizeof(lv_img_decoder_dsc_t));
 
@@ -270,7 +270,7 @@ void lv_img_decoder_set_close_cb(lv_img_decoder_t * decoder, lv_img_decoder_clos
  * @param header store the image data here
  * @return LV_RES_OK: the info is successfully stored in `header`; LV_RES_INV: unknown format or other error.
  */
-lv_res_t lv_img_decoder_built_in_info(lv_img_decoder_t * decoder, const void * src, lv_img_header_t * header)
+FLASHMEM lv_res_t lv_img_decoder_built_in_info(lv_img_decoder_t * decoder, const void * src, lv_img_header_t * header)
 {
     LV_UNUSED(decoder); /*Unused*/
 
@@ -323,7 +323,7 @@ lv_res_t lv_img_decoder_built_in_info(lv_img_decoder_t * decoder, const void * s
  * @param dsc pointer to decoder descriptor. `src`, `color` are already initialized in it.
  * @return LV_RES_OK: the info is successfully stored in `header`; LV_RES_INV: unknown format or other error.
  */
-lv_res_t lv_img_decoder_built_in_open(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc)
+FLASHMEM lv_res_t lv_img_decoder_built_in_open(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc)
 {
     /*Open the file if it's a file*/
     if(dsc->src_type == LV_IMG_SRC_FILE) {
@@ -477,7 +477,7 @@ lv_res_t lv_img_decoder_built_in_open(lv_img_decoder_t * decoder, lv_img_decoder
  * @param buf a buffer to store the decoded pixels
  * @return LV_RES_OK: ok; LV_RES_INV: failed
  */
-lv_res_t lv_img_decoder_built_in_read_line(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc, lv_coord_t x,
+FLASHMEM lv_res_t lv_img_decoder_built_in_read_line(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc, lv_coord_t x,
                                            lv_coord_t y, lv_coord_t len, uint8_t * buf)
 {
     LV_UNUSED(decoder); /*Unused*/
@@ -534,7 +534,7 @@ void lv_img_decoder_built_in_close(lv_img_decoder_t * decoder, lv_img_decoder_ds
  *   STATIC FUNCTIONS
  **********************/
 
-static lv_res_t lv_img_decoder_built_in_line_true_color(lv_img_decoder_dsc_t * dsc, lv_coord_t x, lv_coord_t y,
+FLASHMEM static lv_res_t lv_img_decoder_built_in_line_true_color(lv_img_decoder_dsc_t * dsc, lv_coord_t x, lv_coord_t y,
                                                         lv_coord_t len, uint8_t * buf)
 {
     lv_img_decoder_built_in_data_t * user_data = dsc->user_data;
@@ -559,7 +559,7 @@ static lv_res_t lv_img_decoder_built_in_line_true_color(lv_img_decoder_dsc_t * d
     return LV_RES_OK;
 }
 
-static lv_res_t lv_img_decoder_built_in_line_alpha(lv_img_decoder_dsc_t * dsc, lv_coord_t x, lv_coord_t y,
+FLASHMEM static lv_res_t lv_img_decoder_built_in_line_alpha(lv_img_decoder_dsc_t * dsc, lv_coord_t x, lv_coord_t y,
                                                    lv_coord_t len, uint8_t * buf)
 {
     const lv_opa_t alpha1_opa_table[2]  = {0, 255};          /*Opacity mapping with bpp = 1 (Just for compatibility)*/
@@ -650,7 +650,7 @@ static lv_res_t lv_img_decoder_built_in_line_alpha(lv_img_decoder_dsc_t * dsc, l
     return LV_RES_OK;
 }
 
-static lv_res_t lv_img_decoder_built_in_line_indexed(lv_img_decoder_dsc_t * dsc, lv_coord_t x, lv_coord_t y,
+FLASHMEM static lv_res_t lv_img_decoder_built_in_line_indexed(lv_img_decoder_dsc_t * dsc, lv_coord_t x, lv_coord_t y,
                                                      lv_coord_t len, uint8_t * buf)
 {
     uint8_t px_size = lv_img_cf_get_px_size(dsc->header.cf);

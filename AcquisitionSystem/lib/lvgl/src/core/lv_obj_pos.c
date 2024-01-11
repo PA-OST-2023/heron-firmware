@@ -77,7 +77,7 @@ void lv_obj_set_y(lv_obj_t * obj, lv_coord_t y)
     }
 }
 
-bool lv_obj_refr_size(lv_obj_t * obj)
+FLASHMEM bool lv_obj_refr_size(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -342,7 +342,7 @@ void lv_obj_align(lv_obj_t * obj, lv_align_t align, lv_coord_t x_ofs, lv_coord_t
     lv_obj_set_pos(obj, x_ofs, y_ofs);
 }
 
-void lv_obj_align_to(lv_obj_t * obj, const lv_obj_t * base, lv_align_t align, lv_coord_t x_ofs, lv_coord_t y_ofs)
+FLASHMEM void lv_obj_align_to(lv_obj_t * obj, const lv_obj_t * base, lv_align_t align, lv_coord_t x_ofs, lv_coord_t y_ofs)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -626,7 +626,7 @@ bool lv_obj_refresh_self_size(lv_obj_t * obj)
     return true;
 }
 
-void lv_obj_refr_pos(lv_obj_t * obj)
+FLASHMEM void lv_obj_refr_pos(lv_obj_t * obj)
 {
     if(lv_obj_is_layout_positioned(obj)) return;
 
@@ -706,7 +706,7 @@ void lv_obj_refr_pos(lv_obj_t * obj)
     }
 }
 
-void lv_obj_move_to(lv_obj_t * obj, lv_coord_t x, lv_coord_t y)
+FLASHMEM void lv_obj_move_to(lv_obj_t * obj, lv_coord_t x, lv_coord_t y)
 {
     /*Convert x and y to absolute coordinates*/
     lv_obj_t * parent = obj->parent;
@@ -865,7 +865,7 @@ void lv_obj_invalidate(const lv_obj_t * obj)
 
 }
 
-bool lv_obj_area_is_visible(const lv_obj_t * obj, lv_area_t * area)
+FLASHMEM bool lv_obj_area_is_visible(const lv_obj_t * obj, lv_area_t * area)
 {
     if(lv_obj_has_flag(obj, LV_OBJ_FLAG_HIDDEN)) return false;
 
@@ -991,7 +991,7 @@ lv_coord_t lv_clamp_height(lv_coord_t height, lv_coord_t min_height, lv_coord_t 
  *   STATIC FUNCTIONS
  **********************/
 
-static lv_coord_t calc_content_width(lv_obj_t * obj)
+FLASHMEM static lv_coord_t calc_content_width(lv_obj_t * obj)
 {
     lv_obj_scroll_to_x(obj, 0, LV_ANIM_OFF);
 
@@ -1075,7 +1075,7 @@ static lv_coord_t calc_content_width(lv_obj_t * obj)
     else return LV_MAX(child_res, self_w);
 }
 
-static lv_coord_t calc_content_height(lv_obj_t * obj)
+FLASHMEM static lv_coord_t calc_content_height(lv_obj_t * obj)
 {
     lv_obj_scroll_to_y(obj, 0, LV_ANIM_OFF);
 
@@ -1128,7 +1128,7 @@ static lv_coord_t calc_content_height(lv_obj_t * obj)
 
 }
 
-static void layout_update_core(lv_obj_t * obj)
+FLASHMEM static void layout_update_core(lv_obj_t * obj)
 {
     uint32_t i;
     uint32_t child_cnt = lv_obj_get_child_cnt(obj);
@@ -1153,7 +1153,7 @@ static void layout_update_core(lv_obj_t * obj)
     }
 }
 
-static void transform_point(const lv_obj_t * obj, lv_point_t * p, bool inv)
+FLASHMEM static void transform_point(const lv_obj_t * obj, lv_point_t * p, bool inv)
 {
     int16_t angle = lv_obj_get_style_transform_angle(obj, 0);
     int16_t zoom = lv_obj_get_style_transform_zoom(obj, 0);

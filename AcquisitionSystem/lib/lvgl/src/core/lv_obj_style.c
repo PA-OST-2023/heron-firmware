@@ -73,7 +73,7 @@ void _lv_obj_style_init(void)
     _lv_ll_init(&LV_GC_ROOT(_lv_obj_style_trans_ll), sizeof(trans_t));
 }
 
-void lv_obj_add_style(lv_obj_t * obj, lv_style_t * style, lv_style_selector_t selector)
+FLASHMEM void lv_obj_add_style(lv_obj_t * obj, lv_style_t * style, lv_style_selector_t selector)
 {
     trans_del(obj, selector, LV_STYLE_PROP_ANY, NULL);
 
@@ -103,7 +103,7 @@ void lv_obj_add_style(lv_obj_t * obj, lv_style_t * style, lv_style_selector_t se
     lv_obj_refresh_style(obj, selector, LV_STYLE_PROP_ANY);
 }
 
-void lv_obj_remove_style(lv_obj_t * obj, lv_style_t * style, lv_style_selector_t selector)
+FLASHMEM void lv_obj_remove_style(lv_obj_t * obj, lv_style_t * style, lv_style_selector_t selector)
 {
     lv_state_t state = lv_obj_style_get_selector_state(selector);
     lv_part_t part = lv_obj_style_get_selector_part(selector);
@@ -164,7 +164,7 @@ void lv_obj_report_style_change(lv_style_t * style)
     }
 }
 
-void lv_obj_refresh_style(lv_obj_t * obj, lv_style_selector_t selector, lv_style_prop_t prop)
+FLASHMEM void lv_obj_refresh_style(lv_obj_t * obj, lv_style_selector_t selector, lv_style_prop_t prop)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 
@@ -220,7 +220,7 @@ void lv_obj_enable_style_refresh(bool en)
     style_refr = en;
 }
 
-lv_style_value_t lv_obj_get_style_prop(const lv_obj_t * obj, lv_part_t part, lv_style_prop_t prop)
+FLASHMEM lv_style_value_t lv_obj_get_style_prop(const lv_obj_t * obj, lv_part_t part, lv_style_prop_t prop)
 {
     lv_style_value_t value_act;
     bool inheritable = lv_style_prop_has_flag(prop, LV_STYLE_PROP_INHERIT);
@@ -322,7 +322,7 @@ bool lv_obj_remove_local_style_prop(lv_obj_t * obj, lv_style_prop_t prop, lv_sty
     return res;
 }
 
-void _lv_obj_style_create_transition(lv_obj_t * obj, lv_part_t part, lv_state_t prev_state, lv_state_t new_state,
+FLASHMEM void _lv_obj_style_create_transition(lv_obj_t * obj, lv_part_t part, lv_state_t prev_state, lv_state_t new_state,
                                      const _lv_obj_style_transition_dsc_t * tr_dsc)
 {
     trans_t * tr;
@@ -390,7 +390,7 @@ lv_style_value_t _lv_obj_style_apply_color_filter(const lv_obj_t * obj, uint32_t
     return v;
 }
 
-_lv_style_state_cmp_t _lv_obj_style_state_compare(lv_obj_t * obj, lv_state_t state1, lv_state_t state2)
+FLASHMEM _lv_style_state_cmp_t _lv_obj_style_state_compare(lv_obj_t * obj, lv_state_t state1, lv_state_t state2)
 {
     _lv_style_state_cmp_t res = _LV_STYLE_STATE_CMP_SAME;
 
@@ -507,10 +507,12 @@ lv_text_align_t lv_obj_calculate_style_text_align(const struct _lv_obj_t * obj, 
  * @param selector OR-ed value of parts and state for which the style should be get
  * @return pointer to the local style
  */
-static lv_style_t * get_local_style(lv_obj_t * obj, lv_style_selector_t selector)
+FLASHMEM static lv_style_t * get_local_style(lv_obj_t * obj, lv_style_selector_t selector)
 {
     uint32_t i;
     for(i = 0; i < obj->style_cnt; i++) {
+        if(obj == NULL) continue;   // Added by Florian
+        if(obj->styles == NULL) continue;  // Added by Florian
         if(obj->styles[i].is_local &&
            obj->styles[i].selector == selector) {
             return obj->styles[i].style;
@@ -543,7 +545,7 @@ static lv_style_t * get_local_style(lv_obj_t * obj, lv_style_selector_t selector
  * @param selector OR-ed value of parts and state for which the style should be get
  * @return pointer to the transition style
  */
-static _lv_obj_style_t * get_trans_style(lv_obj_t * obj,  lv_style_selector_t selector)
+FLASHMEM static _lv_obj_style_t * get_trans_style(lv_obj_t * obj,  lv_style_selector_t selector)
 {
     uint32_t i;
     for(i = 0; i < obj->style_cnt; i++) {
@@ -573,6 +575,7 @@ static lv_style_res_t get_prop_core(const lv_obj_t * obj, lv_part_t part, lv_sty
 {
     uint8_t group = 1 << _lv_style_get_prop_group(prop);
     int32_t weight = -1;
+    if(obj == NULL) return LV_STYLE_RES_NOT_FOUND;   // Added by Florian
     lv_state_t state = obj->state;
     lv_state_t state_inv = ~state;
     lv_style_value_t value_tmp;
@@ -580,7 +583,9 @@ static lv_style_res_t get_prop_core(const lv_obj_t * obj, lv_part_t part, lv_sty
     uint32_t i;
     lv_style_res_t found;
     for(i = 0; i < obj->style_cnt; i++) {
+        if(obj == NULL) continue;   // Added by Florian
         _lv_obj_style_t * obj_style = &obj->styles[i];
+        if(obj_style == NULL) continue;  // Added by Florian
         if(obj_style->is_trans == false) break;
         if(skip_trans) continue;
 
@@ -599,6 +604,9 @@ static lv_style_res_t get_prop_core(const lv_obj_t * obj, lv_part_t part, lv_sty
     }
 
     for(; i < obj->style_cnt; i++) {
+        if(obj == NULL) continue;   // Added by Florian
+        if(obj->styles == NULL) continue;  // Added by Florian
+        if(obj->styles[i].style == NULL) continue;  // Added by Florian
         if((obj->styles[i].style->has_group & group) == 0) continue;
         _lv_obj_style_t * obj_style = &obj->styles[i];
         lv_part_t part_act = lv_obj_style_get_selector_part(obj->styles[i].selector);
@@ -685,7 +693,7 @@ static void refresh_children_style(lv_obj_t * obj)
  * @param prop a property or 0xFF to remove all properties
  * @param tr_limit delete transitions only "older" than this. `NULL` if not used
  */
-static bool trans_del(lv_obj_t * obj, lv_part_t part, lv_style_prop_t prop, trans_t * tr_limit)
+FLASHMEM static bool trans_del(lv_obj_t * obj, lv_part_t part, lv_style_prop_t prop, trans_t * tr_limit)
 {
     trans_t * tr;
     trans_t * tr_prev;
@@ -719,7 +727,7 @@ static bool trans_del(lv_obj_t * obj, lv_part_t part, lv_style_prop_t prop, tran
     return removed;
 }
 
-static void trans_anim_cb(void * _tr, int32_t v)
+FLASHMEM static void trans_anim_cb(void * _tr, int32_t v)
 {
     trans_t * tr = _tr;
     lv_obj_t * obj = tr->obj;
@@ -783,7 +791,7 @@ static void trans_anim_cb(void * _tr, int32_t v)
 
 }
 
-static void trans_anim_start_cb(lv_anim_t * a)
+FLASHMEM static void trans_anim_start_cb(lv_anim_t * a)
 {
     trans_t * tr = a->var;
 
@@ -804,7 +812,7 @@ static void trans_anim_start_cb(lv_anim_t * a)
 
 }
 
-static void trans_anim_ready_cb(lv_anim_t * a)
+FLASHMEM static void trans_anim_ready_cb(lv_anim_t * a)
 {
     trans_t * tr = a->var;
     lv_obj_t * obj = tr->obj;

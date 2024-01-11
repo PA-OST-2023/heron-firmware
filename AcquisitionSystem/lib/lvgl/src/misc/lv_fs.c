@@ -38,12 +38,12 @@ static const char * lv_fs_get_real_path(const char * path);
  *   GLOBAL FUNCTIONS
  **********************/
 
-void _lv_fs_init(void)
+FLASHMEM void _lv_fs_init(void)
 {
     _lv_ll_init(&LV_GC_ROOT(_lv_fsdrv_ll), sizeof(lv_fs_drv_t *));
 }
 
-bool lv_fs_is_ready(char letter)
+FLASHMEM bool lv_fs_is_ready(char letter)
 {
     lv_fs_drv_t * drv = lv_fs_get_drv(letter);
 
@@ -54,7 +54,7 @@ bool lv_fs_is_ready(char letter)
     return drv->ready_cb(drv);
 }
 
-lv_fs_res_t lv_fs_open(lv_fs_file_t * file_p, const char * path, lv_fs_mode_t mode)
+FLASHMEM lv_fs_res_t lv_fs_open(lv_fs_file_t * file_p, const char * path, lv_fs_mode_t mode)
 {
     if(path == NULL) {
         LV_LOG_WARN("Can't open file: path is NULL");
@@ -102,7 +102,7 @@ lv_fs_res_t lv_fs_open(lv_fs_file_t * file_p, const char * path, lv_fs_mode_t mo
     return LV_FS_RES_OK;
 }
 
-lv_fs_res_t lv_fs_close(lv_fs_file_t * file_p)
+FLASHMEM lv_fs_res_t lv_fs_close(lv_fs_file_t * file_p)
 {
     if(file_p->drv == NULL) {
         return LV_FS_RES_INV_PARAM;
@@ -129,7 +129,7 @@ lv_fs_res_t lv_fs_close(lv_fs_file_t * file_p)
     return res;
 }
 
-static lv_fs_res_t lv_fs_read_cached(lv_fs_file_t * file_p, char * buf, uint32_t btr, uint32_t * br)
+FLASHMEM static lv_fs_res_t lv_fs_read_cached(lv_fs_file_t * file_p, char * buf, uint32_t btr, uint32_t * br)
 {
     lv_fs_res_t res = LV_FS_RES_OK;
     uint32_t file_position = file_p->cache->file_position;
@@ -202,7 +202,7 @@ static lv_fs_res_t lv_fs_read_cached(lv_fs_file_t * file_p, char * buf, uint32_t
     return res;
 }
 
-lv_fs_res_t lv_fs_read(lv_fs_file_t * file_p, void * buf, uint32_t btr, uint32_t * br)
+FLASHMEM lv_fs_res_t lv_fs_read(lv_fs_file_t * file_p, void * buf, uint32_t btr, uint32_t * br)
 {
     if(br != NULL) *br = 0;
     if(file_p->drv == NULL) return LV_FS_RES_INV_PARAM;
@@ -223,7 +223,7 @@ lv_fs_res_t lv_fs_read(lv_fs_file_t * file_p, void * buf, uint32_t btr, uint32_t
     return res;
 }
 
-lv_fs_res_t lv_fs_write(lv_fs_file_t * file_p, const void * buf, uint32_t btw, uint32_t * bw)
+FLASHMEM lv_fs_res_t lv_fs_write(lv_fs_file_t * file_p, const void * buf, uint32_t btw, uint32_t * bw)
 {
     if(bw != NULL) *bw = 0;
 
@@ -242,7 +242,7 @@ lv_fs_res_t lv_fs_write(lv_fs_file_t * file_p, const void * buf, uint32_t btw, u
     return res;
 }
 
-lv_fs_res_t lv_fs_seek(lv_fs_file_t * file_p, uint32_t pos, lv_fs_whence_t whence)
+FLASHMEM lv_fs_res_t lv_fs_seek(lv_fs_file_t * file_p, uint32_t pos, lv_fs_whence_t whence)
 {
     if(file_p->drv == NULL) {
         return LV_FS_RES_INV_PARAM;
@@ -297,7 +297,7 @@ lv_fs_res_t lv_fs_seek(lv_fs_file_t * file_p, uint32_t pos, lv_fs_whence_t whenc
     return res;
 }
 
-lv_fs_res_t lv_fs_tell(lv_fs_file_t * file_p, uint32_t * pos)
+FLASHMEM lv_fs_res_t lv_fs_tell(lv_fs_file_t * file_p, uint32_t * pos)
 {
     if(file_p->drv == NULL) {
         *pos = 0;
@@ -321,7 +321,7 @@ lv_fs_res_t lv_fs_tell(lv_fs_file_t * file_p, uint32_t * pos)
     return res;
 }
 
-lv_fs_res_t lv_fs_dir_open(lv_fs_dir_t * rddir_p, const char * path)
+FLASHMEM lv_fs_res_t lv_fs_dir_open(lv_fs_dir_t * rddir_p, const char * path)
 {
     if(path == NULL) return LV_FS_RES_INV_PARAM;
 
@@ -355,7 +355,7 @@ lv_fs_res_t lv_fs_dir_open(lv_fs_dir_t * rddir_p, const char * path)
     return LV_FS_RES_OK;
 }
 
-lv_fs_res_t lv_fs_dir_read(lv_fs_dir_t * rddir_p, char * fn)
+FLASHMEM lv_fs_res_t lv_fs_dir_read(lv_fs_dir_t * rddir_p, char * fn)
 {
     if(rddir_p->drv == NULL || rddir_p->dir_d == NULL) {
         fn[0] = '\0';
@@ -372,7 +372,7 @@ lv_fs_res_t lv_fs_dir_read(lv_fs_dir_t * rddir_p, char * fn)
     return res;
 }
 
-lv_fs_res_t lv_fs_dir_close(lv_fs_dir_t * rddir_p)
+FLASHMEM lv_fs_res_t lv_fs_dir_close(lv_fs_dir_t * rddir_p)
 {
     if(rddir_p->drv == NULL || rddir_p->dir_d == NULL) {
         return LV_FS_RES_INV_PARAM;

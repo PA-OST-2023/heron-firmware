@@ -42,7 +42,7 @@ static void lv_async_timer_cb(lv_timer_t * timer);
  *   GLOBAL FUNCTIONS
  **********************/
 
-lv_res_t lv_async_call(lv_async_cb_t async_xcb, void * user_data)
+FLASHMEM lv_res_t lv_async_call(lv_async_cb_t async_xcb, void * user_data)
 {
     /*Allocate an info structure*/
     lv_async_info_t * info = lv_mem_alloc(sizeof(lv_async_info_t));
@@ -65,7 +65,7 @@ lv_res_t lv_async_call(lv_async_cb_t async_xcb, void * user_data)
     return LV_RES_OK;
 }
 
-lv_res_t lv_async_call_cancel(lv_async_cb_t async_xcb, void * user_data)
+FLASHMEM lv_res_t lv_async_call_cancel(lv_async_cb_t async_xcb, void * user_data)
 {
     lv_timer_t * timer = lv_timer_get_next(NULL);
     lv_res_t res = LV_RES_INV;
@@ -96,7 +96,7 @@ lv_res_t lv_async_call_cancel(lv_async_cb_t async_xcb, void * user_data)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_async_timer_cb(lv_timer_t * timer)
+FLASHMEM static void lv_async_timer_cb(lv_timer_t * timer)
 {
     lv_async_info_t * info = (lv_async_info_t *)timer->user_data;
 

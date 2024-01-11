@@ -71,12 +71,12 @@
 					"name": "label_1",
 					"id": "hbw20los",
 					"type": "label",
-					"left": 0,
+					"left": 20,
 					"top": 11,
 					"visible": true,
 					"flag": [],
 					"custom_attributes": {},
-					"width": 246,
+					"width": 200,
 					"height": 32,
 					"default_style": false,
 					"text": "Acquisition System",
@@ -21993,11 +21993,11 @@
 						"visible": true,
 						"flag": [],
 						"pos": [
-							0,
+							20,
 							11
 						],
 						"size": [
-							246,
+							200,
 							32
 						],
 						"default_style": false,
@@ -22095,7 +22095,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI\\import\\image\\Heron.png",
+						"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\AcquisitionSystem\\UI\\import\\image\\Heron.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "50,50",

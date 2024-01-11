@@ -32,13 +32,16 @@
 
 #include "console.h"
 
+DMAMEM char Console::ringBuffer[QUEUE_BUFFER_LENGTH];
+
 bool Console::begin(void)
 {
   if(type == USBCDC_t)
   {
     (*(usb_serial_class*)&stream).begin(0);
   }
-  else return false;
+  else
+    return false;
   return initialize();
 }
 
@@ -48,16 +51,15 @@ bool Console::begin(unsigned long baud, uint32_t config)
   {
     (*(HardwareSerial*)&stream).begin(baud, config);
   }
-  else return false;
+  else
+    return false;
   return initialize();
 }
 
 bool Console::initialize(void)
 {
-  ringBuffer = (char*) malloc(QUEUE_BUFFER_LENGTH);
-  if(ringBuffer == nullptr) return false;
   initialized = true;
-  threads.addThread(interfaceTask, this, 256);
+  threads.addThread(interfaceTask, this, 1024);
   threads.addThread(writeTask, this, 4096);
   return true;
 }
@@ -67,34 +69,33 @@ void Console::end(void)
   initialized = false;
 }
 
-void Console::writeTask(void *pvParameter)
+void Console::writeTask(void* pvParameter)
 {
   Console* ref = (Console*)pvParameter;
 
   while(ref->initialized)
   {
-    if(ref->notifyMutex.lock() && ref->streamActive)      // Wait on notification for data in buffer or console opened
+    if(ref->notifyMutex.lock() && ref->streamActive)    // Wait on notification for data in buffer or console opened
     {
       if(ref->bufferAccessMutex.lock())
       {
-        if(ref->readIdx < ref->writeIdx)                  // Regular case, no wrap around needed
+        if(ref->readIdx < ref->writeIdx)    // Regular case, no wrap around needed
         {
-          ref->stream.write((const uint8_t*) ref->ringBuffer + ref->readIdx, ref->writeIdx - ref->readIdx);
+          ref->stream.write((const uint8_t*)ref->ringBuffer + ref->readIdx, ref->writeIdx - ref->readIdx);
         }
-        else if(ref->readIdx > ref->writeIdx)             // Need to send buffer in two parts (ReadIdx to End | 0 to WriteIdx)
+        else if(ref->readIdx > ref->writeIdx)    // Need to send buffer in two parts (ReadIdx to End | 0 to WriteIdx)
         {
-          ref->stream.write((const uint8_t*) ref->ringBuffer + ref->readIdx, QUEUE_BUFFER_LENGTH - ref->readIdx);
-          ref->stream.write((const uint8_t*) ref->ringBuffer, ref->writeIdx);
+          ref->stream.write((const uint8_t*)ref->ringBuffer + ref->readIdx, QUEUE_BUFFER_LENGTH - ref->readIdx);
+          ref->stream.write((const uint8_t*)ref->ringBuffer, ref->writeIdx);
         }
         ref->readIdx = ref->writeIdx;
         ref->bufferAccessMutex.unlock();
       }
-      ref->notifyMutex.unlock();
     }
   }
 }
 
-void Console::interfaceTask(void *pvParameter)
+void Console::interfaceTask(void* pvParameter)
 {
   Console* ref = (Console*)pvParameter;
 
@@ -126,7 +127,7 @@ void Console::interfaceTask(void *pvParameter)
       ref->bufferAccessMutex.unlock();
       ref->notifyMutex.unlock();
     }
-    if(!ref->streamActive && streamActiveOld)               // Detect if console has been closed
+    if(!ref->streamActive && streamActiveOld)    // Detect if console has been closed
     {
       ref->stream.flush();
       ref->stream.clearWriteError();
@@ -137,25 +138,28 @@ void Console::interfaceTask(void *pvParameter)
   }
 }
 
-size_t Console::write(const uint8_t *buffer, size_t size)
+size_t Console::write(const uint8_t* buffer, size_t size)
 {
-  if(size == 0) return 0;
+  if(!initialized)
+    return 0;
+  if(size == 0)
+    return 0;
   if(bufferAccessMutex.lock())
   {
     size_t free;
-    size = min(size, (size_t) QUEUE_BUFFER_LENGTH - 1);
+    size = min(size, (size_t)QUEUE_BUFFER_LENGTH - 1);
     if(writeIdx + size <= QUEUE_BUFFER_LENGTH)
     {
-      memcpy((uint8_t*) ringBuffer + writeIdx, buffer, size);
+      memcpy((uint8_t*)ringBuffer + writeIdx, buffer, size);
       free = QUEUE_BUFFER_LENGTH - (writeIdx - readIdx);
     }
     else
     {
       size_t firstPartSize = QUEUE_BUFFER_LENGTH - writeIdx;
-      memcpy((uint8_t*) ringBuffer + writeIdx, buffer, firstPartSize);
-      memcpy((uint8_t*) ringBuffer, buffer + firstPartSize, size - firstPartSize);
+      memcpy((uint8_t*)ringBuffer + writeIdx, buffer, firstPartSize);
+      memcpy((uint8_t*)ringBuffer, buffer + firstPartSize, size - firstPartSize);
       free = readIdx - writeIdx;
-    } 
+    }
     writeIdx = (writeIdx + size) & (QUEUE_BUFFER_LENGTH - 1);
     if(size > free)
     {
@@ -163,7 +167,7 @@ size_t Console::write(const uint8_t *buffer, size_t size)
     }
 
     bufferAccessMutex.unlock();
-    notifyMutex.unlock();     // Send signal to update task (for sending out data in queue buffer)
+    notifyMutex.unlock();    // Send signal to update task (for sending out data in queue buffer)
     return size;
   }
   return 0;
@@ -178,48 +182,55 @@ void Console::printTimestamp(void)
   printf("[%02d:%02d:%02d.%03d] ", h, m, s, ms);
 }
 
-void Console::printStartupMessage(void)
+FLASHMEM void Console::printStartupMessage(void)
 {
   stream.print(CONSOLE_CLEAR);
   stream.print(CONSOLE_COLOR_BOLD_CYAN CONSOLE_BACKGROUND_DEFAULT);
   stream.println("****************************************************");
   stream.println("*                AcquisitionSystem                 *");
-  stream.println("*      2023, Florian Baumgartner, Alain Keller     *");
+  stream.println("*      2024, Florian Baumgartner, Alain Keller     *");
   stream.println("****************************************************");
-  stream.println("*                                                  *");      
-  stream.println("*                              +%@@#==+++++-.      *");                  
-  stream.println("*                            :+.  :==+==:.         *");                  
-  stream.println("*                           .+==.::..              *");                  
-  stream.println("*                          .*:=--:                 *");                  
-  stream.println("*                         .= .====:                *");                  
-  stream.println("*                             .=+++-               *");                  
-  stream.println("*                               *+#-               *");                  
-  stream.println("*                              .*+#-               *");                  
-  stream.println("*                         .::--*#**-               *");                  
-  stream.println("*                      :+#%%@@*###-=               *");                  
-  stream.println("*                    :*@@@@*@#+*+%-:               *");                  
-  stream.println("*                  :*%@@@@@@%.=+=+-                *");                  
-  stream.println("*                :*##@@@@%%##=%#=-.                *");                  
-  stream.println("*              .=**#@@@%%%#@@#%+=:                 *");                  
-  stream.println("*            .=#%%%%%####%@@*..*=                  *");                  
-  stream.println("*           .*%%%#####*#%@@= .::.                  *");                  
-  stream.println("*           +##%####%%*=#%=-:.                     *");                  
-  stream.println("*          +*%%%@%#+-+--#-:                        *");                  
-  stream.println("*         =##@@%#+--::=*+                          *");                  
-  stream.println("*        :%@@%#=.     +*-                          *");                  
-  stream.println("*        -@@@*.      .%%:                          *");                  
-  stream.println("*        .-:.        .@@=                          *");                  
-  stream.println("*                     #*=                          *");                  
-  stream.println("*                     *-#                          *");                  
-  stream.println("*                     -=+:                         *");                  
-  stream.println("*                     :#.#                         *");                  
-  stream.println("*        ... ..    ..:-@=@+--=-.... ..             *");                  
-  stream.println("*       ...::...:::-=+++*###*=--.:::::.            *");                  
+  stream.println("*                                                  *");
+  stream.println("*                              +%@@#==+++++-.      *");
+  stream.println("*                            :+.  :==+==:.         *");
+  stream.println("*                           .+==.::..              *");
+  stream.println("*                          .*:=--:                 *");
+  stream.println("*                         .= .====:                *");
+  stream.println("*                             .=+++-               *");
+  stream.println("*                               *+#-               *");
+  stream.println("*                              .*+#-               *");
+  stream.println("*                         .::--*#**-               *");
+  stream.println("*                      :+#%%@@*###-=               *");
+  stream.println("*                    :*@@@@*@#+*+%-:               *");
+  stream.println("*                  :*%@@@@@@%.=+=+-                *");
+  stream.println("*                :*##@@@@%%##=%#=-.                *");
+  stream.println("*              .=**#@@@%%%#@@#%+=:                 *");
+  stream.println("*            .=#%%%%%####%@@*..*=                  *");
+  stream.println("*           .*%%%#####*#%@@= .::.                  *");
+  stream.println("*           +##%####%%*=#%=-:.                     *");
+  stream.println("*          +*%%%@%#+-+--#-:                        *");
+  stream.println("*         =##@@%#+--::=*+                          *");
+  stream.println("*        :%@@%#=.     +*-                          *");
+  stream.println("*        -@@@*.      .%%:                          *");
+  stream.println("*        .-:.        .@@=                          *");
+  stream.println("*                     #*=                          *");
+  stream.println("*                     *-#                          *");
+  stream.println("*                     -=+:                         *");
+  stream.println("*                     :#.#                         *");
+  stream.println("*        ... ..    ..:-@=@+--=-.... ..             *");
+  stream.println("*       ...::...:::-=+++*###*=--.:::::.            *");
   stream.println("****************************************************");
   stream.println(CONSOLE_LOG);
+
+  if(CrashReport)
+  {
+    stream.println("[CONSOLE] Crash report found:");
+    stream.print(CONSOLE_COLOR_BOLD_RED CONSOLE_BACKGROUND_DEFAULT);
+    stream.println(CrashReport);
+    stream.println(CONSOLE_LOG);
+  }
 }
 
-
 #ifndef USE_CUSTOM_CONSOLE
-  Console console(Serial, true);
+Console console(Serial, true);
 #endif

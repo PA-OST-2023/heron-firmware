@@ -43,7 +43,7 @@ static lv_coord_t elastic_diff(lv_obj_t * scroll_obj, lv_coord_t diff, lv_coord_
  *   GLOBAL FUNCTIONS
  **********************/
 
-void _lv_indev_scroll_handler(_lv_indev_proc_t * proc)
+FLASHMEM void _lv_indev_scroll_handler(_lv_indev_proc_t * proc)
 {
     if(proc->types.pointer.vect.x == 0 && proc->types.pointer.vect.y == 0) {
         return;
@@ -109,7 +109,7 @@ void _lv_indev_scroll_handler(_lv_indev_proc_t * proc)
 }
 
 
-void _lv_indev_scroll_throw_handler(_lv_indev_proc_t * proc)
+FLASHMEM void _lv_indev_scroll_throw_handler(_lv_indev_proc_t * proc)
 {
     lv_obj_t * scroll_obj = proc->types.pointer.scroll_obj;
     if(scroll_obj == NULL) return;
@@ -255,7 +255,7 @@ void lv_indev_scroll_get_snap_dist(lv_obj_t * obj, lv_point_t * p)
  *   STATIC FUNCTIONS
  **********************/
 
-static lv_obj_t * find_scroll_obj(_lv_indev_proc_t * proc)
+FLASHMEM static lv_obj_t * find_scroll_obj(_lv_indev_proc_t * proc)
 {
     lv_obj_t * obj_candidate = NULL;
     lv_dir_t dir_candidate = LV_DIR_NONE;
@@ -384,7 +384,7 @@ static lv_obj_t * find_scroll_obj(_lv_indev_proc_t * proc)
     return obj_candidate;
 }
 
-static void init_scroll_limits(_lv_indev_proc_t * proc)
+FLASHMEM static void init_scroll_limits(_lv_indev_proc_t * proc)
 {
     lv_obj_t * obj = proc->types.pointer.scroll_obj;
     /*If there no STOP allow scrolling anywhere*/
@@ -452,7 +452,7 @@ static void init_scroll_limits(_lv_indev_proc_t * proc)
  *            what if children are already moved by this value
  * @return the distance of the snap point.
  */
-static lv_coord_t find_snap_point_x(const lv_obj_t * obj, lv_coord_t min, lv_coord_t max, lv_coord_t ofs)
+FLASHMEM static lv_coord_t find_snap_point_x(const lv_obj_t * obj, lv_coord_t min, lv_coord_t max, lv_coord_t ofs)
 {
     lv_scroll_snap_t align = lv_obj_get_scroll_snap_x(obj);
     if(align == LV_SCROLL_SNAP_NONE) return 0;
@@ -507,7 +507,7 @@ static lv_coord_t find_snap_point_x(const lv_obj_t * obj, lv_coord_t min, lv_coo
  *            what if children are already moved by this value
  * @return the distance of the snap point.
  */
-static lv_coord_t find_snap_point_y(const lv_obj_t * obj, lv_coord_t min, lv_coord_t max, lv_coord_t ofs)
+FLASHMEM static lv_coord_t find_snap_point_y(const lv_obj_t * obj, lv_coord_t min, lv_coord_t max, lv_coord_t ofs)
 {
     lv_scroll_snap_t align = lv_obj_get_scroll_snap_y(obj);
     if(align == LV_SCROLL_SNAP_NONE) return 0;
@@ -553,7 +553,7 @@ static lv_coord_t find_snap_point_y(const lv_obj_t * obj, lv_coord_t min, lv_coo
     return dist == LV_COORD_MAX ? 0 : -dist;
 }
 
-static void scroll_limit_diff(_lv_indev_proc_t * proc, lv_coord_t * diff_x, lv_coord_t * diff_y)
+FLASHMEM static void scroll_limit_diff(_lv_indev_proc_t * proc, lv_coord_t * diff_x, lv_coord_t * diff_y)
 {
     if(diff_y) {
         if(proc->types.pointer.scroll_sum.y + *diff_y < proc->types.pointer.scroll_area.y1) {
@@ -578,7 +578,7 @@ static void scroll_limit_diff(_lv_indev_proc_t * proc, lv_coord_t * diff_x, lv_c
 
 
 
-static lv_coord_t scroll_throw_predict_y(_lv_indev_proc_t * proc)
+FLASHMEM static lv_coord_t scroll_throw_predict_y(_lv_indev_proc_t * proc)
 {
     lv_coord_t y = proc->types.pointer.scroll_throw_vect.y;
     lv_coord_t move = 0;
@@ -594,7 +594,7 @@ static lv_coord_t scroll_throw_predict_y(_lv_indev_proc_t * proc)
 }
 
 
-static lv_coord_t scroll_throw_predict_x(_lv_indev_proc_t * proc)
+FLASHMEM static lv_coord_t scroll_throw_predict_x(_lv_indev_proc_t * proc)
 {
     lv_coord_t x = proc->types.pointer.scroll_throw_vect.x;
     lv_coord_t move = 0;
@@ -609,7 +609,7 @@ static lv_coord_t scroll_throw_predict_x(_lv_indev_proc_t * proc)
     return move;
 }
 
-static lv_coord_t elastic_diff(lv_obj_t * scroll_obj, lv_coord_t diff, lv_coord_t scroll_start, lv_coord_t scroll_end,
+FLASHMEM static lv_coord_t elastic_diff(lv_obj_t * scroll_obj, lv_coord_t diff, lv_coord_t scroll_start, lv_coord_t scroll_end,
                                lv_dir_t dir)
 {
     if(lv_obj_has_flag(scroll_obj, LV_OBJ_FLAG_SCROLL_ELASTIC)) {

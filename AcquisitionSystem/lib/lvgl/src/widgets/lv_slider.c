@@ -77,7 +77,7 @@ bool lv_slider_is_dragged(const lv_obj_t * obj)
  *   STATIC FUNCTIONS
  **********************/
 
-static void lv_slider_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+FLASHMEM static void lv_slider_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     lv_slider_t * slider = (lv_slider_t *)obj;
@@ -92,7 +92,7 @@ static void lv_slider_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj
     lv_obj_set_ext_click_area(obj, LV_DPX(8));
 }
 
-static void lv_slider_event(const lv_obj_class_t * class_p, lv_event_t * e)
+FLASHMEM static void lv_slider_event(const lv_obj_class_t * class_p, lv_event_t * e)
 {
     LV_UNUSED(class_p);
 
@@ -329,7 +329,7 @@ static void lv_slider_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
 }
 
-static void draw_knob(lv_event_t * e)
+FLASHMEM static void draw_knob(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
     lv_slider_t * slider = (lv_slider_t *)obj;
@@ -409,7 +409,7 @@ static void draw_knob(lv_event_t * e)
     }
 }
 
-static void position_knob(lv_obj_t * obj, lv_area_t * knob_area, const lv_coord_t knob_size, const bool hor)
+FLASHMEM static void position_knob(lv_obj_t * obj, lv_area_t * knob_area, const lv_coord_t knob_size, const bool hor)
 {
     if(hor) {
         knob_area->x1 -= (knob_size >> 1);
