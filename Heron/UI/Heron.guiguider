@@ -314,7 +314,7 @@
 					"use_fs": false,
 					"fs_type": "flash",
 					"sd_path": "",
-					"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\icai_inverted_small.png",
+					"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\icai_inverted_small.png",
 					"rotate": 0,
 					"x": 50,
 					"y": 50,
@@ -434,7 +434,7 @@
 					"use_fs": false,
 					"fs_type": "flash",
 					"sd_path": "",
-					"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\Heron.png",
+					"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\Heron.png",
 					"rotate": 0,
 					"x": 50,
 					"y": 50,
@@ -16606,7 +16606,7 @@
 					"use_fs": false,
 					"fs_type": "flash",
 					"sd_path": "",
-					"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\compass_background.png",
+					"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\compass_background.png",
 					"rotate": 0,
 					"x": 50,
 					"y": 50,
@@ -25613,7 +25613,7 @@
 					"flag": [],
 					"custom_attributes": {},
 					"width": 220,
-					"height": 177,
+					"height": 190,
 					"default_style": false,
 					"scrollbar_mode": "OFF",
 					"child": [
@@ -27026,7 +27026,6 @@
 											{
 												"trigger": "clicked",
 												"dst": "null",
-												"item_index": 0,
 												"action": {
 													"load_screen": {
 														"ische": false,
@@ -27152,12 +27151,12 @@
 														"deleted_cb": "",
 														"path_type": "linear"
 													}
-												}
+												},
+												"item_index": 0
 											},
 											{
 												"trigger": "clicked",
 												"dst": "null",
-												"item_index": 1,
 												"action": {
 													"load_screen": {
 														"ische": false,
@@ -27283,7 +27282,8 @@
 														"deleted_cb": "",
 														"path_type": "linear"
 													}
-												}
+												},
+												"item_index": 1
 											}
 										]
 									}
@@ -28277,7 +28277,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\Heron.png",
+						"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\Heron.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "50,50",
@@ -28405,7 +28405,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\icai_inverted_small.png",
+						"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\icai_inverted_small.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "50,50",
@@ -40378,7 +40378,7 @@
 						],
 						"default_style": false,
 						"custom_attributes": {},
-						"img_path": "C:\\Users\\Admin\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\compass_background.png",
+						"img_path": "D:\\GoogleDrive\\MSE\\PA-OST-2023\\heron-firmware\\Heron\\UI\\import\\image\\compass_background.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "50,50",
@@ -45911,7 +45911,7 @@
 						],
 						"size": [
 							220,
-							177
+							190
 						],
 						"default_style": false,
 						"custom_attributes": {},

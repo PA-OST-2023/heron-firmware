@@ -28,7 +28,7 @@ void setup_scr_screen_settings(lv_ui *ui)
 	//Write codes screen_settings_cont_settings
 	ui->screen_settings_cont_settings = lv_obj_create(ui->screen_settings);
 	lv_obj_set_pos(ui->screen_settings_cont_settings, 10, 50);
-	lv_obj_set_size(ui->screen_settings_cont_settings, 220, 177);
+	lv_obj_set_size(ui->screen_settings_cont_settings, 220, 190);
 	lv_obj_set_scrollbar_mode(ui->screen_settings_cont_settings, LV_SCROLLBAR_MODE_OFF);
 
 	//Write style for screen_settings_cont_settings, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
